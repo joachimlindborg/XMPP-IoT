@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema
+    xmlns:xs='http://www.w3.org/2001/XMLSchema'
+    targetNamespace='urn:xmpp:sn:provisioning'
+    xmlns='urn:xmpp:sn:provisioning'
+    xmlns:sn='urn:xmpp:sn'
+    elementFormDefault='qualified'>
+ 
+	<xs:import namespace='urn:xmpp:sn'/>
+ 
+	<xs:element name='isFriend' type='Friend'/>
+	<xs:element name='isFriendResponse' type='FriendResponse'/>
+	<xs:element name='unfriend' type='Friend'/>
+ 
+	<xs:complexType name='Friend'>
+		<xs:attribute name='jid' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='FriendResponse'>
+		<xs:complexContent>
+			<xs:extension base='Friend'>
+				<xs:attribute name='result' type='xs:boolean' use='required'/>
+				<xs:attribute name='secondaryTrustAllowed' type='xs:boolean' use='optional' default='false'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+ 
+	<xs:element name='canRead' type='CanRead'/>
+	<xs:element name='canReadResponse' type='CanReadResponse'/>
+ 
+	<xs:complexType name='CanRead'>
+		<xs:choice minOccurs='0' maxOccurs='unbounded'>
+			<xs:element name='node'>
+				<xs:complexType>
+					<xs:attribute name='nodeId' type='xs:string' use='required'/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name='field'>
+				<xs:complexType>
+					<xs:attribute name='name' type='xs:string' use='required'/>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+		<xs:attributeGroup ref='sn:fieldTypes'/>
+		<xs:attribute name='all' type='xs:boolean' use='optional' default='false'/>
+		<xs:attribute name='historical' type='xs:boolean' use='optional' default='false'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='CanReadResponse'>
+		<xs:complexContent>
+			<xs:extension base='CanRead'>
+				<xs:attribute name='result' type='xs:boolean' use='required'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+ 
+	<xs:element name='clearCache'>
+		<xs:complexType/>
+	</xs:element>
+ 
+	<xs:element name='canAccess'>
+		<xs:complexType>
+			<xs:choice minOccurs='0' maxOccurs='unbounded'>
+				<xs:element name='jid' type='jidCredential'/>
+				<xs:element name='ip4' type='ip4Credential'/>
+				<xs:element name='ip6' type='ip6Credential'/>
+				<xs:element name='hostName' type='hostNameCredential'/>
+				<xs:element name='x509Certificate' type='x509CertificateCredential'/>
+				<xs:element name='x509CertificateThumbprint' type='x509CertificateThumbprintCredential'/>
+				<xs:element name='userName' type='userNameCredential'/>
+				<xs:element name='longitude' type='longitudeCredential'/>
+				<xs:element name='latitude' type='latitudeCredential'/>
+				<xs:element name='sso' type='ssoCredential'/>
+				<xs:element name='protocol' type='protocolCredential'/>
+			</xs:choice>
+			<xs:attribute name='serviceId' type='xs:string' use='required'/>
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:element name='canAccessResponse'>
+		<xs:complexType>
+			<xs:attribute name='result' type='xs:boolean' use='required'/>
+			<xs:attribute name='userToken' type='xs:string' use='optional'/>
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:complexType name='jidCredential'>
+		<xs:attribute name='value' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='ip4Credential'>
+		<xs:attribute name='value' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='ip6Credential'>
+		<xs:attribute name='value' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='hostNameCredential'>
+		<xs:attribute name='value' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='x509CertificateCredential'>
+		<xs:attribute name='base64' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='x509CertificateThumbprintCredential'>
+		<xs:attribute name='base64' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='userNameCredential'>
+		<xs:attribute name='value' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='longitudeCredential'>
+		<xs:attribute name='value' type='xs:double' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='latitudeCredential'>
+		<xs:attribute name='value' type='xs:double' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='ssoCredential'>
+		<xs:attribute name='value' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='protocolCredential'>
+		<xs:attribute name='value' type='ProtocolName' use='required'/>
+	</xs:complexType>
+ 
+	<xs:simpleType name='ProtocolName'>
+		<xs:restriction base='xs:string'>
+			<xs:enumeration value='XMPP'/>
+			<xs:enumeration value='HTTP'/>
+			<xs:enumeration value='HTTPS'/>
+			<xs:enumeration value='TcpSocket'/>
+			<xs:enumeration value='UdpSocket'/>
+			<xs:enumeration value='Queue'/>
+			<xs:enumeration value='Internal'/>
+			<xs:enumeration value='Other'/>
+		</xs:restriction>
+	</xs:simpleType>
+ 
+	<xs:element name='userLoggedIn'>
+		<xs:complexType>
+			<xs:attribute name='serviceId' type='xs:string' use='required'/>
+			<xs:attribute name='userToken' type='xs:string' use='required'/>
+			<xs:attribute name='userName' type='xs:string' use='required'/>
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:element name='hasPrivilege'>
+		<xs:complexType>
+			<xs:attribute name='serviceId' type='xs:string' use='required'/>
+			<xs:attribute name='userToken' type='xs:string' use='required'/>
+			<xs:attribute name='privilegeId' type='PrivilegeId' use='required'/>
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:element name='hasPrivilegeResponse'>
+		<xs:complexType>
+			<xs:attribute name='result' type='xs:boolean' use='required'/>
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:simpleType name='PrivilegeId'>
+		<xs:restriction base='xs:string'>
+			<xs:pattern value='^[^.]+([.][^.]+)*$'/>
+		</xs:restriction>		
+	</xs:simpleType>
+ 
+	<xs:element name='downloadPrivileges'>
+		<xs:complexType>
+			<xs:attribute name='serviceId' type='xs:string' use='required'/>
+			<xs:attribute name='userToken' type='xs:string' use='required'/>
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:element name='downloadPrivilegesResponse'>
+		<xs:complexType>
+			<xs:choice minOccurs='0' maxOccurs='unbounded'>
+				<xs:element name='include' type='Privilege'/>
+				<xs:element name='exclude' type='Privilege'/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:complexType name='Privilege'>
+		<xs:attribute name='id' type='PrivilegeId' use='required'/>
+	</xs:complexType>
+ 
+</xs:schema>

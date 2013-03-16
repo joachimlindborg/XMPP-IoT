@@ -1,0 +1,1543 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>XEP-xxxx: XEP - Sensor Networks - Sensor Data</title>
+    <link rel="stylesheet" type="text/css" href="xmpp.css">
+    <link href="prettify.css" type="text/css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"><script type="text/javascript" src="prettify.js"></script><meta name="DC.Title" content="XEP - Sensor Networks - Sensor Data">
+    <meta name="DC.Creator" content="Peter Waher">
+    <meta name="DC.Description" content="This specification provides the common framework for sensor data interchange over XMPP networks.">
+    <meta name="DC.Publisher" content="XMPP Standards Foundation">
+    <meta name="DC.Contributor" content="XMPP Extensions Editor">
+    <meta name="DC.Date" content="2013-03-11">
+    <meta name="DC.Type" content="XMPP Extension Protocol">
+    <meta name="DC.Format" content="XHTML">
+    <meta name="DC.Identifier" content="XEP-xxxx">
+    <meta name="DC.Language" content="en">
+    <meta name="DC.Rights" content="This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).">
+  </head>
+  <body onload="prettyPrint()">
+    <h1>XEP-xxxx: XEP - Sensor Networks - Sensor Data</h1>
+    <table>
+      <tr valign="top">
+        <td><strong>Abstract:</strong></td>
+        <td>This specification provides the common framework for sensor data interchange over XMPP networks.</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Author:</strong></td>
+        <td>Peter Waher</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Copyright:</strong></td>
+        <td>© 1999 - 2013 XMPP Standards Foundation. <a href="#appendix-legal">SEE LEGAL NOTICES</a>.</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Status:</strong></td>
+        <td>ProtoXEP</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Type:</strong></td>
+        <td>Standards Track</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Version:</strong></td>
+        <td>0.0.3</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Last Updated:</strong></td>
+        <td>2013-03-11</td>
+      </tr>
+    </table>
+    <hr>
+    <p style="color:red">WARNING: This document has not yet been accepted for consideration or approved in any official manner by the XMPP Standards Foundation, and this document is not yet an XMPP Extension Protocol (XEP). If this document is accepted as a XEP by the XMPP Council, it will be published at &lt;<a href="http://xmpp.org/extensions/">http://xmpp.org/extensions/</a>&gt; and announced on the &lt;standards@xmpp.org&gt; mailing list.</p>
+    <hr>
+    <h2>Table of Contents</h2>
+    <div class="indent">
+      <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
+      3.1.  <a href="#sect-ID0EFCAE">Request Read-out of momentary values</a><br>   
+      3.2.  <a href="#sect-ID0ECDAE">Read-out failure</a><br>   
+      3.3.  <a href="#sect-ID0EODAE">Read-out rejected</a><br>   
+      3.4.  <a href="#sect-ID0E1DAE">Read-out all</a><br>   
+      3.5.  <a href="#sect-ID0EGEAE">Read-out of multiple devices</a><br>   
+      3.6.  <a href="#sect-ID0ESEAE">Read-out of specific fields</a><br>   
+      3.7.  <a href="#sect-ID0ESFAE">Cancelling a scheduled read-out request</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
+      5.1.  <a href="#sect-ID0EQHAE">String lengths</a><br>   
+      5.2.  <a href="#sect-ID0ETIAE">Enumerations vs. Strings</a><br>   
+      5.3.  <a href="#sect-ID0EKKAE">Asynchronous feedback</a><br>   
+      5.4.  <a href="#sect-ID0E1KAE">Field Value Types</a><br>   
+      5.5.  <a href="#sect-ID0EUNAE">Field Types</a><br>   
+      5.6.  <a href="#sect-ID0ERVAE">Field Status Values</a><br>   
+      5.7.  <a href="#sect-ID0ED2AE">Subnodes and supernodes</a><br>6.  <a href="#i18n">Internationalization Considerations</a><br>   
+      6.1.  <a href="#sect-ID0E42AE">Time Zones</a><br>   
+      6.2.  <a href="#sect-ID0ER3AE">Localized strings</a><br>7.  <a href="#security">Security Considerations</a><br>8.  <a href="#iana">IANA Considerations</a><br>9.  <a href="#registrar">XMPP Registrar Considerations</a><br>10.  <a href="#schema">XML Schema</a><br>11.  <a href="#ack">Acknowledgements</a></p>
+      <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
+    </div>
+    <hr>
+    <h2>1.
+       <a name="intro">Introduction</a></h2>
+		<p class="" style="">
+			This XEP provides the underlying architecture, basic operations and data structures for sensor data communication over XMPP networks. It includes a hardware abstraction model, removing any 
+			technical detail implemented in underlying technologies.
+		</p>
+		<p class="" style="">
+			Note has to be taken, that these XEP's are designed for implementation in sensors, many of which have very limited amount of memory (both RAM and ROM) or resources (processing power).
+			Therefore, simplicity is of utmost importance. Furthermore, sensor networks can become huge, easily with millions of devices in peer-to-peer networks.
+		</p>
+		<p class="" style="">
+			Sensor networks contains many different architectures and use cases. For this reason, the sensor network standards have been divided into multiple XEPs according to the following table:
+		</p>
+		
+		<div class="indent">
+      <p class="caption"><a name="table-1"></a>Table 1: Sensor Network XEPs</p>
+      <table border="1" cellpadding="3" cellspacing="0">
+			<tr class="body">
+				<th colspan="" rowspan="">XEP</th>
+				<th colspan="" rowspan="">Description</th>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">XEP-0000-Exi</td>
+				<td colspan="" rowspan="">Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
+				in all sensor network implementations where memory and packet size is an issue.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">xep-0000-SN-BatteryPoweredSensors</td>
+				<td colspan="" rowspan="">Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">xep-0000-SN-Concentrators</td>
+				<td colspan="" rowspan="">Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">xep-0000-SN-Control</td>
+				<td colspan="" rowspan="">Defines how to control actuators and other devices in sensor networks.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">xep-0000-SN-Discovery</td>
+				<td colspan="" rowspan="">Defines the peculiars of sensor discovery in sensor networks. Apart from discovering sensors by JID, it also defines how to discover sensors based on location, etc.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">xep-0000-SN-Events</td>
+				<td colspan="" rowspan="">Defines how sensors send events, how event subscription, hysteresis levels, etc., are configured.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">xep-0000-SN-Interoperability</td>
+				<td colspan="" rowspan="">Defines guidelines for how to achieve interoperability in sensor networks, publishing interoperability interfaces for different types of devices.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">xep-0000-SN-Multicast</td>
+				<td colspan="" rowspan="">Defines how sensor data can be multicast in efficient ways.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">xep-0000-SN-Provisioning</td>
+				<td colspan="" rowspan="">Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">xep-0000-SN-PubSub</td>
+				<td colspan="" rowspan="">Defines how efficient publication of sensor data can be made in sensor networks.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">xep-0000-SN-SensorData</td>
+				<td colspan="" rowspan="">This specification. Provides the underlying architecture, basic operations and data structures for sensor data communication over XMPP networks. 
+				It includes a hardware abstraction model, removing any technical detail implemented in underlying technologies. This XEP is used by all other sensor network XEPs.</td>
+			</tr>
+		</table>
+    </div>
+	<h2>2.
+       <a name="glossary">Glossary</a></h2>
+		<p class="" style="">The following table lists common terms and corresponding descriptions.</p>
+		<div class="indent">
+      <p class="caption"><a name="table-2"></a>Table 2: Glossary</p>
+      <table border="1" cellpadding="3" cellspacing="0">
+			<tr class="body">
+				<th colspan="" rowspan="">Term</th>
+				<th colspan="" rowspan="">Description</th>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Actuator</td>
+				<td colspan="" rowspan="">Device containing at least one configurable property or output that can and should be controlled by some other entity or device.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Computed Value</td>
+				<td colspan="" rowspan="">A value that is computed instead of measured.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Concentrator</td>
+				<td colspan="" rowspan="">Device managing a set of devices which it publishes on the XMPP network.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Field</td>
+				<td colspan="" rowspan="">One item of sensor data. Contains information about: Node, Field Name, Value, Precision, Unit, Value Type, Status, Timestamp, Localization information, etc.
+				Fields should be unique within the triple (Node ID, Field Name, Timestamp).</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Field Name</td>
+				<td colspan="" rowspan="">Name of a field of sensor data. Examples: Energy, Volume, Flow, Power, etc.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Field Type</td>
+				<td colspan="" rowspan="">What type of value the field represents. Examples: Momentary Value, Status Value, Identification Value, Calculated Value, Peak Value, Historical Value, etc.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Historical Value</td>
+				<td colspan="" rowspan="">A value stored in memory from a previous timestamp.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Identification Value</td>
+				<td colspan="" rowspan="">A value that can be used for identification. (Serial numbers, meter IDs, locations, names, etc.)</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Localization information</td>
+				<td colspan="" rowspan="">Optional information for a field, allowing the sensor to control how the information should be presented to human viewers.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Meter</td>
+				<td colspan="" rowspan="">A device possible containing multiple sensors, used in metering applications. Examples: Electricity meter, Water Meter, Heat Meter, Cooling Meter, etc.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Momentary Value</td>
+				<td colspan="" rowspan="">A momentary value represents a value measured at the time of the read-out.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Node</td>
+				<td colspan="" rowspan="">Graphs contain nodes and edges between nodes. In Sensor Networks, sensors, actuators, meters, devices, gatewats, etc., are often depicted as nodes and links between sensors (friendships) 
+				are depicted as edges. In abstract terms, it's easier to talk about a Node, than have to list different types of nodes possible (sensors, actuators, meters, devices, gateways, etc.).
+				Each Node has a Node ID.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Node ID</td>
+				<td colspan="" rowspan="">An ID uniquelly identifying a node within its corresponding context. If a globally unique ID is desired, an architechture should be used using a universally accepted 
+				ID scheme.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Parameter</td>
+				<td colspan="" rowspan="">Readable and/or writable property on a node/device. The XEP xep-0000-SN-Concentrators deals with reading and writing parameters
+				on nodes/devices. Fields are not parameters, and parameters are not fields.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Peak Value</td>
+				<td colspan="" rowspan="">A maximum or minimum value during a given period.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Precision</td>
+				<td colspan="" rowspan="">In physics, precision determines the number of digits of precision. In sensor networks however, this definition is not easily applicable. Instead, precision
+				determines, for example, the number of decimals of precision, or power of precision. Example: 123.200 MWh contains 3 decimals of precision. All entities parsing and
+				delivering field information in sensor networks should always retain the number of decimals in a message.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Sensor</td>
+				<td colspan="" rowspan="">Device measuring at least one digital value (0 or 1) or analog value (value with precision and physical unit). Examples: Temperature sensor, pressure sensor, etc.
+				Sensor values are reported as fields during read-out. Each sensor has a unique Node ID.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">SN</td>
+				<td colspan="" rowspan="">Sensor Network. A network consisting, but not limited to sensors, where transport and use of sensor data is of primary concern. A sensor network may contain actuators, network applications, monitors, services, etc.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Status Value</td>
+				<td colspan="" rowspan="">A value displaying status information about something.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Timestamp</td>
+				<td colspan="" rowspan="">Timestamp of value, when the value was sampled or recorded.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Unit</td>
+				<td colspan="" rowspan="">Physical unit of value. Example: MWh, l/s, etc.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Value</td>
+				<td colspan="" rowspan="">A field value.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Value Status</td>
+				<td colspan="" rowspan="">Status of field value. Contains important status information for Quality of Service purposes. Examples: Ok, Error, Warning, Time Shifted, Missing, Signed, etc.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">Value Type</td>
+				<td colspan="" rowspan="">Can be numeric, string, boolean, Date &amp; Time, Time Span or Enumeration.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">SN</td>
+				<td colspan="" rowspan="">Sensor Network, a sensor network including devices of all types.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">WSN</td>
+				<td colspan="" rowspan="">Wireless Sensor Network, a sensor network including wireless devices.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">XMPP Client</td>
+				<td colspan="" rowspan="">Application connected to an XMPP network, having a JID. Note that sensors, as well as applications requesting sensor data can be XMPP clients.</td>
+			</tr>
+		</table>
+    </div>
+	<h2>3.
+       <a name="usecases">Use Cases</a></h2>
+		<p class="" style="">
+			The most common use case for a sensor network application is meter read-out. It's performed using a request and response mechanism, as is shown in the following diagram.
+		</p>
+		<p class="" style="">
+			<img alt="" src="http://i.imgur.com/tTGDh4m.png">
+		</p>
+		<p class="" style="">
+			The read-out request is started by the client sending a <span class="strong">req</span> request to the device. Here, the client selects a sequence number <span class="strong">seqnr</span>. 
+			It should be unique among requests made by the client. The device will use this sequence numbers in all messages sent back to the client.
+		</p>
+		<p class="" style="">
+			The request also contains a set of <span class="strong">field types</span> that very roughly determine what the client wants to read. What the client actually will return will be determined by
+			a lot of other factors, such as make and model of device, any provisioning rules provided, etc. This parameter just gives a hint on what kind of data is desired. It is implicit in the request
+			by the context what kind of data is requested. Examples of field types are: Momentary values, peak values, historical values, computed values, status values, identification values, etc.
+		</p>
+		<p class="" style="">
+			If reading historical values, the client can also specify an optional time range using the <span class="strong">from</span> and <span class="strong">to</span> parameter values, giving the device a hint on 
+			how much data to return.
+		</p>
+		<p class="" style="">
+			If the client wants the read-out to be performed at a given point in time, the client can define this using the optional parameter <span class="strong">when</span>.
+		</p>
+		<p class="" style="">
+			There's an optional parameter <span class="strong">ids</span> that the client can provide, listing a set of <span class="strong">Node IDs</span>. If omitted, the request includes all sensors or devices 
+			managed by the current JID. But, if the JID is controlled by a system, device or concentrator managing various devices, the <span class="strong">ids</span> parameter restricts the read-out to 
+			specific individuals.
+		</p>
+		<p class="" style="">
+			<span class="strong">Note:</span> The device is not required to follow the hints given by the client. These are suggestions the client can use to minimize its effort to perform the read-out.
+			The client MUST make sure the response is filtered according to original requirements by the client after the read-out response has been received.
+		</p>
+		<p class="" style="">
+			If the device accepts the client request, it sends an <span class="strong">accepted</span> response back to the client. The device also has to determine if the read-out is commenced directly,
+			or if it is to be queued for later processing. Note that the request can be queued for several reasons. The device can be busy, and queues it until it is ready to process the request.
+			It can also queue the request if the client has requested it to be executed at a given time. If the request is queued, the device informs the client of this using the <span class="strong">queued</span>
+			attribute. Note however, that the device will process the request when it can. There's no guarantee that the device will be able to process the request exactly when the client requests it.
+		</p>
+		<p class="" style="">
+			<span class="strong">Note:</span> The <span class="strong">accepted</span> message can be omitted if the device already has the response and is ready to send it. If the client receives field data or a 
+			<span class="strong">done</span> message before receiving an <span class="strong">accepted</span> message, the client can assume the device accepted the request and omitted sending an <span class="strong">accepted</span>
+			element.
+		</p>
+		<p class="" style="">
+			If the request was queued, the device will send a message informing the client when the read-out is begun. This is done using a <span class="strong">started</span> message, using the same
+			<span class="strong">seqnr</span> used in the original request.
+		</p>
+		<p class="" style="">
+			<span class="strong">Note:</span> Sending a <span class="strong">started</span> element should be omitted by the device if the request is not queued on the device. If the <span class="strong">queued</span> attribute
+			is omitted in the response, or has the value <span class="strong">false</span>, the client must not assume the device will send a <span class="strong">started</span> element.
+		</p>
+		<p class="" style="">
+			During the read-out, the device sends partial results back to the client using the same <span class="strong">seqnr</span> as used in the request, using a <span class="strong">fields</span> message.
+			These messages will contain a sequence of fields read out of the device. The client is required to filter this list according to original specifications, as the device is not required
+			to do this filtering for the client.
+		</p>
+		<p class="" style="">
+			When read-out is complete, the device will send a <span class="strong">done</span> message to the client with the same <span class="strong">seqnr</span> as in the original request. Since the sender 
+			of messages in the device at the time of sending might not be aware of if there are more messages to send or not, the device can send this message separately as is shown in the
+			diagram. If the device however, knows the last message containing fields is the last, it can set a <span class="strong">done</span> attribute in the message, to skip this last message.
+		</p>
+		<p class="" style="">
+			<span class="strong">Note:</span> There is no guarantee that the device will send a corresponding <span class="strong">started</span> and <span class="strong">fields</span> element, even though the request was
+			accepted. The device might lose power during the process and forget the request. The client should always be aware of that devices may not respond in time, and take appropriate action
+			accordingly (for instance, implementing a retry mechanism).
+		</p>
+		<p class="" style="">
+			If a failure occurs while performing the read-out, a <span class="strong">failure</span> message is sent, instead of a corresponding <span class="strong">fields</span> message, as is shown in the following diagram.
+			Apart from notifying the client that a failure to perform the read-out, or part thereof, has occurred, it also provides a list of errors that the device encountered while trying. Note that 
+			multiple <span class="strong">fields</span> and <span class="strong">failure</span> messages can be sent back to the client during the read-out.
+		</p>
+		<p class="" style="">
+			<img alt="" src="http://i.imgur.com/5WsyGcW.png">
+		</p>
+		<p class="" style="">
+			The device can also reject a read-out request. Reasons for rejecting a request may be missing privileges defined by provisioning rules, etc. It's not part of this XEP
+			to define such rules. A separate XEP (<a href="xep-0000-SN-Provisioning.html">xep-0000-SN-Provisioning</a>) defines an architecture for how such provisioning can be easily implemented.
+		</p>
+		<p class="" style="">
+			A rejection response is shown in the following diagram.
+		</p>
+		<p class="" style="">
+			<img alt="" src="http://i.imgur.com/Lf2agLP.png">
+		</p>
+		<p class="" style="">
+			If a read-out has been queued, the client can cancel the queued read-out request sending a <span class="strong">cancel</span> command to the device. If a reading has begin and the client
+			sends a <span class="strong">cancel</span> command to the device, the device can choose if the read-out should be cancelled or completed.
+		</p>
+		<p class="" style="">
+			<span class="strong">Note:</span> Remember that the <span class="strong">seqnr</span> value used in this command is unique only to the client making the request. The device can receive requests
+			from multiple clients, and must make sure it differs between <span class="strong">seqnr</span> values from different clients. Different clients are assumed to have different values
+			in the corresponding <span class="strong">from</span> attributes.
+		</p>
+		<p class="" style="">
+			<img alt="" src="http://i.imgur.com/9pK4n2R.png">
+		</p>
+		<div class="indent">
+      <h3>3.1 <a name="sect-ID0EFCAE">Request Read-out of momentary values</a></h3>
+			<p class="" style="">
+				The client that wishes to receive momentary values from the sensor initiates the request using the <span class="strong">req</span> request sent to the device.
+			</p>
+			<p class="caption"><a name="example-1"></a>Example 1. Read-out request of momentary values from a device</p>
+      <div class="indent">
+        <pre class="prettyprint">
+				
+   &lt;iq type='get'
+       from='master@clayster.com'
+       to='device@clayster.com'
+       id='1'&gt;
+      &lt;req xmlns='urn:xmpp:sn' seqnr='1' momentary='true'/&gt;
+   &lt;/iq&gt;
+			</pre>
+      </div>
+
+			<p class="" style="">
+				When the device has received and accepted the request, it responds as follows:
+			</p>
+
+			<p class="caption"><a name="example-2"></a>Example 2. Read-out request accepted by device</p>
+      <div class="indent">
+        <pre class="prettyprint">
+				
+   &lt;iq type='result'
+       from='device@clayster.com'
+       to='master@clayster.com'
+       id='1'&gt;
+      &lt;accepted xmlns='urn:xmpp:sn' seqnr='1'/&gt;
+   &lt;/iq&gt;
+			</pre>
+      </div>
+
+			<p class="" style="">
+				When read-out is complete, the response is sent as follows:
+			</p>
+
+			<p class="caption"><a name="example-3"></a>Example 3. Momentary read-out response</p>
+      <div class="indent">
+        <pre class="prettyprint">
+				
+   &lt;message from='device@clayster.com'
+            to='master@clayster.com'&gt;
+      &lt;fields xmlns='urn:xmpp:sn' seqnr='1' done='true'&gt;
+         &lt;node nodeId='Device01'&gt;
+            &lt;timestamp value='2013-03-07T16:24:30'&gt;
+               &lt;numeric name='Temperature' momentary='true' automaticReadout='true' value='23.4' unit='°C'/&gt; 
+            &lt;/timestamp&gt;
+         &lt;/node&gt;
+      &lt;/fields&gt;
+   &lt;/message&gt;
+			</pre>
+      </div>
+		</div>
+		
+		<div class="indent">
+      <h3>3.2 <a name="sect-ID0ECDAE">Read-out failure</a></h3>
+			<p class="" style="">
+				If instead a read-out could not be performed, the communication sequence might look as follows:
+			</p>
+
+			<p class="caption"><a name="example-4"></a>Example 4. Momentary read-out failure</p>
+      <div class="indent">
+        <pre class="prettyprint">
+				
+   &lt;iq type='get'
+       from='master@clayster.com'
+       to='device@clayster.com'
+       id='2'&gt;
+      &lt;req xmlns='urn:xmpp:sn' seqnr='2' momentary='true'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='device@clayster.com'
+       to='master@clayster.com'
+       id='2'&gt;
+      &lt;accepted xmlns='urn:xmpp:sn' seqnr='2'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;message from='device@clayster.com'
+            to='master@clayster.com'&gt;
+      &lt;failure xmlns='urn:xmpp:sn' seqnr='2' done='true'&gt;
+         &lt;error nodeId='Device01' timestamp='2013-03-07T17:13:30'&gt;Timeout.&lt;/error&gt;
+      &lt;/failure&gt;
+   &lt;/message&gt;
+			</pre>
+      </div>
+		</div>
+		<div class="indent">
+      <h3>3.3 <a name="sect-ID0EODAE">Read-out rejected</a></h3>
+			<p class="" style="">
+				If for some reason, the device rejects the read-out request, the communication sequence might look as follows:
+			</p>
+
+			<p class="caption"><a name="example-5"></a>Example 5. Momentary read-out rejected</p>
+      <div class="indent">
+        <pre class="prettyprint">
+				
+   &lt;iq type='get'
+       from='master@clayster.com'
+       to='device@clayster.com'
+       id='3'&gt;
+      &lt;req xmlns='urn:xmpp:sn' seqnr='3' momentary='true'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='device@clayster.com'
+       to='master@clayster.com'
+       id='3'&gt;
+      &lt;rejected xmlns='urn:xmpp:sn' seqnr='3'&gt;
+	     &lt;error&gt;Access denied.&lt;/error&gt;
+      &lt;/rejected&gt;
+   &lt;/iq&gt;
+			</pre>
+      </div>
+		</div>
+		<div class="indent">
+      <h3>3.4 <a name="sect-ID0E1DAE">Read-out all</a></h3>
+			<p class="" style="">
+				The following example shows a communication sequence when a client reads out all available information from a sensor at a given point in time:
+			</p>
+
+			<p class="caption"><a name="example-6"></a>Example 6. Scheduled read-out of device with multiple responses</p>
+      <div class="indent">
+        <pre class="prettyprint">
+				
+   &lt;iq type='get'
+       from='master@clayster.com'
+       to='device@clayster.com'
+       id='4'&gt;
+      &lt;req xmlns='urn:xmpp:sn' seqnr='4' all='true' when='2013-03-07T19:00:00'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='device@clayster.com'
+       to='master@clayster.com'
+       id='4'&gt;
+      &lt;accepted xmlns='urn:xmpp:sn' seqnr='4' queued='true'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;message from='device@clayster.com'
+            to='master@clayster.com'&gt;
+      &lt;started xmlns='urn:xmpp:sn' seqnr='4'/&gt;
+   &lt;/message&gt;
+   
+   &lt;message from='device@clayster.com'
+            to='master@clayster.com'&gt;
+      &lt;fields xmlns='urn:xmpp:sn' seqnr='4'&gt;
+         &lt;node nodeId='Device01'&gt;
+            &lt;timestamp value='2013-03-07T19:00:00'&gt;
+               &lt;numeric name='Temperature' momentary='true' automaticReadout='true' value='23.4' unit='°C'/&gt; 
+               &lt;numeric name='Runtime' status='true' automaticReadout='true' value='12345' unit='h'/&gt;
+               &lt;string name='Device ID' identification='true' automaticReadout='true' value='Device01'/&gt;
+            &lt;/timestamp&gt;
+         &lt;/node&gt;
+      &lt;/fields&gt;
+   &lt;/message&gt;
+   
+   &lt;message from='device@clayster.com'
+            to='master@clayster.com'&gt;
+      &lt;fields xmlns='urn:xmpp:sn' seqnr='4'&gt;
+         &lt;node nodeId='Device01'&gt;
+            &lt;timestamp value='2013-03-07T19:00:00'&gt;
+               &lt;numeric name='Temperature, Max' peak='true' automaticReadout='true' value='25.9' unit='°C'/&gt; 
+               &lt;numeric name='Temperature, Min' peak='true' automaticReadout='true' value='18.7' unit='°C'/&gt; 
+               &lt;numeric name='Temperature, Mean' computed='true' automaticReadout='true' value='22.5' unit='°C'/&gt; 
+            &lt;/timestamp&gt;
+         &lt;/node&gt;
+      &lt;/fields&gt;
+   &lt;/message&gt;
+   
+   &lt;message from='device@clayster.com'
+            to='master@clayster.com'&gt;
+      &lt;fields xmlns='urn:xmpp:sn' seqnr='4'&gt;
+         &lt;node nodeId='Device01'&gt;
+            &lt;timestamp value='2013-03-07T18:00:00'&gt;
+               &lt;numeric name='Temperature' historicalHour='true' automaticReadout='true' value='24.5' unit='°C'/&gt; 
+            &lt;/timestamp&gt;
+            &lt;timestamp value='2013-03-07T17:00:00'&gt;
+               &lt;numeric name='Temperature' historicalHour='true' automaticReadout='true' value='25.1' unit='°C'/&gt; 
+            &lt;/timestamp&gt;
+            &lt;timestamp value='2013-03-07T16:00:00'&gt;
+               &lt;numeric name='Temperature' historicalHour='true' automaticReadout='true' value='25.2' unit='°C'/&gt; 
+            &lt;/timestamp&gt;
+			...
+            &lt;timestamp value='2013-03-07T00:00:00'&gt;
+               &lt;numeric name='Temperature' historicalHour='true' historicalDay='true' automaticReadout='true' value='25.2' unit='°C'/&gt; 
+            &lt;/timestamp&gt;
+         &lt;/node&gt;
+      &lt;/fields&gt;
+   &lt;/message&gt;
+   
+   &lt;message from='device@clayster.com'
+            to='master@clayster.com'&gt;
+      &lt;done xmlns='urn:xmpp:sn' seqnr='4'/&gt;
+   &lt;/message&gt;
+			</pre>
+      </div>
+		</div>
+		<div class="indent">
+      <h3>3.5 <a name="sect-ID0EGEAE">Read-out of multiple devices</a></h3>
+			<p class="" style="">
+				The following example shows how a client reads a subset of multiple sensors behind a device with a single JID.
+			</p>
+
+			<p class="caption"><a name="example-7"></a>Example 7. Read-out of multiple devices</p>
+      <div class="indent">
+        <pre class="prettyprint">
+				
+   &lt;iq type='get'
+       from='master@clayster.com'
+       to='device@clayster.com'
+       id='5'&gt;
+      &lt;req xmlns='urn:xmpp:sn' seqnr='5' momentary='true'&gt;
+         &lt;node nodeId='Device02'/&gt;
+         &lt;node nodeId='Device03'/&gt;
+      &lt;/req&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='device@clayster.com'
+       to='master@clayster.com'
+       id='5'&gt;
+      &lt;accepted xmlns='urn:xmpp:sn' seqnr='5'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;message from='device@clayster.com'
+            to='master@clayster.com'&gt;
+      &lt;fields xmlns='urn:xmpp:sn' seqnr='5'&gt;
+         &lt;node nodeId='Device02'&gt;
+            &lt;timestamp value='2013-03-07T19:31:15'&gt;
+               &lt;numeric name='Temperature' momentary='true' automaticReadout='true' value='23.4' unit='°C'/&gt; 
+            &lt;/timestamp&gt;
+         &lt;/node&gt;
+      &lt;/fields&gt;
+   &lt;/message&gt;
+   
+   &lt;message from='device@clayster.com'
+            to='master@clayster.com'&gt;
+      &lt;fields xmlns='urn:xmpp:sn' seqnr='5' done='true'&gt;
+         &lt;node nodeId='Device03'&gt;
+            &lt;timestamp value='2013-03-07T19:31:16'&gt;
+               &lt;numeric name='Temperature' momentary='true' automaticReadout='true' value='22.8' unit='°C'/&gt; 
+            &lt;/timestamp&gt;
+         &lt;/node&gt;
+      &lt;/fields&gt;
+   &lt;/message&gt;
+			</pre>
+      </div>
+		</div>
+		<div class="indent">
+      <h3>3.6 <a name="sect-ID0ESEAE">Read-out of specific fields</a></h3>
+			<p class="" style="">
+				The <span class="strong">req</span> element can take <span class="strong">field</span> sub elements, with which the client can specify which fields it is interested in.
+				If not provided, the client is assumed to return all matching fields, regardless of field name. However, the <span class="strong">field</span> elements in the
+				request object can be used as a hint which fields should be returned.
+			</p>
+			<p class="" style="">
+				<span class="strong">Note:</span> the device is not required to adhere to the field limits expressed by these <span class="strong">field</span> elements. They are considered
+				a hint the device can use to limit bandwidth.
+			</p>
+			<p class="" style="">
+				The following example shows how a client can read specific fields in a device.
+			</p>
+
+			<p class="caption"><a name="example-8"></a>Example 8. Read-out of multiple devices</p>
+      <div class="indent">
+        <pre class="prettyprint">
+				
+   &lt;iq type='get'
+       from='master@clayster.com'
+       to='device@clayster.com'
+       id='6'&gt;
+      &lt;req xmlns='urn:xmpp:sn' seqnr='6' momentary='true'&gt;
+         &lt;node nodeId='Device04'/&gt;
+         &lt;field name='Energy'/&gt;
+         &lt;field name='Power'/&gt;
+      &lt;/req&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='device@clayster.com'
+       to='master@clayster.com'
+       id='6'&gt;
+      &lt;accepted xmlns='urn:xmpp:sn' seqnr='6'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;message from='device@clayster.com'
+            to='master@clayster.com'&gt;
+      &lt;fields xmlns='urn:xmpp:sn' seqnr='6' done='true'&gt;
+         &lt;node nodeId='Device04'&gt;
+            &lt;timestamp value='2013-03-07T22:03:15'&gt;
+               &lt;numeric name='Energy' momentary='true' automaticReadout='true' value='12345.67' unit='MWh'/&gt; 
+               &lt;numeric name='Power' momentary='true' automaticReadout='true' value='239.4' unit='W'/&gt; 
+            &lt;/timestamp&gt;
+         &lt;/node&gt;
+      &lt;/fields&gt;
+   &lt;/message&gt;
+			</pre>
+      </div>
+		</div>
+		<div class="indent">
+      <h3>3.7 <a name="sect-ID0ESFAE">Cancelling a scheduled read-out request</a></h3>
+			<p class="" style="">
+				The following example shows how the client cancels a scheduled read-out:
+			</p>
+
+			<p class="caption"><a name="example-9"></a>Example 9. Scheduled read-out of device with multiple responses</p>
+      <div class="indent">
+        <pre class="prettyprint">
+				
+   &lt;iq type='get'
+       from='master@clayster.com'
+       to='device@clayster.com'
+       id='8'&gt;
+      &lt;req xmlns='urn:xmpp:sn' seqnr='8' all='true' when='2013-03-09T23:30:00'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='device@clayster.com'
+       to='master@clayster.com'
+       id='8'&gt;
+      &lt;accepted xmlns='urn:xmpp:sn' seqnr='8' queued='true'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='get'
+       from='master@clayster.com'
+       to='device@clayster.com'
+       id='8'&gt;
+      &lt;cancel xmlns='urn:xmpp:sn' seqnr='8'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='device@clayster.com'
+       to='master@clayster.com'
+       id='8'&gt;
+      &lt;cancelled xmlns='urn:xmpp:sn' seqnr='8'/&gt;
+   &lt;/iq&gt;
+			</pre>
+      </div>
+		</div>
+	<h2>4.
+       <a name="support">Determining Support</a></h2>
+		<p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:sn" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0ENGAE">1</a>] information requests.</p>
+		<p class="caption"><a name="example-10"></a>Example 10. Service discovery information request</p>
+    <div class="indent">
+      <pre class="prettyprint">
+			
+&lt;iq type='get'
+    from='master@clayster.com'
+    to='device@clayster.com'
+    id='disco1'&gt;
+  &lt;query xmlns='http://jabber.org/protocol/disco#info'/&gt;
+&lt;/iq&gt;
+		</pre>
+    </div>
+		<p class="caption"><a name="example-11"></a>Example 11. Service discovery information response</p>
+    <div class="indent">
+      <pre class="prettyprint">
+			
+&lt;iq type='result'
+    from='device@clayster.com'
+    to='master@clayster.com'
+    id='disco1'&gt;
+  &lt;query xmlns='http://jabber.org/protocol/disco#info'&gt;
+    ...
+    &lt;feature var='urn:xmpp:sn'/&gt;
+    ...
+  &lt;/query&gt;
+&lt;/iq&gt;
+		</pre>
+    </div>
+		<p class="" style="">In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined 
+		in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EEHAE">2</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.</p>
+	<h2>5.
+       <a name="impl">Implementation Notes</a></h2>
+		<div class="indent">
+      <h3>5.1 <a name="sect-ID0EQHAE">String lengths</a></h3>
+			<p class="" style="">
+				As noticed, a conscious effort has been made not to shorten element and attribute names. This is to make sure, XML is maintained readable. Packet size is not deemed to be
+				affected negatively by this for two reasons:
+			</p>
+			<ul class="" style="">
+				<li class="" style="">For sensors with limited memory, or where package size is important, <span class="ref" style=""><a href="http://www.w3.org/TR/exi/">EXI</a></span> 
+				 [<a href="#nt-ID0EGIAE">3</a>] is supposed to be used. 
+				EXI compresses strings as normalized index values, making the string appear only once in the packet. Therefore, shortening string length doesn't affect packet 
+				size much. Element and attribute names in known namespaces are furthermore only encoded by index in schema, not by name.</li>
+				<li class="" style="">If limited memory or package size is not a consideration, readability and ease of implementation is preferred to short messages.</li>
+			</ul>
+		</div>
+		<div class="indent">
+      <h3>5.2 <a name="sect-ID0ETIAE">Enumerations vs. Strings</a></h3>
+			<p class="" style="">
+				This protocol has avoided the use of enumerations for data types such as units, field names, etc., and instead use strings. The reasons for this are:
+			</p>
+			<ul class="" style="">
+				<li class="" style="">Enumerations would unnecessarily restrict the use of the protocol to field names and units listed in the protocol.</li>
+				<li class="" style="">It would be very difficult to try to create a complete set of field names and units that would suit all applications.</li>
+				<li class="" style="">Leaving these values as strings would let developers the liberty to use units as they desire.</li>
+				<li class="" style="">If EXI is used for compression, the use of strings will only increase payload slightly, with only one copy of each distinct value used.</li>
+				<li class="" style="">If EXI is not used, this does not affect packet size.</li>
+			</ul>
+			<p class="" style="">
+				However, some things need to be taken into account:
+			</p>
+			<ul class="" style="">
+				<li class="" style="">Since free strings are used, XML validation cannot be used to secure correct names are used.</li>
+				<li class="" style="">xep-0000-SN-Interoperability lists recommendations on how field names and units should be used in order to achieve maximum interoperability in SN.</li>
+				<li class="" style="">Consumers of sensor data need to include unit conversion algorithms.</li>
+			</ul>
+		</div>
+		<div class="indent">
+      <h3>5.3 <a name="sect-ID0EKKAE">Asynchronous feedback</a></h3>
+			<p class="" style="">
+				Since some applications require real-time feedback (or as real-time as possible), and read-out might in certain cases take a long time, the device has the option
+				to send multiple <span class="strong">fields</span> messages during read-out. The client is responsible for collecting all such messages until either a <span class="strong">done</span> message
+				is sent, or a corresponding <span class="strong">done</span> attribute is available in one of the messages received. Only the device knows how many (if any) messages are sent in
+				response to a read-out request.
+			</p>
+		</div>
+		<div class="indent">
+      <h3>5.4 <a name="sect-ID0E1KAE">Field Value Types</a></h3>
+			<p class="" style="">
+				There are different types of values that can be reported from a device. The following table lists the various types:
+			</p>
+			<div class="indent">
+        <p class="caption"><a name="table-3"></a>Table 3: Field Value Types</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+				<tr class="body">
+					<th colspan="" rowspan="">Element</th>
+					<th colspan="" rowspan="">Description</th>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">numeric</td>
+					<td colspan="" rowspan="">
+						Represents a numerical value. Numerical values contain, apart from a numerical number, also an implicit precision (number of decimals) and an
+						optional unit. All parties in the communication chain should retain the number of decimals used, since this contains information that is important
+						in the interpretation of a value. For example, 10 °C is different from 10.0 °C, and very different from 10.00 °C. If a sensor delivers the value
+						10 °C you can assume it probably lies between 9.5 °C and 10.5 °C. But if a sensor delivers 10.00 °C, it is probably very exact (if calibrated correctly).
+					</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">string</td>
+					<td colspan="" rowspan="">Represents a string value. It contains an arbitrary string value.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">boolean</td>
+					<td colspan="" rowspan="">Represents a boolean value that can be either true or false.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">dateTime</td>
+					<td colspan="" rowspan="">Represents a date and optional time value. The value must be encoded using the xs:dateTime data type. This includes date, an optional time and optional time zone information.
+					If time zone is not available, it is supposed to be undefined.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">timeSpan</td>
+					<td colspan="" rowspan="">Represents a time span value. This can be either a time of day value, if nonnegative and less than 24 hours, or a duration value.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">enum</td>
+					<td colspan="" rowspan="">Represents an enumeration value. What differs this value from a string value, is that it apart from the enumeration value (which is a string value),
+					also contains a data type, which consumers can use to interpret its value. This specification does not assume knowledge of any particular enumeration
+					data types.</td>
+				</tr>
+			</table>
+      </div>
+		</div>
+		<div class="indent">
+      <h3>5.5 <a name="sect-ID0EUNAE">Field Types</a></h3>
+			<p class="" style="">
+				There are different types of fields, apart from types of values a field can have. These types are conceptual types, similar to categories. They are not exclusive,
+				and can be combined.
+			</p>
+			<p class="" style="">
+				If requesting multiple field types in a request, the device must interpret this as a union of the corresponding field types and return at least all field values
+				that contain at least one of the requested field types. Example: If requesting momentary values and historical values, devices must return both its momentary values
+				and its historical values.
+			</p>
+			<p class="" style="">
+				But, when a device reports a field having multiple field types, the client should interpret this as the intersection of the corresponding field types, i.e. the corresponding
+				field has all corresponding field types. Example: A field marked as both a status value and as a historical value is in fact a historical status value.
+			</p>
+			<p class="" style="">
+				The following table lists the different field types specified in this document:
+			</p>
+			<div class="indent">
+        <p class="caption"><a name="table-4"></a>Table 4: Field Types</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+				<tr class="body">
+					<th colspan="" rowspan="">Field Type</th>
+					<th colspan="" rowspan="">Description</th>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">computed</td>
+					<td colspan="" rowspan="">A value that is computed instead of measured.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">historical*</td>
+					<td colspan="" rowspan="">A value stored in memory from a previous timestamp. The suffix is used to determine period, as shown below.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">historicalSecond</td>
+					<td colspan="" rowspan="">A value stored at a second shift (milliseconds = 0).</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">historicalMinute</td>
+					<td colspan="" rowspan="">A value stored at a minute shift (seconds=milliseconds=0). Are also second values.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">historicalHour</td>
+					<td colspan="" rowspan="">A value stored at a hour shift (minutes=seconds=milliseconds=0). Are also minute and second values.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">historicalDay</td>
+					<td colspan="" rowspan="">A value stored at a day shift (hours=minutes=seconds=milliseconds=0). Are also hour, minute and second values.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">historicalWeek</td>
+					<td colspan="" rowspan="">A value stored at a week shift (Monday, hours=minutes=seconds=milliseconds=0). Are also day, hour, minute and second values.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">historicalMonth</td>
+					<td colspan="" rowspan="">A value stored at a month shift (day=1, hours=minutes=seconds=milliseconds=0). Are also day, hour, minute and second values.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">historicalQuarter</td>
+					<td colspan="" rowspan="">A value stored at a quarter year shift (Month=Jan, Apr, Jul, Oct, day=1, hours=minutes=seconds=milliseconds=0). Are also month, day, hour, minute and second values.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">historicalYear</td>
+					<td colspan="" rowspan="">A value stored at a year shift (Month=Jan, day=1, hours=minutes=seconds=milliseconds=0). Are also quarter, month, day, hour, minute and second values.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">historicalOther</td>
+					<td colspan="" rowspan="">If period if historical value is not important in the request or by the device.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">identity</td>
+					<td colspan="" rowspan="">A value that can be used for identification. (Serial numbers, meter IDs, locations, names, addresses, etc.)</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">momentary</td>
+					<td colspan="" rowspan="">A momentary value represents a value measured at the time of the read-out. Examples: Energy, Volume, Power, Flow, Temperature, Pressure, etc.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">peak</td>
+					<td colspan="" rowspan="">A maximum or minimum value during a given period. Examples "Temperature, Max", "Temperature, Min", etc.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">status</td>
+					<td colspan="" rowspan="">A value displaying status information about something. Examples: Health, Battery life time, Runtime, Expected life time, Signal strength, Signal quality, etc. </td>
+				</tr>
+			</table>
+      </div>
+			<p class="" style="">
+				There are two field type attributes that can be used in requests to simplify read-out:
+			</p>
+			<div class="indent">
+        <p class="caption"><a name="table-5"></a>Table 5: Special Field Types available in read-out requests</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+				<tr class="body">
+					<th colspan="" rowspan="">Field Type</th>
+					<th colspan="" rowspan="">Description</th>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">all</td>
+					<td colspan="" rowspan="">Reads all types of fields. It is the same as explicitly setting all field type attributes to true.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">historical</td>
+					<td colspan="" rowspan="">If period of historical values is not important, this attribute can be set to include all types of historical values.</td>
+				</tr>
+			</table>
+      </div>
+			<p class="" style="">
+				<span class="strong">Note:</span> The reason for including different time periods for historical values is that these periods are common in metering
+				applications. However, the client is not restricted to these in any way. The client can always just ask for historical values, and do
+				filtering as necessary to read out the interval desired.
+			</p>
+			<p class="" style="">
+				Also, devices are not required to include logic to parse and figure out what historical values are actually desired by the client. If too
+				complicated for the device to handle, it is free to report all historical values. However, the device should limit the historical values
+				to any interval requested, and should try to limit itself to the field types requested. Information in the request element are seen as hints
+				that the device can use to optimize any communication required by the operation.
+			</p>
+		</div>
+		<div class="indent">
+      <h3>5.6 <a name="sect-ID0ERVAE">Field Status Values</a></h3>
+			<p class="" style="">
+				In metering applications where quality of service is important, a field must always be accompanied with a corresponding status flag. Devices should
+				set these accordingly. If no status flag is set on a field, the client can assume <span class="strong">automaticReadout</span> is true.
+			</p>
+			<p class="" style="">
+				Note that status flags are not exclusive. Many of them can logically be combined. Some also imply an order of importance. This should be kept in mind
+				when trying to overwrite existing values with read values: An estimate should not overwrite a read-out, a read-out not a signed value, and a signed value
+				not an invoiced value, etc.
+			</p>
+			<p class="" style="">
+				Available status flags, in order of importance:
+			</p>
+			<div class="indent">
+        <p class="caption"><a name="table-6"></a>Table 6: </p>
+        <table border="1" cellpadding="3" cellspacing="0">
+				<tr class="body">
+					<th colspan="" rowspan="">Status Flag</th>
+					<th colspan="" rowspan="">Description</th>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">missing</td>
+					<td colspan="" rowspan="">Value is missing</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">automaticEstimate</td>
+					<td colspan="" rowspan="">An estimate of the value has been done automatically. Considered more reliable than a missing value (duh!).</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">manualEstimate</td>
+					<td colspan="" rowspan="">The value has manually been estimated. Considered more reliable than an automatic estimate.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">manualReadout</td>
+					<td colspan="" rowspan="">Value has been manually read. Considered more reliable than a manual estimate.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">automaticReadout</td>
+					<td colspan="" rowspan="">Value has been automatically read. Considered more reliable than a manually read value.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">timeOffset</td>
+					<td colspan="" rowspan="">The time was offset more than allowed and corrected during the measurement period.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">warning</td>
+					<td colspan="" rowspan="">A warning was logged during the measurement period.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">error</td>
+					<td colspan="" rowspan="">An error was logged during the measurement period.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">signed</td>
+					<td colspan="" rowspan="">The value has been signed by an operator. Considered more reliable than an automatically read value. Note that the signed status flag can be used to overwrite
+					existing values of higher importance. Example signed + invoiced can be considered more reliable than only invoiced, etc.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">invoiced</td>
+					<td colspan="" rowspan="">The value has been invoiced by an operator. Considered more reliable than a signed value.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">endOfSeries</td>
+					<td colspan="" rowspan="">The value has been marked as an end point in a series. This can be used for instance to mark the change of tenant in an apartment.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">powerFailure</td>
+					<td colspan="" rowspan="">The device recorded a power failure during the measurement period.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">invoiceConfirmed</td>
+					<td colspan="" rowspan="">The value has been invoiced by an operator and confirmed by the recipient. Considered more reliable than an invoiced value.</td>
+				</tr>
+			</table>
+      </div>
+		</div>
+		<div class="indent">
+      <h3>5.7 <a name="sect-ID0ED2AE">Subnodes and supernodes</a></h3>
+			<p class="" style="">
+				This document does not go into detail on how devices are ordered behind a JID. Some of the examples have assumed a single device lies behind a JID, others
+				that multiple devices exist behind a JID. Also, no order or structure of devices has been assumed.
+			</p>
+			<p class="" style="">
+				But it can be mentioned that it is assumed that if a client requests a read-out of a supernode, it implies the read-out of all its subnodes. Therefore, the
+				client cannot expect read-out to be limited to the devices listed explicitly in a request, as nodes implicitly implied, as descendant nodes of the selected nodes,
+				can also be included.
+			</p>
+			<p class="" style="">
+				More information about how multiple devices behind a JID can be handled, is described in the XEP <a href="xep-0000-SN-Concentrators.html">xep-0000-SN-Concentrators</a>.
+			</p>
+		</div>
+	<h2>6.
+       <a name="i18n">Internationalization Considerations</a></h2>
+		<div class="indent">
+      <h3>6.1 <a name="sect-ID0E42AE">Time Zones</a></h3>
+			<p class="" style="">
+				All timestamps and dateTime values use the XML data type xs:dateTime to specify values. These values include a date, an optional time and an optional time zone.
+			</p>
+			<p class="" style="">
+				<span class="strong">Note:</span> If time zone is not available, it is supposed to be undefined.
+			</p>
+			<p class="" style="">
+				If devices report time zone, this information should be propagated throughout the system. Otherwise, comparing timestamps from different time zones will be impossible.
+			</p>
+		</div>
+		<div class="indent">
+      <h3>6.2 <a name="sect-ID0ER3AE">Localized strings</a></h3>
+			<p class="" style="">
+				This specification allows for localization of field names in meter data read-out. This is performed by assigning each localizable string a <span class="strong">String ID</span>
+				which should be unique within a given <span class="strong">Language Module</span>. A <span class="strong">Language Module</span> can be any string, including URI's or namespace names.
+				The XEP <a href="xep-0000-SN-Interoperability.html">xep-0000-SN-Interoperability</a> details how such localizations can be made in an interoperable way.
+			</p>
+			<p class="" style="">
+				<span class="strong">Note:</span> Localization of strings are for human consumption only. Machines should use the unlocalized strings in program logic.
+			</p>
+			<p class="" style="">
+				The following example shows how a device can report localized field information that can be presented to end users without systems being preprogrammed
+				to recognize the device. Language modules can be aggregated by operators after installation, or installed as a pluggable module after the main installation,
+				if localization is desired.
+			</p>
+			<p class="caption"><a name="example-12"></a>Example 12. Localized field names</p>
+      <div class="indent">
+        <pre class="prettyprint">
+				
+   &lt;iq type='get'
+       from='master@clayster.com'
+       to='device@clayster.com'
+       id='7'&gt;
+      &lt;req xmlns='urn:xmpp:sn' seqnr='7' all='true'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='device@clayster.com'
+       to='master@clayster.com'
+       id='7'&gt;
+      &lt;accepted xmlns='urn:xmpp:sn' seqnr='7'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;message from='device@clayster.com'
+            to='master@clayster.com'&gt;
+      &lt;fields xmlns='urn:xmpp:sn' seqnr='7' done='true'&gt;
+         &lt;node nodeId='Device05'&gt;
+            &lt;timestamp value='2013-03-07T22:20:45'&gt;
+               &lt;numeric name='Temperature' momentary='true' automaticReadout='true' 
+                        value='23.4' unit='°C' module='Whatchamacallit' stringIds='1'/&gt; 
+               &lt;numeric name='Temperature, Min' momentary='true' automaticReadout='true' 
+                        value='23.4' unit='°C' module='Whatchamacallit' stringIds='1,2'/&gt; 
+               &lt;numeric name='Temperature, Max' momentary='true' automaticReadout='true' 
+                        value='23.4' unit='°C' module='Whatchamacallit' stringIds='1,3'/&gt; 
+               &lt;numeric name='Temperature, Mean' momentary='true' automaticReadout='true' 
+                        value='23.4' unit='°C' module='Whatchamacallit' stringIds='1,4'/&gt; 
+            &lt;/timestamp&gt;
+         &lt;/node&gt;
+      &lt;/fields&gt;
+   &lt;/message&gt;
+			</pre>
+      </div>
+			<p class="" style="">
+				The above example defines a language module called <span class="strong">Watchamacallit</span>. In this language module it defines four strings, with IDs 1-4. A system might store these as follows,
+				where the system replaces all <span class="strong">%N%</span> with a conceptual n:th parameter. (It's up to the system to define these strings, any syntax and how to handle input and output.). In
+				this example, we will assume <span class="strong">%0%</span> means any previous output, and <span class="strong">%1%</span> any seed value provided. (See below).
+			</p>
+			<div class="indent">
+        <p class="caption"><a name="table-7"></a>Table 7: Example string IDs</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+				<tr class="body">
+					<th colspan="" rowspan="">ID</th>
+					<th colspan="" rowspan="">String</th>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">1</td>
+					<td colspan="" rowspan="">Temperature</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">2</td>
+					<td colspan="" rowspan="">%0%, Min</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">3</td>
+					<td colspan="" rowspan="">%0%, Max</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">4</td>
+					<td colspan="" rowspan="">%0%, Mean</td>
+				</tr>
+			</table>
+      </div>
+			<p class="" style="">
+				So, when the client reads the field name <span class="strong">Temperature, Min</span>, it knows that the field name is the composition of the string <span class="strong">Temperature</span>, and
+				the string <span class="strong">%0%, Min</span>, where it will replace <span class="strong">%0%</span> with the output of the previous step, in this case <span class="strong">Temperature</span>.
+				These strings can later be localized to different languages by operators of the system, and values presented when reading the device, can be done in a language
+				different from the one used by the sensor.
+			</p>
+			<p class="" style="">
+				<span class="strong">Note:</span> The XEP <a href="xep-0000-SN-Interoperability.html">xep-0000-SN-Interoperability</a> details how such localizations can be made in an interoperable way.
+			</p>
+			<p class="" style="">
+				The <span class="strong">stringIds</span> attribute merits some further explanation. The value of this attribute must match the following regular expression:
+			</p>
+			<p class="caption">
+      </p>
+      <div class="indent">
+        <pre class="prettyprint">
+   ^\d+([|]\w+([.]\w+)*([|][^,]*)?)?(,\d+([|]\w+([.]\w+)*([|][^,]*)?)?)*$
+			</pre>
+      </div>
+			<p class="" style="">
+				This basically means, it's of the format: ID_1[|[Module_1][|Seed_1]][...[ID_n[|[Module_n][|Seed_n]]]]
+			</p>
+			<p class="" style="">
+				Where brackets [] mean the contents inside is optional, <span class="strong">ID_i</span> is an integer representing the string ID in a language module. <span class="strong">Module_i</span>
+				is optional and allows for specifying a module for <span class="strong">ID_i</span>, if different from the module defined in the <span class="strong">module</span> attribute. <span class="strong">Seed_i</span>
+				allows for seeding the generation of the localized string with a value. This might come in handy when generating strings like <span class="strong">Input 5</span>, where you don't want to
+				create localized strings for every input there is.
+			</p>
+			<p class="" style="">
+				Why such a complicated syntax? The reason is the following: Most localized strings are simple numbers, without the need of specifying modules and seeds. This makes
+				it very efficient to store it as an attribute instead of having to create subelements for every localized field. It's an exception to the rule, to need multiple steps
+				or seeds in the generation of localized strings. Therefore, attributes is an efficient means to specify localization. However, in the general case, a single string ID
+				is not sufficient and multiple steps are required, some seeded.
+			</p>
+			<div class="indent">
+        <p class="caption"><a name="table-8"></a>Table 8: stringIds Examples</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+				<tr class="body">
+					<th colspan="" rowspan="">stringIds</th>
+					<th colspan="" rowspan="">New Parts</th>
+					<th colspan="" rowspan="">Result</th>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">1</td>
+					<td colspan="" rowspan="">1="Temperature"</td>
+					<td colspan="" rowspan="">Temperature</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">1,2</td>
+					<td colspan="" rowspan="">2="%0%, Max"</td>
+					<td colspan="" rowspan="">Temperature, Max</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">1,1|MathModule</td>
+					<td colspan="" rowspan="">1 in module "MathModule"="sum(%0%)"</td>
+					<td colspan="" rowspan="">sum(Temperature)</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">3||A1</td>
+					<td colspan="" rowspan="">3="Input %1%"</td>
+					<td colspan="" rowspan="">Input A1</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">4||A1,2</td>
+					<td colspan="" rowspan="">4="Entrance %1%"</td>
+					<td colspan="" rowspan="">Entrance A1, Max</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">4||A1,5||3</td>
+					<td colspan="" rowspan="">5="%0%, Floor %1%"</td>
+					<td colspan="" rowspan="">Entrance A1, Floor 3</td>
+				</tr>
+			</table>
+      </div>
+		</div>
+	<h2>7.
+       <a name="security">Security Considerations</a></h2>
+		<p class="" style="">
+			This document has not touched upon security in sensor networks. There are mainly three concerns that implementers of sensor networks need to consider:
+		</p>
+		<ul class="" style="">
+			<li class="" style="">
+				Communication should be restricted to friends as long as possible. Approved friendships provide a mechanism of limiting sensor information to authorized and authenticated users.
+				However, there are cases where multicast messages may want to go outside of recognized friendships. More information about such use cases, see the
+				XEP <a href="xep-0000-SN-Multicast.html">xep-0000-SN-Multicast</a>.
+			</li>
+			<li class="" style="">
+				Sensors may have very limited user interfaces. Even though installation of sensor networks is beyond the scope of this document, a simple installation scheme may include a
+				single LED on the sensor that lights up for a time after receiving a friendship request. If a user presses a button on the device while the LED is lit, the friendship request
+				is acknowledged, and communication is authorized.
+			</li>
+			<li class="" style="">
+				More advanced access rights, privileges, automatic friendship recognition, etc., may be managed by a third party. How to implement more advanced provisioning and detailed
+				access rights to sensor information is detailed in the XEP <a href="xep-0000-SN-Provisioning.html">xep-0000-SN-Provisioning</a>.
+			</li>
+		</ul>
+	<h2>8.
+       <a name="iana">IANA Considerations</a></h2>
+		<p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EVGAG">4</a>].</p>
+	<h2>9.
+       <a name="registrar">XMPP Registrar Considerations</a></h2>
+		<p class="" style="">REQUIRED.</p>
+		
+	<h2>10.
+       <a name="schema">XML Schema</a></h2>
+		<p class="caption">
+    </p>
+    <div class="indent">
+      <pre class="prettyprint">
+			
+&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;xs:schema
+    xmlns:xs='http://www.w3.org/2001/XMLSchema'
+    targetNamespace='urn:xmpp:sn'
+    xmlns='urn:xmpp:sn'
+    elementFormDefault='qualified'&gt;
+   
+    &lt;xs:element name='req'&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:choice minOccurs='0' maxOccurs='unbounded'&gt;
+                &lt;xs:element name='node'&gt;
+                    &lt;xs:complexType&gt;
+                        &lt;xs:attribute name='nodeId' type='xs:string' use='required'/&gt;
+                    &lt;/xs:complexType&gt;
+                &lt;/xs:element&gt;
+                &lt;xs:element name='field'&gt;
+                    &lt;xs:complexType&gt;
+                        &lt;xs:attribute name='name' type='xs:string' use='required'/&gt;
+                    &lt;/xs:complexType&gt;
+                &lt;/xs:element&gt;
+            &lt;/xs:choice&gt;
+            &lt;xs:attribute name='seqnr' type='xs:int' use='required'/&gt;
+            &lt;xs:attributeGroup ref='fieldTypes'/&gt;
+            &lt;xs:attribute name='all' type='xs:boolean' use='optional' default='false'/&gt;
+            &lt;xs:attribute name='historical' type='xs:boolean' use='optional' default='false'/&gt;
+            &lt;xs:attribute name='from' type='xs:dateTime' use='optional'/&gt;
+            &lt;xs:attribute name='to' type='xs:dateTime' use='optional'/&gt;
+            &lt;xs:attribute name='when' type='xs:dateTime' use='optional'/&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+
+    &lt;xs:attributeGroup name='fieldTypes'&gt;
+        &lt;xs:attribute name='momentary' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='peak' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='status' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='computed' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='identity' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='historicalSecond' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='historicalMinute' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='historicalHour' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='historicalDay' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='historicalWeek' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='historicalMonth' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='historicalQuarter' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='historicalYear' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='historicalOther' type='xs:boolean' use='optional' default='false'/&gt;
+    &lt;/xs:attributeGroup&gt;
+
+    &lt;xs:element name='accepted'&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:attribute name='seqnr' type='xs:int' use='required'/&gt;
+            &lt;xs:attribute name='queued' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+
+    &lt;xs:element name='started'&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:attribute name='seqnr' type='xs:int' use='required'/&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+
+    &lt;xs:element name='fields'&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
+                &lt;xs:element name='node'&gt;
+                    &lt;xs:complexType&gt;
+                        &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
+                            &lt;xs:element name='timestamp'&gt;
+                                &lt;xs:complexType&gt;
+                                    &lt;xs:choice minOccurs='0' maxOccurs='unbounded'&gt;
+                                        &lt;xs:element name='numeric' type='numeric'/&gt;
+                                        &lt;xs:element name='string' type='string'/&gt;
+                                        &lt;xs:element name='boolean' type='boolean'/&gt;
+                                        &lt;xs:element name='dateTime' type='dateTime'/&gt;
+                                        &lt;xs:element name='timeSpan' type='timeSpan'/&gt;
+                                        &lt;xs:element name='enum' type='enum'/&gt;
+                                    &lt;/xs:choice&gt;
+                                    &lt;xs:attribute name='value' type='xs:dateTime' use='required'/&gt;
+                                &lt;/xs:complexType&gt;
+                            &lt;/xs:element&gt;
+                        &lt;/xs:sequence&gt;
+                        &lt;xs:attribute name='nodeId' type='xs:string' use='required'/&gt;
+                    &lt;/xs:complexType&gt;
+                &lt;/xs:element&gt;
+            &lt;/xs:sequence&gt;
+            &lt;xs:attribute name='seqnr' type='xs:int' use='required'/&gt;
+            &lt;xs:attribute name='done' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+
+    &lt;xs:element name='failure'&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
+                &lt;xs:element name='error'&gt;
+                    &lt;xs:complexType&gt;
+                        &lt;xs:simpleContent&gt;
+                            &lt;xs:extension base='xs:string'&gt;
+                                &lt;xs:attribute name='nodeId' type='xs:string' use='required'/&gt;
+                                &lt;xs:attribute name='timestamp' type='xs:string' use='required'/&gt;
+                            &lt;/xs:extension&gt;
+                        &lt;/xs:simpleContent&gt;
+                    &lt;/xs:complexType&gt;
+                &lt;/xs:element&gt;
+            &lt;/xs:sequence&gt;
+            &lt;xs:attribute name='seqnr' type='xs:int' use='required'/&gt;
+            &lt;xs:attribute name='done' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+
+    &lt;xs:element name='rejected'&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
+                &lt;xs:element name='error' type='xs:string'/&gt;
+            &lt;/xs:sequence&gt;
+            &lt;xs:attribute name='seqnr' type='xs:int' use='required'/&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+
+    &lt;xs:element name='done'&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:attribute name='seqnr' type='xs:int' use='required'/&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+
+    &lt;xs:complexType name='field' abstract='true'&gt;
+        &lt;xs:attribute name="name" type="xs:string" use="required"/&gt;
+        &lt;xs:attributeGroup ref='fieldTypes'/&gt;
+        &lt;xs:attributeGroup ref='fieldStatus'/&gt;
+        &lt;xs:attribute name="module" type="xs:string" use="optional"/&gt;
+        &lt;xs:attribute name="stringIds" type="StringIds" use="optional"/&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:simpleType name="StringIds"&gt;
+        &lt;xs:restriction base="xs:string"&gt;
+            &lt;xs:pattern value="^\d+([|]\w+([.]\w+)*([|][^,]*)?)?(,\d+([|]\w+([.]\w+)*([|][^,]*)?)?)*$"/&gt;
+        &lt;/xs:restriction&gt;
+    &lt;/xs:simpleType&gt;
+
+    &lt;xs:attributeGroup name='fieldStatus'&gt;
+        &lt;xs:attribute name='missing' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='automaticEstimate' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='manualEstimate' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='manualReadout' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='automaticReadout' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='timeOffset' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='warning' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='error' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='signed' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='invoiced' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='endOfSeries' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='powerFailure' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='invoiceConfirmed' type='xs:boolean' use='optional' default='false'/&gt;
+    &lt;/xs:attributeGroup&gt;
+
+    &lt;xs:complexType name='numeric'&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base='field'&gt;
+                &lt;xs:attribute name="value" type="xs:double" use="required"/&gt;
+                &lt;xs:attribute name="unit" type="xs:string" use="required"/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:complexType name='string'&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base='field'&gt;
+                &lt;xs:attribute name="value" type="xs:string" use="required"/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:complexType name='boolean'&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base='field'&gt;
+                &lt;xs:attribute name="value" type="xs:boolean" use="required"/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:complexType name='dateTime'&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base='field'&gt;
+                &lt;xs:attribute name="value" type="xs:dateTime" use="required"/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:complexType name='timeSpan'&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base='field'&gt;
+                &lt;xs:attribute name="value" type="xs:duration" use="required"/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+
+    &lt;xs:complexType name='enum'&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base='field'&gt;
+                &lt;xs:attribute name="value" type="xs:string" use="required"/&gt;
+                &lt;xs:attribute name="dataType" type="xs:string" use="required"/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+
+&lt;/xs:schema&gt;
+
+		</pre>
+    </div>
+	<h2>11.
+       <a name="ack">Acknowledgements</a></h2>
+		<p class="" style="">Thanks to Joachim Lindborg, Karin Forsell and Tina Beckman for all valuable feedback.</p>
+	<hr><a name="appendices"></a><h2>Appendices</h2>
+    <hr><a name="appendix-docinfo"></a><h3>Appendix A: Document Information</h3>
+    <p class="indent">
+            Series: <a href="http://xmpp.org/extensions/">XEP</a><br>
+            Number: xxxx<br>
+            Publisher: <a href="/xsf/">XMPP Standards Foundation</a><br>
+            Status: 
+            <a href="http://xmpp.org/extensions/xep-0001.html#states-ProtoXEP">ProtoXEP</a><br>
+            Type:
+            <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
+            Version: 0.0.3<br>
+            Last Updated: 2013-03-11<br>
+                Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001, XEP-0030<br>
+                Supersedes: None<br>
+                Superseded By: None<br>
+            Short Name: NOT_YET_ASSIGNED<br>
+            This document in other formats: 
+                <a class="standardsButton" href="http://xmpp.org/extensions/xep-xxxx.xml">XML</a> 
+                <a class="standardsButton" href="http://xmpp.org/extensions/xep-xxxx.pdf">PDF</a></p>
+    <hr><a name="appendix-authorinfo"></a><h3>Appendix B: Author Information</h3>
+    <div class="indent">
+      <h3>Peter Waher</h3>
+      <p class="indent">
+        Email:
+        <a href="mailto:peter.waher@clayster.com">peter.waher@clayster.com</a><br>
+        JabberID: 
+        <a href="xmpp:peter.waher@jabber.org">peter.waher@jabber.org</a><br>
+        URI: 
+        <a href="http://se.linkedin.com/pub/peter-waher/1a/71b/a29/">http://se.linkedin.com/pub/peter-waher/1a/71b/a29/</a><br></p>
+    </div>
+    <hr><a name="appendix-legal"></a><h3>Appendix C: Legal Notices</h3>
+    <div class="indent">
+      <h4>Copyright</h4>This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).<h4>Permissions</h4>Permission is hereby granted, free of charge, to any person obtaining a copy of this specification (the "Specification"), to make use of the Specification without restriction, including without limitation the rights to implement the Specification in a software program, deploy the Specification in a network service, and copy, modify, merge, publish, translate, distribute, sublicense, or sell copies of the Specification, and to permit persons to whom the Specification is furnished to do so, subject to the condition that the foregoing copyright notice and this permission notice shall be included in all copies or substantial portions of the Specification. Unless separate permission is granted, modified works that are redistributed shall not contain misleading information regarding the authors, title, number, or publisher of the Specification, and shall not claim endorsement of the modified works by the authors, any organization or project to which the authors belong, or the XMPP Standards Foundation.<h4>Disclaimer of Warranty</h4><span style="font-weight: bold">## NOTE WELL: This Specification is provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. In no event shall the XMPP Standards Foundation or the authors of this Specification be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Specification or the implementation, deployment, or other use of the Specification. ##</span><h4>Limitation of Liability</h4>In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall the XMPP Standards Foundation or any author of this Specification be liable for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising out of the use or inability to use the Specification (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if the XMPP Standards Foundation or such author has been advised of the possibility of such damages.<h4>IPR Conformance</h4>This XMPP Extension Protocol has been contributed in full conformance with the XSF's Intellectual Property Rights Policy (a copy of which may be found at &lt;<a href="http://www.xmpp.org/extensions/ipr-policy.shtml">http://www.xmpp.org/extensions/ipr-policy.shtml</a>&gt; or obtained by writing to XSF, P.O. Box 1641, Denver, CO 80201 USA).</div>
+    <hr><a name="appendix-xmpp"></a><h3>Appendix D: Relation to XMPP</h3>
+    <p class="indent">The Extensible Messaging and Presence Protocol (XMPP) is defined in the XMPP Core (RFC 6120) and XMPP IM (RFC 6121) specifications contributed by the XMPP Standards Foundation to the Internet Standards Process, which is managed by the Internet Engineering Task Force in accordance with RFC 2026. Any protocol defined in this document has been developed outside the Internet Standards Process and is to be understood as an extension to XMPP rather than as an evolution, development, or modification of XMPP itself.</p>
+    <hr><a name="appendix-discuss"></a><h3>Appendix E: Discussion Venue</h3>
+    <p class="indent">The primary venue for discussion of XMPP Extension Protocols is the &lt;<a href="http://mail.jabber.org/mailman/listinfo/standards">standards@xmpp.org</a>&gt; discussion list.</p>
+    <p class="indent">Discussion on other xmpp.org discussion lists might also be appropriate; see &lt;<a href="http://xmpp.org/about/discuss.shtml">http://xmpp.org/about/discuss.shtml</a>&gt; for a complete list.</p>
+    <p class="indent">Errata can be sent to &lt;<a href="mailto:editor@xmpp.org">editor@xmpp.org</a>&gt;.</p>
+    <hr><a name="appendix-conformance"></a><h3>Appendix F: Requirements Conformance</h3>
+    <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
+    <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
+    <div class="indent">
+      <p><a name="nt-ID0ENGAE">1</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0EEHAE">2</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0EGIAE">3</a>. Efficient XML Interchange (EXI) Format &lt;<a href="http://www.w3.org/TR/exi/">http://www.w3.org/TR/exi/</a>&gt;.</p>
+      <p><a name="nt-ID0EVGAG">4</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+    </div>
+    <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
+    <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
+    <div class="indent">
+      <h4>Version 0.0.3 (2013-03-11)</h4>
+      <div class="indent">
+				<p class="" style="">Changed time point to timestamp everywhere.</p>
+				<p class="" style="">Corrected some errors in the text.</p>
+				<p class="" style="">Made the accepted response optional.</p>
+			 (pwa)
+    </div>
+      <h4>Version 0.0.2 (2013-03-09)</h4>
+      <div class="indent">
+				<p class="" style="">Corrected some errors in XML examples.</p>
+				<p class="" style="">English corrected.</p>
+				<p class="" style="">Added <span class="strong">errors</span> elements to the <span class="strong">rejected</span> element.</p>
+				<p class="" style="">Added <span class="strong">cancel</span> command with corresponding <span class="strong">cancelled</span> response.</p>
+			 (pwa)
+    </div>
+      <h4>Version 0.0.1 (2013-03-07)</h4>
+      <div class="indent">
+				<p class="" style="">First draft.</p>
+			 (pwa)
+    </div>
+    </div>
+    <hr>
+    <p>END</p>
+  </body>
+</html>
