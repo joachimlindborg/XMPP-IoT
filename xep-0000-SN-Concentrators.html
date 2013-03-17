@@ -1,0 +1,1463 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>XEP-xxxx: XEP - Sensor Networks - Concentrators</title>
+    <link rel="stylesheet" type="text/css" href="xmpp.css">
+    <link href="prettify.css" type="text/css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"><script type="text/javascript" src="prettify.js"></script><meta name="DC.Title" content="XEP - Sensor Networks - Concentrators">
+    <meta name="DC.Creator" content="Peter Waher">
+    <meta name="DC.Description" content="This specification describes how to manage and get information from concentrators of devices over XMPP networks.">
+    <meta name="DC.Publisher" content="XMPP Standards Foundation">
+    <meta name="DC.Contributor" content="XMPP Extensions Editor">
+    <meta name="DC.Date" content="2001-09-14">
+    <meta name="DC.Type" content="XMPP Extension Protocol">
+    <meta name="DC.Format" content="XHTML">
+    <meta name="DC.Identifier" content="XEP-xxxx">
+    <meta name="DC.Language" content="en">
+    <meta name="DC.Rights" content="This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).">
+  </head>
+  <body onload="prettyPrint()">
+    <h1>XEP-xxxx: XEP - Sensor Networks - Concentrators</h1>
+    <table>
+      <tr valign="top">
+        <td><strong>Abstract:</strong></td>
+        <td>This specification describes how to manage and get information from concentrators of devices over XMPP networks.</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Author:</strong></td>
+        <td>Peter Waher</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Copyright:</strong></td>
+        <td>© 1999 - 2013 XMPP Standards Foundation. <a href="#appendix-legal">SEE LEGAL NOTICES</a>.</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Status:</strong></td>
+        <td>ProtoXEP</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Type:</strong></td>
+        <td>Standards Track</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Version:</strong></td>
+        <td>0.0.1</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Last Updated:</strong></td>
+        <td>2001-09-14</td>
+      </tr>
+    </table>
+    <hr>
+    <p style="color:red">WARNING: This document has not yet been accepted for consideration or approved in any official manner by the XMPP Standards Foundation, and this document is not yet an XMPP Extension Protocol (XEP). If this document is accepted as a XEP by the XMPP Council, it will be published at &lt;<a href="http://xmpp.org/extensions/">http://xmpp.org/extensions/</a>&gt; and announced on the &lt;standards@xmpp.org&gt; mailing list.</p>
+    <hr>
+    <h2>Table of Contents</h2>
+    <div class="indent">
+      <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
+      3.1.  <a href="#sect-ID0ESCAE">Get Capabilities</a><br>   
+      3.2.  <a href="#sect-ID0ETDAE">Get All Data Sources</a><br>   
+      3.3.  <a href="#sect-ID0E6DAE">Get Top Data Sources</a><br>   
+      3.4.  <a href="#sect-ID0ELEAE">Get Child Data Sources</a><br>   
+      3.5.  <a href="#sect-ID0EXEAE">Contains Node</a><br>   
+      3.6.  <a href="#sect-ID0EDFAE">Contains Nodes</a><br>   
+      3.7.  <a href="#sect-ID0ETFAE">Get Node</a><br>   
+      3.8.  <a href="#sect-ID0EHGAE">Get Nodes</a><br>   
+      3.9.  <a href="#sect-ID0EVGAE">Get All Nodes</a><br>   
+      3.10.  <a href="#sect-ID0E3GAE">Get All Nodes derived from</a><br>   
+      3.11.  <a href="#sect-ID0EDHAE">Get indices of Data Source</a><br>   
+      3.12.  <a href="#sect-ID0EKHAE">Get Node from index</a><br>   
+      3.13.  <a href="#sect-ID0ERHAE">Get Nodes from index</a><br>   
+      3.14.  <a href="#sect-ID0EYHAE">Get All Nodes from index</a><br>   
+      3.15.  <a href="#sect-ID0E6HAE">Get Root Nodes</a><br>   
+      3.16.  <a href="#sect-ID0EGIAE">Get Child Nodes</a><br>   
+      3.17.  <a href="#sect-ID0ENIAE">Get Node Parameters</a><br>   
+      3.18.  <a href="#sect-ID0EUIAE">Set Node Parameters</a><br>   
+      3.19.  <a href="#sect-ID0E2IAE">Set Node Parameters Failure</a><br>   
+      3.20.  <a href="#sect-ID0ECJAE">Get Common Node Parameters</a><br>   
+      3.21.  <a href="#sect-ID0EJJAE">Set Common Node Parameters</a><br>   
+      3.22.  <a href="#sect-ID0EQJAE">Set Common Node Parameters Failure</a><br>   
+      3.23.  <a href="#sect-ID0EXJAE">Get Node Parameter Names</a><br>   
+      3.24.  <a href="#sect-ID0E5JAE">Get Node Parameter Values</a><br>   
+      3.25.  <a href="#sect-ID0EFKAE">Set Node Parameter Values</a><br>   
+      3.26.  <a href="#sect-ID0EMKAE">Set Node Parameter Values Failure</a><br>   
+      3.27.  <a href="#sect-ID0ETKAE">Get Node Status</a><br>   
+      3.28.  <a href="#sect-ID0E1KAE">Get Addable Node Types</a><br>   
+      3.29.  <a href="#sect-ID0EBLAE">Get Parameters for New Node</a><br>   
+      3.30.  <a href="#sect-ID0EILAE">Create New Node</a><br>   
+      3.31.  <a href="#sect-ID0EPLAE">Create New Node Failure</a><br>   
+      3.32.  <a href="#sect-ID0EWLAE">Destroy Node</a><br>   
+      3.33.  <a href="#sect-ID0E4LAE">Destroy Node Failure</a><br>   
+      3.34.  <a href="#sect-ID0EEMAE">Get Node Ancestors</a><br>   
+      3.35.  <a href="#sect-ID0ELMAE">Get Node Commands</a><br>   
+      3.36.  <a href="#sect-ID0ESMAE">Execute Simple Node Command</a><br>   
+      3.37.  <a href="#sect-ID0EZMAE">Get Common Commands for Nodes</a><br>   
+      3.38.  <a href="#sect-ID0EANAE">Execute Simple Command on multiple Nodes</a><br>   
+      3.39.  <a href="#sect-ID0EHNAE">Get Node Command Parameters</a><br>   
+      3.40.  <a href="#sect-ID0EONAE">Execute Parametrized Node Command</a><br>   
+      3.41.  <a href="#sect-ID0EVNAE">Get Common Command Parameters from command on multiple nodes</a><br>   
+      3.42.  <a href="#sect-ID0E3NAE">Execute Parametrized Command on multiple Nodes</a><br>   
+      3.43.  <a href="#sect-ID0EDOAE">Move Node Up</a><br>   
+      3.44.  <a href="#sect-ID0EKOAE">Move Node Down</a><br>4.  <a href="#impl">Implementation Notes</a><br>   
+      4.1.  <a href="#nodeinfo">Node Information</a><br>5.  <a href="#i18n">Internationalization Considerations</a><br>6.  <a href="#security">Security Considerations</a><br>   
+      6.1.  <a href="#Access rights"></a><br>   
+      6.2.  <a href="#sect-ID0E4XAE">Restricting access to node commands per contact</a><br>   
+      6.3.  <a href="#sect-ID0EEYAE">Restricting access to node commands per contact</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a></p>
+      <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
+    </div>
+    <hr>
+    <h2>1.
+       <a name="intro">Introduction</a></h2>
+        <p class="" style="">
+            Concentrators are devices in sensor networks, concentrating the management of a sub set of devices to one point. They can be small (for example: PLC:s managing a small
+            set of sensors and actuators), medium-sized (for example: mid-level concentrators, controlling branches of the network, islands, perhaps using separate comunication protocols),
+            large (for example: entire sub-systems, perhaps managed by a separate child/partner organisation) to massive (for example: The entire top-level system, smart-grid, IoT network).
+        </p>
+        <p class="" style="">
+            Even though this XEP is generally written and can be used by other implementations not based on sensor networks, much of the requirements used to define this specification
+            comes from requirements used in sensor networks and Internet of Things applications and infrastructure.
+        </p>
+        <p class="" style="">
+            This specification will define the following aspects of a general concentrator profile, that can handle all different types of concentrators available in sensor network architectures:
+        </p>
+        <ul class="" style="">
+            <li class="" style="">
+                A concentrator works with multiple <span class="strong">data sources</span>. Effective management of data sources and their contents is a vital part of this XEP.
+            </li>
+            <li class="" style="">The ability to work with massive cuantities of entities.</li>
+            <li class="" style="">Effective synchronization of contents between interested parties.</li>
+            <li class="" style="">Effective ways to interact with entities controlled by the concentrator.</li>
+        </ul>
+        <p class="" style="">
+            Even though there are technologies available in forms of XEPs that solve parts of the above mentioned problem, they do not provide sufficient support. The following paragraphs will
+            take the time to list why different tachnologies are not applicable.
+        </p>
+        <p class="" style="">
+            This XEP defines tree structures for nodes in different data sources. <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0060.html">Publish-Subscribe</a></span>  [<a href="#nt-ID0EZE">1</a>] defines a model where a tree structure of nodes is published and users can browse this
+            tree structure. Furthermore, it allows the possibility to publish items on these nodes as well as syndicalization of this information.
+        </p>
+        <p class="" style="">
+            This XEP also defines data sources (in a tree structure). These data sources contain nodes. <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0248.html">PubSub Collection Nodes</a></span>  [<a href="#nt-ID0EKF">2</a>] defines a structure called a node collection, a structure that 
+            allows the creation of collections containing loosly coupled nodes.
+        </p>
+        <p class="" style="">
+            Even though this document defines tree structures of data, it is not however based on XEP-0060. There are multiple reasons for this:
+        </p>
+        <ul class="" style="">
+            <li class="" style="">
+                The structures defined in this specification do not include items to publish for each node.
+            </li>
+            <li class="" style="">
+                We want to be able to use XEP-0060 in parallell to this specification, for the purpose of publishing sensor data.
+                More information about this is found in <a href="xep-0000-SN-PubSub.html">xep-0000-SN-PubSub.html</a>.
+            </li>
+            <li class="" style="">
+                For massive systems (hundreds of thousands, or millions, of nodes behind a concentrator, its vitally important to be able to manage sets of nodes directly 
+                (for example: Edit multiple nodes at once). Many of the operations in XEP-0060 only allow for operations of singular nodes. Firthermore, many simple operations 
+                require multiple messages per node. This document defines way to operate of sets of nodes simultaneously, as well as ways to perform operations with a smaller 
+                number of operations.
+            </li>
+            <li class="" style="">
+                In this document, nodes have specific functions, controlled by a specific Node Type. Different Node Types have different parameter sets, different options, commands, 
+                capabilities, etc. XEP-0060 does not differ between node types. There, nodes are only a structural way to sort data into a tree graph.
+            </li>
+            <li class="" style="">
+                In this document, nodes have real-time status, like errors, warnings, etc.
+            </li>
+        </ul>
+        <p class="" style="">
+            XEP-0248 defines the concept of node collections and syndicalization of information from nodes in these collections. But XEP-0248 is not used in this specification.
+            There are multiple reasons:
+        </p>
+        <ul class="" style="">
+            <li class="" style="">
+                We want to be able to use XEP-0248 in parallell to this specification, for the purpose of publishing sensor data.
+                More information about this is found in <a href="xep-0000-SN-PubSub.html">xep-0000-SN-PubSub.html</a>.
+            </li>
+            <li class="" style="">
+                Node IDs are not necessarily unique by themselves in the system. This document defines a uniqueness concept based on a triple of data: (Data Source ID, Cache Type, Node ID). This
+                means that Nodes must have IDs unique within a given Cache Type, within a given data source.
+            </li>
+            <li class="" style="">
+                We need to expand on types of events generated from a data source, to make them adhere to the particulars of nodes as defined in this specification.
+            </li>
+            <li class="" style="">
+                Data sources own their nodes. XEP-0248 define a loosly coupled structure with references to nodes. In this document, a data source is the owner of all nodes
+                contained in it.
+            </li>
+        </ul>
+        <p class="" style="">
+            <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0050.html">Ad-Hoc Commands</a></span>  [<a href="#nt-ID0EZH">3</a>] defines how ad-hoc commands can be implemented and how clients can use such commands to interact with underlying logic. But XEP-0050 is not used in this specification.
+            There are multiple reasons:
+        </p>
+        <ul class="" style="">
+            <li class="" style="">
+                We want to be able to use XEP-0050 for other types of commands, than commands defined in this specification. Generally, XEP-0050 is used to implement
+                system-wide commands.
+            </li>
+            <li class="" style="">
+                Commands defined in this specification are context sensitive, i.e. they depend on the type of node and the context of the node on which the act.
+            </li>
+            <li class="" style="">
+                It is a requirement to be able to execute commands on sets of nodes directly.
+            </li>
+            <li class="" style="">
+                Since commands have to be context sensitive, a large concentrator system may have hundreds or thousands of different commands, making it impossible to create
+                context sensitive GUI's using XEP-0050.
+            </li>
+            <li class="" style="">
+                Dialog types used for Ad-Hoc-commands are not sufficient. First, dynamic dialogs are required in the general case. 
+                (XEP <a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms.html</a> define how to create dynamic forms.) Further more, the
+                wizard style type of dialogs used for more complex dialogs in ad-hoc commands, are difficult to automate.
+            </li>
+        </ul>
+
+        <p class="" style="">
+            Sensor networks contains many different architectures and use cases. For this reason, the sensor network standards have been divided into multiple XEPs according to the following table:
+        </p>
+
+        <div class="indent">
+      <p class="caption"><a name="table-1"></a>Table 1: Sensor Network XEPs</p>
+      <table border="1" cellpadding="3" cellspacing="0">
+            <tr class="body">
+                <th colspan="" rowspan="">XEP</th>
+                <th colspan="" rowspan="">Description</th>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">XEP-0000-DynamicForms</td>
+                <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EACAC">4</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EMCAC">5</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0EYCAC">6</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EEDAC">7</a>].</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">XEP-0000-Exi</td>
+                <td colspan="" rowspan="">
+                    Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
+                    in all sensor network implementations where memory and packet size is an issue.
+                </td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">xep-0000-SN-BatteryPoweredSensors</td>
+                <td colspan="" rowspan="">Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">xep-0000-SN-Concentrators</td>
+                <td colspan="" rowspan="">This specification. Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">xep-0000-SN-Control</td>
+                <td colspan="" rowspan="">Defines how to control actuators and other devices in sensor networks.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">xep-0000-SN-Discovery</td>
+                <td colspan="" rowspan="">Defines the peculiars of sensor discovery in sensor networks. Apart from discovering sensors by JID, it also defines how to discover sensors based on location, etc.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">xep-0000-SN-Events</td>
+                <td colspan="" rowspan="">Defines how sensors send events, how event subscription, hysteresis levels, etc., are configured.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">xep-0000-SN-Interoperability</td>
+                <td colspan="" rowspan="">Defines guidelines for how to achieve interoperability in sensor networks, publishing interoperability interfaces for different types of devices.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">xep-0000-SN-Multicast</td>
+                <td colspan="" rowspan="">Defines how sensor data can be multicast in efficient ways.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">xep-0000-SN-Provisioning</td>
+                <td colspan="" rowspan="">Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">xep-0000-SN-PubSub</td>
+                <td colspan="" rowspan="">Defines how efficient publication of sensor data can be made in sensor networks.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">xep-0000-SN-SensorData</td>
+                <td colspan="" rowspan="">
+                    Provides the underlying architecture, basic operations and data structures for sensor data communication over XMPP networks.
+                    It includes a hardware abstraction model, removing any technical detail implemented in underlying technologies. This XEP is used by all other sensor network XEPs.
+                </td>
+            </tr>
+        </table>
+    </div>
+    <h2>2.
+       <a name="glossary">Glossary</a></h2>
+        <p class="" style="">The following table lists common terms and corresponding descriptions.</p>
+        <div class="indent">
+      <p class="caption"><a name="table-2"></a>Table 2: Glossary</p>
+      <table border="1" cellpadding="3" cellspacing="0">
+            <tr class="body">
+                <th colspan="" rowspan="">Term</th>
+                <th colspan="" rowspan="">Description</th>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Actuator</td>
+                <td colspan="" rowspan="">Device containing at least one configurable property or output that can and should be controlled by some other entity or device.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Cache Type</td>
+                <td colspan="" rowspan="">Node IDs are unique within a given cache type (and data source id). Examples of cache types may be: Sensor nodes, streets, buildings, groupings, etc.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Computed Value</td>
+                <td colspan="" rowspan="">A value that is computed instead of measured.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Concentrator</td>
+                <td colspan="" rowspan="">Device managing a set of devices which it publishes on the XMPP network.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Data Source</td>
+                <td colspan="" rowspan="">A Data source contains a collection of nodes. Three types of data sources exist: Singular, Flat and Tree. Singular data sources only include one object.
+                Flat data sources contain a list of objects and Tree data sources contain nodes formed as a tree graph with one root element.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Field</td>
+                <td colspan="" rowspan="">
+                    One item of sensor data. Contains information about: Node, Field Name, Value, Precision, Unit, Value Type, Status, Timestamp, Localization information, etc.
+                    Fields should be unique within the triple (Node ID, Field Name, Timestamp).
+                </td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Field Name</td>
+                <td colspan="" rowspan="">Name of a field of sensor data. Examples: Energy, Volume, Flow, Power, etc.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Field Type</td>
+                <td colspan="" rowspan="">What type of value the field represents. Examples: Momentary Value, Status Value, Identification Value, Calculated Value, Peak Value, Historical Value, etc.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Historical Value</td>
+                <td colspan="" rowspan="">A value stored in memory from a previous timestamp.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Identification Value</td>
+                <td colspan="" rowspan="">A value that can be used for identification. (Serial numbers, meter IDs, locations, names, etc.)</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Localization information</td>
+                <td colspan="" rowspan="">Optional information for a field, allowing the sensor to control how the information should be presented to human viewers.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Meter</td>
+                <td colspan="" rowspan="">A device possible containing multiple sensors, used in metering applications. Examples: Electricity meter, Water Meter, Heat Meter, Cooling Meter, etc.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Momentary Value</td>
+                <td colspan="" rowspan="">A momentary value represents a value measured at the time of the read-out.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Node</td>
+                <td colspan="" rowspan="">
+                    Graphs contain nodes and edges between nodes. In Sensor Networks, sensors, actuators, meters, devices, gateways, etc., are often depicted as nodes and links between sensors (friendships)
+                    are depicted as edges. In abstract terms, it's easier to talk about a Node, than have to list different types of nodes possible (sensors, actuators, meters, devices, gateways, etc.).
+                    Each Node has a Node ID. Nodes belong to a data source, and all nodes have a Node Type. Some nodes have a parent node, and some nodes have child nodes. Nodes with the same 
+                    parent nodes a called sibling nodes.
+                </td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Node ID</td>
+                <td colspan="" rowspan="">
+                    An ID uniquely identifying a node within its corresponding context. If a globally unique ID is desired, an architecture should be used using a universally accepted
+                    ID scheme.
+                </td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Node Type</td>
+                <td colspan="" rowspan="">Each node has a Node Type. The Node Type defines the funcionality of the node in the system.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Parameter</td>
+                <td colspan="" rowspan="">
+                    Readable and/or writable property on a node/device. The XEP xep-0000-SN-Concentrators deals with reading and writing parameters
+                    on nodes/devices. Fields are not parameters, and parameters are not fields.
+                </td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Peak Value</td>
+                <td colspan="" rowspan="">A maximum or minimum value during a given period.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Precision</td>
+                <td colspan="" rowspan="">
+                    In physics, precision determines the number of digits of precision. In sensor networks however, this definition is not easily applicable. Instead, precision
+                    determines, for example, the number of decimals of precision, or power of precision. Example: 123.200 MWh contains 3 decimals of precision. All entities parsing and
+                    delivering field information in sensor networks should always retain the number of decimals in a message.
+                </td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Sensor</td>
+                <td colspan="" rowspan="">
+                    Device measuring at least one digital value (0 or 1) or analog value (value with precision and physical unit). Examples: Temperature sensor, pressure sensor, etc.
+                    Sensor values are reported as fields during read-out. Each sensor has a unique Node ID.
+                </td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">SN</td>
+                <td colspan="" rowspan="">Sensor Network. A network consisting, but not limited to sensors, where transport and use of sensor data is of primary concern. A sensor network may contain actuators, network applications, monitors, services, etc.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Status Value</td>
+                <td colspan="" rowspan="">A value displaying status information about something.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Timestamp</td>
+                <td colspan="" rowspan="">Timestamp of value, when the value was sampled or recorded.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Unit</td>
+                <td colspan="" rowspan="">Physical unit of value. Example: MWh, l/s, etc.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Value</td>
+                <td colspan="" rowspan="">A field value.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Value Status</td>
+                <td colspan="" rowspan="">Status of field value. Contains important status information for Quality of Service purposes. Examples: Ok, Error, Warning, Time Shifted, Missing, Signed, etc.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">Value Type</td>
+                <td colspan="" rowspan="">Can be numeric, string, boolean, Date &amp; Time, Time Span or Enumeration.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">SN</td>
+                <td colspan="" rowspan="">Sensor Network, a sensor network including devices of all types.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">WSN</td>
+                <td colspan="" rowspan="">Wireless Sensor Network, a sensor network including wireless devices.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">XMPP Client</td>
+                <td colspan="" rowspan="">Application connected to an XMPP network, having a JID. Note that sensors, as well as applications requesting sensor data can be XMPP clients.</td>
+            </tr>
+        </table>
+    </div>
+    <h2>3.
+       <a name="usecases">Use Cases</a></h2>
+        <p class="" style="">
+            To create a complete set of operations supported by all types of concentrators, ranging from PLCs to subsystems to entire systems is very difficult. So, the aim
+            of this document is instead to create a very small reduced set of operations, a common denominator, that would allow for basic maintenance and interoperability of 
+            concentrators of different makes and models and of these varying ranges.
+        </p>
+        <div class="indent">
+      <h3>3.1 <a name="sect-ID0ESCAE">Get Capabilities</a></h3>
+            <p class="" style="">
+                This document lists a sequence of commands. Some are very basic, while others are used for managing massive amounts of devices. When developing a small PLC, it might
+                be difficult to motivate the implementation of the more advanced commands. They are simply not necessary for the management of the device. So, clients connecting to 
+                the concentrator need a way to learn what operations are available in the concentrator, and as a consequence what operations are not. To do this, the
+                <span class="strong">getCapabilities</span> command is sent, as is shown in the following example.
+            </p>
+            <p class="caption"><a name="example-1"></a>Example 1. Full capabilities</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='subsystem@clayster.com'
+       id='1'&gt;
+      &lt;getCapabilities xmlns='urn:xmpp:sn:concentrators'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='subsystem@clayster.com'
+       to='client@clayster.com'
+       id='1'&gt;
+      &lt;getCapabilitiesResponse xmlns='urn:xmpp:sn:concentrators'&gt;
+          &lt;value&gt;getCapabilities&lt;/value&gt;
+          &lt;value&gt;getAllDataSources&lt;/value&gt;
+          &lt;value&gt;getTopDataSources&lt;/value&gt;
+          &lt;value&gt;getChildDataSources&lt;/value&gt;
+          &lt;value&gt;containsNode&lt;/value&gt;
+          &lt;value&gt;containsNodes&lt;/value&gt;
+          &lt;value&gt;getNode&lt;/value&gt;
+          &lt;value&gt;getNodes&lt;/value&gt;
+          &lt;value&gt;getAllNodes&lt;/value&gt;
+          &lt;value&gt;getRootNodes&lt;/value&gt;
+          &lt;value&gt;getChildNodes&lt;/value&gt;
+          &lt;value&gt;getIndices&lt;/value&gt;
+          &lt;value&gt;getNodeFromIndex&lt;/value&gt;
+          &lt;value&gt;getNodesFromIndex&lt;/value&gt;
+          &lt;value&gt;getAllNodesFromIndex&lt;/value&gt;
+          &lt;value&gt;getNodeParameters&lt;/value&gt;
+          &lt;value&gt;getCommonNodeParameters&lt;/value&gt;
+          &lt;value&gt;getNodeParameterNames&lt;/value&gt;
+          &lt;value&gt;getNodeParameterValues&lt;/value&gt;
+          &lt;value&gt;setNodeParameterValues&lt;/value&gt;
+          &lt;value&gt;getNodeStatus&lt;/value&gt;
+          &lt;value&gt;getAddableNodeTypes&lt;/value&gt;
+          &lt;value&gt;getParametersForNewNode&lt;/value&gt;
+          &lt;value&gt;createNewNode&lt;/value&gt;
+          &lt;value&gt;destroyNode&lt;/value&gt;
+          &lt;value&gt;getAncestors&lt;/value&gt;
+          &lt;value&gt;getNodeCommands&lt;/value&gt;
+          &lt;value&gt;getCommonNodeCommands&lt;/value&gt;
+          &lt;value&gt;getCommandParameters&lt;/value&gt;
+          &lt;value&gt;getCommonCommandParameters&lt;/value&gt;
+          &lt;value&gt;moveUp&lt;/value&gt;
+          &lt;value&gt;moveDown&lt;/value&gt;
+      &lt;/getCapabilitiesResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+            <p class="" style="">
+                A smaller gateway on the other hand, may have skipped the implementation of the batch commands that are used for larger systems:
+            </p>
+            <p class="caption"><a name="example-2"></a>Example 2. No batch command capabilities</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='gateway@clayster.com'
+       id='2'&gt;
+      &lt;getCapabilities xmlns='urn:xmpp:sn:concentrators'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='gateway@clayster.com'
+       to='client@clayster.com'
+       id='2'&gt;
+      &lt;getCapabilitiesResponse xmlns='urn:xmpp:sn:concentrators'&gt;
+          &lt;value&gt;getCapabilities&lt;/value&gt;
+          &lt;value&gt;getAllDataSources&lt;/value&gt;
+          &lt;value&gt;getTopDataSources&lt;/value&gt;
+          &lt;value&gt;getChildDataSources&lt;/value&gt;
+          &lt;value&gt;containsNode&lt;/value&gt;
+          &lt;value&gt;getNode&lt;/value&gt;
+          &lt;value&gt;getRootNodes&lt;/value&gt;
+          &lt;value&gt;getChildNodes&lt;/value&gt;
+          &lt;value&gt;getNodeParameters&lt;/value&gt;
+          &lt;value&gt;getNodeStatus&lt;/value&gt;
+          &lt;value&gt;getAddableNodeTypes&lt;/value&gt;
+          &lt;value&gt;getParametersForNewNode&lt;/value&gt;
+          &lt;value&gt;createNewNode&lt;/value&gt;
+          &lt;value&gt;destroyNode&lt;/value&gt;
+          &lt;value&gt;getAncestors&lt;/value&gt;
+          &lt;value&gt;getNodeCommands&lt;/value&gt;
+          &lt;value&gt;getCommandParameters&lt;/value&gt;
+          &lt;value&gt;moveUp&lt;/value&gt;
+          &lt;value&gt;moveDown&lt;/value&gt;
+      &lt;/getCapabilitiesResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+            <p class="" style="">
+                But a small PLC, possibly with a fixed set of nodes, might have support for an even more reduced set of commands:
+            </p>
+            <p class="caption"><a name="example-3"></a>Example 3. No edit capabilities</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='plc@clayster.com'
+       id='3'&gt;
+      &lt;getCapabilities xmlns='urn:xmpp:sn:concentrators'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='plc@clayster.com'
+       to='client@clayster.com'
+       id='3'&gt;
+      &lt;getCapabilitiesResponse xmlns='urn:xmpp:sn:concentrators'&gt;
+          &lt;value&gt;getCapabilities&lt;/value&gt;
+          &lt;value&gt;getAllDataSources&lt;/value&gt;
+          &lt;value&gt;getNode&lt;/value&gt;
+          &lt;value&gt;getRootNodes&lt;/value&gt;
+          &lt;value&gt;getChildNodes&lt;/value&gt;
+          &lt;value&gt;getNodeParameters&lt;/value&gt;
+          &lt;value&gt;getNodeStatus&lt;/value&gt;
+          &lt;value&gt;getNodeCommands&lt;/value&gt;
+          &lt;value&gt;getCommandParameters&lt;/value&gt;
+      &lt;/getCapabilitiesResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+            <p class="" style="">
+                So, clients who need to interact with different types of concentrators need to be aware of what commands are supported, and limit operations to thos commands.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>3.2 <a name="sect-ID0ETDAE">Get All Data Sources</a></h3>
+            <p class="" style="">
+                This command will return a flat list of all available data sources on the concentrator. It is not structured hierarchically.
+            </p>
+            <p class="caption"><a name="example-4"></a>Example 4. Get All Data Sources</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='4'&gt;
+      &lt;getAllDataSources xmlns='urn:xmpp:sn:concentrators' xml:lang='en'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='4'&gt;
+      &lt;getAllDataSourcesResponse xmlns='urn:xmpp:sn:concentrators'&gt;
+          &lt;dataSource id='Applications' name='Applications' hasChildren='false'/&gt;
+          &lt;dataSource id='Certificates' name='Certificates' hasChildren='false'/&gt;
+          &lt;dataSource id='Clayster.EventSink.Programmable' name='Programmable Event Log' hasChildren='false'/&gt;
+          ...
+      &lt;/getAllDataSourcesResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.3 <a name="sect-ID0E6DAE">Get Top Data Sources</a></h3>
+            <p class="" style="">
+                If the client is interested in the hierarchical structure of available data sources, it should request only the root sources, and then ask the client for their
+                corresponding child data sources. If the client wants to present the data sources to a user, presenting them in their hierarchical order may be more intuitive.
+            </p>
+            <p class="caption"><a name="example-5"></a>Example 5. Get Top Data Sources</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='5'&gt;
+      &lt;getTopDataSources xmlns='urn:xmpp:sn:concentrators' xml:lang='en'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='5'&gt;
+      &lt;getTopDataSourcesResponse xmlns='urn:xmpp:sn:concentrators'&gt;
+          &lt;dataSource id='MeteringRoot' name='Metering' hasChildren='true'/&gt;
+          &lt;dataSource id='SecurityRoot' name='Security' hasChildren='true'/&gt;
+          &lt;dataSource id='SystemRoot' name='System' hasChildren='true'/&gt;
+          ...
+      &lt;/getAllDataSourcesResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.4 <a name="sect-ID0ELEAE">Get Child Data Sources</a></h3>
+            <p class="" style="">
+                Having the ID of a data source that contains child data sources, you can fetch the child sources as follows:
+            </p>
+            <p class="caption"><a name="example-6"></a>Example 6. Get Child Data Sources</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='6'&gt;
+      &lt;getChildDataSources xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringRoot' xml:lang='en'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='6'&gt;
+      &lt;getChildDataSourcesResponse xmlns='urn:xmpp:sn:concentrators'&gt;
+          &lt;dataSource id='MeteringFieldImports' name='Field Imports' hasChildren='false'/&gt;
+          &lt;dataSource id='MeteringFieldProcessors' name='Field Processors' hasChildren='false'/&gt;
+          &lt;dataSource id='MeteringFieldSinks' name='Field Sinks' hasChildren='false'/&gt;
+          &lt;dataSource id='MeteringGroups' name='Groups' hasChildren='false'/&gt;
+          &lt;dataSource id='MeteringJobs' name='Jobs' hasChildren='false'/&gt;
+          &lt;dataSource id='MeteringTopology' name='Topology' hasChildren='false'/&gt;
+          &lt;dataSource id='MeteringUnitConversion' name='Unit Conversion' hasChildren='false'/&gt;
+      &lt;/getChildDataSourcesResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.5 <a name="sect-ID0EXEAE">Contains Node</a></h3>
+            <p class="" style="">
+                This command permits the client to check the existance of a node on the concetrator.
+            </p>
+            <p class="caption"><a name="example-7"></a>Example 7. Checking the existance of a node</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='7'&gt;
+      &lt;containsNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='7'&gt;
+      &lt;containsNodeResponse xmlns='urn:xmpp:sn:concentrators'&gt;true&lt;/containsNodeResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.6 <a name="sect-ID0EDFAE">Contains Nodes</a></h3>
+            <p class="" style="">
+                If the client wants to check the existance of multiple nodes on the concentrator, it can use this batch command instead:
+            </p>
+            <p class="caption"><a name="example-8"></a>Example 8. Checking the existance of a multiple nodes</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='8'&gt;
+      &lt;containsNodes xmlns='urn:xmpp:sn:concentrators'&gt;
+         &lt;node sourceId='MeteringTopology' nodeId='Node1'/&gt;
+         &lt;node sourceId='MeteringTopology' nodeId='Node2'/&gt;
+         &lt;node sourceId='MeteringTopology' nodeId='Node3'/&gt;
+         &lt;node sourceId='MeteringGroups' nodeId='Group1'/&gt;
+      &lt;/containsNodes&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='8'&gt;
+      &lt;containsNodesResponse xmlns='urn:xmpp:sn:concentrators'&gt;
+	     &lt;value&gt;true&lt;/value&gt;
+	     &lt;value&gt;true&lt;/value&gt;
+	     &lt;value&gt;false&lt;/value&gt;
+	     &lt;value&gt;true&lt;/value&gt;
+      &lt;/containsNodeResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+			<p class="" style="">
+				The array returned will have one item for each item in the request, in the same order.
+			</p>
+        </div>
+        <div class="indent">
+      <h3>3.7 <a name="sect-ID0ETFAE">Get Node</a></h3>
+			<p class="" style="">
+				This command returns basic information about a node in the concentrator.
+			</p>
+			<p class="caption"><a name="example-9"></a>Example 9. Get Node</p>
+      <div class="indent">
+        <pre class="prettyprint">
+				
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='9'&gt;
+      &lt;getNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='9'&gt;
+      &lt;getNodeResponse xmlns='urn:xmpp:sn:concentrators' 
+	                   id='Node1'
+					   cacheType='Node'
+					   state='Warning'
+					   hasChildren='false'
+					   isReadable='true'
+					   isConfigurable='true'
+					   hasCommands='true'/&gt;
+   &lt;/iq&gt;
+			</pre>
+      </div>
+			<p class="" style="">
+				For more information, see <a href="#nodeinfo">Node Information</a>.
+			</p>
+        </div>
+        <div class="indent">
+      <h3>3.8 <a name="sect-ID0EHGAE">Get Nodes</a></h3>
+			<p class="" style="">
+				This commands lets the client get information from multiple nodes at once.
+				
+				
+			</p>
+        </div>
+        <div class="indent">
+      <h3>3.9 <a name="sect-ID0EVGAE">Get All Nodes</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.10 <a name="sect-ID0E3GAE">Get All Nodes derived from</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.11 <a name="sect-ID0EDHAE">Get indices of Data Source</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.12 <a name="sect-ID0EKHAE">Get Node from index</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.13 <a name="sect-ID0ERHAE">Get Nodes from index</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.14 <a name="sect-ID0EYHAE">Get All Nodes from index</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.15 <a name="sect-ID0E6HAE">Get Root Nodes</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.16 <a name="sect-ID0EGIAE">Get Child Nodes</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.17 <a name="sect-ID0ENIAE">Get Node Parameters</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.18 <a name="sect-ID0EUIAE">Set Node Parameters</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.19 <a name="sect-ID0E2IAE">Set Node Parameters Failure</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.20 <a name="sect-ID0ECJAE">Get Common Node Parameters</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.21 <a name="sect-ID0EJJAE">Set Common Node Parameters</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.22 <a name="sect-ID0EQJAE">Set Common Node Parameters Failure</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.23 <a name="sect-ID0EXJAE">Get Node Parameter Names</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.24 <a name="sect-ID0E5JAE">Get Node Parameter Values</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.25 <a name="sect-ID0EFKAE">Set Node Parameter Values</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.26 <a name="sect-ID0EMKAE">Set Node Parameter Values Failure</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.27 <a name="sect-ID0ETKAE">Get Node Status</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.28 <a name="sect-ID0E1KAE">Get Addable Node Types</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.29 <a name="sect-ID0EBLAE">Get Parameters for New Node</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.30 <a name="sect-ID0EILAE">Create New Node</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.31 <a name="sect-ID0EPLAE">Create New Node Failure</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.32 <a name="sect-ID0EWLAE">Destroy Node</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.33 <a name="sect-ID0E4LAE">Destroy Node Failure</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.34 <a name="sect-ID0EEMAE">Get Node Ancestors</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.35 <a name="sect-ID0ELMAE">Get Node Commands</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.36 <a name="sect-ID0ESMAE">Execute Simple Node Command</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.37 <a name="sect-ID0EZMAE">Get Common Commands for Nodes</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.38 <a name="sect-ID0EANAE">Execute Simple Command on multiple Nodes</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.39 <a name="sect-ID0EHNAE">Get Node Command Parameters</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.40 <a name="sect-ID0EONAE">Execute Parametrized Node Command</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.41 <a name="sect-ID0EVNAE">Get Common Command Parameters from command on multiple nodes</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.42 <a name="sect-ID0E3NAE">Execute Parametrized Command on multiple Nodes</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.43 <a name="sect-ID0EDOAE">Move Node Up</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>3.44 <a name="sect-ID0EKOAE">Move Node Down</a></h3>
+            
+        </div>
+    <h2>4.
+       <a name="impl">Implementation Notes</a></h2>
+		<div class="indent">
+      <h3>4.1 <a name="nodeinfo">Node Information</a></h3>
+			<p class="" style="">
+				Several commands return basic node information. The following table lists possible fields with corresponding descriptions.
+			</p>
+			<div class="indent">
+        <p class="caption"><a name="table-3"></a>Table 3: Basic Node Information</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+				<tr class="body">
+					<th colspan="" rowspan="">Attribute</th>
+					<th colspan="" rowspan="">Use</th>
+					<th colspan="" rowspan="">Default</th>
+					<th colspan="" rowspan="">Description</th>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">id</td>
+					<td colspan="" rowspan="">required</td>
+					<td colspan="" rowspan=""> </td>
+					<td colspan="" rowspan="">The ID of the node in the data source.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">displayName</td>
+					<td colspan="" rowspan="">optional</td>
+					<td colspan="" rowspan=""> </td>
+					<td colspan="" rowspan="">If provided, a string presentable to users. If localization is supported and a correct language attribute was provided, this string will be localized.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">localId</td>
+					<td colspan="" rowspan="">optional</td>
+					<td colspan="" rowspan=""> </td>
+					<td colspan="" rowspan="">If provided, an ID for the node, but unique locally between siblings.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">logId</td>
+					<td colspan="" rowspan="">optional</td>
+					<td colspan="" rowspan=""> </td>
+					<td colspan="" rowspan="">If provided, an ID for the node, as it would appear or be used in system logs.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">cacheType</td>
+					<td colspan="" rowspan="">required</td>
+					<td colspan="" rowspan=""> </td>
+					<td colspan="" rowspan="">Used to uniquelly identify the node. If concentrators do not use this parameter, they can set this string to the empty string.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">state</td>
+					<td colspan="" rowspan="">required</td>
+					<td colspan="" rowspan=""> </td>
+					<td colspan="" rowspan="">Current overall state of the node.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">hasChildren</td>
+					<td colspan="" rowspan="">required</td>
+					<td colspan="" rowspan=""> </td>
+					<td colspan="" rowspan="">If the node has children or not.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">isReadable</td>
+					<td colspan="" rowspan="">optional</td>
+					<td colspan="" rowspan="">false</td>
+					<td colspan="" rowspan="">If the node can be read. (*)</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">isConfigurable</td>
+					<td colspan="" rowspan="">optional</td>
+					<td colspan="" rowspan="">false</td>
+					<td colspan="" rowspan="">If the node can be configured. (**)</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">hasCommands</td>
+					<td colspan="" rowspan="">optional</td>
+					<td colspan="" rowspan="">false</td>
+					<td colspan="" rowspan="">If the node has registered commands or not.</td>
+				</tr>
+			</table>
+      </div>
+			<p class="" style="">
+				(*) See <a href="xep-0000-SN-SensorData.html">xep-0000-SN-SensorData</a> for more information about how to read nodes.
+			</p>
+			<p class="" style="">
+				(**) See <a href="xep-0000-SN-Control.html">xep-0000-SN-Control</a> for more information about how to configure nodes.
+			</p>
+		</div>
+        
+    <h2>5.
+       <a name="i18n">Internationalization Considerations</a></h2>
+        <p class="" style="">
+            Loalization of content can be performed if clients provide <span class="strong">xml:lang</span> attributes in commands made to the concentrator. If omitted, the
+            <span class="strong">default language</span> will be used in responses. If provided, but the concentrator does not support localization, or the requested language,
+            the <span class="strong">default language</span> will also be used.
+        </p>
+    <h2>6.
+       <a name="security">Security Considerations</a></h2>
+        <div class="indent">
+      <h3>6.1 <a name="Access rights"></a></h3>
+            <p class="" style="">
+                This document publishes a lot of commands with which to interact with a concentrator. If security and access rights is an issue, it might not be sufficient
+                to allow all friends access to the system. There are many ways in which to restrict access to the contents of the concentrator. Following are some examples:
+            </p>
+            <ul class="" style="">
+                <li class="" style="">
+                    The concentrator can restrict friendships to trusted friends, and then assign access rights internally to the approved contacts.
+                </li>
+                <li class="" style="">
+                    The concentrator can use a provisioning server (see <a href="xep-0000-SN-Provisioning.html">xep-0000-SN-Provisioning.html</a>) to delegate trust
+                    to a third party responsible for controlling who can get access to the concentrator (<span class="strong">isFriend</span> or <span class="strong">canAccess</span> commands), 
+                    and what items can be viewed (<span class="strong">hasPrivilege</span> or <span class="strong">downloadPrivileges</span> commands).
+                </li>
+            </ul>
+        </div>
+        <div class="indent">
+      <h3>6.2 <a name="sect-ID0E4XAE">Restricting access to node commands per contact</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>6.3 <a name="sect-ID0EEYAE">Restricting access to node commands per contact</a></h3>
+            
+        </div>
+    <h2>7.
+       <a name="iana">IANA Considerations</a></h2>
+        <p class="" style="">REQUIRED.</p>
+    <h2>8.
+       <a name="registrar">XMPP Registrar Considerations</a></h2>
+        <p class="" style="">REQUIRED.</p>
+    <h2>9.
+       <a name="schema">XML Schema</a></h2>
+        <p class="caption">
+    </p>
+    <div class="indent">
+      <pre class="prettyprint">
+            
+&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;xs:schema
+    xmlns:xs='http://www.w3.org/2001/XMLSchema'
+    targetNamespace='urn:xmpp:sn:concentrators'
+    xmlns='urn:xmpp:sn:concentrators'
+    xmlns:sn='urn:xmpp:sn'
+    xmlns:xd="jabber:x:data"
+    xmlns:xdv="http://jabber.org/protocol/xdata-validate"
+    xmlns:xdl="http://jabber.org/protocol/xdata-layout"
+    elementFormDefault='qualified'&gt;
+ 
+    &lt;xs:import namespace='urn:xmpp:sn'/&gt;
+    &lt;xs:import namespace='jabber:x:data'/&gt;
+    &lt;xs:import namespace='http://jabber.org/protocol/xdata-validate'/&gt;
+    &lt;xs:import namespace='http://jabber.org/protocol/xdata-layout'/&gt;
+ 
+    &lt;xs:element name='getCapabilities' type='EmptyElement'/&gt;
+    &lt;xs:element name='getCapabilitiesResponse' type='StringArray'/&gt;
+ 
+    &lt;xs:element name='getAllDataSources' type='EmptyElement'/&gt;
+    &lt;xs:element name='getAllDataSourcesResponse' type='DataSourceArray'/&gt;
+ 
+    &lt;xs:element name='getTopDataSources' type='EmptyElement'/&gt;
+    &lt;xs:element name='getTopDataSourcesResponse' type='DataSourceArray'/&gt;
+ 
+    &lt;xs:element name='getChildDataSources' type='SourceReference'/&gt;
+    &lt;xs:element name='getChildDataSourcesResponse' type='DataSourceArray'/&gt;
+ 
+    &lt;xs:complexType name='EmptyElement'&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:complexType name='SourceReference'&gt;
+        &lt;xs:attributeGroup ref='sourceReference'/&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:attributeGroup name='sourceReference'&gt;
+        &lt;xs:attribute name='sourceId' type='xs:string' use='required'/&gt;
+    &lt;/xs:attributeGroup&gt;
+ 
+    &lt;xs:complexType name='DataSource'&gt;
+        &lt;xs:attribute name='id' type='xs:string' use='required'/&gt;
+        &lt;xs:attribute name='name' type='xs:string' use='required'/&gt;
+        &lt;xs:attribute name='hasChildren' type='xs:boolean' use='optional' default='false'/&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:complexType name='DataSourceArray'&gt;
+        &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
+            &lt;xs:element name='dataSource' type='DataSource'/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:element name='containsNode' type='NodeReference'/&gt;
+    &lt;xs:element name='containsNodeResponse' type='xs:boolean'/&gt;
+ 
+    &lt;xs:element name='containsNodes' type='NodeReferences'/&gt;
+    &lt;xs:element name='containsNodesResponse' type='BooleanArray'/&gt;
+ 
+    &lt;xs:complexType name='NodeReference'&gt;
+        &lt;xs:attributeGroup ref='nodeReference'/&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:complexType name='NodeReferences'&gt;
+        &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
+            &lt;xs:element name='node' type='NodeReference'/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:attributeGroup name='nodeReference'&gt;
+        &lt;xs:attributeGroup ref='sourceReference'/&gt;
+        &lt;xs:attribute name='nodeId' type='xs:string' use='required'/&gt;
+        &lt;xs:attribute name='cacheType' type='xs:string' use='optional'/&gt;
+    &lt;/xs:attributeGroup&gt;
+ 
+    &lt;xs:element name='getNode' type='NodeReference'/&gt;
+    &lt;xs:element name='getNodeResponse' type='NodeInformation'/&gt;
+ 
+    &lt;xs:element name='getNodes' type='NodeReferences'/&gt;
+    &lt;xs:element name='getNodesResponse' type='NodeInformationArray'/&gt;
+ 
+    &lt;xs:element name='getAllNodes' type='GetAllNodes'/&gt;
+    &lt;xs:element name='getAllNodesResponse' type='NodeInformationArray'/&gt;
+ 
+    &lt;xs:element name='getRootNodes' type='SourceReference'/&gt;
+    &lt;xs:element name='getRootNodesResponse' type='NodeInformationArray'/&gt;
+ 
+    &lt;xs:element name='getChildNodes' type='GetChildNodes'/&gt;
+    &lt;xs:element name='getChildNodesResponse' type='NodeInformationArray'/&gt;
+ 
+    &lt;xs:complexType name='GetAllNodes'&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base='SourceReference'&gt;
+                &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
+                    &lt;xs:element name='onlyIfDerivedFrom' type='xs:string'/&gt;
+                &lt;/xs:sequence&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:complexType name='GetChildNodes'&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base='NodeReference'&gt;
+                &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
+                    &lt;xs:element name='sortOrder' type='SortOrder'/&gt;
+                &lt;/xs:sequence&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:complexType name='SortOrder'&gt;
+        &lt;xs:attribute name='parameterName' type='xs:string' use='required'/&gt;
+        &lt;xs:attribute name='ascending' type='xs:boolean' use='optional' default='true'/&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:complexType name='NodeInformation'&gt;
+        &lt;xs:attribute name='id' type='xs:string' use='required'/&gt;
+        &lt;xs:attribute name='displayName' type='xs:string' use='optional'/&gt;
+        &lt;xs:attribute name='localId' type='xs:string' use='optional'/&gt;
+        &lt;xs:attribute name='logId' type='xs:string' use='optional'/&gt;
+        &lt;xs:attribute name='cacheType' type='xs:string' use='required'/&gt;
+        &lt;xs:attribute name='state' type='NodeState' use='required'/&gt;
+        &lt;xs:attribute name='hasChildren' type='xs:boolean' use='required'/&gt;
+        &lt;xs:attribute name='isReadable' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='isConfigurable' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;xs:attribute name='hasCommands' type='xs:boolean' use='optional' default='false'/&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:complexType name='NodeInformationArray'&gt;
+        &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
+            &lt;xs:element name='node' type='NodeInformation'/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:simpleType name='NodeState'&gt;
+        &lt;xs:restriction base='xs:string'&gt;
+            &lt;xs:enumeration value='None'/&gt;
+            &lt;xs:enumeration value='Information'/&gt;
+            &lt;xs:enumeration value='WarningSigned'/&gt;
+            &lt;xs:enumeration value='WarningUnsigned'/&gt;
+            &lt;xs:enumeration value='ErrorSigned'/&gt;
+            &lt;xs:enumeration value='ErrorUnsigned'/&gt;
+        &lt;/xs:restriction&gt;
+    &lt;/xs:simpleType&gt;
+ 
+    &lt;xs:element name='getIndices' type='SourceReference'/&gt;
+    &lt;xs:element name='getIndicesResponse' type='StringArray'/&gt;
+ 
+    &lt;xs:complexType name='StringArray'&gt;
+        &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
+            &lt;xs:element name='value' type='xs:string'/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:complexType name='BooleanArray'&gt;
+        &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
+            &lt;xs:element name='value' type='xs:boolean'/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:element name='getNodeFromIndex' type='IndexReference'/&gt;
+    &lt;xs:element name='getNodeFromIndexResponse' type='NodeInformation'/&gt;
+ 
+    &lt;xs:element name='getNodesFromIndex' type='IndexReferences'/&gt;
+    &lt;xs:element name='getNodesFromIndexResponse' type='NodeInformationArray'/&gt;
+ 
+    &lt;xs:complexType name='IndexReference'&gt;
+        &lt;xs:attributeGroup ref='indexReference'/&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:complexType name='IndexReferences'&gt;
+        &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
+            &lt;xs:element name='indexRef' type='IndexReference'/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:attributeGroup name='indexReference'&gt;
+        &lt;xs:attributeGroup ref='sourceReference'/&gt;
+        &lt;xs:attribute name='index' type='xs:string' use='required'/&gt;
+        &lt;xs:attribute name='indexValue' type='xs:string' use='required'/&gt;
+    &lt;/xs:attributeGroup&gt;
+ 
+    &lt;xs:element name='getAllNodesFromIndex' type='IndexReference'/&gt;
+    &lt;xs:element name='getAllNodesFromIndexResponse' type='NodeInformationArray'/&gt;
+ 
+    &lt;xs:element name='getNodeParameters' type='NodeReference'/&gt;
+    &lt;xs:element name='getNodeParametersResponse' type='ParameterForm'/&gt;
+ 
+    &lt;xs:element name='getCommonNodeParameters' type='NodeReferences'/&gt;
+    &lt;xs:element name='getCommonNodeParametersResponse' type='ParameterForm'/&gt;
+ 
+    &lt;xs:complexType name='ParameterForm'&gt;
+        &lt;xs:sequence&gt;
+            &lt;xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data" id="x"/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:element name='getNodeParameterNames' type='NodeReference'/&gt;
+    &lt;xs:element name='getNodeParameterNamesResponse' type='StringArray'/&gt;
+ 
+    &lt;xs:element name='getNodeParameterValues' type='GetNodeParameterValues'/&gt;
+    &lt;xs:element name='getNodeParameterValuesResponse' type='StringArray'/&gt;
+ 
+    &lt;xs:complexType name='GetNodeParameterValues'&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base='NodeReference'&gt;
+                &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
+                    &lt;xs:element name='parameterName' type='xs:string'/&gt;
+                &lt;/xs:sequence&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:element name='setNodeParameterValues' type='SetNodeParameterValues'/&gt;
+    &lt;xs:element name='setNodeParameterValuesResponse' type='StringArray'/&gt;
+ 
+    &lt;xs:complexType name='SetNodeParameterValues'&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base='NodeReference'&gt;
+                &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
+                    &lt;xs:element name='parameter' type='Parameter'/&gt;
+                &lt;/xs:sequence&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:complexType name='Parameter'&gt;
+        &lt;xs:attribute name='name' type='xs:string' use='required'/&gt;
+        &lt;xs:attribute name='value' type='xs:string' use='required'/&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:element name='getNodeStatus' type='NodeReference'/&gt;
+    &lt;xs:element name='getNodeStatusResponse' type='MessageArray'/&gt;
+ 
+    &lt;xs:complexType name='Message'&gt;
+        &lt;xs:simpleContent&gt;
+            &lt;xs:extension base='xs:string'&gt;
+                &lt;xs:attribute name='timestamp' type='xs:dateTime' use='required'/&gt;
+                &lt;xs:attribute name='type' type='MessageType' use='required'/&gt;
+                &lt;xs:attribute name='id' type='xs:string' use='optional'/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:simpleContent&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:complexType name='MessageArray'&gt;
+        &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
+            &lt;xs:element name='message' type='Message'/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:simpleType name='MessageType'&gt;
+        &lt;xs:restriction base='xs:string'&gt;
+            &lt;xs:enumeration value='Error'/&gt;
+            &lt;xs:enumeration value='Warning'/&gt;
+            &lt;xs:enumeration value='Information'/&gt;
+        &lt;/xs:restriction&gt;
+    &lt;/xs:simpleType&gt;
+ 
+    &lt;xs:element name='getAddableNodeTypes' type='NodeReference'/&gt;
+    &lt;xs:element name='getAddableNodeTypesResponse' type='StringArray'/&gt;
+ 
+    &lt;xs:element name='getParametersForNewNode' type='NodeTypeReference'/&gt;
+    &lt;xs:element name='getParametersForNewNodeResponse' type='ParameterForm'/&gt;
+ 
+    &lt;xs:complexType name='NodeTypeReference'&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base='NodeReference'&gt;
+                &lt;xs:attribute name='type' type='xs:string' use='required'/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:element name='createNewNode' type='NodeTypeReference'/&gt;
+    &lt;xs:element name='createNewNodeResponse' type='NodeInformation'/&gt;
+ 
+    &lt;xs:element name='destroyNode' type='NodeReference'/&gt;
+    &lt;xs:element name='destroyNodeResponse' type='EmptyElement'/&gt;
+ 
+    &lt;xs:element name='getAncestors' type='NodeReference'/&gt;
+    &lt;xs:element name='getAncestorsResponse' type='NodeInformationArray'/&gt;
+ 
+    &lt;xs:element name='getNodeCommands' type='NodeReference'/&gt;
+    &lt;xs:element name='getNodeCommandsResponse' type='CommandArray'/&gt;
+ 
+    &lt;xs:element name='getCommonNodeCommands' type='NodeReferences'/&gt;
+    &lt;xs:element name='getCommonNodeCommandsResponse' type='CommandArray'/&gt;
+ 
+    &lt;xs:complexType name='Command'&gt;
+        &lt;xs:attribute name='id' type='xs:string' use='required'/&gt;
+        &lt;xs:attribute name='name' type='xs:string' use='required'/&gt;
+        &lt;xs:attribute name='type' type='CommandType' use='required'/&gt;
+        &lt;xs:attribute name='sortCategory' type='xs:string' use='optional'/&gt;
+        &lt;xs:attribute name='sortKey' type='xs:string' use='optional'/&gt;
+        &lt;xs:attribute name='confirmationString' type='xs:string' use='optional'/&gt;
+        &lt;xs:attribute name='failureString' type='xs:string' use='optional'/&gt;
+        &lt;xs:attribute name='successString' type='xs:string' use='optional'/&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:complexType name='CommandArray'&gt;
+        &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
+            &lt;xs:element name='message' type='Command'/&gt;
+        &lt;/xs:sequence&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:simpleType name='CommandType'&gt;
+        &lt;xs:restriction base='xs:string'&gt;
+            &lt;xs:enumeration value='Simple'/&gt;
+            &lt;xs:enumeration value='Parametrized'/&gt;
+        &lt;/xs:restriction&gt;
+    &lt;/xs:simpleType&gt;
+ 
+    &lt;xs:complexType name='NodeCommandReference'&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base='NodeReference'&gt;
+                &lt;xs:attribute name='command' type='xs:string' use='required'/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:element name='getCommandParameters' type='NodeCommandReference'/&gt;
+    &lt;xs:element name='getCommandParametersResponse' type='ParameterForm'/&gt;
+ 
+    &lt;xs:element name='getCommonCommandParameters'&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:complexContent&gt;
+                &lt;xs:extension base='NodeReferences'&gt;
+                    &lt;xs:attribute name='command' type='xs:string' use='required'/&gt;
+                &lt;/xs:extension&gt;
+            &lt;/xs:complexContent&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name='getCommonCommandParametersResponse' type='ParameterForm'/&gt;
+ 
+    &lt;xs:element name='moveUp' type='NodeReference'/&gt;
+    &lt;xs:element name='moveUpResponse' type='EmptyElement'/&gt;
+ 
+    &lt;xs:element name='moveDown' type='NodeReference'/&gt;
+    &lt;xs:element name='moveDownResponse' type='EmptyElement'/&gt;
+ 
+&lt;/xs:schema&gt;
+        </pre>
+    </div>
+    <hr><a name="appendices"></a><h2>Appendices</h2>
+    <hr><a name="appendix-docinfo"></a><h3>Appendix A: Document Information</h3>
+    <p class="indent">
+            Series: <a href="http://xmpp.org/extensions/">XEP</a><br>
+            Number: xxxx<br>
+            Publisher: <a href="/xsf/">XMPP Standards Foundation</a><br>
+            Status: 
+            <a href="http://xmpp.org/extensions/xep-0001.html#states-ProtoXEP">ProtoXEP</a><br>
+            Type:
+            <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
+            Version: 0.0.1<br>
+            Last Updated: 2001-09-14<br>
+                Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001, XEP-0004, XEP-0030, XEP-0122, XEP-0137, XEP-0141, xep-0000-SN-SensorData, xep-0000-DynamicForms<br>
+                Supersedes: None<br>
+                Superseded By: None<br>
+            Short Name: NOT_YET_ASSIGNED<br>
+            This document in other formats: 
+                <a class="standardsButton" href="http://xmpp.org/extensions/xep-xxxx.xml">XML</a> 
+                <a class="standardsButton" href="http://xmpp.org/extensions/xep-xxxx.pdf">PDF</a></p>
+    <hr><a name="appendix-authorinfo"></a><h3>Appendix B: Author Information</h3>
+    <div class="indent">
+      <h3>Peter Waher</h3>
+      <p class="indent">
+        Email:
+        <a href="mailto:peter.waher@clayster.com">peter.waher@clayster.com</a><br>
+        JabberID: 
+        <a href="xmpp:peter.waher@jabber.org">peter.waher@jabber.org</a><br>
+        URI: 
+        <a href="http://se.linkedin.com/pub/peter-waher/1a/71b/a29/">http://se.linkedin.com/pub/peter-waher/1a/71b/a29/</a><br></p>
+    </div>
+    <hr><a name="appendix-legal"></a><h3>Appendix C: Legal Notices</h3>
+    <div class="indent">
+      <h4>Copyright</h4>This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).<h4>Permissions</h4>Permission is hereby granted, free of charge, to any person obtaining a copy of this specification (the "Specification"), to make use of the Specification without restriction, including without limitation the rights to implement the Specification in a software program, deploy the Specification in a network service, and copy, modify, merge, publish, translate, distribute, sublicense, or sell copies of the Specification, and to permit persons to whom the Specification is furnished to do so, subject to the condition that the foregoing copyright notice and this permission notice shall be included in all copies or substantial portions of the Specification. Unless separate permission is granted, modified works that are redistributed shall not contain misleading information regarding the authors, title, number, or publisher of the Specification, and shall not claim endorsement of the modified works by the authors, any organization or project to which the authors belong, or the XMPP Standards Foundation.<h4>Disclaimer of Warranty</h4><span style="font-weight: bold">## NOTE WELL: This Specification is provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. In no event shall the XMPP Standards Foundation or the authors of this Specification be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Specification or the implementation, deployment, or other use of the Specification. ##</span><h4>Limitation of Liability</h4>In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall the XMPP Standards Foundation or any author of this Specification be liable for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising out of the use or inability to use the Specification (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if the XMPP Standards Foundation or such author has been advised of the possibility of such damages.<h4>IPR Conformance</h4>
+                This XMPP Extension Protocol has been contributed in full conformance with the XSF's Intellectual Property Rights Policy (a copy of which may be found at &lt;<a href="http://www.xmpp.org/extensions/ipr-policy.shtml">http://www.xmpp.org/extensions/ipr-policy.shtml</a>&gt; or obtained by writing to XSF, P.O. Box 1641, Denver, CO 80201 USA).
+            </div>
+    <hr><a name="appendix-xmpp"></a><h3>Appendix D: Relation to XMPP</h3>
+    <p class="indent">The Extensible Messaging and Presence Protocol (XMPP) is defined in the XMPP Core (RFC 6120) and XMPP IM (RFC 6121) specifications contributed by the XMPP Standards Foundation to the Internet Standards Process, which is managed by the Internet Engineering Task Force in accordance with RFC 2026. Any protocol defined in this document has been developed outside the Internet Standards Process and is to be understood as an extension to XMPP rather than as an evolution, development, or modification of XMPP itself.</p>
+    <hr><a name="appendix-discuss"></a><h3>Appendix E: Discussion Venue</h3>
+    <p class="indent">The primary venue for discussion of XMPP Extension Protocols is the &lt;<a href="http://mail.jabber.org/mailman/listinfo/standards">standards@xmpp.org</a>&gt; discussion list.</p>
+    <p class="indent">Discussion on other xmpp.org discussion lists might also be appropriate; see &lt;<a href="http://xmpp.org/about/discuss.shtml">http://xmpp.org/about/discuss.shtml</a>&gt; for a complete list.</p>
+    <p class="indent">Errata can be sent to &lt;<a href="mailto:editor@xmpp.org">editor@xmpp.org</a>&gt;.</p>
+    <hr><a name="appendix-conformance"></a><h3>Appendix F: Requirements Conformance</h3>
+    <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
+    <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
+    <div class="indent">
+      <p><a name="nt-ID0EZE">1</a>. XEP-0060: Publish-Subscribe &lt;<a href="http://xmpp.org/extensions/xep-0060.html">http://xmpp.org/extensions/xep-0060.html</a>&gt;.</p>
+      <p><a name="nt-ID0EKF">2</a>. XEP-0248: PubSub Collection Nodes &lt;<a href="http://xmpp.org/extensions/xep-0248.html">http://xmpp.org/extensions/xep-0248.html</a>&gt;.</p>
+      <p><a name="nt-ID0EZH">3</a>. XEP-0050: Ad-Hoc Commands &lt;<a href="http://xmpp.org/extensions/xep-0050.html">http://xmpp.org/extensions/xep-0050.html</a>&gt;.</p>
+      <p><a name="nt-ID0EACAC">4</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0EMCAC">5</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
+      <p><a name="nt-ID0EYCAC">6</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
+      <p><a name="nt-ID0EEDAC">7</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+    </div>
+    <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
+    <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
+    <div class="indent">
+      <h4>Version 0.0.1 (2001-09-14)</h4>
+      <div class="indent">
+                <p class="" style="">First draft.</p>
+             (psa)
+    </div>
+    </div>
+    <hr>
+    <p>END</p>
+  </body>
+</html>

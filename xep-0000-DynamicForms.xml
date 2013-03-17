@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- 
+* xml:lang?
+
+http://xmpp.org/extensions/xep-0004.html
+http://xmpp.org/extensions/xep-0122.html
+http://xmpp.org/extensions/xep-0141.html
+http://xmpp.org/extensions/xep-0137.html
+http://xmpp.org/registrar/xdv-datatypes.html
+http://xmpp.org/registrar/xdv-prefixes.html
+
+XEP-0122: xmlns:xdv='http://jabber.org/protocol/xdata-validate'
+XEP-0141: xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
+
+Tabs = <xdl:page>
+
+Boolean						- <field type="boolean">
+Color						- <field type="text-single"><xdv:validate datatype="someprefix:color"><xdv:regex> ^[0-9a-fA-F]{6}$</xdv:regex> ?
+CustomValidationString		- ?
+DateTime					- <field type="text-single"><xdv:validate datatype="xs:dateTime"><xdv:basic/> eller <xdv:range min max/>
+							- <field type="text-single"><xdv:validate datatype="xs:date"><xdv:basic/> eller <xdv:range min max/> om dateOnly
+Double						- <field type="text-single"><xdv:validate datatype="xs:double"><xdv:basic/> eller <xdv:range min max/>
+Duration					- <field type="text-single"><xdv:validate datatype="xs:duration"><xdv:basic/>
+Enum						- <field type="list-single">
+ExpressionString			- ?
+FileUpload					- <field type="text-single"><xdv:validate datatype="sipub:file-transfer"><xdv:basic/>
+Id							- ?
+Int32						- <field type="text-single"><xdv:validate datatype="xs:int"><xdv:basic/> eller <xdv:range min max/>
+Int64						- <field type="text-single"><xdv:validate datatype="xs:long"><xdv:basic/> eller <xdv:range min max/>
+List						- <field type="list-single">
+MultiLineText				- <field type="text-multi">
+MultipleChoice				- <field type="list-multi"> - ? No data source reference.
+Paragraph					- <field type="fixed"> - ? formatting, anfang.
+							- <xdl:page><xdl:text> - alternativ ? formatting, anfang.
+ServerFolderString			- ?
+StringOptions				- <field type="list-single">
+							- <field type="list-single"><xdv:validate><xdv:open/> - om fritext tillåten.
+							- <field type="list-single"><xdv:validate><xdv:regex/> - om fritext tillåten & pattern används. (?)
+String						- <field type="text-single">
+							- <field type="text-private"> if masked.
+							- ... med <xdv:validate><xdv:regex/> om pattern används.
+TimeSpan					- <field type="text-single"><xdv:validate datatype="xs:time"><xdv:basic/> eller <xdv:range min max/>
+
+Client side values.
+Notsame-flag (multple-node-edit)
+Error/parameter
+Read-only parameters
+
+=======================================================================================================
+
+Color parameter:
+
+Hello
+
+Is it possible to add a data type to the list of data types supported by validation rules in XEP 0122?
+http://xmpp.org/registrar/xdv-datatypes.html
+
+Is this done by writing a separate XEP for this, like XEP 0137 (albeit simpler)?
+http://xmpp.org/extensions/xep-0137.html
+
+I would like to be able to add color parameters to data forms, as follows:
+
+<field type="text-single"><xdv:validate datatype="someprefix:color"><xdv:regex> ^[0-9a-fA-F]{6}$</xdv:regex>
+
+My hope was that, clients recognizing this new type, would be able to render a color picker, while other clients not recognizing this type, would default to the xs:string type, and use the regular expression to limit input to a color value.
+
+Choosing a color by entering its hexadecimal RGB-triple is quite difficult for a normal user.
+
+Sincerely,
+Peter Waher 
+-->
+<!DOCTYPE xep SYSTEM 'xep.dtd' [
+  <!ENTITY % ents SYSTEM 'xep.ent'>
+%ents;
+]>
+<?xml-stylesheet type='text/xsl' href='xep.xsl'?>
+<xep>
+<header>
+  <title>XEP Template</title>
+  <abstract>This specification provides an example of the format for XMPP Extension Protocols (XEPs).</abstract>
+  <legal>
+    <copyright>This XMPP Extension Protocol is copyright (c) 1999 - 2012 by the XMPP Standards Foundation (XSF).</copyright>
+    <permissions>Permission is hereby granted, free of charge, to any person obtaining a copy of this specification (the &quot;Specification&quot;), to make use of the Specification without restriction, including without limitation the rights to implement the Specification in a software program, deploy the Specification in a network service, and copy, modify, merge, publish, translate, distribute, sublicense, or sell copies of the Specification, and to permit persons to whom the Specification is furnished to do so, subject to the condition that the foregoing copyright notice and this permission notice shall be included in all copies or substantial portions of the Specification. Unless separate permission is granted, modified works that are redistributed shall not contain misleading information regarding the authors, title, number, or publisher of the Specification, and shall not claim endorsement of the modified works by the authors, any organization or project to which the authors belong, or the XMPP Standards Foundation.</permissions>
+    <warranty>## NOTE WELL: This Specification is provided on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. In no event shall the XMPP Standards Foundation or the authors of this Specification be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Specification or the implementation, deployment, or other use of the Specification. ##</warranty>
+    <liability>In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall the XMPP Standards Foundation or any author of this Specification be liable for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising out of the use or inability to use the Specification (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if the XMPP Standards Foundation or such author has been advised of the possibility of such damages.</liability>
+    <conformance>This XMPP Extension Protocol has been contributed in full conformance with the XSF's Intellectual Property Rights Policy (a copy of which may be found at &lt;<link url='http://www.xmpp.org/extensions/ipr-policy.shtml'>http://www.xmpp.org/extensions/ipr-policy.shtml</link>&gt; or obtained by writing to XSF, P.O. Box 1641, Denver, CO 80201 USA).</conformance>
+  </legal>
+  <number>xxxx</number>
+  <status>ProtoXEP</status>
+  <type>Standards Track</type>
+  <sig>Standards</sig>
+  <approver>Council</approver>
+  <dependencies>
+    <spec>XMPP Core</spec>
+    <spec>XEP-0001</spec>
+    <spec>Etc.</spec>
+  </dependencies>
+  <supersedes/>
+  <supersededby/>
+  <shortname>NOT_YET_ASSIGNED</shortname>
+  <author>
+    <firstname>Peter</firstname>
+    <surname>Saint-Andre</surname>
+    <email>stpeter@jabber.org</email>
+    <jid>stpeter@jabber.org</jid>
+  </author>
+  <revision>
+    <version>0.0.1</version>
+    <date>2001-09-14</date>
+    <initials>psa</initials>
+    <remark><p>First draft.</p></remark>
+  </revision>
+</header>
+<section1 topic='Introduction' anchor='intro'>
+  <p>This is a template for use in writing XMPP Extension Protocol specifications (XEPs). For detailed information about the XSF's standards process and how to write a XEP, refer to "XEP-0001: XMPP Extension Protocols" and "XEP-0143: Guidelines for Authors of XMPP Extension Protocols".</p>
+</section1>
+<section1 topic='Requirements' anchor='reqs'>
+  <p>STRONGLY RECOMMENDED.</p>
+</section1>
+<section1 topic='Glossary' anchor='glossary'>
+  <p>OPTIONAL.</p>
+</section1>
+<section1 topic='Use Cases' anchor='usecases'>
+  <p>STRONGLY RECOMMENDED.</p>
+</section1>
+<section1 topic='Business Rules' anchor='rules'>
+  <p>OPTIONAL.</p>
+</section1>
+<section1 topic='Implementation Notes' anchor='impl'>
+  <p>OPTIONAL.</p>
+</section1>
+<section1 topic='Accessibility Considerations' anchor='access'>
+  <p>OPTIONAL.</p>
+</section1>
+<section1 topic='Internationalization Considerations' anchor='i18n'>
+  <p>OPTIONAL.</p>
+</section1>
+<section1 topic='Security Considerations' anchor='security'>
+  <p>REQUIRED.</p>
+</section1>
+<section1 topic='IANA Considerations' anchor='iana'>
+  <p>REQUIRED.</p>
+</section1>
+<section1 topic='XMPP Registrar Considerations' anchor='registrar'>
+  <p>REQUIRED.</p>
+</section1>
+<section1 topic='XML Schema' anchor='schema'>
+  <p>REQUIRED for protocol specifications.</p>
+</section1>
+</xep>
