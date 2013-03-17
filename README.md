@@ -6,7 +6,7 @@ Sensor Networks and the Internet of Things
 
 The final result will be published through the XSF foundation 
 
-Planned XEP's are 
+Planned XEP's 
 
 XEP-0000-Exi	Defines how to EXI can be used in XMPP to achieve efficient 
 		compression of data. Albeit not a sensor network specific XEP, 
@@ -63,4 +63,6 @@ Email: peter.waher@clayster.com
 JabberID: peter.waher@jabber.org
 URI: http://se.linkedin.com/pub/peter-waher/1a/71b/a29/
 
-mananged by joachim.lindborg@sust.se
+mananged by 
+Email: joachim.lindborg@sust.se
+URI:
