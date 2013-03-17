@@ -8,7 +8,6 @@ The final result will be published through the XSF foundation
 
 Planned XEP's are 
 
-XEP	        Description
 XEP-0000-Exi	Defines how to EXI can be used in XMPP to achieve efficient 
 		compression of data. Albeit not a sensor network specific XEP, 
 		this XEP should be considered in all sensor network 
