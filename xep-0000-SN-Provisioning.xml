@@ -78,6 +78,9 @@
             efficiently using a trusted third party with more power and options when it comes to user interface design and storage.
         </p>
         <p>
+            This XEP relies heavily on <link url='xep-0000-SN-SensorData.html'>xep-0000-SN-SensorData</link> <note><link url='xep-0000-SN-SensorData.html'>xep-0000-SN-SensorData</link></note>.
+        </p>
+        <p>
             Sensor networks contains many different architectures and use cases. For this reason, the sensor network standards have been divided into multiple XEPs according to the following table:
         </p>
 
@@ -141,9 +144,6 @@
                 </td>
             </tr>
         </table>
-        <p>
-            This XEP relies heavily on <link url='xep-0000-SN-SensorData.html'>xep-0000-SN-SensorData</link> <note><link url='xep-0000-SN-SensorData.html'>xep-0000-SN-SensorData</link></note>.
-        </p>
     </section1>
     <section1 topic='Glossary' anchor='glossary'>
         <p>The following table lists common terms and corresponding descriptions.</p>
