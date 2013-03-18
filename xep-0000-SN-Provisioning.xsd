@@ -8,14 +8,27 @@
  
 	<xs:import namespace='urn:xmpp:sn'/>
  
+	<xs:element name='getToken' type='GetToken'/>
+	<xs:element name='getTokenResponse' type='GetTokenResponse'/>
+ 
+	<xs:complexType name='GetToken'>
+		<xs:attribute name='deviceId' type='xs:string' use='optional'/>
+		<xs:attribute name='serviceId' type='xs:string' use='optional'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='GetTokenResponse'>
+		<xs:attribute name='token' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
 	<xs:element name='isFriend' type='Friend'/>
 	<xs:element name='isFriendResponse' type='FriendResponse'/>
 	<xs:element name='unfriend' type='Friend'/>
+	<xs:element name='Friend' type='Friend'/>
  
 	<xs:complexType name='Friend'>
 		<xs:attribute name='jid' type='xs:string' use='required'/>
 	</xs:complexType>
- 
+
 	<xs:complexType name='FriendResponse'>
 		<xs:complexContent>
 			<xs:extension base='Friend'>
@@ -28,11 +41,13 @@
 	<xs:element name='canRead' type='CanRead'/>
 	<xs:element name='canReadResponse' type='CanReadResponse'/>
  
-	<xs:complexType name='CanRead'>
+	<xs:complexType name='CanReadBase' abstract='true'>
 		<xs:choice minOccurs='0' maxOccurs='unbounded'>
 			<xs:element name='node'>
 				<xs:complexType>
 					<xs:attribute name='nodeId' type='xs:string' use='required'/>
+					<xs:attribute name='sourceId' type='xs:string' use='optional'/>
+					<xs:attribute name='cacheType' type='xs:string' use='optional'/>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name='field'>
@@ -44,11 +59,20 @@
 		<xs:attributeGroup ref='sn:fieldTypes'/>
 		<xs:attribute name='all' type='xs:boolean' use='optional' default='false'/>
 		<xs:attribute name='historical' type='xs:boolean' use='optional' default='false'/>
+		<xs:attribute name='jid' type='xs:string' use='required'/>
 	</xs:complexType>
- 
+
+	<xs:complexType name='CanRead'>
+		<xs:complexContent>
+			<xs:extension base='CanReadBase'>
+				<xs:attribute name='token' type='xs:string' use='optional'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
 	<xs:complexType name='CanReadResponse'>
 		<xs:complexContent>
-			<xs:extension base='CanRead'>
+			<xs:extension base='CanReadBase'>
 				<xs:attribute name='result' type='xs:boolean' use='required'/>
 			</xs:extension>
 		</xs:complexContent>
@@ -73,7 +97,7 @@
 				<xs:element name='sso' type='ssoCredential'/>
 				<xs:element name='protocol' type='protocolCredential'/>
 			</xs:choice>
-			<xs:attribute name='serviceId' type='xs:string' use='required'/>
+			<xs:attribute name='serviceToken' type='xs:string' use='required'/>
 		</xs:complexType>
 	</xs:element>
  
@@ -143,7 +167,7 @@
  
 	<xs:element name='userLoggedIn'>
 		<xs:complexType>
-			<xs:attribute name='serviceId' type='xs:string' use='required'/>
+			<xs:attribute name='serviceToken' type='xs:string' use='required'/>
 			<xs:attribute name='userToken' type='xs:string' use='required'/>
 			<xs:attribute name='userName' type='xs:string' use='required'/>
 		</xs:complexType>
@@ -151,7 +175,7 @@
  
 	<xs:element name='hasPrivilege'>
 		<xs:complexType>
-			<xs:attribute name='serviceId' type='xs:string' use='required'/>
+			<xs:attribute name='serviceToken' type='xs:string' use='required'/>
 			<xs:attribute name='userToken' type='xs:string' use='required'/>
 			<xs:attribute name='privilegeId' type='PrivilegeId' use='required'/>
 		</xs:complexType>
@@ -171,7 +195,7 @@
  
 	<xs:element name='downloadPrivileges'>
 		<xs:complexType>
-			<xs:attribute name='serviceId' type='xs:string' use='required'/>
+			<xs:attribute name='serviceToken' type='xs:string' use='required'/>
 			<xs:attribute name='userToken' type='xs:string' use='required'/>
 		</xs:complexType>
 	</xs:element>

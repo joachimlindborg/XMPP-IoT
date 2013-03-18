@@ -10,7 +10,7 @@
     <meta name="DC.Description" content="This specification provides the common framework for sensor data interchange over XMPP networks.">
     <meta name="DC.Publisher" content="XMPP Standards Foundation">
     <meta name="DC.Contributor" content="XMPP Extensions Editor">
-    <meta name="DC.Date" content="2013-03-11">
+    <meta name="DC.Date" content="2013-03-18">
     <meta name="DC.Type" content="XMPP Extension Protocol">
     <meta name="DC.Format" content="XHTML">
     <meta name="DC.Identifier" content="XEP-xxxx">
@@ -42,11 +42,11 @@
       </tr>
       <tr valign="top">
         <td><strong>Version:</strong></td>
-        <td>0.0.3</td>
+        <td>0.0.4</td>
       </tr>
       <tr valign="top">
         <td><strong>Last Updated:</strong></td>
-        <td>2013-03-11</td>
+        <td>2013-03-18</td>
       </tr>
     </table>
     <hr>
@@ -55,22 +55,23 @@
     <h2>Table of Contents</h2>
     <div class="indent">
       <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
-      3.1.  <a href="#sect-ID0EFCAE">Request Read-out of momentary values</a><br>   
-      3.2.  <a href="#sect-ID0ECDAE">Read-out failure</a><br>   
-      3.3.  <a href="#sect-ID0EODAE">Read-out rejected</a><br>   
-      3.4.  <a href="#sect-ID0E1DAE">Read-out all</a><br>   
-      3.5.  <a href="#sect-ID0EGEAE">Read-out of multiple devices</a><br>   
-      3.6.  <a href="#sect-ID0ESEAE">Read-out of specific fields</a><br>   
-      3.7.  <a href="#sect-ID0ESFAE">Cancelling a scheduled read-out request</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
-      5.1.  <a href="#sect-ID0EQHAE">String lengths</a><br>   
-      5.2.  <a href="#sect-ID0ETIAE">Enumerations vs. Strings</a><br>   
-      5.3.  <a href="#sect-ID0EKKAE">Asynchronous feedback</a><br>   
-      5.4.  <a href="#sect-ID0E1KAE">Field Value Types</a><br>   
-      5.5.  <a href="#sect-ID0EUNAE">Field Types</a><br>   
-      5.6.  <a href="#sect-ID0ERVAE">Field Status Values</a><br>   
-      5.7.  <a href="#sect-ID0ED2AE">Subnodes and supernodes</a><br>6.  <a href="#i18n">Internationalization Considerations</a><br>   
-      6.1.  <a href="#sect-ID0E42AE">Time Zones</a><br>   
-      6.2.  <a href="#sect-ID0ER3AE">Localized strings</a><br>7.  <a href="#security">Security Considerations</a><br>8.  <a href="#iana">IANA Considerations</a><br>9.  <a href="#registrar">XMPP Registrar Considerations</a><br>10.  <a href="#schema">XML Schema</a><br>11.  <a href="#ack">Acknowledgements</a></p>
+      3.1.  <a href="#sect-ID0EVEAE">Request Read-out of momentary values</a><br>   
+      3.2.  <a href="#sect-ID0ESFAE">Read-out failure</a><br>   
+      3.3.  <a href="#sect-ID0E5FAE">Read-out rejected</a><br>   
+      3.4.  <a href="#sect-ID0EKGAE">Read-out all</a><br>   
+      3.5.  <a href="#sect-ID0EWGAE">Read-out of multiple devices</a><br>   
+      3.6.  <a href="#sect-ID0ECHAE">Read-out of specific fields</a><br>   
+      3.7.  <a href="#sect-ID0ECIAE">Cancelling a scheduled read-out request</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
+      5.1.  <a href="#sect-ID0EAKAE">String lengths</a><br>   
+      5.2.  <a href="#sect-ID0EDLAE">Enumerations vs. Strings</a><br>   
+      5.3.  <a href="#sect-ID0E1MAE">Asynchronous feedback</a><br>   
+      5.4.  <a href="#sect-ID0EKNAE">Field Value Types</a><br>   
+      5.5.  <a href="#sect-ID0EEQAE">Field Types</a><br>   
+      5.6.  <a href="#sect-ID0EBYAE">Field Status Values</a><br>   
+      5.7.  <a href="#sect-ID0ET4AE">Subnodes and supernodes</a><br>   
+      5.8.  <a href="#sect-ID0EI5AE">Reading devices from large subsystems</a><br>6.  <a href="#i18n">Internationalization Considerations</a><br>   
+      6.1.  <a href="#sect-ID0EU6AE">Time Zones</a><br>   
+      6.2.  <a href="#sect-ID0EJAAG">Localized strings</a><br>7.  <a href="#security">Security Considerations</a><br>8.  <a href="#iana">IANA Considerations</a><br>9.  <a href="#registrar">XMPP Registrar Considerations</a><br>10.  <a href="#schema">XML Schema</a><br>11.  <a href="#ack">Acknowledgements</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
     </div>
     <hr>
@@ -94,6 +95,10 @@
 			<tr class="body">
 				<th colspan="" rowspan="">XEP</th>
 				<th colspan="" rowspan="">Description</th>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">XEP-0000-DynamicForms</td>
+				<td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0ETG">1</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0E6G">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0ELH">3</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EXH">4</a>].</td>
 			</tr>
 			<tr class="body">
 				<td colspan="" rowspan="">XEP-0000-Exi</td>
@@ -242,6 +247,13 @@
 				<td colspan="" rowspan="">Timestamp of value, when the value was sampled or recorded.</td>
 			</tr>
 			<tr class="body">
+				<td colspan="" rowspan="">Token</td>
+				<td colspan="" rowspan="">
+					A client, device or user can get a token from a provisioning server. These tokens can be included in requeests to other entities in the network, so these entities can validate
+					access rights with the provisioning server.
+				</td>
+			</tr>
+			<tr class="body">
 				<td colspan="" rowspan="">Unit</td>
 				<td colspan="" rowspan="">Physical unit of value. Example: MWh, l/s, etc.</td>
 			</tr>
@@ -256,10 +268,6 @@
 			<tr class="body">
 				<td colspan="" rowspan="">Value Type</td>
 				<td colspan="" rowspan="">Can be numeric, string, boolean, Date &amp; Time, Time Span or Enumeration.</td>
-			</tr>
-			<tr class="body">
-				<td colspan="" rowspan="">SN</td>
-				<td colspan="" rowspan="">Sensor Network, a sensor network including devices of all types.</td>
 			</tr>
 			<tr class="body">
 				<td colspan="" rowspan="">WSN</td>
@@ -369,7 +377,7 @@
 			<img alt="" src="http://i.imgur.com/9pK4n2R.png">
 		</p>
 		<div class="indent">
-      <h3>3.1 <a name="sect-ID0EFCAE">Request Read-out of momentary values</a></h3>
+      <h3>3.1 <a name="sect-ID0EVEAE">Request Read-out of momentary values</a></h3>
 			<p class="" style="">
 				The client that wishes to receive momentary values from the sensor initiates the request using the <span class="strong">req</span> request sent to the device.
 			</p>
@@ -426,7 +434,7 @@
 		</div>
 		
 		<div class="indent">
-      <h3>3.2 <a name="sect-ID0ECDAE">Read-out failure</a></h3>
+      <h3>3.2 <a name="sect-ID0ESFAE">Read-out failure</a></h3>
 			<p class="" style="">
 				If instead a read-out could not be performed, the communication sequence might look as follows:
 			</p>
@@ -459,7 +467,7 @@
       </div>
 		</div>
 		<div class="indent">
-      <h3>3.3 <a name="sect-ID0EODAE">Read-out rejected</a></h3>
+      <h3>3.3 <a name="sect-ID0E5FAE">Read-out rejected</a></h3>
 			<p class="" style="">
 				If for some reason, the device rejects the read-out request, the communication sequence might look as follows:
 			</p>
@@ -487,7 +495,7 @@
       </div>
 		</div>
 		<div class="indent">
-      <h3>3.4 <a name="sect-ID0E1DAE">Read-out all</a></h3>
+      <h3>3.4 <a name="sect-ID0EKGAE">Read-out all</a></h3>
 			<p class="" style="">
 				The following example shows a communication sequence when a client reads out all available information from a sensor at a given point in time:
 			</p>
@@ -570,7 +578,7 @@
       </div>
 		</div>
 		<div class="indent">
-      <h3>3.5 <a name="sect-ID0EGEAE">Read-out of multiple devices</a></h3>
+      <h3>3.5 <a name="sect-ID0EWGAE">Read-out of multiple devices</a></h3>
 			<p class="" style="">
 				The following example shows how a client reads a subset of multiple sensors behind a device with a single JID.
 			</p>
@@ -621,7 +629,7 @@
       </div>
 		</div>
 		<div class="indent">
-      <h3>3.6 <a name="sect-ID0ESEAE">Read-out of specific fields</a></h3>
+      <h3>3.6 <a name="sect-ID0ECHAE">Read-out of specific fields</a></h3>
 			<p class="" style="">
 				The <span class="strong">req</span> element can take <span class="strong">field</span> sub elements, with which the client can specify which fields it is interested in.
 				If not provided, the client is assumed to return all matching fields, regardless of field name. However, the <span class="strong">field</span> elements in the
@@ -672,7 +680,7 @@
       </div>
 		</div>
 		<div class="indent">
-      <h3>3.7 <a name="sect-ID0ESFAE">Cancelling a scheduled read-out request</a></h3>
+      <h3>3.7 <a name="sect-ID0ECIAE">Cancelling a scheduled read-out request</a></h3>
 			<p class="" style="">
 				The following example shows how the client cancels a scheduled read-out:
 			</p>
@@ -713,7 +721,7 @@
 		</div>
 	<h2>4.
        <a name="support">Determining Support</a></h2>
-		<p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:sn" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0ENGAE">1</a>] information requests.</p>
+		<p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:sn" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0E4IAE">5</a>] information requests.</p>
 		<p class="caption"><a name="example-10"></a>Example 10. Service discovery information request</p>
     <div class="indent">
       <pre class="prettyprint">
@@ -743,25 +751,25 @@
 		</pre>
     </div>
 		<p class="" style="">In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined 
-		in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EEHAE">2</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.</p>
+		in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EUJAE">6</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.</p>
 	<h2>5.
        <a name="impl">Implementation Notes</a></h2>
 		<div class="indent">
-      <h3>5.1 <a name="sect-ID0EQHAE">String lengths</a></h3>
+      <h3>5.1 <a name="sect-ID0EAKAE">String lengths</a></h3>
 			<p class="" style="">
 				As noticed, a conscious effort has been made not to shorten element and attribute names. This is to make sure, XML is maintained readable. Packet size is not deemed to be
 				affected negatively by this for two reasons:
 			</p>
 			<ul class="" style="">
 				<li class="" style="">For sensors with limited memory, or where package size is important, <span class="ref" style=""><a href="http://www.w3.org/TR/exi/">EXI</a></span> 
-				 [<a href="#nt-ID0EGIAE">3</a>] is supposed to be used. 
+				 [<a href="#nt-ID0EWKAE">7</a>] is supposed to be used. 
 				EXI compresses strings as normalized index values, making the string appear only once in the packet. Therefore, shortening string length doesn't affect packet 
 				size much. Element and attribute names in known namespaces are furthermore only encoded by index in schema, not by name.</li>
 				<li class="" style="">If limited memory or package size is not a consideration, readability and ease of implementation is preferred to short messages.</li>
 			</ul>
 		</div>
 		<div class="indent">
-      <h3>5.2 <a name="sect-ID0ETIAE">Enumerations vs. Strings</a></h3>
+      <h3>5.2 <a name="sect-ID0EDLAE">Enumerations vs. Strings</a></h3>
 			<p class="" style="">
 				This protocol has avoided the use of enumerations for data types such as units, field names, etc., and instead use strings. The reasons for this are:
 			</p>
@@ -782,7 +790,7 @@
 			</ul>
 		</div>
 		<div class="indent">
-      <h3>5.3 <a name="sect-ID0EKKAE">Asynchronous feedback</a></h3>
+      <h3>5.3 <a name="sect-ID0E1MAE">Asynchronous feedback</a></h3>
 			<p class="" style="">
 				Since some applications require real-time feedback (or as real-time as possible), and read-out might in certain cases take a long time, the device has the option
 				to send multiple <span class="strong">fields</span> messages during read-out. The client is responsible for collecting all such messages until either a <span class="strong">done</span> message
@@ -791,7 +799,7 @@
 			</p>
 		</div>
 		<div class="indent">
-      <h3>5.4 <a name="sect-ID0E1KAE">Field Value Types</a></h3>
+      <h3>5.4 <a name="sect-ID0EKNAE">Field Value Types</a></h3>
 			<p class="" style="">
 				There are different types of values that can be reported from a device. The following table lists the various types:
 			</p>
@@ -838,7 +846,7 @@
       </div>
 		</div>
 		<div class="indent">
-      <h3>5.5 <a name="sect-ID0EUNAE">Field Types</a></h3>
+      <h3>5.5 <a name="sect-ID0EEQAE">Field Types</a></h3>
 			<p class="" style="">
 				There are different types of fields, apart from types of values a field can have. These types are conceptual types, similar to categories. They are not exclusive,
 				and can be combined.
@@ -957,7 +965,7 @@
 			</p>
 		</div>
 		<div class="indent">
-      <h3>5.6 <a name="sect-ID0ERVAE">Field Status Values</a></h3>
+      <h3>5.6 <a name="sect-ID0EBYAE">Field Status Values</a></h3>
 			<p class="" style="">
 				In metering applications where quality of service is important, a field must always be accompanied with a corresponding status flag. Devices should
 				set these accordingly. If no status flag is set on a field, the client can assume <span class="strong">automaticReadout</span> is true.
@@ -1034,7 +1042,7 @@
       </div>
 		</div>
 		<div class="indent">
-      <h3>5.7 <a name="sect-ID0ED2AE">Subnodes and supernodes</a></h3>
+      <h3>5.7 <a name="sect-ID0ET4AE">Subnodes and supernodes</a></h3>
 			<p class="" style="">
 				This document does not go into detail on how devices are ordered behind a JID. Some of the examples have assumed a single device lies behind a JID, others
 				that multiple devices exist behind a JID. Also, no order or structure of devices has been assumed.
@@ -1048,10 +1056,24 @@
 				More information about how multiple devices behind a JID can be handled, is described in the XEP <a href="xep-0000-SN-Concentrators.html">xep-0000-SN-Concentrators</a>.
 			</p>
 		</div>
+		<div class="indent">
+      <h3>5.8 <a name="sect-ID0EI5AE">Reading devices from large subsystems</a></h3>
+			<p class="" style="">
+				All examples in this document have been simplified examples where a few devices containing a few fields have been read. However, in many cases large subsystems with
+				very many sensors containing many fields have to be read, as is documented in <a href="xep-0000-SN-Concentrators.html">xep-0000-SN-Concentrators.html</a>
+				 [<a href="#nt-ID0ET5AE">8</a>]. In such cases, a node may have to be specified using two or perhaps
+				even three ID's: a <span class="strong">sourceId</span> identifying the data source controlling the device, a possible <span class="strong">cacheType</span> narrowing down the search to
+				a specific kind of node, and the common <span class="strong">nodeId</span>. For more information about this, see <a href="xep-0000-SN-Concentrators.html">xep-0000-SN-Concentrators.html</a>.
+			</p>
+			<p class="" style="">
+				<span class="strong">Note:</span> For cases where the <span class="strong">nodeId</span> is sufficient to uniquelly identify the node, it is sufficient to provide this attribute in the request.
+				If there is ambiguity in the request, the receptor must treat the request as a request with a set of nodes, all with the corresponding <span class="strong">nodeId</span> as requested.
+			</p>
+		</div>
 	<h2>6.
        <a name="i18n">Internationalization Considerations</a></h2>
 		<div class="indent">
-      <h3>6.1 <a name="sect-ID0E42AE">Time Zones</a></h3>
+      <h3>6.1 <a name="sect-ID0EU6AE">Time Zones</a></h3>
 			<p class="" style="">
 				All timestamps and dateTime values use the XML data type xs:dateTime to specify values. These values include a date, an optional time and an optional time zone.
 			</p>
@@ -1063,7 +1085,7 @@
 			</p>
 		</div>
 		<div class="indent">
-      <h3>6.2 <a name="sect-ID0ER3AE">Localized strings</a></h3>
+      <h3>6.2 <a name="sect-ID0EJAAG">Localized strings</a></h3>
 			<p class="" style="">
 				This specification allows for localization of field names in meter data read-out. This is performed by assigning each localizable string a <span class="strong">String ID</span>
 				which should be unique within a given <span class="strong">Language Module</span>. A <span class="strong">Language Module</span> can be any string, including URI's or namespace names.
@@ -1237,12 +1259,14 @@
 			</li>
 			<li class="" style="">
 				More advanced access rights, privileges, automatic friendship recognition, etc., may be managed by a third party. How to implement more advanced provisioning and detailed
-				access rights to sensor information is detailed in the XEP <a href="xep-0000-SN-Provisioning.html">xep-0000-SN-Provisioning</a>.
+				access rights to sensor information is detailed in the XEP <a href="xep-0000-SN-Provisioning.html">xep-0000-SN-Provisioning</a>. In short, a device, service or user can get a
+				<span class="strong">deviceToken</span>, <span class="strong">serviceToken</span> and <span class="strong">userToken</span> respectivelly from a provisioning server. The service or device then uses these tokens
+				in all readout requests and the device being read out can in turn use these tokens to validate access rights with the provisioning server.
 			</li>
 		</ul>
 	<h2>8.
        <a name="iana">IANA Considerations</a></h2>
-		<p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EVGAG">4</a>].</p>
+		<p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0ESKAG">9</a>].</p>
 	<h2>9.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
 		<p class="" style="">REQUIRED.</p>
@@ -1267,6 +1291,8 @@
                 &lt;xs:element name='node'&gt;
                     &lt;xs:complexType&gt;
                         &lt;xs:attribute name='nodeId' type='xs:string' use='required'/&gt;
+                        &lt;xs:attribute name='sourceId' type='xs:string' use='optional'/&gt;
+                        &lt;xs:attribute name='cacheType' type='xs:string' use='optional'/&gt;
                     &lt;/xs:complexType&gt;
                 &lt;/xs:element&gt;
                 &lt;xs:element name='field'&gt;
@@ -1282,6 +1308,9 @@
             &lt;xs:attribute name='from' type='xs:dateTime' use='optional'/&gt;
             &lt;xs:attribute name='to' type='xs:dateTime' use='optional'/&gt;
             &lt;xs:attribute name='when' type='xs:dateTime' use='optional'/&gt;
+            &lt;xs:attribute name='serviceToken' type='xs:string' use='optional'/&gt;
+            &lt;xs:attribute name='deviceToken' type='xs:string' use='optional'/&gt;
+            &lt;xs:attribute name='userToken' type='xs:string' use='optional'/&gt;
         &lt;/xs:complexType&gt;
     &lt;/xs:element&gt;
 
@@ -1336,6 +1365,8 @@
                             &lt;/xs:element&gt;
                         &lt;/xs:sequence&gt;
                         &lt;xs:attribute name='nodeId' type='xs:string' use='required'/&gt;
+                        &lt;xs:attribute name='sourceId' type='xs:string' use='optional'/&gt;
+                        &lt;xs:attribute name='cacheType' type='xs:string' use='optional'/&gt;
                     &lt;/xs:complexType&gt;
                 &lt;/xs:element&gt;
             &lt;/xs:sequence&gt;
@@ -1352,6 +1383,8 @@
                         &lt;xs:simpleContent&gt;
                             &lt;xs:extension base='xs:string'&gt;
                                 &lt;xs:attribute name='nodeId' type='xs:string' use='required'/&gt;
+                                &lt;xs:attribute name='sourceId' type='xs:string' use='optional'/&gt;
+                                &lt;xs:attribute name='cacheType' type='xs:string' use='optional'/&gt;
                                 &lt;xs:attribute name='timestamp' type='xs:string' use='required'/&gt;
                             &lt;/xs:extension&gt;
                         &lt;/xs:simpleContent&gt;
@@ -1475,8 +1508,8 @@
             <a href="http://xmpp.org/extensions/xep-0001.html#states-ProtoXEP">ProtoXEP</a><br>
             Type:
             <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
-            Version: 0.0.3<br>
-            Last Updated: 2013-03-11<br>
+            Version: 0.0.4<br>
+            Last Updated: 2013-03-18<br>
                 Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001, XEP-0030<br>
                 Supersedes: None<br>
                 Superseded By: None<br>
@@ -1508,14 +1541,27 @@
     <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
     <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
     <div class="indent">
-      <p><a name="nt-ID0ENGAE">1</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
-      <p><a name="nt-ID0EEHAE">2</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
-      <p><a name="nt-ID0EGIAE">3</a>. Efficient XML Interchange (EXI) Format &lt;<a href="http://www.w3.org/TR/exi/">http://www.w3.org/TR/exi/</a>&gt;.</p>
-      <p><a name="nt-ID0EVGAG">4</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+      <p><a name="nt-ID0ETG">1</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0E6G">2</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
+      <p><a name="nt-ID0ELH">3</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
+      <p><a name="nt-ID0EXH">4</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+      <p><a name="nt-ID0E4IAE">5</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0EUJAE">6</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0EWKAE">7</a>. Efficient XML Interchange (EXI) Format &lt;<a href="http://www.w3.org/TR/exi/">http://www.w3.org/TR/exi/</a>&gt;.</p>
+      <p><a name="nt-ID0ET5AE">8</a>. 
+					<a href="xep-0000-SN-Concentrators.html">xep-0000-SN-Concentrators.html</a>
+				</p>
+      <p><a name="nt-ID0ESKAG">9</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
     <div class="indent">
+      <h4>Version 0.0.4 (2013-03-18)</h4>
+      <div class="indent">
+				<p class="" style="">Added information about how to read sensors from large subsystems.</p>
+				<p class="" style="">Added support for client/device provisioning tokens.</p>
+			 (pwa)
+    </div>
       <h4>Version 0.0.3 (2013-03-11)</h4>
       <div class="indent">
 				<p class="" style="">Changed time point to timestamp everywhere.</p>

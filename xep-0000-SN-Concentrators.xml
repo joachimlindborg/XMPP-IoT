@@ -3,6 +3,7 @@
 <!-- TODO: enhanced concentrator GUI XEP. (Icons, overlays, etc.) -->
 <!-- TODO: Interaction with provisioning server -->
 <!-- TODO: Error message when command is not supported -->
+<!-- TODO: Refresh capabilities command -->
 <!DOCTYPE xep SYSTEM 'xep.dtd' [
     <!ENTITY % ents SYSTEM 'xep.ent'>
     %ents;
@@ -35,6 +36,7 @@
             <spec>XEP-0137</spec>
             <spec>XEP-0141</spec>
             <spec>xep-0000-SN-SensorData</spec>
+            <spec>xep-0000-SN-Provisioning</spec>
             <spec>xep-0000-DynamicForms</spec>
         </dependencies>
         <supersedes/>
@@ -348,6 +350,13 @@
                 <td>Timestamp of value, when the value was sampled or recorded.</td>
             </tr>
             <tr>
+                <td>Token</td>
+                <td>
+                    A client, device or user can get a token from a provisioning server. These tokens can be included in requeests to other entities in the network, so these entities can validate
+                    access rights with the provisioning server.
+                </td>
+            </tr>
+            <tr>
                 <td>Unit</td>
                 <td>Physical unit of value. Example: MWh, l/s, etc.</td>
             </tr>
@@ -362,10 +371,6 @@
             <tr>
                 <td>Value Type</td>
                 <td>Can be numeric, string, boolean, Date &amp; Time, Time Span or Enumeration.</td>
-            </tr>
-            <tr>
-                <td>SN</td>
-                <td>Sensor Network, a sensor network including devices of all types.</td>
             </tr>
             <tr>
                 <td>WSN</td>
@@ -637,23 +642,23 @@
        to='client@clayster.com'
        id='8'>
       <containsNodesResponse xmlns='urn:xmpp:sn:concentrators'>
-	     <value>true</value>
-	     <value>true</value>
-	     <value>false</value>
-	     <value>true</value>
+         <value>true</value>
+         <value>true</value>
+         <value>false</value>
+         <value>true</value>
       </containsNodeResponse>
    </iq>]]>
             </example>
-			<p>
-				The array returned will have one item for each item in the request, in the same order.
-			</p>
+            <p>
+                The array returned will have one item for each item in the request, in the same order.
+            </p>
         </section2>
         <section2 topic='Get Node'>
-			<p>
-				This command returns basic information about a node in the concentrator.
-			</p>
-			<example caption='Get Node'>
-				<![CDATA[
+            <p>
+                This command returns basic information about a node in the concentrator.
+            </p>
+            <example caption='Get Node'>
+                <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -666,33 +671,229 @@
        to='client@clayster.com'
        id='9'>
       <getNodeResponse xmlns='urn:xmpp:sn:concentrators' 
-	                   id='Node1'
-					   cacheType='Node'
-					   state='Warning'
-					   hasChildren='false'
-					   isReadable='true'
-					   isConfigurable='true'
-					   hasCommands='true'/>
+                       id='Node1'
+                       cacheType='Node'
+                       state='Warning'
+                       hasChildren='false'
+                       isReadable='true'
+                       isConfigurable='true'
+                       hasCommands='true'
+                       parentId='Root'/>
+   </iq>]]>
+            </example>
+            <p>
+                For more information, see <link url='#nodeinfo'>Node Information</link>.
+            </p>
+        </section2>
+        <section2 topic='Get Nodes'>
+            <p>
+                This commands lets the client get information from multiple nodes at once.
+            </p>
+			<example caption='Get Nodes'>
+				<![CDATA[
+   <iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='10'>
+      <getNodes xmlns='urn:xmpp:sn:concentrators'>
+          <node sourceId='MeteringTopology' nodeId='Node1'/>
+          <node sourceId='MeteringTopology' nodeId='Node2'/>
+          <node sourceId='MeteringTopology' nodeId='Node3'/>
+	  </getNodes>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='10'>
+      <getNodesResponse xmlns='urn:xmpp:sn:concentrators'>
+	      <node id='Node1' cacheType='Node' state='Warning' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
+	      <node id='Node2' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
+	      <node id='Node3' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
+      </getNodesResponse>
    </iq>]]>
 			</example>
 			<p>
 				For more information, see <link url='#nodeinfo'>Node Information</link>.
 			</p>
-        </section2>
-        <section2 topic='Get Nodes'>
+		</section2>
+		<section2 topic='Get Node with parameters'>
 			<p>
-				This commands lets the client get information from multiple nodes at once.
-				<!-- TODO: GetNodeWithParameters -->
-				<!-- TODO: GetNodesWithParameters -->
+				This command returns basic information about a node in the concentrator, but also adds properties for the node.
 			</p>
-        </section2>
-        <section2 topic='Get All Nodes'>
+			<example caption='Get Node with parameters'>
+				<![CDATA[
+   <iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='11'>
+      <getNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en' parameters='true'/>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='11'>
+      <getNodeResponse xmlns='urn:xmpp:sn:concentrators' id='Node1' cacheType='Node' state='Warning' 
+	                                 hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
+          <string id='id' name='Node ID' value='Node1'/>
+          <string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/>
+          <string id='sn' name='Serial Number' value='123456'/>
+          <string id='class' name='Node Class' value='Temperature'/>
+          <string id='meterLoc' name='Meter Location' value='P123502-2'/>
+          <int id='addr' name='Address' value='123'/>
+		  <double id='lat' name='Latitude' value='12.345'/>
+		  <double id='long' name='Longitude' value='123.45'/>
+      </getNodeResponse>
+   </iq>]]>
+			</example>
+			<p>
+				For more information, see <link url='#nodeinfo'>Node Information</link>.
+			</p>
+		</section2>
+		<section2 topic='Get Nodes with parameters'>
+			<p>
+				This commands lets the client get information from multiple nodes at once, including node properties.
+			</p>
+			<example caption='Get Nodes with parameters'>
+				<![CDATA[
+   <iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='12'>
+      <getNodes xmlns='urn:xmpp:sn:concentrators' parameters='true' xml:lang='true'>
+          <node sourceId='MeteringTopology' nodeId='Node1'/>
+          <node sourceId='MeteringTopology' nodeId='Node2'/>
+          <node sourceId='MeteringTopology' nodeId='Node3'/>
+	  </getNodes>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='12'>
+      <getNodesResponse xmlns='urn:xmpp:sn:concentrators'>
+	      <node id='Node1' cacheType='Node' state='Warning' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
+              <string id='id' name='Node ID' value='Node1'/>
+              <string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/>
+              <string id='sn' name='Serial Number' value='123456'/>
+              <string id='class' name='Node Class' value='Temperature'/>
+              <string id='meterLoc' name='Meter Location' value='P123502-2'/>
+              <int id='addr' name='Address' value='123'/>
+		      <double id='lat' name='Latitude' value='12.345'/>
+		      <double id='long' name='Longitude' value='123.45'/>
+		  </node>
+	      <node id='Node2' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
+              <string id='id' name='Node ID' value='Node2'/>
+              <string id='type' name='Node Type' value='Watchamacallit Pressure Sensor v1.2'/>
+              <string id='sn' name='Serial Number' value='234567'/>
+              <string id='class' name='Node Class' value='Pressure'/>
+              <string id='meterLoc' name='Meter Location' value='P668632-6'/>
+              <int id='addr' name='Address' value='124'/>
+		      <double id='lat' name='Latitude' value='12.345'/>
+		      <double id='long' name='Longitude' value='123.45'/>
+		  </node>
+	      <node id='Node3' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
+              <string id='id' name='Node ID' value='Node3'/>
+              <string id='type' name='Node Type' value='Watchamacallit Electricity Meter v1.2'/>
+              <string id='sn' name='Serial Number' value='345678'/>
+              <string id='class' name='Node Class' value='Electricity'/>
+              <string id='meterLoc' name='Meter Location' value='P332367-9'/>
+              <int id='addr' name='Address' value='125'/>
+		      <double id='lat' name='Latitude' value='12.345'/>
+		      <double id='long' name='Longitude' value='123.45'/>
+		  </node>
+      </getNodesResponse>
+   </iq>]]>
+			</example>
+			<p>
+				For more information, see <link url='#nodeinfo'>Node Information</link>.
+			</p>
+		</section2>
+		<section2 topic='Get All Nodes'>
+			<p>
+				If the device does not manage too many nodes, it could choose to implement this function. It would return all all available nodes with one call.
+			</p>
+			<example caption='Get All Nodes'>
+				<![CDATA[
+   <iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='13'>
+      <getAllNodes xmlns='urn:xmpp:sn:concentrators'/>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='13'>
+      <getAllNodesResponse xmlns='urn:xmpp:sn:concentrators'>
+	      <node id='Node1' cacheType='Node' state='Warning' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
+	      <node id='Node2' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
+	      <node id='Node3' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
+      </getNodeResponse>
+   </iq>]]>
+			</example>
+		</section2>
+		<section2 topic='Get All Nodes with Parameters'>
+			<p>
+				If the device does not manage too many nodes, it could choose to implement this function. It would return all all available nodes with their parameters with one call.
+			</p>
+			<example caption='Get All Nodes with Parameters'>
+				<![CDATA[
+   <iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='14'>
+      <getAllNodes xmlns='urn:xmpp:sn:concentrators' parameters='true' xml:lang='en'/>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='14'>
+      <getAllNodesResponse xmlns='urn:xmpp:sn:concentrators'>
+	      <node id='Node1' cacheType='Node' state='Warning' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
+              <string id='id' name='Node ID' value='Node1'/>
+              <string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/>
+              <string id='sn' name='Serial Number' value='123456'/>
+              <string id='class' name='Node Class' value='Temperature'/>
+              <string id='meterLoc' name='Meter Location' value='P123502-2'/>
+              <int id='addr' name='Address' value='123'/>
+		      <double id='lat' name='Latitude' value='12.345'/>
+		      <double id='long' name='Longitude' value='123.45'/>
+		  </node>
+	      <node id='Node2' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
+              <string id='id' name='Node ID' value='Node2'/>
+              <string id='type' name='Node Type' value='Watchamacallit Pressure Sensor v1.2'/>
+              <string id='sn' name='Serial Number' value='234567'/>
+              <string id='class' name='Node Class' value='Pressure'/>
+              <string id='meterLoc' name='Meter Location' value='P668632-6'/>
+              <int id='addr' name='Address' value='124'/>
+		      <double id='lat' name='Latitude' value='12.345'/>
+		      <double id='long' name='Longitude' value='123.45'/>
+		  </node>
+	      <node id='Node3' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
+              <string id='id' name='Node ID' value='Node3'/>
+              <string id='type' name='Node Type' value='Watchamacallit Electricity Meter v1.2'/>
+              <string id='sn' name='Serial Number' value='345678'/>
+              <string id='class' name='Node Class' value='Electricity'/>
+              <string id='meterLoc' name='Meter Location' value='P332367-9'/>
+              <int id='addr' name='Address' value='125'/>
+		      <double id='lat' name='Latitude' value='12.345'/>
+		      <double id='long' name='Longitude' value='123.45'/>
+		  </node>
+      </getNodeResponse>
+   </iq>]]>
+			</example>
+		</section2>
+		<section2 topic='Get All Nodes derived from'>
             <!-- TODO -->
         </section2>
-        <section2 topic='Get All Nodes derived from'>
-            <!-- TODO -->
-        </section2>
-        <section2 topic='Get indices of Data Source'>
+		<section2 topic='Get All Nodes derived from with Parameters'>
+			<!-- TODO -->
+		</section2>
+		<section2 topic='Get indices of Data Source'>
             <!-- TODO -->
         </section2>
         <section2 topic='Get Node from index'>
@@ -726,18 +927,6 @@
             <!-- TODO -->
         </section2>
         <section2 topic='Set Common Node Parameters Failure'>
-            <!-- TODO -->
-        </section2>
-        <section2 topic='Get Node Parameter Names'>
-            <!-- TODO -->
-        </section2>
-        <section2 topic='Get Node Parameter Values'>
-            <!-- TODO -->
-        </section2>
-        <section2 topic='Set Node Parameter Values'>
-            <!-- TODO -->
-        </section2>
-        <section2 topic='Set Node Parameter Values Failure'>
             <!-- TODO -->
         </section2>
         <section2 topic='Get Node Status'>
@@ -796,85 +985,86 @@
         </section2>
     </section1>
     <section1 topic='Implementation Notes' anchor='impl'>
-		<section2 topic='Node Information' anchor='nodeinfo'>
-			<p>
-				Several commands return basic node information. The following table lists possible fields with corresponding descriptions.
-			</p>
-			<table caption='Basic Node Information'>
-				<tr>
-					<th>Attribute</th>
-					<th>Use</th>
-					<th>Default</th>
-					<th>Description</th>
-				</tr>
-				<tr>
-					<td>id</td>
-					<td>required</td>
-					<td>&nbsp;</td>
-					<td>The ID of the node in the data source.</td>
-				</tr>
-				<tr>
-					<td>displayName</td>
-					<td>optional</td>
-					<td>&nbsp;</td>
-					<td>If provided, a string presentable to users. If localization is supported and a correct language attribute was provided, this string will be localized.</td>
-				</tr>
-				<tr>
-					<td>localId</td>
-					<td>optional</td>
-					<td>&nbsp;</td>
-					<td>If provided, an ID for the node, but unique locally between siblings.</td>
-				</tr>
-				<tr>
-					<td>logId</td>
-					<td>optional</td>
-					<td>&nbsp;</td>
-					<td>If provided, an ID for the node, as it would appear or be used in system logs.</td>
-				</tr>
-				<tr>
-					<td>cacheType</td>
-					<td>required</td>
-					<td>&nbsp;</td>
-					<td>Used to uniquelly identify the node. If concentrators do not use this parameter, they can set this string to the empty string.</td>
-				</tr>
-				<tr>
-					<td>state</td>
-					<td>required</td>
-					<td>&nbsp;</td>
-					<td>Current overall state of the node.</td>
-				</tr>
-				<tr>
-					<td>hasChildren</td>
-					<td>required</td>
-					<td>&nbsp;</td>
-					<td>If the node has children or not.</td>
-				</tr>
-				<tr>
-					<td>isReadable</td>
-					<td>optional</td>
-					<td>false</td>
-					<td>If the node can be read. (*)</td>
-				</tr>
-				<tr>
-					<td>isConfigurable</td>
-					<td>optional</td>
-					<td>false</td>
-					<td>If the node can be configured. (**)</td>
-				</tr>
-				<tr>
-					<td>hasCommands</td>
-					<td>optional</td>
-					<td>false</td>
-					<td>If the node has registered commands or not.</td>
-				</tr>
-			</table>
-			<p>
-				(*) See <link url='xep-0000-SN-SensorData.html'>xep-0000-SN-SensorData</link> for more information about how to read nodes.
-			</p>
-			<p>
-				(**) See <link url='xep-0000-SN-Control.html'>xep-0000-SN-Control</link> for more information about how to configure nodes.
-			</p>
-		</section2>
+        <section2 topic='Node Information' anchor='nodeinfo'>
+            <p>
+                Several commands return basic node information. The following table lists possible fields with corresponding descriptions.
+            </p>
+            <table caption='Basic Node Information'>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Use</th>
+                    <th>Default</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>id</td>
+                    <td>required</td>
+                    <td>&nbsp;</td>
+                    <td>The ID of the node in the data source.</td>
+                </tr>
+                <tr>
+                    <td>displayName</td>
+                    <td>optional</td>
+                    <td>&nbsp;</td>
+                    <td>If provided, a string presentable to users. If localization is supported and a correct language attribute was provided, this string will be localized.</td>
+                </tr>
+                <tr>
+                    <td>localId</td>
+                    <td>optional</td>
+                    <td>&nbsp;</td>
+                    <td>If provided, an ID for the node, but unique locally between siblings.</td>
+                </tr>
+                <tr>
+                    <td>logId</td>
+                    <td>optional</td>
+                    <td>&nbsp;</td>
+                    <td>If provided, an ID for the node, as it would appear or be used in system logs.</td>
+                </tr>
+                <tr>
+                    <td>cacheType</td>
+                    <td>required</td>
+                    <td>&nbsp;</td>
+                    <td>Used to uniquelly identify the node. If concentrators do not use this parameter, they can set this string to the empty string.</td>
+                </tr>
+                <tr>
+                    <td>state</td>
+                    <td>required</td>
+                    <td>&nbsp;</td>
+                    <td>Current overall state of the node.</td>
+                </tr>
+                <tr>
+                    <td>hasChildren</td>
+                    <td>required</td>
+                    <td>&nbsp;</td>
+                    <td>If the node has children or not.</td>
+                </tr>
+                <tr>
+                    <td>isReadable</td>
+                    <td>optional</td>
+                    <td>false</td>
+                    <td>If the node can be read. (*)</td>
+                </tr>
+                <tr>
+                    <td>isConfigurable</td>
+                    <td>optional</td>
+                    <td>false</td>
+                    <td>If the node can be configured. (**)</td>
+                </tr>
+                <tr>
+                    <td>hasCommands</td>
+                    <td>optional</td>
+                    <td>false</td>
+                    <td>If the node has registered commands or not.</td>
+                </tr>
+            </table>
+            <p>
+                (*) See <link url='xep-0000-SN-SensorData.html'>xep-0000-SN-SensorData</link> for more information about how to read nodes.
+            </p>
+            <p>
+                (**) See <link url='xep-0000-SN-Control.html'>xep-0000-SN-Control</link> for more information about how to configure nodes.
+            </p>
+			<!-- TODO: Parameter types -->
+        </section2>
         <!-- TODO: Requirement to implement the Sensor Data XEP (data source: Topology) -->
     </section1>
     <section1 topic='Internationalization Considerations' anchor='i18n'>
@@ -898,6 +1088,12 @@
                     The concentrator can use a provisioning server (see <link url='xep-0000-SN-Provisioning.html'>xep-0000-SN-Provisioning.html</link>) to delegate trust
                     to a third party responsible for controlling who can get access to the concentrator (<strong>isFriend</strong> or <strong>canAccess</strong> commands), 
                     and what items can be viewed (<strong>hasPrivilege</strong> or <strong>downloadPrivileges</strong> commands).
+                </li>
+                <li>
+                    All requests to the concentrator can contain the optional attributes <strong>deviceToken</strong>, <strong>serviceToken</strong> and <strong>userToken</strong>.
+                    Clients making requests to the concentrator can use these attributes to forward information about who originated the action (<strong>userToken</strong>),
+                    what service is performing the action (<strong>serviceToken</strong>) or what device is performing the action(<strong>deviceToken</strong>). The concentrator
+                    can use this information to check with provisioning servers what access rights and user privileges exist before performing the action.
                 </li>
             </ul>
         </section2>
@@ -933,23 +1129,34 @@
     <xs:import namespace='http://jabber.org/protocol/xdata-validate'/>
     <xs:import namespace='http://jabber.org/protocol/xdata-layout'/>
  
-    <xs:element name='getCapabilities' type='EmptyElement'/>
+    <xs:element name='getCapabilities' type='TokenRequest'/>
     <xs:element name='getCapabilitiesResponse' type='StringArray'/>
  
-    <xs:element name='getAllDataSources' type='EmptyElement'/>
+    <xs:element name='getAllDataSources' type='TokenRequest'/>
     <xs:element name='getAllDataSourcesResponse' type='DataSourceArray'/>
  
-    <xs:element name='getTopDataSources' type='EmptyElement'/>
+    <xs:element name='getTopDataSources' type='TokenRequest'/>
     <xs:element name='getTopDataSourcesResponse' type='DataSourceArray'/>
  
-    <xs:element name='getChildDataSources' type='SourceReference'/>
+    <xs:element name='getChildDataSources' type='SourceReferenceRequest'/>
     <xs:element name='getChildDataSourcesResponse' type='DataSourceArray'/>
  
-    <xs:complexType name='EmptyElement'>
+    <xs:complexType name='TokenRequest'>
+        <xs:attributeGroup ref='tokens'/>
     </xs:complexType>
  
-    <xs:complexType name='SourceReference'>
-        <xs:attributeGroup ref='sourceReference'/>
+    <xs:attributeGroup name='tokens'>
+        <xs:attribute name='deviceToken' type='xs:string' use='optional'/>
+        <xs:attribute name='serviceToken' type='xs:string' use='optional'/>
+        <xs:attribute name='userToken' type='xs:string' use='optional'/>
+    </xs:attributeGroup>
+ 
+    <xs:complexType name='SourceReferenceRequest'>
+        <xs:complexContent>
+            <xs:extension base='TokenRequest'>
+                <xs:attributeGroup ref='sourceReference'/>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
  
     <xs:attributeGroup name='sourceReference'>
@@ -968,20 +1175,32 @@
         </xs:sequence>
     </xs:complexType>
  
-    <xs:element name='containsNode' type='NodeReference'/>
+    <xs:element name='containsNode' type='NodeReferenceRequest'/>
     <xs:element name='containsNodeResponse' type='xs:boolean'/>
  
-    <xs:element name='containsNodes' type='NodeReferences'/>
+    <xs:element name='containsNodes' type='NodeReferencesRequest'/>
     <xs:element name='containsNodesResponse' type='BooleanArray'/>
+ 
+    <xs:complexType name='NodeReferenceRequest'>
+        <xs:complexContent>
+            <xs:extension base='TokenRequest'>
+                <xs:attributeGroup ref='nodeReference'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
  
     <xs:complexType name='NodeReference'>
         <xs:attributeGroup ref='nodeReference'/>
     </xs:complexType>
  
-    <xs:complexType name='NodeReferences'>
-        <xs:sequence minOccurs='0' maxOccurs='unbounded'>
-            <xs:element name='node' type='NodeReference'/>
-        </xs:sequence>
+    <xs:complexType name='NodeReferencesRequest'>
+        <xs:complexContent>
+            <xs:extension base='TokenRequest'>
+                <xs:sequence minOccurs='0' maxOccurs='unbounded'>
+                    <xs:element name='node' type='NodeReference'/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
  
     <xs:attributeGroup name='nodeReference'>
@@ -990,24 +1209,32 @@
         <xs:attribute name='cacheType' type='xs:string' use='optional'/>
     </xs:attributeGroup>
  
-    <xs:element name='getNode' type='NodeReference'/>
+    <xs:element name='getNode' type='NodeReferenceParametersRequest'/>
     <xs:element name='getNodeResponse' type='NodeInformation'/>
  
-    <xs:element name='getNodes' type='NodeReferences'/>
+    <xs:element name='getNodes' type='NodeReferenceParametersRequest'/>
     <xs:element name='getNodesResponse' type='NodeInformationArray'/>
- 
-    <xs:element name='getAllNodes' type='GetAllNodes'/>
+  
+    <xs:element name='getAllNodes' type='NodeReferenceParametersRequest'/>
     <xs:element name='getAllNodesResponse' type='NodeInformationArray'/>
  
-    <xs:element name='getRootNodes' type='SourceReference'/>
+    <xs:element name='getRootNodes' type='NodeReferenceParametersRequest'/>
     <xs:element name='getRootNodesResponse' type='NodeInformationArray'/>
  
-    <xs:element name='getChildNodes' type='GetChildNodes'/>
+    <xs:element name='getChildNodes' type='NodeReferenceParametersRequest'/>
     <xs:element name='getChildNodesResponse' type='NodeInformationArray'/>
  
-    <xs:complexType name='GetAllNodes'>
+    <xs:complexType name='NodeReferenceParametersRequest'>
         <xs:complexContent>
-            <xs:extension base='SourceReference'>
+            <xs:extension base='NodeReferenceRequest'>
+                <xs:attribute name='parameters' type='xs:boolean' use='optional' default='false'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    <xs:complexType name='GetAllNodesRequest'>
+        <xs:complexContent>
+            <xs:extension base='SourceReferenceRequest'>
                 <xs:sequence minOccurs='0' maxOccurs='unbounded'>
                     <xs:element name='onlyIfDerivedFrom' type='xs:string'/>
                 </xs:sequence>
@@ -1015,9 +1242,9 @@
         </xs:complexContent>
     </xs:complexType>
  
-    <xs:complexType name='GetChildNodes'>
+    <xs:complexType name='GetChildNodesRequest'>
         <xs:complexContent>
-            <xs:extension base='NodeReference'>
+            <xs:extension base='NodeReferenceRequest'>
                 <xs:sequence minOccurs='0' maxOccurs='unbounded'>
                     <xs:element name='sortOrder' type='SortOrder'/>
                 </xs:sequence>
@@ -1031,6 +1258,17 @@
     </xs:complexType>
  
     <xs:complexType name='NodeInformation'>
+        <xs:choice minOccurs='0' maxOccurs='unbounded'>
+            <xs:element name='boolean' type='BooleanParameter'/>
+            <xs:element name='color' type='ColorParameter'/>
+            <xs:element name='dateTime' type='DateTimeParameter'/>
+            <xs:element name='double' type='DoubleParameter'/>
+            <xs:element name='duration' type='DurationParameter'/>
+            <xs:element name='int' type='IntParameter'/>
+            <xs:element name='long' type='LongParameter'/>
+            <xs:element name='string' type='StringParameter'/>
+            <xs:element name='time' type='TimeParameter'/>
+        </xs:choice>
         <xs:attribute name='id' type='xs:string' use='required'/>
         <xs:attribute name='displayName' type='xs:string' use='optional'/>
         <xs:attribute name='localId' type='xs:string' use='optional'/>
@@ -1041,6 +1279,91 @@
         <xs:attribute name='isReadable' type='xs:boolean' use='optional' default='false'/>
         <xs:attribute name='isConfigurable' type='xs:boolean' use='optional' default='false'/>
         <xs:attribute name='hasCommands' type='xs:boolean' use='optional' default='false'/>
+        <xs:attribute name='parentId' type='xs:string' use='optional'/>
+        <xs:attribute name='parentCacheType' type='xs:string' use='optional'/>
+    </xs:complexType>
+ 
+    <xs:complexType name='Parameter' abstract='true'>
+        <xs:attribute name='id' type='xs:string' use='required'/>
+        <xs:attribute name='name' type='xs:string' use='required'/>
+    </xs:complexType>
+ 
+    <xs:complexType name='BooleanParameter'>
+        <xs:complexContent>
+            <xs:extension base='Parameter'>
+                <xs:attribute name='value' type='xs:boolean' use='required'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    <xs:complexType name='ColorParameter'>
+        <xs:complexContent>
+            <xs:extension base='Parameter'>
+                <xs:attribute name='value' type='Color' use='required'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    <xs:simpleType name='Color'>
+        <xs:restriction base='xs:string'>
+            <xs:pattern value='^[0-9a-fA-F]{6}$'/>
+        </xs:restriction>    
+    </xs:simpleType>
+ 
+    <xs:complexType name='DateTimeParameter'>
+        <xs:complexContent>
+            <xs:extension base='Parameter'>
+                <xs:attribute name='value' type='xs:dateTime' use='required'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    <xs:complexType name='DoubleParameter'>
+        <xs:complexContent>
+            <xs:extension base='Parameter'>
+                <xs:attribute name='value' type='xs:double' use='required'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    <xs:complexType name='DurationParameter'>
+        <xs:complexContent>
+            <xs:extension base='Parameter'>
+                <xs:attribute name='value' type='xs:duration' use='required'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    <xs:complexType name='IntParameter'>
+        <xs:complexContent>
+            <xs:extension base='Parameter'>
+                <xs:attribute name='value' type='xs:int' use='required'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    <xs:complexType name='LongParameter'>
+        <xs:complexContent>
+            <xs:extension base='Parameter'>
+                <xs:attribute name='value' type='xs:long' use='required'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    <xs:complexType name='StringParameter'>
+        <xs:complexContent>
+            <xs:extension base='Parameter'>
+                <xs:attribute name='value' type='xs:string' use='required'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    <xs:complexType name='TimeParameter'>
+        <xs:complexContent>
+            <xs:extension base='Parameter'>
+                <xs:attribute name='value' type='xs:time' use='required'/>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
  
     <xs:complexType name='NodeInformationArray'>
@@ -1060,7 +1383,7 @@
         </xs:restriction>
     </xs:simpleType>
  
-    <xs:element name='getIndices' type='SourceReference'/>
+    <xs:element name='getIndices' type='SourceReferenceRequest'/>
     <xs:element name='getIndicesResponse' type='StringArray'/>
  
     <xs:complexType name='StringArray'>
@@ -1075,20 +1398,32 @@
         </xs:sequence>
     </xs:complexType>
  
-    <xs:element name='getNodeFromIndex' type='IndexReference'/>
+    <xs:element name='getNodeFromIndex' type='IndexReferenceRequest'/>
     <xs:element name='getNodeFromIndexResponse' type='NodeInformation'/>
  
-    <xs:element name='getNodesFromIndex' type='IndexReferences'/>
+    <xs:element name='getNodesFromIndex' type='IndexReferencesRequest'/>
     <xs:element name='getNodesFromIndexResponse' type='NodeInformationArray'/>
+ 
+    <xs:complexType name='IndexReferenceRequest'>
+        <xs:complexContent>
+            <xs:extension base='TokenRequest'>
+                <xs:attributeGroup ref='indexReference'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
  
     <xs:complexType name='IndexReference'>
         <xs:attributeGroup ref='indexReference'/>
     </xs:complexType>
  
-    <xs:complexType name='IndexReferences'>
-        <xs:sequence minOccurs='0' maxOccurs='unbounded'>
-            <xs:element name='indexRef' type='IndexReference'/>
-        </xs:sequence>
+    <xs:complexType name='IndexReferencesRequest'>
+        <xs:complexContent>
+            <xs:extension base='TokenRequest'>
+                <xs:sequence minOccurs='0' maxOccurs='unbounded'>
+                    <xs:element name='indexRef' type='IndexReference'/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
  
     <xs:attributeGroup name='indexReference'>
@@ -1097,56 +1432,22 @@
         <xs:attribute name='indexValue' type='xs:string' use='required'/>
     </xs:attributeGroup>
  
-    <xs:element name='getAllNodesFromIndex' type='IndexReference'/>
+    <xs:element name='getAllNodesFromIndex' type='IndexReferenceRequest'/>
     <xs:element name='getAllNodesFromIndexResponse' type='NodeInformationArray'/>
  
-    <xs:element name='getNodeParameters' type='NodeReference'/>
+    <xs:element name='getNodeParameters' type='NodeReferenceRequest'/>
     <xs:element name='getNodeParametersResponse' type='ParameterForm'/>
  
-    <xs:element name='getCommonNodeParameters' type='NodeReferences'/>
+    <xs:element name='getCommonNodeParameters' type='NodeReferencesRequest'/>
     <xs:element name='getCommonNodeParametersResponse' type='ParameterForm'/>
  
     <xs:complexType name='ParameterForm'>
         <xs:sequence>
-            <xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data" id="x"/>
+            <xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
         </xs:sequence>
     </xs:complexType>
  
-    <xs:element name='getNodeParameterNames' type='NodeReference'/>
-    <xs:element name='getNodeParameterNamesResponse' type='StringArray'/>
- 
-    <xs:element name='getNodeParameterValues' type='GetNodeParameterValues'/>
-    <xs:element name='getNodeParameterValuesResponse' type='StringArray'/>
- 
-    <xs:complexType name='GetNodeParameterValues'>
-        <xs:complexContent>
-            <xs:extension base='NodeReference'>
-                <xs:sequence minOccurs='0' maxOccurs='unbounded'>
-                    <xs:element name='parameterName' type='xs:string'/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
- 
-    <xs:element name='setNodeParameterValues' type='SetNodeParameterValues'/>
-    <xs:element name='setNodeParameterValuesResponse' type='StringArray'/>
- 
-    <xs:complexType name='SetNodeParameterValues'>
-        <xs:complexContent>
-            <xs:extension base='NodeReference'>
-                <xs:sequence minOccurs='0' maxOccurs='unbounded'>
-                    <xs:element name='parameter' type='Parameter'/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
- 
-    <xs:complexType name='Parameter'>
-        <xs:attribute name='name' type='xs:string' use='required'/>
-        <xs:attribute name='value' type='xs:string' use='required'/>
-    </xs:complexType>
- 
-    <xs:element name='getNodeStatus' type='NodeReference'/>
+    <xs:element name='getNodeStatus' type='NodeReferenceRequest'/>
     <xs:element name='getNodeStatusResponse' type='MessageArray'/>
  
     <xs:complexType name='Message'>
@@ -1173,33 +1474,36 @@
         </xs:restriction>
     </xs:simpleType>
  
-    <xs:element name='getAddableNodeTypes' type='NodeReference'/>
+    <xs:element name='getAddableNodeTypes' type='NodeReferenceRequest'/>
     <xs:element name='getAddableNodeTypesResponse' type='StringArray'/>
+    <!-- & Displayable type names -->
  
-    <xs:element name='getParametersForNewNode' type='NodeTypeReference'/>
+    <xs:element name='getParametersForNewNode' type='NodeTypeReferenceRequest'/>
     <xs:element name='getParametersForNewNodeResponse' type='ParameterForm'/>
  
-    <xs:complexType name='NodeTypeReference'>
+    <xs:complexType name='NodeTypeReferenceRequest'>
         <xs:complexContent>
-            <xs:extension base='NodeReference'>
+            <xs:extension base='NodeReferenceRequest'>
                 <xs:attribute name='type' type='xs:string' use='required'/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
  
-    <xs:element name='createNewNode' type='NodeTypeReference'/>
+    <xs:element name='createNewNode' type='NodeTypeReferenceRequest'/>
     <xs:element name='createNewNodeResponse' type='NodeInformation'/>
  
-    <xs:element name='destroyNode' type='NodeReference'/>
-    <xs:element name='destroyNodeResponse' type='EmptyElement'/>
+    <xs:element name='destroyNode' type='NodeReferenceRequest'/>
+    <xs:element name='destroyNodeResponse' type='EmptyResponse'/>
  
-    <xs:element name='getAncestors' type='NodeReference'/>
+    <xs:complexType name='EmptyResponse'/>
+ 
+    <xs:element name='getAncestors' type='NodeReferenceRequest'/>
     <xs:element name='getAncestorsResponse' type='NodeInformationArray'/>
  
-    <xs:element name='getNodeCommands' type='NodeReference'/>
+    <xs:element name='getNodeCommands' type='NodeReferenceRequest'/>
     <xs:element name='getNodeCommandsResponse' type='CommandArray'/>
  
-    <xs:element name='getCommonNodeCommands' type='NodeReferences'/>
+    <xs:element name='getCommonNodeCommands' type='NodeReferencesRequest'/>
     <xs:element name='getCommonNodeCommandsResponse' type='CommandArray'/>
  
     <xs:complexType name='Command'>
@@ -1226,21 +1530,21 @@
         </xs:restriction>
     </xs:simpleType>
  
-    <xs:complexType name='NodeCommandReference'>
+    <xs:complexType name='NodeCommandReferenceRequest'>
         <xs:complexContent>
-            <xs:extension base='NodeReference'>
+            <xs:extension base='NodeReferenceRequest'>
                 <xs:attribute name='command' type='xs:string' use='required'/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
  
-    <xs:element name='getCommandParameters' type='NodeCommandReference'/>
+    <xs:element name='getCommandParameters' type='NodeCommandReferenceRequest'/>
     <xs:element name='getCommandParametersResponse' type='ParameterForm'/>
  
     <xs:element name='getCommonCommandParameters'>
         <xs:complexType>
             <xs:complexContent>
-                <xs:extension base='NodeReferences'>
+                <xs:extension base='NodeReferencesRequest'>
                     <xs:attribute name='command' type='xs:string' use='required'/>
                 </xs:extension>
             </xs:complexContent>
@@ -1248,11 +1552,11 @@
     </xs:element>
     <xs:element name='getCommonCommandParametersResponse' type='ParameterForm'/>
  
-    <xs:element name='moveUp' type='NodeReference'/>
-    <xs:element name='moveUpResponse' type='EmptyElement'/>
+    <xs:element name='moveUp' type='NodeReferenceRequest'/>
+    <xs:element name='moveUpResponse' type='EmptyResponse'/>
  
-    <xs:element name='moveDown' type='NodeReference'/>
-    <xs:element name='moveDownResponse' type='EmptyElement'/>
+    <xs:element name='moveDown' type='NodeReferenceRequest'/>
+    <xs:element name='moveDownResponse' type='EmptyResponse'/>
  
 </xs:schema>]]>
         </code>
