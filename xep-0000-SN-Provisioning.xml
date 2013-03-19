@@ -365,10 +365,10 @@
 				The provisioning server must not return tokens that contain white space characters.
 			</p>
             <p>
-                <strong>Note:</strong> In many cases, an address to a provisioning server might might be preprgrammed during production of the
+                <strong>Note:</strong> In many cases, an address to a provisioning server might be preprogrammed during production of the
                 device. In these cases, parts of the above procedure may not neccesary. All the client needs to do, if the provisioning server is not available
                 in the roster of the device, is to send a subscription request to the provisioning server, to alert the server of the existence of the device,
-                and possible request a device token.
+                and possibly request a device token.
             </p>
             <p>
                 The following use cases will assume such a trust relationship has been created between the corresponding device and the provisioning server.
@@ -451,7 +451,7 @@
                 be silently ignored.
             </p>
 
-            <example caption='Undriending existing friend'>
+            <example caption='Unfriending existing friend'>
                 <![CDATA[
    <message from='provisioning@clayster.com'
             to='device@clayster.com'>
@@ -671,7 +671,7 @@
         </section2>
         <section2 topic='Getting a service token'>
             <p>
-                A service requesting provisioning assistence, needs to retrieve a service token from the provisioning server. The following example shows how this can be done.
+                A service requesting provisioning assistance, needs to retrieve a service token from the provisioning server. The following example shows how this can be done.
             </p>
             <example caption='Requesting a service token'>
                 <![CDATA[
