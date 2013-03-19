@@ -534,9 +534,9 @@
        to='client@clayster.com'
        id='4'>
       <getAllDataSourcesResponse xmlns='urn:xmpp:sn:concentrators'>
-          <dataSource id='Applications' name='Applications' hasChildren='false'/>
-          <dataSource id='Certificates' name='Certificates' hasChildren='false'/>
-          <dataSource id='Clayster.EventSink.Programmable' name='Programmable Event Log' hasChildren='false'/>
+          <dataSource id='Applications' name='Applications' hasChildren='false' lastChanged='2013-03-19T17:58:01'/>
+          <dataSource id='Certificates' name='Certificates' hasChildren='false' lastChanged='2013-02-20T12:31:54'/>
+          <dataSource id='Clayster.EventSink.Programmable' name='Programmable Event Log' hasChildren='false' lastChanged='2012-10-25T09:31:12'/>
           ...
       </getAllDataSourcesResponse>
    </iq>]]>
@@ -561,9 +561,9 @@
        to='client@clayster.com'
        id='5'>
       <getTopDataSourcesResponse xmlns='urn:xmpp:sn:concentrators'>
-          <dataSource id='MeteringRoot' name='Metering' hasChildren='true'/>
-          <dataSource id='SecurityRoot' name='Security' hasChildren='true'/>
-          <dataSource id='SystemRoot' name='System' hasChildren='true'/>
+          <dataSource id='MeteringRoot' name='Metering' hasChildren='true' lastChanged='2013-03-19T17:58:01'/>
+          <dataSource id='SecurityRoot' name='Security' hasChildren='true' lastChanged='2013-01-12T22:03:50'/>
+          <dataSource id='SystemRoot' name='System' hasChildren='true' lastChanged='2012-02-20T12:34:56'/>
           ...
       </getAllDataSourcesResponse>
    </iq>]]>
@@ -579,7 +579,7 @@
        from='client@clayster.com'
        to='concentrator@clayster.com'
        id='6'>
-      <getChildDataSources xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringRoot' xml:lang='en'/>
+      <getChildDataSources xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringRoot' xml:lang='en' lastChanged='2013-03-19T17:58:01'/>
    </iq>
    
    <iq type='result'
@@ -587,13 +587,13 @@
        to='client@clayster.com'
        id='6'>
       <getChildDataSourcesResponse xmlns='urn:xmpp:sn:concentrators'>
-          <dataSource id='MeteringFieldImports' name='Field Imports' hasChildren='false'/>
-          <dataSource id='MeteringFieldProcessors' name='Field Processors' hasChildren='false'/>
-          <dataSource id='MeteringFieldSinks' name='Field Sinks' hasChildren='false'/>
-          <dataSource id='MeteringGroups' name='Groups' hasChildren='false'/>
-          <dataSource id='MeteringJobs' name='Jobs' hasChildren='false'/>
-          <dataSource id='MeteringTopology' name='Topology' hasChildren='false'/>
-          <dataSource id='MeteringUnitConversion' name='Unit Conversion' hasChildren='false'/>
+          <dataSource id='MeteringFieldImports' name='Field Imports' hasChildren='false' lastChanged='2013-03-19T17:58:01'/>
+          <dataSource id='MeteringFieldProcessors' name='Field Processors' hasChildren='false' lastChanged='2013-03-19T17:58:01'/>
+          <dataSource id='MeteringFieldSinks' name='Field Sinks' hasChildren='false' lastChanged='2013-03-19T17:58:01'/>
+          <dataSource id='MeteringGroups' name='Groups' hasChildren='false' lastChanged='2013-03-19T17:58:01'/>
+          <dataSource id='MeteringJobs' name='Jobs' hasChildren='false' lastChanged='2013-03-19T17:58:01'/>
+          <dataSource id='MeteringTopology' name='Topology' hasChildren='false' lastChanged='2013-03-19T17:58:01'/>
+          <dataSource id='MeteringUnitConversion' name='Unit Conversion' hasChildren='false' lastChanged='2013-03-19T17:58:01'/>
       </getChildDataSourcesResponse>
    </iq>]]>
             </example>
@@ -672,13 +672,15 @@
        id='9'>
       <getNodeResponse xmlns='urn:xmpp:sn:concentrators' 
                        id='Node1'
+					   nodeType='Namespace.NodeType1'
                        cacheType='Node'
                        state='Warning'
                        hasChildren='false'
                        isReadable='true'
                        isConfigurable='true'
                        hasCommands='true'
-                       parentId='Root'/>
+                       parentId='Root'
+					   lastChanged='2013-03-19T17:58:01'/>
    </iq>]]>
             </example>
             <p>
@@ -707,9 +709,12 @@
        to='client@clayster.com'
        id='10'>
       <getNodesResponse xmlns='urn:xmpp:sn:concentrators'>
-	      <node id='Node1' cacheType='Node' state='Warning' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
-	      <node id='Node2' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
-	      <node id='Node3' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
+	      <node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='Warning' hasChildren='false' isReadable='true' 
+		        isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/>
+	      <node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
+		        isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/>
+	      <node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
+		        isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/>
       </getNodesResponse>
    </iq>]]>
 			</example>
@@ -734,8 +739,8 @@
        from='concentrator@clayster.com'
        to='client@clayster.com'
        id='11'>
-      <getNodeResponse xmlns='urn:xmpp:sn:concentrators' id='Node1' cacheType='Node' state='Warning' 
-	                                 hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
+      <getNodeResponse xmlns='urn:xmpp:sn:concentrators' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='Warning' hasChildren='false' 
+	                   isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'>
           <string id='id' name='Node ID' value='Node1'/>
           <string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/>
           <string id='sn' name='Serial Number' value='123456'/>
@@ -773,7 +778,8 @@
        to='client@clayster.com'
        id='12'>
       <getNodesResponse xmlns='urn:xmpp:sn:concentrators'>
-	      <node id='Node1' cacheType='Node' state='Warning' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
+	      <node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='Warning' hasChildren='false' isReadable='true' 
+		        isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'>
               <string id='id' name='Node ID' value='Node1'/>
               <string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/>
               <string id='sn' name='Serial Number' value='123456'/>
@@ -783,7 +789,8 @@
 		      <double id='lat' name='Latitude' value='12.345'/>
 		      <double id='long' name='Longitude' value='123.45'/>
 		  </node>
-	      <node id='Node2' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
+	      <node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
+		        isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'>
               <string id='id' name='Node ID' value='Node2'/>
               <string id='type' name='Node Type' value='Watchamacallit Pressure Sensor v1.2'/>
               <string id='sn' name='Serial Number' value='234567'/>
@@ -793,7 +800,8 @@
 		      <double id='lat' name='Latitude' value='12.345'/>
 		      <double id='long' name='Longitude' value='123.45'/>
 		  </node>
-	      <node id='Node3' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
+	      <node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
+		        isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'>
               <string id='id' name='Node ID' value='Node3'/>
               <string id='type' name='Node Type' value='Watchamacallit Electricity Meter v1.2'/>
               <string id='sn' name='Serial Number' value='345678'/>
@@ -820,7 +828,7 @@
        from='client@clayster.com'
        to='concentrator@clayster.com'
        id='13'>
-      <getAllNodes xmlns='urn:xmpp:sn:concentrators'/>
+      <getAllNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology'/>
    </iq>
    
    <iq type='result'
@@ -828,9 +836,12 @@
        to='client@clayster.com'
        id='13'>
       <getAllNodesResponse xmlns='urn:xmpp:sn:concentrators'>
-	      <node id='Node1' cacheType='Node' state='Warning' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
-	      <node id='Node2' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
-	      <node id='Node3' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
+	      <node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='Warning' hasChildren='false' 
+		        isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
+	      <node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
+		        isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
+	      <node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
+		        isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
       </getNodeResponse>
    </iq>]]>
 			</example>
@@ -845,7 +856,7 @@
        from='client@clayster.com'
        to='concentrator@clayster.com'
        id='14'>
-      <getAllNodes xmlns='urn:xmpp:sn:concentrators' parameters='true' xml:lang='en'/>
+      <getAllNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' parameters='true' xml:lang='en'/>
    </iq>
    
    <iq type='result'
@@ -853,7 +864,8 @@
        to='client@clayster.com'
        id='14'>
       <getAllNodesResponse xmlns='urn:xmpp:sn:concentrators'>
-	      <node id='Node1' cacheType='Node' state='Warning' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
+	      <node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='Warning' hasChildren='false' 
+		        isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
               <string id='id' name='Node ID' value='Node1'/>
               <string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/>
               <string id='sn' name='Serial Number' value='123456'/>
@@ -863,7 +875,8 @@
 		      <double id='lat' name='Latitude' value='12.345'/>
 		      <double id='long' name='Longitude' value='123.45'/>
 		  </node>
-	      <node id='Node2' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
+	      <node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
+		        isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
               <string id='id' name='Node ID' value='Node2'/>
               <string id='type' name='Node Type' value='Watchamacallit Pressure Sensor v1.2'/>
               <string id='sn' name='Serial Number' value='234567'/>
@@ -873,7 +886,8 @@
 		      <double id='lat' name='Latitude' value='12.345'/>
 		      <double id='long' name='Longitude' value='123.45'/>
 		  </node>
-	      <node id='Node3' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
+	      <node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
+		        isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
               <string id='id' name='Node ID' value='Node3'/>
               <string id='type' name='Node Type' value='Watchamacallit Electricity Meter v1.2'/>
               <string id='sn' name='Serial Number' value='345678'/>
@@ -888,9 +902,81 @@
 			</example>
 		</section2>
 		<section2 topic='Get All Nodes derived from'>
-            <!-- TODO -->
-        </section2>
-		<section2 topic='Get All Nodes derived from with Parameters'>
+			<p>
+				This command assumes node types exist in a class hierarchy, and allows the caller to retrieve nodes with similar inheritance. 
+			</p>
+			<example caption='Get All Nodes derived from'>
+				<![CDATA[
+   <iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='15'>
+      <getAllNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology'>
+	      <onlyIfDerivedFrom>Namespace.BaseClass1</onlyIfDerivedFrom>
+	  </getAllNodes>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='15'>
+      <getAllNodesResponse xmlns='urn:xmpp:sn:concentrators'>
+	      <node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='Warning' hasChildren='false' 
+		        isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
+	      <node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
+		        isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
+      </getNodeResponse>
+   </iq>]]>
+			</example>
+		</section2>
+		<section2 topic='Get All Nodes derived from, with Parameters'>
+			<p>
+				This command assumes node types exist in a class hierarchy, and allows the caller to retrieve nodes with similar inheritance. It also returns node parameters
+				directly in the response.
+			</p>
+			<example caption='Get All Nodes derived from, with Parameters'>
+				<![CDATA[
+   <iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='16'>
+      <getAllNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' parameters='true' xml:lang='en'>
+	      <onlyIfDerivedFrom>Namespace.BaseClass1</onlyIfDerivedFrom>
+	  </getAllNodes>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='16'>
+      <getAllNodesResponse xmlns='urn:xmpp:sn:concentrators'>
+	      <node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='Warning' hasChildren='false' 
+		        isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
+              <string id='id' name='Node ID' value='Node1'/>
+              <string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/>
+              <string id='sn' name='Serial Number' value='123456'/>
+              <string id='class' name='Node Class' value='Temperature'/>
+              <string id='meterLoc' name='Meter Location' value='P123502-2'/>
+              <int id='addr' name='Address' value='123'/>
+		      <double id='lat' name='Latitude' value='12.345'/>
+		      <double id='long' name='Longitude' value='123.45'/>
+		  </node>
+	      <node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
+		        isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'>
+              <string id='id' name='Node ID' value='Node3'/>
+              <string id='type' name='Node Type' value='Watchamacallit Electricity Meter v1.2'/>
+              <string id='sn' name='Serial Number' value='345678'/>
+              <string id='class' name='Node Class' value='Electricity'/>
+              <string id='meterLoc' name='Meter Location' value='P332367-9'/>
+              <int id='addr' name='Address' value='125'/>
+		      <double id='lat' name='Latitude' value='12.345'/>
+		      <double id='long' name='Longitude' value='123.45'/>
+		  </node>
+      </getNodeResponse>
+   </iq>]]>
+			</example>
+		</section2>
+		<section2 topic='Get node inheritence'>
 			<!-- TODO -->
 		</section2>
 		<section2 topic='Get indices of Data Source'>
@@ -983,6 +1069,15 @@
         <section2 topic='Move Node Down'>
             <!-- TODO -->
         </section2>
+		<section2 topic='Subscribe to data source changes'>
+			<!-- TODO -->
+		</section2>
+		<section2 topic='Unsubscribe to data source changes'>
+			<!-- TODO -->
+		</section2>
+		<section2 topic='Get changes since'>
+			<!-- TODO -->
+		</section2>
     </section1>
     <section1 topic='Implementation Notes' anchor='impl'>
         <section2 topic='Node Information' anchor='nodeinfo'>

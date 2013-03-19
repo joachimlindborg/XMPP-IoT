@@ -52,7 +52,8 @@
         <xs:attribute name='id' type='xs:string' use='required'/>
         <xs:attribute name='name' type='xs:string' use='required'/>
         <xs:attribute name='hasChildren' type='xs:boolean' use='optional' default='false'/>
-    </xs:complexType>
+		<xs:attribute name='lastChanged' type='xs:dateTime' use='optional'/>
+	</xs:complexType>
  
     <xs:complexType name='DataSourceArray'>
         <xs:sequence minOccurs='0' maxOccurs='unbounded'>
@@ -100,10 +101,13 @@
     <xs:element name='getNodes' type='NodeReferenceParametersRequest'/>
     <xs:element name='getNodesResponse' type='NodeInformationArray'/>
   
-    <xs:element name='getAllNodes' type='NodeReferenceParametersRequest'/>
+    <xs:element name='getAllNodes' type='SourceReferenceParametersRequest'/>
     <xs:element name='getAllNodesResponse' type='NodeInformationArray'/>
- 
-    <xs:element name='getRootNodes' type='NodeReferenceParametersRequest'/>
+
+	<xs:element name='getNodeInheritence' type='NodeReferenceRequest'/>
+	<xs:element name='getNodeInheritenceResponse' type='StringArray'/>
+
+	<xs:element name='getRootNodes' type='SourceReferenceParametersRequest'/>
     <xs:element name='getRootNodesResponse' type='NodeInformationArray'/>
  
     <xs:element name='getChildNodes' type='NodeReferenceParametersRequest'/>
@@ -116,8 +120,16 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
-    <xs:complexType name='GetAllNodesRequest'>
+
+	<xs:complexType name='SourceReferenceParametersRequest'>
+		<xs:complexContent>
+			<xs:extension base='SourceReferenceRequest'>
+				<xs:attribute name='parameters' type='xs:boolean' use='optional' default='false'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name='GetAllNodesRequest'>
         <xs:complexContent>
             <xs:extension base='SourceReferenceRequest'>
                 <xs:sequence minOccurs='0' maxOccurs='unbounded'>
@@ -156,7 +168,8 @@
         </xs:choice>
         <xs:attribute name='id' type='xs:string' use='required'/>
         <xs:attribute name='displayName' type='xs:string' use='optional'/>
-        <xs:attribute name='localId' type='xs:string' use='optional'/>
+		<xs:attribute name='nodeType' type='xs:string' use='optional'/>
+		<xs:attribute name='localId' type='xs:string' use='optional'/>
         <xs:attribute name='logId' type='xs:string' use='optional'/>
         <xs:attribute name='cacheType' type='xs:string' use='required'/>
         <xs:attribute name='state' type='NodeState' use='required'/>
@@ -166,7 +179,8 @@
         <xs:attribute name='hasCommands' type='xs:boolean' use='optional' default='false'/>
         <xs:attribute name='parentId' type='xs:string' use='optional'/>
         <xs:attribute name='parentCacheType' type='xs:string' use='optional'/>
-    </xs:complexType>
+		<xs:attribute name='lastChanged' type='xs:dateTime' use='optional'/>
+	</xs:complexType>
  
     <xs:complexType name='Parameter' abstract='true'>
         <xs:attribute name='id' type='xs:string' use='required'/>

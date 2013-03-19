@@ -82,6 +82,10 @@
 		<xs:complexType/>
 	</xs:element>
  
+	<xs:element name='clearCacheResponse'>
+		<xs:complexType/>
+	</xs:element>
+ 
 	<xs:element name='canAccess'>
 		<xs:complexType>
 			<xs:choice minOccurs='0' maxOccurs='unbounded'>

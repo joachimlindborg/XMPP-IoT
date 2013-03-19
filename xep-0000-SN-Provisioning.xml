@@ -78,11 +78,9 @@
             efficiently using a trusted third party with more power and options when it comes to user interface design and storage.
         </p>
         <p>
-            This XEP relies heavily on <link url='xep-0000-SN-SensorData.html'>xep-0000-SN-SensorData</link> <note><link url='xep-0000-SN-SensorData.html'>xep-0000-SN-SensorData</link></note>.
-        </p>
-        <p>
-            Sensor networks contains many different architectures and use cases. For this reason, the sensor network standards have been divided into multiple XEPs according to the following table:
-        </p>
+			This XEP relies heavily on <link url='xep-0000-SN-SensorData.html'>xep-0000-SN-SensorData</link> <note><link url='xep-0000-SN-SensorData.html'>xep-0000-SN-SensorData</link></note>.
+			Sensor networks contain many different architectures and use cases. For this reason, the sensor network standards have been divided into multiple XEPs according to the following table:
+		</p>
 
         <table caption='Sensor Network XEPs'>
             <tr>
@@ -255,7 +253,7 @@
 			<tr>
 				<td>Token</td>
 				<td>
-					A client, device or user can get a token from a provisioning server. These tokens can be included in requeests to other entities in the network, so these entities can validate
+					A client, device or user can get a token from a provisioning server. These tokens can be included in requests to other entities in the network, so these entities can validate
 					access rights with the provisioning server.
 				</td>
 			</tr>
@@ -366,7 +364,7 @@
 			</p>
             <p>
                 <strong>Note:</strong> In many cases, an address to a provisioning server might be preprogrammed during production of the
-                device. In these cases, parts of the above procedure may not neccesary. All the client needs to do, if the provisioning server is not available
+                device. In these cases, parts of the above procedure may not neccessary. All the client needs to do, if the provisioning server is not available
                 in the roster of the device, is to send a subscription request to the provisioning server, to alert the server of the existence of the device,
                 and possibly request a device token.
             </p>
@@ -401,7 +399,7 @@
    </iq>]]>
             </example>
             <p>
-                <strong>Note:</strong> The provisioning server implicitly understands which two JIDs are to be checked: The first one is the sender of the message, the second one
+                <strong>Note:</strong> The provisioning server implicitly understands which two JIDs that are to be checked: The first one is the sender of the message, the second one
                 is the JID available in the <strong>jid</strong> attribute in the request.
             </p>
             <p>
@@ -553,7 +551,7 @@
        from='master@clayster.com'
        to='device@clayster.com'
        id='5'>
-      <req xmlns='urn:xmpp:sn' seqnr='5' momentary='true' serviceToken='service0001' userToken='user0001' seqnr='2'>
+      <req xmlns='urn:xmpp:sn' momentary='true' serviceToken='service0001' userToken='user0001' seqnr='2'>
          <node nodeId='Device02'/>
          <node nodeId='Device03'/>
       </req>
@@ -613,7 +611,7 @@
        from='master@clayster.com'
        to='device@clayster.com'
        id='7'>
-      <req xmlns='urn:xmpp:sn' seqnr='7' momentary='true' serviceToken='service0001' userToken='user0001' seqnr='3'/>
+      <req xmlns='urn:xmpp:sn' momentary='true' serviceToken='service0001' userToken='user0001' seqnr='3'/>
    </iq>
    
    <iq type='get'
@@ -651,8 +649,10 @@
         </section2>
         <section2 topic='Clear cache'>
             <p>
-                When the provisioning server updates access rights and user privileges in the system, it will send a <strong>clearCache</strong> message to corresponding devices.
-                If a device was offline during the change, the provisioning server must send the <strong>clearCache</strong> message when the device comes online again.
+                When the provisioning server updates access rights and user privileges in the system, it will send a <strong>clearCache</strong> command to corresponding devices.
+                If a device was offline during the change, the provisioning server must send the <strong>clearCache</strong> message when the device comes online again. To acknowledge
+				the receipt of the command, the client responds with a <strong>clearCacheResponse</strong> element. This response message does not contain any information on what was
+				done by the client. It simply acknowledges the receipt of the command, to make sure the provisioning server does not resend the clear cache command again.
             </p>
             <p>
                 <strong>Note:</strong> The <strong>clearCache</strong> command does not include information on what has been changed, so the device needs to clear the entire cache. This
@@ -663,10 +663,19 @@
 
             <example caption='Clear cache'>
                 <![CDATA[
-   <message from='provisioning@clayster.com'
-            to='device@clayster.com'>
+   <iq type='get'
+       from='device@clayster.com'
+       to='provisioning@clayster.com'
+       id='17'>
       <clearCache xmlns='urn:xmpp:sn:provisioning'/>
-   </message>]]>
+   </iq>
+   
+   <iq type='result'
+       from='provisioning@clayster.com'
+       to='device@clayster.com'
+       id='17'>
+      <clearCacheResponse xmlns='urn:xmpp:sn:provisioning'/>
+   </iq>]]>
             </example>
         </section2>
         <section2 topic='Getting a service token'>
@@ -750,7 +759,7 @@
                     <td>Geolocation</td>
                     <td>HTML5 over HTTP(S), XMPP</td>
                     <td>If the geographic location (longitude &amp; latitude) of the user client is known, it can be used. HTML 5 provides mechanism whereby the location
-                    of the client can be fethced. &xep0080; provides a mechanism whereby client location can be obtained over XMPP.</td>
+                    of the client can be fetched. &xep0080; provides a mechanism whereby client location can be obtained over XMPP.</td>
                 </tr>
                 <tr>
                     <td>SSO Token</td>
@@ -1062,12 +1071,12 @@
             </p>
             <ul>
                 <li>
-                    When a device requests information from the provisioning servers, this can be done in a parallell fashion. Even though the provisioning servers
+                    When a device requests information from the provisioning servers, this can be done in a parallel fashion. Even though the provisioning servers
                     were added in a sequential fashion, there is no order or priority between the servers.
                 </li>
                 <li>
                     When receiving different responses from different servers, with regards to access rights, privileges, relationships, etc.,
-                    the union of rights, or the most forgiving or most accepting response should be used. If one of the servers grant a priviliege, the privilege is assumed
+                    the union of rights, or the most forgiving or most accepting response should be used. If one of the servers grant a privilege, the privilege is assumed
                     to exist. If one of the servers grant a friendship request, the friendship request should be granted, etc. Most probably, different servers will manage
                     different subsets of entities on the network, and when they receive questions about unrecognized devices, they will simply deny access.
                 </li>
@@ -1097,7 +1106,7 @@
                 a specific kind of node, and the common <strong>nodeId</strong>. For more information about this, see <link url='xep-0000-SN-Concentrators.html'>xep-0000-SN-Concentrators.html</link>.
             </p>
             <p>
-                <strong>Note:</strong> For cases where the <strong>nodeId</strong> is sufficient to uniquelly identify the node, it is sufficient to provide this attribute in the request.
+                <strong>Note:</strong> For cases where the <strong>nodeId</strong> is sufficient to uniquely identify the node, it is sufficient to provide this attribute in the request.
                 If there is ambiguity in the request, the receptor must treat the request as a request with a set of nodes, all with the corresponding <strong>nodeId</strong> as requested.
             </p>
         </section2>
@@ -1125,7 +1134,7 @@
                 provisioning server.
             </li>
             <li>
-                Any provisioning servers should be monitored during operation, since it provides a vital link in the operation of the network.
+                Provisioning servers should be monitored during operation, since it provides a vital link in the operation of the network.
             </li>
             <li>
                 Multiple provisioning servers could be allowed, for redundancy or for scalability. This specification does not limit the number of provisioning servers used in a network,
@@ -1227,6 +1236,10 @@
     </xs:complexType>
  
     <xs:element name='clearCache'>
+        <xs:complexType/>
+    </xs:element>
+ 
+    <xs:element name='clearCacheResponse'>
         <xs:complexType/>
     </xs:element>
  
@@ -1364,4 +1377,7 @@
 </xs:schema>]]>
         </code>
     </section1>
+	<section1 topic='Acknowledgements' anchor='ack'>
+		<p>Thanks to Joachim Lindborg and Karin Forsell for all valuable feedback.</p>
+	</section1>
 </xep>
