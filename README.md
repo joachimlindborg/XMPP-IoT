@@ -17,7 +17,7 @@ xep-0000-SN-BatteryPoweredSensors
                 Defines how to handle the peculiars related to battery powered
 		devices, and other devices intermittently available on the network.
 
-xep-0000-SN-Concentrators
+[xep-0000-SN-Concentrators](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-SN/master/xep-0000-SN-Concentrators.html)
 		Defines how to handle architectures containing concentrators 
 		or servers handling multiple sensors.
 
@@ -42,7 +42,7 @@ xep-0000-SN-Interoperability
 xep-0000-SN-Multicast
 		Defines how sensor data can be multicast in efficient ways.
 
-xep-0000-SN-Provisioning
+[xep-0000-SN-Provisioning](httphttp://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-SN/blob/master/xep-0000-SN-Provisioning.html)
 		This specification. Defines how provisioning, the management of
 		access privileges, etc., can be efficiently and easily 
 		implemented.
@@ -51,7 +51,7 @@ xep-0000-SN-PubSub
 		Defines how efficient publication of sensor data can be made 
 		in sensor networks.
 
-xep-0000-SN-SensorData
+[xep-0000-SN-SensorData](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-SN/blob/master/xep-0000-SN-SensorData.html)
 		Provides the underlying architecture, basic operations and 
 		data structures for sensor data communication over XMPP networks. 
 		It includes a hardware abstraction model, removing any technical 
