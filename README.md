@@ -8,7 +8,8 @@ The final result will be published through the XSF foundation
 
 Planned XEP's 
 
-XEP-0000-Exi	Defines how to EXI can be used in XMPP to achieve efficient 
+[XEP-0000-Ex](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-EXI/blob/master/xep-0000-Exi.html)
+		Defines how to EXI can be used in XMPP to achieve efficient 
 		compression of data. Albeit not a sensor network specific XEP, 
 		this XEP should be considered in all sensor network 
 		implementations where memory and packet size is an issue.
