@@ -2,7 +2,6 @@
 <!-- TODO: required data sources, optional data sources -->
 <!-- TODO: enhanced concentrator GUI XEP. (Icons, overlays, etc.) -->
 <!-- TODO: Interaction with provisioning server -->
-<!-- TODO: Error message when command is not supported -->
 <!-- TODO: Refresh capabilities command -->
 <!DOCTYPE xep SYSTEM 'xep.dtd' [
     <!ENTITY % ents SYSTEM 'xep.ent'>
@@ -385,18 +384,19 @@
     <section1 topic='Use Cases' anchor='usecases'>
         <p>
             To create a complete set of operations supported by all types of concentrators, ranging from PLCs to subsystems to entire systems is very difficult. So, the aim
-            of this document is instead to create a very small reduced set of operations, a common denominator, that would allow for basic maintenance and interoperability of 
+            of this document is instead to create a very small reduced set of operations, a common denominator, that would allow for basic maintenance and interoperability of
             concentrators of different makes and models and of these varying ranges.
         </p>
-        <section2 topic='Get Capabilities'>
-            <p>
-                This document lists a sequence of commands. Some are very basic, while others are used for managing massive amounts of devices. When developing a small PLC, it might
-                be difficult to motivate the implementation of the more advanced commands. They are simply not necessary for the management of the device. So, clients connecting to 
-                the concentrator need a way to learn what operations are available in the concentrator, and as a consequence what operations are not. To do this, the
-                <strong>getCapabilities</strong> command is sent, as is shown in the following example.
-            </p>
-            <example caption='Full capabilities'>
-                <![CDATA[
+        <section2 topic='Capabilities'>
+            <section3 topic='Get Capabilities'>
+                <p>
+                    This document lists a sequence of commands. Some are very basic, while others are used for managing massive amounts of devices. When developing a small PLC, it might
+                    be difficult to motivate the implementation of the more advanced commands. They are simply not necessary for the management of the device. So, clients connecting to
+                    the concentrator need a way to learn what operations are available in the concentrator, and as a consequence what operations are not. To do this, the
+                    <strong>getCapabilities</strong> command is sent, as is shown in the following example.
+                </p>
+                <example caption='Full capabilities'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='subsystem@clayster.com'
@@ -443,13 +443,13 @@
           <value>moveDown</value>
       </getCapabilitiesResponse>
    </iq>]]>
-            </example>
-            <p>
-                A smaller gateway on the other hand, may have skipped the implementation of the batch commands that are used for larger systems:
-            </p>
-            <!-- TODO: No data storage -->
-            <example caption='No batch command capabilities'>
-                <![CDATA[
+                </example>
+                <p>
+                    A smaller gateway on the other hand, may have skipped the implementation of the batch commands that are used for larger systems:
+                </p>
+                <!-- TODO: No data storage -->
+                <example caption='No batch command capabilities'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='gateway@clayster.com'
@@ -483,12 +483,12 @@
           <value>moveDown</value>
       </getCapabilitiesResponse>
    </iq>]]>
-            </example>
-            <p>
-                But a small PLC, possibly with a fixed set of nodes, might have support for an even more reduced set of commands:
-            </p>
-            <example caption='No edit capabilities'>
-                <![CDATA[
+                </example>
+                <p>
+                    But a small PLC, possibly with a fixed set of nodes, might have support for an even more reduced set of commands:
+                </p>
+                <example caption='No edit capabilities'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='plc@clayster.com'
@@ -512,17 +512,19 @@
           <value>getCommandParameters</value>
       </getCapabilitiesResponse>
    </iq>]]>
-            </example>
-            <p>
-                So, clients who need to interact with different types of concentrators need to be aware of what commands are supported, and limit operations to thos commands.
-            </p>
+                </example>
+                <p>
+                    So, clients who need to interact with different types of concentrators need to be aware of what commands are supported, and limit operations to thos commands.
+                </p>
+            </section3>
         </section2>
-        <section2 topic='Get All Data Sources'>
-            <p>
-                This command will return a flat list of all available data sources on the concentrator. It is not structured hierarchically.
-            </p>
-            <example caption='Get All Data Sources'>
-                <![CDATA[
+        <section2 topic='Data Sources'>
+            <section3 topic='Get All Data Sources'>
+                <p>
+                    This command will return a flat list of all available data sources on the concentrator. It is not structured hierarchically.
+                </p>
+                <example caption='Get All Data Sources'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -541,15 +543,15 @@
           ...
       </getAllDataSourcesResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get Top Data Sources'>
-            <p>
-                If the client is interested in the hierarchical structure of available data sources, it should request only the root sources, and then ask the client for their
-                corresponding child data sources. If the client wants to present the data sources to a user, presenting them in their hierarchical order may be more intuitive.
-            </p>
-            <example caption='Get Top Data Sources'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get Top Data Sources'>
+                <p>
+                    If the client is interested in the hierarchical structure of available data sources, it should request only the root sources, and then ask the client for their
+                    corresponding child data sources. If the client wants to present the data sources to a user, presenting them in their hierarchical order may be more intuitive.
+                </p>
+                <example caption='Get Top Data Sources'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -568,14 +570,14 @@
           ...
       </getAllDataSourcesResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get Child Data Sources'>
-            <p>
-                Having the ID of a data source that contains child data sources, you can fetch the child sources as follows:
-            </p>
-            <example caption='Get Child Data Sources'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get Child Data Sources'>
+                <p>
+                    Having the ID of a data source that contains child data sources, you can fetch the child sources as follows:
+                </p>
+                <example caption='Get Child Data Sources'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -597,14 +599,14 @@
           <dataSource id='MeteringUnitConversion' name='Unit Conversion' hasChildren='false' lastChanged='2013-03-19T17:58:01'/>
       </getChildDataSourcesResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Contains Node'>
-            <p>
-                This command permits the client to check the existance of a node on the concetrator.
-            </p>
-            <example caption='Checking the existance of a node'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Contains Node'>
+                <p>
+                    This command permits the client to check the existance of a node on the concetrator.
+                </p>
+                <example caption='Checking the existance of a node'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -618,14 +620,99 @@
        id='7'>
       <containsNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>true</containsNodeResponse>
    </iq>]]>
-            </example>
+                </example>
+            </section3>
+            <section3 topic='Subscribe to data source changes'>
+                <p>
+                    A client can subscribe to changes made in a data source. It does this by sending the <strong>subscribe</strong> command to the concentrator,
+                    as is shown in the following example:
+                </p>
+                <example caption='Subscribing to data source events'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='57'>
+      <subscribe xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology'/>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='57'>
+      <subscribeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+   </iq>]]>
+                </example>
+                <p>
+                    Multiple subscriptions to the same source will not result in an error, however the server will still only send one event message for each event in the data source.
+                </p>
+                <p>
+                    <strong>Important:</strong> Event subscriptions only last for as long as the client and concentrator both maintains precense. The concentrator must not persist
+                    event notification subscriptions, and if it goes offline and back online, or if the client goes offline or online again for any reason, the event subscription
+                    is removed.
+                </p>
+                <p>
+                    For more information on types of events sent, see the <link url='#sourceevents'>Data Source Events</link> section.
+                </p>
+            </section3>
+            <section3 topic='Unsubscribe to data source changes'>
+                <p>
+                    A client can unsubscribe to changes made in a data source it is subscribed to. It does this by sending the <strong>unsubscribe</strong> command to the concentrator,
+                    as is shown in the following example:
+                </p>
+                <example caption='Unsubscribing to data source events'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='58'>
+      <unsubscribe xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology'/>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='58'>
+      <unsubscribeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+   </iq>]]>
+                </example>
+                <p>
+                    An unsubscription made to an existing data source, but where an even subscription does not exist, must not result in an error.
+                </p>
+            </section3>
+            <section3 topic='Get changes since given timestamp before subscribing'>
+                <p>
+                    If a client comes back online and wants to know any changes that have taken place on the concentrator since last time it was in contact with it,
+                    it can include a <strong>getEventsSince</strong> attribute in the <strong>subscribe</strong> command sent to the concentrator. This will make the
+                    concentrator send all event messages since the given timestamp to the client before subscribing the client to events in the given data source.
+                </p>
+                <example caption='Get changes since given timestamp before subscribing'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='59'>
+      <subscribe xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' getEventsSince='2013-03-21T19:24:00'/>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='59'>
+      <subscribeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+   </iq>
+   
+   ... Sequence of event messages sent from concentrator to client.]]>
+                </example>
+            </section3>
         </section2>
-        <section2 topic='Contains Nodes'>
-            <p>
-                If the client wants to check the existance of multiple nodes on the concentrator, it can use this batch command instead:
-            </p>
-            <example caption='Checking the existance of a multiple nodes'>
-                <![CDATA[
+        <section2 topic='Nodes'>
+            <section3 topic='Contains Nodes'>
+                <p>
+                    If the client wants to check the existance of multiple nodes on the concentrator, it can use this batch command instead:
+                </p>
+                <example caption='Checking the existance of a multiple nodes'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -649,17 +736,17 @@
          <value>true</value>
       </containsNodeResponse>
    </iq>]]>
-            </example>
-            <p>
-                The array returned will have one item for each item in the request, in the same order.
-            </p>
-        </section2>
-        <section2 topic='Get Node'>
-            <p>
-                This command returns basic information about a node in the concentrator.
-            </p>
-            <example caption='Get Node'>
-                <![CDATA[
+                </example>
+                <p>
+                    The array returned will have one item for each item in the request, in the same order.
+                </p>
+            </section3>
+            <section3 topic='Get Node'>
+                <p>
+                    This command returns basic information about a node in the concentrator.
+                </p>
+                <example caption='Get Node'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -684,17 +771,17 @@
                        parentId='Root' 
                        lastChanged='2013-03-19T17:58:01'/>
    </iq>]]>
-            </example>
-            <p>
-                For more information, see <link url='#nodeinfo'>Node Information</link>.
-            </p>
-        </section2>
-        <section2 topic='Get Nodes'>
-            <p>
-                This commands lets the client get information from multiple nodes at once.
-            </p>
-            <example caption='Get Nodes'>
-                <![CDATA[
+                </example>
+                <p>
+                    For more information, see <link url='#nodeinfo'>Node Information</link>.
+                </p>
+            </section3>
+            <section3 topic='Get Nodes'>
+                <p>
+                    This commands lets the client get information from multiple nodes at once.
+                </p>
+                <example caption='Get Nodes'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -719,17 +806,17 @@
                 isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/>
       </getNodesResponse>
    </iq>]]>
-            </example>
-            <p>
-                For more information, see <link url='#nodeinfo'>Node Information</link>.
-            </p>
-        </section2>
-        <section2 topic='Get Node with parameters'>
-            <p>
-                This command returns basic information about a node in the concentrator, but also adds properties for the node.
-            </p>
-            <example caption='Get Node with parameters'>
-                <![CDATA[
+                </example>
+                <p>
+                    For more information, see <link url='#nodeinfo'>Node Information</link>.
+                </p>
+            </section3>
+            <section3 topic='Get Node with parameters'>
+                <p>
+                    This command returns basic information about a node in the concentrator, but also adds properties for the node.
+                </p>
+                <example caption='Get Node with parameters'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -753,17 +840,17 @@
           <double id='long' name='Longitude' value='123.45'/>
       </getNodeResponse>
    </iq>]]>
-            </example>
-            <p>
-                For more information, see <link url='#nodeinfo'>Node Information</link>.
-            </p>
-        </section2>
-        <section2 topic='Get Nodes with parameters'>
-            <p>
-                This commands lets the client get information from multiple nodes at once, including node properties.
-            </p>
-            <example caption='Get Nodes with parameters'>
-                <![CDATA[
+                </example>
+                <p>
+                    For more information, see <link url='#nodeinfo'>Node Information</link>.
+                </p>
+            </section3>
+            <section3 topic='Get Nodes with parameters'>
+                <p>
+                    This commands lets the client get information from multiple nodes at once, including node properties.
+                </p>
+                <example caption='Get Nodes with parameters'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -815,17 +902,17 @@
           </node>
       </getNodesResponse>
    </iq>]]>
-            </example>
-            <p>
-                For more information, see <link url='#nodeinfo'>Node Information</link>.
-            </p>
-        </section2>
-        <section2 topic='Get All Nodes'>
-            <p>
-                If the device does not manage too many nodes, it could choose to implement this function. It would return all all available nodes with one call.
-            </p>
-            <example caption='Get All Nodes'>
-                <![CDATA[
+                </example>
+                <p>
+                    For more information, see <link url='#nodeinfo'>Node Information</link>.
+                </p>
+            </section3>
+            <section3 topic='Get All Nodes'>
+                <p>
+                    If the device does not manage too many nodes, it could choose to implement this function. It would return all all available nodes with one call.
+                </p>
+                <example caption='Get All Nodes'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -848,14 +935,14 @@
                 isReadable='false' isConfigurable='false' hasCommands='true'/>
       </getNodeResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get All Nodes with Parameters'>
-            <p>
-                If the device does not manage too many nodes, it could choose to implement this function. It would return all all available nodes with their parameters with one call.
-            </p>
-            <example caption='Get All Nodes with Parameters'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get All Nodes with Parameters'>
+                <p>
+                    If the device does not manage too many nodes, it could choose to implement this function. It would return all all available nodes with their parameters with one call.
+                </p>
+                <example caption='Get All Nodes with Parameters'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -908,14 +995,14 @@
           </node>
       </getNodeResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get All Nodes derived from'>
-            <p>
-                This command assumes node types exist in a class hierarchy, and allows the caller to retrieve nodes with similar inheritance. 
-            </p>
-            <example caption='Get All Nodes derived from'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get All Nodes derived from'>
+                <p>
+                    This command assumes node types exist in a class hierarchy, and allows the caller to retrieve nodes with similar inheritance.
+                </p>
+                <example caption='Get All Nodes derived from'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -936,15 +1023,15 @@
                 isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
       </getNodeResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get All Nodes derived from, with Parameters'>
-            <p>
-                This command assumes node types exist in a class hierarchy, and allows the caller to retrieve nodes with similar inheritance. It also returns node parameters
-                directly in the response.
-            </p>
-            <example caption='Get All Nodes derived from, with Parameters'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get All Nodes derived from, with Parameters'>
+                <p>
+                    This command assumes node types exist in a class hierarchy, and allows the caller to retrieve nodes with similar inheritance. It also returns node parameters
+                    directly in the response.
+                </p>
+                <example caption='Get All Nodes derived from, with Parameters'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -983,19 +1070,19 @@
           </node>
       </getNodeResponse>
    </iq>]]>
-            </example>
-            <p>
-                Note that the caller can list multiple classes in the request. This would return only nodes having the correct base class(es) and 
-                implementing all interfaces.
-            </p>
-        </section2>
-        <section2 topic='Get node inheritence'>
-            <p>
-                This command assumes node types exist in a class hierarchy. It allows the caller to get a list of the node class hierarchy and implemented interfaces the
-                node has.
-            </p>
-            <example caption='Get node inheritence'>
-                <![CDATA[
+                </example>
+                <p>
+                    Note that the caller can list multiple classes in the request. This would return only nodes having the correct base class(es) and
+                    implementing all interfaces.
+                </p>
+            </section3>
+            <section3 topic='Get node inheritence'>
+                <p>
+                    This command assumes node types exist in a class hierarchy. It allows the caller to get a list of the node class hierarchy and implemented interfaces the
+                    node has.
+                </p>
+                <example caption='Get node inheritence'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1014,15 +1101,15 @@
           </baseClasses>
       </getNodeInheritenceResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get Root Nodes'>
-            <p>
-                This commands returns the root node of a data source (in case the source is a tree-shaped data source) or the root nodes of a data source (in case the
-                source is flat).
-            </p>
-            <example caption='Get Root Nodes'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get Root Nodes'>
+                <p>
+                    This commands returns the root node of a data source (in case the source is a tree-shaped data source) or the root nodes of a data source (in case the
+                    source is flat).
+                </p>
+                <example caption='Get Root Nodes'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1039,15 +1126,15 @@
                 isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
       </getRootNodesResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get Root Nodes with Parameters'>
-            <p>
-                This commands returns the root node of a data source (in case the source is a tree-shaped data source) or the root nodes of a data source (in case the
-                source is flat), and also returns the parameters for the corresponding nodes.
-            </p>
-            <example caption='Get Root Nodes with Parameters'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get Root Nodes with Parameters'>
+                <p>
+                    This commands returns the root node of a data source (in case the source is a tree-shaped data source) or the root nodes of a data source (in case the
+                    source is flat), and also returns the parameters for the corresponding nodes.
+                </p>
+                <example caption='Get Root Nodes with Parameters'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1073,14 +1160,14 @@
           </node>
       </getRootNodesResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get Child Nodes'>
-            <p>
-                This commands returns the child nodes of a node in a data source.
-            </p>
-            <example caption='Get Child Nodes'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get Child Nodes'>
+                <p>
+                    This commands returns the child nodes of a node in a data source.
+                </p>
+                <example caption='Get Child Nodes'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1099,14 +1186,14 @@
                 isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/>
       </getRootNodesResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get Child Nodes with Parameters'>
-            <p>
-                This commands returns the child nodes of a node in a data source, and also returns the parameters for the corresponding nodes.
-            </p>
-            <example caption='Get Child Nodes with Parameters'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get Child Nodes with Parameters'>
+                <p>
+                    This commands returns the child nodes of a node in a data source, and also returns the parameters for the corresponding nodes.
+                </p>
+                <example caption='Get Child Nodes with Parameters'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1143,14 +1230,14 @@
           </node>
       </getRootNodesResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get indices of Data Source'>
-            <p>
-                This commands returns a list of available indices in a data source. Indices can be used for efficient node look-up.
-            </p>
-            <example caption='Get Child Nodes with Parameters'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get indices of Data Source'>
+                <p>
+                    This commands returns a list of available indices in a data source. Indices can be used for efficient node look-up.
+                </p>
+                <example caption='Get Child Nodes with Parameters'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1173,14 +1260,14 @@
           <value>oid</value>
       </getIndicesResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get Nodes from index'>
-            <p>
-                This command can be used to get a node or nodes from a data source using an index and an index value. 
-            </p>
-            <example caption='Get Nodes from index'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get Nodes from index'>
+                <p>
+                    This command can be used to get a node or nodes from a data source using an index and an index value.
+                </p>
+                <example caption='Get Nodes from index'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1197,14 +1284,14 @@
                 isReadable='true' isConfigurable='true' hasCommands='true' parentId='Apartment 1-1'/>
       </getNodesFromIndexResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get Nodes from index with Parameters'>
-            <p>
-                This command can be used to get a node or nodes from a data source using an index and an index value, and also returns the parameters for the corresponding nodes.
-            </p>
-            <example caption='Get Nodes from index with Parameters'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get Nodes from index with Parameters'>
+                <p>
+                    This command can be used to get a node or nodes from a data source using an index and an index value, and also returns the parameters for the corresponding nodes.
+                </p>
+                <example caption='Get Nodes from index with Parameters'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1226,14 +1313,14 @@
           </node>
       </getNodesFromIndexResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get Nodes from indices'>
-            <p>
-                This command can be used to get nodes from a set of data source using indices and index values.
-            </p>
-            <example caption='Get Nodes from indices'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get Nodes from indices'>
+                <p>
+                    This command can be used to get nodes from a set of data source using indices and index values.
+                </p>
+                <example caption='Get Nodes from indices'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1255,14 +1342,14 @@
                 isReadable='true' isConfigurable='true' hasCommands='true' parentId='Apartment 1-2'/>
       </getNodesFromIndicesResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get Nodes from indices with Parameters'>
-            <p>
-                This command can be used to get nodes from a set of data source using indices and index values, and also returns the parameters for the corresponding nodes.
-            </p>
-            <example caption='Get Nodes from indices with Parameters'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get Nodes from indices with Parameters'>
+                <p>
+                    This command can be used to get nodes from a set of data source using indices and index values, and also returns the parameters for the corresponding nodes.
+                </p>
+                <example caption='Get Nodes from indices with Parameters'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1292,14 +1379,14 @@
           </node>
       </getNodesFromIndicesResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get All Index Values'>
-            <p>
-                This command can be used to get a list of available index values, given a data source and an index.
-            </p>
-            <example caption='Get All Index Values'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get All Index Values'>
+                <p>
+                    This command can be used to get a list of available index values, given a data source and an index.
+                </p>
+                <example caption='Get All Index Values'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1317,22 +1404,177 @@
           ...
       </getAllIndexValuesResponse>
    </iq>]]>
-            </example>
+                </example>
+            </section3>
+            <section3 topic='Get Node Ancestors'>
+                <p>
+                    In a tree formed data source, all nodes except the root node has a parent node. The <strong>getAncestors</strong> command allows the client to get a list
+                    of all ancestors (parent, grand parent, etc.) of a node, as is shown in the following example:
+                </p>
+                <example caption='Get Node Ancestors'>
+                    <![CDATA[
+   <iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='42'>
+      <getAncestors xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Node2' parameters='false' messages='false' xml:lang='en'/>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='42'>
+      <getAncestorsResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+          <node id='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Apartment 1-1'/>
+          <node id='Apartment 1-1' nodeType='Namespace.Apartment' state='None' hasChildren='true' 
+                isReadable='false' isConfigurable='false' hasCommands='true' parentId='Building 1'/>
+          <node id='Building 1' nodeType='Namespace.Building' state='None' hasChildren='true' 
+                isReadable='false' isConfigurable='false' hasCommands='true' parentId='Street'/>
+          <node id='Street' nodeType='Namespace.Street' state='None' hasChildren='true' 
+                isReadable='false' isConfigurable='false' hasCommands='true' parentId='Area'/>
+          <node id='Area' nodeType='Namespace.Area' state='None' hasChildren='true' 
+                isReadable='false' isConfigurable='false' hasCommands='true' parentId='City'/>
+          <node id='City' nodeType='Namespace.City' state='None' hasChildren='true' 
+                isReadable='false' isConfigurable='false' hasCommands='true' parentId='Region'/>
+          <node id='Region' nodeType='Namespace.Region' state='None' hasChildren='true' 
+                isReadable='false' isConfigurable='false' hasCommands='true' parentId='Country'/>
+          <node id='Country' nodeType='Namespace.Country' state='None' hasChildren='true' 
+                isReadable='false' isConfigurable='false' hasCommands='true' parentId='Root'/>
+          <node id='Root' nodeType='Namespace.Root' state='None' hasChildren='true' 
+                isReadable='false' isConfigurable='false' hasCommands='true'/>
+      </getAncestorsResponse>
+   </iq>]]>
+                </example>
+                <p>
+                    Note that the concentrator returns information about the node itself in the response. The <strong>parameters</strong> and <strong>messages</strong>
+                    attributes are used in the request to control if the concentrator should return node parameters and node status messages in the response as well.
+                </p>
+            </section3>
+            <section3 topic='Move Node Up'>
+                <p>
+                    As the order of siblings in a tree can be important, depending on the context and type of nodes involved, the client may be allowed to move nodes up and down among siblings.
+                    To move a node upwards among its siblings is done using the command <strong>moveNodeUp</strong>, as is shown in the following example:
+                </p>
+                <example caption='Move Node Up'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='53'>
+      <moveNodeUp xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringFieldProcessors' nodeId='LogicalOperator'/>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='53'>
+      <moveNodeUpResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+   </iq>]]>
+                </example>
+                <p>
+                    Note that a node that is first among its siblings will maintain its position. The response to the command must still be <strong>OK</strong>.
+                </p>
+            </section3>
+            <section3 topic='Move Node Down'>
+                <p>
+                    As the order of siblings in a tree can be important, depending on the context and type of nodes involved, the client may be allowed to move nodes up and down among siblings.
+                    To move a node downwards among its siblings is done using the command <strong>moveNodeDown</strong>, as is shown in the following example:
+                </p>
+                <example caption='Move Node Up'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='54'>
+      <moveNodeDown xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringFieldProcessors' nodeId='LogicalOperator'/>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='54'>
+      <moveNodeDownResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+   </iq>]]>
+                </example>
+                <p>
+                    Note that a node that is last among its siblings will maintain its position. The response to the command must still be <strong>OK</strong>.
+                </p>
+            </section3>
+            <section3 topic='Move Nodes Up'>
+                <p>
+                    To move a set of nodes upwards among its siblings is done using the command <strong>moveNodesUp</strong>, as is shown in the following example:
+                </p>
+                <example caption='Move Nodes Up'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='55'>
+      <moveNodseUp xmlns='urn:xmpp:sn:concentrators'>
+          <node sourceId='MeteringFieldProcessors' nodeId='LogicalOperator3'/>
+          <node sourceId='MeteringFieldProcessors' nodeId='LogicalOperator4'/>
+          <node sourceId='MeteringFieldProcessors' nodeId='LogicalOperator5'/>
+      </moveNodseUp>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='55'>
+      <moveNodesUpResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+   </iq>]]>
+                </example>
+                <p>
+                    Note that a node that is first among its siblings will maintain its position. The response to the command must still be <strong>OK</strong>. If an attempt is performed to move a
+                    sequence of nodes that are together first as siblings, none of the nodes move relative to each other.
+                </p>
+            </section3>
+            <section3 topic='Move Nodes Down'>
+                <p>
+                    To move a set of nodes downwards among its siblings is done using the command <strong>moveNodesDown</strong>, as is shown in the following example:
+                </p>
+                <example caption='Move Node Up'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='56'>
+      <moveNodesDown xmlns='urn:xmpp:sn:concentrators'>
+          <node sourceId='MeteringFieldProcessors' nodeId='LogicalOperator3'/>
+          <node sourceId='MeteringFieldProcessors' nodeId='LogicalOperator4'/>
+          <node sourceId='MeteringFieldProcessors' nodeId='LogicalOperator5'/>
+      </moveNodseDown>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='56'>
+      <moveNodesDownResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+   </iq>]]>
+                </example>
+                <p>
+                    Note that a node that is last among its siblings will maintain its position. The response to the command must still be <strong>OK</strong>. If an attempt is performed to move a
+                    sequence of nodes that are together last as siblings, none of the nodes move relative to each other.
+                </p>
+            </section3>
         </section2>
-        <section2 topic='Get Node Parameters for editing'>
-            <p>
-                Previously described commands can return parameters for a node. But these parameters are for presentational or informational use. If the client wants to edit
-                the parameters of a node, another set of commands must be used. This use case shows how <strong>getNodeParametersForEdit</strong> can be used to edit available
-                parameters for one node.
-            </p>
-            <p>
-                <strong>Note:</strong> When editing parameters for a node, a different set of parameters might be returned compared to the set of parameters available in commands
-                mentioned above. There may be various resons for this, among other things (but not limited to) user rights, node settings, and parameter type. User rights may restrict the number
-                of parameters the user can access. The node may be configured not to allow editing of certain parameters. Also, some types of parameters may only be available in
-                an edit mode (like long multi-line parameters) and not in a shorter presentation mode.
-            </p>
-            <example caption='Get Node Parameters for editing'>
-                <![CDATA[
+        <section2 topic='Node Parameters'>
+            <section3 topic='Get Node Parameters for editing'>
+                <p>
+                    Previously described commands can return parameters for a node. But these parameters are for presentational or informational use. If the client wants to edit
+                    the parameters of a node, another set of commands must be used. This use case shows how <strong>getNodeParametersForEdit</strong> can be used to edit available
+                    parameters for one node.
+                </p>
+                <p>
+                    <strong>Note:</strong> When editing parameters for a node, a different set of parameters might be returned compared to the set of parameters available in commands
+                    mentioned above. There may be various resons for this, among other things (but not limited to) user rights, node settings, and parameter type. User rights may restrict the number
+                    of parameters the user can access. The node may be configured not to allow editing of certain parameters. Also, some types of parameters may only be available in
+                    an edit mode (like long multi-line parameters) and not in a shorter presentation mode.
+                </p>
+                <example caption='Get Node Parameters for editing'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1421,55 +1663,55 @@
           </x>
       </getNodeParametersForEditResponse>
    </iq>]]>
-            </example>
-            <p>
-                The following table lists the different XEP's the client should implement to be able to support parameter forms according to this proposal:
-            </p>
-            <table caption='Form XEPs'>
-                <tr>
-                    <th>XEP</th>
-                    <th>Description</th>
-                </tr>
-                <tr>
-                    <td>XEP-0004</td>
-                    <td>Describes how basic forms are handled.</td>
-                </tr>
-                <tr>
-                    <td>XEP-0122</td>
-                    <td>Makes it possible to add certain client validation rules to form parameters.</td>
-                </tr>
-                <tr>
-                    <td>XEP-0137</td>
-                    <td>Makes it possible to publish a file upload parameter.</td>
-                </tr>
-                <tr>
-                    <td>XEP-0141</td>
-                    <td>Makes it possible to layout parameters into pages and sections.</td>
-                </tr>
-                <tr>
-                    <td>XEP-0141</td>
-                    <td>Makes it possible to layout parameters into pages and sections.</td>
-                </tr>
-                <tr>
-                    <td>xep-0000-DynamicForms</td>
-                    <td>Makes it possible to create dynamic forms, with server-side validation and forms that change dynamically depending on input.</td>
-                </tr>
-                <!-- TODO: Add XEP for color parameter.-->
-            </table>
-            <p>
-                Read-only parameters will be returned with the <strong>readOnly</strong> element, as defined in <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>.
-                Clients SHOULD support this extension if using this command. However, the server MUST NOT change parameters in a node that are read-only, even if clients happen
-                to try to set them.
-            </p>
-        </section2>
-        <section2 topic='Set Node Parameters after editing'>
-            <p>
-                After editing the form, the client uses the <strong>setNodeParametersAfterEdit</strong> command to set the parameters in the node. Note that it is possible to
-                set the same parameters (or a sub-set of the same parameters) to a different node using this command, without the need to get new form parameters. However, after the first
-                successful set operation, any form session used for dynamic validation during edit will not be available on the server any more.
-            </p>
-            <example caption='Set Node Parameters after editing'>
-                <![CDATA[
+                </example>
+                <p>
+                    The following table lists the different XEP's the client should implement to be able to support parameter forms according to this proposal:
+                </p>
+                <table caption='Form XEPs'>
+                    <tr>
+                        <th>XEP</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>XEP-0004</td>
+                        <td>Describes how basic forms are handled.</td>
+                    </tr>
+                    <tr>
+                        <td>XEP-0122</td>
+                        <td>Makes it possible to add certain client validation rules to form parameters.</td>
+                    </tr>
+                    <tr>
+                        <td>XEP-0137</td>
+                        <td>Makes it possible to publish a file upload parameter.</td>
+                    </tr>
+                    <tr>
+                        <td>XEP-0141</td>
+                        <td>Makes it possible to layout parameters into pages and sections.</td>
+                    </tr>
+                    <tr>
+                        <td>XEP-0141</td>
+                        <td>Makes it possible to layout parameters into pages and sections.</td>
+                    </tr>
+                    <tr>
+                        <td>xep-0000-DynamicForms</td>
+                        <td>Makes it possible to create dynamic forms, with server-side validation and forms that change dynamically depending on input.</td>
+                    </tr>
+                    <!-- TODO: Add XEP for color parameter.-->
+                </table>
+                <p>
+                    Read-only parameters will be returned with the <strong>readOnly</strong> element, as defined in <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>.
+                    Clients SHOULD support this extension if using this command. However, the server MUST NOT change parameters in a node that are read-only, even if clients happen
+                    to try to set them.
+                </p>
+            </section3>
+            <section3 topic='Set Node Parameters after editing'>
+                <p>
+                    After editing the form, the client uses the <strong>setNodeParametersAfterEdit</strong> command to set the parameters in the node. Note that it is possible to
+                    set the same parameters (or a sub-set of the same parameters) to a different node using this command, without the need to get new form parameters. However, after the first
+                    successful set operation, any form session used for dynamic validation during edit will not be available on the server any more.
+                </p>
+                <example caption='Set Node Parameters after editing'>
+                    <![CDATA[
    <iq type='set'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1522,21 +1764,21 @@
           </node>
       </setNodeParametersAfterEditResponse>
    </iq>]]>
-            </example>
-            <p>
-                Note that validation rules, pagination, etc., can be stripped from the form when submitting it to the server. Also the form type attribute must be set
-                to <strong>'submit'</strong>. Note also that as the <strong>result</strong> attribute is <strong>OK</strong>, it is assumed the server has dropped any parameter form resources
-                related to the form, which disables any future dynamic validation of the contents of the form. The newly edited node will also be available in the response
-                in a <strong>node</strong> element.
-            </p>
-        </section2>
-        <section2 topic='Set Node Parameters after editing, Failure'>
-            <p>
-                The following example shows how the server responds when the client tries to set invalid parameters. The response contains detailed information about why, 
-                information which the client can use to inform the user (if any) of what went wrong.
-            </p>
-            <example caption='Set Node Parameters after editing, Failure'>
-                <![CDATA[
+                </example>
+                <p>
+                    Note that validation rules, pagination, etc., can be stripped from the form when submitting it to the server. Also the form type attribute must be set
+                    to <strong>'submit'</strong>. Note also that as the <strong>result</strong> attribute is <strong>OK</strong>, it is assumed the server has dropped any parameter form resources
+                    related to the form, which disables any future dynamic validation of the contents of the form. The newly edited node will also be available in the response
+                    in a <strong>node</strong> element.
+                </p>
+            </section3>
+            <section3 topic='Set Node Parameters after editing, Failure'>
+                <p>
+                    The following example shows how the server responds when the client tries to set invalid parameters. The response contains detailed information about why,
+                    information which the client can use to inform the user (if any) of what went wrong.
+                </p>
+                <example caption='Set Node Parameters after editing, Failure'>
+                    <![CDATA[
    <iq type='set'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1579,28 +1821,30 @@
           <error var='id'>There already exists a node with this ID.</error>
       </setNodeParametersAfterEditResponse>
    </iq>]]>
-            </example>
-            <p>
-                As the <strong>result</strong> attribute is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as 
-                dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
-                <note>XEP-xxxx: Dynamic Data Forms &lt;<link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link>&gt;</note> for more information.
-            </p>
-        </section2>
-        <section2 topic='Get Common Node Parameters for editing'>
-            <p>
-                Advanced concentrators handling large quantities of nodes may let users edit sets of nodes at once to be practical. This is done by publising the
-                <strong>getCommonNodeParametersForEdit</strong> command. It will return a form with parameters that are common for all selected nodes. Since nodes
-                may have different node types it is assumed that different nodes have different sets of parameters. But if this command is used, only parameters matching
-                in IDs, descriptions, validation rules, etc., (but not values) will be returned in a form.
-            </p>
-            <p>
-                <strong>Important:</strong> A parameter that exists in multiple nodes but having different values will be marked with the <strong>notSame</strong> element,
-                according to <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>. Clients using this command MUST support the extensions defined in
-                <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>.
-            </p>
-            <example caption='Get Common Node Parameters for editing'>
-                <![CDATA[
+                </example>
+                <p>
+                    As the <strong>result</strong> attribute is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
+                    dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
+                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
+                    <note>
+                        XEP-xxxx: Dynamic Data Forms &lt;<link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link>&gt;
+                    </note> for more information.
+                </p>
+            </section3>
+            <section3 topic='Get Common Node Parameters for editing'>
+                <p>
+                    Advanced concentrators handling large quantities of nodes may let users edit sets of nodes at once to be practical. This is done by publising the
+                    <strong>getCommonNodeParametersForEdit</strong> command. It will return a form with parameters that are common for all selected nodes. Since nodes
+                    may have different node types it is assumed that different nodes have different sets of parameters. But if this command is used, only parameters matching
+                    in IDs, descriptions, validation rules, etc., (but not values) will be returned in a form.
+                </p>
+                <p>
+                    <strong>Important:</strong> A parameter that exists in multiple nodes but having different values will be marked with the <strong>notSame</strong> element,
+                    according to <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>. Clients using this command MUST support the extensions defined in
+                    <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>.
+                </p>
+                <example caption='Get Common Node Parameters for editing'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1691,25 +1935,25 @@
           </x>
       </getCommonNodeParametersForEditResponse>
    </iq>]]>
-            </example>
-            <p>
-                Note that parameters that are not available in all selected nodes will have been removed. Also and ID-parameter will have been removed, since they
-                cannot be set for a collection of nodes.
-            </p>
-            <p>
-                Fields marked with the <strong>notSame</strong> element only present one value, perhaps the value of the first node. However, the field should be clearly
-                marked in any end-user GUI (for example by graying the field), and MUST ONLY be sent back to the server in a set operation if explicitly edited by the end-user.
-                The parameter will be set in all selected nodes in that case. Unedited fields should be treated as if the end-user accepts the different values for the current set of nodes.
-            </p>
-        </section2>
-        <section2 topic='Set Common Node Parameters after editing'>
-            <p>
-                After editing the form, the client uses the <strong>setCommonNodeParametersAfterEdit</strong> command to set the parameters in the set of nodes. Note that it is possible to
-                set the same parameters (or a sub-set of the same parameters) to a different set of nodes using this command, without the need to get new form parameters. However, after the first
-                successful set operation, any form session used for dynamic validation during edit will not be available on the server any more.
-            </p>
-            <example caption='Set Common Node Parameters after editing'>
-                <![CDATA[
+                </example>
+                <p>
+                    Note that parameters that are not available in all selected nodes will have been removed. Also and ID-parameter will have been removed, since they
+                    cannot be set for a collection of nodes.
+                </p>
+                <p>
+                    Fields marked with the <strong>notSame</strong> element only present one value, perhaps the value of the first node. However, the field should be clearly
+                    marked in any end-user GUI (for example by graying the field), and MUST ONLY be sent back to the server in a set operation if explicitly edited by the end-user.
+                    The parameter will be set in all selected nodes in that case. Unedited fields should be treated as if the end-user accepts the different values for the current set of nodes.
+                </p>
+            </section3>
+            <section3 topic='Set Common Node Parameters after editing'>
+                <p>
+                    After editing the form, the client uses the <strong>setCommonNodeParametersAfterEdit</strong> command to set the parameters in the set of nodes. Note that it is possible to
+                    set the same parameters (or a sub-set of the same parameters) to a different set of nodes using this command, without the need to get new form parameters. However, after the first
+                    successful set operation, any form session used for dynamic validation during edit will not be available on the server any more.
+                </p>
+                <example caption='Set Common Node Parameters after editing'>
+                    <![CDATA[
    <iq type='set'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1769,25 +2013,25 @@
           </node>
       </setCommonNodeParametersAfterEditResponse>
    </iq>]]>
-            </example>
-            <p>
-                Note that validation rules, pagination, etc., can be stripped from the form when submitting it to the server. Also the form type attribute must be set
-                to <strong>'submit'</strong>. Note also that as the <strong>result</strong> attribute is <strong>OK</strong>, it is assumed the server has dropped any parameter form resources
-                related to the form, which disables any future dynamic validation of the contents of the form.
-            </p>
-            <p>
-                <strong>Important:</strong> A parameter that exists in multiple nodes but having different values will be marked with the <strong>notSame</strong> element,
-                according to <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>. Such parameters MUST NOT be sent back to the server unless they have explicitly
-                beed edited or signed by the end-user. The value sent back to the server will be set in all nodes.
-            </p>
-        </section2>
-        <section2 topic='Set Common Node Parameters after editing, Failure'>
-            <p>
-                The following example shows how the server responds when the client tries to set invalid parameters to a set of nodes. The response contains detailed information about why,
-                information which the client can use to inform the user (if any) of what went wrong.
-            </p>
-            <example caption='Set Node Parameters after editing, Failure'>
-                <![CDATA[
+                </example>
+                <p>
+                    Note that validation rules, pagination, etc., can be stripped from the form when submitting it to the server. Also the form type attribute must be set
+                    to <strong>'submit'</strong>. Note also that as the <strong>result</strong> attribute is <strong>OK</strong>, it is assumed the server has dropped any parameter form resources
+                    related to the form, which disables any future dynamic validation of the contents of the form.
+                </p>
+                <p>
+                    <strong>Important:</strong> A parameter that exists in multiple nodes but having different values will be marked with the <strong>notSame</strong> element,
+                    according to <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>. Such parameters MUST NOT be sent back to the server unless they have explicitly
+                    beed edited or signed by the end-user. The value sent back to the server will be set in all nodes.
+                </p>
+            </section3>
+            <section3 topic='Set Common Node Parameters after editing, Failure'>
+                <p>
+                    The following example shows how the server responds when the client tries to set invalid parameters to a set of nodes. The response contains detailed information about why,
+                    information which the client can use to inform the user (if any) of what went wrong.
+                </p>
+                <example caption='Set Node Parameters after editing, Failure'>
+                    <![CDATA[
    <iq type='set'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1818,71 +2062,83 @@
           <error var='id'>Parameter not available.</error>
       </setCommonNodeParametersAfterEditResponse>
    </iq>]]>
-            </example>
-            <p>
-                As the <strong>result</strong> attribute is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
-                dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
-                <note>
-                    XEP-xxxx: Dynamic Data Forms &lt;<link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link>&gt;
-                </note> for more information.
-            </p>
-        </section2>
-        <section2 topic='Get Node Status'>
-            <p>
-                Each node in the concentrator has a <strong>state</strong>. This state is a dynamic run-time state, and therefore not presented as a more static property.
-                This state can be any of the following values, in order of increasing importance:
-            </p>
-            <table caption='Node states'>
-                <tr>
-                    <th>State</th>
-                    <th>Description</th>
-                </tr>
-                <tr>
-                    <td>None</td>
-                    <td>Nothing has been reported on the node.</td>
-                </tr>
-                <tr>
-                    <td>Information</td>
-                    <td>There are informative events reported on the node.</td>
-                </tr>
-                <tr>
-                    <td>WarningSigned</td>
-                    <td>There are warnings reported on the node. But these warnings have been viewed by an operator.</td>
-                </tr>
-                <tr>
-                    <td>WarningUnsigned</td>
-                    <td>There are new or unreviewed warnings reported on the node.</td>
-                </tr>
-                <tr>
-                    <td>ErrorSigned</td>
-                    <td>There are errors reported on the node. But these errors have been viewed by an operator.</td>
-                </tr>
-                <tr>
-                    <td>ErrorUnsigned</td>
-                    <td>There are new or unreviewed errors reported on the node.</td>
-                </tr>
-            </table>
-            <p>
-                Other types of "states" are of course possible, such as phase - installation phase, test phase, production phase, etc. - but such "states" are seen as static
-                and presented as properties on the node. The dynamic information of the <strong>state</strong> attribute of a node, is to give a dynamic runtime state that has
-                the possibility to change during runtime, and that operators must be aware of.
-            </p>
-            <p>
-                The following commands have an optional attribute, with which they can ask the server to return any events logged on the node, giving more details of the
-                current state of the node:
-            </p>
-            <ul>
-                <li><strong>getNode</strong></li>
-                <li><strong>getNodes</strong></li>
-                <li><strong>getChildNodes</strong></li>
-                <li><strong>getAllNodes</strong></li>
-                <li><strong>getRootNodes</strong></li>
-                <li><strong>getNodesFromIndex</strong></li>
-                <li><strong>getNodesFromIndices</strong></li>
-            </ul>
-            <example caption='Get Node Status'>
-                <![CDATA[
+                </example>
+                <p>
+                    As the <strong>result</strong> attribute is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
+                    dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
+                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
+                    <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
+                </p>
+            </section3>
+            <section3 topic='Get Node Status'>
+                <p>
+                    Each node in the concentrator has a <strong>state</strong>. This state is a dynamic run-time state, and therefore not presented as a more static property.
+                    This state can be any of the following values, in order of increasing importance:
+                </p>
+                <table caption='Node states'>
+                    <tr>
+                        <th>State</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>None</td>
+                        <td>Nothing has been reported on the node.</td>
+                    </tr>
+                    <tr>
+                        <td>Information</td>
+                        <td>There are informative events reported on the node.</td>
+                    </tr>
+                    <tr>
+                        <td>WarningSigned</td>
+                        <td>There are warnings reported on the node. But these warnings have been viewed by an operator.</td>
+                    </tr>
+                    <tr>
+                        <td>WarningUnsigned</td>
+                        <td>There are new or unreviewed warnings reported on the node.</td>
+                    </tr>
+                    <tr>
+                        <td>ErrorSigned</td>
+                        <td>There are errors reported on the node. But these errors have been viewed by an operator.</td>
+                    </tr>
+                    <tr>
+                        <td>ErrorUnsigned</td>
+                        <td>There are new or unreviewed errors reported on the node.</td>
+                    </tr>
+                </table>
+                <p>
+                    Other types of "states" are of course possible, such as phase - installation phase, test phase, production phase, etc. - but such "states" are seen as static
+                    and presented as properties on the node. The dynamic information of the <strong>state</strong> attribute of a node, is to give a dynamic runtime state that has
+                    the possibility to change during runtime, and that operators must be aware of.
+                </p>
+                <p>
+                    The following commands have an optional attribute, with which they can ask the server to return any events logged on the node, giving more details of the
+                    current state of the node:
+                </p>
+                <ul>
+                    <li>
+                        <strong>getNode</strong>
+                    </li>
+                    <li>
+                        <strong>getNodes</strong>
+                    </li>
+                    <li>
+                        <strong>getChildNodes</strong>
+                    </li>
+                    <li>
+                        <strong>getAllNodes</strong>
+                    </li>
+                    <li>
+                        <strong>getRootNodes</strong>
+                    </li>
+                    <li>
+                        <strong>getNodesFromIndex</strong>
+                    </li>
+                    <li>
+                        <strong>getNodesFromIndices</strong>
+                    </li>
+                </ul>
+                <example caption='Get Node Status'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1900,13 +2156,13 @@
           <message timestamp='2013-03-21T11:06:15' type='WarningUnsigned' id='ClockWarning'>Internal clock is offset more than 7 seconds.</message>
       </getNodeResponse>                       
    </iq>]]>
-            </example>
-            <p>
-                The <strong>messages</strong> attribute can be combined with the <strong>parameters</strong> attribute to provide both node properties and
-                messages in the response.
-            </p>
-            <example caption='Get Node with parameters'>
-                <![CDATA[
+                </example>
+                <p>
+                    The <strong>messages</strong> attribute can be combined with the <strong>parameters</strong> attribute to provide both node properties and
+                    messages in the response.
+                </p>
+                <example caption='Get Node with parameters'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1932,15 +2188,17 @@
           <message timestamp='2013-03-21T11:06:15' type='WarningUnsigned' id='ClockWarning'>Internal clock is offset more than 7 seconds.</message>
       </getNodeResponse>
    </iq>]]>
-            </example>
+                </example>
+            </section3>
         </section2>
-        <section2 topic='Get Addable Node Types'>
-            <p>
-                Since nodes are context sensitive, depending on node type and tree structure, before being able to create a new node, it is important to know what types of nodes
-                can be added to a given node. This is done using the <strong>getAddableNodeTypes</strong> command, as is shown in the following example:
-            </p>
-            <example caption='Get Addable Node Types'>
-                <![CDATA[
+        <section2 topic='Creating and Destroying Nodes'>
+            <section3 topic='Get Addable Node Types'>
+                <p>
+                    Since nodes are context sensitive, depending on node type and tree structure, before being able to create a new node, it is important to know what types of nodes
+                    can be added to a given node. This is done using the <strong>getAddableNodeTypes</strong> command, as is shown in the following example:
+                </p>
+                <example caption='Get Addable Node Types'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -1958,15 +2216,15 @@
           <nodeType type='Namespace.Location' name='Service Location'/>
       </getAddableNodeTypesResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get Parameters for New Node'>
-            <p>
-                When you what type of node you want to create, you need to get a set of parameters you need to fill in for the new node, before you can create it.
-                This is done using the <strong>getParametersForNewNode</strong> command, as is shown in the following example:
-            </p>
-            <example caption='Get Parameters for New Node'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get Parameters for New Node'>
+                <p>
+                    When you what type of node you want to create, you need to get a set of parameters you need to fill in for the new node, before you can create it.
+                    This is done using the <strong>getParametersForNewNode</strong> command, as is shown in the following example:
+                </p>
+                <example caption='Get Parameters for New Node'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -2005,14 +2263,14 @@
           </x>
       </getParametersForNewNodeResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Create New Node'>
-            <p>
-                After editing the form, the client uses the <strong>createNewNode</strong> command to create the new node using the parameters provided in the form.
-            </p>
-            <example caption='Create New Node after editing'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Create New Node'>
+                <p>
+                    After editing the form, the client uses the <strong>createNewNode</strong> command to create the new node using the parameters provided in the form.
+                </p>
+                <example caption='Create New Node after editing'>
+                    <![CDATA[
    <iq type='set'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -2045,21 +2303,21 @@
           </node>
       </createNewNodeResponse>
    </iq>]]>
-            </example>
-            <p>
-                Note that validation rules, pagination, etc., can be stripped from the form when submitting it to the server. Also the form type attribute must be set
-                to <strong>'submit'</strong>. Note also that as the <strong>result</strong> attribute is <strong>OK</strong>, it is assumed the server has dropped any parameter form resources
-                related to the form, which disables any future dynamic validation of the contents of the form. The newly created node with corresponding parameters is also returned
-                in the response in a <strong>node</strong> element.
-            </p>
-        </section2>
-        <section2 topic='Create New Node, Failure'>
-            <p>
-                The following example shows how the server responds when it cannot accept parameters provided when trying to create a node. The response will contain detailed information 
-                about why, information which the client can use to inform the user (if any) of what went wrong.
-            </p>
-            <example caption='Create New Node, Failure'>
-                <![CDATA[
+                </example>
+                <p>
+                    Note that validation rules, pagination, etc., can be stripped from the form when submitting it to the server. Also the form type attribute must be set
+                    to <strong>'submit'</strong>. Note also that as the <strong>result</strong> attribute is <strong>OK</strong>, it is assumed the server has dropped any parameter form resources
+                    related to the form, which disables any future dynamic validation of the contents of the form. The newly created node with corresponding parameters is also returned
+                    in the response in a <strong>node</strong> element.
+                </p>
+            </section3>
+            <section3 topic='Create New Node, Failure'>
+                <p>
+                    The following example shows how the server responds when it cannot accept parameters provided when trying to create a node. The response will contain detailed information
+                    about why, information which the client can use to inform the user (if any) of what went wrong.
+                </p>
+                <example caption='Create New Node, Failure'>
+                    <![CDATA[
    <iq type='set'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -2088,22 +2346,20 @@
           <error var='referenceId'>Referenced node was not found.</error>
       </createNewNodeResponse>
    </iq>]]>
-            </example>
-            <p>
-                As the <strong>result</strong> attribute is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
-                dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
-                <note>
-                    XEP-xxxx: Dynamic Data Forms &lt;<link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link>&gt;
-                </note> for more information.
-            </p>
-        </section2>
-        <section2 topic='Destroy Node'>
-            <p>
-                To destroy (remove) a node from the concentrator, the <strong>destroyNode</strong> command is sent, as is shown in the following example:
-            </p>
-            <example caption='Destroy Node'>
-                <![CDATA[
+                </example>
+                <p>
+                    As the <strong>result</strong> attribute is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
+                    dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
+                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
+                    <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
+                </p>
+            </section3>
+            <section3 topic='Destroy Node'>
+                <p>
+                    To destroy (remove) a node from the concentrator, the <strong>destroyNode</strong> command is sent, as is shown in the following example:
+                </p>
+                <example caption='Destroy Node'>
+                    <![CDATA[
    <iq type='set'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -2117,18 +2373,18 @@
        id='40'>
       <destroyNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
    </iq>]]>
-            </example>
-            <p>
-                Since the <strong>result</strong> attribute in the response is <strong>OK</strong>, the node has been removed.
-            </p>
-        </section2>
-        <section2 topic='Destroy Node, Failure'>
-            <p>
-                If the <strong>result</strong> attribute in the response is other than <strong>OK</strong>, the node was not removed from the concentrator.
-                The <strong>result</strong> attribute contains the reason why the operation failed, as is shown in the following example:
-            </p>
-            <example caption='Destroy Node, Failure'>
-                <![CDATA[
+                </example>
+                <p>
+                    Since the <strong>result</strong> attribute in the response is <strong>OK</strong>, the node has been removed.
+                </p>
+            </section3>
+            <section3 topic='Destroy Node, Failure'>
+                <p>
+                    If the <strong>result</strong> attribute in the response is other than <strong>OK</strong>, the node was not removed from the concentrator.
+                    The <strong>result</strong> attribute contains the reason why the operation failed, as is shown in the following example:
+                </p>
+                <example caption='Destroy Node, Failure'>
+                    <![CDATA[
    <iq type='set'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -2142,61 +2398,18 @@
        id='41'>
       <destroyNodeResponse xmlns='urn:xmpp:sn:concentrators' result='InsufficientPrivileges'/>
    </iq>]]>
-            </example>
+                </example>
+            </section3>
         </section2>
-        <section2 topic='Get Node Ancestors'>
-            <p>
-                In a tree formed data source, all nodes except the root node has a parent node. The <strong>getAncestors</strong> command allows the client to get a list
-                of all ancestors (parent, grand parent, etc.) of a node, as is shown in the following example:
-            </p>
-            <example caption='Get Node Ancestors'>
-                <![CDATA[
-   <iq type='get'
-       from='client@clayster.com'
-       to='concentrator@clayster.com'
-       id='42'>
-      <getAncestors xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Node2' parameters='false' messages='false' xml:lang='en'/>
-   </iq>
-   
-   <iq type='result'
-       from='concentrator@clayster.com'
-       to='client@clayster.com'
-       id='42'>
-      <getAncestorsResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
-          <node id='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
-                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Apartment 1-1'/>
-          <node id='Apartment 1-1' nodeType='Namespace.Apartment' state='None' hasChildren='true' 
-                isReadable='false' isConfigurable='false' hasCommands='true' parentId='Building 1'/>
-          <node id='Building 1' nodeType='Namespace.Building' state='None' hasChildren='true' 
-                isReadable='false' isConfigurable='false' hasCommands='true' parentId='Street'/>
-          <node id='Street' nodeType='Namespace.Street' state='None' hasChildren='true' 
-                isReadable='false' isConfigurable='false' hasCommands='true' parentId='Area'/>
-          <node id='Area' nodeType='Namespace.Area' state='None' hasChildren='true' 
-                isReadable='false' isConfigurable='false' hasCommands='true' parentId='City'/>
-          <node id='City' nodeType='Namespace.City' state='None' hasChildren='true' 
-                isReadable='false' isConfigurable='false' hasCommands='true' parentId='Region'/>
-          <node id='Region' nodeType='Namespace.Region' state='None' hasChildren='true' 
-                isReadable='false' isConfigurable='false' hasCommands='true' parentId='Country'/>
-          <node id='Country' nodeType='Namespace.Country' state='None' hasChildren='true' 
-                isReadable='false' isConfigurable='false' hasCommands='true' parentId='Root'/>
-          <node id='Root' nodeType='Namespace.Root' state='None' hasChildren='true' 
-                isReadable='false' isConfigurable='false' hasCommands='true'/>
-      </getAncestorsResponse>
-   </iq>]]>
-            </example>
-            <p>
-                Note that the concentrator returns information about the node itself in the response. The <strong>parameters</strong> and <strong>messages</strong>
-                attributes are used in the request to control if the concentrator should return node parameters and node status messages in the response as well.
-            </p>
-        </section2>
-        <section2 topic='Get Node Commands'>
-            <p>
-                Each node can have a context sensitive set of commands available to it. This is shown using the <strong>hasCommands</strong> attribute in the
-                <link url='#nodeinfo'>Node Information</link> record describing the corresponding node. If the client wants to get a list of available commands,
-                the <strong>getNodeCommands</strong> command is sent to the concentrator, as is shown in the following example:
-            </p>
-            <example caption='Get Node Commands'>
-                <![CDATA[
+        <section2 topic='Node Commands'>
+            <section3 topic='Get Node Commands'>
+                <p>
+                    Each node can have a context sensitive set of commands available to it. This is shown using the <strong>hasCommands</strong> attribute in the
+                    <link url='#nodeinfo'>Node Information</link> record describing the corresponding node. If the client wants to get a list of available commands,
+                    the <strong>getNodeCommands</strong> command is sent to the concentrator, as is shown in the following example:
+                </p>
+                <example caption='Get Node Commands'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -2218,19 +2431,19 @@
                    successString='Wakeup call scheduled.'/>
       </getNodeCommandsResponse>
    </iq>]]>
-            </example>
-            <p>
-                There are two types of commands available: <strong>Simple</strong> and <strong>Parametrized</strong>. <strong>Simple</strong> commands take no parameters, and
-                are therefore simpler to execute. <strong>Parametrized</strong> commands require the client to get a set of parameters for the corresponding command before it
-                can be executed. For more information about command attributes, see <link url='#nodecommands'>Node Commands</link>.
-            </p>
-        </section2>
-        <section2 topic='Execute Simple Node Command'>
-            <p>
-                Executing a simple command is done by sending the <strong>executeNodeCommand</strong> command to the concentrator, as is shown in the following example:
-            </p>
-            <example caption='Execute Simple Node Command'>
-                <![CDATA[
+                </example>
+                <p>
+                    There are two types of commands available: <strong>Simple</strong> and <strong>Parametrized</strong>. <strong>Simple</strong> commands take no parameters, and
+                    are therefore simpler to execute. <strong>Parametrized</strong> commands require the client to get a set of parameters for the corresponding command before it
+                    can be executed. For more information about command attributes, see <link url='#nodecommands'>Node Commands</link>.
+                </p>
+            </section3>
+            <section3 topic='Execute Simple Node Command'>
+                <p>
+                    Executing a simple command is done by sending the <strong>executeNodeCommand</strong> command to the concentrator, as is shown in the following example:
+                </p>
+                <example caption='Execute Simple Node Command'>
+                    <![CDATA[
    <iq type='set'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -2244,15 +2457,15 @@
        id='44'>
       <executeNodeCommandResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get Node Command Parameters'>
-            <p>
-                To execute a parametrized command on the node, the client first needs to get (and edit) a set of parameters for the command. Getting a set of parameters for a
-                parametrized command is done as follows:
-            </p>
-            <example caption='Get Node Command Parameters'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get Node Command Parameters'>
+                <p>
+                    To execute a parametrized command on the node, the client first needs to get (and edit) a set of parameters for the command. Getting a set of parameters for a
+                    parametrized command is done as follows:
+                </p>
+                <example caption='Get Node Command Parameters'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -2292,15 +2505,15 @@
           </x>
       </getCommandParametersResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Execute Parametrized Node Command'>
-            <p>
-                Executing a parametrized command is also done by sending the <strong>executeNodeCommand</strong> command to the concentrator, but including the edited form parameters, 
-                as is shown in the following example:
-            </p>
-            <example caption='Execute Parametrized Node Command'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Execute Parametrized Node Command'>
+                <p>
+                    Executing a parametrized command is also done by sending the <strong>executeNodeCommand</strong> command to the concentrator, but including the edited form parameters,
+                    as is shown in the following example:
+                </p>
+                <example caption='Execute Parametrized Node Command'>
+                    <![CDATA[
    <iq type='set'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -2326,20 +2539,18 @@
        id='46'>
       <executeNodeCommandResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Execute Node Command, Failure'>
-            <p>
-                If an error occurs during the execution of a command or if the server rejects the execution of a command, the server returns a response code different from
-                <strong>OK</strong>. If the response code is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
-                dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
-                <note>
-                    XEP-xxxx: Dynamic Data Forms &lt;<link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link>&gt;
-                </note> for more information.
-            </p>
-            <example caption='Execute Node Command, Failure'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Execute Node Command, Failure'>
+                <p>
+                    If an error occurs during the execution of a command or if the server rejects the execution of a command, the server returns a response code different from
+                    <strong>OK</strong>. If the response code is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
+                    dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
+                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
+                    <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
+                </p>
+                <example caption='Execute Node Command, Failure'>
+                    <![CDATA[
    <iq type='set'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -2367,15 +2578,15 @@
           <error var='mode'>You are not allowed to harass people at 04:30:00!</error>
       </executeNodeCommandResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get Common Commands for Nodes'>
-            <p>
-                Using the command <strong>getCommonNodeCommands</strong>, the client can receive commands that are common for a set of nodes, 
-                as is shown in the following example:
-            </p>
-            <example caption='Get Common Commands for Nodes'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get Common Commands for Nodes'>
+                <p>
+                    Using the command <strong>getCommonNodeCommands</strong>, the client can receive commands that are common for a set of nodes,
+                    as is shown in the following example:
+                </p>
+                <example caption='Get Common Commands for Nodes'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -2404,15 +2615,15 @@
                    successString='Wakeup call scheduled.'/>
       </getNodeCommandsResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Execute Simple Command on multiple nodes'>
-            <p>
-                Executing a simple command on multiple nodes is done by sending the <strong>executeCommonNodeCommand</strong> command to the concentrator, 
-                as is shown in the following example:
-            </p>
-            <example caption='Execute Simple Command on multiple nodes'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Execute Simple Command on multiple nodes'>
+                <p>
+                    Executing a simple command on multiple nodes is done by sending the <strong>executeCommonNodeCommand</strong> command to the concentrator,
+                    as is shown in the following example:
+                </p>
+                <example caption='Execute Simple Command on multiple nodes'>
+                    <![CDATA[
    <iq type='set'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -2433,15 +2644,15 @@
        id='49'>
       <executeCommonNodeCommandResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Get Common Command Parameters from command on multiple nodes'>
-            <p>
-                To execute a parametrized command on a set of nodes, the client first needs to get (and edit) a set of parameters for the common command. Getting a set of parameters for a
-                common parametrized command is done as follows:
-            </p>
-            <example caption='Get Common Command Parameters from command on multiple nodes'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Get Common Command Parameters from command on multiple nodes'>
+                <p>
+                    To execute a parametrized command on a set of nodes, the client first needs to get (and edit) a set of parameters for the common command. Getting a set of parameters for a
+                    common parametrized command is done as follows:
+                </p>
+                <example caption='Get Common Command Parameters from command on multiple nodes'>
+                    <![CDATA[
    <iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -2488,15 +2699,15 @@
           </x>
       </getCommandParametersResponse>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Execute Common Parametrized Command on multiple nodes'>
-            <p>
-                Executing a common parametrized command is also done by sending the <strong>executeCommonNodeCommand</strong> command to the concentrator, but including the edited form parameters,
-                as is shown in the following example:
-            </p>
-            <example caption='Execute Common Parametrized Command on multiple nodes'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Execute Common Parametrized Command on multiple nodes'>
+                <p>
+                    Executing a common parametrized command is also done by sending the <strong>executeCommonNodeCommand</strong> command to the concentrator, but including the edited form parameters,
+                    as is shown in the following example:
+                </p>
+                <example caption='Execute Common Parametrized Command on multiple nodes'>
+                    <![CDATA[
    <iq type='set'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -2528,20 +2739,18 @@
        id='51'>
       <executeCommonNodeCommandResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Execute Parametrized Command on multiple Nodes, Failure'>
-            <p>
-                If an error occurs during the execution of a common command or if the server rejects the execution of a common command, the server returns a response code different from
-                <strong>OK</strong>. If the response code is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
-                dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
-                <note>
-                    XEP-xxxx: Dynamic Data Forms &lt;<link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link>&gt;
-                </note> for more information.
-            </p>
-            <example caption='Execute Parametrized Command on multiple Nodes, Failure'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Execute Parametrized Command on multiple Nodes, Failure'>
+                <p>
+                    If an error occurs during the execution of a common command or if the server rejects the execution of a common command, the server returns a response code different from
+                    <strong>OK</strong>. If the response code is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
+                    dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
+                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
+                    <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
+                </p>
+                <example caption='Execute Parametrized Command on multiple Nodes, Failure'>
+                    <![CDATA[
    <iq type='set'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -2575,126 +2784,15 @@
           <error var='mode'>You are not allowed to harass people at 04:30:00!</error>
       </executeCommonNodeCommandResponse>
    </iq>]]>
-            </example>
+                </example>
+            </section3>
         </section2>
-        <section2 topic='Move Node Up'>
-            <p>
-                As the order of siblings in a tree can be important, depending on the context and type of nodes involved, the client may be allowed to move nodes up and down among siblings.
-                To move a node upwards among its siblings is done using the command <strong>moveNodeUp</strong>, as is shown in the following example:
-            </p>
-            <example caption='Move Node Up'>
-                <![CDATA[
-   <iq type='set'
-       from='client@clayster.com'
-       to='concentrator@clayster.com'
-       id='53'>
-      <moveNodeUp xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringFieldProcessors' nodeId='LogicalOperator'/>
-   </iq>
-   
-   <iq type='result'
-       from='concentrator@clayster.com'
-       to='client@clayster.com'
-       id='53'>
-      <moveNodeUpResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
-   </iq>]]>
-            </example>
-            <p>
-                Note that a node that is first among its siblings will maintain its position. The response to the command must still be <strong>OK</strong>.
-            </p>
+        <section2 topic='Data Source Events' anchor='sourceevents'>
+            <!-- TODO: Events -->
         </section2>
-        <section2 topic='Move Node Down'>
-            <p>
-                As the order of siblings in a tree can be important, depending on the context and type of nodes involved, the client may be allowed to move nodes up and down among siblings.
-                To move a node downwards among its siblings is done using the command <strong>moveNodeDown</strong>, as is shown in the following example:
-            </p>
-            <example caption='Move Node Up'>
-                <![CDATA[
-   <iq type='set'
-       from='client@clayster.com'
-       to='concentrator@clayster.com'
-       id='54'>
-      <moveNodeDown xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringFieldProcessors' nodeId='LogicalOperator'/>
-   </iq>
-   
-   <iq type='result'
-       from='concentrator@clayster.com'
-       to='client@clayster.com'
-       id='54'>
-      <moveNodeDownResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
-   </iq>]]>
-            </example>
-            <p>
-                Note that a node that is last among its siblings will maintain its position. The response to the command must still be <strong>OK</strong>.
-            </p>
+        <section2 topic='Data Sets'>
+            <!-- TODO: Data sets -->
         </section2>
-        <section2 topic='Move Nodes Up'>
-            <p>
-                To move a set of nodes upwards among its siblings is done using the command <strong>moveNodesUp</strong>, as is shown in the following example:
-            </p>
-            <example caption='Move Nodes Up'>
-                <![CDATA[
-   <iq type='set'
-       from='client@clayster.com'
-       to='concentrator@clayster.com'
-       id='55'>
-      <moveNodseUp xmlns='urn:xmpp:sn:concentrators'>
-          <node sourceId='MeteringFieldProcessors' nodeId='LogicalOperator3'/>
-          <node sourceId='MeteringFieldProcessors' nodeId='LogicalOperator4'/>
-          <node sourceId='MeteringFieldProcessors' nodeId='LogicalOperator5'/>
-      </moveNodseUp>
-   </iq>
-   
-   <iq type='result'
-       from='concentrator@clayster.com'
-       to='client@clayster.com'
-       id='55'>
-      <moveNodesUpResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
-   </iq>]]>
-            </example>
-            <p>
-                Note that a node that is first among its siblings will maintain its position. The response to the command must still be <strong>OK</strong>. If an attempt is performed to move a 
-                sequence of nodes that are together first as siblings, none of the nodes move relative to each other.
-            </p>
-        </section2>
-        <section2 topic='Move Nodes Down'>
-            <p>
-                To move a set of nodes downwards among its siblings is done using the command <strong>moveNodesDown</strong>, as is shown in the following example:
-            </p>
-            <example caption='Move Node Up'>
-                <![CDATA[
-   <iq type='set'
-       from='client@clayster.com'
-       to='concentrator@clayster.com'
-       id='56'>
-      <moveNodesDown xmlns='urn:xmpp:sn:concentrators'>
-          <node sourceId='MeteringFieldProcessors' nodeId='LogicalOperator3'/>
-          <node sourceId='MeteringFieldProcessors' nodeId='LogicalOperator4'/>
-          <node sourceId='MeteringFieldProcessors' nodeId='LogicalOperator5'/>
-      </moveNodseDown>
-   </iq>
-   
-   <iq type='result'
-       from='concentrator@clayster.com'
-       to='client@clayster.com'
-       id='56'>
-      <moveNodesDownResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
-   </iq>]]>
-            </example>
-            <p>
-                Note that a node that is last among its siblings will maintain its position. The response to the command must still be <strong>OK</strong>. If an attempt is performed to move a
-                sequence of nodes that are together last as siblings, none of the nodes move relative to each other.
-            </p>
-        </section2>
-        <section2 topic='Subscribe to data source changes'>
-            <!-- TODO -->
-        </section2>
-        <section2 topic='Unsubscribe to data source changes'>
-            <!-- TODO -->
-        </section2>
-        <section2 topic='Get changes since'>
-            <!-- TODO -->
-        </section2>
-        <!-- TODO: Data sets -->
     </section1>
     <section1 topic='Implementation Notes' anchor='impl'>
         <section2 topic='Node Information' anchor='nodeinfo'>
@@ -2865,20 +2963,271 @@
     <xs:import namespace='http://jabber.org/protocol/xdata-layout'/>
  
     <xs:element name='getCapabilities' type='TokenRequest'/>
-    <xs:element name='getCapabilitiesResponse' type='StringArray'/>
+    <xs:element name='getCapabilitiesResponse' type='StringArrayResponse'/>
  
     <xs:element name='getAllDataSources' type='TokenRequest'/>
-    <xs:element name='getAllDataSourcesResponse' type='DataSourceArray'/>
+    <xs:element name='getAllDataSourcesResponse' type='DataSourceArrayResponse'/>
  
     <xs:element name='getTopDataSources' type='TokenRequest'/>
-    <xs:element name='getTopDataSourcesResponse' type='DataSourceArray'/>
+    <xs:element name='getTopDataSourcesResponse' type='DataSourceArrayResponse'/>
  
     <xs:element name='getChildDataSources' type='SourceReferenceRequest'/>
-    <xs:element name='getChildDataSourcesResponse' type='DataSourceArray'/>
+    <xs:element name='getChildDataSourcesResponse' type='DataSourceArrayResponse'/>
  
-    <xs:complexType name='TokenRequest'>
-        <xs:attributeGroup ref='tokens'/>
-    </xs:complexType>
+    <xs:element name='containsNode' type='NodeReferenceRequest'/>
+    <xs:element name='containsNodeResponse'>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base='xs:boolean'>
+                    <xs:attributeGroup ref='responseCode'/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+ 
+    <xs:element name='containsNodes' type='NodeReferencesRequest'/>
+    <xs:element name='containsNodesResponse' type='BooleanArrayResponse'/>
+ 
+    <xs:element name='getNode' type='NodeReferenceParametersRequest'/>
+    <xs:element name='getNodeResponse'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeInformation'>
+                    <xs:attributeGroup ref='responseCode'/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+ 
+    <xs:element name='getNodes' type='NodeReferenceParametersRequest'/>
+    <xs:element name='getNodesResponse' type='NodeInformationArrayResponse'/>
+ 
+    <xs:element name='getAllNodes' type='SourceReferenceParametersRequest'/>
+    <xs:element name='getAllNodesResponse' type='NodeInformationArrayResponse'/>
+ 
+    <xs:element name='getNodeInheritence' type='NodeReferenceRequest'/>
+    <xs:element name='getNodeInheritenceResponse'>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name='baseClasses' type='StringArray' minOccurs='1' maxOccurs='1'/>
+                <xs:element name='interfaces' type='StringArray' minOccurs='0' maxOccurs='1'/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+ 
+    <xs:element name='getRootNodes' type='SourceReferenceParametersRequest'/>
+    <xs:element name='getRootNodesResponse' type='NodeInformationArrayResponse'/>
+ 
+    <xs:element name='getChildNodes' type='NodeReferenceParametersRequest'/>
+    <xs:element name='getChildNodesResponse' type='NodeInformationArrayResponse'/>
+ 
+    <xs:element name='getIndices' type='SourceReferenceRequest'/>
+    <xs:element name='getIndicesResponse' type='StringArrayResponse'/>
+ 
+    <xs:element name='getNodesFromIndex' type='IndexReferenceRequest'/>
+    <xs:element name='getNodesFromIndexResponse' type='NodeInformationArrayResponse'/>
+ 
+    <xs:element name='getNodesFromIndices' type='IndexReferencesRequest'/>
+    <xs:element name='getNodesFromIndicesResponse' type='NodeInformationArrayResponse'/>
+ 
+    <xs:element name='getAllIndexValues'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='SourceReferenceRequest'>
+                    <xs:attribute name='index' type='xs:string' use='required'/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='getAllIndexValuesResponse' type='StringArrayResponse'/>
+ 
+    <xs:element name='getNodeParametersForEdit' type='NodeReferenceRequest'/>
+    <xs:element name='getNodeParametersForEditResponse' type='ParameterFormResponse'/>
+ 
+    <xs:element name='setNodeParametersAfterEdit'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeReferenceRequest'>
+                    <xs:sequence>
+                        <xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='setNodeParametersAfterEditResponse' type='SetNodeParametersResponse'/>
+ 
+    <xs:element name='getCommonNodeParametersForEdit' type='NodeReferencesRequest'/>
+    <xs:element name='getCommonNodeParametersForEditResponse' type='ParameterFormResponse'/>
+ 
+    <xs:element name='setCommonNodeParametersAfterEdit'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeReferencesRequest'>
+                    <xs:sequence>
+                        <xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='setCommonNodeParametersAfterEditResponse' type='SetNodeParametersResponse'/>
+ 
+    <xs:element name='getAddableNodeTypes' type='NodeReferenceRequest'/>
+    <xs:element name='getAddableNodeTypesResponse'>
+        <xs:complexType>
+            <xs:sequence minOccurs='0' maxOccurs='unbounded'>
+                <xs:element name='nodeType'>
+                    <xs:complexType>
+                        <xs:attribute name='type' type='xs:string' use='required'/>
+                        <xs:attribute name='name' type='xs:string' use='required'/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+ 
+    <xs:element name='getParametersForNewNode' type='NodeTypeReferenceRequest'/>
+    <xs:element name='getParametersForNewNodeResponse' type='ParameterFormResponse'/>
+ 
+    <xs:element name='createNewNode'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeTypeReferenceRequest'>
+                    <xs:sequence>
+                        <xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='createNewNodeResponse' type='SetNodeParametersResponse'/>
+ 
+    <xs:element name='destroyNode' type='NodeReferenceRequest'/>
+    <xs:element name='destroyNodeResponse'>
+        <xs:complexType>
+            <xs:attributeGroup ref='responseCode'/>
+        </xs:complexType>
+    </xs:element>
+ 
+    <xs:element name='getAncestors' type='NodeReferenceParametersRequest'/>
+    <xs:element name='getAncestorsResponse' type='NodeInformationArrayResponse'/>
+ 
+    <xs:element name='getNodeCommands' type='NodeReferenceRequest'/>
+    <xs:element name='getNodeCommandsResponse' type='CommandArray'/>
+ 
+    <xs:element name='getCommandParameters' type='NodeCommandReferenceRequest'/>
+    <xs:element name='getCommandParametersResponse' type='ParameterFormResponse'/>
+ 
+    <xs:element name='executeNodeCommand'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeCommandReferenceRequest'>
+                    <xs:sequence>
+                        <xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='executeNodeCommandResponse' type='ExecuteNodeCommandResponse'/>
+ 
+    <xs:element name='getCommonNodeCommands' type='NodeReferencesRequest'/>
+    <xs:element name='getCommonNodeCommandsResponse' type='CommandArray'/>
+     
+    <xs:element name='getCommonCommandParameters'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeReferencesRequest'>
+                    <xs:attribute name='command' type='xs:string' use='required'/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='getCommonCommandParametersResponse' type='ParameterFormResponse'/>
+ 
+    <xs:element name='executeCommonNodeCommand'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeReferencesRequest'>
+                    <xs:sequence>
+                        <xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='executeCommonNodeCommandResponse' type='ExecuteNodeCommandResponse'/>
+ 
+    <xs:element name='moveNodeUp' type='NodeReferenceRequest'/>
+    <xs:element name='moveNodeUpResponse' type='Response'/>
+ 
+    <xs:element name='moveNodeDown' type='NodeReferenceRequest'/>
+    <xs:element name='moveNodeDownResponse' type='Response'/>
+ 
+    <xs:element name='moveNodesUp' type='NodeReferencesRequest'/>
+    <xs:element name='moveNodesUpResponse' type='Response'/>
+ 
+    <xs:element name='moveNodesDown' type='NodeReferencesRequest'/>
+    <xs:element name='moveNodesDownResponse' type='Response'/>
+ 
+    <xs:element name='subscribe'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='SourceReferenceRequest'>
+                    <xs:attribute name='getEventsSince' type='xs:dateTime' use='optional'/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='subscribeResponse' type='Response'/>
+ 
+    <xs:element name='unsubscribe' type='SourceReferenceRequest'/>
+    <xs:element name='unsubscribeResponse' type='Response'/>
+ 
+    <xs:simpleType name='ResponseCode'>
+        <xs:restriction base='xs:string'>
+            <xs:enumeration value='OK'/>
+            <xs:enumeration value='NotFound'/>
+            <xs:enumeration value='InsufficientPrivileges'/>
+            <xs:enumeration value='Locked'/>
+            <xs:enumeration value='NotImplemented'/>
+            <xs:enumeration value='FormError'/>
+            <xs:enumeration value='OtherError'/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
+    <xs:simpleType name='Color'>
+        <xs:restriction base='xs:string'>
+            <xs:pattern value='^[0-9a-fA-F]{6}$'/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
+    <xs:simpleType name='NodeState'>
+        <xs:restriction base='xs:string'>
+            <xs:enumeration value='None'/>
+            <xs:enumeration value='Information'/>
+            <xs:enumeration value='WarningSigned'/>
+            <xs:enumeration value='WarningUnsigned'/>
+            <xs:enumeration value='ErrorSigned'/>
+            <xs:enumeration value='ErrorUnsigned'/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
+    <xs:simpleType name='MessageType'>
+        <xs:restriction base='xs:string'>
+            <xs:enumeration value='Error'/>
+            <xs:enumeration value='Warning'/>
+            <xs:enumeration value='Information'/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
+    <xs:simpleType name='CommandType'>
+        <xs:restriction base='xs:string'>
+            <xs:enumeration value='Simple'/>
+            <xs:enumeration value='Parametrized'/>
+        </xs:restriction>
+    </xs:simpleType>
  
     <xs:attributeGroup name='tokens'>
         <xs:attribute name='deviceToken' type='xs:string' use='optional'/>
@@ -2886,6 +3235,39 @@
         <xs:attribute name='userToken' type='xs:string' use='optional'/>
     </xs:attributeGroup>
  
+    <xs:attributeGroup name='sourceReference'>
+        <xs:attribute name='sourceId' type='xs:string' use='required'/>
+    </xs:attributeGroup>
+ 
+    <xs:attributeGroup name='nodeReference'>
+        <xs:attributeGroup ref='sourceReference'/>
+        <xs:attribute name='nodeId' type='xs:string' use='required'/>
+        <xs:attribute name='cacheType' type='xs:string' use='optional'/>
+    </xs:attributeGroup>
+ 
+    <xs:attributeGroup name='parametersAndMessages'>
+        <xs:attribute name='parameters' type='xs:boolean' use='optional' default='false'/>
+        <xs:attribute name='messages' type='xs:boolean' use='optional' default='false'/>
+    </xs:attributeGroup>
+ 
+    <xs:attributeGroup name='indexReference'>
+        <xs:attributeGroup ref='sourceReference'/>
+        <xs:attribute name='index' type='xs:string' use='required'/>
+        <xs:attribute name='indexValue' type='xs:string' use='required'/>
+    </xs:attributeGroup>
+ 
+    <xs:attributeGroup name='responseCode'>
+        <xs:attribute name='result' type='ResponseCode' use='required'/>
+    </xs:attributeGroup>
+ 
+    <xs:complexType name='Response'>
+        <xs:attributeGroup ref='responseCode'/>
+    </xs:complexType>
+ 
+    <xs:complexType name='TokenRequest'>
+        <xs:attributeGroup ref='tokens'/>
+    </xs:complexType>
+  
     <xs:complexType name='SourceReferenceRequest'>
         <xs:complexContent>
             <xs:extension base='TokenRequest'>
@@ -2893,29 +3275,21 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
-    <xs:attributeGroup name='sourceReference'>
-        <xs:attribute name='sourceId' type='xs:string' use='required'/>
-    </xs:attributeGroup>
- 
+  
     <xs:complexType name='DataSource'>
         <xs:attribute name='id' type='xs:string' use='required'/>
         <xs:attribute name='name' type='xs:string' use='required'/>
         <xs:attribute name='hasChildren' type='xs:boolean' use='optional' default='false'/>
+        <xs:attribute name='lastChanged' type='xs:dateTime' use='optional'/>
     </xs:complexType>
- 
-    <xs:complexType name='DataSourceArray'>
+  
+    <xs:complexType name='DataSourceArrayResponse'>
         <xs:sequence minOccurs='0' maxOccurs='unbounded'>
             <xs:element name='dataSource' type='DataSource'/>
         </xs:sequence>
+        <xs:attributeGroup ref='responseCode'/>
     </xs:complexType>
- 
-    <xs:element name='containsNode' type='NodeReferenceRequest'/>
-    <xs:element name='containsNodeResponse' type='xs:boolean'/>
- 
-    <xs:element name='containsNodes' type='NodeReferencesRequest'/>
-    <xs:element name='containsNodesResponse' type='BooleanArray'/>
- 
+  
     <xs:complexType name='NodeReferenceRequest'>
         <xs:complexContent>
             <xs:extension base='TokenRequest'>
@@ -2923,11 +3297,11 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='NodeReference'>
         <xs:attributeGroup ref='nodeReference'/>
     </xs:complexType>
- 
+  
     <xs:complexType name='NodeReferencesRequest'>
         <xs:complexContent>
             <xs:extension base='TokenRequest'>
@@ -2937,32 +3311,19 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
-    <xs:attributeGroup name='nodeReference'>
-        <xs:attributeGroup ref='sourceReference'/>
-        <xs:attribute name='nodeId' type='xs:string' use='required'/>
-        <xs:attribute name='cacheType' type='xs:string' use='optional'/>
-    </xs:attributeGroup>
- 
-    <xs:element name='getNode' type='NodeReferenceParametersRequest'/>
-    <xs:element name='getNodeResponse' type='NodeInformation'/>
- 
-    <xs:element name='getNodes' type='NodeReferenceParametersRequest'/>
-    <xs:element name='getNodesResponse' type='NodeInformationArray'/>
   
-    <xs:element name='getAllNodes' type='NodeReferenceParametersRequest'/>
-    <xs:element name='getAllNodesResponse' type='NodeInformationArray'/>
- 
-    <xs:element name='getRootNodes' type='NodeReferenceParametersRequest'/>
-    <xs:element name='getRootNodesResponse' type='NodeInformationArray'/>
- 
-    <xs:element name='getChildNodes' type='NodeReferenceParametersRequest'/>
-    <xs:element name='getChildNodesResponse' type='NodeInformationArray'/>
- 
     <xs:complexType name='NodeReferenceParametersRequest'>
         <xs:complexContent>
             <xs:extension base='NodeReferenceRequest'>
-                <xs:attribute name='parameters' type='xs:boolean' use='optional' default='false'/>
+                <xs:attributeGroup ref='parametersAndMessages'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    <xs:complexType name='SourceReferenceParametersRequest'>
+        <xs:complexContent>
+            <xs:extension base='SourceReferenceRequest'>
+                <xs:attributeGroup ref='parametersAndMessages'/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2976,7 +3337,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='GetChildNodesRequest'>
         <xs:complexContent>
             <xs:extension base='NodeReferenceRequest'>
@@ -2986,12 +3347,12 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='SortOrder'>
         <xs:attribute name='parameterName' type='xs:string' use='required'/>
         <xs:attribute name='ascending' type='xs:boolean' use='optional' default='true'/>
     </xs:complexType>
- 
+  
     <xs:complexType name='NodeInformation'>
         <xs:choice minOccurs='0' maxOccurs='unbounded'>
             <xs:element name='boolean' type='BooleanParameter'/>
@@ -3003,9 +3364,11 @@
             <xs:element name='long' type='LongParameter'/>
             <xs:element name='string' type='StringParameter'/>
             <xs:element name='time' type='TimeParameter'/>
+            <xs:element name='message' type='Message'/>
         </xs:choice>
         <xs:attribute name='id' type='xs:string' use='required'/>
         <xs:attribute name='displayName' type='xs:string' use='optional'/>
+        <xs:attribute name='nodeType' type='xs:string' use='optional'/>
         <xs:attribute name='localId' type='xs:string' use='optional'/>
         <xs:attribute name='logId' type='xs:string' use='optional'/>
         <xs:attribute name='cacheType' type='xs:string' use='required'/>
@@ -3016,13 +3379,14 @@
         <xs:attribute name='hasCommands' type='xs:boolean' use='optional' default='false'/>
         <xs:attribute name='parentId' type='xs:string' use='optional'/>
         <xs:attribute name='parentCacheType' type='xs:string' use='optional'/>
+        <xs:attribute name='lastChanged' type='xs:dateTime' use='optional'/>
     </xs:complexType>
- 
+  
     <xs:complexType name='Parameter' abstract='true'>
         <xs:attribute name='id' type='xs:string' use='required'/>
         <xs:attribute name='name' type='xs:string' use='required'/>
     </xs:complexType>
- 
+  
     <xs:complexType name='BooleanParameter'>
         <xs:complexContent>
             <xs:extension base='Parameter'>
@@ -3030,7 +3394,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='ColorParameter'>
         <xs:complexContent>
             <xs:extension base='Parameter'>
@@ -3038,13 +3402,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
-    <xs:simpleType name='Color'>
-        <xs:restriction base='xs:string'>
-            <xs:pattern value='^[0-9a-fA-F]{6}$'/>
-        </xs:restriction>    
-    </xs:simpleType>
- 
+  
     <xs:complexType name='DateTimeParameter'>
         <xs:complexContent>
             <xs:extension base='Parameter'>
@@ -3052,7 +3410,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='DoubleParameter'>
         <xs:complexContent>
             <xs:extension base='Parameter'>
@@ -3060,7 +3418,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='DurationParameter'>
         <xs:complexContent>
             <xs:extension base='Parameter'>
@@ -3068,7 +3426,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='IntParameter'>
         <xs:complexContent>
             <xs:extension base='Parameter'>
@@ -3076,7 +3434,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='LongParameter'>
         <xs:complexContent>
             <xs:extension base='Parameter'>
@@ -3084,7 +3442,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='StringParameter'>
         <xs:complexContent>
             <xs:extension base='Parameter'>
@@ -3092,7 +3450,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='TimeParameter'>
         <xs:complexContent>
             <xs:extension base='Parameter'>
@@ -3100,90 +3458,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
-    <xs:complexType name='NodeInformationArray'>
-        <xs:sequence minOccurs='0' maxOccurs='unbounded'>
-            <xs:element name='node' type='NodeInformation'/>
-        </xs:sequence>
-    </xs:complexType>
- 
-    <xs:simpleType name='NodeState'>
-        <xs:restriction base='xs:string'>
-            <xs:enumeration value='None'/>
-            <xs:enumeration value='Information'/>
-            <xs:enumeration value='WarningSigned'/>
-            <xs:enumeration value='WarningUnsigned'/>
-            <xs:enumeration value='ErrorSigned'/>
-            <xs:enumeration value='ErrorUnsigned'/>
-        </xs:restriction>
-    </xs:simpleType>
- 
-    <xs:element name='getIndices' type='SourceReferenceRequest'/>
-    <xs:element name='getIndicesResponse' type='StringArray'/>
- 
-    <xs:complexType name='StringArray'>
-        <xs:sequence minOccurs='0' maxOccurs='unbounded'>
-            <xs:element name='value' type='xs:string'/>
-        </xs:sequence>
-    </xs:complexType>
- 
-    <xs:complexType name='BooleanArray'>
-        <xs:sequence minOccurs='0' maxOccurs='unbounded'>
-            <xs:element name='value' type='xs:boolean'/>
-        </xs:sequence>
-    </xs:complexType>
- 
-    <xs:element name='getNodeFromIndex' type='IndexReferenceRequest'/>
-    <xs:element name='getNodeFromIndexResponse' type='NodeInformation'/>
- 
-    <xs:element name='getNodesFromIndex' type='IndexReferencesRequest'/>
-    <xs:element name='getNodesFromIndexResponse' type='NodeInformationArray'/>
- 
-    <xs:complexType name='IndexReferenceRequest'>
-        <xs:complexContent>
-            <xs:extension base='TokenRequest'>
-                <xs:attributeGroup ref='indexReference'/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
- 
-    <xs:complexType name='IndexReference'>
-        <xs:attributeGroup ref='indexReference'/>
-    </xs:complexType>
- 
-    <xs:complexType name='IndexReferencesRequest'>
-        <xs:complexContent>
-            <xs:extension base='TokenRequest'>
-                <xs:sequence minOccurs='0' maxOccurs='unbounded'>
-                    <xs:element name='indexRef' type='IndexReference'/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
- 
-    <xs:attributeGroup name='indexReference'>
-        <xs:attributeGroup ref='sourceReference'/>
-        <xs:attribute name='index' type='xs:string' use='required'/>
-        <xs:attribute name='indexValue' type='xs:string' use='required'/>
-    </xs:attributeGroup>
- 
-    <xs:element name='getAllNodesFromIndex' type='IndexReferenceRequest'/>
-    <xs:element name='getAllNodesFromIndexResponse' type='NodeInformationArray'/>
- 
-    <xs:element name='getNodeParameters' type='NodeReferenceRequest'/>
-    <xs:element name='getNodeParametersResponse' type='ParameterForm'/>
- 
-    <xs:element name='getCommonNodeParameters' type='NodeReferencesRequest'/>
-    <xs:element name='getCommonNodeParametersResponse' type='ParameterForm'/>
- 
-    <xs:complexType name='ParameterForm'>
-        <xs:sequence>
-            <xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
-        </xs:sequence>
-    </xs:complexType>
- 
-    <xs:element name='getNodeStatus' type='NodeReferenceRequest'/>
-    <xs:element name='getNodeStatusResponse' type='MessageArray'/>
  
     <xs:complexType name='Message'>
         <xs:simpleContent>
@@ -3195,27 +3469,73 @@
         </xs:simpleContent>
     </xs:complexType>
  
-    <xs:complexType name='MessageArray'>
+    <xs:complexType name='NodeInformationArrayResponse'>
         <xs:sequence minOccurs='0' maxOccurs='unbounded'>
-            <xs:element name='message' type='Message'/>
+            <xs:element name='node' type='NodeInformation'/>
+        </xs:sequence>
+        <xs:attributeGroup ref='responseCode'/>
+    </xs:complexType>
+ 
+    <xs:complexType name='StringArray'>
+        <xs:sequence minOccurs='0' maxOccurs='unbounded'>
+            <xs:element name='value' type='xs:string'/>
         </xs:sequence>
     </xs:complexType>
  
-    <xs:simpleType name='MessageType'>
-        <xs:restriction base='xs:string'>
-            <xs:enumeration value='Error'/>
-            <xs:enumeration value='Warning'/>
-            <xs:enumeration value='Information'/>
-        </xs:restriction>
-    </xs:simpleType>
+    <xs:complexType name='StringArrayResponse'>
+        <xs:complexContent>
+            <xs:extension base='StringArray'>
+                <xs:attributeGroup ref='responseCode'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+  
+    <xs:complexType name='BooleanArrayResponse'>
+        <xs:sequence minOccurs='0' maxOccurs='unbounded'>
+            <xs:element name='value' type='xs:boolean'/>
+        </xs:sequence>
+        <xs:attributeGroup ref='responseCode'/>
+    </xs:complexType>
+  
+    <xs:complexType name='IndexReferenceRequest'>
+        <xs:complexContent>
+            <xs:extension base='TokenRequest'>
+                <xs:attributeGroup ref='indexReference'/>
+                <xs:attributeGroup ref='parametersAndMessages'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+  
+    <xs:complexType name='IndexReference'>
+        <xs:attributeGroup ref='indexReference'/>
+    </xs:complexType>
+  
+    <xs:complexType name='IndexReferencesRequest'>
+        <xs:complexContent>
+            <xs:extension base='TokenRequest'>
+                <xs:sequence minOccurs='0' maxOccurs='unbounded'>
+                    <xs:element name='indexRef' type='IndexReference'/>
+                </xs:sequence>
+                <xs:attributeGroup ref='parametersAndMessages'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
  
-    <xs:element name='getAddableNodeTypes' type='NodeReferenceRequest'/>
-    <xs:element name='getAddableNodeTypesResponse' type='StringArray'/>
-    <!-- & Displayable type names -->
+    <xs:complexType name='SetNodeParametersResponse'>
+        <xs:choice minOccurs='1' maxOccurs='1'>
+            <xs:element name='error' type='ParameterError' minOccurs='1' maxOccurs='unbounded'/>
+            <xs:element name='node' type='NodeInformation' minOccurs='1' maxOccurs='unbounded'/>
+        </xs:choice>
+        <xs:attributeGroup ref='responseCode'/>
+    </xs:complexType>
  
-    <xs:element name='getParametersForNewNode' type='NodeTypeReferenceRequest'/>
-    <xs:element name='getParametersForNewNodeResponse' type='ParameterForm'/>
- 
+    <xs:complexType name='ParameterFormResponse'>
+        <xs:sequence>
+            <xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="responseCode"/>
+    </xs:complexType>
+  
     <xs:complexType name='NodeTypeReferenceRequest'>
         <xs:complexContent>
             <xs:extension base='NodeReferenceRequest'>
@@ -3223,24 +3543,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
-    <xs:element name='createNewNode' type='NodeTypeReferenceRequest'/>
-    <xs:element name='createNewNodeResponse' type='NodeInformation'/>
- 
-    <xs:element name='destroyNode' type='NodeReferenceRequest'/>
-    <xs:element name='destroyNodeResponse' type='EmptyResponse'/>
- 
-    <xs:complexType name='EmptyResponse'/>
- 
-    <xs:element name='getAncestors' type='NodeReferenceRequest'/>
-    <xs:element name='getAncestorsResponse' type='NodeInformationArray'/>
- 
-    <xs:element name='getNodeCommands' type='NodeReferenceRequest'/>
-    <xs:element name='getNodeCommandsResponse' type='CommandArray'/>
- 
-    <xs:element name='getCommonNodeCommands' type='NodeReferencesRequest'/>
-    <xs:element name='getCommonNodeCommandsResponse' type='CommandArray'/>
- 
+  
     <xs:complexType name='Command'>
         <xs:attribute name='id' type='xs:string' use='required'/>
         <xs:attribute name='name' type='xs:string' use='required'/>
@@ -3251,20 +3554,13 @@
         <xs:attribute name='failureString' type='xs:string' use='optional'/>
         <xs:attribute name='successString' type='xs:string' use='optional'/>
     </xs:complexType>
- 
+  
     <xs:complexType name='CommandArray'>
         <xs:sequence minOccurs='0' maxOccurs='unbounded'>
-            <xs:element name='message' type='Command'/>
+            <xs:element name='command' type='Command'/>
         </xs:sequence>
     </xs:complexType>
- 
-    <xs:simpleType name='CommandType'>
-        <xs:restriction base='xs:string'>
-            <xs:enumeration value='Simple'/>
-            <xs:enumeration value='Parametrized'/>
-        </xs:restriction>
-    </xs:simpleType>
- 
+  
     <xs:complexType name='NodeCommandReferenceRequest'>
         <xs:complexContent>
             <xs:extension base='NodeReferenceRequest'>
@@ -3273,25 +3569,20 @@
         </xs:complexContent>
     </xs:complexType>
  
-    <xs:element name='getCommandParameters' type='NodeCommandReferenceRequest'/>
-    <xs:element name='getCommandParametersResponse' type='ParameterForm'/>
+    <xs:complexType name='ExecuteNodeCommandResponse'>
+        <xs:sequence minOccurs='0' maxOccurs='unbounded'>
+            <xs:element name='error' type='ParameterError'/>
+        </xs:sequence>
+        <xs:attributeGroup ref='responseCode'/>
+    </xs:complexType>
  
-    <xs:element name='getCommonCommandParameters'>
-        <xs:complexType>
-            <xs:complexContent>
-                <xs:extension base='NodeReferencesRequest'>
-                    <xs:attribute name='command' type='xs:string' use='required'/>
-                </xs:extension>
-            </xs:complexContent>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name='getCommonCommandParametersResponse' type='ParameterForm'/>
- 
-    <xs:element name='moveUp' type='NodeReferenceRequest'/>
-    <xs:element name='moveUpResponse' type='EmptyResponse'/>
- 
-    <xs:element name='moveDown' type='NodeReferenceRequest'/>
-    <xs:element name='moveDownResponse' type='EmptyResponse'/>
+    <xs:complexType name='ParameterError'>
+        <xs:simpleContent>
+            <xs:extension base='xs:string'>
+                <xs:attribute name='var' type='xs:string' use='required'/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
  
 </xs:schema>]]>
         </code>

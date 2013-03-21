@@ -13,307 +13,313 @@
     <xs:import namespace='jabber:x:data'/>
     <xs:import namespace='http://jabber.org/protocol/xdata-validate'/>
     <xs:import namespace='http://jabber.org/protocol/xdata-layout'/>
-
-	<xs:element name='getCapabilities' type='TokenRequest'/>
-	<xs:element name='getCapabilitiesResponse' type='StringArrayResponse'/>
-
-	<xs:element name='getAllDataSources' type='TokenRequest'/>
-	<xs:element name='getAllDataSourcesResponse' type='DataSourceArrayResponse'/>
-
-	<xs:element name='getTopDataSources' type='TokenRequest'/>
-	<xs:element name='getTopDataSourcesResponse' type='DataSourceArrayResponse'/>
-
-	<xs:element name='getChildDataSources' type='SourceReferenceRequest'/>
-	<xs:element name='getChildDataSourcesResponse' type='DataSourceArrayResponse'/>
-
-	<xs:element name='containsNode' type='NodeReferenceRequest'/>
-	<xs:element name='containsNodeResponse'>
-		<xs:complexType>
-			<xs:simpleContent>
-				<xs:extension base='xs:boolean'>
-					<xs:attributeGroup ref='responseCode'/>
-				</xs:extension>
-			</xs:simpleContent>
-		</xs:complexType>
-	</xs:element>
-
-	<xs:element name='containsNodes' type='NodeReferencesRequest'/>
-	<xs:element name='containsNodesResponse' type='BooleanArrayResponse'/>
-
-	<xs:element name='getNode' type='NodeReferenceParametersRequest'/>
-	<xs:element name='getNodeResponse'>
-		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base='NodeInformation'>
-					<xs:attributeGroup ref='responseCode'/>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
-
-	<xs:element name='getNodes' type='NodeReferenceParametersRequest'/>
-	<xs:element name='getNodesResponse' type='NodeInformationArrayResponse'/>
-
-	<xs:element name='getAllNodes' type='SourceReferenceParametersRequest'/>
-	<xs:element name='getAllNodesResponse' type='NodeInformationArrayResponse'/>
-
-	<xs:element name='getNodeInheritence' type='NodeReferenceRequest'/>
-	<xs:element name='getNodeInheritenceResponse'>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name='baseClasses' type='StringArray' minOccurs='1' maxOccurs='1'/>
-				<xs:element name='interfaces' type='StringArray' minOccurs='0' maxOccurs='1'/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-
-	<xs:element name='getRootNodes' type='SourceReferenceParametersRequest'/>
-	<xs:element name='getRootNodesResponse' type='NodeInformationArrayResponse'/>
-
-	<xs:element name='getChildNodes' type='NodeReferenceParametersRequest'/>
-	<xs:element name='getChildNodesResponse' type='NodeInformationArrayResponse'/>
-
-	<xs:element name='getIndices' type='SourceReferenceRequest'/>
-	<xs:element name='getIndicesResponse' type='StringArrayResponse'/>
-
-	<xs:element name='getNodesFromIndex' type='IndexReferenceRequest'/>
-	<xs:element name='getNodesFromIndexResponse' type='NodeInformationArrayResponse'/>
-
-	<xs:element name='getNodesFromIndices' type='IndexReferencesRequest'/>
-	<xs:element name='getNodesFromIndicesResponse' type='NodeInformationArrayResponse'/>
-
-	<xs:element name='getAllIndexValues'>
-		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base='SourceReferenceRequest'>
-					<xs:attribute name='index' type='xs:string' use='required'/>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name='getAllIndexValuesResponse' type='StringArrayResponse'/>
-
-	<xs:element name='getNodeParametersForEdit' type='NodeReferenceRequest'/>
-	<xs:element name='getNodeParametersForEditResponse' type='ParameterFormResponse'/>
-
-	<xs:element name='setNodeParametersAfterEdit'>
-		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base='NodeReferenceRequest'>
-					<xs:sequence>
-						<xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name='setNodeParametersAfterEditResponse' type='SetNodeParametersResponse'/>
-
-	<xs:element name='getCommonNodeParametersForEdit' type='NodeReferencesRequest'/>
-	<xs:element name='getCommonNodeParametersForEditResponse' type='ParameterFormResponse'/>
-
-	<xs:element name='setCommonNodeParametersAfterEdit'>
-		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base='NodeReferencesRequest'>
-					<xs:sequence>
-						<xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name='setCommonNodeParametersAfterEditResponse' type='SetNodeParametersResponse'/>
-
-	<xs:element name='getAddableNodeTypes' type='NodeReferenceRequest'/>
-	<xs:element name='getAddableNodeTypesResponse'>
-		<xs:complexType>
-			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
-				<xs:element name='nodeType'>
-					<xs:complexType>
-						<xs:attribute name='type' type='xs:string' use='required'/>
-						<xs:attribute name='name' type='xs:string' use='required'/>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-
-	<xs:element name='getParametersForNewNode' type='NodeTypeReferenceRequest'/>
-	<xs:element name='getParametersForNewNodeResponse' type='ParameterFormResponse'/>
-
-	<xs:element name='createNewNode'>
-		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base='NodeTypeReferenceRequest'>
-					<xs:sequence>
-						<xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name='createNewNodeResponse' type='SetNodeParametersResponse'/>
-
-	<xs:element name='destroyNode' type='NodeReferenceRequest'/>
-	<xs:element name='destroyNodeResponse'>
-		<xs:complexType>
-			<xs:attributeGroup ref='responseCode'/>
-		</xs:complexType>
-	</xs:element>
-
-	<xs:element name='getAncestors' type='NodeReferenceParametersRequest'/>
-	<xs:element name='getAncestorsResponse' type='NodeInformationArrayResponse'/>
-
-	<xs:element name='getNodeCommands' type='NodeReferenceRequest'/>
-	<xs:element name='getNodeCommandsResponse' type='CommandArray'/>
-
-	<xs:element name='getCommandParameters' type='NodeCommandReferenceRequest'/>
-	<xs:element name='getCommandParametersResponse' type='ParameterFormResponse'/>
-
-	<xs:element name='executeNodeCommand'>
-		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base='NodeCommandReferenceRequest'>
-					<xs:sequence>
-						<xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name='executeNodeCommandResponse' type='ExecuteNodeCommandResponse'/>
-
-	<xs:element name='getCommonNodeCommands' type='NodeReferencesRequest'/>
-	<xs:element name='getCommonNodeCommandsResponse' type='CommandArray'/>
-	
-	<xs:element name='getCommonCommandParameters'>
-		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base='NodeReferencesRequest'>
-					<xs:attribute name='command' type='xs:string' use='required'/>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name='getCommonCommandParametersResponse' type='ParameterFormResponse'/>
-
-	<xs:element name='executeCommonNodeCommand'>
-		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base='NodeReferencesRequest'>
-					<xs:sequence>
-						<xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name='executeCommonNodeCommandResponse' type='ExecuteNodeCommandResponse'/>
-
-	<xs:complexType name='NodeCommandReferenceRequest'>
-		<xs:complexContent>
-			<xs:extension base='NodeReferenceRequest'>
-				<xs:attribute name='command' type='xs:string' use='required'/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:element name='moveNodeUp' type='NodeReferenceRequest'/>
-	<xs:element name='moveNodeUpResponse' type='Response'/>
-
-	<xs:element name='moveNodeDown' type='NodeReferenceRequest'/>
-	<xs:element name='moveNodeDownResponse' type='Response'/>
-
-	<xs:element name='moveNodesUp' type='NodeReferencesRequest'/>
-	<xs:element name='moveNodesUpResponse' type='Response'/>
-
-	<xs:element name='moveNodesDown' type='NodeReferencesRequest'/>
-	<xs:element name='moveNodesDownResponse' type='Response'/>
-
-	<xs:simpleType name='ResponseCode'>
-		<xs:restriction base='xs:string'>
-			<xs:enumeration value='OK'/>
-			<xs:enumeration value='NotFound'/>
-			<xs:enumeration value='InsufficientPrivileges'/>
-			<xs:enumeration value='Locked'/>
-			<xs:enumeration value='NotImplemented'/>
-			<xs:enumeration value='FormError'/>
-			<xs:enumeration value='OtherError'/>
-		</xs:restriction>
-	</xs:simpleType>
-
-	<xs:simpleType name='Color'>
-		<xs:restriction base='xs:string'>
-			<xs:pattern value='^[0-9a-fA-F]{6}$'/>
-		</xs:restriction>
-	</xs:simpleType>
-
-	<xs:simpleType name='NodeState'>
-		<xs:restriction base='xs:string'>
-			<xs:enumeration value='None'/>
-			<xs:enumeration value='Information'/>
-			<xs:enumeration value='WarningSigned'/>
-			<xs:enumeration value='WarningUnsigned'/>
-			<xs:enumeration value='ErrorSigned'/>
-			<xs:enumeration value='ErrorUnsigned'/>
-		</xs:restriction>
-	</xs:simpleType>
-
-	<xs:simpleType name='MessageType'>
-		<xs:restriction base='xs:string'>
-			<xs:enumeration value='Error'/>
-			<xs:enumeration value='Warning'/>
-			<xs:enumeration value='Information'/>
-		</xs:restriction>
-	</xs:simpleType>
-
-	<xs:simpleType name='CommandType'>
-		<xs:restriction base='xs:string'>
-			<xs:enumeration value='Simple'/>
-			<xs:enumeration value='Parametrized'/>
-		</xs:restriction>
-	</xs:simpleType>
-
-	<xs:attributeGroup name='tokens'>
-		<xs:attribute name='deviceToken' type='xs:string' use='optional'/>
-		<xs:attribute name='serviceToken' type='xs:string' use='optional'/>
-		<xs:attribute name='userToken' type='xs:string' use='optional'/>
-	</xs:attributeGroup>
-
-	<xs:attributeGroup name='sourceReference'>
-		<xs:attribute name='sourceId' type='xs:string' use='required'/>
-	</xs:attributeGroup>
-
-	<xs:attributeGroup name='nodeReference'>
-		<xs:attributeGroup ref='sourceReference'/>
-		<xs:attribute name='nodeId' type='xs:string' use='required'/>
-		<xs:attribute name='cacheType' type='xs:string' use='optional'/>
-	</xs:attributeGroup>
-
-	<xs:attributeGroup name='parametersAndMessages'>
-		<xs:attribute name='parameters' type='xs:boolean' use='optional' default='false'/>
-		<xs:attribute name='messages' type='xs:boolean' use='optional' default='false'/>
-	</xs:attributeGroup>
-
-	<xs:attributeGroup name='indexReference'>
-		<xs:attributeGroup ref='sourceReference'/>
-		<xs:attribute name='index' type='xs:string' use='required'/>
-		<xs:attribute name='indexValue' type='xs:string' use='required'/>
-	</xs:attributeGroup>
-
-	<xs:attributeGroup name='responseCode'>
-		<xs:attribute name='result' type='ResponseCode' use='required'/>
-	</xs:attributeGroup>
-
-	<xs:complexType name='Response'>
-		<xs:attributeGroup ref='responseCode'/>
-	</xs:complexType>
-
-	<xs:complexType name='TokenRequest'>
-        <xs:attributeGroup ref='tokens'/>
+ 
+    <xs:element name='getCapabilities' type='TokenRequest'/>
+    <xs:element name='getCapabilitiesResponse' type='StringArrayResponse'/>
+ 
+    <xs:element name='getAllDataSources' type='TokenRequest'/>
+    <xs:element name='getAllDataSourcesResponse' type='DataSourceArrayResponse'/>
+ 
+    <xs:element name='getTopDataSources' type='TokenRequest'/>
+    <xs:element name='getTopDataSourcesResponse' type='DataSourceArrayResponse'/>
+ 
+    <xs:element name='getChildDataSources' type='SourceReferenceRequest'/>
+    <xs:element name='getChildDataSourcesResponse' type='DataSourceArrayResponse'/>
+ 
+    <xs:element name='containsNode' type='NodeReferenceRequest'/>
+    <xs:element name='containsNodeResponse'>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base='xs:boolean'>
+                    <xs:attributeGroup ref='responseCode'/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+ 
+    <xs:element name='containsNodes' type='NodeReferencesRequest'/>
+    <xs:element name='containsNodesResponse' type='BooleanArrayResponse'/>
+ 
+    <xs:element name='getNode' type='NodeReferenceParametersRequest'/>
+    <xs:element name='getNodeResponse'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeInformation'>
+                    <xs:attributeGroup ref='responseCode'/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+ 
+    <xs:element name='getNodes' type='NodeReferenceParametersRequest'/>
+    <xs:element name='getNodesResponse' type='NodeInformationArrayResponse'/>
+ 
+    <xs:element name='getAllNodes' type='SourceReferenceParametersRequest'/>
+    <xs:element name='getAllNodesResponse' type='NodeInformationArrayResponse'/>
+ 
+    <xs:element name='getNodeInheritence' type='NodeReferenceRequest'/>
+    <xs:element name='getNodeInheritenceResponse'>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name='baseClasses' type='StringArray' minOccurs='1' maxOccurs='1'/>
+                <xs:element name='interfaces' type='StringArray' minOccurs='0' maxOccurs='1'/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+ 
+    <xs:element name='getRootNodes' type='SourceReferenceParametersRequest'/>
+    <xs:element name='getRootNodesResponse' type='NodeInformationArrayResponse'/>
+ 
+    <xs:element name='getChildNodes' type='NodeReferenceParametersRequest'/>
+    <xs:element name='getChildNodesResponse' type='NodeInformationArrayResponse'/>
+ 
+    <xs:element name='getIndices' type='SourceReferenceRequest'/>
+    <xs:element name='getIndicesResponse' type='StringArrayResponse'/>
+ 
+    <xs:element name='getNodesFromIndex' type='IndexReferenceRequest'/>
+    <xs:element name='getNodesFromIndexResponse' type='NodeInformationArrayResponse'/>
+ 
+    <xs:element name='getNodesFromIndices' type='IndexReferencesRequest'/>
+    <xs:element name='getNodesFromIndicesResponse' type='NodeInformationArrayResponse'/>
+ 
+    <xs:element name='getAllIndexValues'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='SourceReferenceRequest'>
+                    <xs:attribute name='index' type='xs:string' use='required'/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='getAllIndexValuesResponse' type='StringArrayResponse'/>
+ 
+    <xs:element name='getNodeParametersForEdit' type='NodeReferenceRequest'/>
+    <xs:element name='getNodeParametersForEditResponse' type='ParameterFormResponse'/>
+ 
+    <xs:element name='setNodeParametersAfterEdit'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeReferenceRequest'>
+                    <xs:sequence>
+                        <xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='setNodeParametersAfterEditResponse' type='SetNodeParametersResponse'/>
+ 
+    <xs:element name='getCommonNodeParametersForEdit' type='NodeReferencesRequest'/>
+    <xs:element name='getCommonNodeParametersForEditResponse' type='ParameterFormResponse'/>
+ 
+    <xs:element name='setCommonNodeParametersAfterEdit'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeReferencesRequest'>
+                    <xs:sequence>
+                        <xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='setCommonNodeParametersAfterEditResponse' type='SetNodeParametersResponse'/>
+ 
+    <xs:element name='getAddableNodeTypes' type='NodeReferenceRequest'/>
+    <xs:element name='getAddableNodeTypesResponse'>
+        <xs:complexType>
+            <xs:sequence minOccurs='0' maxOccurs='unbounded'>
+                <xs:element name='nodeType'>
+                    <xs:complexType>
+                        <xs:attribute name='type' type='xs:string' use='required'/>
+                        <xs:attribute name='name' type='xs:string' use='required'/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+ 
+    <xs:element name='getParametersForNewNode' type='NodeTypeReferenceRequest'/>
+    <xs:element name='getParametersForNewNodeResponse' type='ParameterFormResponse'/>
+ 
+    <xs:element name='createNewNode'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeTypeReferenceRequest'>
+                    <xs:sequence>
+                        <xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='createNewNodeResponse' type='SetNodeParametersResponse'/>
+ 
+    <xs:element name='destroyNode' type='NodeReferenceRequest'/>
+    <xs:element name='destroyNodeResponse'>
+        <xs:complexType>
+            <xs:attributeGroup ref='responseCode'/>
+        </xs:complexType>
+    </xs:element>
+ 
+    <xs:element name='getAncestors' type='NodeReferenceParametersRequest'/>
+    <xs:element name='getAncestorsResponse' type='NodeInformationArrayResponse'/>
+ 
+    <xs:element name='getNodeCommands' type='NodeReferenceRequest'/>
+    <xs:element name='getNodeCommandsResponse' type='CommandArray'/>
+ 
+    <xs:element name='getCommandParameters' type='NodeCommandReferenceRequest'/>
+    <xs:element name='getCommandParametersResponse' type='ParameterFormResponse'/>
+ 
+    <xs:element name='executeNodeCommand'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeCommandReferenceRequest'>
+                    <xs:sequence>
+                        <xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='executeNodeCommandResponse' type='ExecuteNodeCommandResponse'/>
+ 
+    <xs:element name='getCommonNodeCommands' type='NodeReferencesRequest'/>
+    <xs:element name='getCommonNodeCommandsResponse' type='CommandArray'/>
+     
+    <xs:element name='getCommonCommandParameters'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeReferencesRequest'>
+                    <xs:attribute name='command' type='xs:string' use='required'/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='getCommonCommandParametersResponse' type='ParameterFormResponse'/>
+ 
+    <xs:element name='executeCommonNodeCommand'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeReferencesRequest'>
+                    <xs:sequence>
+                        <xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='executeCommonNodeCommandResponse' type='ExecuteNodeCommandResponse'/>
+ 
+    <xs:element name='moveNodeUp' type='NodeReferenceRequest'/>
+    <xs:element name='moveNodeUpResponse' type='Response'/>
+ 
+    <xs:element name='moveNodeDown' type='NodeReferenceRequest'/>
+    <xs:element name='moveNodeDownResponse' type='Response'/>
+ 
+    <xs:element name='moveNodesUp' type='NodeReferencesRequest'/>
+    <xs:element name='moveNodesUpResponse' type='Response'/>
+ 
+    <xs:element name='moveNodesDown' type='NodeReferencesRequest'/>
+    <xs:element name='moveNodesDownResponse' type='Response'/>
+ 
+    <xs:element name='subscribe'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='SourceReferenceRequest'>
+                    <xs:attribute name='getEventsSince' type='xs:dateTime' use='optional'/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='subscribeResponse' type='Response'/>
+ 
+    <xs:element name='unsubscribe' type='SourceReferenceRequest'/>
+    <xs:element name='unsubscribeResponse' type='Response'/>
+ 
+    <xs:simpleType name='ResponseCode'>
+        <xs:restriction base='xs:string'>
+            <xs:enumeration value='OK'/>
+            <xs:enumeration value='NotFound'/>
+            <xs:enumeration value='InsufficientPrivileges'/>
+            <xs:enumeration value='Locked'/>
+            <xs:enumeration value='NotImplemented'/>
+            <xs:enumeration value='FormError'/>
+            <xs:enumeration value='OtherError'/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
+    <xs:simpleType name='Color'>
+        <xs:restriction base='xs:string'>
+            <xs:pattern value='^[0-9a-fA-F]{6}$'/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
+    <xs:simpleType name='NodeState'>
+        <xs:restriction base='xs:string'>
+            <xs:enumeration value='None'/>
+            <xs:enumeration value='Information'/>
+            <xs:enumeration value='WarningSigned'/>
+            <xs:enumeration value='WarningUnsigned'/>
+            <xs:enumeration value='ErrorSigned'/>
+            <xs:enumeration value='ErrorUnsigned'/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
+    <xs:simpleType name='MessageType'>
+        <xs:restriction base='xs:string'>
+            <xs:enumeration value='Error'/>
+            <xs:enumeration value='Warning'/>
+            <xs:enumeration value='Information'/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
+    <xs:simpleType name='CommandType'>
+        <xs:restriction base='xs:string'>
+            <xs:enumeration value='Simple'/>
+            <xs:enumeration value='Parametrized'/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
+    <xs:attributeGroup name='tokens'>
+        <xs:attribute name='deviceToken' type='xs:string' use='optional'/>
+        <xs:attribute name='serviceToken' type='xs:string' use='optional'/>
+        <xs:attribute name='userToken' type='xs:string' use='optional'/>
+    </xs:attributeGroup>
+ 
+    <xs:attributeGroup name='sourceReference'>
+        <xs:attribute name='sourceId' type='xs:string' use='required'/>
+    </xs:attributeGroup>
+ 
+    <xs:attributeGroup name='nodeReference'>
+        <xs:attributeGroup ref='sourceReference'/>
+        <xs:attribute name='nodeId' type='xs:string' use='required'/>
+        <xs:attribute name='cacheType' type='xs:string' use='optional'/>
+    </xs:attributeGroup>
+ 
+    <xs:attributeGroup name='parametersAndMessages'>
+        <xs:attribute name='parameters' type='xs:boolean' use='optional' default='false'/>
+        <xs:attribute name='messages' type='xs:boolean' use='optional' default='false'/>
+    </xs:attributeGroup>
+ 
+    <xs:attributeGroup name='indexReference'>
+        <xs:attributeGroup ref='sourceReference'/>
+        <xs:attribute name='index' type='xs:string' use='required'/>
+        <xs:attribute name='indexValue' type='xs:string' use='required'/>
+    </xs:attributeGroup>
+ 
+    <xs:attributeGroup name='responseCode'>
+        <xs:attribute name='result' type='ResponseCode' use='required'/>
+    </xs:attributeGroup>
+ 
+    <xs:complexType name='Response'>
+        <xs:attributeGroup ref='responseCode'/>
     </xs:complexType>
  
+    <xs:complexType name='TokenRequest'>
+        <xs:attributeGroup ref='tokens'/>
+    </xs:complexType>
+  
     <xs:complexType name='SourceReferenceRequest'>
         <xs:complexContent>
             <xs:extension base='TokenRequest'>
@@ -321,21 +327,21 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='DataSource'>
         <xs:attribute name='id' type='xs:string' use='required'/>
         <xs:attribute name='name' type='xs:string' use='required'/>
         <xs:attribute name='hasChildren' type='xs:boolean' use='optional' default='false'/>
-		<xs:attribute name='lastChanged' type='xs:dateTime' use='optional'/>
-	</xs:complexType>
- 
+        <xs:attribute name='lastChanged' type='xs:dateTime' use='optional'/>
+    </xs:complexType>
+  
     <xs:complexType name='DataSourceArrayResponse'>
         <xs:sequence minOccurs='0' maxOccurs='unbounded'>
             <xs:element name='dataSource' type='DataSource'/>
         </xs:sequence>
-		<xs:attributeGroup ref='responseCode'/>
-	</xs:complexType>
- 
+        <xs:attributeGroup ref='responseCode'/>
+    </xs:complexType>
+  
     <xs:complexType name='NodeReferenceRequest'>
         <xs:complexContent>
             <xs:extension base='TokenRequest'>
@@ -343,11 +349,11 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='NodeReference'>
         <xs:attributeGroup ref='nodeReference'/>
     </xs:complexType>
- 
+  
     <xs:complexType name='NodeReferencesRequest'>
         <xs:complexContent>
             <xs:extension base='TokenRequest'>
@@ -357,24 +363,24 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='NodeReferenceParametersRequest'>
         <xs:complexContent>
             <xs:extension base='NodeReferenceRequest'>
-				<xs:attributeGroup ref='parametersAndMessages'/>
-			</xs:extension>
+                <xs:attributeGroup ref='parametersAndMessages'/>
+            </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-	<xs:complexType name='SourceReferenceParametersRequest'>
-		<xs:complexContent>
-			<xs:extension base='SourceReferenceRequest'>
-				<xs:attributeGroup ref='parametersAndMessages'/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:complexType name='GetAllNodesRequest'>
+ 
+    <xs:complexType name='SourceReferenceParametersRequest'>
+        <xs:complexContent>
+            <xs:extension base='SourceReferenceRequest'>
+                <xs:attributeGroup ref='parametersAndMessages'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    <xs:complexType name='GetAllNodesRequest'>
         <xs:complexContent>
             <xs:extension base='SourceReferenceRequest'>
                 <xs:sequence minOccurs='0' maxOccurs='unbounded'>
@@ -383,7 +389,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='GetChildNodesRequest'>
         <xs:complexContent>
             <xs:extension base='NodeReferenceRequest'>
@@ -393,12 +399,12 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='SortOrder'>
         <xs:attribute name='parameterName' type='xs:string' use='required'/>
         <xs:attribute name='ascending' type='xs:boolean' use='optional' default='true'/>
     </xs:complexType>
- 
+  
     <xs:complexType name='NodeInformation'>
         <xs:choice minOccurs='0' maxOccurs='unbounded'>
             <xs:element name='boolean' type='BooleanParameter'/>
@@ -410,12 +416,12 @@
             <xs:element name='long' type='LongParameter'/>
             <xs:element name='string' type='StringParameter'/>
             <xs:element name='time' type='TimeParameter'/>
-			<xs:element name='message' type='Message'/>
-		</xs:choice>
+            <xs:element name='message' type='Message'/>
+        </xs:choice>
         <xs:attribute name='id' type='xs:string' use='required'/>
         <xs:attribute name='displayName' type='xs:string' use='optional'/>
-		<xs:attribute name='nodeType' type='xs:string' use='optional'/>
-		<xs:attribute name='localId' type='xs:string' use='optional'/>
+        <xs:attribute name='nodeType' type='xs:string' use='optional'/>
+        <xs:attribute name='localId' type='xs:string' use='optional'/>
         <xs:attribute name='logId' type='xs:string' use='optional'/>
         <xs:attribute name='cacheType' type='xs:string' use='required'/>
         <xs:attribute name='state' type='NodeState' use='required'/>
@@ -425,14 +431,14 @@
         <xs:attribute name='hasCommands' type='xs:boolean' use='optional' default='false'/>
         <xs:attribute name='parentId' type='xs:string' use='optional'/>
         <xs:attribute name='parentCacheType' type='xs:string' use='optional'/>
-		<xs:attribute name='lastChanged' type='xs:dateTime' use='optional'/>
-	</xs:complexType>
- 
+        <xs:attribute name='lastChanged' type='xs:dateTime' use='optional'/>
+    </xs:complexType>
+  
     <xs:complexType name='Parameter' abstract='true'>
         <xs:attribute name='id' type='xs:string' use='required'/>
         <xs:attribute name='name' type='xs:string' use='required'/>
     </xs:complexType>
- 
+  
     <xs:complexType name='BooleanParameter'>
         <xs:complexContent>
             <xs:extension base='Parameter'>
@@ -440,7 +446,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='ColorParameter'>
         <xs:complexContent>
             <xs:extension base='Parameter'>
@@ -448,7 +454,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='DateTimeParameter'>
         <xs:complexContent>
             <xs:extension base='Parameter'>
@@ -456,7 +462,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='DoubleParameter'>
         <xs:complexContent>
             <xs:extension base='Parameter'>
@@ -464,7 +470,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='DurationParameter'>
         <xs:complexContent>
             <xs:extension base='Parameter'>
@@ -472,7 +478,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='IntParameter'>
         <xs:complexContent>
             <xs:extension base='Parameter'>
@@ -480,7 +486,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='LongParameter'>
         <xs:complexContent>
             <xs:extension base='Parameter'>
@@ -488,7 +494,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='StringParameter'>
         <xs:complexContent>
             <xs:extension base='Parameter'>
@@ -496,7 +502,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='TimeParameter'>
         <xs:complexContent>
             <xs:extension base='Parameter'>
@@ -504,84 +510,84 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-	<xs:complexType name='Message'>
-		<xs:simpleContent>
-			<xs:extension base='xs:string'>
-				<xs:attribute name='timestamp' type='xs:dateTime' use='required'/>
-				<xs:attribute name='type' type='MessageType' use='required'/>
-				<xs:attribute name='id' type='xs:string' use='optional'/>
-			</xs:extension>
-		</xs:simpleContent>
-	</xs:complexType>
-
-	<xs:complexType name='NodeInformationArrayResponse'>
+ 
+    <xs:complexType name='Message'>
+        <xs:simpleContent>
+            <xs:extension base='xs:string'>
+                <xs:attribute name='timestamp' type='xs:dateTime' use='required'/>
+                <xs:attribute name='type' type='MessageType' use='required'/>
+                <xs:attribute name='id' type='xs:string' use='optional'/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+ 
+    <xs:complexType name='NodeInformationArrayResponse'>
         <xs:sequence minOccurs='0' maxOccurs='unbounded'>
             <xs:element name='node' type='NodeInformation'/>
         </xs:sequence>
-		<xs:attributeGroup ref='responseCode'/>
-	</xs:complexType>
-
-	<xs:complexType name='StringArray'>
+        <xs:attributeGroup ref='responseCode'/>
+    </xs:complexType>
+ 
+    <xs:complexType name='StringArray'>
         <xs:sequence minOccurs='0' maxOccurs='unbounded'>
             <xs:element name='value' type='xs:string'/>
         </xs:sequence>
     </xs:complexType>
-
-	<xs:complexType name='StringArrayResponse'>
-		<xs:complexContent>
-			<xs:extension base='StringArray'>
-				<xs:attributeGroup ref='responseCode'/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
  
+    <xs:complexType name='StringArrayResponse'>
+        <xs:complexContent>
+            <xs:extension base='StringArray'>
+                <xs:attributeGroup ref='responseCode'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+  
     <xs:complexType name='BooleanArrayResponse'>
         <xs:sequence minOccurs='0' maxOccurs='unbounded'>
             <xs:element name='value' type='xs:boolean'/>
         </xs:sequence>
-		<xs:attributeGroup ref='responseCode'/>
-	</xs:complexType>
- 
+        <xs:attributeGroup ref='responseCode'/>
+    </xs:complexType>
+  
     <xs:complexType name='IndexReferenceRequest'>
         <xs:complexContent>
             <xs:extension base='TokenRequest'>
                 <xs:attributeGroup ref='indexReference'/>
-				<xs:attributeGroup ref='parametersAndMessages'/>
-			</xs:extension>
+                <xs:attributeGroup ref='parametersAndMessages'/>
+            </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='IndexReference'>
         <xs:attributeGroup ref='indexReference'/>
     </xs:complexType>
- 
+  
     <xs:complexType name='IndexReferencesRequest'>
         <xs:complexContent>
             <xs:extension base='TokenRequest'>
                 <xs:sequence minOccurs='0' maxOccurs='unbounded'>
                     <xs:element name='indexRef' type='IndexReference'/>
                 </xs:sequence>
-				<xs:attributeGroup ref='parametersAndMessages'/>
-			</xs:extension>
+                <xs:attributeGroup ref='parametersAndMessages'/>
+            </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-	<xs:complexType name='SetNodeParametersResponse'>
-		<xs:choice minOccurs='1' maxOccurs='1'>
-			<xs:element name='error' type='ParameterError' minOccurs='1' maxOccurs='unbounded'/>
-			<xs:element name='node' type='NodeInformation' minOccurs='1' maxOccurs='unbounded'/>
-		</xs:choice>
-		<xs:attributeGroup ref='responseCode'/>
-	</xs:complexType>
-
-	<xs:complexType name='ParameterFormResponse'>
+ 
+    <xs:complexType name='SetNodeParametersResponse'>
+        <xs:choice minOccurs='1' maxOccurs='1'>
+            <xs:element name='error' type='ParameterError' minOccurs='1' maxOccurs='unbounded'/>
+            <xs:element name='node' type='NodeInformation' minOccurs='1' maxOccurs='unbounded'/>
+        </xs:choice>
+        <xs:attributeGroup ref='responseCode'/>
+    </xs:complexType>
+ 
+    <xs:complexType name='ParameterFormResponse'>
         <xs:sequence>
             <xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
         </xs:sequence>
-		<xs:attributeGroup ref="responseCode"/>
+        <xs:attributeGroup ref="responseCode"/>
     </xs:complexType>
- 
+  
     <xs:complexType name='NodeTypeReferenceRequest'>
         <xs:complexContent>
             <xs:extension base='NodeReferenceRequest'>
@@ -589,7 +595,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
- 
+  
     <xs:complexType name='Command'>
         <xs:attribute name='id' type='xs:string' use='required'/>
         <xs:attribute name='name' type='xs:string' use='required'/>
@@ -600,13 +606,13 @@
         <xs:attribute name='failureString' type='xs:string' use='optional'/>
         <xs:attribute name='successString' type='xs:string' use='optional'/>
     </xs:complexType>
- 
+  
     <xs:complexType name='CommandArray'>
         <xs:sequence minOccurs='0' maxOccurs='unbounded'>
             <xs:element name='command' type='Command'/>
         </xs:sequence>
     </xs:complexType>
- 
+  
     <xs:complexType name='NodeCommandReferenceRequest'>
         <xs:complexContent>
             <xs:extension base='NodeReferenceRequest'>
@@ -614,20 +620,20 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-	<xs:complexType name='ExecuteNodeCommandResponse'>
-		<xs:sequence minOccurs='0' maxOccurs='unbounded'>
-			<xs:element name='error' type='ParameterError'/>
-		</xs:sequence>
-		<xs:attributeGroup ref='responseCode'/>
-	</xs:complexType>
-
-	<xs:complexType name='ParameterError'>
-		<xs:simpleContent>
-			<xs:extension base='xs:string'>
-				<xs:attribute name='var' type='xs:string' use='required'/>
-			</xs:extension>
-		</xs:simpleContent>
-	</xs:complexType>
-
+ 
+    <xs:complexType name='ExecuteNodeCommandResponse'>
+        <xs:sequence minOccurs='0' maxOccurs='unbounded'>
+            <xs:element name='error' type='ParameterError'/>
+        </xs:sequence>
+        <xs:attributeGroup ref='responseCode'/>
+    </xs:complexType>
+ 
+    <xs:complexType name='ParameterError'>
+        <xs:simpleContent>
+            <xs:extension base='xs:string'>
+                <xs:attribute name='var' type='xs:string' use='required'/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+ 
 </xs:schema>
