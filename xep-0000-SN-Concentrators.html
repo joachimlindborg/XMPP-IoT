@@ -10,7 +10,7 @@
     <meta name="DC.Description" content="This specification describes how to manage and get information from concentrators of devices over XMPP networks.">
     <meta name="DC.Publisher" content="XMPP Standards Foundation">
     <meta name="DC.Contributor" content="XMPP Extensions Editor">
-    <meta name="DC.Date" content="2001-09-14">
+    <meta name="DC.Date" content="2013-03-20">
     <meta name="DC.Type" content="XMPP Extension Protocol">
     <meta name="DC.Format" content="XHTML">
     <meta name="DC.Identifier" content="XEP-xxxx">
@@ -46,7 +46,7 @@
       </tr>
       <tr valign="top">
         <td><strong>Last Updated:</strong></td>
-        <td>2001-09-14</td>
+        <td>2013-03-20</td>
       </tr>
     </table>
     <hr>
@@ -68,41 +68,55 @@
       3.11.  <a href="#sect-ID0EGIAE">Get All Nodes</a><br>   
       3.12.  <a href="#sect-ID0ESIAE">Get All Nodes with Parameters</a><br>   
       3.13.  <a href="#sect-ID0E5IAE">Get All Nodes derived from</a><br>   
-      3.14.  <a href="#sect-ID0EFJAE">Get All Nodes derived from with Parameters</a><br>   
-      3.15.  <a href="#sect-ID0EMJAE">Get indices of Data Source</a><br>   
-      3.16.  <a href="#sect-ID0ETJAE">Get Node from index</a><br>   
-      3.17.  <a href="#sect-ID0E1JAE">Get Nodes from index</a><br>   
-      3.18.  <a href="#sect-ID0EBKAE">Get All Nodes from index</a><br>   
-      3.19.  <a href="#sect-ID0EIKAE">Get Root Nodes</a><br>   
-      3.20.  <a href="#sect-ID0EPKAE">Get Child Nodes</a><br>   
-      3.21.  <a href="#sect-ID0EWKAE">Get Node Parameters</a><br>   
-      3.22.  <a href="#sect-ID0E4KAE">Set Node Parameters</a><br>   
-      3.23.  <a href="#sect-ID0EELAE">Set Node Parameters Failure</a><br>   
-      3.24.  <a href="#sect-ID0ELLAE">Get Common Node Parameters</a><br>   
-      3.25.  <a href="#sect-ID0ESLAE">Set Common Node Parameters</a><br>   
-      3.26.  <a href="#sect-ID0EZLAE">Set Common Node Parameters Failure</a><br>   
-      3.27.  <a href="#sect-ID0EAMAE">Get Node Status</a><br>   
-      3.28.  <a href="#sect-ID0EHMAE">Get Addable Node Types</a><br>   
-      3.29.  <a href="#sect-ID0EOMAE">Get Parameters for New Node</a><br>   
-      3.30.  <a href="#sect-ID0EVMAE">Create New Node</a><br>   
-      3.31.  <a href="#sect-ID0E3MAE">Create New Node Failure</a><br>   
-      3.32.  <a href="#sect-ID0EDNAE">Destroy Node</a><br>   
-      3.33.  <a href="#sect-ID0EKNAE">Destroy Node Failure</a><br>   
-      3.34.  <a href="#sect-ID0ERNAE">Get Node Ancestors</a><br>   
-      3.35.  <a href="#sect-ID0EYNAE">Get Node Commands</a><br>   
-      3.36.  <a href="#sect-ID0E6NAE">Execute Simple Node Command</a><br>   
-      3.37.  <a href="#sect-ID0EGOAE">Get Common Commands for Nodes</a><br>   
-      3.38.  <a href="#sect-ID0ENOAE">Execute Simple Command on multiple Nodes</a><br>   
-      3.39.  <a href="#sect-ID0EUOAE">Get Node Command Parameters</a><br>   
-      3.40.  <a href="#sect-ID0E2OAE">Execute Parametrized Node Command</a><br>   
-      3.41.  <a href="#sect-ID0ECPAE">Get Common Command Parameters from command on multiple nodes</a><br>   
-      3.42.  <a href="#sect-ID0EJPAE">Execute Parametrized Command on multiple Nodes</a><br>   
-      3.43.  <a href="#sect-ID0EQPAE">Move Node Up</a><br>   
-      3.44.  <a href="#sect-ID0EXPAE">Move Node Down</a><br>4.  <a href="#impl">Implementation Notes</a><br>   
-      4.1.  <a href="#nodeinfo">Node Information</a><br>5.  <a href="#i18n">Internationalization Considerations</a><br>6.  <a href="#security">Security Considerations</a><br>   
+      3.14.  <a href="#sect-ID0EKJAE">Get All Nodes derived from, with Parameters</a><br>   
+      3.15.  <a href="#sect-ID0E1JAE">Get node inheritence</a><br>   
+      3.16.  <a href="#sect-ID0EGKAE">Get Root Nodes</a><br>   
+      3.17.  <a href="#sect-ID0ESKAE">Get Root Nodes with Parameters</a><br>   
+      3.18.  <a href="#sect-ID0E5KAE">Get Child Nodes</a><br>   
+      3.19.  <a href="#sect-ID0EKLAE">Get Child Nodes with Parameters</a><br>   
+      3.20.  <a href="#sect-ID0EWLAE">Get indices of Data Source</a><br>   
+      3.21.  <a href="#sect-ID0ECMAE">Get Nodes from index</a><br>   
+      3.22.  <a href="#sect-ID0EOMAE">Get Nodes from index with Parameters</a><br>   
+      3.23.  <a href="#sect-ID0E1MAE">Get Nodes from indices</a><br>   
+      3.24.  <a href="#sect-ID0EGNAE">Get Nodes from indices with Parameters</a><br>   
+      3.25.  <a href="#sect-ID0ESNAE">Get All Index Values</a><br>   
+      3.26.  <a href="#sect-ID0E5NAE">Get Node Parameters for editing</a><br>   
+      3.27.  <a href="#sect-ID0EVRAE">Set Node Parameters after editing</a><br>   
+      3.28.  <a href="#sect-ID0ERSAE">Set Node Parameters after editing, Failure</a><br>   
+      3.29.  <a href="#sect-ID0EPTAE">Get Common Node Parameters for editing</a><br>   
+      3.30.  <a href="#sect-ID0EYUAE">Set Common Node Parameters after editing</a><br>   
+      3.31.  <a href="#sect-ID0E5VAE">Set Common Node Parameters after editing, Failure</a><br>   
+      3.32.  <a href="#sect-ID0E3WAE">Get Node Status</a><br>   
+      3.33.  <a href="#sect-ID0E22AE">Get Addable Node Types</a><br>   
+      3.34.  <a href="#sect-ID0EK3AE">Get Parameters for New Node</a><br>   
+      3.35.  <a href="#sect-ID0EZ3AE">Create New Node</a><br>   
+      3.36.  <a href="#sect-ID0EV4AE">Create New Node, Failure</a><br>   
+      3.37.  <a href="#sect-ID0ET5AE">Destroy Node</a><br>   
+      3.38.  <a href="#sect-ID0EL6AE">Destroy Node, Failure</a><br>   
+      3.39.  <a href="#sect-ID0E56AE">Get Node Ancestors</a><br>   
+      3.40.  <a href="#sect-ID0EXAAG">Get Node Commands</a><br>   
+      3.41.  <a href="#sect-ID0E2BAG">Execute Simple Node Command</a><br>   
+      3.42.  <a href="#sect-ID0EKCAG">Get Node Command Parameters</a><br>   
+      3.43.  <a href="#sect-ID0EWCAG">Execute Parametrized Node Command</a><br>   
+      3.44.  <a href="#sect-ID0EFDAG">Execute Node Command, Failure</a><br>   
+      3.45.  <a href="#sect-ID0E6DAG">Get Common Commands for Nodes</a><br>   
+      3.46.  <a href="#sect-ID0EOEAG">Execute Simple Command on multiple nodes</a><br>   
+      3.47.  <a href="#sect-ID0E4EAG">Get Common Command Parameters from command on multiple nodes</a><br>   
+      3.48.  <a href="#sect-ID0EJFAG">Execute Common Parametrized Command on multiple nodes</a><br>   
+      3.49.  <a href="#sect-ID0EYFAG">Execute Parametrized Command on multiple Nodes, Failure</a><br>   
+      3.50.  <a href="#sect-ID0ESGAG">Move Node Up</a><br>   
+      3.51.  <a href="#sect-ID0EZGAG">Move Node Down</a><br>   
+      3.52.  <a href="#sect-ID0EAHAG">Subscribe to data source changes</a><br>   
+      3.53.  <a href="#sect-ID0EHHAG">Unsubscribe to data source changes</a><br>   
+      3.54.  <a href="#sect-ID0EOHAG">Get changes since</a><br>4.  <a href="#impl">Implementation Notes</a><br>   
+      4.1.  <a href="#nodeinfo">Node Information</a><br>5.  <a href="#i18n">Internationalization Considerations</a><br>   
+      5.1.  <a href="#sect-ID0E2PAG">Localization</a><br>   
+      5.2.  <a href="#sect-ID0ELQAG">Time Zones</a><br>   
+      5.3.  <a href="#sect-ID0EYQAG">Interoperability</a><br>6.  <a href="#security">Security Considerations</a><br>   
       6.1.  <a href="#Access rights"></a><br>   
-      6.2.  <a href="#sect-ID0E4ZAE">Restricting access to node commands per contact</a><br>   
-      6.3.  <a href="#sect-ID0EE1AE">Restricting access to node commands per contact</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a></p>
+      6.2.  <a href="#sect-ID0EXSAG">Restricting access to commands per contact</a><br>   
+      6.3.  <a href="#sect-ID0E5SAG">Restricting access to node properties per contact</a><br>   
+      6.4.  <a href="#sect-ID0EFTAG">Restricting access to node commands per contact</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
     </div>
     <hr>
@@ -466,7 +480,7 @@
        from='subsystem@clayster.com'
        to='client@clayster.com'
        id='1'&gt;
-      &lt;getCapabilitiesResponse xmlns='urn:xmpp:sn:concentrators'&gt;
+      &lt;getCapabilitiesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
           &lt;value&gt;getCapabilities&lt;/value&gt;
           &lt;value&gt;getAllDataSources&lt;/value&gt;
           &lt;value&gt;getTopDataSources&lt;/value&gt;
@@ -521,7 +535,7 @@
        from='gateway@clayster.com'
        to='client@clayster.com'
        id='2'&gt;
-      &lt;getCapabilitiesResponse xmlns='urn:xmpp:sn:concentrators'&gt;
+      &lt;getCapabilitiesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
           &lt;value&gt;getCapabilities&lt;/value&gt;
           &lt;value&gt;getAllDataSources&lt;/value&gt;
           &lt;value&gt;getTopDataSources&lt;/value&gt;
@@ -563,7 +577,7 @@
        from='plc@clayster.com'
        to='client@clayster.com'
        id='3'&gt;
-      &lt;getCapabilitiesResponse xmlns='urn:xmpp:sn:concentrators'&gt;
+      &lt;getCapabilitiesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
           &lt;value&gt;getCapabilities&lt;/value&gt;
           &lt;value&gt;getAllDataSources&lt;/value&gt;
           &lt;value&gt;getNode&lt;/value&gt;
@@ -601,10 +615,10 @@
        from='concentrator@clayster.com'
        to='client@clayster.com'
        id='4'&gt;
-      &lt;getAllDataSourcesResponse xmlns='urn:xmpp:sn:concentrators'&gt;
-          &lt;dataSource id='Applications' name='Applications' hasChildren='false'/&gt;
-          &lt;dataSource id='Certificates' name='Certificates' hasChildren='false'/&gt;
-          &lt;dataSource id='Clayster.EventSink.Programmable' name='Programmable Event Log' hasChildren='false'/&gt;
+      &lt;getAllDataSourcesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;dataSource id='Applications' name='Applications' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;dataSource id='Certificates' name='Certificates' hasChildren='false' lastChanged='2013-02-20T12:31:54'/&gt;
+          &lt;dataSource id='Clayster.EventSink.Programmable' name='Programmable Event Log' hasChildren='false' lastChanged='2012-10-25T09:31:12'/&gt;
           ...
       &lt;/getAllDataSourcesResponse&gt;
    &lt;/iq&gt;
@@ -632,10 +646,10 @@
        from='concentrator@clayster.com'
        to='client@clayster.com'
        id='5'&gt;
-      &lt;getTopDataSourcesResponse xmlns='urn:xmpp:sn:concentrators'&gt;
-          &lt;dataSource id='MeteringRoot' name='Metering' hasChildren='true'/&gt;
-          &lt;dataSource id='SecurityRoot' name='Security' hasChildren='true'/&gt;
-          &lt;dataSource id='SystemRoot' name='System' hasChildren='true'/&gt;
+      &lt;getTopDataSourcesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;dataSource id='MeteringRoot' name='Metering' hasChildren='true' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;dataSource id='SecurityRoot' name='Security' hasChildren='true' lastChanged='2013-01-12T22:03:50'/&gt;
+          &lt;dataSource id='SystemRoot' name='System' hasChildren='true' lastChanged='2012-02-20T12:34:56'/&gt;
           ...
       &lt;/getAllDataSourcesResponse&gt;
    &lt;/iq&gt;
@@ -655,21 +669,21 @@
        from='client@clayster.com'
        to='concentrator@clayster.com'
        id='6'&gt;
-      &lt;getChildDataSources xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringRoot' xml:lang='en'/&gt;
+      &lt;getChildDataSources xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringRoot' xml:lang='en' lastChanged='2013-03-19T17:58:01'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com'
        id='6'&gt;
-      &lt;getChildDataSourcesResponse xmlns='urn:xmpp:sn:concentrators'&gt;
-          &lt;dataSource id='MeteringFieldImports' name='Field Imports' hasChildren='false'/&gt;
-          &lt;dataSource id='MeteringFieldProcessors' name='Field Processors' hasChildren='false'/&gt;
-          &lt;dataSource id='MeteringFieldSinks' name='Field Sinks' hasChildren='false'/&gt;
-          &lt;dataSource id='MeteringGroups' name='Groups' hasChildren='false'/&gt;
-          &lt;dataSource id='MeteringJobs' name='Jobs' hasChildren='false'/&gt;
-          &lt;dataSource id='MeteringTopology' name='Topology' hasChildren='false'/&gt;
-          &lt;dataSource id='MeteringUnitConversion' name='Unit Conversion' hasChildren='false'/&gt;
+      &lt;getChildDataSourcesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;dataSource id='MeteringFieldImports' name='Field Imports' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;dataSource id='MeteringFieldProcessors' name='Field Processors' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;dataSource id='MeteringFieldSinks' name='Field Sinks' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;dataSource id='MeteringGroups' name='Groups' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;dataSource id='MeteringJobs' name='Jobs' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;dataSource id='MeteringTopology' name='Topology' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;dataSource id='MeteringUnitConversion' name='Unit Conversion' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
       &lt;/getChildDataSourcesResponse&gt;
    &lt;/iq&gt;
             </pre>
@@ -695,7 +709,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com'
        id='7'&gt;
-      &lt;containsNodeResponse xmlns='urn:xmpp:sn:concentrators'&gt;true&lt;/containsNodeResponse&gt;
+      &lt;containsNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;true&lt;/containsNodeResponse&gt;
    &lt;/iq&gt;
             </pre>
       </div>
@@ -725,7 +739,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com'
        id='8'&gt;
-      &lt;containsNodesResponse xmlns='urn:xmpp:sn:concentrators'&gt;
+      &lt;containsNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
          &lt;value&gt;true&lt;/value&gt;
          &lt;value&gt;true&lt;/value&gt;
          &lt;value&gt;false&lt;/value&gt;
@@ -759,14 +773,17 @@
        to='client@clayster.com'
        id='9'&gt;
       &lt;getNodeResponse xmlns='urn:xmpp:sn:concentrators' 
-                       id='Node1'
-                       cacheType='Node'
-                       state='Warning'
+                       result='OK'
+                       id='Node1' 
+                       nodeType='Namespace.NodeType1' 
+                       cacheType='Node' 
+                       state='WarningUnsigned' 
                        hasChildren='false'
-                       isReadable='true'
-                       isConfigurable='true'
-                       hasCommands='true'
-                       parentId='Root'/&gt;
+                       isReadable='true' 
+                       isConfigurable='true' 
+                       hasCommands='true' 
+                       parentId='Root' 
+                       lastChanged='2013-03-19T17:58:01'/&gt;
    &lt;/iq&gt;
             </pre>
       </div>
@@ -779,10 +796,10 @@
             <p class="" style="">
                 This commands lets the client get information from multiple nodes at once.
             </p>
-			<p class="caption"><a name="example-10"></a>Example 10. Get Nodes</p>
+            <p class="caption"><a name="example-10"></a>Example 10. Get Nodes</p>
       <div class="indent">
         <pre class="prettyprint">
-				
+                
    &lt;iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -791,34 +808,37 @@
           &lt;node sourceId='MeteringTopology' nodeId='Node1'/&gt;
           &lt;node sourceId='MeteringTopology' nodeId='Node2'/&gt;
           &lt;node sourceId='MeteringTopology' nodeId='Node3'/&gt;
-	  &lt;/getNodes&gt;
+      &lt;/getNodes&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com'
        id='10'&gt;
-      &lt;getNodesResponse xmlns='urn:xmpp:sn:concentrators'&gt;
-	      &lt;node id='Node1' cacheType='Node' state='Warning' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/&gt;
-	      &lt;node id='Node2' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/&gt;
-	      &lt;node id='Node3' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/&gt;
+      &lt;getNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' isReadable='true' 
+                isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
+                isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
+                isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/&gt;
       &lt;/getNodesResponse&gt;
    &lt;/iq&gt;
-			</pre>
+            </pre>
       </div>
-			<p class="" style="">
-				For more information, see <a href="#nodeinfo">Node Information</a>.
-			</p>
-		</div>
-		<div class="indent">
+            <p class="" style="">
+                For more information, see <a href="#nodeinfo">Node Information</a>.
+            </p>
+        </div>
+        <div class="indent">
       <h3>3.9 <a name="sect-ID0E5GAE">Get Node with parameters</a></h3>
-			<p class="" style="">
-				This command returns basic information about a node in the concentrator, but also adds properties for the node.
-			</p>
-			<p class="caption"><a name="example-11"></a>Example 11. Get Node with parameters</p>
+            <p class="" style="">
+                This command returns basic information about a node in the concentrator, but also adds properties for the node.
+            </p>
+            <p class="caption"><a name="example-11"></a>Example 11. Get Node with parameters</p>
       <div class="indent">
         <pre class="prettyprint">
-				
+                
    &lt;iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -830,33 +850,33 @@
        from='concentrator@clayster.com'
        to='client@clayster.com'
        id='11'&gt;
-      &lt;getNodeResponse xmlns='urn:xmpp:sn:concentrators' id='Node1' cacheType='Node' state='Warning' 
-	                                 hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
+      &lt;getNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' 
+                       hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
           &lt;string id='id' name='Node ID' value='Node1'/&gt;
           &lt;string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/&gt;
           &lt;string id='sn' name='Serial Number' value='123456'/&gt;
           &lt;string id='class' name='Node Class' value='Temperature'/&gt;
           &lt;string id='meterLoc' name='Meter Location' value='P123502-2'/&gt;
           &lt;int id='addr' name='Address' value='123'/&gt;
-		  &lt;double id='lat' name='Latitude' value='12.345'/&gt;
-		  &lt;double id='long' name='Longitude' value='123.45'/&gt;
+          &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+          &lt;double id='long' name='Longitude' value='123.45'/&gt;
       &lt;/getNodeResponse&gt;
    &lt;/iq&gt;
-			</pre>
+            </pre>
       </div>
-			<p class="" style="">
-				For more information, see <a href="#nodeinfo">Node Information</a>.
-			</p>
-		</div>
-		<div class="indent">
+            <p class="" style="">
+                For more information, see <a href="#nodeinfo">Node Information</a>.
+            </p>
+        </div>
+        <div class="indent">
       <h3>3.10 <a name="sect-ID0ESHAE">Get Nodes with parameters</a></h3>
-			<p class="" style="">
-				This commands lets the client get information from multiple nodes at once, including node properties.
-			</p>
-			<p class="caption"><a name="example-12"></a>Example 12. Get Nodes with parameters</p>
+            <p class="" style="">
+                This commands lets the client get information from multiple nodes at once, including node properties.
+            </p>
+            <p class="caption"><a name="example-12"></a>Example 12. Get Nodes with parameters</p>
       <div class="indent">
         <pre class="prettyprint">
-				
+                
    &lt;iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
@@ -865,265 +885,1990 @@
           &lt;node sourceId='MeteringTopology' nodeId='Node1'/&gt;
           &lt;node sourceId='MeteringTopology' nodeId='Node2'/&gt;
           &lt;node sourceId='MeteringTopology' nodeId='Node3'/&gt;
-	  &lt;/getNodes&gt;
+      &lt;/getNodes&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com'
        id='12'&gt;
-      &lt;getNodesResponse xmlns='urn:xmpp:sn:concentrators'&gt;
-	      &lt;node id='Node1' cacheType='Node' state='Warning' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
+      &lt;getNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' isReadable='true' 
+                isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
               &lt;string id='id' name='Node ID' value='Node1'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/&gt;
               &lt;string id='sn' name='Serial Number' value='123456'/&gt;
               &lt;string id='class' name='Node Class' value='Temperature'/&gt;
               &lt;string id='meterLoc' name='Meter Location' value='P123502-2'/&gt;
               &lt;int id='addr' name='Address' value='123'/&gt;
-		      &lt;double id='lat' name='Latitude' value='12.345'/&gt;
-		      &lt;double id='long' name='Longitude' value='123.45'/&gt;
-		  &lt;/node&gt;
-	      &lt;node id='Node2' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
+              &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+              &lt;double id='long' name='Longitude' value='123.45'/&gt;
+          &lt;/node&gt;
+          &lt;node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
+                isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
               &lt;string id='id' name='Node ID' value='Node2'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Pressure Sensor v1.2'/&gt;
               &lt;string id='sn' name='Serial Number' value='234567'/&gt;
               &lt;string id='class' name='Node Class' value='Pressure'/&gt;
               &lt;string id='meterLoc' name='Meter Location' value='P668632-6'/&gt;
               &lt;int id='addr' name='Address' value='124'/&gt;
-		      &lt;double id='lat' name='Latitude' value='12.345'/&gt;
-		      &lt;double id='long' name='Longitude' value='123.45'/&gt;
-		  &lt;/node&gt;
-	      &lt;node id='Node3' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
+              &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+              &lt;double id='long' name='Longitude' value='123.45'/&gt;
+          &lt;/node&gt;
+          &lt;node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
+                isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
               &lt;string id='id' name='Node ID' value='Node3'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Electricity Meter v1.2'/&gt;
               &lt;string id='sn' name='Serial Number' value='345678'/&gt;
               &lt;string id='class' name='Node Class' value='Electricity'/&gt;
               &lt;string id='meterLoc' name='Meter Location' value='P332367-9'/&gt;
               &lt;int id='addr' name='Address' value='125'/&gt;
-		      &lt;double id='lat' name='Latitude' value='12.345'/&gt;
-		      &lt;double id='long' name='Longitude' value='123.45'/&gt;
-		  &lt;/node&gt;
+              &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+              &lt;double id='long' name='Longitude' value='123.45'/&gt;
+          &lt;/node&gt;
       &lt;/getNodesResponse&gt;
    &lt;/iq&gt;
-			</pre>
+            </pre>
       </div>
-			<p class="" style="">
-				For more information, see <a href="#nodeinfo">Node Information</a>.
-			</p>
-		</div>
-		<div class="indent">
+            <p class="" style="">
+                For more information, see <a href="#nodeinfo">Node Information</a>.
+            </p>
+        </div>
+        <div class="indent">
       <h3>3.11 <a name="sect-ID0EGIAE">Get All Nodes</a></h3>
-			<p class="" style="">
-				If the device does not manage too many nodes, it could choose to implement this function. It would return all all available nodes with one call.
-			</p>
-			<p class="caption"><a name="example-13"></a>Example 13. Get All Nodes</p>
+            <p class="" style="">
+                If the device does not manage too many nodes, it could choose to implement this function. It would return all all available nodes with one call.
+            </p>
+            <p class="caption"><a name="example-13"></a>Example 13. Get All Nodes</p>
       <div class="indent">
         <pre class="prettyprint">
-				
+                
    &lt;iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
        id='13'&gt;
-      &lt;getAllNodes xmlns='urn:xmpp:sn:concentrators'/&gt;
+      &lt;getAllNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com'
        id='13'&gt;
-      &lt;getAllNodesResponse xmlns='urn:xmpp:sn:concentrators'&gt;
-	      &lt;node id='Node1' cacheType='Node' state='Warning' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/&gt;
-	      &lt;node id='Node2' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/&gt;
-	      &lt;node id='Node3' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/&gt;
+      &lt;getAllNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/&gt;
+          &lt;node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/&gt;
+          &lt;node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/&gt;
+          &lt;node id='Root' nodeType='Namespace.Root' cacheType='Node' state='None' hasChildren='true' 
+                isReadable='false' isConfigurable='false' hasCommands='true'/&gt;
       &lt;/getNodeResponse&gt;
    &lt;/iq&gt;
-			</pre>
+            </pre>
       </div>
-		</div>
-		<div class="indent">
+        </div>
+        <div class="indent">
       <h3>3.12 <a name="sect-ID0ESIAE">Get All Nodes with Parameters</a></h3>
-			<p class="" style="">
-				If the device does not manage too many nodes, it could choose to implement this function. It would return all all available nodes with their parameters with one call.
-			</p>
-			<p class="caption"><a name="example-14"></a>Example 14. Get All Nodes with Parameters</p>
+            <p class="" style="">
+                If the device does not manage too many nodes, it could choose to implement this function. It would return all all available nodes with their parameters with one call.
+            </p>
+            <p class="caption"><a name="example-14"></a>Example 14. Get All Nodes with Parameters</p>
       <div class="indent">
         <pre class="prettyprint">
-				
+                
    &lt;iq type='get'
        from='client@clayster.com'
        to='concentrator@clayster.com'
        id='14'&gt;
-      &lt;getAllNodes xmlns='urn:xmpp:sn:concentrators' parameters='true' xml:lang='en'/&gt;
+      &lt;getAllNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' parameters='true' xml:lang='en'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com'
        id='14'&gt;
-      &lt;getAllNodesResponse xmlns='urn:xmpp:sn:concentrators'&gt;
-	      &lt;node id='Node1' cacheType='Node' state='Warning' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
+      &lt;getAllNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
               &lt;string id='id' name='Node ID' value='Node1'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/&gt;
               &lt;string id='sn' name='Serial Number' value='123456'/&gt;
               &lt;string id='class' name='Node Class' value='Temperature'/&gt;
               &lt;string id='meterLoc' name='Meter Location' value='P123502-2'/&gt;
               &lt;int id='addr' name='Address' value='123'/&gt;
-		      &lt;double id='lat' name='Latitude' value='12.345'/&gt;
-		      &lt;double id='long' name='Longitude' value='123.45'/&gt;
-		  &lt;/node&gt;
-	      &lt;node id='Node2' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
+              &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+              &lt;double id='long' name='Longitude' value='123.45'/&gt;
+          &lt;/node&gt;
+          &lt;node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
               &lt;string id='id' name='Node ID' value='Node2'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Pressure Sensor v1.2'/&gt;
               &lt;string id='sn' name='Serial Number' value='234567'/&gt;
               &lt;string id='class' name='Node Class' value='Pressure'/&gt;
               &lt;string id='meterLoc' name='Meter Location' value='P668632-6'/&gt;
               &lt;int id='addr' name='Address' value='124'/&gt;
-		      &lt;double id='lat' name='Latitude' value='12.345'/&gt;
-		      &lt;double id='long' name='Longitude' value='123.45'/&gt;
-		  &lt;/node&gt;
-	      &lt;node id='Node3' cacheType='Node' state='None' hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
+              &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+              &lt;double id='long' name='Longitude' value='123.45'/&gt;
+          &lt;/node&gt;
+          &lt;node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
               &lt;string id='id' name='Node ID' value='Node3'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Electricity Meter v1.2'/&gt;
               &lt;string id='sn' name='Serial Number' value='345678'/&gt;
               &lt;string id='class' name='Node Class' value='Electricity'/&gt;
               &lt;string id='meterLoc' name='Meter Location' value='P332367-9'/&gt;
               &lt;int id='addr' name='Address' value='125'/&gt;
-		      &lt;double id='lat' name='Latitude' value='12.345'/&gt;
-		      &lt;double id='long' name='Longitude' value='123.45'/&gt;
-		  &lt;/node&gt;
+              &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+              &lt;double id='long' name='Longitude' value='123.45'/&gt;
+          &lt;/node&gt;
+          &lt;node id='Root' nodeType='Namespace.Root' cacheType='Node' state='None' hasChildren='true' 
+                isReadable='false' isConfigurable='false' hasCommands='true'&gt;
+              &lt;string id='id' name='Node ID' value='Root'/&gt;
+              &lt;string id='type' name='Node Type' value='Root Node'/&gt;
+          &lt;/node&gt;
       &lt;/getNodeResponse&gt;
    &lt;/iq&gt;
-			</pre>
+            </pre>
       </div>
-		</div>
-		<div class="indent">
+        </div>
+        <div class="indent">
       <h3>3.13 <a name="sect-ID0E5IAE">Get All Nodes derived from</a></h3>
-            
+            <p class="" style="">
+                This command assumes node types exist in a class hierarchy, and allows the caller to retrieve nodes with similar inheritance. 
+            </p>
+            <p class="caption"><a name="example-15"></a>Example 15. Get All Nodes derived from</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='15'&gt;
+      &lt;getAllNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology'&gt;
+          &lt;onlyIfDerivedFrom&gt;Namespace.BaseClass1&lt;/onlyIfDerivedFrom&gt;
+      &lt;/getAllNodes&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='15'&gt;
+      &lt;getAllNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/&gt;
+          &lt;node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/&gt;
+      &lt;/getNodeResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
         </div>
-		<div class="indent">
-      <h3>3.14 <a name="sect-ID0EFJAE">Get All Nodes derived from with Parameters</a></h3>
-			
-		</div>
-		<div class="indent">
-      <h3>3.15 <a name="sect-ID0EMJAE">Get indices of Data Source</a></h3>
+        <div class="indent">
+      <h3>3.14 <a name="sect-ID0EKJAE">Get All Nodes derived from, with Parameters</a></h3>
+            <p class="" style="">
+                This command assumes node types exist in a class hierarchy, and allows the caller to retrieve nodes with similar inheritance. It also returns node parameters
+                directly in the response.
+            </p>
+            <p class="caption"><a name="example-16"></a>Example 16. Get All Nodes derived from, with Parameters</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='16'&gt;
+      &lt;getAllNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' parameters='true' xml:lang='en'&gt;
+          &lt;onlyIfDerivedFrom&gt;Namespace.BaseClass1&lt;/onlyIfDerivedFrom&gt;
+      &lt;/getAllNodes&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='16'&gt;
+      &lt;getAllNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
+              &lt;string id='id' name='Node ID' value='Node1'/&gt;
+              &lt;string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/&gt;
+              &lt;string id='sn' name='Serial Number' value='123456'/&gt;
+              &lt;string id='class' name='Node Class' value='Temperature'/&gt;
+              &lt;string id='meterLoc' name='Meter Location' value='P123502-2'/&gt;
+              &lt;int id='addr' name='Address' value='123'/&gt;
+              &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+              &lt;double id='long' name='Longitude' value='123.45'/&gt;
+          &lt;/node&gt;
+          &lt;node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
+              &lt;string id='id' name='Node ID' value='Node3'/&gt;
+              &lt;string id='type' name='Node Type' value='Watchamacallit Electricity Meter v1.2'/&gt;
+              &lt;string id='sn' name='Serial Number' value='345678'/&gt;
+              &lt;string id='class' name='Node Class' value='Electricity'/&gt;
+              &lt;string id='meterLoc' name='Meter Location' value='P332367-9'/&gt;
+              &lt;int id='addr' name='Address' value='125'/&gt;
+              &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+              &lt;double id='long' name='Longitude' value='123.45'/&gt;
+          &lt;/node&gt;
+      &lt;/getNodeResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+            <p class="" style="">
+                Note that the caller can list multiple classes in the request. This would return only nodes having the correct base class(es) and 
+                implementing all interfaces.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>3.15 <a name="sect-ID0E1JAE">Get node inheritence</a></h3>
+            <p class="" style="">
+                This command assumes node types exist in a class hierarchy. It allows the caller to get a list of the node class hierarchy and implemented interfaces the
+                node has.
+            </p>
+            <p class="caption"><a name="example-17"></a>Example 17. Get node inheritence</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='17'&gt;
+      &lt;getNodeInheritence xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='17'&gt;
+      &lt;getNodeInheritenceResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;baseClasses&gt;
+              &lt;value&gt;Namespace.BaseClass1&lt;/value&gt;
+              &lt;value&gt;Namespace.AbstractBase&lt;/value&gt;
+          &lt;/baseClasses&gt;
+      &lt;/getNodeInheritenceResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.16 <a name="sect-ID0EGKAE">Get Root Nodes</a></h3>
+            <p class="" style="">
+                This commands returns the root node of a data source (in case the source is a tree-shaped data source) or the root nodes of a data source (in case the
+                source is flat).
+            </p>
+            <p class="caption"><a name="example-18"></a>Example 18. Get Root Nodes</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='18'&gt;
+      &lt;getRootNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' /&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='18'&gt;
+      &lt;getRootNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/&gt;
+      &lt;/getRootNodesResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.17 <a name="sect-ID0ESKAE">Get Root Nodes with Parameters</a></h3>
+            <p class="" style="">
+                This commands returns the root node of a data source (in case the source is a tree-shaped data source) or the root nodes of a data source (in case the
+                source is flat), and also returns the parameters for the corresponding nodes.
+            </p>
+            <p class="caption"><a name="example-19"></a>Example 19. Get Root Nodes with Parameters</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='19'&gt;
+      &lt;getRootNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' parameters='true' xml:lang='en'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='19'&gt;
+      &lt;getRootNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
+              &lt;string id='id' name='Node ID' value='Node1'/&gt;
+              &lt;string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/&gt;
+              &lt;string id='sn' name='Serial Number' value='123456'/&gt;
+              &lt;string id='class' name='Node Class' value='Temperature'/&gt;
+              &lt;string id='meterLoc' name='Meter Location' value='P123502-2'/&gt;
+              &lt;int id='addr' name='Address' value='123'/&gt;
+              &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+              &lt;double id='long' name='Longitude' value='123.45'/&gt;
+          &lt;/node&gt;
+      &lt;/getRootNodesResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.18 <a name="sect-ID0E5KAE">Get Child Nodes</a></h3>
+            <p class="" style="">
+                This commands returns the child nodes of a node in a data source.
+            </p>
+            <p class="caption"><a name="example-20"></a>Example 20. Get Child Nodes</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='20'&gt;
+      &lt;getChildNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' /&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='20'&gt;
+      &lt;getChildNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/&gt;
+          &lt;node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'/&gt;
+      &lt;/getRootNodesResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.19 <a name="sect-ID0EKLAE">Get Child Nodes with Parameters</a></h3>
+            <p class="" style="">
+                This commands returns the child nodes of a node in a data source, and also returns the parameters for the corresponding nodes.
+            </p>
+            <p class="caption"><a name="example-21"></a>Example 21. Get Child Nodes with Parameters</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='21'&gt;
+      &lt;getChildNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' parameters='true' xml:lang='en' /&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='21'&gt;
+      &lt;getChildNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
+              &lt;string id='id' name='Node ID' value='Node2'/&gt;
+              &lt;string id='type' name='Node Type' value='Watchamacallit Pressure Sensor v1.2'/&gt;
+              &lt;string id='sn' name='Serial Number' value='234567'/&gt;
+              &lt;string id='class' name='Node Class' value='Pressure'/&gt;
+              &lt;string id='meterLoc' name='Meter Location' value='P668632-6'/&gt;
+              &lt;int id='addr' name='Address' value='124'/&gt;
+              &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+              &lt;double id='long' name='Longitude' value='123.45'/&gt;
+          &lt;/node&gt;
+          &lt;node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
+              &lt;string id='id' name='Node ID' value='Node3'/&gt;
+              &lt;string id='type' name='Node Type' value='Watchamacallit Electricity Meter v1.2'/&gt;
+              &lt;string id='sn' name='Serial Number' value='345678'/&gt;
+              &lt;string id='class' name='Node Class' value='Electricity'/&gt;
+              &lt;string id='meterLoc' name='Meter Location' value='P332367-9'/&gt;
+              &lt;int id='addr' name='Address' value='125'/&gt;
+              &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+              &lt;double id='long' name='Longitude' value='123.45'/&gt;
+          &lt;/node&gt;
+      &lt;/getRootNodesResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.20 <a name="sect-ID0EWLAE">Get indices of Data Source</a></h3>
+            <p class="" style="">
+                This commands returns a list of available indices in a data source. Indices can be used for efficient node look-up.
+            </p>
+            <p class="caption"><a name="example-22"></a>Example 22. Get Child Nodes with Parameters</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='22'&gt;
+      &lt;getIndices xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' /&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='22'&gt;
+      &lt;getIndicesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;value&gt;country&lt;/value&gt;
+          &lt;value&gt;region&lt;/value&gt;
+          &lt;value&gt;city&lt;/value&gt;
+          &lt;value&gt;area&lt;/value&gt;
+          &lt;value&gt;street&lt;/value&gt;
+          &lt;value&gt;building&lt;/value&gt;
+          &lt;value&gt;apartment&lt;/value&gt;
+          &lt;value&gt;oid&lt;/value&gt;
+      &lt;/getIndicesResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.21 <a name="sect-ID0ECMAE">Get Nodes from index</a></h3>
+            <p class="" style="">
+                This command can be used to get a node or nodes from a data source using an index and an index value. 
+            </p>
+            <p class="caption"><a name="example-23"></a>Example 23. Get Nodes from index</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='23'&gt;
+      &lt;getNodesFromIndex xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' index='apartment' indexValue='A1-1' /&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='23'&gt;
+      &lt;getNodesFromIndexResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;node id='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Apartment 1-1'/&gt;
+      &lt;/getNodesFromIndexResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.22 <a name="sect-ID0EOMAE">Get Nodes from index with Parameters</a></h3>
+            <p class="" style="">
+                This command can be used to get a node or nodes from a data source using an index and an index value, and also returns the parameters for the corresponding nodes.
+            </p>
+            <p class="caption"><a name="example-24"></a>Example 24. Get Nodes from index with Parameters</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='24'&gt;
+      &lt;getNodesFromIndex xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' index='apartment' indexValue='A1-1' 
+                         parameters='true' xml:lang='en'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='24'&gt;
+      &lt;getNodesFromIndexResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;node id='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Apartment 1-1'&gt;
+              &lt;string id='id' name='Node ID' value='Node2'/&gt;
+              &lt;string id='type' name='Node Type' value='Metering Topology Reference'/&gt;
+              &lt;string id='referenceId' name='Reference ID' value='Node2'/&gt;
+          &lt;/node&gt;
+      &lt;/getNodesFromIndexResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.23 <a name="sect-ID0E1MAE">Get Nodes from indices</a></h3>
+            <p class="" style="">
+                This command can be used to get nodes from a set of data source using indices and index values.
+            </p>
+            <p class="caption"><a name="example-25"></a>Example 25. Get Nodes from indices</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='25'&gt;
+      &lt;getNodesFromIndices xmlns='urn:xmpp:sn:concentrators'&gt;
+          &lt;indexRef sourceId='MeteringGroups' index='apartment' indexValue='A1-1'/&gt;
+          &lt;indexRef sourceId='MeteringGroups' index='apartment' indexValue='A1-2'/&gt;
+      &lt;/getNodesFromIndices&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='25'&gt;
+      &lt;getNodesFromIndicesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;node id='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Apartment 1-1'/&gt;
+          &lt;node id='Node3' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Apartment 1-2'/&gt;
+      &lt;/getNodesFromIndicesResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.24 <a name="sect-ID0EGNAE">Get Nodes from indices with Parameters</a></h3>
+            <p class="" style="">
+                This command can be used to get nodes from a set of data source using indices and index values, and also returns the parameters for the corresponding nodes.
+            </p>
+            <p class="caption"><a name="example-26"></a>Example 26. Get Nodes from indices with Parameters</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='26'&gt;
+      &lt;getNodesFromIndices xmlns='urn:xmpp:sn:concentrators' parameters='true' xml:lang='en'&gt;
+          &lt;indexRef sourceId='MeteringGroups' index='apartment' indexValue='A1-1'/&gt;
+          &lt;indexRef sourceId='MeteringGroups' index='apartment' indexValue='A1-2'/&gt;
+      &lt;/getNodesFromIndices&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='26'&gt;
+      &lt;getNodesFromIndicesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;node id='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Apartment 1-1'&gt;
+              &lt;string id='id' name='Node ID' value='Node2'/&gt;
+              &lt;string id='type' name='Node Type' value='Metering Topology Reference'/&gt;
+              &lt;string id='referenceId' name='Reference ID' value='Node2'/&gt;
+          &lt;/node&gt;
+          &lt;node id='Node3' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Apartment 1-2'&gt;
+              &lt;string id='id' name='Node ID' value='Node3'/&gt;
+              &lt;string id='type' name='Node Type' value='Metering Topology Reference'/&gt;
+              &lt;string id='referenceId' name='Reference ID' value='Node3'/&gt;
+          &lt;/node&gt;
+      &lt;/getNodesFromIndicesResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.25 <a name="sect-ID0ESNAE">Get All Index Values</a></h3>
+            <p class="" style="">
+                This command can be used to get a list of available index values, given a data source and an index.
+            </p>
+            <p class="caption"><a name="example-27"></a>Example 27. Get All Index Values</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='27'&gt;
+      &lt;getAllIndexValues xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' index='apartment'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='27'&gt;
+      &lt;getAllIndexValuesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;value&gt;A1-1&lt;/value&gt;
+          &lt;value&gt;A1-2&lt;/value&gt;
+          ...
+      &lt;/getAllIndexValuesResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.26 <a name="sect-ID0E5NAE">Get Node Parameters for editing</a></h3>
+            <p class="" style="">
+                Previously described commands can return parameters for a node. But these parameters are for presentational or informational use. If the client wants to edit
+                the parameters of a node, another set of commands must be used. This use case shows how <span class="strong">getNodeParametersForEdit</span> can be used to edit available
+                parameters for one node.
+            </p>
+            <p class="" style="">
+                <span class="strong">Note:</span> When editing parameters for a node, a different set of parameters might be returned compared to the set of parameters available in commands
+                mentioned above. There may be various resons for this, among other things (but not limited to) user rights, node settings, and parameter type. User rights may restrict the number
+                of parameters the user can access. The node may be configured not to allow editing of certain parameters. Also, some types of parameters may only be available in
+                an edit mode (like long multi-line parameters) and not in a shorter presentation mode.
+            </p>
+            <p class="caption"><a name="example-28"></a>Example 28. Get Node Parameters for editing</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='28'&gt;
+      &lt;getNodeParametersForEdit xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='28'&gt;
+      &lt;getNodeParametersForEditResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;x type='form' 
+             xmlns='jabber:x:data' 
+             xmlns:xdv='http://jabber.org/protocol/xdata-validate'
+             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'&gt;
+              &lt;title&gt;Node1&lt;/title&gt;
+              &lt;xdl:page label='Identity'&gt;
+                  &lt;xdl:fieldref var='id'/&gt;
+                  &lt;xdl:fieldref var='type'/&gt;
+                  &lt;xdl:fieldref var='class'/&gt;
+                  &lt;xdl:fieldref var='sn'/&gt;
+              &lt;/xdl:page&gt;
+              &lt;xdl:page label='Location'&gt;
+                  &lt;xdl:fieldref var='meterLoc'/&gt;
+                  &lt;xdl:fieldref var='lat'/&gt;
+                  &lt;xdl:fieldref var='long'/&gt;
+              &lt;/xdl:page&gt;
+              &lt;xdl:page label='Communication'&gt;
+                  &lt;xdl:fieldref var='addr'/&gt;
+              &lt;/xdl:page&gt;
+              &lt;field var='xdd session' type='hidden'&gt;
+                  &lt;value&gt;009c7956-001c-43fb-8edb-76bcf74272c9&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='id' type='text-single' label='Node ID:'&gt;
+                  &lt;desc&gt;ID of the node.&lt;/desc&gt;
+                  &lt;required/&gt;
+                  &lt;value&gt;Node1&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='type' type='text-single' label='Node Type:'&gt;
+                  &lt;desc&gt;Type of node.&lt;/desc&gt;
+                  &lt;value&gt;Watchamacallit Temperature Sensor v1.2&lt;/value&gt;
+                  &lt;xdd:readOnly/&gt;
+              &lt;/field&gt;
+              &lt;field var='class' type='list-single' label='Node Class:'&gt;
+                  &lt;desc&gt;Class of node&lt;/desc&gt;
+                  &lt;value&gt;Temperature&lt;/value&gt;
+                  &lt;option label='Cooling'&gt;&lt;value&gt;Cooling&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Electricity'&gt;&lt;value&gt;Electricity&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Heating'&gt;&lt;value&gt;Heating&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Pressure'&gt;&lt;value&gt;Pressure&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Temperature'&gt;&lt;value&gt;Temperature&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Water'&gt;&lt;value&gt;Water&lt;/value&gt;&lt;/option&gt;
+                  ...
+              &lt;/field&gt;
+              &lt;field var='sn' type='text-single' label='Serial Number:'&gt;
+                  &lt;desc&gt;Serial number of node/device.&lt;/desc&gt;
+                  &lt;value&gt;123456&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='meterLoc' type='text-single' label='Meter Location:'&gt;
+                  &lt;desc&gt;Meter Location.&lt;/desc&gt;
+                  &lt;value&gt;P123502-2&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='addr' type='text-single' label='Address:'&gt;
+                  &lt;xdv:validate datatype='xs:int'&gt;
+                      &lt;xdv:range min='1' max='250'/&gt;
+                  &lt;/xdv:validate&gt;
+                  &lt;desc&gt;Bus address&lt;/desc&gt;
+                  &lt;value&gt;123&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='lat' type='text-single' label='Latitude:'&gt;
+                  &lt;xdv:validate datatype='xs:double'&gt;
+                      &lt;xdv:range min='-90' max='90'/&gt;
+                  &lt;/xdv:validate&gt;
+                  &lt;desc&gt;Latitude of node.&lt;/desc&gt;
+                  &lt;value&gt;12.345&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='long' type='text-single' label='Longitude:'&gt;
+                  &lt;xdv:validate datatype='xs:double'&gt;
+                      &lt;xdv:range min='-180' max='180'/&gt;
+                  &lt;/xdv:validate&gt;
+                  &lt;desc&gt;Longitude of node.&lt;/desc&gt;
+                  &lt;value&gt;123.45&lt;/value&gt;
+              &lt;/field&gt;
+          &lt;/x&gt;
+      &lt;/getNodeParametersForEditResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+            <p class="" style="">
+                The following table lists the different XEP's the client should implement to be able to support parameter forms according to this proposal:
+            </p>
+            <div class="indent">
+        <p class="caption"><a name="table-3"></a>Table 3: Form XEPs</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+                <tr class="body">
+                    <th colspan="" rowspan="">XEP</th>
+                    <th colspan="" rowspan="">Description</th>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">XEP-0004</td>
+                    <td colspan="" rowspan="">Describes how basic forms are handled.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">XEP-0122</td>
+                    <td colspan="" rowspan="">Makes it possible to add certain client validation rules to form parameters.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">XEP-0137</td>
+                    <td colspan="" rowspan="">Makes it possible to publish a file upload parameter.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">XEP-0141</td>
+                    <td colspan="" rowspan="">Makes it possible to layout parameters into pages and sections.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">XEP-0141</td>
+                    <td colspan="" rowspan="">Makes it possible to layout parameters into pages and sections.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">xep-0000-DynamicForms</td>
+                    <td colspan="" rowspan="">Makes it possible to create dynamic forms, with server-side validation and forms that change dynamically depending on input.</td>
+                </tr>
+                
+            </table>
+      </div>
+            <p class="" style="">
+                Read-only parameters will be returned with the <span class="strong">readOnly</span> element, as defined in <a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms</a>.
+                Clients SHOULD support this extension if using this command. However, the server MUST NOT change parameters in a node that are read-only, even if clients happen
+                to try to set them.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>3.27 <a name="sect-ID0EVRAE">Set Node Parameters after editing</a></h3>
+            <p class="" style="">
+                After editing the form, the client uses the <span class="strong">setNodeParametersAfterEdit</span> command to set the parameters in the node. Note that it is possible to
+                set the same parameters (or a sub-set of the same parameters) to a different node using this command, without the need to get new form parameters. However, after the first
+                successful set operation, any form session used for dynamic validation during edit will not be available on the server any more.
+            </p>
+            <p class="caption"><a name="example-29"></a>Example 29. Set Node Parameters after editing</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='29'&gt;
+      &lt;setNodeParametersAfterEdit xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en'&gt;
+          &lt;x type='submit' xmlns='jabber:x:data'&gt;
+              &lt;field var='xdd session' type='hidden'&gt;
+                  &lt;value&gt;009c7956-001c-43fb-8edb-76bcf74272c9&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='id' type='text-single'&gt;
+                  &lt;value&gt;Node1&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='class' type='list-single'&gt;
+                  &lt;value&gt;Temperature&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='sn' type='text-single'&gt;
+                  &lt;value&gt;123456&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='meterLoc' type='text-single'&gt;
+                  &lt;value&gt;P123502-2&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='addr' type='text-single'&gt;
+                  &lt;value&gt;123&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='lat' type='text-single'&gt;
+                  &lt;value&gt;12.345&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='long' type='text-single'&gt;
+                  &lt;value&gt;123.45&lt;/value&gt;
+              &lt;/field&gt;
+          &lt;/x&gt;
+      &lt;/setNodeParametersAfterEdit&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='29'&gt;
+      &lt;setNodeParametersAfterEditResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
+              &lt;string id='id' name='Node ID' value='Node1'/&gt;
+              &lt;string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/&gt;
+              &lt;string id='sn' name='Serial Number' value='123456'/&gt;
+              &lt;string id='class' name='Node Class' value='Temperature'/&gt;
+              &lt;string id='meterLoc' name='Meter Location' value='P123502-2'/&gt;
+              &lt;int id='addr' name='Address' value='123'/&gt;
+              &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+              &lt;double id='long' name='Longitude' value='123.45'/&gt;
+          &lt;/node&gt;
+      &lt;/setNodeParametersAfterEditResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+            <p class="" style="">
+                Note that validation rules, pagination, etc., can be stripped from the form when submitting it to the server. Also the form type attribute must be set
+                to <span class="strong">'submit'</span>. Note also that as the <span class="strong">result</span> attribute is <span class="strong">OK</span>, it is assumed the server has dropped any parameter form resources
+                related to the form, which disables any future dynamic validation of the contents of the form. The newly edited node will also be available in the response
+                in a <span class="strong">node</span> element.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>3.28 <a name="sect-ID0ERSAE">Set Node Parameters after editing, Failure</a></h3>
+            <p class="" style="">
+                The following example shows how the server responds when the client tries to set invalid parameters. The response contains detailed information about why, 
+                information which the client can use to inform the user (if any) of what went wrong.
+            </p>
+            <p class="caption"><a name="example-30"></a>Example 30. Set Node Parameters after editing, Failure</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='30'&gt;
+      &lt;setNodeParametersAfterEdit xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node2' xml:lang='en'&gt;
+          &lt;x type='submit' xmlns='jabber:x:data'&gt;
+              &lt;field var='xdd session' type='hidden'&gt;
+                  &lt;value&gt;009c7956-001c-43fb-8edb-76bcf74272c9&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='id' type='text-single'&gt;
+                  &lt;value&gt;Node1&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='class' type='list-single'&gt;
+                  &lt;value&gt;Temperature&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='sn' type='text-single'&gt;
+                  &lt;value&gt;123456&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='meterLoc' type='text-single'&gt;
+                  &lt;value&gt;P123502-2&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='addr' type='text-single'&gt;
+                  &lt;value&gt;123&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='lat' type='text-single'&gt;
+                  &lt;value&gt;12.345&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='long' type='text-single'&gt;
+                  &lt;value&gt;123.45&lt;/value&gt;
+              &lt;/field&gt;
+          &lt;/x&gt;
+      &lt;/setNodeParametersAfterEdit&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='30'&gt;
+      &lt;setNodeParametersAfterEditResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'&gt;
+          &lt;error var='id'&gt;There already exists a node with this ID.&lt;/error&gt;
+      &lt;/setNodeParametersAfterEditResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+            <p class="" style="">
+                As the <span class="strong">result</span> attribute is <span class="strong">FormError</span>, the server maintains any parameter form resources related to the form, and features such as 
+                dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
+                explicitly cancelled or a form session time-out has occurred. See <a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms</a>
+                 [<a href="#nt-ID0EHTAE">8</a>] for more information.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>3.29 <a name="sect-ID0EPTAE">Get Common Node Parameters for editing</a></h3>
+            <p class="" style="">
+                Advanced concentrators handling large quantities of nodes may let users edit sets of nodes at once to be practical. This is done by publising the
+                <span class="strong">getCommonNodeParametersForEdit</span> command. It will return a form with parameters that are common for all selected nodes. Since nodes
+                may have different node types it is assumed that different nodes have different sets of parameters. But if this command is used, only parameters matching
+                in IDs, descriptions, validation rules, etc., (but not values) will be returned in a form.
+            </p>
+            <p class="" style="">
+                <span class="strong">Important:</span> A parameter that exists in multiple nodes but having different values will be marked with the <span class="strong">notSame</span> element,
+                according to <a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms</a>. Clients using this command MUST support the extensions defined in
+                <a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms</a>.
+            </p>
+            <p class="caption"><a name="example-31"></a>Example 31. Get Common Node Parameters for editing</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='31'&gt;
+      &lt;getCommonNodeParametersForEdit xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' xml:lang='en'&gt;
+         &lt;node sourceId='MeteringTopology' nodeId='Node1'/&gt;
+         &lt;node sourceId='MeteringTopology' nodeId='Node2'/&gt;
+         &lt;node sourceId='MeteringTopology' nodeId='Node3'/&gt;
+      &lt;/getCommonNodeParametersForEdit&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='31'&gt;
+      &lt;getCommonNodeParametersForEditResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;x type='form' 
+             xmlns='jabber:x:data' 
+             xmlns:xdv='http://jabber.org/protocol/xdata-validate'
+             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'&gt;
+              &lt;title&gt;Node1, Node2, Node3&lt;/title&gt;
+              &lt;xdl:page label='Identity'&gt;
+                  &lt;xdl:fieldref var='type'/&gt;
+                  &lt;xdl:fieldref var='class'/&gt;
+                  &lt;xdl:fieldref var='sn'/&gt;
+              &lt;/xdl:page&gt;
+              &lt;xdl:page label='Location'&gt;
+                  &lt;xdl:fieldref var='meterLoc'/&gt;
+                  &lt;xdl:fieldref var='lat'/&gt;
+                  &lt;xdl:fieldref var='long'/&gt;
+              &lt;/xdl:page&gt;
+              &lt;field var='xdd session' type='hidden'&gt;
+                  &lt;value&gt;009c7956-001c-43fb-8edb-76bcf74272c9&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='type' type='text-single' label='Node Type:'&gt;
+                  &lt;desc&gt;Type of node.&lt;/desc&gt;
+                  &lt;value&gt;Watchamacallit Temperature Sensor v1.2&lt;/value&gt;
+                  &lt;xdd:readOnly/&gt;
+                  &lt;xdd:notSame/&gt;
+              &lt;/field&gt;
+              &lt;field var='class' type='list-single' label='Node Class:'&gt;
+                  &lt;desc&gt;Class of node&lt;/desc&gt;
+                  &lt;value&gt;Temperature&lt;/value&gt;
+                  &lt;xdd:notSame/&gt;
+                  &lt;option label='Cooling'&gt;&lt;value&gt;Cooling&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Electricity'&gt;&lt;value&gt;Electricity&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Heating'&gt;&lt;value&gt;Heating&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Pressure'&gt;&lt;value&gt;Pressure&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Temperature'&gt;&lt;value&gt;Temperature&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Water'&gt;&lt;value&gt;Water&lt;/value&gt;&lt;/option&gt;
+                  ...
+              &lt;/field&gt;
+              &lt;field var='sn' type='text-single' label='Serial Number:'&gt;
+                  &lt;desc&gt;Serial number of node/device.&lt;/desc&gt;
+                  &lt;value&gt;123456&lt;/value&gt;
+                  &lt;xdd:notSame/&gt;
+              &lt;/field&gt;
+              &lt;field var='meterLoc' type='text-single' label='Meter Location:'&gt;
+                  &lt;desc&gt;Meter Location.&lt;/desc&gt;
+                  &lt;value&gt;P123502-2&lt;/value&gt;
+                  &lt;xdd:notSame/&gt;
+              &lt;/field&gt;
+              &lt;field var='addr' type='text-single' label='Address:'&gt;
+                  &lt;xdv:validate datatype='xs:int'&gt;
+                      &lt;xdv:range min='1' max='250'/&gt;
+                  &lt;/xdv:validate&gt;
+                  &lt;desc&gt;Bus address&lt;/desc&gt;
+                  &lt;value&gt;123&lt;/value&gt;
+                  &lt;xdd:notSame/&gt;
+              &lt;/field&gt;
+              &lt;field var='lat' type='text-single' label='Latitude:'&gt;
+                  &lt;xdv:validate datatype='xs:double'&gt;
+                      &lt;xdv:range min='-90' max='90'/&gt;
+                  &lt;/xdv:validate&gt;
+                  &lt;desc&gt;Latitude of node.&lt;/desc&gt;
+                  &lt;value&gt;12.345&lt;/value&gt;
+                  &lt;xdd:notSame/&gt;
+              &lt;/field&gt;
+              &lt;field var='long' type='text-single' label='Longitude:'&gt;
+                  &lt;xdv:validate datatype='xs:double'&gt;
+                      &lt;xdv:range min='-180' max='180'/&gt;
+                  &lt;/xdv:validate&gt;
+                  &lt;desc&gt;Longitude of node.&lt;/desc&gt;
+                  &lt;value&gt;123.45&lt;/value&gt;
+                  &lt;xdd:notSame/&gt;
+              &lt;/field&gt;
+          &lt;/x&gt;
+      &lt;/getCommonNodeParametersForEditResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+            <p class="" style="">
+                Note that parameters that are not available in all selected nodes will have been removed. Also and ID-parameter will have been removed, since they
+                cannot be set for a collection of nodes.
+            </p>
+            <p class="" style="">
+                Fields marked with the <span class="strong">notSame</span> element only present one value, perhaps the value of the first node. However, the field should be clearly
+                marked in any end-user GUI (for example by graying the field), and MUST ONLY be sent back to the server in a set operation if explicitly edited by the end-user.
+                The parameter will be set in all selected nodes in that case. Unedited fields should be treated as if the end-user accepts the different values for the current set of nodes.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>3.30 <a name="sect-ID0EYUAE">Set Common Node Parameters after editing</a></h3>
+            <p class="" style="">
+                After editing the form, the client uses the <span class="strong">setCommonNodeParametersAfterEdit</span> command to set the parameters in the set of nodes. Note that it is possible to
+                set the same parameters (or a sub-set of the same parameters) to a different set of nodes using this command, without the need to get new form parameters. However, after the first
+                successful set operation, any form session used for dynamic validation during edit will not be available on the server any more.
+            </p>
+            <p class="caption"><a name="example-32"></a>Example 32. Set Common Node Parameters after editing</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='32'&gt;
+      &lt;setCommonNodeParametersAfterEdit xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en'&gt;
+          &lt;node sourceId='MeteringTopology' nodeId='Node1'/&gt;
+          &lt;node sourceId='MeteringTopology' nodeId='Node2'/&gt;
+          &lt;node sourceId='MeteringTopology' nodeId='Node3'/&gt;
+          &lt;x type='submit' xmlns='jabber:x:data'&gt;
+              &lt;field var='xdd session' type='hidden'&gt;
+                  &lt;value&gt;009c7956-001c-43fb-8edb-76bcf74272c9&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='class' type='list-single'&gt;
+                  &lt;value&gt;Temperature&lt;/value&gt;
+              &lt;/field&gt;
+          &lt;/x&gt;
+      &lt;/setCommonNodeParametersAfterEdit&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='32'&gt;
+      &lt;setCommonNodeParametersAfterEditResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'&gt;
+          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
+              &lt;string id='id' name='Node ID' value='Node1'/&gt;
+              &lt;string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/&gt;
+              &lt;string id='sn' name='Serial Number' value='123456'/&gt;
+              &lt;string id='class' name='Node Class' value='Temperature'/&gt;
+              &lt;string id='meterLoc' name='Meter Location' value='P123502-2'/&gt;
+              &lt;int id='addr' name='Address' value='123'/&gt;
+              &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+              &lt;double id='long' name='Longitude' value='123.45'/&gt;
+          &lt;/node&gt;
+          &lt;node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
+              &lt;string id='id' name='Node ID' value='Node2'/&gt;
+              &lt;string id='type' name='Node Type' value='Watchamacallit Pressure Sensor v1.2'/&gt;
+              &lt;string id='sn' name='Serial Number' value='234567'/&gt;
+              &lt;string id='class' name='Node Class' value='Temperature'/&gt;
+              &lt;string id='meterLoc' name='Meter Location' value='P668632-6'/&gt;
+              &lt;int id='addr' name='Address' value='124'/&gt;
+              &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+              &lt;double id='long' name='Longitude' value='123.45'/&gt;
+          &lt;/node&gt;
+          &lt;node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root'&gt;
+              &lt;string id='id' name='Node ID' value='Node3'/&gt;
+              &lt;string id='type' name='Node Type' value='Watchamacallit Electricity Meter v1.2'/&gt;
+              &lt;string id='sn' name='Serial Number' value='345678'/&gt;
+              &lt;string id='class' name='Node Class' value='Temperature'/&gt;
+              &lt;string id='meterLoc' name='Meter Location' value='P332367-9'/&gt;
+              &lt;int id='addr' name='Address' value='125'/&gt;
+              &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+              &lt;double id='long' name='Longitude' value='123.45'/&gt;
+          &lt;/node&gt;
+      &lt;/setCommonNodeParametersAfterEditResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+            <p class="" style="">
+                Note that validation rules, pagination, etc., can be stripped from the form when submitting it to the server. Also the form type attribute must be set
+                to <span class="strong">'submit'</span>. Note also that as the <span class="strong">result</span> attribute is <span class="strong">OK</span>, it is assumed the server has dropped any parameter form resources
+                related to the form, which disables any future dynamic validation of the contents of the form.
+            </p>
+            <p class="" style="">
+                <span class="strong">Important:</span> A parameter that exists in multiple nodes but having different values will be marked with the <span class="strong">notSame</span> element,
+                according to <a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms</a>. Such parameters MUST NOT be sent back to the server unless they have explicitly
+                beed edited or signed by the end-user. The value sent back to the server will be set in all nodes.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>3.31 <a name="sect-ID0E5VAE">Set Common Node Parameters after editing, Failure</a></h3>
+            <p class="" style="">
+                The following example shows how the server responds when the client tries to set invalid parameters to a set of nodes. The response contains detailed information about why,
+                information which the client can use to inform the user (if any) of what went wrong.
+            </p>
+            <p class="caption"><a name="example-33"></a>Example 33. Set Node Parameters after editing, Failure</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='33'&gt;
+      &lt;setCommonNodeParametersAfterEdit xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' xml:lang='en'&gt;
+          &lt;node sourceId='MeteringTopology' nodeId='Node1'/&gt;
+          &lt;node sourceId='MeteringTopology' nodeId='Node2'/&gt;
+          &lt;node sourceId='MeteringTopology' nodeId='Node3'/&gt;
+          &lt;x type='submit' xmlns='jabber:x:data'&gt;
+              &lt;field var='xdd session' type='hidden'&gt;
+                  &lt;value&gt;009c7956-001c-43fb-8edb-76bcf74272c9&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='id' type='text-single'&gt;
+                  &lt;value&gt;Node1&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='class' type='list-single'&gt;
+                  &lt;value&gt;Temperature&lt;/value&gt;
+              &lt;/field&gt;
+          &lt;/x&gt;
+      &lt;/setCommonNodeParametersAfterEdit&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='33'&gt;
+      &lt;setCommonNodeParametersAfterEditResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'&gt;
+          &lt;error var='id'&gt;Parameter not available.&lt;/error&gt;
+      &lt;/setCommonNodeParametersAfterEditResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+            <p class="" style="">
+                As the <span class="strong">result</span> attribute is <span class="strong">FormError</span>, the server maintains any parameter form resources related to the form, and features such as
+                dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
+                explicitly cancelled or a form session time-out has occurred. See <a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms</a>
+                 [<a href="#nt-ID0EUWAE">9</a>] for more information.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>3.32 <a name="sect-ID0E3WAE">Get Node Status</a></h3>
+            <p class="" style="">
+                Each node in the concentrator has a <span class="strong">state</span>. This state is a dynamic run-time state, and therefore not presented as a more static property.
+                This state can be any of the following values, in order of increasing importance:
+            </p>
+            <div class="indent">
+        <p class="caption"><a name="table-4"></a>Table 4: Node states</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+                <tr class="body">
+                    <th colspan="" rowspan="">State</th>
+                    <th colspan="" rowspan="">Description</th>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">None</td>
+                    <td colspan="" rowspan="">Nothing has been reported on the node.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">Information</td>
+                    <td colspan="" rowspan="">There are informative events reported on the node.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">WarningSigned</td>
+                    <td colspan="" rowspan="">There are warnings reported on the node. But these warnings have been viewed by an operator.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">WarningUnsigned</td>
+                    <td colspan="" rowspan="">There are new or unreviewed warnings reported on the node.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">ErrorSigned</td>
+                    <td colspan="" rowspan="">There are errors reported on the node. But these errors have been viewed by an operator.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">ErrorUnsigned</td>
+                    <td colspan="" rowspan="">There are new or unreviewed errors reported on the node.</td>
+                </tr>
+            </table>
+      </div>
+            <p class="" style="">
+                Other types of "states" are of course possible, such as phase - installation phase, test phase, production phase, etc. - but such "states" are seen as static
+                and presented as properties on the node. The dynamic information of the <span class="strong">state</span> attribute of a node, is to give a dynamic runtime state that has
+                the possibility to change during runtime, and that operators must be aware of.
+            </p>
+            <p class="" style="">
+                The following commands have an optional attribute, with which they can ask the server to return any events logged on the node, giving more details of the
+                current state of the node:
+            </p>
+            <ul class="" style="">
+                <li class="" style=""><span class="strong">getNode</span></li>
+                <li class="" style=""><span class="strong">getNodes</span></li>
+                <li class="" style=""><span class="strong">getChildNodes</span></li>
+                <li class="" style=""><span class="strong">getAllNodes</span></li>
+                <li class="" style=""><span class="strong">getRootNodes</span></li>
+                <li class="" style=""><span class="strong">getNodesFromIndex</span></li>
+                <li class="" style=""><span class="strong">getNodesFromIndices</span></li>
+            </ul>
+            <p class="caption"><a name="example-34"></a>Example 34. Get Node Status</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='34'&gt;
+      &lt;getNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' messages='true' xml:lang='en'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='34'&gt;
+      &lt;getNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK' 
+                       id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false'
+                       isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
+          &lt;message timestamp='2013-03-21T11:06:15' type='WarningUnsigned' id='ClockWarning'&gt;Internal clock is offset more than 7 seconds.&lt;/message&gt;
+      &lt;/getNodeResponse&gt;                       
+   &lt;/iq&gt;
+            </pre>
+      </div>
+            <p class="" style="">
+                The <span class="strong">messages</span> attribute can be combined with the <span class="strong">parameters</span> attribute to provide both node properties and
+                messages in the response.
+            </p>
+            <p class="caption"><a name="example-35"></a>Example 35. Get Node with parameters</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='35'&gt;
+      &lt;getNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en' parameters='true' messages='true'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='35'&gt;
+      &lt;getNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK' 
+                       id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
+                       isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
+          &lt;string id='id' name='Node ID' value='Node1'/&gt;
+          &lt;string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/&gt;
+          &lt;string id='sn' name='Serial Number' value='123456'/&gt;
+          &lt;string id='class' name='Node Class' value='Temperature'/&gt;
+          &lt;string id='meterLoc' name='Meter Location' value='P123502-2'/&gt;
+          &lt;int id='addr' name='Address' value='123'/&gt;
+          &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+          &lt;double id='long' name='Longitude' value='123.45'/&gt;
+          &lt;message timestamp='2013-03-21T11:06:15' type='WarningUnsigned' id='ClockWarning'&gt;Internal clock is offset more than 7 seconds.&lt;/message&gt;
+      &lt;/getNodeResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.33 <a name="sect-ID0E22AE">Get Addable Node Types</a></h3>
+            <p class="" style="">
+                Since nodes are context sensitive, depending on node type and tree structure, before being able to create a new node, it is important to know what types of nodes
+                can be added to a given node. This is done using the <span class="strong">getAddableNodeTypes</span> command, as is shown in the following example:
+            </p>
+            <p class="caption"><a name="example-36"></a>Example 36. Get Addable Node Types</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='36'&gt;
+      &lt;getAddableNodeTypes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='B1' xml:lang='en'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='36'&gt;
+      &lt;getAddableNodeTypesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;nodeType type='Namespace.Apartment' name='Apartment'/&gt;
+          &lt;nodeType type='Namespace.MeteringTopologyReference' name='Metering Topology Reference'/&gt;
+          &lt;nodeType type='Namespace.Location' name='Service Location'/&gt;
+      &lt;/getAddableNodeTypesResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.34 <a name="sect-ID0EK3AE">Get Parameters for New Node</a></h3>
+            <p class="" style="">
+                When you what type of node you want to create, you need to get a set of parameters you need to fill in for the new node, before you can create it.
+                This is done using the <span class="strong">getParametersForNewNode</span> command, as is shown in the following example:
+            </p>
+            <p class="caption"><a name="example-37"></a>Example 37. Get Parameters for New Node</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='37'&gt;
+      &lt;getParametersForNewNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='B1' type='Namespace.MeteringTopologyReference' xml:lang='en'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='37'&gt;
+      &lt;getParametersForNewNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;x type='form' 
+             xmlns='jabber:x:data' 
+             xmlns:xdv='http://jabber.org/protocol/xdata-validate'
+             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'&gt;
+              &lt;title&gt;Metering Topology&lt;/title&gt;
+              &lt;xdl:page label='Identity'&gt;
+                  &lt;xdl:fieldref var='id'/&gt;
+                  &lt;xdl:fieldref var='referenceId'/&gt;
+              &lt;/xdl:page&gt;
+              &lt;field var='xdd session' type='hidden'&gt;
+                  &lt;value&gt;0B146517-8EA3-4BEC-A2E9-CF3F209D4A5D&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='id' type='text-single' label='Node ID:'&gt;
+                  &lt;desc&gt;ID of the node.&lt;/desc&gt;
+                  &lt;required/&gt;
+                  &lt;value/&gt;
+              &lt;/field&gt;
+              &lt;field var='referenceId' type='text-single' label='Metering Node ID:'&gt;
+                  &lt;desc&gt;ID of the node in the metering topology.&lt;/desc&gt;
+                  &lt;required/&gt;
+                  &lt;value/&gt;
+              &lt;/field&gt;
+          &lt;/x&gt;
+      &lt;/getParametersForNewNodeResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.35 <a name="sect-ID0EZ3AE">Create New Node</a></h3>
+            <p class="" style="">
+                After editing the form, the client uses the <span class="strong">createNewNode</span> command to create the new node using the parameters provided in the form.
+            </p>
+            <p class="caption"><a name="example-38"></a>Example 38. Create New Node after editing</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='38'&gt;
+      &lt;createNewNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='B1' type='Namespace.MeteringTopologyReference' xml:lang='en'&gt;
+          &lt;x type='submit' xmlns='jabber:x:data'&gt;
+              &lt;field var='xdd session' type='hidden'&gt;
+                  &lt;value&gt;0B146517-8EA3-4BEC-A2E9-CF3F209D4A5D&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='id' type='text-single'&gt;
+                  &lt;value&gt;Reference to Node1&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='referenceId' type='text-single'&gt;
+                  &lt;value&gt;Node1&lt;/value&gt;
+              &lt;/field&gt;
+          &lt;/x&gt;
+      &lt;/setNodeParametersAfterEdit&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='38'&gt;
+      &lt;createNewNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;node id='Reference to Node1' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='B1'&gt;
+              &lt;string id='id' name='Node ID' value='Reference to Node1'/&gt;
+              &lt;string id='type' name='Node Type' value='Metering Topology Reference'/&gt;
+              &lt;string id='referenceId' name='Reference ID' value='Node1'/&gt;
+          &lt;/node&gt;
+      &lt;/createNewNodeResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+            <p class="" style="">
+                Note that validation rules, pagination, etc., can be stripped from the form when submitting it to the server. Also the form type attribute must be set
+                to <span class="strong">'submit'</span>. Note also that as the <span class="strong">result</span> attribute is <span class="strong">OK</span>, it is assumed the server has dropped any parameter form resources
+                related to the form, which disables any future dynamic validation of the contents of the form. The newly created node with corresponding parameters is also returned
+                in the response in a <span class="strong">node</span> element.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>3.36 <a name="sect-ID0EV4AE">Create New Node, Failure</a></h3>
+            <p class="" style="">
+                The following example shows how the server responds when it cannot accept parameters provided when trying to create a node. The response will contain detailed information 
+                about why, information which the client can use to inform the user (if any) of what went wrong.
+            </p>
+            <p class="caption"><a name="example-39"></a>Example 39. Create New Node, Failure</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='39'&gt;
+      &lt;createNewNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='B1' type='Namespace.MeteringTopologyReference' xml:lang='en'&gt;
+          &lt;x type='submit' xmlns='jabber:x:data'&gt;
+              &lt;field var='xdd session' type='hidden'&gt;
+                  &lt;value&gt;0B146517-8EA3-4BEC-A2E9-CF3F209D4A5D&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='id' type='text-single'&gt;
+                  &lt;value&gt;Node2&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='referenceId' type='text-single'&gt;
+                  &lt;value&gt;NodeX&lt;/value&gt;
+              &lt;/field&gt;
+          &lt;/x&gt;
+      &lt;/setNodeParametersAfterEdit&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='39'&gt;
+      &lt;createNewNodeResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'&gt;
+          &lt;error var='id'&gt;There already exists a node with this ID.&lt;/error&gt;
+          &lt;error var='referenceId'&gt;Referenced node was not found.&lt;/error&gt;
+      &lt;/createNewNodeResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+            <p class="" style="">
+                As the <span class="strong">result</span> attribute is <span class="strong">FormError</span>, the server maintains any parameter form resources related to the form, and features such as
+                dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
+                explicitly cancelled or a form session time-out has occurred. See <a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms</a>
+                 [<a href="#nt-ID0EL5AE">10</a>] for more information.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>3.37 <a name="sect-ID0ET5AE">Destroy Node</a></h3>
+            <p class="" style="">
+                To destroy (remove) a node from the concentrator, the <span class="strong">destroyNode</span> command is sent, as is shown in the following example:
+            </p>
+            <p class="caption"><a name="example-40"></a>Example 40. Destroy Node</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='40'&gt;
+      &lt;destroyNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='B1' xml:lang='en'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='40'&gt;
+      &lt;destroyNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+            <p class="" style="">
+                Since the <span class="strong">result</span> attribute in the response is <span class="strong">OK</span>, the node has been removed.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>3.38 <a name="sect-ID0EL6AE">Destroy Node, Failure</a></h3>
+            <p class="" style="">
+                If the <span class="strong">result</span> attribute in the response is other than <span class="strong">OK</span>, the node was not removed from the concentrator.
+                The <span class="strong">result</span> attribute contains the reason why the operation failed, as is shown in the following example:
+            </p>
+            <p class="caption"><a name="example-41"></a>Example 41. Destroy Node, Failure</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='41'&gt;
+      &lt;destroyNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='B1' xml:lang='en'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='41'&gt;
+      &lt;destroyNodeResponse xmlns='urn:xmpp:sn:concentrators' result='InsufficientPrivileges'/&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.39 <a name="sect-ID0E56AE">Get Node Ancestors</a></h3>
+            <p class="" style="">
+                In a tree formed data source, all nodes except the root node has a parent node. The <span class="strong">getAncestors</span> command allows the client to get a list
+                of all ancestors (parent, grand parent, etc.) of a node, as is shown in the following example:
+            </p>
+            <p class="caption"><a name="example-42"></a>Example 42. Get Node Ancestors</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='42'&gt;
+      &lt;getAncestors xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Node2' parameters='false' messages='false' xml:lang='en'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='42'&gt;
+      &lt;getAncestorsResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;node id='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
+                isReadable='true' isConfigurable='true' hasCommands='true' parentId='Apartment 1-1'/&gt;
+          &lt;node id='Apartment 1-1' nodeType='Namespace.Apartment' state='None' hasChildren='true' 
+                isReadable='false' isConfigurable='false' hasCommands='true' parentId='Building 1'/&gt;
+          &lt;node id='Building 1' nodeType='Namespace.Building' state='None' hasChildren='true' 
+                isReadable='false' isConfigurable='false' hasCommands='true' parentId='Street'/&gt;
+          &lt;node id='Street' nodeType='Namespace.Street' state='None' hasChildren='true' 
+                isReadable='false' isConfigurable='false' hasCommands='true' parentId='Area'/&gt;
+          &lt;node id='Area' nodeType='Namespace.Area' state='None' hasChildren='true' 
+                isReadable='false' isConfigurable='false' hasCommands='true' parentId='City'/&gt;
+          &lt;node id='City' nodeType='Namespace.City' state='None' hasChildren='true' 
+                isReadable='false' isConfigurable='false' hasCommands='true' parentId='Region'/&gt;
+          &lt;node id='Region' nodeType='Namespace.Region' state='None' hasChildren='true' 
+                isReadable='false' isConfigurable='false' hasCommands='true' parentId='Country'/&gt;
+          &lt;node id='Country' nodeType='Namespace.Country' state='None' hasChildren='true' 
+                isReadable='false' isConfigurable='false' hasCommands='true' parentId='Root'/&gt;
+          &lt;node id='Root' nodeType='Namespace.Root' state='None' hasChildren='true' 
+                isReadable='false' isConfigurable='false' hasCommands='true'/&gt;
+      &lt;/getAncestorsResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+            <p class="" style="">
+                Note that the concentrator returns information about the node itself in the response. The <span class="strong">parameters</span> and <span class="strong">messages</span>
+                attributes are used in the request to control if the concentrator should return node parameters and node status messages in the response as well.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>3.40 <a name="sect-ID0EXAAG">Get Node Commands</a></h3>
+            <p class="" style="">
+                Each node can have a context sensitive set of commands available to it. This is shown using the <span class="strong">hasCommands</span> attribute in the
+                <a href="#nodeinfo">Node Information</a> record describing the corresponding node. If the client wants to get a list of available commands,
+                the <span class="strong">getNodeCommands</span> command is sent to the concentrator, as is shown in the following example:
+            </p>
+            <p class="caption"><a name="example-43"></a>Example 43. Get Node Commands</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='43'&gt;
+      &lt;getNodeCommands xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' xml:lang='en'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='43'&gt;
+      &lt;getNodeCommandsResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;command id='knockDoor' name='Knock on door' type='Simple' 
+                   confirmationString='Are you sure you want to knock on the door?'
+                   failureString='Unable to knock on the dorr.'
+                   successString='Door knocked.'/&gt;
+          &lt;command id='scheduleWakeupCall' name='Schedule wakeup call' type='Parametrized' 
+                   failureString='Unable to schedule the wakeup call.'
+                   successString='Wakeup call scheduled.'/&gt;
+      &lt;/getNodeCommandsResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+            <p class="" style="">
+                There are two types of commands available: <span class="strong">Simple</span> and <span class="strong">Parametrized</span>. <span class="strong">Simple</span> commands take no parameters, and
+                are therefore simpler to execute. <span class="strong">Parametrized</span> commands require the client to get a set of parameters for the corresponding command before it
+                can be executed. For more information about command attributes, see <a href="#nodecommands">Node Commands</a>.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>3.41 <a name="sect-ID0E2BAG">Execute Simple Node Command</a></h3>
+            <p class="" style="">
+                Executing a simple command is done by sending the <span class="strong">executeNodeCommand</span> command to the concentrator, as is shown in the following example:
+            </p>
+            <p class="caption"><a name="example-44"></a>Example 44. Execute Simple Node Command</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='44'&gt;
+      &lt;executeNodeCommand xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='knockDoor'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='44'&gt;
+      &lt;executeNodeCommandResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.42 <a name="sect-ID0EKCAG">Get Node Command Parameters</a></h3>
+            <p class="" style="">
+                To execute a parametrized command on the node, the client first needs to get (and edit) a set of parameters for the command. Getting a set of parameters for a
+                parametrized command is done as follows:
+            </p>
+            <p class="caption"><a name="example-45"></a>Example 45. Get Node Command Parameters</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='45'&gt;
+      &lt;getCommandParameters xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='scheduleWakeupCall'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='45'&gt;
+      &lt;getCommandParametersResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;x type='form' 
+             xmlns='jabber:x:data' 
+             xmlns:xdv='http://jabber.org/protocol/xdata-validate'
+             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'&gt;
+              &lt;title&gt;Schedule wake-up call&lt;/title&gt;
+              &lt;field var='xdd session' type='hidden'&gt;
+                  &lt;value&gt;E14E330F-8496-46F0-8F40-178808AB13A7&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='time' type='text-single' label='Time:'&gt;
+                  &lt;desc&gt;Time of the wake-up call.&lt;/desc&gt;
+                  &lt;required/&gt;
+                  &lt;value&gt;&lt;/value&gt;
+                  &lt;xdv:validate datatype='xs:time'/&gt;
+                      &lt;xdv:basic/&gt;
+                  &lt;/xdv:validate&gt;
+              &lt;/field&gt;
+              &lt;field var='mode' type='list-single' label='Wake-up mode:'&gt;
+                  &lt;desc&gt;Type of wake-up call&lt;/desc&gt;
+                  &lt;value&gt;Soft&lt;/value&gt;
+                  &lt;option label='Soft'&gt;&lt;value&gt;Soft&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Normal'&gt;&lt;value&gt;Normal&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Harass'&gt;&lt;value&gt;Harass&lt;/value&gt;&lt;/option&gt;
+              &lt;/field&gt;
+          &lt;/x&gt;
+      &lt;/getCommandParametersResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.43 <a name="sect-ID0EWCAG">Execute Parametrized Node Command</a></h3>
+            <p class="" style="">
+                Executing a parametrized command is also done by sending the <span class="strong">executeNodeCommand</span> command to the concentrator, but including the edited form parameters, 
+                as is shown in the following example:
+            </p>
+            <p class="caption"><a name="example-46"></a>Example 46. Execute Parametrized Node Command</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='46'&gt;
+      &lt;executeNodeCommand xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='scheduleWakeupCall' xml:lang='en'&gt;
+          &lt;x type='submit' xmlns='jabber:x:data'&gt;
+              &lt;field var='xdd session' type='hidden'&gt;
+                  &lt;value&gt;E14E330F-8496-46F0-8F40-178808AB13A7&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='time' type='text-single'&gt;
+                  &lt;value&gt;04:30:00&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='mode' type='list-single'&gt;
+                  &lt;value&gt;Harass&lt;/value&gt;
+              &lt;/field&gt;
+          &lt;/x&gt;
+      &lt;/executeNodeCommand&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='46'&gt;
+      &lt;executeNodeCommandResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.44 <a name="sect-ID0EFDAG">Execute Node Command, Failure</a></h3>
+            <p class="" style="">
+                If an error occurs during the execution of a command or if the server rejects the execution of a command, the server returns a response code different from
+                <span class="strong">OK</span>. If the response code is <span class="strong">FormError</span>, the server maintains any parameter form resources related to the form, and features such as
+                dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
+                explicitly cancelled or a form session time-out has occurred. See <a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms</a>
+                 [<a href="#nt-ID0EUDAG">11</a>] for more information.
+            </p>
+            <p class="caption"><a name="example-47"></a>Example 47. Execute Node Command, Failure</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='47'&gt;
+      &lt;executeNodeCommand xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='scheduleWakeupCall' xml:lang='en'&gt;
+          &lt;x type='submit' xmlns='jabber:x:data'&gt;
+              &lt;field var='xdd session' type='hidden'&gt;
+                  &lt;value&gt;E14E330F-8496-46F0-8F40-178808AB13A7&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='time' type='text-single'&gt;
+                  &lt;value&gt;04:30:00&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='mode' type='list-single'&gt;
+                  &lt;value&gt;Harass&lt;/value&gt;
+              &lt;/field&gt;
+          &lt;/x&gt;
+      &lt;/executeNodeCommand&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='47'&gt;
+      &lt;executeNodeCommandResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'&gt;
+          &lt;error var='mode'&gt;You are not allowed to harass people at 04:30:00!&lt;/error&gt;
+      &lt;/executeNodeCommandResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.45 <a name="sect-ID0E6DAG">Get Common Commands for Nodes</a></h3>
+            <p class="" style="">
+                Using the command <span class="strong">getCommonNodeCommands</span>, the client can receive commands that are common for a set of nodes, 
+                as is shown in the following example:
+            </p>
+            <p class="caption"><a name="example-48"></a>Example 48. Get Common Commands for Nodes</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='48'&gt;
+      &lt;getCommonNodeCommands xmlns='urn:xmpp:sn:concentrators' xml:lang='en'&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-1'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-2'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-3'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-4'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-5'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-6'/&gt;
+      &lt;/getCommonNodeCommands&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='48'&gt;
+      &lt;getNodeCommandsResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;command id='knockDoor' name='Knock on door' type='Simple' 
+                   confirmationString='Are you sure you want to knock on the door?'
+                   failureString='Unable to knock on the dorr.'
+                   successString='Door knocked.'/&gt;
+          &lt;command id='scheduleWakeupCall' name='Schedule wakeup call' type='Parametrized' 
+                   failureString='Unable to schedule the wakeup call.'
+                   successString='Wakeup call scheduled.'/&gt;
+      &lt;/getNodeCommandsResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.46 <a name="sect-ID0EOEAG">Execute Simple Command on multiple nodes</a></h3>
+            <p class="" style="">
+                Executing a simple command on multiple nodes is done by sending the <span class="strong">executeCommonNodeCommand</span> command to the concentrator, 
+                as is shown in the following example:
+            </p>
+            <p class="caption"><a name="example-49"></a>Example 49. Execute Simple Command on multiple nodes</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='49'&gt;
+      &lt;executeCommonNodeCommand xmlns='urn:xmpp:sn:concentrators' command='knockDoor'&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-1'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-2'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-3'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-4'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-5'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-6'/&gt;
+      &lt;/executeCommonNodeCommand&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='49'&gt;
+      &lt;executeCommonNodeCommandResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.47 <a name="sect-ID0E4EAG">Get Common Command Parameters from command on multiple nodes</a></h3>
+            <p class="" style="">
+                To execute a parametrized command on a set of nodes, the client first needs to get (and edit) a set of parameters for the common command. Getting a set of parameters for a
+                common parametrized command is done as follows:
+            </p>
+            <p class="caption"><a name="example-50"></a>Example 50. Get Common Command Parameters from command on multiple nodes</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='50'&gt;
+      &lt;getCommonCommandParameters xmlns='urn:xmpp:sn:concentrators' command='scheduleWakeupCall'&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-1'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-2'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-3'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-4'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-5'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-6'/&gt;
+      &lt;/getCommonCommandParameters&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='50'&gt;
+      &lt;getCommonCommandParametersResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;x type='form' 
+             xmlns='jabber:x:data' 
+             xmlns:xdv='http://jabber.org/protocol/xdata-validate'
+             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'&gt;
+              &lt;title&gt;Schedule wake-up call&lt;/title&gt;
+              &lt;field var='xdd session' type='hidden'&gt;
+                  &lt;value&gt;E14E330F-8496-46F0-8F40-178808AB13A7&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='time' type='text-single' label='Time:'&gt;
+                  &lt;desc&gt;Time of the wake-up call.&lt;/desc&gt;
+                  &lt;required/&gt;
+                  &lt;value&gt;&lt;/value&gt;
+                  &lt;xdv:validate datatype='xs:time'/&gt;
+                      &lt;xdv:basic/&gt;
+                  &lt;/xdv:validate&gt;
+              &lt;/field&gt;
+              &lt;field var='mode' type='list-single' label='Wake-up mode:'&gt;
+                  &lt;desc&gt;Type of wake-up call&lt;/desc&gt;
+                  &lt;value&gt;Soft&lt;/value&gt;
+                  &lt;option label='Soft'&gt;&lt;value&gt;Soft&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Normal'&gt;&lt;value&gt;Normal&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Harass'&gt;&lt;value&gt;Harass&lt;/value&gt;&lt;/option&gt;
+              &lt;/field&gt;
+          &lt;/x&gt;
+      &lt;/getCommandParametersResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.48 <a name="sect-ID0EJFAG">Execute Common Parametrized Command on multiple nodes</a></h3>
+            <p class="" style="">
+                Executing a common parametrized command is also done by sending the <span class="strong">executeCommonNodeCommand</span> command to the concentrator, but including the edited form parameters,
+                as is shown in the following example:
+            </p>
+            <p class="caption"><a name="example-51"></a>Example 51. Execute Common Parametrized Command on multiple nodes</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='51'&gt;
+      &lt;executeCommonNodeCommand xmlns='urn:xmpp:sn:concentrators' command='scheduleWakeupCall' xml:lang='en'&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-1'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-2'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-3'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-4'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-5'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-6'/&gt;
+          &lt;x type='submit' xmlns='jabber:x:data'&gt;
+              &lt;field var='xdd session' type='hidden'&gt;
+                  &lt;value&gt;E14E330F-8496-46F0-8F40-178808AB13A7&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='time' type='text-single'&gt;
+                  &lt;value&gt;04:30:00&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='mode' type='list-single'&gt;
+                  &lt;value&gt;Harass&lt;/value&gt;
+              &lt;/field&gt;
+          &lt;/x&gt;
+      &lt;/executeCommonNodeCommand&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='51'&gt;
+      &lt;executeCommonNodeCommandResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.49 <a name="sect-ID0EYFAG">Execute Parametrized Command on multiple Nodes, Failure</a></h3>
+            <p class="" style="">
+                If an error occurs during the execution of a common command or if the server rejects the execution of a common command, the server returns a response code different from
+                <span class="strong">OK</span>. If the response code is <span class="strong">FormError</span>, the server maintains any parameter form resources related to the form, and features such as
+                dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
+                explicitly cancelled or a form session time-out has occurred. See <a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms</a>
+                 [<a href="#nt-ID0EHGAG">12</a>] for more information.
+            </p>
+            <p class="caption"><a name="example-52"></a>Example 52. Execute Parametrized Command on multiple Nodes, Failure</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='52'&gt;
+      &lt;executeCommonNodeCommand xmlns='urn:xmpp:sn:concentrators' command='scheduleWakeupCall' xml:lang='en'&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-1'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-2'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-3'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-4'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-5'/&gt;
+          &lt;node sourceId='MeteringGroups' nodeId='Apartment 1-6'/&gt;
+          &lt;x type='submit' xmlns='jabber:x:data'&gt;
+              &lt;field var='xdd session' type='hidden'&gt;
+                  &lt;value&gt;E14E330F-8496-46F0-8F40-178808AB13A7&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='time' type='text-single'&gt;
+                  &lt;value&gt;04:30:00&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='mode' type='list-single'&gt;
+                  &lt;value&gt;Harass&lt;/value&gt;
+              &lt;/field&gt;
+          &lt;/x&gt;
+      &lt;/executeCommonNodeCommand&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='52'&gt;
+      &lt;executeCommonNodeCommandResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'&gt;
+          &lt;error var='mode'&gt;You are not allowed to harass people at 04:30:00!&lt;/error&gt;
+      &lt;/executeCommonNodeCommandResponse&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.50 <a name="sect-ID0ESGAG">Move Node Up</a></h3>
             
         </div>
         <div class="indent">
-      <h3>3.16 <a name="sect-ID0ETJAE">Get Node from index</a></h3>
+      <h3>3.51 <a name="sect-ID0EZGAG">Move Node Down</a></h3>
             
         </div>
         <div class="indent">
-      <h3>3.17 <a name="sect-ID0E1JAE">Get Nodes from index</a></h3>
+      <h3>3.52 <a name="sect-ID0EAHAG">Subscribe to data source changes</a></h3>
             
         </div>
         <div class="indent">
-      <h3>3.18 <a name="sect-ID0EBKAE">Get All Nodes from index</a></h3>
+      <h3>3.53 <a name="sect-ID0EHHAG">Unsubscribe to data source changes</a></h3>
             
         </div>
         <div class="indent">
-      <h3>3.19 <a name="sect-ID0EIKAE">Get Root Nodes</a></h3>
+      <h3>3.54 <a name="sect-ID0EOHAG">Get changes since</a></h3>
             
         </div>
-        <div class="indent">
-      <h3>3.20 <a name="sect-ID0EPKAE">Get Child Nodes</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.21 <a name="sect-ID0EWKAE">Get Node Parameters</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.22 <a name="sect-ID0E4KAE">Set Node Parameters</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.23 <a name="sect-ID0EELAE">Set Node Parameters Failure</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.24 <a name="sect-ID0ELLAE">Get Common Node Parameters</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.25 <a name="sect-ID0ESLAE">Set Common Node Parameters</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.26 <a name="sect-ID0EZLAE">Set Common Node Parameters Failure</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.27 <a name="sect-ID0EAMAE">Get Node Status</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.28 <a name="sect-ID0EHMAE">Get Addable Node Types</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.29 <a name="sect-ID0EOMAE">Get Parameters for New Node</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.30 <a name="sect-ID0EVMAE">Create New Node</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.31 <a name="sect-ID0E3MAE">Create New Node Failure</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.32 <a name="sect-ID0EDNAE">Destroy Node</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.33 <a name="sect-ID0EKNAE">Destroy Node Failure</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.34 <a name="sect-ID0ERNAE">Get Node Ancestors</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.35 <a name="sect-ID0EYNAE">Get Node Commands</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.36 <a name="sect-ID0E6NAE">Execute Simple Node Command</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.37 <a name="sect-ID0EGOAE">Get Common Commands for Nodes</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.38 <a name="sect-ID0ENOAE">Execute Simple Command on multiple Nodes</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.39 <a name="sect-ID0EUOAE">Get Node Command Parameters</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.40 <a name="sect-ID0E2OAE">Execute Parametrized Node Command</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.41 <a name="sect-ID0ECPAE">Get Common Command Parameters from command on multiple nodes</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.42 <a name="sect-ID0EJPAE">Execute Parametrized Command on multiple Nodes</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.43 <a name="sect-ID0EQPAE">Move Node Up</a></h3>
-            
-        </div>
-        <div class="indent">
-      <h3>3.44 <a name="sect-ID0EXPAE">Move Node Down</a></h3>
-            
-        </div>
+        
     <h2>4.
        <a name="impl">Implementation Notes</a></h2>
         <div class="indent">
@@ -1131,8 +2876,9 @@
             <p class="" style="">
                 Several commands return basic node information. The following table lists possible fields with corresponding descriptions.
             </p>
+            
             <div class="indent">
-        <p class="caption"><a name="table-3"></a>Table 3: Basic Node Information</p>
+        <p class="caption"><a name="table-5"></a>Table 5: Basic Node Information</p>
         <table border="1" cellpadding="3" cellspacing="0">
                 <tr class="body">
                     <th colspan="" rowspan="">Attribute</th>
@@ -1208,16 +2954,37 @@
             <p class="" style="">
                 (**) See <a href="xep-0000-SN-Control.html">xep-0000-SN-Control</a> for more information about how to configure nodes.
             </p>
-			
         </div>
+        
+        
+        
+        
         
     <h2>5.
        <a name="i18n">Internationalization Considerations</a></h2>
-        <p class="" style="">
-            Loalization of content can be performed if clients provide <span class="strong">xml:lang</span> attributes in commands made to the concentrator. If omitted, the
-            <span class="strong">default language</span> will be used in responses. If provided, but the concentrator does not support localization, or the requested language,
-            the <span class="strong">default language</span> will also be used.
-        </p>
+        <div class="indent">
+      <h3>5.1 <a name="sect-ID0E2PAG">Localization</a></h3>
+            <p class="" style="">
+                Loalization of content can be performed if clients provide <span class="strong">xml:lang</span> attributes in commands made to the concentrator. If omitted, the
+                <span class="strong">default language</span> will be used in responses. If provided, but the concentrator does not support localization, or the requested language,
+                the <span class="strong">default language</span> will also be used.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>5.2 <a name="sect-ID0ELQAG">Time Zones</a></h3>
+            <p class="" style="">
+                Concentrators of larger sub-systems spanning multiple time-zones should specify all timestamps with time-zone information, so readers can perform comparisons
+                of time information.
+            </p>
+            <p class="" style="">
+                Information read from a concentrator that lacks time-zone information should be considered to lie in the same time-zone as the reader, unless not explicitly
+                configured with a time-zone.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>5.3 <a name="sect-ID0EYQAG">Interoperability</a></h3>
+            
+        </div>
     <h2>6.
        <a name="security">Security Considerations</a></h2>
         <div class="indent">
@@ -1244,11 +3011,15 @@
             </ul>
         </div>
         <div class="indent">
-      <h3>6.2 <a name="sect-ID0E4ZAE">Restricting access to node commands per contact</a></h3>
+      <h3>6.2 <a name="sect-ID0EXSAG">Restricting access to commands per contact</a></h3>
             
         </div>
         <div class="indent">
-      <h3>6.3 <a name="sect-ID0EE1AE">Restricting access to node commands per contact</a></h3>
+      <h3>6.3 <a name="sect-ID0E5SAG">Restricting access to node properties per contact</a></h3>
+            
+        </div>
+        <div class="indent">
+      <h3>6.4 <a name="sect-ID0EFTAG">Restricting access to node commands per contact</a></h3>
             
         </div>
     <h2>7.
@@ -1259,6 +3030,7 @@
         <p class="" style="">REQUIRED.</p>
     <h2>9.
        <a name="schema">XML Schema</a></h2>
+        
         <p class="caption">
     </p>
     <div class="indent">
@@ -1723,7 +3495,7 @@
             Type:
             <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
             Version: 0.0.1<br>
-            Last Updated: 2001-09-14<br>
+            Last Updated: 2013-03-20<br>
                 Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001, XEP-0004, XEP-0030, XEP-0122, XEP-0137, XEP-0141, xep-0000-SN-SensorData, xep-0000-SN-Provisioning, xep-0000-DynamicForms<br>
                 Supersedes: None<br>
                 Superseded By: None<br>
@@ -1764,14 +3536,27 @@
       <p><a name="nt-ID0EPCAC">5</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
       <p><a name="nt-ID0E2CAC">6</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
       <p><a name="nt-ID0EHDAC">7</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+      <p><a name="nt-ID0EHTAE">8</a>. XEP-xxxx: Dynamic Data Forms &lt;<a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms.html</a>&gt;</p>
+      <p><a name="nt-ID0EUWAE">9</a>. 
+                    XEP-xxxx: Dynamic Data Forms &lt;<a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms.html</a>&gt;
+                </p>
+      <p><a name="nt-ID0EL5AE">10</a>. 
+                    XEP-xxxx: Dynamic Data Forms &lt;<a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms.html</a>&gt;
+                </p>
+      <p><a name="nt-ID0EUDAG">11</a>. 
+                    XEP-xxxx: Dynamic Data Forms &lt;<a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms.html</a>&gt;
+                </p>
+      <p><a name="nt-ID0EHGAG">12</a>. 
+                    XEP-xxxx: Dynamic Data Forms &lt;<a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms.html</a>&gt;
+                </p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
     <div class="indent">
-      <h4>Version 0.0.1 (2001-09-14)</h4>
+      <h4>Version 0.0.1 (2013-03-20)</h4>
       <div class="indent">
                 <p class="" style="">First draft.</p>
-             (psa)
+             (pwa)
     </div>
     </div>
     <hr>
