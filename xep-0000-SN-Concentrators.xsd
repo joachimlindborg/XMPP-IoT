@@ -223,21 +223,90 @@
     <xs:element name='moveNodesDown' type='NodeReferencesRequest'/>
     <xs:element name='moveNodesDownResponse' type='Response'/>
  
-    <xs:element name='subscribe'>
+	<xs:element name='subscribe'>
         <xs:complexType>
             <xs:complexContent>
                 <xs:extension base='SourceReferenceRequest'>
                     <xs:attribute name='getEventsSince' type='xs:dateTime' use='optional'/>
-                </xs:extension>
+					<xs:attributeGroup ref='parametersAndMessages'/>
+					<xs:attributeGroup ref='eventTypes'/>
+				</xs:extension>
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
     <xs:element name='subscribeResponse' type='Response'/>
  
-    <xs:element name='unsubscribe' type='SourceReferenceRequest'/>
+    <xs:element name='unsubscribe'>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='SourceReferenceRequest'>
+					<xs:attributeGroup ref='eventTypes'/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
     <xs:element name='unsubscribeResponse' type='Response'/>
  
-    <xs:simpleType name='ResponseCode'>
+	<xs:element name='nodeAdded' type='NodeSourceInformation'/>
+	<xs:element name='nodeUpdated'>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='NodeSourceInformation'>
+					<xs:attribute name='oldId' type='xs:string' use='optional'/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='nodeStatusChanged'>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='NodeReference'>
+					<xs:choice minOccurs='0' maxOccurs='unbounded'>
+						<xs:element name='message' type='Message'/>
+					</xs:choice>
+					<xs:attribute name='state' type='NodeState' use='required'/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='nodeRemoved' type='NodeReference'/>
+	<xs:element name='nodeMovedUp' type='NodeReference'/>
+	<xs:element name='nodeMovedDown' type='NodeReference'/>
+ 
+	<xs:element name='getDatabases' type='TokenRequest'/>
+	<xs:element name='getDatabasesResponse'>
+		<xs:complexType>
+			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+				<xs:element name='database'>
+					<xs:complexType>
+						<xs:attribute name='id' type='xs:string' use='required'/>
+						<xs:attribute name='name' type='xs:string' use='optional'/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attributeGroup ref='responseCode'/>
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:element name='getDatabaseReadoutParameters' type='DatabaseReferenceRequest'/>
+	<xs:element name='getDatabaseReadoutParametersResponse' type='ParameterFormResponse'/>
+ 
+	<xs:element name='startDatabaseReadout'>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='DatabaseReferenceRequest'>
+					<xs:sequence>
+						<xs:element name='node' type='NodeReference' minOccurs='1' maxOccurs='unbounded'/>
+						<xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
+					</xs:sequence>
+					<xs:attribute name="seqnr" type="xs:int" use="required"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='startDatabaseReadoutResponse' type='ExecuteNodeCommandResponse'/>
+ 
+	<xs:simpleType name='ResponseCode'>
         <xs:restriction base='xs:string'>
             <xs:enumeration value='OK'/>
             <xs:enumeration value='NotFound'/>
@@ -312,7 +381,24 @@
         <xs:attribute name='result' type='ResponseCode' use='required'/>
     </xs:attributeGroup>
  
-    <xs:complexType name='Response'>
+	<xs:attributeGroup name='eventTypes'>
+		<xs:attribute name='nodeAdded' type='xs:boolean' use='optional' default='true'/>
+		<xs:attribute name='nodeUpdated' type='xs:boolean' use='optional' default='true'/>
+		<xs:attribute name='nodeStatusChanged' type='xs:boolean' use='optional' default='true'/>
+		<xs:attribute name='nodeRemoved' type='xs:boolean' use='optional' default='true'/>
+		<xs:attribute name='nodeMovedUp' type='xs:boolean' use='optional' default='true'/>
+		<xs:attribute name='nodeMovedDown' type='xs:boolean' use='optional' default='true'/>
+	</xs:attributeGroup>
+ 
+	<xs:attributeGroup name='databaseReference'>
+		<xs:attribute name='databaseId' type='xs:string' use='required'/>
+	</xs:attributeGroup>
+ 
+	<xs:attributeGroup name='readoutReference'>
+		<xs:attribute name='seqnr' type='xs:int' use='required'/>
+	</xs:attributeGroup>
+ 
+	<xs:complexType name='Response'>
         <xs:attributeGroup ref='responseCode'/>
     </xs:complexType>
  
@@ -423,18 +509,27 @@
         <xs:attribute name='nodeType' type='xs:string' use='optional'/>
         <xs:attribute name='localId' type='xs:string' use='optional'/>
         <xs:attribute name='logId' type='xs:string' use='optional'/>
-        <xs:attribute name='cacheType' type='xs:string' use='required'/>
+        <xs:attribute name='cacheType' type='xs:string' use='optional'/>
         <xs:attribute name='state' type='NodeState' use='required'/>
-        <xs:attribute name='hasChildren' type='xs:boolean' use='required'/>
-        <xs:attribute name='isReadable' type='xs:boolean' use='optional' default='false'/>
+		<xs:attribute name='hasChildren' type='xs:boolean' use='required'/>
+		<xs:attribute name='childrenOrdered' type='xs:boolean' use='optional' default='false'/>
+		<xs:attribute name='isReadable' type='xs:boolean' use='optional' default='false'/>
         <xs:attribute name='isConfigurable' type='xs:boolean' use='optional' default='false'/>
         <xs:attribute name='hasCommands' type='xs:boolean' use='optional' default='false'/>
         <xs:attribute name='parentId' type='xs:string' use='optional'/>
         <xs:attribute name='parentCacheType' type='xs:string' use='optional'/>
         <xs:attribute name='lastChanged' type='xs:dateTime' use='optional'/>
     </xs:complexType>
-  
-    <xs:complexType name='Parameter' abstract='true'>
+ 
+	<xs:complexType name='NodeSourceInformation'>
+		<xs:complexContent>
+			<xs:extension base='NodeInformation'>
+				<xs:attributeGroup ref='sourceReference'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+ 
+	<xs:complexType name='Parameter' abstract='true'>
         <xs:attribute name='id' type='xs:string' use='required'/>
         <xs:attribute name='name' type='xs:string' use='required'/>
     </xs:complexType>
@@ -635,5 +730,18 @@
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
+ 
+	<xs:complexType name='ReadoutReference'>
+		<xs:attributeGroup ref='databaseReference'/>
+		<xs:attributeGroup ref='readoutReference'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='DatabaseReferenceRequest'>
+		<xs:complexContent>
+			<xs:extension base='TokenRequest'>
+				<xs:attributeGroup ref='databaseReference'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
  
 </xs:schema>
