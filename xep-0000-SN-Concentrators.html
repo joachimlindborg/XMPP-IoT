@@ -129,14 +129,19 @@
       3.8.2.  <a href="#sect-ID0ENWAG">Get Database Readout Parameters</a><br>      
       3.8.3.  <a href="#sect-ID0E3WAG">Start Database Readout</a><br>      
       3.8.4.  <a href="#sect-ID0ELYAG">Start Database Readout, Failure</a><br>4.  <a href="#impl">Implementation Notes</a><br>   
-      4.1.  <a href="#nodeinfo">Node Information</a><br>5.  <a href="#i18n">Internationalization Considerations</a><br>   
-      5.1.  <a href="#sect-ID0ECEBG">Localization</a><br>   
-      5.2.  <a href="#sect-ID0ESEBG">Time Zones</a><br>   
-      5.3.  <a href="#sect-ID0E6EBG">Interoperability</a><br>6.  <a href="#security">Security Considerations</a><br>   
-      6.1.  <a href="#sect-ID0ELFBG">Access rights</a><br>   
-      6.2.  <a href="#sect-ID0E5GBG">Restricting access to commands per contact</a><br>   
-      6.3.  <a href="#sect-ID0EFHBG">Restricting access to node properties per contact</a><br>   
-      6.4.  <a href="#sect-ID0EMHBG">Restricting access to node commands per contact</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a></p>
+      4.1.  <a href="#nodeinfo">Node Information</a><br>   
+      4.2.  <a href="#sect-ID0ERDBG">Parameter Types</a><br>   
+      4.3.  <a href="#sect-ID0EMHBG">Response Codes</a><br>   
+      4.4.  <a href="#sect-ID0ERKBG">Unimplemented commands</a><br>   
+      4.5.  <a href="#nodecommands">Command attributes</a><br>   
+      4.6.  <a href="#sect-ID0EPQBG">Node States</a><br>5.  <a href="#i18n">Internationalization Considerations</a><br>   
+      5.1.  <a href="#sect-ID0EQTBG">Localization</a><br>   
+      5.2.  <a href="#sect-ID0EAUBG">Time Zones</a><br>   
+      5.3.  <a href="#sect-ID0ENUBG">Interoperability</a><br>6.  <a href="#security">Security Considerations</a><br>   
+      6.1.  <a href="#sect-ID0EZUBG">Access rights</a><br>   
+      6.2.  <a href="#sect-ID0EMWBG">Restricting access to commands per contact</a><br>   
+      6.3.  <a href="#sect-ID0ETWBG">Restricting access to node properties per contact</a><br>   
+      6.4.  <a href="#sect-ID0E1WBG">Restricting access to node commands per contact</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a><br>10.  <a href="#ack">Acknowledgements</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
     </div>
     <hr>
@@ -4148,16 +4153,254 @@
                 (**) See <a href="xep-0000-SN-Control.html">xep-0000-SN-Control</a> for more information about how to configure nodes.
             </p>
         </div>
-        
-        
-        
-        
-        
+		<div class="indent">
+      <h3>4.2 <a name="sect-ID0ERDBG">Parameter Types</a></h3>
+			<p class="" style="">
+				Nodes can report parameters of different types. The following table lists available parameter types.
+			</p>
+			<div class="indent">
+        <p class="caption"><a name="table-6"></a>Table 6: Parameter Types</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+				<tr class="body">
+					<th colspan="" rowspan="">Element Name</th>
+					<th colspan="" rowspan="">Parameter Value</th>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">boolean</td>
+					<td colspan="" rowspan="">Boolean values. Can be true or false.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">color</td>
+					<td colspan="" rowspan="">Color values. They are strings containing 6 case-insensitive hexadecimal digits of the form RRGGBB, where RR=Red component, GG=Green component, BB=Blue component.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">dateTime</td>
+					<td colspan="" rowspan="">Date and time value, with possible time zone information.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">double</td>
+					<td colspan="" rowspan="">double precision floating point value.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">duration</td>
+					<td colspan="" rowspan="">A time duration value.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">int</td>
+					<td colspan="" rowspan="">A 32-bit integer value.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">long</td>
+					<td colspan="" rowspan="">A 64-bit integer value.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">string</td>
+					<td colspan="" rowspan="">A string value.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">time</td>
+					<td colspan="" rowspan="">A time value using a 24-hour clock.</td>
+				</tr>
+			</table>
+      </div>
+		</div>
+		<div class="indent">
+      <h3>4.3 <a name="sect-ID0EMHBG">Response Codes</a></h3>
+			<p class="" style="">
+				All responses have a response code that the client is required to check. The following table lists possible response codes and their corresponding meanings.
+			</p>
+			<div class="indent">
+        <p class="caption"><a name="table-7"></a>Table 7: Response Codes</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+				<tr class="body">
+					<th colspan="" rowspan="">Response Code</th>
+					<th colspan="" rowspan="">Description</th>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">OK</td>
+					<td colspan="" rowspan="">Request is OK and accepted.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">NotFound</td>
+					<td colspan="" rowspan="">Corresponding object, node, etc., was not found.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">InsufficientPrivileges</td>
+					<td colspan="" rowspan="">Insufficient privileges to perform the corresponding action or execute the corresponding command. Make sure to provide sufficient credentials in the call
+					(user, service, device tokens) with sufficient privileges to perform the action/command.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">Locked</td>
+					<td colspan="" rowspan="">The object/node is locked, and operation could not be performed or completed.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">NotImplemented</td>
+					<td colspan="" rowspan="">Command is not implemented.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">FormError</td>
+					<td colspan="" rowspan="">The form send to the concentrator contains errors. The response contains detailed error information.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">OtherError</td>
+					<td colspan="" rowspan="">Another error occurred.</td>
+				</tr>
+			</table>
+      </div>
+		</div>
+		<div class="indent">
+      <h3>4.4 <a name="sect-ID0ERKBG">Unimplemented commands</a></h3>
+			<p class="" style="">
+				It's important that the concentrator responds to unrecognized commands. This, to make sure future extensions to this document does not produce unexpected
+				results in concentrators implementing a previous version, or in concentrators implementing only a subset of available commands.
+			</p>
+			<p class="" style="">
+				When a concentrator receives an element that it does not understand, it must do as follows:
+			</p>
+			<ul class="" style="">
+				<li class="" style="">If the element is received in a message stanza, the element must be ignored.</li>
+				<li class="" style="">If the element is received in an iq-result stanza, the element must be ignored.</li>
+				<li class="" style="">If the element is received in an iq-get or iq-set stanza, an iq-result stanza must be composed containing an element with the same name as the incoming
+				element, but with <span class="strong">Response</span> appended to it, having a response code of <span class="strong">NotImplemented</span>.</li>
+			</ul>
+			<p class="" style="">
+				The following example shows how unrecognized commands must be handled by the concentrator:
+			</p>
+			<p class="caption"><a name="example-80"></a>Example 80. Unimplemented commands</p>
+      <div class="indent">
+        <pre class="prettyprint">
+				
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='69'&gt;
+      &lt;holabandola xmlns='urn:xmpp:sn:concentrators' ...&gt;
+          ...
+      &lt;/holabandola&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='69'&gt;
+      &lt;holabandolaResponse xmlns='urn:xmpp:sn:concentrators' result='NotImplemented'/&gt;
+   &lt;/iq&gt;
+			</pre>
+      </div>
+		</div>
+		<div class="indent">
+      <h3>4.5 <a name="nodecommands">Command attributes</a></h3>
+			<p class="" style="">
+				Node commands have a set of attributes. The following table lists available attributes and what they mean.
+			</p>
+			<div class="indent">
+        <p class="caption"><a name="table-8"></a>Table 8: Command attributes</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+				<tr class="body">
+					<th colspan="" rowspan="">Attribute</th>
+					<th colspan="" rowspan="">Use</th>
+					<th colspan="" rowspan="">Description</th>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">id</td>
+					<td colspan="" rowspan="">required</td>
+					<td colspan="" rowspan="">ID of the command. Used to identify the command.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">name</td>
+					<td colspan="" rowspan="">required</td>
+					<td colspan="" rowspan="">A string that can be presented to an end-user. Should be localized if the request contained a language preference.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">type</td>
+					<td colspan="" rowspan="">required</td>
+					<td colspan="" rowspan="">If the command is 'Simple' or 'Parametrized'.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">sortCategory</td>
+					<td colspan="" rowspan="">optional</td>
+					<td colspan="" rowspan="">Should be used (if available) by clients to sort available node commands before presenting them to an end-user. Commands should be sorted by Sort Category, Sort Key and
+					lastly by Name.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">sortKey</td>
+					<td colspan="" rowspan="">optional</td>
+					<td colspan="" rowspan="">
+						Should be used (if available) by clients to sort available node commands before presenting them to an end-user. Commands should be sorted by Sort Category, Sort Key and
+						lastly by Name.
+					</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">confirmationString</td>
+					<td colspan="" rowspan="">optional</td>
+					<td colspan="" rowspan="">Should presented to clients (if available) before letting an end-user execute the command. A delete command might have a confirmationString saying
+					'Are you sure you want to delete the current item?' The confirmation string should be presented as a Yes/No[/Cancel] dialog.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">failureString</td>
+					<td colspan="" rowspan="">optional</td>
+					<td colspan="" rowspan="">
+						Could be presented to end-users (if available) if a command fails. It provides the client with an optionally localized string giving some context to the error message.
+						A delete command might have a failureString saying 'Unable to delete the current item.'. The client could then add additional error information, if available,
+						for instance from the response code.
+					</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">successString</td>
+					<td colspan="" rowspan="">optional</td>
+					<td colspan="" rowspan="">
+						Could be presented to end-users (if available) if a command is successfully executed. It provides the client with an optionally localized string giving some context 
+						to the message. A delete command might have a successString saying 'Current item successfully deleted.'.
+					</td>
+				</tr>
+			</table>
+      </div>
+		</div>
+		<div class="indent">
+      <h3>4.6 <a name="sect-ID0EPQBG">Node States</a></h3>
+			<p class="" style="">
+				Nodes can be in different states. Even though nodes are free to publish any amount of states as parameters, there are a set of states that are so crucial to the 
+				concept of a node state, that they are published using a separate attribute and separate events. These node states are as follows:
+			</p>
+			<div class="indent">
+        <p class="caption"><a name="table-9"></a>Table 9: Node States</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+				<tr class="body">
+					<th colspan="" rowspan="">State</th>
+					<th colspan="" rowspan="">Description</th>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">None</td>
+					<td colspan="" rowspan="">The node has nothing special to report.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">Information</td>
+					<td colspan="" rowspan="">The node has informative events reported on it.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">WarningSigned</td>
+					<td colspan="" rowspan="">The node has warnings reported on it. These warnings have been viewed by an operator.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">WarningUnsigned</td>
+					<td colspan="" rowspan="">The node has warnings reported on it that have not been viewed by anybody.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">ErrorSigned</td>
+					<td colspan="" rowspan="">The node has errors reported on it. These errors have been viewed by an operator.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">ErrorUnsigned</td>
+					<td colspan="" rowspan="">The node has errors reported on it that have not been viewed by anybody.</td>
+				</tr>
+			</table>
+      </div>
+		</div>
         
     <h2>5.
        <a name="i18n">Internationalization Considerations</a></h2>
         <div class="indent">
-      <h3>5.1 <a name="sect-ID0ECEBG">Localization</a></h3>
+      <h3>5.1 <a name="sect-ID0EQTBG">Localization</a></h3>
             <p class="" style="">
                 Loalization of content can be performed if clients provide <span class="strong">xml:lang</span> attributes in commands made to the concentrator. If omitted, the
                 <span class="strong">default language</span> will be used in responses. If provided, but the concentrator does not support localization, or the requested language,
@@ -4165,7 +4408,7 @@
             </p>
         </div>
         <div class="indent">
-      <h3>5.2 <a name="sect-ID0ESEBG">Time Zones</a></h3>
+      <h3>5.2 <a name="sect-ID0EAUBG">Time Zones</a></h3>
             <p class="" style="">
                 Concentrators of larger sub-systems spanning multiple time-zones should specify all timestamps with time-zone information, so readers can perform comparisons
                 of time information.
@@ -4176,13 +4419,13 @@
             </p>
         </div>
         <div class="indent">
-      <h3>5.3 <a name="sect-ID0E6EBG">Interoperability</a></h3>
+      <h3>5.3 <a name="sect-ID0ENUBG">Interoperability</a></h3>
             
         </div>
     <h2>6.
        <a name="security">Security Considerations</a></h2>
         <div class="indent">
-      <h3>6.1 <a name="sect-ID0ELFBG">Access rights</a></h3>
+      <h3>6.1 <a name="sect-ID0EZUBG">Access rights</a></h3>
             <p class="" style="">
                 This document publishes a lot of commands with which to interact with a concentrator. If security and access rights is an issue, it might not be sufficient
                 to allow all friends access to the system. There are many ways in which to restrict access to the contents of the concentrator. Following are some examples:
@@ -4205,15 +4448,15 @@
             </ul>
         </div>
         <div class="indent">
-      <h3>6.2 <a name="sect-ID0E5GBG">Restricting access to commands per contact</a></h3>
+      <h3>6.2 <a name="sect-ID0EMWBG">Restricting access to commands per contact</a></h3>
             
         </div>
         <div class="indent">
-      <h3>6.3 <a name="sect-ID0EFHBG">Restricting access to node properties per contact</a></h3>
+      <h3>6.3 <a name="sect-ID0ETWBG">Restricting access to node properties per contact</a></h3>
             
         </div>
         <div class="indent">
-      <h3>6.4 <a name="sect-ID0EMHBG">Restricting access to node commands per contact</a></h3>
+      <h3>6.4 <a name="sect-ID0E1WBG">Restricting access to node commands per contact</a></h3>
             
         </div>
     <h2>7.
@@ -4978,7 +5221,10 @@
 &lt;/xs:schema&gt;
         </pre>
     </div>
-    <hr><a name="appendices"></a><h2>Appendices</h2>
+    <h2>10.
+       <a name="ack">Acknowledgements</a></h2>
+		<p class="" style="">Thanks to Joachim Lindborg for all valuable feedback.</p>
+	<hr><a name="appendices"></a><h2>Appendices</h2>
     <hr><a name="appendix-docinfo"></a><h3>Appendix A: Document Information</h3>
     <p class="indent">
             Series: <a href="http://xmpp.org/extensions/">XEP</a><br>
