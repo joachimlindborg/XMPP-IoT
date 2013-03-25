@@ -2,10 +2,10 @@
 <html>
   <head>
     <META http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>XEP-xxxx: XEP - Sensor Networks - Concentrators</title>
+    <title>XEP-xxxx: Sensor Networks - Concentrators</title>
     <link rel="stylesheet" type="text/css" href="xmpp.css">
     <link href="prettify.css" type="text/css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"><script type="text/javascript" src="prettify.js"></script><meta name="DC.Title" content="XEP - Sensor Networks - Concentrators">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"><script type="text/javascript" src="prettify.js"></script><meta name="DC.Title" content="Sensor Networks - Concentrators">
     <meta name="DC.Creator" content="Peter Waher">
     <meta name="DC.Description" content="This specification describes how to manage and get information from concentrators of devices over XMPP networks.">
     <meta name="DC.Publisher" content="XMPP Standards Foundation">
@@ -18,7 +18,7 @@
     <meta name="DC.Rights" content="This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).">
   </head>
   <body onload="prettyPrint()">
-    <h1>XEP-xxxx: XEP - Sensor Networks - Concentrators</h1>
+    <h1>XEP-xxxx: Sensor Networks - Concentrators</h1>
     <table>
       <tr valign="top">
         <td><strong>Abstract:</strong></td>
@@ -55,78 +55,88 @@
     <h2>Table of Contents</h2>
     <div class="indent">
       <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
-      3.1.  <a href="#sect-ID0EUCAE">Capabilities</a><br>      
-      3.1.1.  <a href="#sect-ID0EYCAE">Get Capabilities</a><br>   
-      3.2.  <a href="#sect-ID0E3DAE">Data Sources</a><br>      
-      3.2.1.  <a href="#sect-ID0EAEAE">Get All Data Sources</a><br>      
-      3.2.2.  <a href="#sect-ID0EMEAE">Get Top Data Sources</a><br>      
-      3.2.3.  <a href="#sect-ID0EYEAE">Get Child Data Sources</a><br>      
-      3.2.4.  <a href="#sect-ID0EEFAE">Contains Node</a><br>      
-      3.2.5.  <a href="#sect-ID0EQFAE">Subscribe to data source changes</a><br>      
-      3.2.6.  <a href="#sect-ID0ESGAE">Unsubscribe to data source changes</a><br>      
-      3.2.7.  <a href="#sect-ID0EFHAE">Get changes since given timestamp before subscribing</a><br>   
-      3.3.  <a href="#sect-ID0EXHAE">Nodes</a><br>      
-      3.3.1.  <a href="#sect-ID0E2HAE">Contains Nodes</a><br>      
-      3.3.2.  <a href="#sect-ID0ELIAE">Get Node</a><br>      
-      3.3.3.  <a href="#sect-ID0E6IAE">Get Nodes</a><br>      
-      3.3.4.  <a href="#sect-ID0ETJAE">Get Node with parameters</a><br>      
-      3.3.5.  <a href="#sect-ID0EHKAE">Get Nodes with parameters</a><br>      
-      3.3.6.  <a href="#sect-ID0E2KAE">Get All Nodes</a><br>      
-      3.3.7.  <a href="#sect-ID0EHLAE">Get All Nodes with Parameters</a><br>      
-      3.3.8.  <a href="#sect-ID0ETLAE">Get All Nodes derived from</a><br>      
-      3.3.9.  <a href="#sect-ID0E6LAE">Get All Nodes derived from, with Parameters</a><br>      
-      3.3.10.  <a href="#sect-ID0EPMAE">Get node inheritence</a><br>      
-      3.3.11.  <a href="#sect-ID0E2MAE">Get Root Nodes</a><br>      
-      3.3.12.  <a href="#sect-ID0EHNAE">Get Root Nodes with Parameters</a><br>      
-      3.3.13.  <a href="#sect-ID0ETNAE">Get Child Nodes</a><br>      
-      3.3.14.  <a href="#sect-ID0E6NAE">Get Child Nodes with Parameters</a><br>      
-      3.3.15.  <a href="#sect-ID0ELOAE">Get indices of Data Source</a><br>      
-      3.3.16.  <a href="#sect-ID0EXOAE">Get Nodes from index</a><br>      
-      3.3.17.  <a href="#sect-ID0EDPAE">Get Nodes from index with Parameters</a><br>      
-      3.3.18.  <a href="#sect-ID0EPPAE">Get Nodes from indices</a><br>      
-      3.3.19.  <a href="#sect-ID0E2PAE">Get Nodes from indices with Parameters</a><br>      
-      3.3.20.  <a href="#sect-ID0EHQAE">Get All Index Values</a><br>      
-      3.3.21.  <a href="#sect-ID0ETQAE">Get Node Ancestors</a><br>      
-      3.3.22.  <a href="#sect-ID0ELRAE">Move Node Up</a><br>      
-      3.3.23.  <a href="#sect-ID0EBSAE">Move Node Down</a><br>      
-      3.3.24.  <a href="#sect-ID0EXSAE">Move Nodes Up</a><br>      
-      3.3.25.  <a href="#sect-ID0ENTAE">Move Nodes Down</a><br>   
-      3.4.  <a href="#sect-ID0EEUAE">Node Parameters</a><br>      
-      3.4.1.  <a href="#sect-ID0EIUAE">Get Node Parameters for editing</a><br>      
-      3.4.2.  <a href="#sect-ID0E6XAE">Set Node Parameters after editing</a><br>      
-      3.4.3.  <a href="#sect-ID0E2YAE">Set Node Parameters after editing, Failure</a><br>      
-      3.4.4.  <a href="#sect-ID0EZZAE">Get Common Node Parameters for editing</a><br>      
-      3.4.5.  <a href="#sect-ID0EC2AE">Set Common Node Parameters after editing</a><br>      
-      3.4.6.  <a href="#sect-ID0EI3AE">Set Common Node Parameters after editing, Failure</a><br>      
-      3.4.7.  <a href="#sect-ID0ED4AE">Get Node Status</a><br>   
-      3.5.  <a href="#sect-ID0ESCAG">Creating and Destroying Nodes</a><br>      
-      3.5.1.  <a href="#sect-ID0EWCAG">Get Addable Node Types</a><br>      
-      3.5.2.  <a href="#sect-ID0EFDAG">Get Parameters for New Node</a><br>      
-      3.5.3.  <a href="#sect-ID0EUDAG">Create New Node</a><br>      
-      3.5.4.  <a href="#sect-ID0EQEAG">Create New Node, Failure</a><br>      
-      3.5.5.  <a href="#sect-ID0ELFAG">Destroy Node</a><br>      
-      3.5.6.  <a href="#sect-ID0EDGAG">Destroy Node, Failure</a><br>   
-      3.6.  <a href="#sect-ID0EXGAG">Node Commands</a><br>      
-      3.6.1.  <a href="#sect-ID0E2GAG">Get Node Commands</a><br>      
-      3.6.2.  <a href="#sect-ID0E6HAG">Execute Simple Node Command</a><br>      
-      3.6.3.  <a href="#sect-ID0EOIAG">Get Node Command Parameters</a><br>      
-      3.6.4.  <a href="#sect-ID0E1IAG">Execute Parametrized Node Command</a><br>      
-      3.6.5.  <a href="#sect-ID0EJJAG">Execute Node Command, Failure</a><br>      
-      3.6.6.  <a href="#sect-ID0EAKAG">Get Common Commands for Nodes</a><br>      
-      3.6.7.  <a href="#sect-ID0EPKAG">Execute Simple Command on multiple nodes</a><br>      
-      3.6.8.  <a href="#sect-ID0E5KAG">Get Common Command Parameters from command on multiple nodes</a><br>      
-      3.6.9.  <a href="#sect-ID0EKLAG">Execute Common Parametrized Command on multiple nodes</a><br>      
-      3.6.10.  <a href="#sect-ID0EZLAG">Execute Parametrized Command on multiple Nodes, Failure</a><br>   
-      3.7.  <a href="#sourceevents">Data Source Events</a><br>   
-      3.8.  <a href="#sect-ID0EYMAG">Data Sets</a><br>4.  <a href="#impl">Implementation Notes</a><br>   
+      3.1.  <a href="#sect-ID0ESCAE">Capabilities</a><br>      
+      3.1.1.  <a href="#sect-ID0EWCAE">Get Capabilities</a><br>   
+      3.2.  <a href="#sect-ID0E6DAE">Data Sources</a><br>      
+      3.2.1.  <a href="#sect-ID0EDEAE">Get All Data Sources</a><br>      
+      3.2.2.  <a href="#sect-ID0EPEAE">Get Top Data Sources</a><br>      
+      3.2.3.  <a href="#sect-ID0E2EAE">Get Child Data Sources</a><br>      
+      3.2.4.  <a href="#subscribe">Subscribe to data source changes</a><br>      
+      3.2.5.  <a href="#sect-ID0EHHAE">Unsubscribe from data source events</a><br>      
+      3.2.6.  <a href="#subscribe2">Get changes since given timestamp before subscribing</a><br>   
+      3.3.  <a href="#sect-ID0EUJAE">Nodes</a><br>      
+      3.3.1.  <a href="#sect-ID0EYJAE">Contains Node</a><br>      
+      3.3.2.  <a href="#sect-ID0EEKAE">Contains Nodes</a><br>      
+      3.3.3.  <a href="#sect-ID0EUKAE">Get Node</a><br>      
+      3.3.4.  <a href="#sect-ID0EILAE">Get Nodes</a><br>      
+      3.3.5.  <a href="#sect-ID0E3LAE">Get Node with parameters</a><br>      
+      3.3.6.  <a href="#sect-ID0EQMAE">Get Nodes with parameters</a><br>      
+      3.3.7.  <a href="#sect-ID0EENAE">Get All Nodes</a><br>      
+      3.3.8.  <a href="#sect-ID0EQNAE">Get All Nodes with Parameters</a><br>      
+      3.3.9.  <a href="#sect-ID0E3NAE">Get All Nodes derived from</a><br>      
+      3.3.10.  <a href="#sect-ID0EIOAE">Get All Nodes derived from, with Parameters</a><br>      
+      3.3.11.  <a href="#sect-ID0EYOAE">Get Node Inheritence</a><br>      
+      3.3.12.  <a href="#sect-ID0EEPAE">Get Root Nodes</a><br>      
+      3.3.13.  <a href="#sect-ID0EQPAE">Get Root Nodes with Parameters</a><br>      
+      3.3.14.  <a href="#sect-ID0E3PAE">Get Child Nodes</a><br>      
+      3.3.15.  <a href="#sect-ID0EIQAE">Get Child Nodes with Parameters</a><br>      
+      3.3.16.  <a href="#sect-ID0EUQAE">Get Indices of Data Source</a><br>      
+      3.3.17.  <a href="#sect-ID0EARAE">Get Nodes from index</a><br>      
+      3.3.18.  <a href="#sect-ID0EMRAE">Get Nodes from index with Parameters</a><br>      
+      3.3.19.  <a href="#sect-ID0EYRAE">Get Nodes from indices</a><br>      
+      3.3.20.  <a href="#sect-ID0EESAE">Get Nodes from indices with Parameters</a><br>      
+      3.3.21.  <a href="#sect-ID0EQSAE">Get All Index Values</a><br>      
+      3.3.22.  <a href="#sect-ID0E3SAE">Get Node Ancestors</a><br>      
+      3.3.23.  <a href="#sect-ID0EUTAE">Move Node Up</a><br>      
+      3.3.24.  <a href="#sect-ID0EKUAE">Move Node Down</a><br>      
+      3.3.25.  <a href="#sect-ID0EAVAE">Move Nodes Up</a><br>      
+      3.3.26.  <a href="#sect-ID0EWVAE">Move Nodes Down</a><br>   
+      3.4.  <a href="#sect-ID0ENWAE">Node Parameters</a><br>      
+      3.4.1.  <a href="#sect-ID0ERWAE">Get Node Parameters for editing</a><br>      
+      3.4.2.  <a href="#sect-ID0EI1AE">Set Node Parameters after editing</a><br>      
+      3.4.3.  <a href="#sect-ID0EE2AE">Set Node Parameters after editing, Failure</a><br>      
+      3.4.4.  <a href="#sect-ID0EC3AE">Get Common Node Parameters for editing</a><br>      
+      3.4.5.  <a href="#sect-ID0EL4AE">Set Common Node Parameters after editing</a><br>      
+      3.4.6.  <a href="#sect-ID0ER5AE">Set Common Node Parameters after editing, Failure</a><br>      
+      3.4.7.  <a href="#sect-ID0EM6AE">Get Node Status</a><br>   
+      3.5.  <a href="#sect-ID0E2EAG">Creating and Destroying Nodes</a><br>      
+      3.5.1.  <a href="#sect-ID0E6EAG">Get Addable Node Types</a><br>      
+      3.5.2.  <a href="#sect-ID0EOFAG">Get Parameters for New Node</a><br>      
+      3.5.3.  <a href="#sect-ID0E4FAG">Create New Node</a><br>      
+      3.5.4.  <a href="#sect-ID0EZGAG">Create New Node, Failure</a><br>      
+      3.5.5.  <a href="#sect-ID0EUHAG">Destroy Node</a><br>      
+      3.5.6.  <a href="#sect-ID0EMIAG">Destroy Node, Failure</a><br>   
+      3.6.  <a href="#sect-ID0EAJAG">Node Commands</a><br>      
+      3.6.1.  <a href="#sect-ID0EEJAG">Get Node Commands</a><br>      
+      3.6.2.  <a href="#sect-ID0EIKAG">Execute Simple Node Command</a><br>      
+      3.6.3.  <a href="#sect-ID0EXKAG">Get Node Command Parameters</a><br>      
+      3.6.4.  <a href="#sect-ID0EDLAG">Execute Parametrized Node Command</a><br>      
+      3.6.5.  <a href="#sect-ID0ESLAG">Execute Node Command, Failure</a><br>      
+      3.6.6.  <a href="#sect-ID0EJMAG">Get Common Commands for Nodes</a><br>      
+      3.6.7.  <a href="#sect-ID0EYMAG">Execute Simple Command on multiple nodes</a><br>      
+      3.6.8.  <a href="#sect-ID0EHNAG">Get Common Command Parameters from command on multiple nodes</a><br>      
+      3.6.9.  <a href="#sect-ID0ETNAG">Execute Common Parametrized Command on multiple nodes</a><br>      
+      3.6.10.  <a href="#sect-ID0ECOAG">Execute Parametrized Command on multiple Nodes, Failure</a><br>   
+      3.7.  <a href="#sourceevents">Data Source Events</a><br>      
+      3.7.1.  <a href="#sect-ID0EFQAG">Node added event</a><br>      
+      3.7.2.  <a href="#sect-ID0ECRAG">Node removed</a><br>      
+      3.7.3.  <a href="#sect-ID0E3RAG">Node updated</a><br>      
+      3.7.4.  <a href="##nodeStatusChanged">Node status changed</a><br>      
+      3.7.5.  <a href="#sect-ID0E1TAG">Node moved up</a><br>      
+      3.7.6.  <a href="#sect-ID0EUUAG">Node moved down</a><br>   
+      3.8.  <a href="#sect-ID0EPVAG">Field Databases</a><br>      
+      3.8.1.  <a href="#sect-ID0E5VAG">Get All Databases</a><br>      
+      3.8.2.  <a href="#sect-ID0ENWAG">Get Database Readout Parameters</a><br>      
+      3.8.3.  <a href="#sect-ID0E3WAG">Start Database Readout</a><br>      
+      3.8.4.  <a href="#sect-ID0ELYAG">Start Database Readout, Failure</a><br>4.  <a href="#impl">Implementation Notes</a><br>   
       4.1.  <a href="#nodeinfo">Node Information</a><br>5.  <a href="#i18n">Internationalization Considerations</a><br>   
-      5.1.  <a href="#sect-ID0EDVAG">Localization</a><br>   
-      5.2.  <a href="#sect-ID0ETVAG">Time Zones</a><br>   
-      5.3.  <a href="#sect-ID0EAWAG">Interoperability</a><br>6.  <a href="#security">Security Considerations</a><br>   
-      6.1.  <a href="#sect-ID0EMWAG">Access rights</a><br>   
-      6.2.  <a href="#sect-ID0E6XAG">Restricting access to commands per contact</a><br>   
-      6.3.  <a href="#sect-ID0EGYAG">Restricting access to node properties per contact</a><br>   
-      6.4.  <a href="#sect-ID0ENYAG">Restricting access to node commands per contact</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a></p>
+      5.1.  <a href="#sect-ID0ECEBG">Localization</a><br>   
+      5.2.  <a href="#sect-ID0ESEBG">Time Zones</a><br>   
+      5.3.  <a href="#sect-ID0E6EBG">Interoperability</a><br>6.  <a href="#security">Security Considerations</a><br>   
+      6.1.  <a href="#sect-ID0ELFBG">Access rights</a><br>   
+      6.2.  <a href="#sect-ID0E5GBG">Restricting access to commands per contact</a><br>   
+      6.3.  <a href="#sect-ID0EFHBG">Restricting access to node properties per contact</a><br>   
+      6.4.  <a href="#sect-ID0EMHBG">Restricting access to node commands per contact</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
     </div>
     <hr>
@@ -157,11 +167,11 @@
             take the time to list why different technologies are not applicable.
         </p>
         <p class="" style="">
-            This XEP defines tree structures for nodes in different data sources. <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0060.html">Publish-Subscribe</a></span>  [<a href="#nt-ID0E2E">1</a>] defines a model where a tree structure of nodes is published and users can browse this
+            This XEP defines tree structures for nodes in different data sources. <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0060.html">Publish-Subscribe</a></span>  [<a href="#nt-ID0EZE">1</a>] defines a model where a tree structure of nodes is published and users can browse this
             tree structure. Furthermore, it allows the possibility to publish items on these nodes as well as syndicalization of this information.
         </p>
         <p class="" style="">
-            This XEP also defines data sources (in a tree structure). These data sources contain nodes. <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0248.html">PubSub Collection Nodes</a></span>  [<a href="#nt-ID0EMF">2</a>] defines a structure called a node collection, a structure that 
+            This XEP also defines data sources (in a tree structure). These data sources contain nodes. <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0248.html">PubSub Collection Nodes</a></span>  [<a href="#nt-ID0EKF">2</a>] defines a structure called a node collection, a structure that 
             allows the creation of collections containing loosly coupled nodes.
         </p>
         <p class="" style="">
@@ -211,7 +221,7 @@
             </li>
         </ul>
         <p class="" style="">
-            <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0050.html">Ad-Hoc Commands</a></span>  [<a href="#nt-ID0E2H">3</a>] defines how ad-hoc commands can be implemented and how clients can use such commands to interact with underlying logic. But XEP-0050 is not used in this specification.
+            <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0050.html">Ad-Hoc Commands</a></span>  [<a href="#nt-ID0EZH">3</a>] defines how ad-hoc commands can be implemented and how clients can use such commands to interact with underlying logic. But XEP-0050 is not used in this specification.
             There are multiple reasons:
         </p>
         <ul class="" style="">
@@ -249,7 +259,7 @@
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">XEP-0000-DynamicForms</td>
-                <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0ECCAC">4</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EOCAC">5</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0E1CAC">6</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EGDAC">7</a>].</td>
+                <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EACAC">4</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EMCAC">5</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0EYCAC">6</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EEDAC">7</a>].</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">XEP-0000-Exi</td>
@@ -468,9 +478,9 @@
             concentrators of different makes and models and of these varying ranges.
         </p>
         <div class="indent">
-      <h3>3.1 <a name="sect-ID0EUCAE">Capabilities</a></h3>
+      <h3>3.1 <a name="sect-ID0ESCAE">Capabilities</a></h3>
             <div class="indent">
-        <h3>3.1.1 <a name="sect-ID0EYCAE">Get Capabilities</a></h3>
+        <h3>3.1.1 <a name="sect-ID0EWCAE">Get Capabilities</a></h3>
                 <p class="" style="">
                     This document lists a sequence of commands. Some are very basic, while others are used for managing massive amounts of devices. When developing a small PLC, it might
                     be difficult to motivate the implementation of the more advanced commands. They are simply not necessary for the management of the device. So, clients connecting to
@@ -502,29 +512,97 @@
           &lt;value&gt;getNode&lt;/value&gt;
           &lt;value&gt;getNodes&lt;/value&gt;
           &lt;value&gt;getAllNodes&lt;/value&gt;
+          &lt;value&gt;getNodeInheritence&lt;/value&gt;
           &lt;value&gt;getRootNodes&lt;/value&gt;
           &lt;value&gt;getChildNodes&lt;/value&gt;
           &lt;value&gt;getIndices&lt;/value&gt;
-          &lt;value&gt;getNodeFromIndex&lt;/value&gt;
           &lt;value&gt;getNodesFromIndex&lt;/value&gt;
-          &lt;value&gt;getAllNodesFromIndex&lt;/value&gt;
-          &lt;value&gt;getNodeParameters&lt;/value&gt;
-          &lt;value&gt;getCommonNodeParameters&lt;/value&gt;
-          &lt;value&gt;getNodeParameterNames&lt;/value&gt;
-          &lt;value&gt;getNodeParameterValues&lt;/value&gt;
-          &lt;value&gt;setNodeParameterValues&lt;/value&gt;
-          &lt;value&gt;getNodeStatus&lt;/value&gt;
+          &lt;value&gt;getNodesFromIndices&lt;/value&gt;
+          &lt;value&gt;getAllIndexValues&lt;/value&gt;
+          &lt;value&gt;getNodeParametersForEdit&lt;/value&gt;
+          &lt;value&gt;setNodeParametersAfterEdit&lt;/value&gt;
+          &lt;value&gt;getCommonNodeParametersForEdit&lt;/value&gt;
+          &lt;value&gt;setCommonNodeParametersAfterEdit&lt;/value&gt;
           &lt;value&gt;getAddableNodeTypes&lt;/value&gt;
           &lt;value&gt;getParametersForNewNode&lt;/value&gt;
           &lt;value&gt;createNewNode&lt;/value&gt;
           &lt;value&gt;destroyNode&lt;/value&gt;
           &lt;value&gt;getAncestors&lt;/value&gt;
           &lt;value&gt;getNodeCommands&lt;/value&gt;
-          &lt;value&gt;getCommonNodeCommands&lt;/value&gt;
           &lt;value&gt;getCommandParameters&lt;/value&gt;
+          &lt;value&gt;executeNodeCommand&lt;/value&gt;
+          &lt;value&gt;getCommonNodeCommands&lt;/value&gt;
           &lt;value&gt;getCommonCommandParameters&lt;/value&gt;
-          &lt;value&gt;moveUp&lt;/value&gt;
-          &lt;value&gt;moveDown&lt;/value&gt;
+          &lt;value&gt;executeCommonNodeCommand&lt;/value&gt;
+          &lt;value&gt;moveNodeUp&lt;/value&gt;
+          &lt;value&gt;moveNodeDown&lt;/value&gt;
+          &lt;value&gt;moveNodesUp&lt;/value&gt;
+          &lt;value&gt;moveNodesDown&lt;/value&gt;
+          &lt;value&gt;subscribe&lt;/value&gt;
+          &lt;value&gt;unsubscribe&lt;/value&gt;
+          &lt;value&gt;getDatabases&lt;/value&gt;
+          &lt;value&gt;getDatabaseReadoutParameters&lt;/value&gt;
+          &lt;value&gt;startDatabaseReadout&lt;/value&gt;
+      &lt;/getCapabilitiesResponse&gt;
+   &lt;/iq&gt;
+                </pre>
+        </div>
+                <p class="" style="">
+                    A concentrator without databases, but still contain a rich interface for handling masses of nodes may present itself as follows:
+                </p>
+                <p class="caption"><a name="example-2"></a>Example 2. Full capabilities</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='subsystem@clayster.com'
+       id='63'&gt;
+      &lt;getCapabilities xmlns='urn:xmpp:sn:concentrators'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='subsystem@clayster.com'
+       to='client@clayster.com'
+       id='63'&gt;
+      &lt;getCapabilitiesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;value&gt;getCapabilities&lt;/value&gt;
+          &lt;value&gt;getAllDataSources&lt;/value&gt;
+          &lt;value&gt;getTopDataSources&lt;/value&gt;
+          &lt;value&gt;getChildDataSources&lt;/value&gt;
+          &lt;value&gt;containsNode&lt;/value&gt;
+          &lt;value&gt;containsNodes&lt;/value&gt;
+          &lt;value&gt;getNode&lt;/value&gt;
+          &lt;value&gt;getNodes&lt;/value&gt;
+          &lt;value&gt;getAllNodes&lt;/value&gt;
+          &lt;value&gt;getNodeInheritence&lt;/value&gt;
+          &lt;value&gt;getRootNodes&lt;/value&gt;
+          &lt;value&gt;getChildNodes&lt;/value&gt;
+          &lt;value&gt;getIndices&lt;/value&gt;
+          &lt;value&gt;getNodesFromIndex&lt;/value&gt;
+          &lt;value&gt;getNodesFromIndices&lt;/value&gt;
+          &lt;value&gt;getAllIndexValues&lt;/value&gt;
+          &lt;value&gt;getNodeParametersForEdit&lt;/value&gt;
+          &lt;value&gt;setNodeParametersAfterEdit&lt;/value&gt;
+          &lt;value&gt;getCommonNodeParametersForEdit&lt;/value&gt;
+          &lt;value&gt;setCommonNodeParametersAfterEdit&lt;/value&gt;
+          &lt;value&gt;getAddableNodeTypes&lt;/value&gt;
+          &lt;value&gt;getParametersForNewNode&lt;/value&gt;
+          &lt;value&gt;createNewNode&lt;/value&gt;
+          &lt;value&gt;destroyNode&lt;/value&gt;
+          &lt;value&gt;getAncestors&lt;/value&gt;
+          &lt;value&gt;getNodeCommands&lt;/value&gt;
+          &lt;value&gt;getCommandParameters&lt;/value&gt;
+          &lt;value&gt;executeNodeCommand&lt;/value&gt;
+          &lt;value&gt;getCommonNodeCommands&lt;/value&gt;
+          &lt;value&gt;getCommonCommandParameters&lt;/value&gt;
+          &lt;value&gt;executeCommonNodeCommand&lt;/value&gt;
+          &lt;value&gt;moveNodeUp&lt;/value&gt;
+          &lt;value&gt;moveNodeDown&lt;/value&gt;
+          &lt;value&gt;moveNodesUp&lt;/value&gt;
+          &lt;value&gt;moveNodesDown&lt;/value&gt;
+          &lt;value&gt;subscribe&lt;/value&gt;
+          &lt;value&gt;unsubscribe&lt;/value&gt;
       &lt;/getCapabilitiesResponse&gt;
    &lt;/iq&gt;
                 </pre>
@@ -532,8 +610,7 @@
                 <p class="" style="">
                     A smaller gateway on the other hand, may have skipped the implementation of the batch commands that are used for larger systems:
                 </p>
-                
-                <p class="caption"><a name="example-2"></a>Example 2. No batch command capabilities</p>
+                <p class="caption"><a name="example-3"></a>Example 3. No batch command capabilities</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -555,10 +632,11 @@
           &lt;value&gt;getChildDataSources&lt;/value&gt;
           &lt;value&gt;containsNode&lt;/value&gt;
           &lt;value&gt;getNode&lt;/value&gt;
+          &lt;value&gt;getNodeInheritence&lt;/value&gt;
           &lt;value&gt;getRootNodes&lt;/value&gt;
           &lt;value&gt;getChildNodes&lt;/value&gt;
-          &lt;value&gt;getNodeParameters&lt;/value&gt;
-          &lt;value&gt;getNodeStatus&lt;/value&gt;
+          &lt;value&gt;getNodeParametersForEdit&lt;/value&gt;
+          &lt;value&gt;setNodeParametersAfterEdit&lt;/value&gt;
           &lt;value&gt;getAddableNodeTypes&lt;/value&gt;
           &lt;value&gt;getParametersForNewNode&lt;/value&gt;
           &lt;value&gt;createNewNode&lt;/value&gt;
@@ -566,8 +644,13 @@
           &lt;value&gt;getAncestors&lt;/value&gt;
           &lt;value&gt;getNodeCommands&lt;/value&gt;
           &lt;value&gt;getCommandParameters&lt;/value&gt;
-          &lt;value&gt;moveUp&lt;/value&gt;
-          &lt;value&gt;moveDown&lt;/value&gt;
+          &lt;value&gt;executeNodeCommand&lt;/value&gt;
+          &lt;value&gt;moveNodeUp&lt;/value&gt;
+          &lt;value&gt;moveNodeDown&lt;/value&gt;
+          &lt;value&gt;moveNodesUp&lt;/value&gt;
+          &lt;value&gt;moveNodesDown&lt;/value&gt;
+          &lt;value&gt;subscribe&lt;/value&gt;
+          &lt;value&gt;unsubscribe&lt;/value&gt;
       &lt;/getCapabilitiesResponse&gt;
    &lt;/iq&gt;
                 </pre>
@@ -575,7 +658,7 @@
                 <p class="" style="">
                     But a small PLC, possibly with a fixed set of nodes, might have support for an even more reduced set of commands:
                 </p>
-                <p class="caption"><a name="example-3"></a>Example 3. No edit capabilities</p>
+                <p class="caption"><a name="example-4"></a>Example 4. No edit capabilities</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -593,13 +676,13 @@
       &lt;getCapabilitiesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
           &lt;value&gt;getCapabilities&lt;/value&gt;
           &lt;value&gt;getAllDataSources&lt;/value&gt;
+          &lt;value&gt;containsNode&lt;/value&gt;
           &lt;value&gt;getNode&lt;/value&gt;
           &lt;value&gt;getRootNodes&lt;/value&gt;
           &lt;value&gt;getChildNodes&lt;/value&gt;
-          &lt;value&gt;getNodeParameters&lt;/value&gt;
-          &lt;value&gt;getNodeStatus&lt;/value&gt;
           &lt;value&gt;getNodeCommands&lt;/value&gt;
           &lt;value&gt;getCommandParameters&lt;/value&gt;
+          &lt;value&gt;executeNodeCommand&lt;/value&gt;
       &lt;/getCapabilitiesResponse&gt;
    &lt;/iq&gt;
                 </pre>
@@ -610,13 +693,13 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.2 <a name="sect-ID0E3DAE">Data Sources</a></h3>
+      <h3>3.2 <a name="sect-ID0E6DAE">Data Sources</a></h3>
             <div class="indent">
-        <h3>3.2.1 <a name="sect-ID0EAEAE">Get All Data Sources</a></h3>
+        <h3>3.2.1 <a name="sect-ID0EDEAE">Get All Data Sources</a></h3>
                 <p class="" style="">
                     This command will return a flat list of all available data sources on the concentrator. It is not structured hierarchically.
                 </p>
-                <p class="caption"><a name="example-4"></a>Example 4. Get All Data Sources</p>
+                <p class="caption"><a name="example-5"></a>Example 5. Get All Data Sources</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -642,12 +725,12 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.2 <a name="sect-ID0EMEAE">Get Top Data Sources</a></h3>
+        <h3>3.2.2 <a name="sect-ID0EPEAE">Get Top Data Sources</a></h3>
                 <p class="" style="">
                     If the client is interested in the hierarchical structure of available data sources, it should request only the root sources, and then ask the client for their
                     corresponding child data sources. If the client wants to present the data sources to a user, presenting them in their hierarchical order may be more intuitive.
                 </p>
-                <p class="caption"><a name="example-5"></a>Example 5. Get Top Data Sources</p>
+                <p class="caption"><a name="example-6"></a>Example 6. Get Top Data Sources</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -673,11 +756,11 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.3 <a name="sect-ID0EYEAE">Get Child Data Sources</a></h3>
+        <h3>3.2.3 <a name="sect-ID0E2EAE">Get Child Data Sources</a></h3>
                 <p class="" style="">
                     Having the ID of a data source that contains child data sources, you can fetch the child sources as follows:
                 </p>
-                <p class="caption"><a name="example-6"></a>Example 6. Get Child Data Sources</p>
+                <p class="caption"><a name="example-7"></a>Example 7. Get Child Data Sources</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -706,32 +789,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.4 <a name="sect-ID0EEFAE">Contains Node</a></h3>
-                <p class="" style="">
-                    This command permits the client to check the existance of a node on the concetrator.
-                </p>
-                <p class="caption"><a name="example-7"></a>Example 7. Checking the existance of a node</p>
-        <div class="indent">
-          <pre class="prettyprint">
-                    
-   &lt;iq type='get'
-       from='client@clayster.com'
-       to='concentrator@clayster.com'
-       id='7'&gt;
-      &lt;containsNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1'/&gt;
-   &lt;/iq&gt;
-   
-   &lt;iq type='result'
-       from='concentrator@clayster.com'
-       to='client@clayster.com'
-       id='7'&gt;
-      &lt;containsNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;true&lt;/containsNodeResponse&gt;
-   &lt;/iq&gt;
-                </pre>
-        </div>
-            </div>
-            <div class="indent">
-        <h3>3.2.5 <a name="sect-ID0EQFAE">Subscribe to data source changes</a></h3>
+        <h3>3.2.4 <a name="subscribe">Subscribe to data source changes</a></h3>
                 <p class="" style="">
                     A client can subscribe to changes made in a data source. It does this by sending the <span class="strong">subscribe</span> command to the concentrator,
                     as is shown in the following example:
@@ -764,16 +822,68 @@
                     is removed.
                 </p>
                 <p class="" style="">
+                    <span class="strong">Note:</span> The <span class="strong">parameters</span> and <span class="strong">messages</span> attributes can be used to retrieve parameter and status message information
+                    about the nodes in event messages sent from the concentrator. Note that the <span class="strong">xml:lang</span> may be used to select the language used in such events, 
+                    if the concentrator supports localization of strings.
+                </p>
+                <p class="caption"><a name="example-9"></a>Example 9. Subscribing to data source events with localized parameters</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='60'&gt;
+      &lt;subscribe xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' parameters='true' messages='true' xml:lang='en'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='60'&gt;
+      &lt;subscribeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/&gt;
+   &lt;/iq&gt;
+                </pre>
+        </div>
+                <p class="" style="">
+                    The <span class="strong">subscribe</span> command has a set of optional attributes, one for each event type available, and with the same names, that the
+                    client can use to subscribe to individual events, but not to others. They have the default value of true implying that if not provided, the
+                    default action is to subscribe to those events.
+                </p>
+                <p class="" style="">
+                    The following example shows how a client can subscribe to a set of events only:
+                </p>
+                <p class="caption"><a name="example-10"></a>Example 10. Subscribing to data source events, avoiding state events</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='61'&gt;
+      &lt;subscribe xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' parameters='true' messages='false' xml:lang='en'
+                 nodeAdded='true' nodeUpdated='true' nodeStatusChanged='false' nodeRemoved='true' nodeMovedUp='false' nodeMovedDown='false'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='61'&gt;
+      &lt;subscribeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/&gt;
+   &lt;/iq&gt;
+                </pre>
+        </div>
+                <p class="" style="">
                     For more information on types of events sent, see the <a href="#sourceevents">Data Source Events</a> section.
                 </p>
             </div>
             <div class="indent">
-        <h3>3.2.6 <a name="sect-ID0ESGAE">Unsubscribe to data source changes</a></h3>
+        <h3>3.2.5 <a name="sect-ID0EHHAE">Unsubscribe from data source events</a></h3>
                 <p class="" style="">
                     A client can unsubscribe to changes made in a data source it is subscribed to. It does this by sending the <span class="strong">unsubscribe</span> command to the concentrator,
                     as is shown in the following example:
                 </p>
-                <p class="caption"><a name="example-9"></a>Example 9. Unsubscribing to data source events</p>
+                <p class="caption"><a name="example-11"></a>Example 11. Unsubscribing from data source events</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -795,15 +905,43 @@
                 <p class="" style="">
                     An unsubscription made to an existing data source, but where an even subscription does not exist, must not result in an error.
                 </p>
+                <p class="" style="">
+                    The <span class="strong">unsubscribe</span> command has a set of optional attributes, one for each event type available, and with the same names, that the
+                    client can use to unsubscribe from individual events, but not from others. They have the default value of true implying that if not provided, the
+                    default action is to unsubscribe from those events.
+                </p>
+                <p class="" style="">
+                    The following example shows how a client can unsubscribe from a subset of events, keeping subscriptions on the others (if subscribed to):
+                </p>
+                <p class="caption"><a name="example-12"></a>Example 12. Unsubscribing from state events</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='62'&gt;
+      &lt;unsubscribe xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' parameters='true' messages='false' xml:lang='en'
+                 nodeAdded='false' nodeUpdated='false' nodeStatusChanged='true' nodeRemoved='false' nodeMovedUp='false' nodeMovedDown='false'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='62'&gt;
+      &lt;subscribeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/&gt;
+   &lt;/iq&gt;
+                </pre>
+        </div>
             </div>
             <div class="indent">
-        <h3>3.2.7 <a name="sect-ID0EFHAE">Get changes since given timestamp before subscribing</a></h3>
+        <h3>3.2.6 <a name="subscribe2">Get changes since given timestamp before subscribing</a></h3>
                 <p class="" style="">
                     If a client comes back online and wants to know any changes that have taken place on the concentrator since last time it was in contact with it,
                     it can include a <span class="strong">getEventsSince</span> attribute in the <span class="strong">subscribe</span> command sent to the concentrator. This will make the
                     concentrator send all event messages since the given timestamp to the client before subscribing the client to events in the given data source.
                 </p>
-                <p class="caption"><a name="example-10"></a>Example 10. Get changes since given timestamp before subscribing</p>
+                <p class="caption"><a name="example-13"></a>Example 13. Get changes since given timestamp before subscribing</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -824,16 +962,53 @@
    ... Sequence of event messages sent from concentrator to client.
                 </pre>
         </div>
+                <p class="" style="">
+                    <span class="strong">Important:</span> Event subscriptions only last for as long as the client and concentrator both maintains precense. The concentrator must not persist
+                    event notification subscriptions, and if it goes offline and back online, or if the client goes offline or online again for any reason, the event subscription
+                    is removed.
+                </p>
+                <p class="" style="">
+                    <span class="strong">Note:</span> The <span class="strong">parameters</span> and <span class="strong">messages</span> attributes can be used to retrieve parameter and status message information
+                    about the nodes in event messages sent from the concentrator.
+                </p>
+                <p class="" style="">
+                    For more information on types of events sent, see the <a href="#sourceevents">Data Source Events</a> section.
+                </p>
             </div>
         </div>
         <div class="indent">
-      <h3>3.3 <a name="sect-ID0EXHAE">Nodes</a></h3>
+      <h3>3.3 <a name="sect-ID0EUJAE">Nodes</a></h3>
             <div class="indent">
-        <h3>3.3.1 <a name="sect-ID0E2HAE">Contains Nodes</a></h3>
+        <h3>3.3.1 <a name="sect-ID0EYJAE">Contains Node</a></h3>
+                <p class="" style="">
+                    This command permits the client to check the existance of a node on the concetrator.
+                </p>
+                <p class="caption"><a name="example-14"></a>Example 14. Checking the existance of a node</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='7'&gt;
+      &lt;containsNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='7'&gt;
+      &lt;containsNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;true&lt;/containsNodeResponse&gt;
+   &lt;/iq&gt;
+                </pre>
+        </div>
+            </div>
+            <div class="indent">
+        <h3>3.3.2 <a name="sect-ID0EEKAE">Contains Nodes</a></h3>
                 <p class="" style="">
                     If the client wants to check the existance of multiple nodes on the concentrator, it can use this batch command instead:
                 </p>
-                <p class="caption"><a name="example-11"></a>Example 11. Checking the existance of a multiple nodes</p>
+                <p class="caption"><a name="example-15"></a>Example 15. Checking the existance of a multiple nodes</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -867,11 +1042,11 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.2 <a name="sect-ID0ELIAE">Get Node</a></h3>
+        <h3>3.3.3 <a name="sect-ID0EUKAE">Get Node</a></h3>
                 <p class="" style="">
                     This command returns basic information about a node in the concentrator.
                 </p>
-                <p class="caption"><a name="example-12"></a>Example 12. Get Node</p>
+                <p class="caption"><a name="example-16"></a>Example 16. Get Node</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -906,11 +1081,11 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.3 <a name="sect-ID0E6IAE">Get Nodes</a></h3>
+        <h3>3.3.4 <a name="sect-ID0EILAE">Get Nodes</a></h3>
                 <p class="" style="">
                     This commands lets the client get information from multiple nodes at once.
                 </p>
-                <p class="caption"><a name="example-13"></a>Example 13. Get Nodes</p>
+                <p class="caption"><a name="example-17"></a>Example 17. Get Nodes</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -945,11 +1120,11 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.4 <a name="sect-ID0ETJAE">Get Node with parameters</a></h3>
+        <h3>3.3.5 <a name="sect-ID0E3LAE">Get Node with parameters</a></h3>
                 <p class="" style="">
                     This command returns basic information about a node in the concentrator, but also adds properties for the node.
                 </p>
-                <p class="caption"><a name="example-14"></a>Example 14. Get Node with parameters</p>
+                <p class="caption"><a name="example-18"></a>Example 18. Get Node with parameters</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -983,11 +1158,11 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.5 <a name="sect-ID0EHKAE">Get Nodes with parameters</a></h3>
+        <h3>3.3.6 <a name="sect-ID0EQMAE">Get Nodes with parameters</a></h3>
                 <p class="" style="">
                     This commands lets the client get information from multiple nodes at once, including node properties.
                 </p>
-                <p class="caption"><a name="example-15"></a>Example 15. Get Nodes with parameters</p>
+                <p class="caption"><a name="example-19"></a>Example 19. Get Nodes with parameters</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1049,11 +1224,11 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.6 <a name="sect-ID0E2KAE">Get All Nodes</a></h3>
+        <h3>3.3.7 <a name="sect-ID0EENAE">Get All Nodes</a></h3>
                 <p class="" style="">
                     If the device does not manage too many nodes, it could choose to implement this function. It would return all all available nodes with one call.
                 </p>
-                <p class="caption"><a name="example-16"></a>Example 16. Get All Nodes</p>
+                <p class="caption"><a name="example-20"></a>Example 20. Get All Nodes</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1083,11 +1258,11 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.7 <a name="sect-ID0EHLAE">Get All Nodes with Parameters</a></h3>
+        <h3>3.3.8 <a name="sect-ID0EQNAE">Get All Nodes with Parameters</a></h3>
                 <p class="" style="">
                     If the device does not manage too many nodes, it could choose to implement this function. It would return all all available nodes with their parameters with one call.
                 </p>
-                <p class="caption"><a name="example-17"></a>Example 17. Get All Nodes with Parameters</p>
+                <p class="caption"><a name="example-21"></a>Example 21. Get All Nodes with Parameters</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1147,11 +1322,11 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.8 <a name="sect-ID0ETLAE">Get All Nodes derived from</a></h3>
+        <h3>3.3.9 <a name="sect-ID0E3NAE">Get All Nodes derived from</a></h3>
                 <p class="" style="">
                     This command assumes node types exist in a class hierarchy, and allows the caller to retrieve nodes with similar inheritance.
                 </p>
-                <p class="caption"><a name="example-18"></a>Example 18. Get All Nodes derived from</p>
+                <p class="caption"><a name="example-22"></a>Example 22. Get All Nodes derived from</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1179,12 +1354,12 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.9 <a name="sect-ID0E6LAE">Get All Nodes derived from, with Parameters</a></h3>
+        <h3>3.3.10 <a name="sect-ID0EIOAE">Get All Nodes derived from, with Parameters</a></h3>
                 <p class="" style="">
                     This command assumes node types exist in a class hierarchy, and allows the caller to retrieve nodes with similar inheritance. It also returns node parameters
                     directly in the response.
                 </p>
-                <p class="caption"><a name="example-19"></a>Example 19. Get All Nodes derived from, with Parameters</p>
+                <p class="caption"><a name="example-23"></a>Example 23. Get All Nodes derived from, with Parameters</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1234,12 +1409,12 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.10 <a name="sect-ID0EPMAE">Get node inheritence</a></h3>
+        <h3>3.3.11 <a name="sect-ID0EYOAE">Get Node Inheritence</a></h3>
                 <p class="" style="">
                     This command assumes node types exist in a class hierarchy. It allows the caller to get a list of the node class hierarchy and implemented interfaces the
                     node has.
                 </p>
-                <p class="caption"><a name="example-20"></a>Example 20. Get node inheritence</p>
+                <p class="caption"><a name="example-24"></a>Example 24. Get node inheritence</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1265,12 +1440,12 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.11 <a name="sect-ID0E2MAE">Get Root Nodes</a></h3>
+        <h3>3.3.12 <a name="sect-ID0EEPAE">Get Root Nodes</a></h3>
                 <p class="" style="">
                     This commands returns the root node of a data source (in case the source is a tree-shaped data source) or the root nodes of a data source (in case the
                     source is flat).
                 </p>
-                <p class="caption"><a name="example-21"></a>Example 21. Get Root Nodes</p>
+                <p class="caption"><a name="example-25"></a>Example 25. Get Root Nodes</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1294,12 +1469,12 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.12 <a name="sect-ID0EHNAE">Get Root Nodes with Parameters</a></h3>
+        <h3>3.3.13 <a name="sect-ID0EQPAE">Get Root Nodes with Parameters</a></h3>
                 <p class="" style="">
                     This commands returns the root node of a data source (in case the source is a tree-shaped data source) or the root nodes of a data source (in case the
                     source is flat), and also returns the parameters for the corresponding nodes.
                 </p>
-                <p class="caption"><a name="example-22"></a>Example 22. Get Root Nodes with Parameters</p>
+                <p class="caption"><a name="example-26"></a>Example 26. Get Root Nodes with Parameters</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1332,11 +1507,11 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.13 <a name="sect-ID0ETNAE">Get Child Nodes</a></h3>
+        <h3>3.3.14 <a name="sect-ID0E3PAE">Get Child Nodes</a></h3>
                 <p class="" style="">
                     This commands returns the child nodes of a node in a data source.
                 </p>
-                <p class="caption"><a name="example-23"></a>Example 23. Get Child Nodes</p>
+                <p class="caption"><a name="example-27"></a>Example 27. Get Child Nodes</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1362,11 +1537,11 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.14 <a name="sect-ID0E6NAE">Get Child Nodes with Parameters</a></h3>
+        <h3>3.3.15 <a name="sect-ID0EIQAE">Get Child Nodes with Parameters</a></h3>
                 <p class="" style="">
                     This commands returns the child nodes of a node in a data source, and also returns the parameters for the corresponding nodes.
                 </p>
-                <p class="caption"><a name="example-24"></a>Example 24. Get Child Nodes with Parameters</p>
+                <p class="caption"><a name="example-28"></a>Example 28. Get Child Nodes with Parameters</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1410,11 +1585,11 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.15 <a name="sect-ID0ELOAE">Get indices of Data Source</a></h3>
+        <h3>3.3.16 <a name="sect-ID0EUQAE">Get Indices of Data Source</a></h3>
                 <p class="" style="">
                     This commands returns a list of available indices in a data source. Indices can be used for efficient node look-up.
                 </p>
-                <p class="caption"><a name="example-25"></a>Example 25. Get Child Nodes with Parameters</p>
+                <p class="caption"><a name="example-29"></a>Example 29. Get Child Nodes with Parameters</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1444,11 +1619,11 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.16 <a name="sect-ID0EXOAE">Get Nodes from index</a></h3>
+        <h3>3.3.17 <a name="sect-ID0EARAE">Get Nodes from index</a></h3>
                 <p class="" style="">
                     This command can be used to get a node or nodes from a data source using an index and an index value.
                 </p>
-                <p class="caption"><a name="example-26"></a>Example 26. Get Nodes from index</p>
+                <p class="caption"><a name="example-30"></a>Example 30. Get Nodes from index</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1472,11 +1647,11 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.17 <a name="sect-ID0EDPAE">Get Nodes from index with Parameters</a></h3>
+        <h3>3.3.18 <a name="sect-ID0EMRAE">Get Nodes from index with Parameters</a></h3>
                 <p class="" style="">
                     This command can be used to get a node or nodes from a data source using an index and an index value, and also returns the parameters for the corresponding nodes.
                 </p>
-                <p class="caption"><a name="example-27"></a>Example 27. Get Nodes from index with Parameters</p>
+                <p class="caption"><a name="example-31"></a>Example 31. Get Nodes from index with Parameters</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1505,11 +1680,11 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.18 <a name="sect-ID0EPPAE">Get Nodes from indices</a></h3>
+        <h3>3.3.19 <a name="sect-ID0EYRAE">Get Nodes from indices</a></h3>
                 <p class="" style="">
                     This command can be used to get nodes from a set of data source using indices and index values.
                 </p>
-                <p class="caption"><a name="example-28"></a>Example 28. Get Nodes from indices</p>
+                <p class="caption"><a name="example-32"></a>Example 32. Get Nodes from indices</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1538,11 +1713,11 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.19 <a name="sect-ID0E2PAE">Get Nodes from indices with Parameters</a></h3>
+        <h3>3.3.20 <a name="sect-ID0EESAE">Get Nodes from indices with Parameters</a></h3>
                 <p class="" style="">
                     This command can be used to get nodes from a set of data source using indices and index values, and also returns the parameters for the corresponding nodes.
                 </p>
-                <p class="caption"><a name="example-29"></a>Example 29. Get Nodes from indices with Parameters</p>
+                <p class="caption"><a name="example-33"></a>Example 33. Get Nodes from indices with Parameters</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1579,11 +1754,11 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.20 <a name="sect-ID0EHQAE">Get All Index Values</a></h3>
+        <h3>3.3.21 <a name="sect-ID0EQSAE">Get All Index Values</a></h3>
                 <p class="" style="">
                     This command can be used to get a list of available index values, given a data source and an index.
                 </p>
-                <p class="caption"><a name="example-30"></a>Example 30. Get All Index Values</p>
+                <p class="caption"><a name="example-34"></a>Example 34. Get All Index Values</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1608,12 +1783,12 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.21 <a name="sect-ID0ETQAE">Get Node Ancestors</a></h3>
+        <h3>3.3.22 <a name="sect-ID0E3SAE">Get Node Ancestors</a></h3>
                 <p class="" style="">
                     In a tree formed data source, all nodes except the root node has a parent node. The <span class="strong">getAncestors</span> command allows the client to get a list
                     of all ancestors (parent, grand parent, etc.) of a node, as is shown in the following example:
                 </p>
-                <p class="caption"><a name="example-31"></a>Example 31. Get Node Ancestors</p>
+                <p class="caption"><a name="example-35"></a>Example 35. Get Node Ancestors</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1657,12 +1832,12 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.22 <a name="sect-ID0ELRAE">Move Node Up</a></h3>
+        <h3>3.3.23 <a name="sect-ID0EUTAE">Move Node Up</a></h3>
                 <p class="" style="">
                     As the order of siblings in a tree can be important, depending on the context and type of nodes involved, the client may be allowed to move nodes up and down among siblings.
                     To move a node upwards among its siblings is done using the command <span class="strong">moveNodeUp</span>, as is shown in the following example:
                 </p>
-                <p class="caption"><a name="example-32"></a>Example 32. Move Node Up</p>
+                <p class="caption"><a name="example-36"></a>Example 36. Move Node Up</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1686,12 +1861,12 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.23 <a name="sect-ID0EBSAE">Move Node Down</a></h3>
+        <h3>3.3.24 <a name="sect-ID0EKUAE">Move Node Down</a></h3>
                 <p class="" style="">
                     As the order of siblings in a tree can be important, depending on the context and type of nodes involved, the client may be allowed to move nodes up and down among siblings.
                     To move a node downwards among its siblings is done using the command <span class="strong">moveNodeDown</span>, as is shown in the following example:
                 </p>
-                <p class="caption"><a name="example-33"></a>Example 33. Move Node Up</p>
+                <p class="caption"><a name="example-37"></a>Example 37. Move Node Up</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1715,11 +1890,11 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.24 <a name="sect-ID0EXSAE">Move Nodes Up</a></h3>
+        <h3>3.3.25 <a name="sect-ID0EAVAE">Move Nodes Up</a></h3>
                 <p class="" style="">
                     To move a set of nodes upwards among its siblings is done using the command <span class="strong">moveNodesUp</span>, as is shown in the following example:
                 </p>
-                <p class="caption"><a name="example-34"></a>Example 34. Move Nodes Up</p>
+                <p class="caption"><a name="example-38"></a>Example 38. Move Nodes Up</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1748,11 +1923,11 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.25 <a name="sect-ID0ENTAE">Move Nodes Down</a></h3>
+        <h3>3.3.26 <a name="sect-ID0EWVAE">Move Nodes Down</a></h3>
                 <p class="" style="">
                     To move a set of nodes downwards among its siblings is done using the command <span class="strong">moveNodesDown</span>, as is shown in the following example:
                 </p>
-                <p class="caption"><a name="example-35"></a>Example 35. Move Node Up</p>
+                <p class="caption"><a name="example-39"></a>Example 39. Move Node Up</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1782,9 +1957,9 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.4 <a name="sect-ID0EEUAE">Node Parameters</a></h3>
+      <h3>3.4 <a name="sect-ID0ENWAE">Node Parameters</a></h3>
             <div class="indent">
-        <h3>3.4.1 <a name="sect-ID0EIUAE">Get Node Parameters for editing</a></h3>
+        <h3>3.4.1 <a name="sect-ID0ERWAE">Get Node Parameters for editing</a></h3>
                 <p class="" style="">
                     Previously described commands can return parameters for a node. But these parameters are for presentational or informational use. If the client wants to edit
                     the parameters of a node, another set of commands must be used. This use case shows how <span class="strong">getNodeParametersForEdit</span> can be used to edit available
@@ -1796,7 +1971,7 @@
                     of parameters the user can access. The node may be configured not to allow editing of certain parameters. Also, some types of parameters may only be available in
                     an edit mode (like long multi-line parameters) and not in a shorter presentation mode.
                 </p>
-                <p class="caption"><a name="example-36"></a>Example 36. Get Node Parameters for editing</p>
+                <p class="caption"><a name="example-40"></a>Example 40. Get Node Parameters for editing</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1934,13 +2109,13 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.4.2 <a name="sect-ID0E6XAE">Set Node Parameters after editing</a></h3>
+        <h3>3.4.2 <a name="sect-ID0EI1AE">Set Node Parameters after editing</a></h3>
                 <p class="" style="">
                     After editing the form, the client uses the <span class="strong">setNodeParametersAfterEdit</span> command to set the parameters in the node. Note that it is possible to
                     set the same parameters (or a sub-set of the same parameters) to a different node using this command, without the need to get new form parameters. However, after the first
                     successful set operation, any form session used for dynamic validation during edit will not be available on the server any more.
                 </p>
-                <p class="caption"><a name="example-37"></a>Example 37. Set Node Parameters after editing</p>
+                <p class="caption"><a name="example-41"></a>Example 41. Set Node Parameters after editing</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2006,12 +2181,12 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.4.3 <a name="sect-ID0E2YAE">Set Node Parameters after editing, Failure</a></h3>
+        <h3>3.4.3 <a name="sect-ID0EE2AE">Set Node Parameters after editing, Failure</a></h3>
                 <p class="" style="">
                     The following example shows how the server responds when the client tries to set invalid parameters. The response contains detailed information about why,
                     information which the client can use to inform the user (if any) of what went wrong.
                 </p>
-                <p class="caption"><a name="example-38"></a>Example 38. Set Node Parameters after editing, Failure</p>
+                <p class="caption"><a name="example-42"></a>Example 42. Set Node Parameters after editing, Failure</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2063,11 +2238,11 @@
                     As the <span class="strong">result</span> attribute is <span class="strong">FormError</span>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
                     explicitly cancelled or a form session time-out has occurred. See <a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms</a>
-                     [<a href="#nt-ID0ERZAE">8</a>] for more information.
+                     [<a href="#nt-ID0E12AE">8</a>] for more information.
                 </p>
             </div>
             <div class="indent">
-        <h3>3.4.4 <a name="sect-ID0EZZAE">Get Common Node Parameters for editing</a></h3>
+        <h3>3.4.4 <a name="sect-ID0EC3AE">Get Common Node Parameters for editing</a></h3>
                 <p class="" style="">
                     Advanced concentrators handling large quantities of nodes may let users edit sets of nodes at once to be practical. This is done by publising the
                     <span class="strong">getCommonNodeParametersForEdit</span> command. It will return a form with parameters that are common for all selected nodes. Since nodes
@@ -2079,7 +2254,7 @@
                     according to <a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms</a>. Clients using this command MUST support the extensions defined in
                     <a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms</a>.
                 </p>
-                <p class="caption"><a name="example-39"></a>Example 39. Get Common Node Parameters for editing</p>
+                <p class="caption"><a name="example-43"></a>Example 43. Get Common Node Parameters for editing</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2186,13 +2361,13 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.4.5 <a name="sect-ID0EC2AE">Set Common Node Parameters after editing</a></h3>
+        <h3>3.4.5 <a name="sect-ID0EL4AE">Set Common Node Parameters after editing</a></h3>
                 <p class="" style="">
                     After editing the form, the client uses the <span class="strong">setCommonNodeParametersAfterEdit</span> command to set the parameters in the set of nodes. Note that it is possible to
                     set the same parameters (or a sub-set of the same parameters) to a different set of nodes using this command, without the need to get new form parameters. However, after the first
                     successful set operation, any form session used for dynamic validation during edit will not be available on the server any more.
                 </p>
-                <p class="caption"><a name="example-40"></a>Example 40. Set Common Node Parameters after editing</p>
+                <p class="caption"><a name="example-44"></a>Example 44. Set Common Node Parameters after editing</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2269,12 +2444,12 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.4.6 <a name="sect-ID0EI3AE">Set Common Node Parameters after editing, Failure</a></h3>
+        <h3>3.4.6 <a name="sect-ID0ER5AE">Set Common Node Parameters after editing, Failure</a></h3>
                 <p class="" style="">
                     The following example shows how the server responds when the client tries to set invalid parameters to a set of nodes. The response contains detailed information about why,
                     information which the client can use to inform the user (if any) of what went wrong.
                 </p>
-                <p class="caption"><a name="example-41"></a>Example 41. Set Node Parameters after editing, Failure</p>
+                <p class="caption"><a name="example-45"></a>Example 45. Set Node Parameters after editing, Failure</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2318,7 +2493,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.4.7 <a name="sect-ID0ED4AE">Get Node Status</a></h3>
+        <h3>3.4.7 <a name="sect-ID0EM6AE">Get Node Status</a></h3>
                 <p class="" style="">
                     Each node in the concentrator has a <span class="strong">state</span>. This state is a dynamic run-time state, and therefore not presented as a more static property.
                     This state can be any of the following values, in order of increasing importance:
@@ -2388,7 +2563,7 @@
                         <span class="strong">getNodesFromIndices</span>
                     </li>
                 </ul>
-                <p class="caption"><a name="example-42"></a>Example 42. Get Node Status</p>
+                <p class="caption"><a name="example-46"></a>Example 46. Get Node Status</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2415,7 +2590,7 @@
                     The <span class="strong">messages</span> attribute can be combined with the <span class="strong">parameters</span> attribute to provide both node properties and
                     messages in the response.
                 </p>
-                <p class="caption"><a name="example-43"></a>Example 43. Get Node with parameters</p>
+                <p class="caption"><a name="example-47"></a>Example 47. Get Node with parameters</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2449,14 +2624,14 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.5 <a name="sect-ID0ESCAG">Creating and Destroying Nodes</a></h3>
+      <h3>3.5 <a name="sect-ID0E2EAG">Creating and Destroying Nodes</a></h3>
             <div class="indent">
-        <h3>3.5.1 <a name="sect-ID0EWCAG">Get Addable Node Types</a></h3>
+        <h3>3.5.1 <a name="sect-ID0E6EAG">Get Addable Node Types</a></h3>
                 <p class="" style="">
                     Since nodes are context sensitive, depending on node type and tree structure, before being able to create a new node, it is important to know what types of nodes
                     can be added to a given node. This is done using the <span class="strong">getAddableNodeTypes</span> command, as is shown in the following example:
                 </p>
-                <p class="caption"><a name="example-44"></a>Example 44. Get Addable Node Types</p>
+                <p class="caption"><a name="example-48"></a>Example 48. Get Addable Node Types</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2481,12 +2656,12 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.5.2 <a name="sect-ID0EFDAG">Get Parameters for New Node</a></h3>
+        <h3>3.5.2 <a name="sect-ID0EOFAG">Get Parameters for New Node</a></h3>
                 <p class="" style="">
                     When you what type of node you want to create, you need to get a set of parameters you need to fill in for the new node, before you can create it.
                     This is done using the <span class="strong">getParametersForNewNode</span> command, as is shown in the following example:
                 </p>
-                <p class="caption"><a name="example-45"></a>Example 45. Get Parameters for New Node</p>
+                <p class="caption"><a name="example-49"></a>Example 49. Get Parameters for New Node</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2532,11 +2707,11 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.5.3 <a name="sect-ID0EUDAG">Create New Node</a></h3>
+        <h3>3.5.3 <a name="sect-ID0E4FAG">Create New Node</a></h3>
                 <p class="" style="">
                     After editing the form, the client uses the <span class="strong">createNewNode</span> command to create the new node using the parameters provided in the form.
                 </p>
-                <p class="caption"><a name="example-46"></a>Example 46. Create New Node after editing</p>
+                <p class="caption"><a name="example-50"></a>Example 50. Create New Node after editing</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2582,12 +2757,12 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.5.4 <a name="sect-ID0EQEAG">Create New Node, Failure</a></h3>
+        <h3>3.5.4 <a name="sect-ID0EZGAG">Create New Node, Failure</a></h3>
                 <p class="" style="">
                     The following example shows how the server responds when it cannot accept parameters provided when trying to create a node. The response will contain detailed information
                     about why, information which the client can use to inform the user (if any) of what went wrong.
                 </p>
-                <p class="caption"><a name="example-47"></a>Example 47. Create New Node, Failure</p>
+                <p class="caption"><a name="example-51"></a>Example 51. Create New Node, Failure</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2629,11 +2804,11 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.5.5 <a name="sect-ID0ELFAG">Destroy Node</a></h3>
+        <h3>3.5.5 <a name="sect-ID0EUHAG">Destroy Node</a></h3>
                 <p class="" style="">
                     To destroy (remove) a node from the concentrator, the <span class="strong">destroyNode</span> command is sent, as is shown in the following example:
                 </p>
-                <p class="caption"><a name="example-48"></a>Example 48. Destroy Node</p>
+                <p class="caption"><a name="example-52"></a>Example 52. Destroy Node</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2657,12 +2832,12 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.5.6 <a name="sect-ID0EDGAG">Destroy Node, Failure</a></h3>
+        <h3>3.5.6 <a name="sect-ID0EMIAG">Destroy Node, Failure</a></h3>
                 <p class="" style="">
                     If the <span class="strong">result</span> attribute in the response is other than <span class="strong">OK</span>, the node was not removed from the concentrator.
                     The <span class="strong">result</span> attribute contains the reason why the operation failed, as is shown in the following example:
                 </p>
-                <p class="caption"><a name="example-49"></a>Example 49. Destroy Node, Failure</p>
+                <p class="caption"><a name="example-53"></a>Example 53. Destroy Node, Failure</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2684,15 +2859,15 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.6 <a name="sect-ID0EXGAG">Node Commands</a></h3>
+      <h3>3.6 <a name="sect-ID0EAJAG">Node Commands</a></h3>
             <div class="indent">
-        <h3>3.6.1 <a name="sect-ID0E2GAG">Get Node Commands</a></h3>
+        <h3>3.6.1 <a name="sect-ID0EEJAG">Get Node Commands</a></h3>
                 <p class="" style="">
                     Each node can have a context sensitive set of commands available to it. This is shown using the <span class="strong">hasCommands</span> attribute in the
                     <a href="#nodeinfo">Node Information</a> record describing the corresponding node. If the client wants to get a list of available commands,
                     the <span class="strong">getNodeCommands</span> command is sent to the concentrator, as is shown in the following example:
                 </p>
-                <p class="caption"><a name="example-50"></a>Example 50. Get Node Commands</p>
+                <p class="caption"><a name="example-54"></a>Example 54. Get Node Commands</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2726,11 +2901,11 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.6.2 <a name="sect-ID0E6HAG">Execute Simple Node Command</a></h3>
+        <h3>3.6.2 <a name="sect-ID0EIKAG">Execute Simple Node Command</a></h3>
                 <p class="" style="">
                     Executing a simple command is done by sending the <span class="strong">executeNodeCommand</span> command to the concentrator, as is shown in the following example:
                 </p>
-                <p class="caption"><a name="example-51"></a>Example 51. Execute Simple Node Command</p>
+                <p class="caption"><a name="example-55"></a>Example 55. Execute Simple Node Command</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2751,12 +2926,12 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.3 <a name="sect-ID0EOIAG">Get Node Command Parameters</a></h3>
+        <h3>3.6.3 <a name="sect-ID0EXKAG">Get Node Command Parameters</a></h3>
                 <p class="" style="">
                     To execute a parametrized command on the node, the client first needs to get (and edit) a set of parameters for the command. Getting a set of parameters for a
                     parametrized command is done as follows:
                 </p>
-                <p class="caption"><a name="example-52"></a>Example 52. Get Node Command Parameters</p>
+                <p class="caption"><a name="example-56"></a>Example 56. Get Node Command Parameters</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2803,12 +2978,12 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.4 <a name="sect-ID0E1IAG">Execute Parametrized Node Command</a></h3>
+        <h3>3.6.4 <a name="sect-ID0EDLAG">Execute Parametrized Node Command</a></h3>
                 <p class="" style="">
                     Executing a parametrized command is also done by sending the <span class="strong">executeNodeCommand</span> command to the concentrator, but including the edited form parameters,
                     as is shown in the following example:
                 </p>
-                <p class="caption"><a name="example-53"></a>Example 53. Execute Parametrized Node Command</p>
+                <p class="caption"><a name="example-57"></a>Example 57. Execute Parametrized Node Command</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2841,7 +3016,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.5 <a name="sect-ID0EJJAG">Execute Node Command, Failure</a></h3>
+        <h3>3.6.5 <a name="sect-ID0ESLAG">Execute Node Command, Failure</a></h3>
                 <p class="" style="">
                     If an error occurs during the execution of a command or if the server rejects the execution of a command, the server returns a response code different from
                     <span class="strong">OK</span>. If the response code is <span class="strong">FormError</span>, the server maintains any parameter form resources related to the form, and features such as
@@ -2849,7 +3024,7 @@
                     explicitly cancelled or a form session time-out has occurred. See <a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms</a>
                     <a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms.html</a> for more information.
                 </p>
-                <p class="caption"><a name="example-54"></a>Example 54. Execute Node Command, Failure</p>
+                <p class="caption"><a name="example-58"></a>Example 58. Execute Node Command, Failure</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2884,12 +3059,12 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.6 <a name="sect-ID0EAKAG">Get Common Commands for Nodes</a></h3>
+        <h3>3.6.6 <a name="sect-ID0EJMAG">Get Common Commands for Nodes</a></h3>
                 <p class="" style="">
                     Using the command <span class="strong">getCommonNodeCommands</span>, the client can receive commands that are common for a set of nodes,
                     as is shown in the following example:
                 </p>
-                <p class="caption"><a name="example-55"></a>Example 55. Get Common Commands for Nodes</p>
+                <p class="caption"><a name="example-59"></a>Example 59. Get Common Commands for Nodes</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2925,12 +3100,12 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.7 <a name="sect-ID0EPKAG">Execute Simple Command on multiple nodes</a></h3>
+        <h3>3.6.7 <a name="sect-ID0EYMAG">Execute Simple Command on multiple nodes</a></h3>
                 <p class="" style="">
                     Executing a simple command on multiple nodes is done by sending the <span class="strong">executeCommonNodeCommand</span> command to the concentrator,
                     as is shown in the following example:
                 </p>
-                <p class="caption"><a name="example-56"></a>Example 56. Execute Simple Command on multiple nodes</p>
+                <p class="caption"><a name="example-60"></a>Example 60. Execute Simple Command on multiple nodes</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2958,12 +3133,12 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.8 <a name="sect-ID0E5KAG">Get Common Command Parameters from command on multiple nodes</a></h3>
+        <h3>3.6.8 <a name="sect-ID0EHNAG">Get Common Command Parameters from command on multiple nodes</a></h3>
                 <p class="" style="">
                     To execute a parametrized command on a set of nodes, the client first needs to get (and edit) a set of parameters for the common command. Getting a set of parameters for a
                     common parametrized command is done as follows:
                 </p>
-                <p class="caption"><a name="example-57"></a>Example 57. Get Common Command Parameters from command on multiple nodes</p>
+                <p class="caption"><a name="example-61"></a>Example 61. Get Common Command Parameters from command on multiple nodes</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -3017,12 +3192,12 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.9 <a name="sect-ID0EKLAG">Execute Common Parametrized Command on multiple nodes</a></h3>
+        <h3>3.6.9 <a name="sect-ID0ETNAG">Execute Common Parametrized Command on multiple nodes</a></h3>
                 <p class="" style="">
                     Executing a common parametrized command is also done by sending the <span class="strong">executeCommonNodeCommand</span> command to the concentrator, but including the edited form parameters,
                     as is shown in the following example:
                 </p>
-                <p class="caption"><a name="example-58"></a>Example 58. Execute Common Parametrized Command on multiple nodes</p>
+                <p class="caption"><a name="example-62"></a>Example 62. Execute Common Parametrized Command on multiple nodes</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -3061,7 +3236,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.10 <a name="sect-ID0EZLAG">Execute Parametrized Command on multiple Nodes, Failure</a></h3>
+        <h3>3.6.10 <a name="sect-ID0ECOAG">Execute Parametrized Command on multiple Nodes, Failure</a></h3>
                 <p class="" style="">
                     If an error occurs during the execution of a common command or if the server rejects the execution of a common command, the server returns a response code different from
                     <span class="strong">OK</span>. If the response code is <span class="strong">FormError</span>, the server maintains any parameter form resources related to the form, and features such as
@@ -3069,7 +3244,7 @@
                     explicitly cancelled or a form session time-out has occurred. See <a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms</a>
                     <a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms.html</a> for more information.
                 </p>
-                <p class="caption"><a name="example-59"></a>Example 59. Execute Parametrized Command on multiple Nodes, Failure</p>
+                <p class="caption"><a name="example-63"></a>Example 63. Execute Parametrized Command on multiple Nodes, Failure</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -3112,11 +3287,744 @@
         </div>
         <div class="indent">
       <h3>3.7 <a name="sourceevents">Data Source Events</a></h3>
-            
+            <p class="" style="">
+                Events are asynchronous messages sent from the concentrator to devices registered with the concentrator and having subscribed to events from the concentrator.
+                <a href="#subscribe">Event subscription</a> can be activated using the <span class="strong">subscribe</span> command. You can also <a href="#subscribe2">retrieve historical events</a>
+                using the <span class="strong">subscribe</span> command.
+            </p>
+            <p class="" style="">
+                Each event is sent from the concentrator to each subscriber using a <span class="strong">message</span> stanza. Each such <span class="strong">megssage</span> stanza may contain multiple
+                events. The following subsections list the different types of events that can be sent. Even though these examples may list only one element in a message stanza, this
+                is not a limitation. Different types of events may also be mixed within the message stanza.
+            </p>
+            <p class="" style="">
+                Event subscriptions only last for as long as the client and concentrator both maintains precense. The concentrator must not persist
+                event notification subscriptions, and if it goes offline and back online, or if the client goes offline or online again for any reason, the event subscription
+                is removed.
+            </p>
+            <p class="" style="">
+                Node events may contain parameters or status messages. This depends on how the subscription was made. The <span class="strong">parameters</span> and <span class="strong">messages</span> attributes
+                in the <span class="strong">subscribe</span> command determine if node parameters and/or status messages should be sent in event messages.
+            </p>
+            <div class="indent">
+        <h3>3.7.1 <a name="sect-ID0EFQAG">Node added event</a></h3>
+                <p class="" style="">
+                    The <span class="strong">nodeAdded</span> event is sent when a node has been added to a data source which the client subscribes to. The following example 
+                    shows how such an event message may look like:
+                </p>
+                <p class="caption"><a name="example-64"></a>Example 64. Node added event, without parameters</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;message from='concentrator@clayster.com'
+            to='client@clayster.com'&gt;
+      &lt;nodeAdded xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
+                 hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/&gt;
+   &lt;/message&gt;
+                </pre>
+        </div>
+                <p class="caption"><a name="example-65"></a>Example 65. Node added event, with parameters</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;message from='concentrator@clayster.com'
+            to='client@clayster.com'&gt;
+      &lt;nodeAdded xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
+                 hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
+          &lt;string id='id' name='Node ID' value='Node1'/&gt;
+          &lt;string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/&gt;
+          &lt;string id='sn' name='Serial Number' value='123456'/&gt;
+          &lt;string id='class' name='Node Class' value='Temperature'/&gt;
+          &lt;string id='meterLoc' name='Meter Location' value='P123502-2'/&gt;
+          &lt;int id='addr' name='Address' value='123'/&gt;
+          &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+          &lt;double id='long' name='Longitude' value='123.45'/&gt;
+      &lt;/nodeAdded&gt;
+   &lt;/message&gt;
+                </pre>
+        </div>
+                <p class="" style="">
+                    <span class="strong">Note:</span> Moving a node in a data source from one parent to another, possibly between different data sources, is performed by first
+                    removing it from the current source (sending a <span class="strong">nodeRemoved</span> event) and then adding it to the new data source (sending a <span class="strong">nodeAdded</span>
+                    event), in that order.
+                </p>
+            </div>
+            <div class="indent">
+        <h3>3.7.2 <a name="sect-ID0ECRAG">Node removed</a></h3>
+                <p class="" style="">
+                    The <span class="strong">nodeRemoved</span> event is sent when a node in a data source has been removed or destroyed. It does not include status message or parameter
+                    information about the node, only the reference to the node. The following example shows how such an event message may look like:
+                </p>
+                <p class="caption"><a name="example-66"></a>Example 66. Node removed</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;message from='concentrator@clayster.com'
+            to='client@clayster.com'&gt;
+      &lt;nodeRemoved xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1'/&gt;
+   &lt;/message&gt;
+                </pre>
+        </div>
+                <p class="" style="">
+                    <span class="strong">Note:</span> Moving a node in a data source from one parent to another, possibly between different data sources, is performed by first
+                    removing it from the current source (sending a <span class="strong">nodeRemoved</span> event) and then adding it to the new data source (sending a <span class="strong">nodeAdded</span>
+                    event), in that order.
+                </p>
+            </div>
+            <div class="indent">
+        <h3>3.7.3 <a name="sect-ID0E3RAG">Node updated</a></h3>
+                <p class="" style="">
+                    The <span class="strong">nodeUpdated</span> event is sent when a node has been updated in a data source which the client subscribes to. The following example
+                    shows how such an event message may look like:
+                </p>
+                <p class="caption"><a name="example-67"></a>Example 67. Node updated event, without parameters</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;message from='concentrator@clayster.com'
+            to='client@clayster.com'&gt;
+      &lt;nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
+                 hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/&gt;
+   &lt;/message&gt;
+                </pre>
+        </div>
+                <p class="caption"><a name="example-68"></a>Example 68. Node updated event, with parameters</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;message from='concentrator@clayster.com'
+            to='client@clayster.com'&gt;
+      &lt;nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
+                 hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
+          &lt;string id='id' name='Node ID' value='Node1'/&gt;
+          &lt;string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/&gt;
+          &lt;string id='sn' name='Serial Number' value='123456'/&gt;
+          &lt;string id='class' name='Node Class' value='Temperature'/&gt;
+          &lt;string id='meterLoc' name='Meter Location' value='P123502-2'/&gt;
+          &lt;int id='addr' name='Address' value='123'/&gt;
+          &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+          &lt;double id='long' name='Longitude' value='123.45'/&gt;
+      &lt;/nodeAdded&gt;
+   &lt;/message&gt;
+                </pre>
+        </div>
+                <p class="" style="">
+                    The event has an optional attribute named <span class="strong">oldId</span>. It is set when the node has been renamed. It must be used, if avilable, to identify
+                    what node has been updated, as the following example shows:
+                </p>
+                <p class="caption"><a name="example-69"></a>Example 69. Node renamed event, without parameters</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;message from='concentrator@clayster.com'
+            to='client@clayster.com'&gt;
+      &lt;nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' oldId='OldNode1' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
+                 hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/&gt;
+   &lt;/message&gt;
+                </pre>
+        </div>
+                <p class="caption"><a name="example-70"></a>Example 70. Node renamed event, with parameters</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;message from='concentrator@clayster.com'
+            to='client@clayster.com'&gt;
+      &lt;nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' oldId='OldNode1' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
+                 hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
+          &lt;string id='id' name='Node ID' value='Node1'/&gt;
+          &lt;string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/&gt;
+          &lt;string id='sn' name='Serial Number' value='123456'/&gt;
+          &lt;string id='class' name='Node Class' value='Temperature'/&gt;
+          &lt;string id='meterLoc' name='Meter Location' value='P123502-2'/&gt;
+          &lt;int id='addr' name='Address' value='123'/&gt;
+          &lt;double id='lat' name='Latitude' value='12.345'/&gt;
+          &lt;double id='long' name='Longitude' value='123.45'/&gt;
+      &lt;/nodeUpdated&gt;
+   &lt;/message&gt;
+                </pre>
+        </div>
+                <p class="" style="">
+                    <span class="strong">Note: </span>If only the status has changed, and no other parameters have changed, the <a href="#nodeStatusChanged">nodeStatusChanged</a>
+                    event could be sent instead, for somewhat improved performance in this case.
+                </p>
+            </div>
+            <div class="indent">
+        <h3>3.7.4 <a name="#nodeStatusChanged">Node status changed</a></h3>
+                <p class="" style="">
+                    The <span class="strong">nodeStatusChanged</span> event is sent when the <a href="#nodestates">state of the node</a> has changed, but no other parameters have been changed.
+                    If the client has subscribed to state messages, these will alsobe included in the event.
+                </p>
+                <p class="caption"><a name="example-71"></a>Example 71. Node status changed event, without messages</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;message from='concentrator@clayster.com'
+            to='client@clayster.com'&gt;
+      &lt;nodeStatusChanged xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' cacheType='Node' state='ErrorUnsigned'/&gt;
+   &lt;/message&gt;
+                </pre>
+        </div>
+                <p class="caption"><a name="example-72"></a>Example 72. Node status changed event, with messages</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;message from='concentrator@clayster.com'
+            to='client@clayster.com'&gt;
+      &lt;nodeStatusChanged xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' cacheType='Node' state='ErrorUnsigned'&gt;
+          &lt;message timestamp='2013-03-22T12:49:34' type='Error'&gt;Sensor does not respond to read-out requests.&lt;/message&gt;
+      &lt;/nodeStatusChanged&gt;
+   &lt;/message&gt;
+                </pre>
+        </div>
+            </div>
+            <div class="indent">
+        <h3>3.7.5 <a name="sect-ID0E1TAG">Node moved up</a></h3>
+                <p class="" style="">
+                    The <span class="strong">nodeMovedUp</span> event is sent when a node in a data source has been moved up among its siblings. It does not include status message or parameter
+                    information about the node, only the reference to the node. The following example shows how such an event message may look like:
+                </p>
+                <p class="caption"><a name="example-73"></a>Example 73. Node moved up</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;message from='concentrator@clayster.com'
+            to='client@clayster.com'&gt;
+      &lt;nodeMovedUp xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1'/&gt;
+   &lt;/message&gt;
+                </pre>
+        </div>
+                <p class="" style="">
+                    <span class="strong">Note:</span> If issuing a <span class="strong">moveNodeUp</span> command on a node that is already first among its siblings, the node is not moved and the
+                    concentrator must not send a <span class="strong">nodeMovedUp</span> event. However, if the client receives such an event pointing to a node that is already first among
+                    its siblings, it should not move the node.
+                </p>
+            </div>
+            <div class="indent">
+        <h3>3.7.6 <a name="sect-ID0EUUAG">Node moved down</a></h3>
+                <p class="" style="">
+                    The <span class="strong">nodeMovedDown</span> event is sent when a node in a data source has been moved down among its siblings. It does not include status message or parameter
+                    information about the node, only the reference to the node. The following example shows how such an event message may look like:
+                </p>
+                <p class="caption"><a name="example-74"></a>Example 74. Node moved down</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;message from='concentrator@clayster.com'
+            to='client@clayster.com'&gt;
+      &lt;nodeMovedDown xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1'/&gt;
+   &lt;/message&gt;
+                </pre>
+        </div>
+                <p class="" style="">
+                    <span class="strong">Note:</span> If issuing a <span class="strong">moveNodeDown</span> command on a node that is already last among its siblings, the node is not moved and the
+                    concentrator must not send a <span class="strong">nodeMovedDown</span> event. However, if the client receives such an event pointing to a node that is already last among
+                    its siblings, it should not move the node.
+                </p>
+            </div>
         </div>
         <div class="indent">
-      <h3>3.8 <a name="sect-ID0EYMAG">Data Sets</a></h3>
-            
+      <h3>3.8 <a name="sect-ID0EPVAG">Field Databases</a></h3>
+            <p class="" style="">
+                A concentrator can often store data from sensors locally (or remotely but controlled locally). Storage is done in <span class="strong">field databases</span>. A concentrator with
+                only communicative abilities will publish zero such field databases (and support for none of the field database commands), while a pure metering database will publish 
+                one or many field databases, but none of the nodes available in any of the different data sources are readable or writable. The nodes in this latter case only acts as 
+                placeholders for the data that the concentrator is storing or controlling.
+            </p>
+            <p class="" style="">
+                The following subsections lists different use cases relating to field databases and how to use them.
+            </p>
+            <div class="indent">
+        <h3>3.8.1 <a name="sect-ID0E5VAG">Get All Databases</a></h3>
+                <p class="" style="">
+                    The client can retrieve the list of available databases on the concentrator using the <span class="strong">getDatabases</span> command, as is shown in the following example:
+                </p>
+                <p class="caption"><a name="example-75"></a>Example 75. Get All Databases</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='64'&gt;
+      &lt;getDatabases xmlns='urn:xmpp:sn:concentrators' xml:lang='en'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='64'&gt;
+      &lt;getDatabasesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;database id='LocalDB' name='Local Database'/&gt;
+          &lt;database id='LocalDBTest' name='Local Test Database'/&gt;
+          &lt;database id='LocalDBProduction' name='Local Production Database'/&gt;
+          &lt;database id='RemoteDB' name='Remote Database'/&gt;
+      &lt;/getDatabasesResponse&gt;
+   &lt;/iq&gt;
+                </pre>
+        </div>
+            </div>
+            <div class="indent">
+        <h3>3.8.2 <a name="sect-ID0ENWAG">Get Database Readout Parameters</a></h3>
+                <p class="" style="">
+                    Before reading data from a database can begin, a parameter form containing database specific search parameters needs to be fetched from the server.
+                    This is done using the <span class="strong">getDatabaseReadoutParameters</span> command, as is shown in the following example:
+                </p>
+                <p class="caption"><a name="example-76"></a>Example 76. Get Database Readout Parameters</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='65'&gt;
+      &lt;getDatabaseReadoutParameters xmlns='urn:xmpp:sn:concentrators' xml:lang='en' databaseId='LocalDB'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='65'&gt;
+      &lt;getDatabaseReadoutParametersResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+          &lt;x type='form' 
+             xmlns='jabber:x:data' 
+             xmlns:xdv='http://jabber.org/protocol/xdata-validate'
+             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'&gt;
+              &lt;title&gt;Database read-out&lt;/title&gt;
+              &lt;xdl:page label='Time'&gt;
+                  &lt;xdl:fieldref var='from'/&gt;
+                  &lt;xdl:fieldref var='to'/&gt;
+              &lt;/xdl:page&gt;
+              &lt;xdl:page label='Fields'&gt;
+                  &lt;xdl:fieldref var='fields'/&gt;
+              &lt;/xdl:page&gt;
+              &lt;xdl:page label='Types'&gt;
+                  &lt;xdl:fieldref var='momentary'/&gt;
+                  &lt;xdl:fieldref var='peak'/&gt;
+                  &lt;xdl:fieldref var='status'/&gt;
+                  &lt;xdl:fieldref var='computed'/&gt;
+                  &lt;xdl:fieldref var='identity'/&gt;
+                  &lt;xdl:fieldref var='historySecond'/&gt;
+                  &lt;xdl:fieldref var='historyMinute'/&gt;
+                  &lt;xdl:fieldref var='historyHour'/&gt;
+                  &lt;xdl:fieldref var='historyDay'/&gt;
+                  &lt;xdl:fieldref var='historyWeek'/&gt;
+                  &lt;xdl:fieldref var='historyMonth'/&gt;
+                  &lt;xdl:fieldref var='historyQuarter'/&gt;
+                  &lt;xdl:fieldref var='historyYear'/&gt;
+                  &lt;xdl:fieldref var='historyOther'/&gt;
+              &lt;/xdl:page&gt;
+              &lt;xdl:page label='Status'&gt;
+                  &lt;xdl:fieldref var='missing'/&gt;
+                  &lt;xdl:fieldref var='automaticEstimates'/&gt;
+                  &lt;xdl:fieldref var='manualEstimates'/&gt;
+                  &lt;xdl:fieldref var='manualReadout'/&gt;
+                  &lt;xdl:fieldref var='automaticReadout'/&gt;
+                  &lt;xdl:fieldref var='timeOffset'/&gt;
+                  &lt;xdl:fieldref var='warning'/&gt;
+                  &lt;xdl:fieldref var='error'/&gt;
+                  &lt;xdl:fieldref var='signed'/&gt;
+                  &lt;xdl:fieldref var='invoiced'/&gt;
+                  &lt;xdl:fieldref var='invoicedConfirmed'/&gt;
+                  &lt;xdl:fieldref var='endOfSeries'/&gt;
+                  &lt;xdl:fieldref var='powerFailure'/&gt;
+                  &lt;xdl:fieldref var='statusLogicMode'/&gt;
+              &lt;/xdl:page&gt;
+              &lt;field var='xdd session' type='hidden'&gt;
+                  &lt;value&gt;C20D4F0C-8F8A-490F-8188-53017DF2B71A&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='from' type='text-single' label='From:'&gt;
+                  &lt;required/&gt;
+                  &lt;xdv:validate datatype='xs:dateTime'&gt;
+                      &lt;xdv:basic/&gt;
+                  &lt;/xdv:validate&gt;
+                  &lt;desc&gt;Read values not older that this timestamp.&lt;/desc&gt;
+                  &lt;value&gt;&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='to' type='text-single' label='To:'&gt;
+                  &lt;required/&gt;
+                  &lt;xdv:validate datatype='xs:dateTime'&gt;
+                      &lt;xdv:basic/&gt;
+                  &lt;/xdv:validate&gt;
+                  &lt;desc&gt;Read values not newer that this timestamp.&lt;/desc&gt;
+                  &lt;value&gt;&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='fields' type='text-multi' label='Fields to include: (Use * as wildcards)'&gt;
+                  &lt;desc&gt;If specified, only the following fields (include wildcards) will be read out.&lt;/desc&gt;
+                  &lt;value&gt;&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='momentary' type='boolean' label='Momentary Values'&gt;
+                  &lt;desc&gt;If checked, momentary values will be read.&lt;/desc&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='peak' type='boolean' label='Peak Values'&gt;
+                  &lt;desc&gt;If checked, peak values will be read.&lt;/desc&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='status' type='boolean' label='Status Values'&gt;
+                  &lt;desc&gt;If checked, status values will be read.&lt;/desc&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='computed' type='boolean' label='Computed Values'&gt;
+                  &lt;desc&gt;If checked, computed values will be read.&lt;/desc&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='identity' type='boolean' label='Identity Values'&gt;
+                  &lt;desc&gt;If checked, identity values will be read.&lt;/desc&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='historySecond' type='boolean' label='Historical Values (second)'&gt;
+                  &lt;desc&gt;If checked, historical values (second) will be read.&lt;/desc&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='historyMinute' type='boolean' label='Historical Values (minute)'&gt;
+                  &lt;desc&gt;If checked, historical values (minute) will be read.&lt;/desc&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='historyHour' type='boolean' label='Historical Values (hour)'&gt;
+                  &lt;desc&gt;If checked, historical values (hour) will be read.&lt;/desc&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='historyDay' type='boolean' label='Historical Values (day)'&gt;
+                  &lt;desc&gt;If checked, historical values (day) will be read.&lt;/desc&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='historyWeek' type='boolean' label='Historical Values (week)'&gt;
+                  &lt;desc&gt;If checked, historical values (week) will be read.&lt;/desc&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='historyMonth' type='boolean' label='Historical Values (month)'&gt;
+                  &lt;desc&gt;If checked, historical values (month) will be read.&lt;/desc&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='historyQuarter' type='boolean' label='Historical Values (quarter)'&gt;
+                  &lt;desc&gt;If checked, historical values (quarter) will be read.&lt;/desc&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='historyYear' type='boolean' label='Historical Values (year)'&gt;
+                  &lt;desc&gt;If checked, historical values (year) will be read.&lt;/desc&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='historyOther' type='boolean' label='Historical Values (other)'&gt;
+                  &lt;desc&gt;If checked, historical values (other) will be read.&lt;/desc&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='missing' type='list-single' label='Missing Values:'&gt;
+                  &lt;desc&gt;Determines how this flag should be treated during readout.&lt;/desc&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+                  &lt;option label='Ignore'&gt;&lt;value&gt;Ignore this flag.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Required'&gt;&lt;value&gt;Only read values with this flag set.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Prohibit'&gt;&lt;value&gt;Only read values with this flag cleared.&lt;/value&gt;&lt;/option&gt;
+              &lt;/field&gt;
+              &lt;field var='automaticEstimates' type='list-single' label='Automatic Estimates:'&gt;
+                  &lt;desc&gt;Determines how this flag should be treated during readout.&lt;/desc&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+                  &lt;option label='Ignore'&gt;&lt;value&gt;Ignore this flag.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Required'&gt;&lt;value&gt;Only read values with this flag set.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Prohibit'&gt;&lt;value&gt;Only read values with this flag cleared.&lt;/value&gt;&lt;/option&gt;
+              &lt;/field&gt;
+              &lt;field var='manualEstimates' type='list-single' label='Manual Estimates:'&gt;
+                  &lt;desc&gt;Determines how this flag should be treated during readout.&lt;/desc&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+                  &lt;option label='Ignore'&gt;&lt;value&gt;Ignore this flag.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Required'&gt;&lt;value&gt;Only read values with this flag set.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Prohibit'&gt;&lt;value&gt;Only read values with this flag cleared.&lt;/value&gt;&lt;/option&gt;
+              &lt;/field&gt;
+              &lt;field var='manualReadout' type='list-single' label='Manual Readout:'&gt;
+                  &lt;desc&gt;Determines how this flag should be treated during readout.&lt;/desc&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+                  &lt;option label='Ignore'&gt;&lt;value&gt;Ignore this flag.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Required'&gt;&lt;value&gt;Only read values with this flag set.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Prohibit'&gt;&lt;value&gt;Only read values with this flag cleared.&lt;/value&gt;&lt;/option&gt;
+              &lt;/field&gt;
+              &lt;field var='automaticReadout' type='list-single' label='Automatic Readout:'&gt;
+                  &lt;desc&gt;Determines how this flag should be treated during readout.&lt;/desc&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+                  &lt;option label='Ignore'&gt;&lt;value&gt;Ignore this flag.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Required'&gt;&lt;value&gt;Only read values with this flag set.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Prohibit'&gt;&lt;value&gt;Only read values with this flag cleared.&lt;/value&gt;&lt;/option&gt;
+              &lt;/field&gt;
+              &lt;field var='timeOffset' type='list-single' label='Time Offset:'&gt;
+                  &lt;desc&gt;Determines how this flag should be treated during readout.&lt;/desc&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+                  &lt;option label='Ignore'&gt;&lt;value&gt;Ignore this flag.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Required'&gt;&lt;value&gt;Only read values with this flag set.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Prohibit'&gt;&lt;value&gt;Only read values with this flag cleared.&lt;/value&gt;&lt;/option&gt;
+              &lt;/field&gt;
+              &lt;field var='warning' type='list-single' label='Warning:'&gt;
+                  &lt;desc&gt;Determines how this flag should be treated during readout.&lt;/desc&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+                  &lt;option label='Ignore'&gt;&lt;value&gt;Ignore this flag.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Required'&gt;&lt;value&gt;Only read values with this flag set.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Prohibit'&gt;&lt;value&gt;Only read values with this flag cleared.&lt;/value&gt;&lt;/option&gt;
+              &lt;/field&gt;
+              &lt;field var='error' type='list-single' label='Error:'&gt;
+                  &lt;desc&gt;Determines how this flag should be treated during readout.&lt;/desc&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+                  &lt;option label='Ignore'&gt;&lt;value&gt;Ignore this flag.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Required'&gt;&lt;value&gt;Only read values with this flag set.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Prohibit'&gt;&lt;value&gt;Only read values with this flag cleared.&lt;/value&gt;&lt;/option&gt;
+              &lt;/field&gt;
+              &lt;field var='signed' type='list-single' label='Signed:'&gt;
+                  &lt;desc&gt;Determines how this flag should be treated during readout.&lt;/desc&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+                  &lt;option label='Ignore'&gt;&lt;value&gt;Ignore this flag.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Required'&gt;&lt;value&gt;Only read values with this flag set.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Prohibit'&gt;&lt;value&gt;Only read values with this flag cleared.&lt;/value&gt;&lt;/option&gt;
+              &lt;/field&gt;
+              &lt;field var='invoiced' type='list-single' label='Invoiced:'&gt;
+                  &lt;desc&gt;Determines how this flag should be treated during readout.&lt;/desc&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+                  &lt;option label='Ignore'&gt;&lt;value&gt;Ignore this flag.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Required'&gt;&lt;value&gt;Only read values with this flag set.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Prohibit'&gt;&lt;value&gt;Only read values with this flag cleared.&lt;/value&gt;&lt;/option&gt;
+              &lt;/field&gt;
+              &lt;field var='invoicedConfirmed' type='list-single' label='Invoiced and Confirmed:'&gt;
+                  &lt;desc&gt;Determines how this flag should be treated during readout.&lt;/desc&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+                  &lt;option label='Ignore'&gt;&lt;value&gt;Ignore this flag.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Required'&gt;&lt;value&gt;Only read values with this flag set.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Prohibit'&gt;&lt;value&gt;Only read values with this flag cleared.&lt;/value&gt;&lt;/option&gt;
+              &lt;/field&gt;
+              &lt;field var='endOfSeries' type='list-single' label='End of Series:'&gt;
+                  &lt;desc&gt;Determines how this flag should be treated during readout.&lt;/desc&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+                  &lt;option label='Ignore'&gt;&lt;value&gt;Ignore this flag.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Required'&gt;&lt;value&gt;Only read values with this flag set.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Prohibit'&gt;&lt;value&gt;Only read values with this flag cleared.&lt;/value&gt;&lt;/option&gt;
+              &lt;/field&gt;
+              &lt;field var='powerFailure' type='list-single' label='Power Failure:'&gt;
+                  &lt;desc&gt;Determines how this flag should be treated during readout.&lt;/desc&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+                  &lt;option label='Ignore'&gt;&lt;value&gt;Ignore this flag.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Required'&gt;&lt;value&gt;Only read values with this flag set.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='Prohibit'&gt;&lt;value&gt;Only read values with this flag cleared.&lt;/value&gt;&lt;/option&gt;
+              &lt;/field&gt;
+              &lt;field var='statusLogicMode' type='list-single' label='Combination Logic:'&gt;
+                  &lt;desc&gt;This parameter specifies how multiple status flags are to be treated in the readout.&lt;/desc&gt;
+                  &lt;value&gt;Any&lt;/value&gt;
+                  &lt;option label='Any'&gt;&lt;value&gt;Any of the conditions above are met.&lt;/value&gt;&lt;/option&gt;
+                  &lt;option label='All'&gt;&lt;value&gt;All of the conditions above are met.&lt;/value&gt;&lt;/option&gt;
+              &lt;/field&gt;
+          &lt;/x&gt;
+      &lt;/getDatabaseReadoutParametersResponse&gt;
+   &lt;/iq&gt;
+                </pre>
+        </div>
+            </div>
+            <div class="indent">
+        <h3>3.8.3 <a name="sect-ID0E3WAG">Start Database Readout</a></h3>
+                <p class="" style="">
+                    Once the parameter form has been filled out, a database readout can be started using the <span class="strong">startDatabaseReadout</span> command.
+                    Data read from the concentrator will follow the same flow of sensor data as that described in <a href="xep-0000-SN-SensorData.html">xep-0000-SN-SensorData</a>
+                     [<a href="#nt-ID0EJXAG">9</a>]. The only difference is that the read-out is started with the <span class="strong">startDatabaseReadout</span> command instead of the <span class="strong">req</span>
+                    command of the sensor data namespace.
+                </p>
+                <p class="" style="">
+                    The following diagram shows the flow of messages when requesting a readout from a database:
+                </p>
+                <p class="" style="">
+                    <img alt="" src="http://i.imgur.com/xdqeGw0.png">
+                </p>
+                <p class="" style="">
+                    The following example shows a <span class="strong">startDatabaseReadout</span> request:
+                </p>
+                <p class="caption"><a name="example-77"></a>Example 77. Start Database Readout</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='66'&gt;
+      &lt;startDatabaseReadout xmlns='urn:xmpp:sn:concentrators' xml:lang='en' databaseId='LocalDB' seqnr='1'&gt;
+          &lt;node sourceId='MeteringTopology' nodeId='Node1'/&gt;
+          &lt;node sourceId='MeteringTopology' nodeId='Node2'/&gt;
+          &lt;node sourceId='MeteringTopology' nodeId='Node3'/&gt;
+          &lt;x type='submit' xmlns='jabber:x:data'&gt;
+              &lt;field var='xdd session' type='hidden'&gt;
+                  &lt;value&gt;C20D4F0C-8F8A-490F-8188-53017DF2B71A&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='from' type='text-single'&gt;
+                  &lt;value&gt;2013-03-22T00:00:00&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='to' type='text-single'&gt;
+                  &lt;value&gt;2013-03-23T00:00:00&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='fields' type='text-multi'&gt;
+                  &lt;value&gt;Temperature&lt;/value&gt;
+                  &lt;value&gt;Pressure&lt;/value&gt;
+                  &lt;value&gt;Power&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='momentary' type='boolean'&gt;
+                  &lt;value&gt;true&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='peak' type='boolean'&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='status' type='boolean'&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='computed' type='boolean'&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='identity' type='boolean'&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='historySecond' type='boolean'&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='historyMinute' type='boolean'&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='historyHour' type='boolean'&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='historyDay' type='boolean'&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='historyWeek' type='boolean'&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='historyMonth' type='boolean'&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='historyQuarter' type='boolean'&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='historyYear' type='boolean'&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='historyOther' type='boolean'&gt;
+                  &lt;value&gt;false&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='missing' type='list-single'&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='automaticEstimates' type='list-single'&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='manualEstimates' type='list-single'&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='manualReadout' type='list-single'&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='automaticReadout' type='list-single'&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='timeOffset' type='list-single'&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='warning' type='list-single'&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='error' type='list-single'&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='signed' type='list-single'&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='invoiced' type='list-single'&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='invoicedConfirmed' type='list-single'&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='endOfSeries' type='list-single'&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='powerFailure' type='list-single'&gt;
+                  &lt;value&gt;Ignore&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='statusLogicMode' type='list-single'&gt;
+                  &lt;value&gt;Any&lt;/value&gt;
+              &lt;/field&gt;
+          &lt;/x&gt;
+      &lt;/startDatabaseReadout&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='66'&gt;
+      &lt;startDatabaseReadoutResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/&gt;
+   &lt;/iq&gt;
+   
+   ... Readout messages follow.
+                </pre>
+        </div>
+            </div>
+            <div class="indent">
+        <h3>3.8.4 <a name="sect-ID0ELYAG">Start Database Readout, Failure</a></h3>
+                <p class="" style="">
+                    The following example shows a response when the concentrator rejects the read-out request:
+                </p>
+                <p class="caption"><a name="example-78"></a>Example 78. Start Database Readout, Failure</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='67'&gt;
+      &lt;startDatabaseReadout xmlns='urn:xmpp:sn:concentrators' xml:lang='en' databaseId='LocalDB' seqnr='1' userToken='12392748927492834'&gt;
+          &lt;node sourceId='MeteringTopology' nodeId='Node1'/&gt;
+          &lt;node sourceId='MeteringTopology' nodeId='Node2'/&gt;
+          &lt;node sourceId='MeteringTopology' nodeId='Node3'/&gt;
+          &lt;x type='submit' xmlns='jabber:x:data'&gt;
+              ...
+          &lt;/x&gt;
+      &lt;/startDatabaseReadout&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='67'&gt;
+      &lt;startDatabaseReadoutResponse xmlns='urn:xmpp:sn:concentrators' result='InsufficientPrivileges'/&gt;
+   &lt;/iq&gt;
+                </pre>
+        </div>
+                <p class="" style="">
+                    The error might also be a result of invalid input parameters being sent:
+                </p>
+                <p class="caption"><a name="example-79"></a>Example 79. Start Database Readout, Failure 2</p>
+        <div class="indent">
+          <pre class="prettyprint">
+                    
+   &lt;iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='68'&gt;
+      &lt;startDatabaseReadout xmlns='urn:xmpp:sn:concentrators' xml:lang='en' databaseId='LocalDB' seqnr='1' userToken='12392748927492834'&gt;
+          &lt;node sourceId='MeteringTopology' nodeId='Node1'/&gt;
+          &lt;node sourceId='MeteringTopology' nodeId='Node2'/&gt;
+          &lt;node sourceId='MeteringTopology' nodeId='Node3'/&gt;
+          &lt;x type='submit' xmlns='jabber:x:data'&gt;
+              ...
+              &lt;field var='from' type='text-single'&gt;
+                  &lt;value&gt;2013-03-23T00:00:00&lt;/value&gt;
+              &lt;/field&gt;
+              &lt;field var='to' type='text-single'&gt;
+                  &lt;value&gt;2013-03-22T00:00:00&lt;/value&gt;
+              &lt;/field&gt;
+              ...
+          &lt;/x&gt;
+      &lt;/startDatabaseReadout&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='68'&gt;
+      &lt;startDatabaseReadoutResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'&gt;
+          &lt;error var='to'&gt;The To timestamp cannot be older than the From timestamp.&lt;/error&gt;
+      &lt;/startDatabaseReadoutResponse&gt;
+   &lt;/iq&gt;
+                </pre>
+        </div>
+            </div>
         </div>
     <h2>4.
        <a name="impl">Implementation Notes</a></h2>
@@ -3125,7 +4033,6 @@
             <p class="" style="">
                 Several commands return basic node information. The following table lists possible fields with corresponding descriptions.
             </p>
-            
             <div class="indent">
         <p class="caption"><a name="table-5"></a>Table 5: Basic Node Information</p>
         <table border="1" cellpadding="3" cellspacing="0">
@@ -3148,6 +4055,12 @@
                     <td colspan="" rowspan="">If provided, a string presentable to users. If localization is supported and a correct language attribute was provided, this string will be localized.</td>
                 </tr>
                 <tr class="body">
+                    <td colspan="" rowspan="">nodeType</td>
+                    <td colspan="" rowspan="">optional</td>
+                    <td colspan="" rowspan=""> </td>
+                    <td colspan="" rowspan="">A string representing the type of the node.</td>
+                </tr>
+                <tr class="body">
                     <td colspan="" rowspan="">localId</td>
                     <td colspan="" rowspan="">optional</td>
                     <td colspan="" rowspan=""> </td>
@@ -3161,9 +4074,12 @@
                 </tr>
                 <tr class="body">
                     <td colspan="" rowspan="">cacheType</td>
-                    <td colspan="" rowspan="">required</td>
+                    <td colspan="" rowspan="">optional</td>
                     <td colspan="" rowspan=""> </td>
-                    <td colspan="" rowspan="">Used to uniquelly identify the node. If concentrators do not use this parameter, they can set this string to the empty string.</td>
+                    <td colspan="" rowspan="">Used to uniquely identify the node in sources where the ID of the node is not sufficient. Example: In a spatial ordering different nodes may represent
+                    countries, regions, cities, areas, streets, buildings and apartments in the same source. However, the ID of each node would depend on what type of node it
+                    represents. It might be valid to have a region, city and/or araa with the same ID. So, to these circuimstances, a Cache Type of Country, Region, City, Area,
+                    Street, Building and Apartment can be used to allow for non-unique IDs within the source, as long as they are unique within the same cache type.</td>
                 </tr>
                 <tr class="body">
                     <td colspan="" rowspan="">state</td>
@@ -3176,6 +4092,16 @@
                     <td colspan="" rowspan="">required</td>
                     <td colspan="" rowspan=""> </td>
                     <td colspan="" rowspan="">If the node has children or not.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">childrenOrdered</td>
+                    <td colspan="" rowspan="">optional</td>
+                    <td colspan="" rowspan="">false</td>
+                    <td colspan="" rowspan="">If the children of the node have an intrinsic order (true), or if the order is not important (false). If the order is not important, the client
+                    can present the order as it wishes, for example sorted on Node ID or any other parameter available on the child nodes. However, if the children have an
+                    intrinsic order, it's important for the client to refresh the child list when neccessary whenever the order is unknown, such as after a nodeAdded event or 
+                    a nodeRemoved event.
+                </td>
                 </tr>
                 <tr class="body">
                     <td colspan="" rowspan="">isReadable</td>
@@ -3195,6 +4121,24 @@
                     <td colspan="" rowspan="">false</td>
                     <td colspan="" rowspan="">If the node has registered commands or not.</td>
                 </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">parentId</td>
+                    <td colspan="" rowspan="">optional</td>
+                    <td colspan="" rowspan=""> </td>
+                    <td colspan="" rowspan="">The node ID of the parent node. If not available, the node is considered a root node.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">parentCacheType</td>
+                    <td colspan="" rowspan="">optional</td>
+                    <td colspan="" rowspan=""> </td>
+                    <td colspan="" rowspan="">The Cache Type of the parent node.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">lastChanged</td>
+                    <td colspan="" rowspan="">optional</td>
+                    <td colspan="" rowspan=""> </td>
+                    <td colspan="" rowspan="">When the node was last changed. Can be used by clients to synchronize content between the concentrator and itself.</td>
+                </tr>
             </table>
       </div>
             <p class="" style="">
@@ -3209,10 +4153,11 @@
         
         
         
+        
     <h2>5.
        <a name="i18n">Internationalization Considerations</a></h2>
         <div class="indent">
-      <h3>5.1 <a name="sect-ID0EDVAG">Localization</a></h3>
+      <h3>5.1 <a name="sect-ID0ECEBG">Localization</a></h3>
             <p class="" style="">
                 Loalization of content can be performed if clients provide <span class="strong">xml:lang</span> attributes in commands made to the concentrator. If omitted, the
                 <span class="strong">default language</span> will be used in responses. If provided, but the concentrator does not support localization, or the requested language,
@@ -3220,7 +4165,7 @@
             </p>
         </div>
         <div class="indent">
-      <h3>5.2 <a name="sect-ID0ETVAG">Time Zones</a></h3>
+      <h3>5.2 <a name="sect-ID0ESEBG">Time Zones</a></h3>
             <p class="" style="">
                 Concentrators of larger sub-systems spanning multiple time-zones should specify all timestamps with time-zone information, so readers can perform comparisons
                 of time information.
@@ -3231,13 +4176,13 @@
             </p>
         </div>
         <div class="indent">
-      <h3>5.3 <a name="sect-ID0EAWAG">Interoperability</a></h3>
+      <h3>5.3 <a name="sect-ID0E6EBG">Interoperability</a></h3>
             
         </div>
     <h2>6.
        <a name="security">Security Considerations</a></h2>
         <div class="indent">
-      <h3>6.1 <a name="sect-ID0EMWAG">Access rights</a></h3>
+      <h3>6.1 <a name="sect-ID0ELFBG">Access rights</a></h3>
             <p class="" style="">
                 This document publishes a lot of commands with which to interact with a concentrator. If security and access rights is an issue, it might not be sufficient
                 to allow all friends access to the system. There are many ways in which to restrict access to the contents of the concentrator. Following are some examples:
@@ -3260,15 +4205,15 @@
             </ul>
         </div>
         <div class="indent">
-      <h3>6.2 <a name="sect-ID0E6XAG">Restricting access to commands per contact</a></h3>
+      <h3>6.2 <a name="sect-ID0E5GBG">Restricting access to commands per contact</a></h3>
             
         </div>
         <div class="indent">
-      <h3>6.3 <a name="sect-ID0EGYAG">Restricting access to node properties per contact</a></h3>
+      <h3>6.3 <a name="sect-ID0EFHBG">Restricting access to node properties per contact</a></h3>
             
         </div>
         <div class="indent">
-      <h3>6.4 <a name="sect-ID0ENYAG">Restricting access to node commands per contact</a></h3>
+      <h3>6.4 <a name="sect-ID0EMHBG">Restricting access to node commands per contact</a></h3>
             
         </div>
     <h2>7.
@@ -3279,7 +4224,6 @@
         <p class="" style="">REQUIRED.</p>
     <h2>9.
        <a name="schema">XML Schema</a></h2>
-        
         <p class="caption">
     </p>
     <div class="indent">
@@ -3515,14 +4459,83 @@
             &lt;xs:complexContent&gt;
                 &lt;xs:extension base='SourceReferenceRequest'&gt;
                     &lt;xs:attribute name='getEventsSince' type='xs:dateTime' use='optional'/&gt;
+                    &lt;xs:attributeGroup ref='parametersAndMessages'/&gt;
+                    &lt;xs:attributeGroup ref='eventTypes'/&gt;
                 &lt;/xs:extension&gt;
             &lt;/xs:complexContent&gt;
         &lt;/xs:complexType&gt;
     &lt;/xs:element&gt;
     &lt;xs:element name='subscribeResponse' type='Response'/&gt;
  
-    &lt;xs:element name='unsubscribe' type='SourceReferenceRequest'/&gt;
+    &lt;xs:element name='unsubscribe'&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:complexContent&gt;
+                &lt;xs:extension base='SourceReferenceRequest'&gt;
+                    &lt;xs:attributeGroup ref='eventTypes'/&gt;
+                &lt;/xs:extension&gt;
+            &lt;/xs:complexContent&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
     &lt;xs:element name='unsubscribeResponse' type='Response'/&gt;
+ 
+    &lt;xs:element name='nodeAdded' type='NodeSourceInformation'/&gt;
+    &lt;xs:element name='nodeUpdated'&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:complexContent&gt;
+                &lt;xs:extension base='NodeSourceInformation'&gt;
+                    &lt;xs:attribute name='oldId' type='xs:string' use='optional'/&gt;
+                &lt;/xs:extension&gt;
+            &lt;/xs:complexContent&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name='nodeStatusChanged'&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:complexContent&gt;
+                &lt;xs:extension base='NodeReference'&gt;
+                    &lt;xs:choice minOccurs='0' maxOccurs='unbounded'&gt;
+                        &lt;xs:element name='message' type='Message'/&gt;
+                    &lt;/xs:choice&gt;
+                    &lt;xs:attribute name='state' type='NodeState' use='required'/&gt;
+                &lt;/xs:extension&gt;
+            &lt;/xs:complexContent&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name='nodeRemoved' type='NodeReference'/&gt;
+    &lt;xs:element name='nodeMovedUp' type='NodeReference'/&gt;
+    &lt;xs:element name='nodeMovedDown' type='NodeReference'/&gt;
+ 
+    &lt;xs:element name='getDatabases' type='TokenRequest'/&gt;
+    &lt;xs:element name='getDatabasesResponse'&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
+                &lt;xs:element name='database'&gt;
+                    &lt;xs:complexType&gt;
+                        &lt;xs:attribute name='id' type='xs:string' use='required'/&gt;
+                        &lt;xs:attribute name='name' type='xs:string' use='optional'/&gt;
+                    &lt;/xs:complexType&gt;
+                &lt;/xs:element&gt;
+            &lt;/xs:sequence&gt;
+            &lt;xs:attributeGroup ref='responseCode'/&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+ 
+    &lt;xs:element name='getDatabaseReadoutParameters' type='DatabaseReferenceRequest'/&gt;
+    &lt;xs:element name='getDatabaseReadoutParametersResponse' type='ParameterFormResponse'/&gt;
+ 
+    &lt;xs:element name='startDatabaseReadout'&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:complexContent&gt;
+                &lt;xs:extension base='DatabaseReferenceRequest'&gt;
+                    &lt;xs:sequence&gt;
+                        &lt;xs:element name='node' type='NodeReference' minOccurs='1' maxOccurs='unbounded'/&gt;
+                        &lt;xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/&gt;
+                    &lt;/xs:sequence&gt;
+                    &lt;xs:attribute name="seqnr" type="xs:int" use="required"/&gt;
+                &lt;/xs:extension&gt;
+            &lt;/xs:complexContent&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+    &lt;xs:element name='startDatabaseReadoutResponse' type='ExecuteNodeCommandResponse'/&gt;
  
     &lt;xs:simpleType name='ResponseCode'&gt;
         &lt;xs:restriction base='xs:string'&gt;
@@ -3597,6 +4610,23 @@
  
     &lt;xs:attributeGroup name='responseCode'&gt;
         &lt;xs:attribute name='result' type='ResponseCode' use='required'/&gt;
+    &lt;/xs:attributeGroup&gt;
+ 
+    &lt;xs:attributeGroup name='eventTypes'&gt;
+        &lt;xs:attribute name='nodeAdded' type='xs:boolean' use='optional' default='true'/&gt;
+        &lt;xs:attribute name='nodeUpdated' type='xs:boolean' use='optional' default='true'/&gt;
+        &lt;xs:attribute name='nodeStatusChanged' type='xs:boolean' use='optional' default='true'/&gt;
+        &lt;xs:attribute name='nodeRemoved' type='xs:boolean' use='optional' default='true'/&gt;
+        &lt;xs:attribute name='nodeMovedUp' type='xs:boolean' use='optional' default='true'/&gt;
+        &lt;xs:attribute name='nodeMovedDown' type='xs:boolean' use='optional' default='true'/&gt;
+    &lt;/xs:attributeGroup&gt;
+ 
+    &lt;xs:attributeGroup name='databaseReference'&gt;
+        &lt;xs:attribute name='databaseId' type='xs:string' use='required'/&gt;
+    &lt;/xs:attributeGroup&gt;
+ 
+    &lt;xs:attributeGroup name='readoutReference'&gt;
+        &lt;xs:attribute name='seqnr' type='xs:int' use='required'/&gt;
     &lt;/xs:attributeGroup&gt;
  
     &lt;xs:complexType name='Response'&gt;
@@ -3710,9 +4740,10 @@
         &lt;xs:attribute name='nodeType' type='xs:string' use='optional'/&gt;
         &lt;xs:attribute name='localId' type='xs:string' use='optional'/&gt;
         &lt;xs:attribute name='logId' type='xs:string' use='optional'/&gt;
-        &lt;xs:attribute name='cacheType' type='xs:string' use='required'/&gt;
+        &lt;xs:attribute name='cacheType' type='xs:string' use='optional'/&gt;
         &lt;xs:attribute name='state' type='NodeState' use='required'/&gt;
         &lt;xs:attribute name='hasChildren' type='xs:boolean' use='required'/&gt;
+        &lt;xs:attribute name='childrenOrdered' type='xs:boolean' use='optional' default='false'/&gt;
         &lt;xs:attribute name='isReadable' type='xs:boolean' use='optional' default='false'/&gt;
         &lt;xs:attribute name='isConfigurable' type='xs:boolean' use='optional' default='false'/&gt;
         &lt;xs:attribute name='hasCommands' type='xs:boolean' use='optional' default='false'/&gt;
@@ -3720,7 +4751,15 @@
         &lt;xs:attribute name='parentCacheType' type='xs:string' use='optional'/&gt;
         &lt;xs:attribute name='lastChanged' type='xs:dateTime' use='optional'/&gt;
     &lt;/xs:complexType&gt;
-  
+ 
+    &lt;xs:complexType name='NodeSourceInformation'&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base='NodeInformation'&gt;
+                &lt;xs:attributeGroup ref='sourceReference'/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+ 
     &lt;xs:complexType name='Parameter' abstract='true'&gt;
         &lt;xs:attribute name='id' type='xs:string' use='required'/&gt;
         &lt;xs:attribute name='name' type='xs:string' use='required'/&gt;
@@ -3923,6 +4962,19 @@
         &lt;/xs:simpleContent&gt;
     &lt;/xs:complexType&gt;
  
+    &lt;xs:complexType name='ReadoutReference'&gt;
+        &lt;xs:attributeGroup ref='databaseReference'/&gt;
+        &lt;xs:attributeGroup ref='readoutReference'/&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:complexType name='DatabaseReferenceRequest'&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base='TokenRequest'&gt;
+                &lt;xs:attributeGroup ref='databaseReference'/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+ 
 &lt;/xs:schema&gt;
         </pre>
     </div>
@@ -3971,15 +5023,18 @@
     <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
     <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
     <div class="indent">
-      <p><a name="nt-ID0E2E">1</a>. XEP-0060: Publish-Subscribe &lt;<a href="http://xmpp.org/extensions/xep-0060.html">http://xmpp.org/extensions/xep-0060.html</a>&gt;.</p>
-      <p><a name="nt-ID0EMF">2</a>. XEP-0248: PubSub Collection Nodes &lt;<a href="http://xmpp.org/extensions/xep-0248.html">http://xmpp.org/extensions/xep-0248.html</a>&gt;.</p>
-      <p><a name="nt-ID0E2H">3</a>. XEP-0050: Ad-Hoc Commands &lt;<a href="http://xmpp.org/extensions/xep-0050.html">http://xmpp.org/extensions/xep-0050.html</a>&gt;.</p>
-      <p><a name="nt-ID0ECCAC">4</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0EOCAC">5</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
-      <p><a name="nt-ID0E1CAC">6</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
-      <p><a name="nt-ID0EGDAC">7</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
-      <p><a name="nt-ID0ERZAE">8</a>. 
+      <p><a name="nt-ID0EZE">1</a>. XEP-0060: Publish-Subscribe &lt;<a href="http://xmpp.org/extensions/xep-0060.html">http://xmpp.org/extensions/xep-0060.html</a>&gt;.</p>
+      <p><a name="nt-ID0EKF">2</a>. XEP-0248: PubSub Collection Nodes &lt;<a href="http://xmpp.org/extensions/xep-0248.html">http://xmpp.org/extensions/xep-0248.html</a>&gt;.</p>
+      <p><a name="nt-ID0EZH">3</a>. XEP-0050: Ad-Hoc Commands &lt;<a href="http://xmpp.org/extensions/xep-0050.html">http://xmpp.org/extensions/xep-0050.html</a>&gt;.</p>
+      <p><a name="nt-ID0EACAC">4</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0EMCAC">5</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
+      <p><a name="nt-ID0EYCAC">6</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
+      <p><a name="nt-ID0EEDAC">7</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+      <p><a name="nt-ID0E12AE">8</a>. 
                         XEP-xxxx: Dynamic Data Forms &lt;<a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms.html</a>&gt;
+                    </p>
+      <p><a name="nt-ID0EJXAG">9</a>. 
+                        XEP-xxxx: Sensor Data <a href="xep-0000-SN-SensorData.html">xep-0000-SN-SensorData</a>
                     </p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>

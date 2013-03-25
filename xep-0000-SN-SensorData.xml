@@ -6,7 +6,7 @@
 <?xml-stylesheet type='text/xsl' href='xep.xsl'?>
 <xep>
 	<header>
-		<title>XEP - Sensor Networks - Sensor Data</title>
+		<title>Sensor Networks - Sensor Data</title>
 		<abstract>This specification provides the common framework for sensor data interchange over XMPP networks.</abstract>
 		<legal>
 			<copyright>This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).</copyright>

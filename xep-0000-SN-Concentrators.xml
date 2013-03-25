@@ -1,8 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- TODO: required data sources, optional data sources -->
 <!-- TODO: enhanced concentrator GUI XEP. (Icons, overlays, etc.) -->
 <!-- TODO: Interaction with provisioning server -->
-<!-- TODO: Refresh capabilities command -->
 <!DOCTYPE xep SYSTEM 'xep.dtd' [
     <!ENTITY % ents SYSTEM 'xep.ent'>
     %ents;
@@ -10,7 +8,7 @@
 <?xml-stylesheet type='text/xsl' href='xep.xsl'?>
 <xep>
     <header>
-        <title>XEP - Sensor Networks - Concentrators</title>
+        <title>Sensor Networks - Concentrators</title>
         <abstract>This specification describes how to manage and get information from concentrators of devices over XMPP networks.</abstract>
         <legal>
             <copyright>This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).</copyright>
@@ -418,36 +416,100 @@
           <value>getNode</value>
           <value>getNodes</value>
           <value>getAllNodes</value>
+          <value>getNodeInheritence</value>
           <value>getRootNodes</value>
           <value>getChildNodes</value>
           <value>getIndices</value>
-          <value>getNodeFromIndex</value>
           <value>getNodesFromIndex</value>
-          <value>getAllNodesFromIndex</value>
-          <value>getNodeParameters</value>
-          <value>getCommonNodeParameters</value>
-          <value>getNodeParameterNames</value>
-          <value>getNodeParameterValues</value>
-          <value>setNodeParameterValues</value>
-          <value>getNodeStatus</value>
+          <value>getNodesFromIndices</value>
+          <value>getAllIndexValues</value>
+          <value>getNodeParametersForEdit</value>
+          <value>setNodeParametersAfterEdit</value>
+          <value>getCommonNodeParametersForEdit</value>
+          <value>setCommonNodeParametersAfterEdit</value>
           <value>getAddableNodeTypes</value>
           <value>getParametersForNewNode</value>
           <value>createNewNode</value>
           <value>destroyNode</value>
           <value>getAncestors</value>
           <value>getNodeCommands</value>
-          <value>getCommonNodeCommands</value>
           <value>getCommandParameters</value>
+          <value>executeNodeCommand</value>
+          <value>getCommonNodeCommands</value>
           <value>getCommonCommandParameters</value>
-          <value>moveUp</value>
-          <value>moveDown</value>
+          <value>executeCommonNodeCommand</value>
+          <value>moveNodeUp</value>
+          <value>moveNodeDown</value>
+          <value>moveNodesUp</value>
+          <value>moveNodesDown</value>
+          <value>subscribe</value>
+          <value>unsubscribe</value>
+          <value>getDatabases</value>
+          <value>getDatabaseReadoutParameters</value>
+          <value>startDatabaseReadout</value>
+      </getCapabilitiesResponse>
+   </iq>]]>
+                </example>
+                <p>
+                    A concentrator without databases, but still contain a rich interface for handling masses of nodes may present itself as follows:
+                </p>
+                <example caption='Full capabilities'>
+                    <![CDATA[
+   <iq type='get'
+       from='client@clayster.com'
+       to='subsystem@clayster.com'
+       id='63'>
+      <getCapabilities xmlns='urn:xmpp:sn:concentrators'/>
+   </iq>
+   
+   <iq type='result'
+       from='subsystem@clayster.com'
+       to='client@clayster.com'
+       id='63'>
+      <getCapabilitiesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+          <value>getCapabilities</value>
+          <value>getAllDataSources</value>
+          <value>getTopDataSources</value>
+          <value>getChildDataSources</value>
+          <value>containsNode</value>
+          <value>containsNodes</value>
+          <value>getNode</value>
+          <value>getNodes</value>
+          <value>getAllNodes</value>
+          <value>getNodeInheritence</value>
+          <value>getRootNodes</value>
+          <value>getChildNodes</value>
+          <value>getIndices</value>
+          <value>getNodesFromIndex</value>
+          <value>getNodesFromIndices</value>
+          <value>getAllIndexValues</value>
+          <value>getNodeParametersForEdit</value>
+          <value>setNodeParametersAfterEdit</value>
+          <value>getCommonNodeParametersForEdit</value>
+          <value>setCommonNodeParametersAfterEdit</value>
+          <value>getAddableNodeTypes</value>
+          <value>getParametersForNewNode</value>
+          <value>createNewNode</value>
+          <value>destroyNode</value>
+          <value>getAncestors</value>
+          <value>getNodeCommands</value>
+          <value>getCommandParameters</value>
+          <value>executeNodeCommand</value>
+          <value>getCommonNodeCommands</value>
+          <value>getCommonCommandParameters</value>
+          <value>executeCommonNodeCommand</value>
+          <value>moveNodeUp</value>
+          <value>moveNodeDown</value>
+          <value>moveNodesUp</value>
+          <value>moveNodesDown</value>
+          <value>subscribe</value>
+          <value>unsubscribe</value>
       </getCapabilitiesResponse>
    </iq>]]>
                 </example>
                 <p>
                     A smaller gateway on the other hand, may have skipped the implementation of the batch commands that are used for larger systems:
                 </p>
-                <!-- TODO: No data storage -->
                 <example caption='No batch command capabilities'>
                     <![CDATA[
    <iq type='get'
@@ -468,10 +530,11 @@
           <value>getChildDataSources</value>
           <value>containsNode</value>
           <value>getNode</value>
+          <value>getNodeInheritence</value>
           <value>getRootNodes</value>
           <value>getChildNodes</value>
-          <value>getNodeParameters</value>
-          <value>getNodeStatus</value>
+          <value>getNodeParametersForEdit</value>
+          <value>setNodeParametersAfterEdit</value>
           <value>getAddableNodeTypes</value>
           <value>getParametersForNewNode</value>
           <value>createNewNode</value>
@@ -479,8 +542,13 @@
           <value>getAncestors</value>
           <value>getNodeCommands</value>
           <value>getCommandParameters</value>
-          <value>moveUp</value>
-          <value>moveDown</value>
+          <value>executeNodeCommand</value>
+          <value>moveNodeUp</value>
+          <value>moveNodeDown</value>
+          <value>moveNodesUp</value>
+          <value>moveNodesDown</value>
+          <value>subscribe</value>
+          <value>unsubscribe</value>
       </getCapabilitiesResponse>
    </iq>]]>
                 </example>
@@ -503,13 +571,13 @@
       <getCapabilitiesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
           <value>getCapabilities</value>
           <value>getAllDataSources</value>
+          <value>containsNode</value>
           <value>getNode</value>
           <value>getRootNodes</value>
           <value>getChildNodes</value>
-          <value>getNodeParameters</value>
-          <value>getNodeStatus</value>
           <value>getNodeCommands</value>
           <value>getCommandParameters</value>
+          <value>executeNodeCommand</value>
       </getCapabilitiesResponse>
    </iq>]]>
                 </example>
@@ -601,28 +669,7 @@
    </iq>]]>
                 </example>
             </section3>
-            <section3 topic='Contains Node'>
-                <p>
-                    This command permits the client to check the existance of a node on the concetrator.
-                </p>
-                <example caption='Checking the existance of a node'>
-                    <![CDATA[
-   <iq type='get'
-       from='client@clayster.com'
-       to='concentrator@clayster.com'
-       id='7'>
-      <containsNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1'/>
-   </iq>
-   
-   <iq type='result'
-       from='concentrator@clayster.com'
-       to='client@clayster.com'
-       id='7'>
-      <containsNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>true</containsNodeResponse>
-   </iq>]]>
-                </example>
-            </section3>
-            <section3 topic='Subscribe to data source changes'>
+            <section3 topic='Subscribe to data source changes' anchor='subscribe'>
                 <p>
                     A client can subscribe to changes made in a data source. It does this by sending the <strong>subscribe</strong> command to the concentrator,
                     as is shown in the following example:
@@ -652,15 +699,61 @@
                     is removed.
                 </p>
                 <p>
+                    <strong>Note:</strong> The <strong>parameters</strong> and <strong>messages</strong> attributes can be used to retrieve parameter and status message information
+                    about the nodes in event messages sent from the concentrator. Note that the <strong>xml:lang</strong> may be used to select the language used in such events, 
+                    if the concentrator supports localization of strings.
+                </p>
+                <example caption='Subscribing to data source events with localized parameters'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='60'>
+      <subscribe xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' parameters='true' messages='true' xml:lang='en'/>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='60'>
+      <subscribeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+   </iq>]]>
+                </example>
+                <p>
+                    The <strong>subscribe</strong> command has a set of optional attributes, one for each event type available, and with the same names, that the
+                    client can use to subscribe to individual events, but not to others. They have the default value of true implying that if not provided, the
+                    default action is to subscribe to those events.
+                </p>
+                <p>
+                    The following example shows how a client can subscribe to a set of events only:
+                </p>
+                <example caption='Subscribing to data source events, avoiding state events'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='61'>
+      <subscribe xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' parameters='true' messages='false' xml:lang='en'
+                 nodeAdded='true' nodeUpdated='true' nodeStatusChanged='false' nodeRemoved='true' nodeMovedUp='false' nodeMovedDown='false'/>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='61'>
+      <subscribeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+   </iq>]]>
+                </example>
+                <p>
                     For more information on types of events sent, see the <link url='#sourceevents'>Data Source Events</link> section.
                 </p>
             </section3>
-            <section3 topic='Unsubscribe to data source changes'>
+            <section3 topic='Unsubscribe from data source events'>
                 <p>
                     A client can unsubscribe to changes made in a data source it is subscribed to. It does this by sending the <strong>unsubscribe</strong> command to the concentrator,
                     as is shown in the following example:
                 </p>
-                <example caption='Unsubscribing to data source events'>
+                <example caption='Unsubscribing from data source events'>
                     <![CDATA[
    <iq type='set'
        from='client@clayster.com'
@@ -679,8 +772,33 @@
                 <p>
                     An unsubscription made to an existing data source, but where an even subscription does not exist, must not result in an error.
                 </p>
+                <p>
+                    The <strong>unsubscribe</strong> command has a set of optional attributes, one for each event type available, and with the same names, that the
+                    client can use to unsubscribe from individual events, but not from others. They have the default value of true implying that if not provided, the
+                    default action is to unsubscribe from those events.
+                </p>
+                <p>
+                    The following example shows how a client can unsubscribe from a subset of events, keeping subscriptions on the others (if subscribed to):
+                </p>
+                <example caption='Unsubscribing from state events'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='62'>
+      <unsubscribe xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' parameters='true' messages='false' xml:lang='en'
+                 nodeAdded='false' nodeUpdated='false' nodeStatusChanged='true' nodeRemoved='false' nodeMovedUp='false' nodeMovedDown='false'/>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='62'>
+      <subscribeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+   </iq>]]>
+                </example>
             </section3>
-            <section3 topic='Get changes since given timestamp before subscribing'>
+            <section3 topic='Get changes since given timestamp before subscribing' anchor='subscribe2'>
                 <p>
                     If a client comes back online and wants to know any changes that have taken place on the concentrator since last time it was in contact with it,
                     it can include a <strong>getEventsSince</strong> attribute in the <strong>subscribe</strong> command sent to the concentrator. This will make the
@@ -704,9 +822,42 @@
    
    ... Sequence of event messages sent from concentrator to client.]]>
                 </example>
+                <p>
+                    <strong>Important:</strong> Event subscriptions only last for as long as the client and concentrator both maintains precense. The concentrator must not persist
+                    event notification subscriptions, and if it goes offline and back online, or if the client goes offline or online again for any reason, the event subscription
+                    is removed.
+                </p>
+                <p>
+                    <strong>Note:</strong> The <strong>parameters</strong> and <strong>messages</strong> attributes can be used to retrieve parameter and status message information
+                    about the nodes in event messages sent from the concentrator.
+                </p>
+                <p>
+                    For more information on types of events sent, see the <link url='#sourceevents'>Data Source Events</link> section.
+                </p>
             </section3>
         </section2>
         <section2 topic='Nodes'>
+            <section3 topic='Contains Node'>
+                <p>
+                    This command permits the client to check the existance of a node on the concetrator.
+                </p>
+                <example caption='Checking the existance of a node'>
+                    <![CDATA[
+   <iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='7'>
+      <containsNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1'/>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='7'>
+      <containsNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>true</containsNodeResponse>
+   </iq>]]>
+                </example>
+            </section3>
             <section3 topic='Contains Nodes'>
                 <p>
                     If the client wants to check the existance of multiple nodes on the concentrator, it can use this batch command instead:
@@ -1076,7 +1227,7 @@
                     implementing all interfaces.
                 </p>
             </section3>
-            <section3 topic='Get node inheritence'>
+            <section3 topic='Get Node Inheritence'>
                 <p>
                     This command assumes node types exist in a class hierarchy. It allows the caller to get a list of the node class hierarchy and implemented interfaces the
                     node has.
@@ -1232,7 +1383,7 @@
    </iq>]]>
                 </example>
             </section3>
-            <section3 topic='Get indices of Data Source'>
+            <section3 topic='Get Indices of Data Source'>
                 <p>
                     This commands returns a list of available indices in a data source. Indices can be used for efficient node look-up.
                 </p>
@@ -2788,10 +2939,687 @@
             </section3>
         </section2>
         <section2 topic='Data Source Events' anchor='sourceevents'>
-            <!-- TODO: Events -->
+            <p>
+                Events are asynchronous messages sent from the concentrator to devices registered with the concentrator and having subscribed to events from the concentrator.
+                <link url='#subscribe'>Event subscription</link> can be activated using the <strong>subscribe</strong> command. You can also <link url='#subscribe2'>retrieve historical events</link>
+                using the <strong>subscribe</strong> command.
+            </p>
+            <p>
+                Each event is sent from the concentrator to each subscriber using a <strong>message</strong> stanza. Each such <strong>megssage</strong> stanza may contain multiple
+                events. The following subsections list the different types of events that can be sent. Even though these examples may list only one element in a message stanza, this
+                is not a limitation. Different types of events may also be mixed within the message stanza.
+            </p>
+            <p>
+                Event subscriptions only last for as long as the client and concentrator both maintains precense. The concentrator must not persist
+                event notification subscriptions, and if it goes offline and back online, or if the client goes offline or online again for any reason, the event subscription
+                is removed.
+            </p>
+            <p>
+                Node events may contain parameters or status messages. This depends on how the subscription was made. The <strong>parameters</strong> and <strong>messages</strong> attributes
+                in the <strong>subscribe</strong> command determine if node parameters and/or status messages should be sent in event messages.
+            </p>
+            <section3 topic='Node added event'>
+                <p>
+                    The <strong>nodeAdded</strong> event is sent when a node has been added to a data source which the client subscribes to. The following example 
+                    shows how such an event message may look like:
+                </p>
+                <example caption='Node added event, without parameters'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com'>
+      <nodeAdded xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
+                 hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/>
+   </message>]]>
+                </example>
+                <example caption='Node added event, with parameters'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com'>
+      <nodeAdded xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
+                 hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'>
+          <string id='id' name='Node ID' value='Node1'/>
+          <string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/>
+          <string id='sn' name='Serial Number' value='123456'/>
+          <string id='class' name='Node Class' value='Temperature'/>
+          <string id='meterLoc' name='Meter Location' value='P123502-2'/>
+          <int id='addr' name='Address' value='123'/>
+          <double id='lat' name='Latitude' value='12.345'/>
+          <double id='long' name='Longitude' value='123.45'/>
+      </nodeAdded>
+   </message>]]>
+                </example>
+                <p>
+                    <strong>Note:</strong> Moving a node in a data source from one parent to another, possibly between different data sources, is performed by first
+                    removing it from the current source (sending a <strong>nodeRemoved</strong> event) and then adding it to the new data source (sending a <strong>nodeAdded</strong>
+                    event), in that order.
+                </p>
+            </section3>
+            <section3 topic='Node removed'>
+                <p>
+                    The <strong>nodeRemoved</strong> event is sent when a node in a data source has been removed or destroyed. It does not include status message or parameter
+                    information about the node, only the reference to the node. The following example shows how such an event message may look like:
+                </p>
+                <example caption='Node removed'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com'>
+      <nodeRemoved xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1'/>
+   </message>]]>
+                </example>
+                <p>
+                    <strong>Note:</strong> Moving a node in a data source from one parent to another, possibly between different data sources, is performed by first
+                    removing it from the current source (sending a <strong>nodeRemoved</strong> event) and then adding it to the new data source (sending a <strong>nodeAdded</strong>
+                    event), in that order.
+                </p>
+            </section3>
+            <section3 topic='Node updated'>
+                <p>
+                    The <strong>nodeUpdated</strong> event is sent when a node has been updated in a data source which the client subscribes to. The following example
+                    shows how such an event message may look like:
+                </p>
+                <example caption='Node updated event, without parameters'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com'>
+      <nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
+                 hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/>
+   </message>]]>
+                </example>
+                <example caption='Node updated event, with parameters'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com'>
+      <nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
+                 hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'>
+          <string id='id' name='Node ID' value='Node1'/>
+          <string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/>
+          <string id='sn' name='Serial Number' value='123456'/>
+          <string id='class' name='Node Class' value='Temperature'/>
+          <string id='meterLoc' name='Meter Location' value='P123502-2'/>
+          <int id='addr' name='Address' value='123'/>
+          <double id='lat' name='Latitude' value='12.345'/>
+          <double id='long' name='Longitude' value='123.45'/>
+      </nodeAdded>
+   </message>]]>
+                </example>
+                <p>
+                    The event has an optional attribute named <strong>oldId</strong>. It is set when the node has been renamed. It must be used, if avilable, to identify
+                    what node has been updated, as the following example shows:
+                </p>
+                <example caption='Node renamed event, without parameters'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com'>
+      <nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' oldId='OldNode1' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
+                 hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/>
+   </message>]]>
+                </example>
+                <example caption='Node renamed event, with parameters'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com'>
+      <nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' oldId='OldNode1' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
+                 hasChildren='false' isReadable='true' isConfigurable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'>
+          <string id='id' name='Node ID' value='Node1'/>
+          <string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/>
+          <string id='sn' name='Serial Number' value='123456'/>
+          <string id='class' name='Node Class' value='Temperature'/>
+          <string id='meterLoc' name='Meter Location' value='P123502-2'/>
+          <int id='addr' name='Address' value='123'/>
+          <double id='lat' name='Latitude' value='12.345'/>
+          <double id='long' name='Longitude' value='123.45'/>
+      </nodeUpdated>
+   </message>]]>
+                </example>
+                <p>
+                    <strong>Note: </strong>If only the status has changed, and no other parameters have changed, the <link url='#nodeStatusChanged'>nodeStatusChanged</link>
+                    event could be sent instead, for somewhat improved performance in this case.
+                </p>
+            </section3>
+            <section3 topic='Node status changed' anchor='#nodeStatusChanged'>
+                <p>
+                    The <strong>nodeStatusChanged</strong> event is sent when the <link url='#nodestates'>state of the node</link> has changed, but no other parameters have been changed.
+                    If the client has subscribed to state messages, these will alsobe included in the event.
+                </p>
+                <example caption='Node status changed event, without messages'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com'>
+      <nodeStatusChanged xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' cacheType='Node' state='ErrorUnsigned'/>
+   </message>]]>
+                </example>
+                <example caption='Node status changed event, with messages'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com'>
+      <nodeStatusChanged xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' cacheType='Node' state='ErrorUnsigned'>
+          <message timestamp='2013-03-22T12:49:34' type='Error'>Sensor does not respond to read-out requests.</message>
+      </nodeStatusChanged>
+   </message>]]>
+                </example>
+            </section3>
+            <section3 topic='Node moved up'>
+                <p>
+                    The <strong>nodeMovedUp</strong> event is sent when a node in a data source has been moved up among its siblings. It does not include status message or parameter
+                    information about the node, only the reference to the node. The following example shows how such an event message may look like:
+                </p>
+                <example caption='Node moved up'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com'>
+      <nodeMovedUp xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1'/>
+   </message>]]>
+                </example>
+                <p>
+                    <strong>Note:</strong> If issuing a <strong>moveNodeUp</strong> command on a node that is already first among its siblings, the node is not moved and the
+                    concentrator must not send a <strong>nodeMovedUp</strong> event. However, if the client receives such an event pointing to a node that is already first among
+                    its siblings, it should not move the node.
+                </p>
+            </section3>
+            <section3 topic='Node moved down'>
+                <p>
+                    The <strong>nodeMovedDown</strong> event is sent when a node in a data source has been moved down among its siblings. It does not include status message or parameter
+                    information about the node, only the reference to the node. The following example shows how such an event message may look like:
+                </p>
+                <example caption='Node moved down'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com'>
+      <nodeMovedDown xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1'/>
+   </message>]]>
+                </example>
+                <p>
+                    <strong>Note:</strong> If issuing a <strong>moveNodeDown</strong> command on a node that is already last among its siblings, the node is not moved and the
+                    concentrator must not send a <strong>nodeMovedDown</strong> event. However, if the client receives such an event pointing to a node that is already last among
+                    its siblings, it should not move the node.
+                </p>
+            </section3>
         </section2>
-        <section2 topic='Data Sets'>
-            <!-- TODO: Data sets -->
+        <section2 topic='Field Databases'>
+            <p>
+                A concentrator can often store data from sensors locally (or remotely but controlled locally). Storage is done in <strong>field databases</strong>. A concentrator with
+                only communicative abilities will publish zero such field databases (and support for none of the field database commands), while a pure metering database will publish 
+                one or many field databases, but none of the nodes available in any of the different data sources are readable or writable. The nodes in this latter case only acts as 
+                placeholders for the data that the concentrator is storing or controlling.
+            </p>
+            <p>
+                The following subsections lists different use cases relating to field databases and how to use them.
+            </p>
+            <section3 topic='Get All Databases'>
+                <p>
+                    The client can retrieve the list of available databases on the concentrator using the <strong>getDatabases</strong> command, as is shown in the following example:
+                </p>
+                <example caption='Get All Databases'>
+                    <![CDATA[
+   <iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='64'>
+      <getDatabases xmlns='urn:xmpp:sn:concentrators' xml:lang='en'/>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='64'>
+      <getDatabasesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+          <database id='LocalDB' name='Local Database'/>
+          <database id='LocalDBTest' name='Local Test Database'/>
+          <database id='LocalDBProduction' name='Local Production Database'/>
+          <database id='RemoteDB' name='Remote Database'/>
+      </getDatabasesResponse>
+   </iq>]]>
+                </example>
+            </section3>
+            <section3 topic='Get Database Readout Parameters'>
+                <p>
+                    Before reading data from a database can begin, a parameter form containing database specific search parameters needs to be fetched from the server.
+                    This is done using the <strong>getDatabaseReadoutParameters</strong> command, as is shown in the following example:
+                </p>
+                <example caption='Get Database Readout Parameters'>
+                    <![CDATA[
+   <iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='65'>
+      <getDatabaseReadoutParameters xmlns='urn:xmpp:sn:concentrators' xml:lang='en' databaseId='LocalDB'/>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='65'>
+      <getDatabaseReadoutParametersResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+          <x type='form' 
+             xmlns='jabber:x:data' 
+             xmlns:xdv='http://jabber.org/protocol/xdata-validate'
+             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'>
+              <title>Database read-out</title>
+              <xdl:page label='Time'>
+                  <xdl:fieldref var='from'/>
+                  <xdl:fieldref var='to'/>
+              </xdl:page>
+              <xdl:page label='Fields'>
+                  <xdl:fieldref var='fields'/>
+              </xdl:page>
+              <xdl:page label='Types'>
+                  <xdl:fieldref var='momentary'/>
+                  <xdl:fieldref var='peak'/>
+                  <xdl:fieldref var='status'/>
+                  <xdl:fieldref var='computed'/>
+                  <xdl:fieldref var='identity'/>
+                  <xdl:fieldref var='historySecond'/>
+                  <xdl:fieldref var='historyMinute'/>
+                  <xdl:fieldref var='historyHour'/>
+                  <xdl:fieldref var='historyDay'/>
+                  <xdl:fieldref var='historyWeek'/>
+                  <xdl:fieldref var='historyMonth'/>
+                  <xdl:fieldref var='historyQuarter'/>
+                  <xdl:fieldref var='historyYear'/>
+                  <xdl:fieldref var='historyOther'/>
+              </xdl:page>
+              <xdl:page label='Status'>
+                  <xdl:fieldref var='missing'/>
+                  <xdl:fieldref var='automaticEstimates'/>
+                  <xdl:fieldref var='manualEstimates'/>
+                  <xdl:fieldref var='manualReadout'/>
+                  <xdl:fieldref var='automaticReadout'/>
+                  <xdl:fieldref var='timeOffset'/>
+                  <xdl:fieldref var='warning'/>
+                  <xdl:fieldref var='error'/>
+                  <xdl:fieldref var='signed'/>
+                  <xdl:fieldref var='invoiced'/>
+                  <xdl:fieldref var='invoicedConfirmed'/>
+                  <xdl:fieldref var='endOfSeries'/>
+                  <xdl:fieldref var='powerFailure'/>
+                  <xdl:fieldref var='statusLogicMode'/>
+              </xdl:page>
+              <field var='xdd session' type='hidden'>
+                  <value>C20D4F0C-8F8A-490F-8188-53017DF2B71A</value>
+              </field>
+              <field var='from' type='text-single' label='From:'>
+                  <required/>
+                  <xdv:validate datatype='xs:dateTime'>
+                      <xdv:basic/>
+                  </xdv:validate>
+                  <desc>Read values not older that this timestamp.</desc>
+                  <value></value>
+              </field>
+              <field var='to' type='text-single' label='To:'>
+                  <required/>
+                  <xdv:validate datatype='xs:dateTime'>
+                      <xdv:basic/>
+                  </xdv:validate>
+                  <desc>Read values not newer that this timestamp.</desc>
+                  <value></value>
+              </field>
+              <field var='fields' type='text-multi' label='Fields to include: (Use * as wildcards)'>
+                  <desc>If specified, only the following fields (include wildcards) will be read out.</desc>
+                  <value></value>
+              </field>
+              <field var='momentary' type='boolean' label='Momentary Values'>
+                  <desc>If checked, momentary values will be read.</desc>
+                  <value>false</value>
+              </field>
+              <field var='peak' type='boolean' label='Peak Values'>
+                  <desc>If checked, peak values will be read.</desc>
+                  <value>false</value>
+              </field>
+              <field var='status' type='boolean' label='Status Values'>
+                  <desc>If checked, status values will be read.</desc>
+                  <value>false</value>
+              </field>
+              <field var='computed' type='boolean' label='Computed Values'>
+                  <desc>If checked, computed values will be read.</desc>
+                  <value>false</value>
+              </field>
+              <field var='identity' type='boolean' label='Identity Values'>
+                  <desc>If checked, identity values will be read.</desc>
+                  <value>false</value>
+              </field>
+              <field var='historySecond' type='boolean' label='Historical Values (second)'>
+                  <desc>If checked, historical values (second) will be read.</desc>
+                  <value>false</value>
+              </field>
+              <field var='historyMinute' type='boolean' label='Historical Values (minute)'>
+                  <desc>If checked, historical values (minute) will be read.</desc>
+                  <value>false</value>
+              </field>
+              <field var='historyHour' type='boolean' label='Historical Values (hour)'>
+                  <desc>If checked, historical values (hour) will be read.</desc>
+                  <value>false</value>
+              </field>
+              <field var='historyDay' type='boolean' label='Historical Values (day)'>
+                  <desc>If checked, historical values (day) will be read.</desc>
+                  <value>false</value>
+              </field>
+              <field var='historyWeek' type='boolean' label='Historical Values (week)'>
+                  <desc>If checked, historical values (week) will be read.</desc>
+                  <value>false</value>
+              </field>
+              <field var='historyMonth' type='boolean' label='Historical Values (month)'>
+                  <desc>If checked, historical values (month) will be read.</desc>
+                  <value>false</value>
+              </field>
+              <field var='historyQuarter' type='boolean' label='Historical Values (quarter)'>
+                  <desc>If checked, historical values (quarter) will be read.</desc>
+                  <value>false</value>
+              </field>
+              <field var='historyYear' type='boolean' label='Historical Values (year)'>
+                  <desc>If checked, historical values (year) will be read.</desc>
+                  <value>false</value>
+              </field>
+              <field var='historyOther' type='boolean' label='Historical Values (other)'>
+                  <desc>If checked, historical values (other) will be read.</desc>
+                  <value>false</value>
+              </field>
+              <field var='missing' type='list-single' label='Missing Values:'>
+                  <desc>Determines how this flag should be treated during readout.</desc>
+                  <value>Ignore</value>
+                  <option label='Ignore'><value>Ignore this flag.</value></option>
+                  <option label='Required'><value>Only read values with this flag set.</value></option>
+                  <option label='Prohibit'><value>Only read values with this flag cleared.</value></option>
+              </field>
+              <field var='automaticEstimates' type='list-single' label='Automatic Estimates:'>
+                  <desc>Determines how this flag should be treated during readout.</desc>
+                  <value>Ignore</value>
+                  <option label='Ignore'><value>Ignore this flag.</value></option>
+                  <option label='Required'><value>Only read values with this flag set.</value></option>
+                  <option label='Prohibit'><value>Only read values with this flag cleared.</value></option>
+              </field>
+              <field var='manualEstimates' type='list-single' label='Manual Estimates:'>
+                  <desc>Determines how this flag should be treated during readout.</desc>
+                  <value>Ignore</value>
+                  <option label='Ignore'><value>Ignore this flag.</value></option>
+                  <option label='Required'><value>Only read values with this flag set.</value></option>
+                  <option label='Prohibit'><value>Only read values with this flag cleared.</value></option>
+              </field>
+              <field var='manualReadout' type='list-single' label='Manual Readout:'>
+                  <desc>Determines how this flag should be treated during readout.</desc>
+                  <value>Ignore</value>
+                  <option label='Ignore'><value>Ignore this flag.</value></option>
+                  <option label='Required'><value>Only read values with this flag set.</value></option>
+                  <option label='Prohibit'><value>Only read values with this flag cleared.</value></option>
+              </field>
+              <field var='automaticReadout' type='list-single' label='Automatic Readout:'>
+                  <desc>Determines how this flag should be treated during readout.</desc>
+                  <value>Ignore</value>
+                  <option label='Ignore'><value>Ignore this flag.</value></option>
+                  <option label='Required'><value>Only read values with this flag set.</value></option>
+                  <option label='Prohibit'><value>Only read values with this flag cleared.</value></option>
+              </field>
+              <field var='timeOffset' type='list-single' label='Time Offset:'>
+                  <desc>Determines how this flag should be treated during readout.</desc>
+                  <value>Ignore</value>
+                  <option label='Ignore'><value>Ignore this flag.</value></option>
+                  <option label='Required'><value>Only read values with this flag set.</value></option>
+                  <option label='Prohibit'><value>Only read values with this flag cleared.</value></option>
+              </field>
+              <field var='warning' type='list-single' label='Warning:'>
+                  <desc>Determines how this flag should be treated during readout.</desc>
+                  <value>Ignore</value>
+                  <option label='Ignore'><value>Ignore this flag.</value></option>
+                  <option label='Required'><value>Only read values with this flag set.</value></option>
+                  <option label='Prohibit'><value>Only read values with this flag cleared.</value></option>
+              </field>
+              <field var='error' type='list-single' label='Error:'>
+                  <desc>Determines how this flag should be treated during readout.</desc>
+                  <value>Ignore</value>
+                  <option label='Ignore'><value>Ignore this flag.</value></option>
+                  <option label='Required'><value>Only read values with this flag set.</value></option>
+                  <option label='Prohibit'><value>Only read values with this flag cleared.</value></option>
+              </field>
+              <field var='signed' type='list-single' label='Signed:'>
+                  <desc>Determines how this flag should be treated during readout.</desc>
+                  <value>Ignore</value>
+                  <option label='Ignore'><value>Ignore this flag.</value></option>
+                  <option label='Required'><value>Only read values with this flag set.</value></option>
+                  <option label='Prohibit'><value>Only read values with this flag cleared.</value></option>
+              </field>
+              <field var='invoiced' type='list-single' label='Invoiced:'>
+                  <desc>Determines how this flag should be treated during readout.</desc>
+                  <value>Ignore</value>
+                  <option label='Ignore'><value>Ignore this flag.</value></option>
+                  <option label='Required'><value>Only read values with this flag set.</value></option>
+                  <option label='Prohibit'><value>Only read values with this flag cleared.</value></option>
+              </field>
+              <field var='invoicedConfirmed' type='list-single' label='Invoiced and Confirmed:'>
+                  <desc>Determines how this flag should be treated during readout.</desc>
+                  <value>Ignore</value>
+                  <option label='Ignore'><value>Ignore this flag.</value></option>
+                  <option label='Required'><value>Only read values with this flag set.</value></option>
+                  <option label='Prohibit'><value>Only read values with this flag cleared.</value></option>
+              </field>
+              <field var='endOfSeries' type='list-single' label='End of Series:'>
+                  <desc>Determines how this flag should be treated during readout.</desc>
+                  <value>Ignore</value>
+                  <option label='Ignore'><value>Ignore this flag.</value></option>
+                  <option label='Required'><value>Only read values with this flag set.</value></option>
+                  <option label='Prohibit'><value>Only read values with this flag cleared.</value></option>
+              </field>
+              <field var='powerFailure' type='list-single' label='Power Failure:'>
+                  <desc>Determines how this flag should be treated during readout.</desc>
+                  <value>Ignore</value>
+                  <option label='Ignore'><value>Ignore this flag.</value></option>
+                  <option label='Required'><value>Only read values with this flag set.</value></option>
+                  <option label='Prohibit'><value>Only read values with this flag cleared.</value></option>
+              </field>
+              <field var='statusLogicMode' type='list-single' label='Combination Logic:'>
+                  <desc>This parameter specifies how multiple status flags are to be treated in the readout.</desc>
+                  <value>Any</value>
+                  <option label='Any'><value>Any of the conditions above are met.</value></option>
+                  <option label='All'><value>All of the conditions above are met.</value></option>
+              </field>
+          </x>
+      </getDatabaseReadoutParametersResponse>
+   </iq>]]>
+                </example>
+            </section3>
+            <section3 topic='Start Database Readout'>
+                <p>
+                    Once the parameter form has been filled out, a database readout can be started using the <strong>startDatabaseReadout</strong> command.
+                    Data read from the concentrator will follow the same flow of sensor data as that described in <link url='xep-0000-SN-SensorData.html'>xep-0000-SN-SensorData</link>
+                    <note>
+                        XEP-xxxx: Sensor Data <link url='xep-0000-SN-SensorData.html'>xep-0000-SN-SensorData</link>
+                    </note>. The only difference is that the read-out is started with the <strong>startDatabaseReadout</strong> command instead of the <strong>req</strong>
+                    command of the sensor data namespace.
+                </p>
+                <p>
+                    The following diagram shows the flow of messages when requesting a readout from a database:
+                </p>
+                <p>
+                    <img src='http://i.imgur.com/xdqeGw0.png'/>
+                </p>
+                <p>
+                    The following example shows a <strong>startDatabaseReadout</strong> request:
+                </p>
+                <example caption='Start Database Readout'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='66'>
+      <startDatabaseReadout xmlns='urn:xmpp:sn:concentrators' xml:lang='en' databaseId='LocalDB' seqnr='1'>
+          <node sourceId='MeteringTopology' nodeId='Node1'/>
+          <node sourceId='MeteringTopology' nodeId='Node2'/>
+          <node sourceId='MeteringTopology' nodeId='Node3'/>
+          <x type='submit' xmlns='jabber:x:data'>
+              <field var='xdd session' type='hidden'>
+                  <value>C20D4F0C-8F8A-490F-8188-53017DF2B71A</value>
+              </field>
+              <field var='from' type='text-single'>
+                  <value>2013-03-22T00:00:00</value>
+              </field>
+              <field var='to' type='text-single'>
+                  <value>2013-03-23T00:00:00</value>
+              </field>
+              <field var='fields' type='text-multi'>
+                  <value>Temperature</value>
+                  <value>Pressure</value>
+                  <value>Power</value>
+              </field>
+              <field var='momentary' type='boolean'>
+                  <value>true</value>
+              </field>
+              <field var='peak' type='boolean'>
+                  <value>false</value>
+              </field>
+              <field var='status' type='boolean'>
+                  <value>false</value>
+              </field>
+              <field var='computed' type='boolean'>
+                  <value>false</value>
+              </field>
+              <field var='identity' type='boolean'>
+                  <value>false</value>
+              </field>
+              <field var='historySecond' type='boolean'>
+                  <value>false</value>
+              </field>
+              <field var='historyMinute' type='boolean'>
+                  <value>false</value>
+              </field>
+              <field var='historyHour' type='boolean'>
+                  <value>false</value>
+              </field>
+              <field var='historyDay' type='boolean'>
+                  <value>false</value>
+              </field>
+              <field var='historyWeek' type='boolean'>
+                  <value>false</value>
+              </field>
+              <field var='historyMonth' type='boolean'>
+                  <value>false</value>
+              </field>
+              <field var='historyQuarter' type='boolean'>
+                  <value>false</value>
+              </field>
+              <field var='historyYear' type='boolean'>
+                  <value>false</value>
+              </field>
+              <field var='historyOther' type='boolean'>
+                  <value>false</value>
+              </field>
+              <field var='missing' type='list-single'>
+                  <value>Ignore</value>
+              </field>
+              <field var='automaticEstimates' type='list-single'>
+                  <value>Ignore</value>
+              </field>
+              <field var='manualEstimates' type='list-single'>
+                  <value>Ignore</value>
+              </field>
+              <field var='manualReadout' type='list-single'>
+                  <value>Ignore</value>
+              </field>
+              <field var='automaticReadout' type='list-single'>
+                  <value>Ignore</value>
+              </field>
+              <field var='timeOffset' type='list-single'>
+                  <value>Ignore</value>
+              </field>
+              <field var='warning' type='list-single'>
+                  <value>Ignore</value>
+              </field>
+              <field var='error' type='list-single'>
+                  <value>Ignore</value>
+              </field>
+              <field var='signed' type='list-single'>
+                  <value>Ignore</value>
+              </field>
+              <field var='invoiced' type='list-single'>
+                  <value>Ignore</value>
+              </field>
+              <field var='invoicedConfirmed' type='list-single'>
+                  <value>Ignore</value>
+              </field>
+              <field var='endOfSeries' type='list-single'>
+                  <value>Ignore</value>
+              </field>
+              <field var='powerFailure' type='list-single'>
+                  <value>Ignore</value>
+              </field>
+              <field var='statusLogicMode' type='list-single'>
+                  <value>Any</value>
+              </field>
+          </x>
+      </startDatabaseReadout>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='66'>
+      <startDatabaseReadoutResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+   </iq>
+   
+   ... Readout messages follow.]]>
+                </example>
+            </section3>
+            <section3 topic="Start Database Readout, Failure">
+                <p>
+                    The following example shows a response when the concentrator rejects the read-out request:
+                </p>
+                <example caption='Start Database Readout, Failure'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='67'>
+      <startDatabaseReadout xmlns='urn:xmpp:sn:concentrators' xml:lang='en' databaseId='LocalDB' seqnr='1' userToken='12392748927492834'>
+          <node sourceId='MeteringTopology' nodeId='Node1'/>
+          <node sourceId='MeteringTopology' nodeId='Node2'/>
+          <node sourceId='MeteringTopology' nodeId='Node3'/>
+          <x type='submit' xmlns='jabber:x:data'>
+              ...
+          </x>
+      </startDatabaseReadout>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='67'>
+      <startDatabaseReadoutResponse xmlns='urn:xmpp:sn:concentrators' result='InsufficientPrivileges'/>
+   </iq>]]>
+                </example>
+                <p>
+                    The error might also be a result of invalid input parameters being sent:
+                </p>
+                <example caption='Start Database Readout, Failure 2'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='68'>
+      <startDatabaseReadout xmlns='urn:xmpp:sn:concentrators' xml:lang='en' databaseId='LocalDB' seqnr='1' userToken='12392748927492834'>
+          <node sourceId='MeteringTopology' nodeId='Node1'/>
+          <node sourceId='MeteringTopology' nodeId='Node2'/>
+          <node sourceId='MeteringTopology' nodeId='Node3'/>
+          <x type='submit' xmlns='jabber:x:data'>
+              ...
+              <field var='from' type='text-single'>
+                  <value>2013-03-23T00:00:00</value>
+              </field>
+              <field var='to' type='text-single'>
+                  <value>2013-03-22T00:00:00</value>
+              </field>
+              ...
+          </x>
+      </startDatabaseReadout>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='68'>
+      <startDatabaseReadoutResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'>
+          <error var='to'>The To timestamp cannot be older than the From timestamp.</error>
+      </startDatabaseReadoutResponse>
+   </iq>]]>
+                </example>
+            </section3>
         </section2>
     </section1>
     <section1 topic='Implementation Notes' anchor='impl'>
@@ -2799,7 +3627,6 @@
             <p>
                 Several commands return basic node information. The following table lists possible fields with corresponding descriptions.
             </p>
-            <!-- TODO: Update list -->
             <table caption='Basic Node Information'>
                 <tr>
                     <th>Attribute</th>
@@ -2820,6 +3647,12 @@
                     <td>If provided, a string presentable to users. If localization is supported and a correct language attribute was provided, this string will be localized.</td>
                 </tr>
                 <tr>
+                    <td>nodeType</td>
+                    <td>optional</td>
+                    <td>&nbsp;</td>
+                    <td>A string representing the type of the node.</td>
+                </tr>
+                <tr>
                     <td>localId</td>
                     <td>optional</td>
                     <td>&nbsp;</td>
@@ -2833,9 +3666,12 @@
                 </tr>
                 <tr>
                     <td>cacheType</td>
-                    <td>required</td>
+                    <td>optional</td>
                     <td>&nbsp;</td>
-                    <td>Used to uniquelly identify the node. If concentrators do not use this parameter, they can set this string to the empty string.</td>
+                    <td>Used to uniquely identify the node in sources where the ID of the node is not sufficient. Example: In a spatial ordering different nodes may represent
+                    countries, regions, cities, areas, streets, buildings and apartments in the same source. However, the ID of each node would depend on what type of node it
+                    represents. It might be valid to have a region, city and/or araa with the same ID. So, to these circuimstances, a Cache Type of Country, Region, City, Area,
+                    Street, Building and Apartment can be used to allow for non-unique IDs within the source, as long as they are unique within the same cache type.</td>
                 </tr>
                 <tr>
                     <td>state</td>
@@ -2848,6 +3684,16 @@
                     <td>required</td>
                     <td>&nbsp;</td>
                     <td>If the node has children or not.</td>
+                </tr>
+                <tr>
+                    <td>childrenOrdered</td>
+                    <td>optional</td>
+                    <td>false</td>
+                    <td>If the children of the node have an intrinsic order (true), or if the order is not important (false). If the order is not important, the client
+                    can present the order as it wishes, for example sorted on Node ID or any other parameter available on the child nodes. However, if the children have an
+                    intrinsic order, it's important for the client to refresh the child list when neccessary whenever the order is unknown, such as after a nodeAdded event or 
+                    a nodeRemoved event.
+                </td>
                 </tr>
                 <tr>
                     <td>isReadable</td>
@@ -2867,6 +3713,24 @@
                     <td>false</td>
                     <td>If the node has registered commands or not.</td>
                 </tr>
+                <tr>
+                    <td>parentId</td>
+                    <td>optional</td>
+                    <td>&nbsp;</td>
+                    <td>The node ID of the parent node. If not available, the node is considered a root node.</td>
+                </tr>
+                <tr>
+                    <td>parentCacheType</td>
+                    <td>optional</td>
+                    <td>&nbsp;</td>
+                    <td>The Cache Type of the parent node.</td>
+                </tr>
+                <tr>
+                    <td>lastChanged</td>
+                    <td>optional</td>
+                    <td>&nbsp;</td>
+                    <td>When the node was last changed. Can be used by clients to synchronize content between the concentrator and itself.</td>
+                </tr>
             </table>
             <p>
                 (*) See <link url='xep-0000-SN-SensorData.html'>xep-0000-SN-SensorData</link> for more information about how to read nodes.
@@ -2879,6 +3743,7 @@
         <!-- TODO: Response codes, available in all response stanzas -->
         <!-- TODO: Respond even to commands not recognized. <holabandola .../>    <holabandolaResponse responseCode='NotImplemented'/>-->
         <!-- TODO: Node commands #nodecommands -->
+        <!-- TODO: Node states #nodestates-->
         <!-- TODO: Requirement to implement the Sensor Data XEP (data source: Topology) -->
     </section1>
     <section1 topic='Internationalization Considerations' anchor='i18n'>
@@ -2943,7 +3808,6 @@
         <p>REQUIRED.</p>
     </section1>
     <section1 topic='XML Schema' anchor='schema'>
-        <!-- TODO: Update with current schema -->
         <code>
             <![CDATA[
 <?xml version='1.0' encoding='UTF-8'?>
@@ -3176,14 +4040,83 @@
             <xs:complexContent>
                 <xs:extension base='SourceReferenceRequest'>
                     <xs:attribute name='getEventsSince' type='xs:dateTime' use='optional'/>
+                    <xs:attributeGroup ref='parametersAndMessages'/>
+                    <xs:attributeGroup ref='eventTypes'/>
                 </xs:extension>
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
     <xs:element name='subscribeResponse' type='Response'/>
  
-    <xs:element name='unsubscribe' type='SourceReferenceRequest'/>
+    <xs:element name='unsubscribe'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='SourceReferenceRequest'>
+                    <xs:attributeGroup ref='eventTypes'/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
     <xs:element name='unsubscribeResponse' type='Response'/>
+ 
+    <xs:element name='nodeAdded' type='NodeSourceInformation'/>
+    <xs:element name='nodeUpdated'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeSourceInformation'>
+                    <xs:attribute name='oldId' type='xs:string' use='optional'/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='nodeStatusChanged'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeReference'>
+                    <xs:choice minOccurs='0' maxOccurs='unbounded'>
+                        <xs:element name='message' type='Message'/>
+                    </xs:choice>
+                    <xs:attribute name='state' type='NodeState' use='required'/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='nodeRemoved' type='NodeReference'/>
+    <xs:element name='nodeMovedUp' type='NodeReference'/>
+    <xs:element name='nodeMovedDown' type='NodeReference'/>
+ 
+    <xs:element name='getDatabases' type='TokenRequest'/>
+    <xs:element name='getDatabasesResponse'>
+        <xs:complexType>
+            <xs:sequence minOccurs='0' maxOccurs='unbounded'>
+                <xs:element name='database'>
+                    <xs:complexType>
+                        <xs:attribute name='id' type='xs:string' use='required'/>
+                        <xs:attribute name='name' type='xs:string' use='optional'/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attributeGroup ref='responseCode'/>
+        </xs:complexType>
+    </xs:element>
+ 
+    <xs:element name='getDatabaseReadoutParameters' type='DatabaseReferenceRequest'/>
+    <xs:element name='getDatabaseReadoutParametersResponse' type='ParameterFormResponse'/>
+ 
+    <xs:element name='startDatabaseReadout'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='DatabaseReferenceRequest'>
+                    <xs:sequence>
+                        <xs:element name='node' type='NodeReference' minOccurs='1' maxOccurs='unbounded'/>
+                        <xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
+                    </xs:sequence>
+                    <xs:attribute name="seqnr" type="xs:int" use="required"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='startDatabaseReadoutResponse' type='ExecuteNodeCommandResponse'/>
  
     <xs:simpleType name='ResponseCode'>
         <xs:restriction base='xs:string'>
@@ -3258,6 +4191,23 @@
  
     <xs:attributeGroup name='responseCode'>
         <xs:attribute name='result' type='ResponseCode' use='required'/>
+    </xs:attributeGroup>
+ 
+    <xs:attributeGroup name='eventTypes'>
+        <xs:attribute name='nodeAdded' type='xs:boolean' use='optional' default='true'/>
+        <xs:attribute name='nodeUpdated' type='xs:boolean' use='optional' default='true'/>
+        <xs:attribute name='nodeStatusChanged' type='xs:boolean' use='optional' default='true'/>
+        <xs:attribute name='nodeRemoved' type='xs:boolean' use='optional' default='true'/>
+        <xs:attribute name='nodeMovedUp' type='xs:boolean' use='optional' default='true'/>
+        <xs:attribute name='nodeMovedDown' type='xs:boolean' use='optional' default='true'/>
+    </xs:attributeGroup>
+ 
+    <xs:attributeGroup name='databaseReference'>
+        <xs:attribute name='databaseId' type='xs:string' use='required'/>
+    </xs:attributeGroup>
+ 
+    <xs:attributeGroup name='readoutReference'>
+        <xs:attribute name='seqnr' type='xs:int' use='required'/>
     </xs:attributeGroup>
  
     <xs:complexType name='Response'>
@@ -3371,9 +4321,10 @@
         <xs:attribute name='nodeType' type='xs:string' use='optional'/>
         <xs:attribute name='localId' type='xs:string' use='optional'/>
         <xs:attribute name='logId' type='xs:string' use='optional'/>
-        <xs:attribute name='cacheType' type='xs:string' use='required'/>
+        <xs:attribute name='cacheType' type='xs:string' use='optional'/>
         <xs:attribute name='state' type='NodeState' use='required'/>
         <xs:attribute name='hasChildren' type='xs:boolean' use='required'/>
+        <xs:attribute name='childrenOrdered' type='xs:boolean' use='optional' default='false'/>
         <xs:attribute name='isReadable' type='xs:boolean' use='optional' default='false'/>
         <xs:attribute name='isConfigurable' type='xs:boolean' use='optional' default='false'/>
         <xs:attribute name='hasCommands' type='xs:boolean' use='optional' default='false'/>
@@ -3381,7 +4332,15 @@
         <xs:attribute name='parentCacheType' type='xs:string' use='optional'/>
         <xs:attribute name='lastChanged' type='xs:dateTime' use='optional'/>
     </xs:complexType>
-  
+ 
+    <xs:complexType name='NodeSourceInformation'>
+        <xs:complexContent>
+            <xs:extension base='NodeInformation'>
+                <xs:attributeGroup ref='sourceReference'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
     <xs:complexType name='Parameter' abstract='true'>
         <xs:attribute name='id' type='xs:string' use='required'/>
         <xs:attribute name='name' type='xs:string' use='required'/>
@@ -3582,6 +4541,19 @@
                 <xs:attribute name='var' type='xs:string' use='required'/>
             </xs:extension>
         </xs:simpleContent>
+    </xs:complexType>
+ 
+    <xs:complexType name='ReadoutReference'>
+        <xs:attributeGroup ref='databaseReference'/>
+        <xs:attributeGroup ref='readoutReference'/>
+    </xs:complexType>
+ 
+    <xs:complexType name='DatabaseReferenceRequest'>
+        <xs:complexContent>
+            <xs:extension base='TokenRequest'>
+                <xs:attributeGroup ref='databaseReference'/>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
  
 </xs:schema>]]>
