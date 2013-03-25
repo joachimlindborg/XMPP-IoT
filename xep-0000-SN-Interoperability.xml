@@ -5,6 +5,7 @@
 <!-- TODO: Localization of field names: Modules, string IDs -->
 <!--<section2 topic='Tables for unit conversion'></section2>-->
 <!-- TODO: Privilege IDs -->
+<!-- TODO: required data sources, optional data sources -->
 <!DOCTYPE xep SYSTEM 'xep.dtd' [
 	<!ENTITY % ents SYSTEM 'xep.ent'>
 	%ents;

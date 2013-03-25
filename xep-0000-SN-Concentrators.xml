@@ -3739,11 +3739,229 @@
                 (**) See <link url='xep-0000-SN-Control.html'>xep-0000-SN-Control</link> for more information about how to configure nodes.
             </p>
         </section2>
-        <!-- TODO: Parameter types -->
-        <!-- TODO: Response codes, available in all response stanzas -->
-        <!-- TODO: Respond even to commands not recognized. <holabandola .../>    <holabandolaResponse responseCode='NotImplemented'/>-->
-        <!-- TODO: Node commands #nodecommands -->
-        <!-- TODO: Node states #nodestates-->
+		<section2 topic='Parameter Types'>
+			<p>
+				Nodes can report parameters of different types. The following table lists available parameter types.
+			</p>
+			<table caption='Parameter Types'>
+				<tr>
+					<th>Element Name</th>
+					<th>Parameter Value</th>
+				</tr>
+				<tr>
+					<td>boolean</td>
+					<td>Boolean values. Can be true or false.</td>
+				</tr>
+				<tr>
+					<td>color</td>
+					<td>Color values. They are strings containing 6 case-insensitive hexadecimal digits of the form RRGGBB, where RR=Red component, GG=Green component, BB=Blue component.</td>
+				</tr>
+				<tr>
+					<td>dateTime</td>
+					<td>Date and time value, with possible time zone information.</td>
+				</tr>
+				<tr>
+					<td>double</td>
+					<td>double precision floating point value.</td>
+				</tr>
+				<tr>
+					<td>duration</td>
+					<td>A time duration value.</td>
+				</tr>
+				<tr>
+					<td>int</td>
+					<td>A 32-bit integer value.</td>
+				</tr>
+				<tr>
+					<td>long</td>
+					<td>A 64-bit integer value.</td>
+				</tr>
+				<tr>
+					<td>string</td>
+					<td>A string value.</td>
+				</tr>
+				<tr>
+					<td>time</td>
+					<td>A time value using a 24-hour clock.</td>
+				</tr>
+			</table>
+		</section2>
+		<section2 topic='Response Codes'>
+			<p>
+				All responses have a response code that the client is required to check. The following table lists possible response codes and their corresponding meanings.
+			</p>
+			<table caption='Response Codes'>
+				<tr>
+					<th>Response Code</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>OK</td>
+					<td>Request is OK and accepted.</td>
+				</tr>
+				<tr>
+					<td>NotFound</td>
+					<td>Corresponding object, node, etc., was not found.</td>
+				</tr>
+				<tr>
+					<td>InsufficientPrivileges</td>
+					<td>Insufficient privileges to perform the corresponding action or execute the corresponding command. Make sure to provide sufficient credentials in the call
+					(user, service, device tokens) with sufficient privileges to perform the action/command.</td>
+				</tr>
+				<tr>
+					<td>Locked</td>
+					<td>The object/node is locked, and operation could not be performed or completed.</td>
+				</tr>
+				<tr>
+					<td>NotImplemented</td>
+					<td>Command is not implemented.</td>
+				</tr>
+				<tr>
+					<td>FormError</td>
+					<td>The form send to the concentrator contains errors. The response contains detailed error information.</td>
+				</tr>
+				<tr>
+					<td>OtherError</td>
+					<td>Another error occurred.</td>
+				</tr>
+			</table>
+		</section2>
+		<section2 topic='Unimplemented commands'>
+			<p>
+				It's important that the concentrator responds to unrecognized commands. This, to make sure future extensions to this document does not produce unexpected
+				results in concentrators implementing a previous version, or in concentrators implementing only a subset of available commands.
+			</p>
+			<p>
+				When a concentrator receives an element that it does not understand, it must do as follows:
+			</p>
+			<ul>
+				<li>If the element is received in a message stanza, the element must be ignored.</li>
+				<li>If the element is received in an iq-result stanza, the element must be ignored.</li>
+				<li>If the element is received in an iq-get or iq-set stanza, an iq-result stanza must be composed containing an element with the same name as the incoming
+				element, but with <strong>Response</strong> appended to it, having a response code of <strong>NotImplemented</strong>.</li>
+			</ul>
+			<p>
+				The following example shows how unrecognized commands must be handled by the concentrator:
+			</p>
+			<example caption='Unimplemented commands'>
+				<![CDATA[
+   <iq type='get'
+       from='client@clayster.com'
+       to='concentrator@clayster.com'
+       id='69'>
+      <holabandola xmlns='urn:xmpp:sn:concentrators' ...>
+          ...
+      </holabandola>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com'
+       id='69'>
+      <holabandolaResponse xmlns='urn:xmpp:sn:concentrators' result='NotImplemented'/>
+   </iq>]]>
+			</example>
+		</section2>
+		<section2 topic='Command attributes' anchor='nodecommands'>
+			<p>
+				Node commands have a set of attributes. The following table lists available attributes and what they mean.
+			</p>
+			<table caption='Command attributes'>
+				<tr>
+					<th>Attribute</th>
+					<th>Use</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>id</td>
+					<td>required</td>
+					<td>ID of the command. Used to identify the command.</td>
+				</tr>
+				<tr>
+					<td>name</td>
+					<td>required</td>
+					<td>A string that can be presented to an end-user. Should be localized if the request contained a language preference.</td>
+				</tr>
+				<tr>
+					<td>type</td>
+					<td>required</td>
+					<td>If the command is 'Simple' or 'Parametrized'.</td>
+				</tr>
+				<tr>
+					<td>sortCategory</td>
+					<td>optional</td>
+					<td>Should be used (if available) by clients to sort available node commands before presenting them to an end-user. Commands should be sorted by Sort Category, Sort Key and
+					lastly by Name.</td>
+				</tr>
+				<tr>
+					<td>sortKey</td>
+					<td>optional</td>
+					<td>
+						Should be used (if available) by clients to sort available node commands before presenting them to an end-user. Commands should be sorted by Sort Category, Sort Key and
+						lastly by Name.
+					</td>
+				</tr>
+				<tr>
+					<td>confirmationString</td>
+					<td>optional</td>
+					<td>Should presented to clients (if available) before letting an end-user execute the command. A delete command might have a confirmationString saying
+					'Are you sure you want to delete the current item?' The confirmation string should be presented as a Yes/No[/Cancel] dialog.</td>
+				</tr>
+				<tr>
+					<td>failureString</td>
+					<td>optional</td>
+					<td>
+						Could be presented to end-users (if available) if a command fails. It provides the client with an optionally localized string giving some context to the error message.
+						A delete command might have a failureString saying 'Unable to delete the current item.'. The client could then add additional error information, if available,
+						for instance from the response code.
+					</td>
+				</tr>
+				<tr>
+					<td>successString</td>
+					<td>optional</td>
+					<td>
+						Could be presented to end-users (if available) if a command is successfully executed. It provides the client with an optionally localized string giving some context 
+						to the message. A delete command might have a successString saying 'Current item successfully deleted.'.
+					</td>
+				</tr>
+			</table>
+		</section2>
+		<section2 topic='Node States'>
+			<p>
+				Nodes can be in different states. Even though nodes are free to publish any amount of states as parameters, there are a set of states that are so crucial to the 
+				concept of a node state, that they are published using a separate attribute and separate events. These node states are as follows:
+			</p>
+			<table caption='Node States'>
+				<tr>
+					<th>State</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>None</td>
+					<td>The node has nothing special to report.</td>
+				</tr>
+				<tr>
+					<td>Information</td>
+					<td>The node has informative events reported on it.</td>
+				</tr>
+				<tr>
+					<td>WarningSigned</td>
+					<td>The node has warnings reported on it. These warnings have been viewed by an operator.</td>
+				</tr>
+				<tr>
+					<td>WarningUnsigned</td>
+					<td>The node has warnings reported on it that have not been viewed by anybody.</td>
+				</tr>
+				<tr>
+					<td>ErrorSigned</td>
+					<td>The node has errors reported on it. These errors have been viewed by an operator.</td>
+				</tr>
+				<tr>
+					<td>ErrorUnsigned</td>
+					<td>The node has errors reported on it that have not been viewed by anybody.</td>
+				</tr>
+			</table>
+		</section2>
         <!-- TODO: Requirement to implement the Sensor Data XEP (data source: Topology) -->
     </section1>
     <section1 topic='Internationalization Considerations' anchor='i18n'>
@@ -4559,4 +4777,7 @@
 </xs:schema>]]>
         </code>
     </section1>
+	<section1 topic='Acknowledgements' anchor='ack'>
+		<p>Thanks to Joachim Lindborg for all valuable feedback.</p>
+	</section1>
 </xep>
