@@ -76,10 +76,12 @@
             <li>Effective synchronization of contents between interested parties.</li>
             <li>Effective ways to interact with entities controlled by the concentrator.</li>
         </ul>
+	<section2 topic='Relations to other extensions'>
         <p>
             Even though there are technologies available in forms of XEPs that solve parts of the above mentioned problem, they do not provide sufficient support. The following paragraphs will
             take the time to list why different technologies are not applicable.
         </p>
+	<section3 topic='XEP-0060'>
         <p>
             This XEP defines tree structures for nodes in different data sources. &xep0060; defines a model where a tree structure of nodes is published and users can browse this
             tree structure. Furthermore, it allows the possibility to publish items on these nodes as well as syndicalization of this information.
@@ -102,7 +104,7 @@
             <li>
                 For massive systems (hundreds of thousands, or millions, of nodes behind a concentrator, its vitally important to be able to manage sets of nodes directly 
                 (for example: Edit multiple nodes at once). Many of the operations in XEP-0060 only allow for operations of singular nodes. Furthermore, many simple operations 
-                require multiple messages per node. This document defines way to operate of sets of nodes simultaneously, as well as ways to perform operations with a smaller 
+                require multiple messages per node. This document defines way to operate on sets of nodes simultaneously, as well as ways to perform operations with a smaller 
                 number of operations.
             </li>
             <li>
@@ -113,6 +115,8 @@
                 In this document, nodes have real-time status, like errors, warnings, etc.
             </li>
         </ul>
+	</section3>
+	<section3 topic='XEP-0248'>
         <p>
             XEP-0248 defines the concept of node collections and syndicalization of information from nodes in these collections. But XEP-0248 is not used in this specification.
             There are multiple reasons:
@@ -134,6 +138,8 @@
                 contained in it.
             </li>
         </ul>
+	</section3>
+	<section3 topic='XEP-0050'>
         <p>
             &xep0050; defines how ad-hoc commands can be implemented and how clients can use such commands to interact with underlying logic. But XEP-0050 is not used in this specification.
             There are multiple reasons:
@@ -159,10 +165,11 @@
                 wizard style type of dialogs used for more complex dialogs in ad-hoc commands, are difficult to automate.
             </li>
         </ul>
-
-        <p>
-            Sensor networks contains many different architectures and use cases. For this reason, the sensor network standards have been divided into multiple XEPs according to the following table:
-        </p>
+	</section3>
+      </section2>
+      <p>
+	Sensor networks contains many different architectures and use cases. For this reason, the sensor network standards have been divided into multiple XEPs according to the following table:
+      </p>
 
         <table caption='Sensor Network XEPs'>
             <tr>
@@ -383,7 +390,7 @@
         <p>
             To create a complete set of operations supported by all types of concentrators, ranging from PLCs to subsystems to entire systems is very difficult. So, the aim
             of this document is instead to create a very small reduced set of operations, a common denominator, that would allow for basic maintenance and interoperability of
-            concentrators of different makes and models and of these varying ranges.
+            concentrators of different origins, models and of varying sizes.
         </p>
         <section2 topic='Capabilities'>
             <section3 topic='Get Capabilities'>
@@ -582,7 +589,7 @@
    </iq>]]>
                 </example>
                 <p>
-                    So, clients who need to interact with different types of concentrators need to be aware of what commands are supported, and limit operations to thos commands.
+                    So, clients who need to interact with different types of concentrators need to be aware of what commands are supported, and limit operations to those commands.
                 </p>
             </section3>
         </section2>
@@ -615,7 +622,7 @@
             </section3>
             <section3 topic='Get Top Data Sources'>
                 <p>
-                    If the client is interested in the hierarchical structure of available data sources, it should request only the root sources, and then ask the client for their
+                    If the client is interested in the hierarchical structure of available data sources, it should request only the root sources, and then ask the concentrator for its
                     corresponding child data sources. If the client wants to present the data sources to a user, presenting them in their hierarchical order may be more intuitive.
                 </p>
                 <example caption='Get Top Data Sources'>
@@ -695,7 +702,7 @@
                 </p>
                 <p>
                     <strong>Important:</strong> Event subscriptions only last for as long as the client and concentrator both maintains precense. The concentrator must not persist
-                    event notification subscriptions, and if it goes offline and back online, or if the client goes offline or online again for any reason, the event subscription
+                    event notification subscriptions, if it goes offline and back online, or if the client goes offline or online again for any reason, the event subscription
                     is removed.
                 </p>
                 <p>
@@ -1060,7 +1067,7 @@
             </section3>
             <section3 topic='Get All Nodes'>
                 <p>
-                    If the device does not manage too many nodes, it could choose to implement this function. It would return all all available nodes with one call.
+                    If the device does not manage too many nodes, it could choose to implement this function. It would return all available nodes with one call.
                 </p>
                 <example caption='Get All Nodes'>
                     <![CDATA[
@@ -2217,8 +2224,7 @@
                 <p>
                     As the <strong>result</strong> attribute is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
-                    <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
+                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link> for more information.
                 </p>
             </section3>
             <section3 topic='Get Node Status'>
@@ -2501,8 +2507,7 @@
                 <p>
                     As the <strong>result</strong> attribute is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
-                    <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
+                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
                 </p>
             </section3>
             <section3 topic='Destroy Node'>
@@ -2697,8 +2702,7 @@
                     If an error occurs during the execution of a command or if the server rejects the execution of a command, the server returns a response code different from
                     <strong>OK</strong>. If the response code is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
-                    <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
+                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
                 </p>
                 <example caption='Execute Node Command, Failure'>
                     <![CDATA[
@@ -2897,8 +2901,7 @@
                     If an error occurs during the execution of a common command or if the server rejects the execution of a common command, the server returns a response code different from
                     <strong>OK</strong>. If the response code is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
-                    <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
+                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
                 </p>
                 <example caption='Execute Parametrized Command on multiple Nodes, Failure'>
                     <![CDATA[
@@ -4777,7 +4780,7 @@
 </xs:schema>]]>
         </code>
     </section1>
-	<section1 topic='Acknowledgements' anchor='ack'>
-		<p>Thanks to Joachim Lindborg for all valuable feedback.</p>
-	</section1>
+    <section1 topic='Acknowledgements' anchor='ack'>
+      <p>Thanks to Joachim Lindborg for all valuable feedback.</p>
+    </section1>
 </xep>
