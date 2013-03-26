@@ -6,7 +6,7 @@ Sensor Networks and the Internet of Things
 
 The final result will be published through the XSF foundation 
 
-Planned XEP's 
+# Planned XEP's 
 
 [XEP-0000-Ex](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-EXI/blob/master/xep-0000-Exi.html)
 		Defines how to EXI can be used in XMPP to achieve efficient 
@@ -59,11 +59,11 @@ xep-0000-SN-PubSub
 		detail implemented in underlying technologies. 
 		This XEP is used by all other sensor network XEPs.
 
-Main author
+## Main author
 Email: peter.waher@clayster.com
 JabberID: peter.waher@jabber.org
 URI: http://se.linkedin.com/pub/peter-waher/1a/71b/a29/
 
-mananged by 
+## Co working and Managed by 
 Email: joachim.lindborg@sust.se
-URI:
+URI: http://se.linkedin.com/in/joachimlindborg/
