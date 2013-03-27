@@ -93,6 +93,10 @@
 				<th>Description</th>
 			</tr>
 			<tr>
+				<td>XEP-0000-ColorParameter</td>
+				<td>Defines extensions for how color parameters can be handled, based on &xep0004;</td>
+			</tr>
+			<tr>
 				<td>XEP-0000-DynamicForms</td>
 				<td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
 			</tr>
@@ -641,11 +645,10 @@
    </message>]]>
 			</example>
 		</section2>
-		<section2 topic="Cancelling a scheduled read-out request">
+		<section2 topic="Cancelling a scheduled read-out request" anchor="cancelreadout">
 			<p>
 				The following example shows how the client cancels a scheduled read-out:
 			</p>
-
 			<example caption='Scheduled read-out of device with multiple responses'>
 				<![CDATA[
    <iq type='get'

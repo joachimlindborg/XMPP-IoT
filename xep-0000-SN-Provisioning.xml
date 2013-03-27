@@ -87,7 +87,11 @@
                 <th>XEP</th>
                 <th>Description</th>
             </tr>
-            <tr>
+			<tr>
+				<td>XEP-0000-ColorParameter</td>
+				<td>Defines extensions for how color parameters can be handled, based on &xep0004;</td>
+			</tr>
+			<tr>
                 <td>XEP-0000-DynamicForms</td>
                 <td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
             </tr>
@@ -678,7 +682,7 @@
    </iq>]]>
             </example>
         </section2>
-        <section2 topic='Getting a service token'>
+        <section2 topic='Getting a service token' anchor='servicetoken'>
             <p>
                 A service requesting provisioning assistance, needs to retrieve a service token from the provisioning server. The following example shows how this can be done.
             </p>
@@ -699,7 +703,7 @@
    </iq>]]>
             </example>
         </section2>
-        <section2 topic='User access to service'>
+        <section2 topic='User access to service' anchor='usertoken'>
             <p>
                 Provisioning in sensor networks also requires control of user access to different services in the network. This use case shows how service access rights are controlled using
                 a trusted provisioning server.
@@ -1044,7 +1048,7 @@
         </p>
     </section1>
     <section1 topic='Implementation Notes' anchor='impl'>
-        <section2 topic='Caching and cache time'>
+        <section2 topic='Caching and cache time' anchor='cache'>
             <p>
                 To minimize network traffic, and optimize response time, devices should cache access rights and user privileges provided by the provisioning server. If memory is limited,
                 items in the cache should be ordered by last access, and items with the oldest last access timestamp should be removed first. A safety valve can optionally be implemented as well,

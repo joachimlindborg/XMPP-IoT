@@ -6,6 +6,9 @@
 <!--<section2 topic='Tables for unit conversion'></section2>-->
 <!-- TODO: Privilege IDs -->
 <!-- TODO: required data sources, optional data sources -->
+<!-- TODO: Data Source ID -> Privilege ID: ...DataSources.SourceId -->
+<!-- TODO: Node Command ID -> Privilege ID: ...Commands.CommandId -->
+<!-- TODO: Node Properties -> Privilege ID: ...Parameters.Page.ParameterId -->
 <!DOCTYPE xep SYSTEM 'xep.dtd' [
 	<!ENTITY % ents SYSTEM 'xep.ent'>
 	%ents;
