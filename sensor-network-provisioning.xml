@@ -26,7 +26,7 @@
             <spec>XMPP Core</spec>
             <spec>XEP-0001</spec>
             <spec>XEP-0030</spec>
-            <spec>xep-0000-SN-SensorData</spec>
+            <spec>sensor-data</spec>
         </dependencies>
         <supersedes/>
         <supersededby/>
@@ -38,7 +38,15 @@
             <jid>peter.waher@jabber.org</jid>
             <uri>http://se.linkedin.com/pub/peter-waher/1a/71b/a29/</uri>
         </author>
-        <revision>
+		<revision>
+			<version>0.0.4</version>
+			<date>???</date>
+			<initials>pwa</initials>
+			<remark>
+				<p>Added altitude credentials.</p>
+			</remark>
+		</revision>
+		<revision>
             <version>0.0.3</version>
             <date>2013-03-18</date>
             <initials>pwa</initials>
@@ -78,7 +86,7 @@
             efficiently using a trusted third party with more power and options when it comes to user interface design and storage.
         </p>
         <p>
-			This XEP relies heavily on <link url='xep-0000-SN-SensorData.html'>xep-0000-SN-SensorData</link> <note><link url='xep-0000-SN-SensorData.html'>xep-0000-SN-SensorData</link></note>.
+			This XEP relies heavily on <link url='sensor-data.html'>sensor-data</link> <note><link url='sensor-data.html'>sensor-data</link></note>.
 			Sensor networks contain many different architectures and use cases. For this reason, the sensor network standards have been divided into multiple XEPs according to the following table:
 		</p>
 
@@ -96,7 +104,7 @@
                 <td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
             </tr>
             <tr>
-                <td>XEP-0000-Exi</td>
+                <td>exi</td>
                 <td>
                     Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
                     in all sensor network implementations where memory and packet size is an issue.
@@ -131,7 +139,7 @@
                 <td>Defines how sensor data can be multicast in efficient ways.</td>
             </tr>
             <tr>
-                <td>xep-0000-SN-Provisioning</td>
+                <td>sensor-network-provisioning</td>
                 <td>This specification. Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
             </tr>
             <tr>
@@ -139,7 +147,7 @@
                 <td>Defines how efficient publication of sensor data can be made in sensor networks.</td>
             </tr>
             <tr>
-                <td>xep-0000-SN-SensorData</td>
+                <td>sensor-data</td>
                 <td>
                     Provides the underlying architecture, basic operations and data structures for sensor data communication over XMPP networks.
                     It includes a hardware abstraction model, removing any technical detail implemented in underlying technologies. This XEP is used by all other sensor network XEPs.
@@ -489,7 +497,7 @@
                 <img src='http://i.imgur.com/yWPVD44.png'/>
             </p>
             <p>
-                <strong>Note:</strong> This use case is an extension of the use case 'Read-out rejected' in the XEP <link url='xep-0000-SN-SensorData.html'>xep-0000-SN-SensorData</link>.
+                <strong>Note:</strong> This use case is an extension of the use case 'Read-out rejected' in the XEP <link url='sensor-data.html'>sensor-data</link>.
             </p>
             <p>
                 The following example shows the communication first between the client and the device, then the device and the provisioning server, and last between the device and the client:
@@ -539,7 +547,7 @@
                 <img src='http://i.imgur.com/niZ6smb.png'/>
             </p>
             <p>
-                <strong>Note:</strong> This use case is an extension of the use case 'Read-out of multiple devices' in the XEP <link url='xep-0000-SN-SensorData.html'>xep-0000-SN-SensorData</link>.
+                <strong>Note:</strong> This use case is an extension of the use case 'Read-out of multiple devices' in the XEP <link url='sensor-data.html'>sensor-data</link>.
             </p>
             <p>
                 <strong>Note 2:</strong> If the server responds, but without specifying a list of nodes, the device can assume that all nodes available in the original request are allowed
@@ -762,7 +770,7 @@
                 <tr>
                     <td>Geolocation</td>
                     <td>HTML5 over HTTP(S), XMPP</td>
-                    <td>If the geographic location (longitude &amp; latitude) of the user client is known, it can be used. HTML 5 provides mechanism whereby the location
+                    <td>If the geographic location (longitude, latitude and possibly altitude) of the user client is known, it can be used. HTML 5 provides mechanism whereby the location
                     of the client can be fetched. &xep0080; provides a mechanism whereby client location can be obtained over XMPP.</td>
                 </tr>
                 <tr>
@@ -1259,6 +1267,7 @@
                 <xs:element name='userName' type='userNameCredential'/>
                 <xs:element name='longitude' type='longitudeCredential'/>
                 <xs:element name='latitude' type='latitudeCredential'/>
+                <xs:element name='altitude' type='altitudeCredential'/>
                 <xs:element name='sso' type='ssoCredential'/>
                 <xs:element name='protocol' type='protocolCredential'/>
             </xs:choice>
@@ -1306,6 +1315,10 @@
     </xs:complexType>
  
     <xs:complexType name='latitudeCredential'>
+        <xs:attribute name='value' type='xs:double' use='required'/>
+    </xs:complexType>
+ 
+    <xs:complexType name='altitudeCredential'>
         <xs:attribute name='value' type='xs:double' use='required'/>
     </xs:complexType>
  

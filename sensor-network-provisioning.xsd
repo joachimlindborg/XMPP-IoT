@@ -98,6 +98,7 @@
 				<xs:element name='userName' type='userNameCredential'/>
 				<xs:element name='longitude' type='longitudeCredential'/>
 				<xs:element name='latitude' type='latitudeCredential'/>
+				<xs:element name='altitude' type='altitudeCredential'/>
 				<xs:element name='sso' type='ssoCredential'/>
 				<xs:element name='protocol' type='protocolCredential'/>
 			</xs:choice>
@@ -147,7 +148,11 @@
 	<xs:complexType name='latitudeCredential'>
 		<xs:attribute name='value' type='xs:double' use='required'/>
 	</xs:complexType>
- 
+
+	<xs:complexType name='altitudeCredential'>
+		<xs:attribute name='value' type='xs:double' use='required'/>
+	</xs:complexType>
+
 	<xs:complexType name='ssoCredential'>
 		<xs:attribute name='value' type='xs:string' use='required'/>
 	</xs:complexType>

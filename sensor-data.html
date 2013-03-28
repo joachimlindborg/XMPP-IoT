@@ -105,7 +105,7 @@
 				<td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EKH">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EWH">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0EDAAC">4</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EPAAC">5</a>].</td>
 			</tr>
 			<tr class="body">
-				<td colspan="" rowspan="">XEP-0000-Exi</td>
+				<td colspan="" rowspan="">exi</td>
 				<td colspan="" rowspan="">Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
 				in all sensor network implementations where memory and packet size is an issue.</td>
 			</tr>
@@ -138,7 +138,7 @@
 				<td colspan="" rowspan="">Defines how sensor data can be multicast in efficient ways.</td>
 			</tr>
 			<tr class="body">
-				<td colspan="" rowspan="">xep-0000-SN-Provisioning</td>
+				<td colspan="" rowspan="">sensor-network-provisioning</td>
 				<td colspan="" rowspan="">Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
 			</tr>
 			<tr class="body">
@@ -146,7 +146,7 @@
 				<td colspan="" rowspan="">Defines how efficient publication of sensor data can be made in sensor networks.</td>
 			</tr>
 			<tr class="body">
-				<td colspan="" rowspan="">xep-0000-SN-SensorData</td>
+				<td colspan="" rowspan="">sensor-data</td>
 				<td colspan="" rowspan="">This specification. Provides the underlying architecture, basic operations and data structures for sensor data communication over XMPP networks. 
 				It includes a hardware abstraction model, removing any technical detail implemented in underlying technologies. This XEP is used by all other sensor network XEPs.</td>
 			</tr>
@@ -360,7 +360,7 @@
 		</p>
 		<p class="" style="">
 			The device can also reject a read-out request. Reasons for rejecting a request may be missing privileges defined by provisioning rules, etc. It's not part of this XEP
-			to define such rules. A separate XEP (<a href="xep-0000-SN-Provisioning.html">xep-0000-SN-Provisioning</a>) defines an architecture for how such provisioning can be easily implemented.
+			to define such rules. A separate XEP (<a href="sensor-network-provisioning.html">sensor-network-provisioning</a>) defines an architecture for how such provisioning can be easily implemented.
 		</p>
 		<p class="" style="">
 			A rejection response is shown in the following diagram.
@@ -688,7 +688,6 @@
 			<p class="" style="">
 				The following example shows how the client cancels a scheduled read-out:
 			</p>
-
 			<p class="caption"><a name="example-9"></a>Example 9. Scheduled read-out of device with multiple responses</p>
       <div class="indent">
         <pre class="prettyprint">
@@ -1263,7 +1262,7 @@
 			</li>
 			<li class="" style="">
 				More advanced access rights, privileges, automatic friendship recognition, etc., may be managed by a third party. How to implement more advanced provisioning and detailed
-				access rights to sensor information is detailed in the XEP <a href="xep-0000-SN-Provisioning.html">xep-0000-SN-Provisioning</a>. In short, a device, service or user can get a
+				access rights to sensor information is detailed in the XEP <a href="sensor-network-provisioning.html">sensor-network-provisioning</a>. In short, a device, service or user can get a
 				<span class="strong">deviceToken</span>, <span class="strong">serviceToken</span> and <span class="strong">userToken</span> respectivelly from a provisioning server. The service or device then uses these tokens
 				in all readout requests and the device being read out can in turn use these tokens to validate access rights with the provisioning server.
 			</li>

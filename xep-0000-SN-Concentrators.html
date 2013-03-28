@@ -291,7 +291,7 @@
                 <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0ENDAC">5</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EZDAC">6</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0EFEAC">7</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EREAC">8</a>].</td>
             </tr>
             <tr class="body">
-                <td colspan="" rowspan="">XEP-0000-Exi</td>
+                <td colspan="" rowspan="">exi</td>
                 <td colspan="" rowspan="">
                     Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
                     in all sensor network implementations where memory and packet size is an issue.
@@ -326,7 +326,7 @@
                 <td colspan="" rowspan="">Defines how sensor data can be multicast in efficient ways.</td>
             </tr>
             <tr class="body">
-                <td colspan="" rowspan="">xep-0000-SN-Provisioning</td>
+                <td colspan="" rowspan="">sensor-network-provisioning</td>
                 <td colspan="" rowspan="">Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
             </tr>
             <tr class="body">
@@ -334,7 +334,7 @@
                 <td colspan="" rowspan="">Defines how efficient publication of sensor data can be made in sensor networks.</td>
             </tr>
             <tr class="body">
-                <td colspan="" rowspan="">xep-0000-SN-SensorData</td>
+                <td colspan="" rowspan="">sensor-data</td>
                 <td colspan="" rowspan="">
                     Provides the underlying architecture, basic operations and data structures for sensor data communication over XMPP networks.
                     It includes a hardware abstraction model, removing any technical detail implemented in underlying technologies. This XEP is used by all other sensor network XEPs.
@@ -3913,7 +3913,7 @@
         <h3>3.8.3 <a name="sect-ID0E3YAG">Start Database Readout</a></h3>
                 <p class="" style="">
                     Once the parameter form has been filled out, a database readout can be started using the <span class="strong">startDatabaseReadout</span> command.
-                    Data read from the concentrator will follow the same flow of sensor data as that described in <a href="xep-0000-SN-SensorData.html">xep-0000-SN-SensorData</a>
+                    Data read from the concentrator will follow the same flow of sensor data as that described in <a href="sensor-data.html">sensor-data</a>
                      [<a href="#nt-ID0EJZAG">10</a>]. The only difference is that the read-out is started with the <span class="strong">startDatabaseReadout</span> command instead of the <span class="strong">req</span>
                     command of the sensor data namespace.                    
                 </p>
@@ -4125,8 +4125,8 @@
             <div class="indent">
         <h3>3.8.5 <a name="sect-ID0E51AG">Cancelling a database read-out</a></h3>
                 <p class="" style="">
-                    A client can cancel a database read-out using the <a href="xep-0000-SN-SensorData.html#cancelreadout">cancel</a> read-out command,
-                    as described in <a href="xep-0000-SN-SensorData.html">xep-0000-SN-SensorData</a>.
+                    A client can cancel a database read-out using the <a href="sensor-data.html#cancelreadout">cancel</a> read-out command,
+                    as described in <a href="sensor-data.html">sensor-data</a>.
                 </p>
                 <p class="caption"><a name="example-81"></a>Example 81. Cancelling a database read-out</p>
         <div class="indent">
@@ -4288,7 +4288,7 @@
             </table>
       </div>
             <p class="" style="">
-                (*) See <a href="xep-0000-SN-SensorData.html">xep-0000-SN-SensorData</a> for more information about how to read nodes.
+                (*) See <a href="sensor-data.html">sensor-data</a> for more information about how to read nodes.
             </p>
             <p class="" style="">
                 (**) See <a href="xep-0000-SN-Control.html">xep-0000-SN-Control</a> for more information about how to configure nodes.
@@ -4622,7 +4622,7 @@
 		<div class="indent">
       <h3>6.2 <a name="sect-ID0EX1BG">Integration with provisioning servers</a></h3>
 			<p class="" style="">
-				The <a href="xep-0000-SN-Provisioning.html">xep-0000-SN-Provisioning</a> document describes how trust can be delegated to trusted provisioning servers
+				The <a href="sensor-network-provisioning.html">sensor-network-provisioning</a> document describes how trust can be delegated to trusted provisioning servers
 				that can be used to restrict access to and privileges in a network.
 			</p>
 			<p class="" style="">
@@ -4647,15 +4647,15 @@
 				</p>
 				<ul class="" style="">
 					<li class="" style="">
-						The user has a <span class="strong">userToken</span> it received during <a href="xep-0000-SN-Provisioning#usertoken">connection with the service</a>. This user token should
+						The user has a <span class="strong">userToken</span> it received during <a href="sensor-network-provisioning#usertoken">connection with the service</a>. This user token should
 						be included in all calls made by the user.
 					</li>
 					<li class="" style="">
-						The service has a <span class="strong">serviceToken</span> it received during <a href="xep-0000-SN-Provisioning#servicetoken">service registration</a>. This service token
+						The service has a <span class="strong">serviceToken</span> it received during <a href="sensor-network-provisioning#servicetoken">service registration</a>. This service token
 						should be aggregated by all calls made by the service.
 					</li>
 					<li class="" style="">
-						The concentrators should cache all calls made to the provisioning server according to available <a href="xep-0000-SN-Provisioning#cache">cache rules</a>.
+						The concentrators should cache all calls made to the provisioning server according to available <a href="sensor-network-provisioning#cache">cache rules</a>.
 					</li>
 					<li class="" style="">
 						The conversion of a Data Source ID to a Privilege ID should be performed according to rules defined in <a href="xep-0000-SN-Interoperability.html">xep-0000-SN-Interoperability</a>.
@@ -5489,7 +5489,7 @@
             <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
             Version: 0.0.1<br>
             Last Updated: 2013-03-20<br>
-                Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001, XEP-0004, XEP-0030, XEP-0122, XEP-0137, XEP-0141, xep-0000-SN-SensorData, xep-0000-SN-Provisioning, xep-0000-DynamicForms, xep-0000-ColorParameter<br>
+                Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001, XEP-0004, XEP-0030, XEP-0122, XEP-0137, XEP-0141, sensor-data, sensor-network-provisioning, xep-0000-DynamicForms, xep-0000-ColorParameter<br>
                 Supersedes: None<br>
                 Superseded By: None<br>
             Short Name: NOT_YET_ASSIGNED<br>
@@ -5534,9 +5534,9 @@
                         XEP-xxxx: Dynamic Data Forms &lt;<a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms.html</a>&gt;
                     </p>
       <p><a name="nt-ID0EJZAG">10</a>. 
-                        XEP-xxxx: Sensor Data <a href="xep-0000-SN-SensorData.html">xep-0000-SN-SensorData</a>
+                        XEP-xxxx: Sensor Data <a href="sensor-data.html">sensor-data</a>
                     </p>
-      <p><a name="nt-ID0EWZBG">11</a>. XEP-xxxx: Provisioning <a href="xep-0000-SN-Provisioning.html">xep-0000-SN-Provisioning</a></p>
+      <p><a name="nt-ID0EWZBG">11</a>. XEP-xxxx: Provisioning <a href="sensor-network-provisioning.html">sensor-network-provisioning</a></p>
       <p><a name="nt-ID0EJAAI">12</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
