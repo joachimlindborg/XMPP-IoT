@@ -43,7 +43,7 @@ xep-0000-SN-Interoperability
 xep-0000-SN-Multicast
 		Defines how sensor data can be multicast in efficient ways.
 
-[sensor-network-provisioning](httphttp://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-SN/blob/master/sensor-network-provisioning.html)
+[sensor-network-provisioning](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-SN/blob/master/sensor-network-provisioning.html)
 		This specification. Defines how provisioning, the management of
 		access privileges, etc., can be efficiently and easily 
 		implemented.
