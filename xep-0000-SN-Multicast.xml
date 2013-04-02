@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- TODO: MUC -->
+<!-- http://xmpp.org/extensions/xep-0033.html -->
 <!DOCTYPE xep SYSTEM 'xep.dtd' [
   <!ENTITY % ents SYSTEM 'xep.ent'>
 %ents;
