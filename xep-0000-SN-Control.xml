@@ -1,7 +1,4 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- TODO: When written, complete provisioning XEP -->
-<!-- TODO: Multi-node-config -->
-<!-- TODO: Restricting access to Configurable parameters per node and contact-->
 <!DOCTYPE xep SYSTEM 'xep.dtd' [
     <!ENTITY % ents SYSTEM 'xep.ent'>
     %ents;
@@ -298,7 +295,8 @@
                 <![CDATA[
    <message from='master@clayster.com/amr'
             to='device@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control' nodeId='DigitalOutput1'>
+      <set xmlns='urn:xmpp:sn:control'>
+         <node nodeId='DigitalOutput1'/>
          <boolean name='Output' value='true'/>
       </set>
    </message>]]>
@@ -318,7 +316,8 @@
        from='master@clayster.com/amr'
        to='device@clayster.com'
        id='1'>
-      <set xmlns='urn:xmpp:sn:control' nodeId='DigitalOutput1'>
+      <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
+         <node nodeId='DigitalOutput1'/>
          <boolean name='Output' value='true'/>
       </set>
    </iq>
@@ -345,7 +344,8 @@
        from='master@clayster.com/amr'
        to='device@clayster.com'
        id='2'>
-      <set xmlns='urn:xmpp:sn:control' nodeId='AnalogOutput1'>
+      <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
+         <node nodeId='AnalogOutput1'/>
          <boolean name='Output' value='true'/>
       </set>
    </iq>
@@ -373,7 +373,8 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='device@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control' nodeId='DigitalOutput1'>
+      <set xmlns='urn:xmpp:sn:control'>
+         <node nodeId='DigitalOutput1'/>
          <boolean name='Output' value='true'/>
       </set>
    </message>]]>
@@ -388,7 +389,8 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='device@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control' nodeId='AnalogOutput1'>
+      <set xmlns='urn:xmpp:sn:control'>
+         <node nodeId='AnalogOutput1'/>
          <int name='Output' value='50000'/>
       </set>
    </message>]]>
@@ -404,7 +406,8 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='device@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control' nodeId='MegaPrecisionAnalogOutput1'>
+      <set xmlns='urn:xmpp:sn:control'>
+         <node nodeId='MegaPrecisionAnalogOutput1'/>
          <long name='Output' value='500000000000000'/>
       </set>
    </message>]]>
@@ -419,7 +422,8 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='device@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control' nodeId='TextDisplay'>
+      <set xmlns='urn:xmpp:sn:control'>
+         <node nodeId='TextDisplay'/>
          <string name='Row1' value='Temperature: 21.4 °C'/>
       </set>
    </message>]]>
@@ -434,7 +438,8 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='device@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control' nodeId='AnalogOutput2'>
+      <set xmlns='urn:xmpp:sn:control'>
+         <node nodeId='AnalogOutput2'/>
          <double name='4-20mA' value='8.192'/>
       </set>
    </message>]]>
@@ -449,7 +454,8 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='device@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control' nodeId='Alarm'>
+      <set xmlns='urn:xmpp:sn:control'>
+         <node nodeId='Alarm'/>
          <dateTime name='Alarm Time' value='2013-04-02T08:00:00'/>
       </set>
    </message>]]>
@@ -464,7 +470,8 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='device@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control' nodeId='Alarm'>
+      <set xmlns='urn:xmpp:sn:control'>
+         <node nodeId='Alarm'/>
          <time name='Alarm Time' value='08:00:00'/>
       </set>
    </message>]]>
@@ -479,7 +486,8 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='device@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control' nodeId='Alarm'>
+      <set xmlns='urn:xmpp:sn:control'>
+         <node nodeId='Alarm'/>
          <duration name='Alarm Duration' value='PT3M30S'/>
       </set>
    </message>]]>
@@ -494,7 +502,8 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='device@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control' nodeId='SpotLight'>
+      <set xmlns='urn:xmpp:sn:control'>
+         <node nodeId='SpotLight'/>
          <color name='Color' value='3399FF'/>
       </set>
    </message>]]>
@@ -510,7 +519,8 @@
                 <![CDATA[
    <message from='master@clayster.com/amr'
             to='device@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control' nodeId='Dimmer'>
+      <set xmlns='urn:xmpp:sn:control'>
+         <node nodeId='Dimmer'/>
          <int name='FadeTimeMilliseconds' value='500'/>
          <int name='OutputPercent' value='10'/>
       </set>
@@ -632,10 +642,138 @@
         </section2>
         <section2 topic='Setting a (partial) control form'>
             <p>
-                Control actions can be requested by sending a full or partial control form back to the device. Control parameters not edited MUST not be included
+                Control actions can be requested by submitting a full or partial control form back to the device. Control parameters not edited MUST not be included
                 in the form, and the device in turn MUST ONLY invoke control actions corresponding to the parameters returned in the form.
             </p>
-            <!-- TODO -->
+            <p>
+                The following example shows how control actions can be requested submitting a control parameters form to the device:
+            </p>
+            <example caption='Setting a (partial) control form'>
+                <![CDATA[
+   <iq type='set'
+       from='master@clayster.com/amr'
+       to='device@clayster.com'
+       id='5'>
+      <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
+          <node nodeId='Dimmer'/>
+          <x type='submit' xmlns='jabber:x:data'>
+              <field var='xdd session' type='hidden'>
+                  <value>325ED0F3-9A9A-45A4-9634-4E0D41C5EA06</value>
+              </field>
+              <field var='FadeTimeMilliseconds' type='text-single'>
+                  <value>500</value>
+              </field>
+              <field var='OutputPercent' type='text-single'>
+                  <value>10</value>
+              </field>
+          </x>
+      </set>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com/client'
+       id='5'>
+      <setResponse xmlns='urn:xmpp:sn:control' responseCode='OK'/>
+   </iq>]]>
+            </example>
+            <p>
+                In this example, the FadeTimeMilliseconds and OutputPercent control parameters are sent, while the MainSwitch control parameter is left as is. Fading is therefore
+                parformed only if the dimmer is switched on.
+            </p>
+        </section2>
+        <section2 topic='Setting a (partial) control form, Failure'>
+            <p>
+                A device can reject a control form submission. It does this returning an <strong>error</strong> iq stanza, and detailing the error in the <strong>result</strong>
+                attribute of the <strong>setResponse</strong> element. If there are errors in the form, details are listed using <strong>error</strong> elements in the response, 
+                as is shown in the following example:
+            </p>
+            <example caption='Setting a (partial) control form, Failure'>
+                <![CDATA[
+   <iq type='set'
+       from='master@clayster.com/amr'
+       to='device@clayster.com'
+       id='6'>
+      <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
+          <node nodeId='Dimmer'/>
+          <x type='submit' xmlns='jabber:x:data'>
+              <field var='xdd session' type='hidden'>
+                  <value>325ED0F3-9A9A-45A4-9634-4E0D41C5EA06</value>
+              </field>
+              <field var='FadeTimeMilliseconds' type='text-single'>
+                  <value>500</value>
+              </field>
+              <field var='OutputPercent' type='text-single'>
+                  <value>200</value>
+              </field>
+          </x>
+      </set>
+   </iq>
+   
+   <iq type='error'
+       from='concentrator@clayster.com'
+       to='client@clayster.com/client'
+       id='6'>
+      <setResponse xmlns='urn:xmpp:sn:control' responseCode='FormError'>
+          <error var='OutputPercent'>Invalid parameter value.</error>
+      </setResponse>
+   </iq>]]>
+            </example>
+        </section2>
+        <section2 topic='Sending a control command to multiple nodes'>
+            <p>
+                The client can send the same control command to multiple nodes by simply adding more <strong>node</strong> elements in the request,
+                as is shown in the following example:
+            </p>
+            <example caption='Sending a control command to multiple nodes'>
+                <![CDATA[
+   <message from='master@clayster.com/amr'
+            to='device@clayster.com'>
+      <set xmlns='urn:xmpp:sn:control'>
+         <node nodeId='DigitalOutput1'/>
+         <node nodeId='DigitalOutput2'/>
+         <node nodeId='DigitalOutput3'/>
+         <node nodeId='DigitalOutput4'/>
+         <boolean name='Output' value='false'/>
+      </set>
+   </message>]]>
+            </example>
+        </section2>
+        <section2 topic='Sending a control command to multiple nodes, Failure'>
+            <p>
+                By using an IQ stanza, the caller can receive an acknowledgement of the reception of the command, or error information if the command could not be processed.
+                When sending a control command to multiple nodes at a time the device must validate all parameters against all nodes before taking any control action. If
+                validation fails, an error message is returned and no control action is taken. The following example shows an example of an erroneous control message made to 
+                multiple nodes on a device:
+            </p>
+            <example caption='Sending a control command to multiple nodes, Failure'>
+                <![CDATA[
+   <iq type='set'
+       from='master@clayster.com/amr'
+       to='device@clayster.com'
+       id='7'>
+      <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
+         <node nodeId='DigitalOutput1'/>
+         <node nodeId='DigitalOutput2'/>
+         <node nodeId='DigitalOutput3'/>
+         <node nodeId='DigitalOutput4'/>
+         <node nodeId='AnalogOutput1'/>
+         <node nodeId='AnalogOutput2'/>
+         <node nodeId='AnalogOutput3'/>
+         <node nodeId='AnalogOutput4'/>
+         <boolean name='Output' value='true'/>
+      </set>
+   </iq>
+   
+   <iq type='error'
+       from='device@clayster.com'
+       to='master@clayster.com/amr'
+       id='7'>
+      <setResponse xmlns='urn:xmpp:sn:control' responseCode='OtherError'>
+          <error var='Output'>Invalid parameter type.</error>
+      </setResponse>
+   </iq>]]>
+            </example>
         </section2>
     </section1>
     <section1 topic='Implementation Notes' anchor='impl'>
@@ -657,12 +795,15 @@
         <section2 topic='Data Sources &amp; Cache Types'>
             <!-- TODO -->
         </section2>
+        <!-- TODO: When written, complete provisioning XEP -->
+        <!-- TODO: Restricting access to Configurable parameters per node and contact-->
     </section1>
     <section1 topic='Accessibility Considerations' anchor='access'>
         <p>OPTIONAL.</p>
     </section1>
     <section1 topic='Internationalization Considerations' anchor='i18n'>
         <p>OPTIONAL.</p>
+        <!-- TODO: xml:lang if using IQ instead of message, since error messages can be localized. -->
     </section1>
     <section1 topic='Security Considerations' anchor='security'>
         <p>REQUIRED.</p>
@@ -695,6 +836,11 @@
     <xs:element name='set'>
         <xs:complexType>
             <xs:choice minOccurs='0' maxOccurs='unbounded'>
+                <xs:element name='node'>
+                    <xs:complexType>
+                        <xs:attributeGroup ref='nodeReference'/>
+                    </xs:complexType>
+                </xs:element>
                 <xs:element name='boolean' type='BooleanParameter'/>
                 <xs:element name='color' type='ColorParameter'/>
                 <xs:element name='dateTime' type='DateTimeParameter'/>
@@ -712,7 +858,6 @@
                     </xs:complexType>
                 </xs:element>
             </xs:choice>
-            <xs:attributeGroup ref='nodeReference'/>
             <xs:attributeGroup ref='tokens'/>
         </xs:complexType>
     </xs:element>

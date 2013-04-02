@@ -17,6 +17,11 @@
 	<xs:element name='set'>
 		<xs:complexType>
 			<xs:choice minOccurs='0' maxOccurs='unbounded'>
+				<xs:element name='node'>
+					<xs:complexType>
+						<xs:attributeGroup ref='nodeReference'/>
+					</xs:complexType>
+				</xs:element>
 				<xs:element name='boolean' type='BooleanParameter'/>
 				<xs:element name='color' type='ColorParameter'/>
 				<xs:element name='dateTime' type='DateTimeParameter'/>
@@ -34,7 +39,6 @@
 					</xs:complexType>
 				</xs:element>
 			</xs:choice>
-			<xs:attributeGroup ref='nodeReference'/>
 			<xs:attributeGroup ref='tokens'/>
 		</xs:complexType>
 	</xs:element>
