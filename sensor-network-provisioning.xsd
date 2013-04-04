@@ -11,72 +11,16 @@
 	<xs:element name='getToken' type='GetToken'/>
 	<xs:element name='getTokenResponse' type='GetTokenResponse'/>
  
-	<xs:complexType name='GetToken'>
-		<xs:attribute name='deviceId' type='xs:string' use='optional'/>
-		<xs:attribute name='serviceId' type='xs:string' use='optional'/>
-	</xs:complexType>
- 
-	<xs:complexType name='GetTokenResponse'>
-		<xs:attribute name='token' type='xs:string' use='required'/>
-	</xs:complexType>
- 
 	<xs:element name='isFriend' type='Friend'/>
 	<xs:element name='isFriendResponse' type='FriendResponse'/>
 	<xs:element name='unfriend' type='Friend'/>
 	<xs:element name='Friend' type='Friend'/>
  
-	<xs:complexType name='Friend'>
-		<xs:attribute name='jid' type='xs:string' use='required'/>
-	</xs:complexType>
-
-	<xs:complexType name='FriendResponse'>
-		<xs:complexContent>
-			<xs:extension base='Friend'>
-				<xs:attribute name='result' type='xs:boolean' use='required'/>
-				<xs:attribute name='secondaryTrustAllowed' type='xs:boolean' use='optional' default='false'/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
- 
 	<xs:element name='canRead' type='CanRead'/>
 	<xs:element name='canReadResponse' type='CanReadResponse'/>
  
-	<xs:complexType name='CanReadBase' abstract='true'>
-		<xs:choice minOccurs='0' maxOccurs='unbounded'>
-			<xs:element name='node'>
-				<xs:complexType>
-					<xs:attribute name='nodeId' type='xs:string' use='required'/>
-					<xs:attribute name='sourceId' type='xs:string' use='optional'/>
-					<xs:attribute name='cacheType' type='xs:string' use='optional'/>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name='field'>
-				<xs:complexType>
-					<xs:attribute name='name' type='xs:string' use='required'/>
-				</xs:complexType>
-			</xs:element>
-		</xs:choice>
-		<xs:attributeGroup ref='sn:fieldTypes'/>
-		<xs:attribute name='all' type='xs:boolean' use='optional' default='false'/>
-		<xs:attribute name='historical' type='xs:boolean' use='optional' default='false'/>
-		<xs:attribute name='jid' type='xs:string' use='required'/>
-	</xs:complexType>
-
-	<xs:complexType name='CanRead'>
-		<xs:complexContent>
-			<xs:extension base='CanReadBase'>
-				<xs:attribute name='token' type='xs:string' use='optional'/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:complexType name='CanReadResponse'>
-		<xs:complexContent>
-			<xs:extension base='CanReadBase'>
-				<xs:attribute name='result' type='xs:boolean' use='required'/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
+	<xs:element name='canControl' type='CanControl'/>
+	<xs:element name='canControlResponse' type='CanControlResponse'/>
  
 	<xs:element name='clearCache'>
 		<xs:complexType/>
@@ -89,18 +33,18 @@
 	<xs:element name='canAccess'>
 		<xs:complexType>
 			<xs:choice minOccurs='0' maxOccurs='unbounded'>
-				<xs:element name='jid' type='jidCredential'/>
-				<xs:element name='ip4' type='ip4Credential'/>
-				<xs:element name='ip6' type='ip6Credential'/>
-				<xs:element name='hostName' type='hostNameCredential'/>
-				<xs:element name='x509Certificate' type='x509CertificateCredential'/>
-				<xs:element name='x509CertificateThumbprint' type='x509CertificateThumbprintCredential'/>
-				<xs:element name='userName' type='userNameCredential'/>
-				<xs:element name='longitude' type='longitudeCredential'/>
-				<xs:element name='latitude' type='latitudeCredential'/>
-				<xs:element name='altitude' type='altitudeCredential'/>
-				<xs:element name='sso' type='ssoCredential'/>
-				<xs:element name='protocol' type='protocolCredential'/>
+				<xs:element name='jid' type='JidCredential'/>
+				<xs:element name='ip4' type='Ip4Credential'/>
+				<xs:element name='ip6' type='Ip6Credential'/>
+				<xs:element name='hostName' type='HostNameCredential'/>
+				<xs:element name='x509Certificate' type='X509CertificateCredential'/>
+				<xs:element name='x509CertificateThumbprint' type='X509CertificateThumbprintCredential'/>
+				<xs:element name='userName' type='UserNameCredential'/>
+				<xs:element name='longitude' type='LongitudeCredential'/>
+				<xs:element name='latitude' type='LatitudeCredential'/>
+				<xs:element name='altitude' type='AltitudeCredential'/>
+				<xs:element name='sso' type='SsoCredential'/>
+				<xs:element name='protocol' type='ProtocolCredential'/>
 			</xs:choice>
 			<xs:attribute name='serviceToken' type='xs:string' use='required'/>
 		</xs:complexType>
@@ -112,67 +56,6 @@
 			<xs:attribute name='userToken' type='xs:string' use='optional'/>
 		</xs:complexType>
 	</xs:element>
- 
-	<xs:complexType name='jidCredential'>
-		<xs:attribute name='value' type='xs:string' use='required'/>
-	</xs:complexType>
- 
-	<xs:complexType name='ip4Credential'>
-		<xs:attribute name='value' type='xs:string' use='required'/>
-	</xs:complexType>
- 
-	<xs:complexType name='ip6Credential'>
-		<xs:attribute name='value' type='xs:string' use='required'/>
-	</xs:complexType>
- 
-	<xs:complexType name='hostNameCredential'>
-		<xs:attribute name='value' type='xs:string' use='required'/>
-	</xs:complexType>
- 
-	<xs:complexType name='x509CertificateCredential'>
-		<xs:attribute name='base64' type='xs:string' use='required'/>
-	</xs:complexType>
- 
-	<xs:complexType name='x509CertificateThumbprintCredential'>
-		<xs:attribute name='base64' type='xs:string' use='required'/>
-	</xs:complexType>
- 
-	<xs:complexType name='userNameCredential'>
-		<xs:attribute name='value' type='xs:string' use='required'/>
-	</xs:complexType>
- 
-	<xs:complexType name='longitudeCredential'>
-		<xs:attribute name='value' type='xs:double' use='required'/>
-	</xs:complexType>
- 
-	<xs:complexType name='latitudeCredential'>
-		<xs:attribute name='value' type='xs:double' use='required'/>
-	</xs:complexType>
-
-	<xs:complexType name='altitudeCredential'>
-		<xs:attribute name='value' type='xs:double' use='required'/>
-	</xs:complexType>
-
-	<xs:complexType name='ssoCredential'>
-		<xs:attribute name='value' type='xs:string' use='required'/>
-	</xs:complexType>
- 
-	<xs:complexType name='protocolCredential'>
-		<xs:attribute name='value' type='ProtocolName' use='required'/>
-	</xs:complexType>
- 
-	<xs:simpleType name='ProtocolName'>
-		<xs:restriction base='xs:string'>
-			<xs:enumeration value='XMPP'/>
-			<xs:enumeration value='HTTP'/>
-			<xs:enumeration value='HTTPS'/>
-			<xs:enumeration value='TcpSocket'/>
-			<xs:enumeration value='UdpSocket'/>
-			<xs:enumeration value='Queue'/>
-			<xs:enumeration value='Internal'/>
-			<xs:enumeration value='Other'/>
-		</xs:restriction>
-	</xs:simpleType>
  
 	<xs:element name='userLoggedIn'>
 		<xs:complexType>
@@ -196,12 +79,6 @@
 		</xs:complexType>
 	</xs:element>
  
-	<xs:simpleType name='PrivilegeId'>
-		<xs:restriction base='xs:string'>
-			<xs:pattern value='^[^.]+([.][^.]+)*$'/>
-		</xs:restriction>		
-	</xs:simpleType>
- 
 	<xs:element name='downloadPrivileges'>
 		<xs:complexType>
 			<xs:attribute name='serviceToken' type='xs:string' use='required'/>
@@ -218,8 +95,168 @@
 		</xs:complexType>
 	</xs:element>
  
+	<xs:complexType name='GetToken'>
+		<xs:attribute name='deviceId' type='xs:string' use='optional'/>
+		<xs:attribute name='serviceId' type='xs:string' use='optional'/>
+	</xs:complexType>
+  
+	<xs:complexType name='GetTokenResponse'>
+		<xs:attribute name='token' type='xs:string' use='required'/>
+	</xs:complexType>
+  
+	<xs:complexType name='Friend'>
+		<xs:attribute name='jid' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='FriendResponse'>
+		<xs:complexContent>
+			<xs:extension base='Friend'>
+				<xs:attribute name='result' type='xs:boolean' use='required'/>
+				<xs:attribute name='secondaryTrustAllowed' type='xs:boolean' use='optional' default='false'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+ 
+	<xs:complexType name='CanReadBase' abstract='true'>
+		<xs:choice minOccurs='0' maxOccurs='unbounded'>
+			<xs:element name='node'>
+				<xs:complexType>
+					<xs:attribute name='nodeId' type='xs:string' use='required'/>
+					<xs:attribute name='sourceId' type='xs:string' use='optional'/>
+					<xs:attribute name='cacheType' type='xs:string' use='optional'/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name='field'>
+				<xs:complexType>
+					<xs:attribute name='name' type='xs:string' use='required'/>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+		<xs:attributeGroup ref='sn:fieldTypes'/>
+		<xs:attribute name='all' type='xs:boolean' use='optional' default='false'/>
+		<xs:attribute name='historical' type='xs:boolean' use='optional' default='false'/>
+		<xs:attribute name='jid' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='CanRead'>
+		<xs:complexContent>
+			<xs:extension base='CanReadBase'>
+				<xs:attribute name='token' type='xs:string' use='optional'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+ 
+	<xs:complexType name='CanReadResponse'>
+		<xs:complexContent>
+			<xs:extension base='CanReadBase'>
+				<xs:attribute name='result' type='xs:boolean' use='required'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+ 
+	<xs:complexType name='CanControlBase' abstract='true'>
+		<xs:choice minOccurs='0' maxOccurs='unbounded'>
+			<xs:element name='node'>
+				<xs:complexType>
+					<xs:attribute name='nodeId' type='xs:string' use='required'/>
+					<xs:attribute name='sourceId' type='xs:string' use='optional'/>
+					<xs:attribute name='cacheType' type='xs:string' use='optional'/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name='parameter'>
+				<xs:complexType>
+					<xs:attribute name='name' type='xs:string' use='required'/>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute name='jid' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='CanControl'>
+		<xs:complexContent>
+			<xs:extension base='CanControlBase'>
+				<xs:attribute name='token' type='xs:string' use='optional'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+ 
+	<xs:complexType name='CanControlResponse'>
+		<xs:complexContent>
+			<xs:extension base='CanControlBase'>
+				<xs:attribute name='result' type='xs:boolean' use='required'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+ 
+	<xs:complexType name='JidCredential'>
+		<xs:attribute name='value' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='Ip4Credential'>
+		<xs:attribute name='value' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='Ip6Credential'>
+		<xs:attribute name='value' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='HostNameCredential'>
+		<xs:attribute name='value' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='X509CertificateCredential'>
+		<xs:attribute name='base64' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='X509CertificateThumbprintCredential'>
+		<xs:attribute name='base64' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='UserNameCredential'>
+		<xs:attribute name='value' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='LongitudeCredential'>
+		<xs:attribute name='value' type='xs:double' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='LatitudeCredential'>
+		<xs:attribute name='value' type='xs:double' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='AltitudeCredential'>
+		<xs:attribute name='value' type='xs:double' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='SsoCredential'>
+		<xs:attribute name='value' type='xs:string' use='required'/>
+	</xs:complexType>
+ 
+	<xs:complexType name='ProtocolCredential'>
+		<xs:attribute name='value' type='ProtocolName' use='required'/>
+	</xs:complexType>
+ 
 	<xs:complexType name='Privilege'>
 		<xs:attribute name='id' type='PrivilegeId' use='required'/>
 	</xs:complexType>
+ 
+	<xs:simpleType name='ProtocolName'>
+		<xs:restriction base='xs:string'>
+			<xs:enumeration value='XMPP'/>
+			<xs:enumeration value='HTTP'/>
+			<xs:enumeration value='HTTPS'/>
+			<xs:enumeration value='TcpSocket'/>
+			<xs:enumeration value='UdpSocket'/>
+			<xs:enumeration value='Queue'/>
+			<xs:enumeration value='Internal'/>
+			<xs:enumeration value='Other'/>
+		</xs:restriction>
+	</xs:simpleType>
+ 
+	<xs:simpleType name='PrivilegeId'>
+		<xs:restriction base='xs:string'>
+			<xs:pattern value='^[^.]+([.][^.]+)*$'/>
+		</xs:restriction>		
+	</xs:simpleType>
  
 </xs:schema>

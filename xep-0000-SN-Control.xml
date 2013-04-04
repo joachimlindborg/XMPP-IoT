@@ -287,80 +287,86 @@
                 XEP-xxxx: Sensor Networks - Interoperability &lt;<link url='xep-0000-SN-Interoperability.html'>xep-0000-SN-Interoperability.html</link>&gt;
             </note>.
         </p>
-        <section2 topic='Sending a control command using a message stanza'>
-            <p>
-                Following is an example of a control command sent using a message stanza:
-            </p>
-            <example caption='Message stanza for setting a value'>
-                <![CDATA[
+        <p>
+            If the device is a concentrator, as defined in
+            <note>
+                XEP-xxxx: Sensor Networks - Concentrators &lt;<link url='xep-0000-SN-Concentrators.html'>xep-0000-SN-Concentrators.html</link>&gt;
+            </note>, an handles multiple nodes behind it, which node(s) to control is defined using <strong>node</strong> elements. If not a concentrator,
+            the use of <strong>node</strong> elements is not necessary, and control commands are sent directly to the device itself.
+        </p>
+        <section2 topic='Control commands'>
+            <section3 topic='Sending a control command using a message stanza'>
+                <p>
+                    Following is an example of a control command sent using a message stanza:
+                </p>
+                <example caption='Message stanza for setting a value'>
+                    <![CDATA[
    <message from='master@clayster.com/amr'
-            to='device@clayster.com'>
+            to='digital.output@clayster.com'>
       <set xmlns='urn:xmpp:sn:control'>
-         <node nodeId='DigitalOutput1'/>
          <boolean name='Output' value='true'/>
       </set>
    </message>]]>
-            </example>
-            <p>
-                Note that any response is supressed when sending a message stanza, regardless if the desired control command could be executed or not. The following example shows how the same
-                control command could be issued using an IQ stanza instead:
-            </p>
-        </section2>
-        <section2 topic='Sending a control command using an IQ stanza'>
-            <p>
-                Following is an example of a control command sent using an iq stanza:
-            </p>
-            <example caption='IQ stanza for setting a value'>
-                <![CDATA[
+                </example>
+                <p>
+                    Note that any response is supressed when sending a message stanza, regardless if the desired control command could be executed or not. The following example shows how the same
+                    control command could be issued using an IQ stanza instead:
+                </p>
+            </section3>
+            <section3 topic='Sending a control command using an IQ stanza'>
+                <p>
+                    Following is an example of a control command sent using an iq stanza:
+                </p>
+                <example caption='IQ stanza for setting a value'>
+                    <![CDATA[
    <iq type='set'
        from='master@clayster.com/amr'
-       to='device@clayster.com'
+       to='digital.output@clayster.com'
        id='1'>
       <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
-         <node nodeId='DigitalOutput1'/>
          <boolean name='Output' value='true'/>
       </set>
    </iq>
    
    <iq type='result'
-       from='device@clayster.com'
+       from='digital.output@clayster.com'
        to='master@clayster.com/amr'
        id='1'>
       <setResponse xmlns='urn:xmpp:sn:control' responseCode='OK'/>
    </iq>]]>
-            </example>
-            <p>
-                In the following use cases, often a message stanza will be used to illustrate the point. However, the same operation could equally well be used using an iq stanza instead.
-            </p>
-        </section2>
-        <section2 topic='Control failure response'>
-            <p>
-                By using an IQ stanza, the caller can receive an acknowledgement of the reception of the command, or error information if the command could not be processed.
-                Following is an example of a control command sent using an iq stanza, where the receiver reports an error back to the caller:
-            </p>
-            <example caption='Control failure response'>
-                <![CDATA[
+                </example>
+                <p>
+                    In the following use cases, often a message stanza will be used to illustrate the point. However, the same operation could equally well be used using an iq stanza instead.
+                </p>
+            </section3>
+            <section3 topic='Control failure response'>
+                <p>
+                    By using an IQ stanza, the caller can receive an acknowledgement of the reception of the command, or error information if the command could not be processed.
+                    Following is an example of a control command sent using an iq stanza, where the receiver reports an error back to the caller:
+                </p>
+                <example caption='Control failure response'>
+                    <![CDATA[
    <iq type='set'
        from='master@clayster.com/amr'
-       to='device@clayster.com'
+       to='analog.output@clayster.com'
        id='2'>
       <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
-         <node nodeId='AnalogOutput1'/>
          <boolean name='Output' value='true'/>
       </set>
    </iq>
    
    <iq type='error'
-       from='device@clayster.com'
+       from='analog.output@clayster.com'
        to='master@clayster.com/amr'
        id='2'>
       <setResponse xmlns='urn:xmpp:sn:control' responseCode='OtherError'>
           <error var='Output'>Invalid parameter type.</error>
       </setResponse>
    </iq>]]>
-            </example>
+                </example>
+            </section3>
         </section2>
-        <section2 topic='Setting single values'>
+        <section2 topic='Setting control parameters'>
             <p>
                 The following sub-sections illustrate how to set parameters of different types in a device.
             </p>
@@ -372,9 +378,8 @@
                 <example caption='Setting a single boolean-valued control parameter'>
                     <![CDATA[
    <message from='master@clayster.com/amr'
-            to='device@clayster.com'>
+            to='digital.output@clayster.com'>
       <set xmlns='urn:xmpp:sn:control'>
-         <node nodeId='DigitalOutput1'/>
          <boolean name='Output' value='true'/>
       </set>
    </message>]]>
@@ -388,9 +393,8 @@
                 <example caption='Setting a single 32-bit integer-valued control parameter'>
                     <![CDATA[
    <message from='master@clayster.com/amr'
-            to='device@clayster.com'>
+            to='analog.output@clayster.com'>
       <set xmlns='urn:xmpp:sn:control'>
-         <node nodeId='AnalogOutput1'/>
          <int name='Output' value='50000'/>
       </set>
    </message>]]>
@@ -405,9 +409,8 @@
                 <example caption='Setting a single 64-bit integer-valued control parameter'>
                     <![CDATA[
    <message from='master@clayster.com/amr'
-            to='device@clayster.com'>
+            to='megaprecision.analog.output@clayster.com'>
       <set xmlns='urn:xmpp:sn:control'>
-         <node nodeId='MegaPrecisionAnalogOutput1'/>
          <long name='Output' value='500000000000000'/>
       </set>
    </message>]]>
@@ -421,9 +424,8 @@
                 <example caption='Setting a single string-valued control parameter'>
                     <![CDATA[
    <message from='master@clayster.com/amr'
-            to='device@clayster.com'>
+            to='text.display@clayster.com'>
       <set xmlns='urn:xmpp:sn:control'>
-         <node nodeId='TextDisplay'/>
          <string name='Row1' value='Temperature: 21.4 °C'/>
       </set>
    </message>]]>
@@ -437,10 +439,39 @@
                 <example caption='Setting a single double-valued control parameter'>
                     <![CDATA[
    <message from='master@clayster.com/amr'
-            to='device@clayster.com'>
+            to='analog.output2@clayster.com'>
       <set xmlns='urn:xmpp:sn:control'>
-         <node nodeId='AnalogOutput2'/>
          <double name='4-20mA' value='8.192'/>
+      </set>
+   </message>]]>
+                </example>
+            </section3>
+            <section3 topic='Setting a single date-valued control parameter'>
+                <p>
+                    Setting date-valued control parameters might be necessary when timing is an issue. Often it forms part of a larger context.
+                    The following example shows how a date value can be set in a device.
+                </p>
+                <example caption='Setting a single date-valued control parameter'>
+                    <![CDATA[
+   <message from='master@clayster.com/amr'
+            to='alarm@clayster.com'>
+      <set xmlns='urn:xmpp:sn:control'>
+         <date name='TariffStartDate' value='2013-05-01'/>
+      </set>
+   </message>]]>
+                </example>
+            </section3>
+            <section3 topic='Setting a single time-valued control parameter'>
+                <p>
+                    Setting time-valued control parameters might be necessary when timing is an issue. Often it forms part of a larger context.
+                    The following example shows how a time value can be set in a device.
+                </p>
+                <example caption='Setting a single time-valued control parameter'>
+                    <![CDATA[
+   <message from='master@clayster.com/amr'
+            to='alarm@clayster.com'>
+      <set xmlns='urn:xmpp:sn:control'>
+         <time name='Alarm Time' value='08:00:00'/>
       </set>
    </message>]]>
                 </example>
@@ -453,9 +484,8 @@
                 <example caption='Setting a single date &amp; time-valued control parameter'>
                     <![CDATA[
    <message from='master@clayster.com/amr'
-            to='device@clayster.com'>
+            to='alarm@clayster.com'>
       <set xmlns='urn:xmpp:sn:control'>
-         <node nodeId='Alarm'/>
          <dateTime name='Alarm Time' value='2013-04-02T08:00:00'/>
       </set>
    </message>]]>
@@ -469,9 +499,8 @@
                 <example caption='Setting a single time-valued control parameter'>
                     <![CDATA[
    <message from='master@clayster.com/amr'
-            to='device@clayster.com'>
+            to='alarm@clayster.com'>
       <set xmlns='urn:xmpp:sn:control'>
-         <node nodeId='Alarm'/>
          <time name='Alarm Time' value='08:00:00'/>
       </set>
    </message>]]>
@@ -485,9 +514,8 @@
                 <example caption='Setting a single duration-valued control parameter'>
                     <![CDATA[
    <message from='master@clayster.com/amr'
-            to='device@clayster.com'>
+            to='alarm@clayster.com'>
       <set xmlns='urn:xmpp:sn:control'>
-         <node nodeId='Alarm'/>
          <duration name='Alarm Duration' value='PT3M30S'/>
       </set>
    </message>]]>
@@ -495,65 +523,64 @@
             </section3>
             <section3 topic='Setting a single color-valued control parameter'>
                 <p>
-                    Setting single color values in a device can occur in instances where color or lighting is important. Sometimes color is set using enumerations (string-valued 
+                    Setting single color values in a device can occur in instances where color or lighting is important. Sometimes color is set using enumerations (string-valued
                     or integer-valued parameters), and sometimes as a color property. The following example shows how a color value can be set in a device.
                 </p>
                 <example caption='Setting a single color-valued control parameter'>
                     <![CDATA[
    <message from='master@clayster.com/amr'
-            to='device@clayster.com'>
+            to='spotlight@clayster.com'>
       <set xmlns='urn:xmpp:sn:control'>
-         <node nodeId='SpotLight'/>
          <color name='Color' value='3399FF'/>
       </set>
    </message>]]>
                 </example>
             </section3>
-        </section2>
-        <section2 topic='Setting multiple control parameters at once'>
-            <p>
-                Often, setting a single control parameter is not sufficient for a control action. In these cases, setting multiple control parameters at once is necessary.
-                The <strong>set</strong> command makes this easy however, since it allows for any number of control parameters to be set at once, as the following example shows:
-            </p>
-            <example caption='Setting multiple control parameters at once'>
-                <![CDATA[
+            <section3 topic='Setting multiple control parameters at once'>
+                <p>
+                    Often, setting a single control parameter is not sufficient for a control action. In these cases, setting multiple control parameters at once is necessary.
+                    The <strong>set</strong> command makes this easy however, since it allows for any number of control parameters to be set at once, as the following example shows:
+                </p>
+                <example caption='Setting multiple control parameters at once'>
+                    <![CDATA[
    <message from='master@clayster.com/amr'
-            to='device@clayster.com'>
+            to='dimmer@clayster.com'>
       <set xmlns='urn:xmpp:sn:control'>
-         <node nodeId='Dimmer'/>
          <int name='FadeTimeMilliseconds' value='500'/>
          <int name='OutputPercent' value='10'/>
       </set>
    </message>]]>
-            </example>
-            <p>
-                Sometimes the order of control parameters are important in the device, and sometimes the parameters form part of a whole. It depends on the context of the device.
-                In the above example, the order is important. When the OutputPercent control parameter is set, it will start to fade in or out to the desired setting (10%), using the
-                fade time set previously. If the FadeTimeMilliseconds control parameter would have been set after the OutputPercent parameter, the fading would have been started using
-                the previous setting, which might be unknown.
-            </p>
-            <p>
-                The order of control parameters to use depends on the device. The <link url='#controlform'>Control Form</link> lists available control parameters of the device in the
-                order they are expected to be sent to the device. The XEP <link url='xep-0000-SN-Interoperability.html'>xep-0000-SN-Interoperability</link> details what control parameters 
-                must be available for different interfaces, and if the order of control parameters is important.
-            </p>
+                </example>
+                <p>
+                    Sometimes the order of control parameters are important in the device, and sometimes the parameters form part of a whole. It depends on the context of the device.
+                    In the above example, the order is important. When the OutputPercent control parameter is set, it will start to fade in or out to the desired setting (10%), using the
+                    fade time set previously. If the FadeTimeMilliseconds control parameter would have been set after the OutputPercent parameter, the fading would have been started using
+                    the previous setting, which might be unknown.
+                </p>
+                <p>
+                    The order of control parameters to use depends on the device. The <link url='#controlform'>Control Form</link> lists available control parameters of the device in the
+                    order they are expected to be sent to the device. The XEP <link url='xep-0000-SN-Interoperability.html'>xep-0000-SN-Interoperability</link> details what control parameters
+                    must be available for different interfaces, and if the order of control parameters is important.
+                </p>
+            </section3>
         </section2>
-        <section2 topic='Getting a control form' anchor='controlform'>
-            <p>
-                A client can get a control form containing available control parameters of the device. This is done using the <strong>getForm</strong> command,
-                as is shown in the following example:
-            </p>
-            <example caption='Getting a control form'>
-                <![CDATA[
+        <section2 topic='Control forms'>
+            <section3 topic='Getting a control form' anchor='controlform'>
+                <p>
+                    A client can get a control form containing available control parameters of the device. This is done using the <strong>getForm</strong> command,
+                    as is shown in the following example:
+                </p>
+                <example caption='Getting a control form'>
+                    <![CDATA[
    <iq type='get'
        from='master@clayster.com/amr'
-       to='device@clayster.com'
+       to='dimmer@clayster.com'
        id='3'>
-      <getForm xmlns='urn:xmpp:sn:control' nodeId='Dimmer' xml:lang='en'/>
+      <getForm xmlns='urn:xmpp:sn:control' xml:lang='en'/>
    </iq>
    
    <iq type='result'
-       from='device@clayster.com'
+       from='dimmer@clayster.com'
        to='master@clayster.com/amr'
        id='3'>
       <getFormResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
@@ -566,6 +593,7 @@
               <xdl:page label='Output'>
                   <xdl:fieldref var='FaceTimeMilliseconds'/>
                   <xdl:fieldref var='OutputPercent'/>
+                  <xdl:fieldref var='MainSwitch'/>
               </xdl:page>
               <field var='xdd session' type='hidden'>
                   <value>325ED0F3-9A9A-45A4-9634-4E0D41C5EA06</value>
@@ -594,68 +622,68 @@
           </x>
       </getFormResponse>
    </iq>]]>
-            </example>
-            <p>
-                <strong>IMPORTANT:</strong> The device MUST mark all control parameters in the form as <strong>notSame</strong>, as defined in
-                <note>
-                    XEP-xxxx: Dynamic Data Forms &lt;<link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link>&gt;
-                </note>. If an end user would open the control form and press OK (submitting the form) without having entered a value, no value
-                would be written, and no action taken. If only a few parameter woule be edited, only those parameters would be sent to the device
-                and only the corresponding actions taken.
-            </p>
-            <p>
-                All parameters in the form MUST also have validation rules defined according to XEP-0122, specifically validation data types and ranges
-                where appropriate. This to give type information to the client, which the client later can use to send typed control commands directly, 
-                without the need to get and send data forms to the device to control it.
-            </p>
-            <p>
-                Also, the device SHOULD group control parameters that should be written together using pages and sections, as described in XEP-0141. Parameters
-                MUST also be ordered in a way so that when set in that order using the typed commands, the corresponding control actions can be successfully executed.
-            </p>
-            <p>
-                <strong>Note:</strong> There's a difference between node parameters, as described in XEP <link url='xep-0000-SN-Concentrators.html'>xep-0000-SN-Concentrators</link>, 
-                and control parameters as described in this document. For more information about this, please see 
-                <link url='#nodeparamsvscontrolparams'>Difference between node parameters and node control parameters</link>.
-            </p>
-        </section2>
-        <section2 topic='Getting a control form, Failure'>
-            <p>
-                A device can reject a control form request. It does this returning an <strong>error</strong> iq stanza, and detailing the error in the <strong>result</strong>
-                attribute of the <strong>getformResponse</strong> element, as is shown in the following example:
-            </p>
-            <example caption='Getting a control form, Failure'>
-                <![CDATA[
+                </example>
+                <p>
+                    <strong>IMPORTANT:</strong> The device MUST mark all control parameters in the form as <strong>notSame</strong>, as defined in
+                    <note>
+                        XEP-xxxx: Dynamic Data Forms &lt;<link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link>&gt;
+                    </note>. If an end user would open the control form and press OK (submitting the form) without having entered a value, no value
+                    would be written, and no action taken. If only a few parameter would be edited, only those parameters would be sent to the device
+                    and only the corresponding actions taken.
+                </p>
+                <p>
+                    All parameters in the form MUST also have validation rules defined according to <link url='http://xmpp.org/extensions/xep-0122.html'>XEP-0122</link>, 
+                    specifically validation data types and ranges where appropriate. This to give type information to the client, which the client later can use to send 
+                    typed control commands directly, without the need to get and send data forms to the device to control it.
+                </p>
+                <p>
+                    Also, the device SHOULD group control parameters that should be written together using pages and sections, as described in
+                    <link url='http://xmpp.org/extensions/xep-0141.html'>XEP-0141</link>. Parameters
+                    MUST also be ordered in a way so that when set in that order using the typed commands, the corresponding control actions can be successfully executed.
+                </p>
+                <p>
+                    <strong>Note:</strong> There's a difference between node parameters, as described in XEP <link url='xep-0000-SN-Concentrators.html'>xep-0000-SN-Concentrators</link>,
+                    and control parameters as described in this document. For more information about this, please see
+                    <link url='#nodeparamsvscontrolparams'>Difference between node parameters and node control parameters</link>.
+                </p>
+            </section3>
+            <section3 topic='Getting a control form, Failure'>
+                <p>
+                    A device can reject a control form request. It does this returning an <strong>error</strong> iq stanza, and detailing the error in the <strong>result</strong>
+                    attribute of the <strong>getformResponse</strong> element, as is shown in the following example:
+                </p>
+                <example caption='Getting a control form, Failure'>
+                    <![CDATA[
    <iq type='get'
        from='master@clayster.com/amr'
-       to='device@clayster.com'
+       to='dimmer@clayster.com'
        id='4'>
-      <getForm xmlns='urn:xmpp:sn:control' nodeId='Dimmer' xml:lang='en'/>
+      <getForm xmlns='urn:xmpp:sn:control' xml:lang='en'/>
    </iq>
    
    <iq type='error'
-       from='device@clayster.com'
+       from='dimmer@clayster.com'
        to='master@clayster.com/amr'
        id='4'>
       <getFormResponse xmlns='urn:xmpp:sn:concentrators' result='InsufficientPrivileges'/>
    </iq>]]>
-            </example>
-        </section2>
-        <section2 topic='Setting a (partial) control form'>
-            <p>
-                Control actions can be requested by submitting a full or partial control form back to the device. Control parameters not edited MUST not be included
-                in the form, and the device in turn MUST ONLY invoke control actions corresponding to the parameters returned in the form.
-            </p>
-            <p>
-                The following example shows how control actions can be requested submitting a control parameters form to the device:
-            </p>
-            <example caption='Setting a (partial) control form'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Setting a (partial) control form'>
+                <p>
+                    Control actions can be requested by submitting a full or partial control form back to the device. Control parameters not edited MUST not be included
+                    in the form, and the device in turn MUST ONLY invoke control actions corresponding to the parameters returned in the form.
+                </p>
+                <p>
+                    The following example shows how control actions can be requested submitting a control parameters form to the device:
+                </p>
+                <example caption='Setting a (partial) control form'>
+                    <![CDATA[
    <iq type='set'
        from='master@clayster.com/amr'
-       to='device@clayster.com'
+       to='dimmer@clayster.com'
        id='5'>
       <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
-          <node nodeId='Dimmer'/>
           <x type='submit' xmlns='jabber:x:data'>
               <field var='xdd session' type='hidden'>
                   <value>325ED0F3-9A9A-45A4-9634-4E0D41C5EA06</value>
@@ -671,31 +699,30 @@
    </iq>
    
    <iq type='result'
-       from='concentrator@clayster.com'
-       to='client@clayster.com/client'
+       from='dimmer@clayster.com'
+       to='master@clayster.com/amr'
        id='5'>
       <setResponse xmlns='urn:xmpp:sn:control' responseCode='OK'/>
    </iq>]]>
-            </example>
-            <p>
-                In this example, the FadeTimeMilliseconds and OutputPercent control parameters are sent, while the MainSwitch control parameter is left as is. Fading is therefore
-                parformed only if the dimmer is switched on.
-            </p>
-        </section2>
-        <section2 topic='Setting a (partial) control form, Failure'>
-            <p>
-                A device can reject a control form submission. It does this returning an <strong>error</strong> iq stanza, and detailing the error in the <strong>result</strong>
-                attribute of the <strong>setResponse</strong> element. If there are errors in the form, details are listed using <strong>error</strong> elements in the response, 
-                as is shown in the following example:
-            </p>
-            <example caption='Setting a (partial) control form, Failure'>
-                <![CDATA[
+                </example>
+                <p>
+                    In this example, the FadeTimeMilliseconds and OutputPercent control parameters are sent, while the MainSwitch control parameter is left as is. Fading is therefore
+                    parformed only if the dimmer is switched on.
+                </p>
+            </section3>
+            <section3 topic='Setting a (partial) control form, Failure'>
+                <p>
+                    A device can reject a control form submission. It does this returning an <strong>error</strong> iq stanza, and detailing the error in the <strong>result</strong>
+                    attribute of the <strong>setResponse</strong> element. If there are errors in the form, details are listed using <strong>error</strong> elements in the response,
+                    as is shown in the following example:
+                </p>
+                <example caption='Setting a (partial) control form, Failure'>
+                    <![CDATA[
    <iq type='set'
        from='master@clayster.com/amr'
-       to='device@clayster.com'
+       to='dimmer@clayster.com'
        id='6'>
       <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
-          <node nodeId='Dimmer'/>
           <x type='submit' xmlns='jabber:x:data'>
               <field var='xdd session' type='hidden'>
                   <value>325ED0F3-9A9A-45A4-9634-4E0D41C5EA06</value>
@@ -711,24 +738,46 @@
    </iq>
    
    <iq type='error'
-       from='concentrator@clayster.com'
-       to='client@clayster.com/client'
+       from='dimmer@clayster.com'
+       to='master@clayster.com/amr'
        id='6'>
       <setResponse xmlns='urn:xmpp:sn:control' responseCode='FormError'>
           <error var='OutputPercent'>Invalid parameter value.</error>
       </setResponse>
    </iq>]]>
-            </example>
+                </example>
+            </section3>
         </section2>
-        <section2 topic='Sending a control command to multiple nodes'>
+        <section2 topic='Controlling devices behind a concentrator'>
             <p>
-                The client can send the same control command to multiple nodes by simply adding more <strong>node</strong> elements in the request,
-                as is shown in the following example:
+                Controlling devices behind a concentrator can be done by specifying what device(s) to control using <strong>node</strong> elements within the
+                command elements sent to the concentrator. The following sub-sections show examples of how this is done.
             </p>
-            <example caption='Sending a control command to multiple nodes'>
-                <![CDATA[
+            <section3 topic='Sending a control command to a node behind a concentrator'>
+                <p>
+                    To send a control message to a specific node behind a concentrator, the <strong>node</strong> element can be used to identify the node,
+                    as is shown in the following example:
+                </p>
+                <example caption='Sending a control command to a node behind a concentrator'>
+                    <![CDATA[
    <message from='master@clayster.com/amr'
-            to='device@clayster.com'>
+            to='concentrator@clayster.com'>
+      <set xmlns='urn:xmpp:sn:control'>
+         <node nodeId='DigitalOutput1'/>
+         <boolean name='Output' value='false'/>
+      </set>
+   </message>]]>
+                </example>
+            </section3>
+            <section3 topic='Sending a control command to multiple nodes'>
+                <p>
+                    The client can send the same control command to multiple nodes behind a concentrator by simply adding more <strong>node</strong> elements in the request,
+                    as is shown in the following example:
+                </p>
+                <example caption='Sending a control command to multiple nodes'>
+                    <![CDATA[
+   <message from='master@clayster.com/amr'
+            to='concentrator@clayster.com'>
       <set xmlns='urn:xmpp:sn:control'>
          <node nodeId='DigitalOutput1'/>
          <node nodeId='DigitalOutput2'/>
@@ -737,20 +786,20 @@
          <boolean name='Output' value='false'/>
       </set>
    </message>]]>
-            </example>
-        </section2>
-        <section2 topic='Sending a control command to multiple nodes, Failure'>
-            <p>
-                By using an IQ stanza, the caller can receive an acknowledgement of the reception of the command, or error information if the command could not be processed.
-                When sending a control command to multiple nodes at a time the device must validate all parameters against all nodes before taking any control action. If
-                validation fails, an error message is returned and no control action is taken. The following example shows an example of an erroneous control message made to 
-                multiple nodes on a device:
-            </p>
-            <example caption='Sending a control command to multiple nodes, Failure'>
-                <![CDATA[
+                </example>
+            </section3>
+            <section3 topic='Sending a control command to multiple nodes, Failure'>
+                <p>
+                    By using an IQ stanza, the caller can receive an acknowledgement of the reception of the command, or error information if the command could not be processed.
+                    When sending a control command to multiple nodes at a time the device must validate all parameters against all nodes before taking any control action. If
+                    validation fails, an error message is returned and no control action is taken. The following example shows an example of an erroneous control message made to
+                    multiple nodes on a device:
+                </p>
+                <example caption='Sending a control command to multiple nodes, Failure'>
+                    <![CDATA[
    <iq type='set'
        from='master@clayster.com/amr'
-       to='device@clayster.com'
+       to='concentrator@clayster.com'
        id='7'>
       <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
          <node nodeId='DigitalOutput1'/>
@@ -766,53 +815,688 @@
    </iq>
    
    <iq type='error'
-       from='device@clayster.com'
+       from='concentrator@clayster.com'
        to='master@clayster.com/amr'
        id='7'>
       <setResponse xmlns='urn:xmpp:sn:control' responseCode='OtherError'>
           <error var='Output'>Invalid parameter type.</error>
       </setResponse>
    </iq>]]>
-            </example>
+                </example>
+            </section3>
+            <section3 topic='Getting a control form from multiple nodes'>
+                <p>
+                    A client can get a control form containing available control parameters common between a set of nodes controlled by the concentrator. This is done 
+                    adding a sequence of <strong>node</strong> elements to a <strong>getForm</strong> command sent to the concentrator, as is shown in the following example:
+                </p>
+                <example caption='Getting a control form'>
+                    <![CDATA[
+   <iq type='get'
+       from='master@clayster.com/amr'
+       to='concentrator@clayster.com'
+       id='8'>
+      <getForm xmlns='urn:xmpp:sn:control' xml:lang='en'>
+          <node nodeId='DigitalOutput1'/>
+          <node nodeId='DigitalOutput2'/>
+          <node nodeId='DigitalOutput3'/>
+          <node nodeId='DigitalOutput4'/>
+      </getForm>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='master@clayster.com/amr'
+       id='8'>
+      <getFormResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+          <x type='form' 
+             xmlns='jabber:x:data' 
+             xmlns:xdv='http://jabber.org/protocol/xdata-validate'
+             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'>
+              <title>DigitalOutput1, DigitalOutput2, ...</title>
+              <xdl:page label='Output'>
+                  <xdl:fieldref var='Output'/>
+              </xdl:page>
+              <field var='xdd session' type='hidden'>
+                  <value>325ED0F3-9A9A-45A4-9634-4E0D41C5EA06</value>
+              </field>
+              <field var='Output' type='boolean' label='Output'>
+                  <desc>If the digital output is high (checked) or low (uncheckd).</desc>
+                  <value>true</value>
+                  <xdd:notSame/>
+              </field>
+          </x>
+      </getFormResponse>
+   </iq>]]>
+                </example>
+                <p>
+                    Note that only parameters that are common between the nodes defined in the request must be returned. However, all parameters must have the
+                    <strong>>notSame</strong> flag set, regardless of current output status.
+                </p>
+            </section3>
+            <section3 topic='Getting a control form from multiple nodes, Failure'>
+                <p>
+                    A device can reject a control form request. It does this returning an <strong>error</strong> iq stanza, and detailing the error in the <strong>result</strong>
+                    attribute of the <strong>getformResponse</strong> element. The following example shows the device rejecting a control form request, because it does not support
+                    the handling of common parameters between multiple nodes:
+                </p>
+                <example caption='Getting a control form from multiple nodes, Failure'>
+                    <![CDATA[
+   <iq type='get'
+       from='master@clayster.com/amr'
+       to='concentrator@clayster.com'
+       id='9'>
+      <getForm xmlns='urn:xmpp:sn:control' xml:lang='en'>
+          <node nodeId='DigitalOutput1'/>
+          <node nodeId='DigitalOutput2'/>
+          <node nodeId='DigitalOutput3'/>
+          <node nodeId='DigitalOutput4'/>
+      </getForm>
+   </iq>
+   
+   <iq type='error'
+       from='concentrator@clayster.com'
+       to='master@clayster.com/amr'
+       id='9'>
+      <getFormResponse xmlns='urn:xmpp:sn:concentrators' result='NotImplemented'/>
+   </iq>]]>
+                </example>
+            </section3>
+            <section3 topic='Setting a (partial) control form to multiple nodes'>
+                <p>
+                    You set a control form to multiple nodes controlled by a concentrator by adding <strong>node</strong> elements to the <string>set</string>
+                    command sent to the concentrator, as is shown in the following example:
+                </p>
+                <example caption='Setting a (partial) control form to multiple nodes'>
+                    <![CDATA[
+   <iq type='set'
+       from='master@clayster.com/amr'
+       to='concentrator@clayster.com'
+       id='10'>
+      <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
+          <node nodeId='DigitalOutput1'/>
+          <node nodeId='DigitalOutput2'/>
+          <node nodeId='DigitalOutput3'/>
+          <node nodeId='DigitalOutput4'/>
+          <x type='submit' xmlns='jabber:x:data'>
+              <field var='xdd session' type='hidden'>
+                  <value>325ED0F3-9A9A-45A4-9634-4E0D41C5EA06</value>
+              </field>
+              <field var='Output' type='boolean'>
+                  <value>true</value>
+              </field>
+          </x>
+      </set>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='master@clayster.com/amr'
+       id='10'>
+      <setResponse xmlns='urn:xmpp:sn:control' responseCode='OK'/>
+   </iq>]]>
+                </example>
+            </section3>
+            <section3 topic='Setting a (partial) control form to multiple nodes, Failure'>
+                <p>
+                    A device can reject a control form submission. It does this returning an <strong>error</strong> iq stanza, and detailing the error in the <strong>result</strong>
+                    attribute of the <strong>setResponse</strong> element. The following example shows the device rejecting a control form submission because one of the control parameters,
+                    even though it exists on all nodes, is not of the same type on all nodes.
+                </p>
+                <example caption='Setting a (partial) control form to multiple nodes'>
+                    <![CDATA[
+   <iq type='set'
+       from='master@clayster.com/amr'
+       to='concentrator@clayster.com'
+       id='11'>
+      <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
+          <node nodeId='DigitalOutput1'/>
+          <node nodeId='DigitalOutput2'/>
+          <node nodeId='DigitalOutput3'/>
+          <node nodeId='DigitalOutput4'/>
+          <node nodeId='AnalogOutput1'/>
+          <node nodeId='AnalogOutput2'/>
+          <node nodeId='AnalogOutput3'/>
+          <node nodeId='AnalogOutput4'/>
+          <x type='submit' xmlns='jabber:x:data'>
+              <field var='xdd session' type='hidden'>
+                  <value>325ED0F3-9A9A-45A4-9634-4E0D41C5EA06</value>
+              </field>
+              <field var='Output' type='boolean'>
+                  <value>true</value>
+              </field>
+          </x>
+      </set>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='master@clayster.com/amr'
+       id='11'>
+      <setResponse xmlns='urn:xmpp:sn:control' responseCode='FormError'>
+          <error var='Output'>Invalid type</error>
+      </setResponse>
+   </iq>]]>
+                </example>
+            </section3>
         </section2>
     </section1>
     <section1 topic='Implementation Notes' anchor='impl'>
         <section2 topic='Reading current control states'>
-            <!-- TODO -->
+            <p>
+                If a client wants to know the current status of control parameters, it must perform a readout of <strong>Momentary</strong> and <strong>Status</strong> values 
+                from the device, according to
+                <note>
+                    XEP-xxxx: Sensor Data &lt;<link url='sensor-data.html'>sensor-data.html</link>&gt;
+                </note>, and from the returned set of values take the current control parameter value according to the following rules, ordered by priority:
+            </p>
+            <ul>
+                <li>
+                    <p>
+                        If there's a field marked as momentary value, with an unlocalized field name equal to the unlocalized control parameter name and having a compatible
+                        field value type (see table below) and a status field without the missing flag set, the value of the field should be considered the current value of 
+                        the control parameter.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        If there's a field marked as status value, with an unlocalized field name equal to the unlocalized control parameter name and having a compatible
+                        field value type (see table below) and a status field without the missing flag set, the value of the field should be considered the current value of 
+                        the control parameter.
+                    </p>
+                </li>
+            </ul>
+            <p>
+                Even though getting the the control form could provide the client with a quicker and easier way of retrieving control parameter values, the form is not
+                guaranteed to contain correct current values. In some cases, retrieving current values might take time and only be retrieved using an asynchronous read-out
+                process described in this section.
+            </p>
+            <p>
+                The following table shows how corresponding field values should be converted to the corresponding control parameter value based on field type (x-axis) and 
+                control parameter type (y-axis). N/A means conversion has no meaning and types are not compatible.
+            </p>
+            <table caption='Conversion of Field Value to Control Parameter Value based on types'>
+                <tr>
+                    <th></th>
+                    <th>numeric</th>
+                    <th>string</th>
+                    <th>boolean</th>
+                    <th>dateTime</th>
+                    <th>timeSpan</th>
+                    <th>enum</th>
+                </tr>
+                <tr>
+                    <th>boolean</th>
+                    <td>!=0</td>
+                    <td>N/A</td>
+                    <td>x</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <th>color</th>
+                    <td>N/A</td>
+                    <td>RRGGBB</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <th>date</th>
+                    <td>N/A</td>
+                    <td>(1)</td>
+                    <td>N/A</td>
+                    <td>Date part</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <th>dateTime</th>
+                    <td>N/A</td>
+                    <td>(2)</td>
+                    <td>N/A</td>
+                    <td>x</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <th>double</th>
+                    <td>x</td>
+                    <td>(3)</td>
+                    <td>Z2</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <th>duration</th>
+                    <td>N/A</td>
+                    <td>(4)</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>x</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <th>int</th>
+                    <td>x</td>
+                    <td>(5)</td>
+                    <td>Z2</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <th>long</th>
+                    <td>x</td>
+                    <td>(5)</td>
+                    <td>Z2</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <th>string</th>
+                    <td>(6)</td>
+                    <td>x</td>
+                    <td>xs:boolean</td>
+                    <td>xs:dateTime</td>
+                    <td>xs:duration</td>
+                    <td>x</td>
+                </tr>
+                <tr>
+                    <th>time</th>
+                    <td>N/A</td>
+                    <td>(7)</td>
+                    <td>N/A</td>
+                    <td>Time part</td>
+                    <td>(8)</td>
+                    <td>N/A</td>
+                </tr>
+            </table>
+            <p>
+                The following table lists notes with details on how to do conversion, if in doubt.
+            </p>
+            <table caption="Conversion rules">
+                <tr>
+                    <th>Note</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>(1)</td>
+                    <td>
+                        The client should try to convert the string to a date value, first according to the format specified by the XML data type xs:date, and if not possible
+                        by RFC 822.
+                    </td>
+                </tr>
+                <tr>
+                    <td>(2)</td>
+                    <td>
+                        The client should try to convert the string to a date &amp; time value, first according to the format specified by the XML data type xs:dateTime, and if not possible
+                        by RFC 822.
+                    </td>
+                </tr>
+                <tr>
+                    <td>(3)</td>
+                    <td>
+                        The client should try to convert the string to a double-precision floating-point value, first according to the format specified by the XML data type xs:double, 
+                        and if not possible using system-local string to floating-point conversion using local decimal and throusand separator settings.
+                    </td>
+                </tr>
+                <tr>
+                    <td>(4)</td>
+                    <td>
+                        The client should try to convert the string to a duration value, first according to the format specified by the XML data type xs:duration,
+                        and if not possible using the XML data type xs:time.
+                    </td>
+                </tr>
+                <tr>
+                    <td>(5)</td>
+                    <td>The client should try to convert the string to an integer value according to the corresponding XML data type formats xs:int and xs:long.</td>
+                </tr>
+                <tr>
+                    <td>(6)</td>
+                    <td>
+                        The numeric field value consists of three parts: Numeric value, number of decimals and optional unit. If no unit is provided, only the numeric value should
+                        be converted to a string (compatible with the XML data type xs:double), using exactly the number of decimals provided in the field. If a unit is provided
+                        (non-empty string) it must not be appended to the value, if the value is to be used for control output. For presentation purposes however, a space could be 
+                        appended to the number and the unit appended after the space.    
+                    </td>
+                </tr>
+                <tr>
+                    <td>(7)</td>
+                    <td>
+                        The client should try to convert the string to a time value  according to the format specified by the XML data type xs:time.
+                    </td>
+                </tr>
+                <tr>
+                    <td>(8)</td>
+                    <td>
+                        A timeSpan field value contains a xs:duration value. The xs:duration has a larger domain than xs:time, and contains all xs:time values, but xs:time does
+                        not contain all possible xs:duration values. So, conversion of an xs:duration value to an xs:time value should be performed only if a duration lies
+                        between 00:00:00 and 23:59:59.
+                    </td>
+                </tr>
+                <tr>
+                    <td>x</td>
+                    <td>Use the canonical conversion method.</td>
+                </tr>
+                <tr>
+                    <td>Z2</td>
+                    <td>true = 1, false = 0.</td>
+                </tr>
+                <tr>
+                    <td>N/A</td>
+                    <td>Not applicable. Conversion has no meaning. Value types are not compatible.</td>
+                </tr>
+                <tr>
+                    <td>!=0</td>
+                    <td>Nonzero = true, Zero = false.</td>
+                </tr>
+                <tr>
+                    <td>RRGGBB</td>
+                    <td>A string of six hexadecimal characters, the first two the red component of the color, the next two the green component and the last two the blue component.</td>
+                </tr>
+                <tr>
+                    <td>Date part</td>
+                    <td>Only the date part of the xs:dateTime value should be used.</td>
+                </tr>
+                <tr>
+                    <td>Time part</td>
+                    <td>Only the time part of the xs:dateTime value should be used.</td>
+                </tr>
+                <tr>
+                    <td>xs:boolean</td>
+                    <td>Conversion to a string should follow the rules specified for the XML datatype xs:boolean.</td>
+                </tr>
+                <tr>
+                    <td>xs:dateTime</td>
+                    <td>Conversion to a string should follow the rules specified for the XML datatype xs:dateTime.</td>
+                </tr>
+                <tr>
+                    <td>xs:duration</td>
+                    <td>Conversion to a string should follow the rules specified for the XML datatype xs:duration.</td>
+                </tr>
+            </table>
+            <p>
+                <strong>Note:</strong> the namespace prefix <strong>xs</strong> is here supposed to be linked with the XML Schema namespace
+                <link url="http://www.w3.org/2001/XMLSchema">http://www.w3.org/2001/XMLSchema</link>.
+            </p>
         </section2>
         <section2 topic='Difference between node parameters and node control parameters' anchor='nodeparamsvscontrolparams'>
-            <!-- TODO -->
+            <p>
+                A node defined in a concentrator, as defined by <link url='xep-0000-SN-Concentrators.html'>xep-0000-SN-Concentrators.html</link>, supporting control has
+                two sets of parameters that are different: First a set of node parameters and then a set of control parameters.
+            </p>
+            <p>
+                Node parameters are defined by the node type in the concentrator, as described in <link url='xep-0000-SN-Concentrators.html'>xep-0000-SN-Concentrators.html</link>,
+                and they are typically used by the concentrator to define the node and how to communicate or interact with the underlying device. The important part here is to know
+                that the node parameters are maintained by the concentrator, not the underlying device.
+            </p>
+            <p>
+                Control parameters however, are parameters that reside on the underlying device. When set, they change the actual state or behaviour of the underlying device.
+                The connection to the device however, controlled by the concentrator, remains unchanged by such a control parameter update.
+            </p>
         </section2>
-        <section2 topic='Regarding pages and sections in control forms'>
-            <!-- TODO -->
+        <section2 topic='Grouping control parameters' anchor='parametergroups'>
+            <p>
+                Many control actions avilable in a device can be controlled using only one control parameter. If a device only publishes such control parameters, the order
+                of control paramters is not that important.
+            </p>
+            <p>
+                However, there are many control actions that require the client to set multiple control parameters at the same time, for the device to have a complete understanding
+                what the client wants to do.
+            </p>
+            <p>
+                <link url='http://xmpp.org/extensions/xep-0141.html'>XEP-0141</link> defines a way to group parameters in a data form by including the concept of pages and sections.
+                Even though these pages and sections are used for layout purposes, it should be used by devices to mark parameters that should be used together to perform control actions.
+            </p>
+            <p>
+                The following set of rules should be adhered to, by devices as well as clients, to minimize confusion and resulting errors:
+            </p>
+            <ul>
+                <li>
+                    <p>
+                        Control parameters should be listed in control forms in the order the device expects the client to write them back.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Clients should set control parameters in the order they are listed in the corresponding control forms.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Control actions that require multiple control parameters should report these together, grouped by pages or sections within pages,
+                        to make clear that the parameters belong together.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        For control actions requiring multiple control parameters, devices should strive to publish default values for all parameters involved. 
+                        These default values should then be used by the device if a client happens to write only a subset of the control parameters required for
+                        a control action. The default value could be the current state of the parameter.
+                    </p>
+                </li>
+            </ul>
+            <p>
+                Note however, that one cannot always make the assumption that parameters on the same page or same section in a control form belong to the same control action.
+                For instance, a PLC with 16 digital outputs might publish a control form containing a single page with 16 check boxes on (boolean parameters), that can be
+                controlled individually.
+            </p>
+            <p>
+                To solve the problem of grouping parameters together, so a client can know which parameters belong together, a new element is defined that can be used in
+                data forms: <strong>parameterGroup</strong>. It is optional, but can be added to control parameters in forms, as a way to tell the client that parameters
+                having the same <strong>parameterGroup</strong> belong together and should be written together. The following example illustrates this.
+            </p>
+            <example caption='Grouping control parameters'>
+                <![CDATA[
+   <iq type='get'
+       from='master@clayster.com/amr'
+       to='spotlight@clayster.com'
+       id='12'>
+      <getForm xmlns='urn:xmpp:sn:control' xml:lang='en'/>
+   </iq>
+   
+   <iq type='result'
+       from='spotlight@clayster.com'
+       to='master@clayster.com/amr'
+       id='12'>
+      <getFormResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+          <x type='form' 
+             xmlns='jabber:x:data' 
+             xmlns:xdv='http://jabber.org/protocol/xdata-validate'
+             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'>
+              <title>Spotlight</title>
+              <xdl:page label='Output'>
+                  <xdl:fieldref var='MainSwitch'/>
+              </xdl:page>
+              <xdl:page label='Direction'>
+                  <xdl:fieldref var='HorizontalAngle'/>
+                  <xdl:fieldref var='ElevationAngle'/>
+              </xdl:page>
+              <field var='xdd session' type='hidden'>
+                  <value>325ED0F3-9A9A-45A4-9634-4E0D41C5EA06</value>
+              </field>
+              <field var='MainSwitch' type='boolean' label='Main switch'>
+                  <desc>If the spotlight is turned on or off.</desc>
+                  <value>true</value>
+                  <xdd:notSame/>
+              </field>
+              <field var='HorizontalAngle' type='text-single' label='Horizontal angle:'>
+                  <desc>Horizontal angle of the spotlight.</desc>
+                  <value>0</value>
+                  <xdv:validate datatype='xs:double'>
+                      <xdv:range min='-180' max='180'/>
+                  </xdv:validate>
+                  <xdd:notSame/>
+                  <parameterGroup xmlns='urn:xmpp:sn:concentrators' name='direction'/>
+              </field>
+              <field var='ElevationAngle' type='text-single' label='Elevation angle:'>
+                  <desc>Elevation angle of the spotlight.</desc>
+                  <value>0</value>
+                  <xdv:validate datatype='xs:double'>
+                      <xdv:range min='-90' max='90'/>
+                  </xdv:validate>
+                  <xdd:notSame/>
+                  <parameterGroup xmlns='urn:xmpp:sn:concentrators' name='direction'/>
+              </field>
+          </x>
+      </getFormResponse>
+   </iq>]]>
+            </example>
+            <p>
+                The above example informs the client that the two parameters HorizontalAngle and ElevationAngle should be written together to control a control action
+                (named direction).
+            </p>
+            <p>
+                For more information about common control actions and their parameters, see <link url='xep-0000-SN-Interoperability.html'>xep-0000-SN-Interoperability.html</link>,
+                which defines a set of interoperable interfaces and their abilities.
+            </p>
         </section2>
         <section2 topic='Node commands vs. control parameters'>
-            <!-- TODO -->
+            <p>
+                Nodes behind a concentrator, as defined in <link url='xep-0000-SN-Concentrators.html'>xep-0000-SN-Concentrators.html</link>, have an additional means of
+                publishing control interfaces: Node Commands.
+            </p>
+            <p>
+                However, there are many differences between Node Commands and Control Parameters, as shown in the following list:
+            </p>
+            <ul>
+                <li>
+                    <p>
+                        Node Commands are defined by the node type in the concentrator, and not by the device itself.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Node Commands may do many different things, not only performing control actions.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Parametrized Node Commands require the client to always get a parameter data form, and write back values. There's no way to send simple
+                        control messages using Node Commands.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Node Commands can be partitioned, grouped and sorted separately.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Each Parametrized Node Command has a separate parameter form, which makes grouping of parameters normal.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Node Commands are only available for nodes controlled by a concentrator.
+                    </p>
+                </li>
+            </ul>
+            <p>
+                If implementing a device with many complex control actions (like an advanced PLC), consideration should be made to divide the device into logical groups and
+                implement the concentrators interface as well. Then the more complex control actions could be implemented as Node Commands instead of control actions
+                as defined in this document, and implementing the simpler more intuitive control actions as described in this document.
+            </p>
         </section2>
         <section2 topic='Tokens'>
-            <!-- TODO -->
+            <p>
+                If control interaction is performed in a context of delegated trust, as defined in the Sensor Network Provisioning XEP 
+                <note>
+                    XEP-xxxx: Sensor Networks - Provisioning &lt;<link url='sensor-network-provisioning.html'>sensor-network-provisioning.html</link>&gt;
+                </note>, tokens should always be included in all calls. This to allow devices to check privileges with provisioning servers.
+            </p>
+            <p>
+                The <strong>set</strong> and <strong>getForm</strong> commands support the following token attributes:
+            </p>
+            <ul>
+                <li>
+                    <strong>serviceToken</strong>
+                </li>
+                <li>
+                    <strong>deviceToken</strong>
+                </li>
+                <li>
+                    <strong>userToken</strong>
+                </li>
+            </ul>
+            <p>
+                For more information about provisioning, see <link url='sensor-network-provisioning.html'>sensor-network-provisioning.html</link>.
+            </p>
         </section2>
-        <section2 topic='Data Sources &amp; Cache Types'>
-            <!-- TODO -->
+        <section2 topic='Controlling devices in large subsystems'>
+            <p>
+                Most examples in this document have been simplified examples where a few devices containing a few control parameters have been used. However, in many cases large subsystems with
+                very many actuators containing many different control actions have to be controlled, as is documented in <link url='xep-0000-SN-Concentrators.html'>xep-0000-SN-Concentrators.html</link>. 
+                In such cases, a node may have to be specified using two or perhaps even three ID's: a <strong>sourceId</strong> identifying the data source controlling the device, a possible 
+                <strong>cacheType</strong> narrowing down the search to a specific kind of node, and the common <strong>nodeId</strong>. For more information about this, see 
+                <link url='xep-0000-SN-Concentrators.html'>xep-0000-SN-Concentrators.html</link>.
+            </p>
+            <p>
+                <strong>Note:</strong> For cases where the <strong>nodeId</strong> is sufficient to uniquelly identify the node, it is sufficient to provide this attribute in the request.
+                If there is ambiguity in the request, the receptor must treat the request as a request with a set of nodes, all with the corresponding <strong>nodeId</strong> as requested.
+            </p>
         </section2>
-        <!-- TODO: When written, complete provisioning XEP -->
-        <!-- TODO: Restricting access to Configurable parameters per node and contact-->
-    </section1>
-    <section1 topic='Accessibility Considerations' anchor='access'>
-        <p>OPTIONAL.</p>
     </section1>
     <section1 topic='Internationalization Considerations' anchor='i18n'>
-        <p>OPTIONAL.</p>
-        <!-- TODO: xml:lang if using IQ instead of message, since error messages can be localized. -->
+        <section2 topic='Time Zones'>
+            <p>
+                All timestamps and dateTime values use the XML data type xs:dateTime to specify values. These values include a date, an optional time and an optional time zone.
+            </p>
+            <p>
+                <strong>Note:</strong> If time zone is not available, it is supposed to be undefined. The client reading the sensor that reports fields without time zone information
+                should assume the sensor has the same time zone as the client, if not explicitly configured otherwise on the client side.
+            </p>
+            <p>
+                If devices report time zone, this information should be propagated throughout the system. Otherwise, comparing timestamps from different time zones will be impossible.
+            </p>
+        </section2>
+        <section2 topic='xml:lang'>
+            <p>
+                Control commands sent using IQ stanzas instead of messages, should consider using the <strong>xml:lang</strong> attribute to specify the desired language
+                used (if possible) when returning information back to the caller, like error messages, localized control forms, etc.
+            </p>
+        </section2>
     </section1>
     <section1 topic='Security Considerations' anchor='security'>
-        <p>REQUIRED.</p>
+        <p>
+            Controlling devices in a large sensor network is a hackers wet dream. Therefore, consideration of how network security is implemented should not be underestimated.
+            The following sections provide some general items that should be considered.
+        </p>
+        <section2 topic='Encryption &amp; Authentication'>
+            <p>
+                Consider to always use an encrypted connection with any XMPP Server used in the network. Also, make sure the server is properly authenticated and any server
+                certificate properly validated.
+            </p>
+            <p>
+                Control commands should only be accepted by trusted parties. A minimum is to make sure only authenticated and validated clients (friends) can perform control actions
+                on the device.
+            </p>
+        </section2>
+        <section2 topic='Provisioning'>
+            <p>
+                Consider using provisioning servers to allow for detailed control of who can do what in a sensor network. Implementing proper provisioning support decreases
+                the risk for adverse effects, not only from intentional hacking, but also from unintentional errors.
+            </p>
+            <p>
+                If using delegated trust, make sure the provisioning servers are properly authenticated and validated before trusting them.
+            </p>
+            <p>
+                More information about provisioning can be found in <link url='sensor-network-provisioning.html'>sensor-network-provisioning.html</link>.
+            </p>
+        </section2>
     </section1>
     <section1 topic='IANA Considerations' anchor='iana'>
-        <p>REQUIRED.</p>
+        <p>This document requires no interaction with &IANA;.</p>
     </section1>
     <section1 topic='XMPP Registrar Considerations' anchor='registrar'>
         <p>REQUIRED.</p>
+        <!-- TODO -->
     </section1>
     <section1 topic='XML Schema' anchor='schema'>
         <code>
@@ -836,13 +1520,10 @@
     <xs:element name='set'>
         <xs:complexType>
             <xs:choice minOccurs='0' maxOccurs='unbounded'>
-                <xs:element name='node'>
-                    <xs:complexType>
-                        <xs:attributeGroup ref='nodeReference'/>
-                    </xs:complexType>
-                </xs:element>
+                <xs:element name='node' type='NodeReference'/>
                 <xs:element name='boolean' type='BooleanParameter'/>
                 <xs:element name='color' type='ColorParameter'/>
+                <xs:element name='date' type='DateParameter'/>
                 <xs:element name='dateTime' type='DateTimeParameter'/>
                 <xs:element name='double' type='DoubleParameter'/>
                 <xs:element name='duration' type='DurationParameter'/>
@@ -864,8 +1545,14 @@
  
     <xs:element name='setResponse'>
         <xs:complexType>
-            <xs:choice minOccurs='1' maxOccurs='1'>
-                <xs:element name='error' type='ParameterError' minOccurs='1' maxOccurs='unbounded'/>
+            <xs:choice minOccurs='0' maxOccurs='unbounded'>
+                <xs:element name='node' type='NodeReference'/>
+                <xs:element name='parameter'>
+                    <xs:complexType>
+                        <xs:attribute name='name' type='xs:string' use='required'/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name='error' type='ParameterError'/>
             </xs:choice>
             <xs:attributeGroup ref='responseCode'/>
         </xs:complexType>
@@ -873,7 +1560,9 @@
  
     <xs:element name='getForm'>
         <xs:complexType>
-            <xs:attributeGroup ref='nodeReference'/>
+            <xs:sequence minOccurs='0' maxOccurs='unbounded'>
+                <xs:element name='node' type='NodeReference'/>
+            </xs:sequence>
             <xs:attributeGroup ref='tokens'/>
         </xs:complexType>
     </xs:element>
@@ -884,6 +1573,12 @@
                 <xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
             </xs:sequence>
             <xs:attributeGroup ref='responseCode'/>
+        </xs:complexType>
+    </xs:element>
+ 
+    <xs:element name='parameterGroup'>
+        <xs:complexType>
+            <xs:attribute name='name' type='xs:string' use='required'/>
         </xs:complexType>
     </xs:element>
  
@@ -919,6 +1614,14 @@
         <xs:complexContent>
             <xs:extension base='Parameter'>
                 <xs:attribute name='value' type='Color' use='required'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    <xs:complexType name='DateParameter'>
+        <xs:complexContent>
+            <xs:extension base='Parameter'>
+                <xs:attribute name='value' type='xs:date' use='required'/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -987,6 +1690,10 @@
         </xs:simpleContent>
     </xs:complexType>
  
+    <xs:complexType name='NodeReference'>
+        <xs:attributeGroup ref='nodeReference'/>
+    </xs:complexType>
+ 
     <xs:simpleType name='Color'>
         <xs:restriction base='xs:string'>
             <xs:pattern value='^[0-9a-fA-F]{6}$'/>
@@ -999,6 +1706,7 @@
             <xs:enumeration value='NotFound'/>
             <xs:enumeration value='InsufficientPrivileges'/>
             <xs:enumeration value='Locked'/>
+            <xs:enumeration value='NotImplemented'/>
             <xs:enumeration value='FormError'/>
             <xs:enumeration value='OtherError'/>
         </xs:restriction>
@@ -1006,5 +1714,8 @@
  
 </xs:schema>]]>
         </code>
+    </section1>
+    <section1 topic='Acknowledgements' anchor='ack'>
+        <p>Thanks to Joachim Lindborg for all valuable feedback.</p>
     </section1>
 </xep>

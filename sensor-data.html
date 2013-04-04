@@ -1078,7 +1078,8 @@
 				All timestamps and dateTime values use the XML data type xs:dateTime to specify values. These values include a date, an optional time and an optional time zone.
 			</p>
 			<p class="" style="">
-				<span class="strong">Note:</span> If time zone is not available, it is supposed to be undefined.
+				<span class="strong">Note:</span> If time zone is not available, it is supposed to be undefined. The client reading the sensor that reports fields without time zone information
+				should assume the sensor has the same time zone as the client, if not explicitly configured otherwise on the client side.
 			</p>
 			<p class="" style="">
 				If devices report time zone, this information should be propagated throughout the system. Otherwise, comparing timestamps from different time zones will be impossible.
