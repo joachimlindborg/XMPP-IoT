@@ -17,13 +17,10 @@
 	<xs:element name='set'>
 		<xs:complexType>
 			<xs:choice minOccurs='0' maxOccurs='unbounded'>
-				<xs:element name='node'>
-					<xs:complexType>
-						<xs:attributeGroup ref='nodeReference'/>
-					</xs:complexType>
-				</xs:element>
+				<xs:element name='node' type='NodeReference'/>
 				<xs:element name='boolean' type='BooleanParameter'/>
 				<xs:element name='color' type='ColorParameter'/>
+				<xs:element name='date' type='DateParameter'/>
 				<xs:element name='dateTime' type='DateTimeParameter'/>
 				<xs:element name='double' type='DoubleParameter'/>
 				<xs:element name='duration' type='DurationParameter'/>
@@ -45,8 +42,14 @@
  
 	<xs:element name='setResponse'>
 		<xs:complexType>
-			<xs:choice minOccurs='1' maxOccurs='1'>
-				<xs:element name='error' type='ParameterError' minOccurs='1' maxOccurs='unbounded'/>
+			<xs:choice minOccurs='0' maxOccurs='unbounded'>
+				<xs:element name='node' type='NodeReference'/>
+				<xs:element name='parameter'>
+					<xs:complexType>
+						<xs:attribute name='name' type='xs:string' use='required'/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='error' type='ParameterError'/>
 			</xs:choice>
 			<xs:attributeGroup ref='responseCode'/>
 		</xs:complexType>
@@ -54,7 +57,9 @@
  
 	<xs:element name='getForm'>
 		<xs:complexType>
-			<xs:attributeGroup ref='nodeReference'/>
+			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+				<xs:element name='node' type='NodeReference'/>
+			</xs:sequence>
 			<xs:attributeGroup ref='tokens'/>
 		</xs:complexType>
 	</xs:element>
@@ -65,6 +70,12 @@
 				<xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
 			</xs:sequence>
 			<xs:attributeGroup ref='responseCode'/>
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:element name='parameterGroup'>
+		<xs:complexType>
+			<xs:attribute name='name' type='xs:string' use='required'/>
 		</xs:complexType>
 	</xs:element>
  
@@ -100,6 +111,14 @@
 		<xs:complexContent>
 			<xs:extension base='Parameter'>
 				<xs:attribute name='value' type='Color' use='required'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+ 
+	<xs:complexType name='DateParameter'>
+		<xs:complexContent>
+			<xs:extension base='Parameter'>
+				<xs:attribute name='value' type='xs:date' use='required'/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -168,6 +187,10 @@
 		</xs:simpleContent>
 	</xs:complexType>
  
+	<xs:complexType name='NodeReference'>
+		<xs:attributeGroup ref='nodeReference'/>
+	</xs:complexType>
+ 
 	<xs:simpleType name='Color'>
 		<xs:restriction base='xs:string'>
 			<xs:pattern value='^[0-9a-fA-F]{6}$'/>
@@ -180,6 +203,7 @@
 			<xs:enumeration value='NotFound'/>
 			<xs:enumeration value='InsufficientPrivileges'/>
 			<xs:enumeration value='Locked'/>
+			<xs:enumeration value='NotImplemented'/>
 			<xs:enumeration value='FormError'/>
 			<xs:enumeration value='OtherError'/>
 		</xs:restriction>
