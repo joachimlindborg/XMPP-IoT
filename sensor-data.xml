@@ -1424,6 +1424,24 @@
 ]]>
 		</code>
 	</section1>
+	<section1 topic='For more information' anchor='moreinfo'>
+		<p>
+			For more information, please see the following resources:
+		</p>
+		<ul>
+			<li>
+				<p>
+					The <link url='http://wiki.xmpp.org/web/Tech_pages/SensorNetworks'>Sensor Network section of the XMPP Wiki</link> contains further information about the
+					use of the sensor network XEPs, links to implementations, discussions, etc.
+				</p>
+			</li>
+			<li>
+				<p>
+					The XEP's and related projects are also available on <link url='https://github.com/joachimlindborg/'>github</link>, thanks to Joachim Lindborg.
+				</p>
+			</li>
+		</ul>
+	</section1>
 	<section1 topic='Acknowledgements' anchor='ack'>
 		<p>Thanks to Joachim Lindborg, Karin Forsell, Tina Beckman, Kevin Smith and Tobias Markmann for all valuable feedback.</p>
 	</section1>

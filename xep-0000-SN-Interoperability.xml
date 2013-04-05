@@ -1,14 +1,4 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- TODO: Field names -->
-<!-- TODO: Interfaces: Ex: Heat Meter, Electricity Meter, etc. -->
-<!-- TODO: Units: Categories, Units, conversion tables. -->
-<!-- TODO: Localization of field names: Modules, string IDs -->
-<!--<section2 topic='Tables for unit conversion'></section2>-->
-<!-- TODO: Privilege IDs -->
-<!-- TODO: required data sources, optional data sources -->
-<!-- TODO: Data Source ID -> Privilege ID: ...DataSources.SourceId -->
-<!-- TODO: Node Command ID -> Privilege ID: ...Commands.CommandId -->
-<!-- TODO: Node Properties -> Privilege ID: ...Parameters.Page.ParameterId -->
 <!DOCTYPE xep SYSTEM 'xep.dtd' [
 	<!ENTITY % ents SYSTEM 'xep.ent'>
 	%ents;
@@ -16,10 +6,10 @@
 <?xml-stylesheet type='text/xsl' href='xep.xsl'?>
 <xep>
 	<header>
-		<title>XEP Template</title>
-		<abstract>This specification provides an example of the format for XMPP Extension Protocols (XEPs).</abstract>
+		<title>Sensor Networks - Interoperability</title>
+		<abstract>This specification provides interoperability guidelines for sensors and actuators in sensor networks based on XMPP.</abstract>
 		<legal>
-			<copyright>This XMPP Extension Protocol is copyright (c) 1999 - 2012 by the XMPP Standards Foundation (XSF).</copyright>
+			<copyright>This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).</copyright>
 			<permissions>Permission is hereby granted, free of charge, to any person obtaining a copy of this specification (the &quot;Specification&quot;), to make use of the Specification without restriction, including without limitation the rights to implement the Specification in a software program, deploy the Specification in a network service, and copy, modify, merge, publish, translate, distribute, sublicense, or sell copies of the Specification, and to permit persons to whom the Specification is furnished to do so, subject to the condition that the foregoing copyright notice and this permission notice shall be included in all copies or substantial portions of the Specification. Unless separate permission is granted, modified works that are redistributed shall not contain misleading information regarding the authors, title, number, or publisher of the Specification, and shall not claim endorsement of the modified works by the authors, any organization or project to which the authors belong, or the XMPP Standards Foundation.</permissions>
 			<warranty>## NOTE WELL: This Specification is provided on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. In no event shall the XMPP Standards Foundation or the authors of this Specification be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Specification or the implementation, deployment, or other use of the Specification. ##</warranty>
 			<liability>In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall the XMPP Standards Foundation or any author of this Specification be liable for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising out of the use or inability to use the Specification (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if the XMPP Standards Foundation or such author has been advised of the possibility of such damages.</liability>
@@ -33,62 +23,670 @@
 		<sig>Standards</sig>
 		<approver>Council</approver>
 		<dependencies>
-			<spec>XMPP Core</spec>
 			<spec>XEP-0001</spec>
-			<spec>Etc.</spec>
+			<spec>XEP-0030</spec>
+			<spec>sensor-data</spec>
+			<spec>sensor-network-provisioning</spec>
+			<spec>xep-0000-Concentrators</spec>
+			<spec>xep-0000-Control</spec>
 		</dependencies>
 		<supersedes/>
 		<supersededby/>
 		<shortname>NOT_YET_ASSIGNED</shortname>
 		<author>
 			<firstname>Peter</firstname>
-			<surname>Saint-Andre</surname>
-			<email>stpeter@jabber.org</email>
-			<jid>stpeter@jabber.org</jid>
+			<surname>Waher</surname>
+			<email>peter.waher@clayster.com</email>
+			<jid>peter.waher@jabber.org</jid>
+			<uri>http://se.linkedin.com/pub/peter-waher/1a/71b/a29/</uri>
 		</author>
 		<revision>
 			<version>0.0.1</version>
-			<date>2001-09-14</date>
-			<initials>psa</initials>
+			<date>2013-04-04</date>
+			<initials>pwa</initials>
 			<remark>
 				<p>First draft.</p>
 			</remark>
 		</revision>
 	</header>
 	<section1 topic='Introduction' anchor='intro'>
-		<p>This is a template for use in writing XMPP Extension Protocol specifications (XEPs). For detailed information about the XSF's standards process and how to write a XEP, refer to "XEP-0001: XMPP Extension Protocols" and "XEP-0143: Guidelines for Authors of XMPP Extension Protocols".</p>
-	</section1>
-	<section1 topic='Requirements' anchor='reqs'>
-		<p>STRONGLY RECOMMENDED.</p>
+		<p>
+			There are multiple XEP's controlling how different parties exchange information between each other across the XMPP-based sensor network. However, to achieve
+			interoperability between products of different manufacturers, common rules need to be adhered to by all parties involved, so data and information can be freely 
+			interchanged and understood throughout the network. This document defines such interoperability rules.
+		</p>
+		<p>
+			Sensor networks contains many different architectures and use cases. For this reason, the sensor network standards have been divided into multiple XEPs according to the following table:
+		</p>
+		<table caption='Sensor Network XEPs'>
+			<tr>
+				<th>XEP</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td>XEP-0000-ColorParameter</td>
+				<td>Defines extensions for how color parameters can be handled, based on &xep0004;</td>
+			</tr>
+			<tr>
+				<td>XEP-0000-DynamicForms</td>
+				<td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
+			</tr>
+			<tr>
+				<td>exi</td>
+				<td>
+					Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
+					in all sensor network implementations where memory and packet size is an issue.
+				</td>
+			</tr>
+			<tr>
+				<td>xep-0000-SN-BatteryPoweredSensors</td>
+				<td>Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
+			</tr>
+			<tr>
+				<td>xep-0000-SN-Concentrators</td>
+				<td>Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
+			</tr>
+			<tr>
+				<td>xep-0000-SN-Control</td>
+				<td>Defines how to control actuators and other devices in sensor networks.</td>
+			</tr>
+			<tr>
+				<td>xep-0000-SN-Discovery</td>
+				<td>Defines the peculiars of sensor discovery in sensor networks. Apart from discovering sensors by JID, it also defines how to discover sensors based on location, etc.</td>
+			</tr>
+			<tr>
+				<td>xep-0000-SN-Events</td>
+				<td>Defines how sensors send events, how event subscription, hysteresis levels, etc., are configured.</td>
+			</tr>
+			<tr>
+				<td>xep-0000-SN-Interoperability</td>
+				<td>This specification. Defines guidelines for how to achieve interoperability in sensor networks, publishing interoperability interfaces for different types of devices.</td>
+			</tr>
+			<tr>
+				<td>xep-0000-SN-Multicast</td>
+				<td>Defines how sensor data can be multicast in efficient ways.</td>
+			</tr>
+			<tr>
+				<td>sensor-network-provisioning</td>
+				<td>Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
+			</tr>
+			<tr>
+				<td>xep-0000-SN-PubSub</td>
+				<td>Defines how efficient publication of sensor data can be made in sensor networks.</td>
+			</tr>
+			<tr>
+				<td>sensor-data</td>
+				<td>
+					Provides the underlying architecture, basic operations and data structures for sensor data communication over XMPP networks.
+					It includes a hardware abstraction model, removing any technical detail implemented in underlying technologies. This XEP is used by all other sensor network XEPs.
+				</td>
+			</tr>
+		</table>
 	</section1>
 	<section1 topic='Glossary' anchor='glossary'>
-		<p>OPTIONAL.</p>
+		<p>The following table lists common terms and corresponding descriptions.</p>
+		<dl>
+			<di>
+				<dt>Actuator</dt>
+				<dd>Device containing at least one configurable property or output that can and should be controlled by some other entity or device.</dd>
+			</di>
+			<di>
+				<dt>Computed Value</dt>
+				<dd>A value that is computed instead of measured.</dd>
+			</di>
+			<di>
+				<dt>Concentrator</dt>
+				<dd>Device managing a set of devices which it publishes on the XMPP network.</dd>
+			</di>
+			<di>
+				<dt>Field</dt>
+				<dd>
+					One item of sensor data. Contains information about: Node, Field Name, Value, Precision, Unit, Value Type, Status, Timestamp, Localization information, etc.
+					Fields should be unique within the triple (Node ID, Field Name, Timestamp).
+				</dd>
+			</di>
+			<di>
+				<dt>Field Name</dt>
+				<dd>Name of a field of sensor data. Examples: Energy, Volume, Flow, Power, etc.</dd>
+			</di>
+			<di>
+				<dt>Field Type</dt>
+				<dd>What type of value the field represents. Examples: Momentary Value, Status Value, Identification Value, Calculated Value, Peak Value, Historical Value, etc.</dd>
+			</di>
+			<di>
+				<dt>Historical Value</dt>
+				<dd>A value stored in memory from a previous timestamp.</dd>
+			</di>
+			<di>
+				<dt>Identification Value</dt>
+				<dd>A value that can be used for identification. (Serial numbers, meter IDs, locations, names, etc.)</dd>
+			</di>
+			<di>
+				<dt>Localization information</dt>
+				<dd>Optional information for a field, allowing the sensor to control how the information should be presented to human viewers.</dd>
+			</di>
+			<di>
+				<dt>Meter</dt>
+				<dd>A device possible containing multiple sensors, used in metering applications. Examples: Electricity meter, Water Meter, Heat Meter, Cooling Meter, etc.</dd>
+			</di>
+			<di>
+				<dt>Momentary Value</dt>
+				<dd>A momentary value represents a value measured at the time of the read-out.</dd>
+			</di>
+			<di>
+				<dt>Node</dt>
+				<dd>
+					Graphs contain nodes and edges between nodes. In Sensor Networks, sensors, actuators, meters, devices, gatewats, etc., are often depicted as nodes and links between sensors (friendships)
+					are depicted as edges. In abstract terms, it's easier to talk about a Node, than have to list different types of nodes possible (sensors, actuators, meters, devices, gateways, etc.).
+					Each Node has a Node ID.
+				</dd>
+			</di>
+			<di>
+				<dt>Node ID</dt>
+				<dd>
+					An ID uniquelly identifying a node within its corresponding context. If a globally unique ID is desired, an architechture should be used using a universally accepted
+					ID scheme.
+				</dd>
+			</di>
+			<di>
+				<dt>Parameter</dt>
+				<dd>
+					Readable and/or writable property on a node/device. The XEP xep-0000-SN-Concentrators deals with reading and writing parameters
+					on nodes/devices. Fields are not parameters, and parameters are not fields.
+				</dd>
+			</di>
+			<di>
+				<dt>Peak Value</dt>
+				<dd>A maximum or minimum value during a given period.</dd>
+			</di>
+			<di>
+				<dt>Precision</dt>
+				<dd>
+					In physics, precision determines the number of digits of precision. In sensor networks however, this definition is not easily applicable. Instead, precision
+					determines, for example, the number of decimals of precision, or power of precision. Example: 123.200 MWh contains 3 decimals of precision. All entities parsing and
+					delivering field information in sensor networks should always retain the number of decimals in a message.
+				</dd>
+			</di>
+			<di>
+				<dt>Sensor</dt>
+				<dd>
+					Device measuring at least one digital value (0 or 1) or analog value (value with precision and physical unit). Examples: Temperature sensor, pressure sensor, etc.
+					Sensor values are reported as fields during read-out. Each sensor has a unique Node ID.
+				</dd>
+			</di>
+			<di>
+				<dt>SN</dt>
+				<dd>Sensor Network. A network consisting, but not limited to sensors, where transport and use of sensor data is of primary concern. A sensor network may contain actuators, network applications, monitors, services, etc.</dd>
+			</di>
+			<di>
+				<dt>Status Value</dt>
+				<dd>A value displaying status information about something.</dd>
+			</di>
+			<di>
+				<dt>Timestamp</dt>
+				<dd>Timestamp of value, when the value was sampled or recorded.</dd>
+			</di>
+			<di>
+				<dt>Token</dt>
+				<dd>
+					A client, device or user can get a token from a provisioning server. These tokens can be included in requeests to other entities in the network, so these entities can validate
+					access rights with the provisioning server.
+				</dd>
+			</di>
+			<di>
+				<dt>Unit</dt>
+				<dd>Physical unit of value. Example: MWh, l/s, etc.</dd>
+			</di>
+			<di>
+				<dt>Value</dt>
+				<dd>A field value.</dd>
+			</di>
+			<di>
+				<dt>Value Status</dt>
+				<dd>Status of field value. Contains important status information for Quality of Service purposes. Examples: Ok, Error, Warning, Time Shifted, Missing, Signed, etc.</dd>
+			</di>
+			<di>
+				<dt>Value Type</dt>
+				<dd>Can be numeric, string, boolean, Date &amp; Time, Time Span or Enumeration.</dd>
+			</di>
+			<di>
+				<dt>WSN</dt>
+				<dd>Wireless Sensor Network, a sensor network including wireless devices.</dd>
+			</di>
+			<di>
+				<dt>XMPP Client</dt>
+				<dd>Application connected to an XMPP network, having a JID. Note that sensors, as well as applications requesting sensor data can be XMPP clients.</dd>
+			</di>
+		</dl>
 	</section1>
 	<section1 topic='Use Cases' anchor='usecases'>
-		<p>STRONGLY RECOMMENDED.</p>
-	</section1>
-	<section1 topic='Business Rules' anchor='rules'>
-		<p>OPTIONAL.</p>
-	</section1>
-	<section1 topic='Implementation Notes' anchor='impl'>
-		<p>OPTIONAL.</p>
-	</section1>
-	<section1 topic='Accessibility Considerations' anchor='access'>
-		<p>OPTIONAL.</p>
-	</section1>
-	<section1 topic='Internationalization Considerations' anchor='i18n'>
-		<p>OPTIONAL.</p>
+		<section2 topic='Interfaces' anchor='interfaces'>
+			<p>
+				The basic tool for creating interoperability in large networks where many different devices from many different manufacturers needs to interoperate, is to
+				create recognized interfaces with well defined attributes. The following sub-sections lists interfaces that should be adhered to by parties interested in
+				creating interoperable devices in sensor networks based on XMPP. A device can implement any number of interfaces.
+			</p>
+			<section3 topic='XMPP.SN.Sensors'>
+				<section4 topic='XMPP.SN.Sensors.Temperature'>
+					<table caption='XMPP.SN.Sensors.Temperature Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Temperature</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary Temperature value.</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.SN.Sensors.Pressure'>
+					<table caption='XMPP.SN.Sensors.Pressure Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Pressure</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary Pressure value.</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.SN.Sensors.LightIntensity'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.SN.Sensors.Humidity'>
+					<!-- TODO -->
+				</section4>
+			</section3>
+			<section3 topic='XMPP.SN.Meters'>
+				<section4 topic='XMPP.SN.Meters.Electricity'>
+					<table caption='XMPP.SN.Meters.Electricity Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Energy</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Accumulated Energy.</td>
+						</tr>
+						<tr>
+							<td>Power</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary power value.</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.SN.Meters.Heat'>
+					<table caption='XMPP.SN.Meters.Heat Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Energy</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Accumulated Energy.</td>
+						</tr>
+						<tr>
+							<td>Volume</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Accumulated Volume.</td>
+						</tr>
+						<tr>
+							<td>Power</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary power value.</td>
+						</tr>
+						<tr>
+							<td>Flow</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary flow value.</td>
+						</tr>
+						<tr>
+							<td>Temperature Difference</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary temperatude difference value.</td>
+						</tr>
+						<tr>
+							<td>Supply Temperature</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary temperatude difference value.</td>
+						</tr>
+						<tr>
+							<td>Return Temperature</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary temperatude difference value.</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.SN.Meters.Cooling'>
+					<table caption='XMPP.SN.Meters.Cooling Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Energy</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Accumulated Energy.</td>
+						</tr>
+						<tr>
+							<td>Volume</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Accumulated Volume.</td>
+						</tr>
+						<tr>
+							<td>Power</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary power value.</td>
+						</tr>
+						<tr>
+							<td>Flow</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary flow value.</td>
+						</tr>
+						<tr>
+							<td>Temperature Difference</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary temperatude difference value.</td>
+						</tr>
+						<tr>
+							<td>Supply Temperature</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary temperatude difference value.</td>
+						</tr>
+						<tr>
+							<td>Return Temperature</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary temperatude difference value.</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.SN.Meters.HeatingCooling'>
+					<table caption='XMPP.SN.Meters.HeatingCooling Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Energy</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Accumulated Energy.</td>
+						</tr>
+						<tr>
+							<td>Volume</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Accumulated Volume.</td>
+						</tr>
+						<tr>
+							<td>Power</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary power value.</td>
+						</tr>
+						<tr>
+							<td>Flow</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary flow value.</td>
+						</tr>
+						<tr>
+							<td>Temperature Difference</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary temperatude difference value.</td>
+						</tr>
+						<tr>
+							<td>Supply Temperature</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary temperatude difference value.</td>
+						</tr>
+						<tr>
+							<td>Return Temperature</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary temperatude difference value.</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.SN.Meters.Water'>
+					<table caption='XMPP.SN.Meters.Water Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Volume</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Accumulated Volume.</td>
+						</tr>
+						<tr>
+							<td>Flow</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary flow value.</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.SN.Meters.Gas'>
+					<table caption='XMPP.SN.Meters.Gas Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Volume</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Accumulated Volume.</td>
+						</tr>
+						<tr>
+							<td>Flow</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary flow value.</td>
+						</tr>
+					</table>
+				</section4>
+			</section3>
+			<section3 topic='XMPP.SN.Actuators'>
+				<section4 topic='XMPP.SN.Actuators.DigitalOutput'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.SN.Actuators.AnalogOutput'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.SN.Actuators.DigitalOutputs'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.SN.Actuators.AnalogOutputs'>
+					<!-- TODO -->
+				</section4>
+			</section3>
+			<section3 topic='XMPP.SN.Logistics'>
+				<!-- TODO -->
+			</section3>
+			<section3 topic='XMPP.SN.Identification'>
+				<!-- TODO -->
+			</section3>
+			<section3 topic='XMPP.SN.Cameras'>
+				<!-- TODO -->
+			</section3>
+			<section3 topic='XMPP.SN.Weather'>
+				<section4 topic='XMPP.SN.Weather.WindDirection'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.SN.Weather.WindSpeed'>
+					<!-- TODO -->
+				</section4>
+			</section3>
+		</section2>
+		<section2 topic='Field Names'>
+			<table caption='Localization of Field Names'>
+				<tr>
+					<th>Field Name</th>
+					<th>String ID</th>
+				</tr>
+				<tr>
+					<td>Pressure</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Temperature</td>
+					<td></td>
+				</tr>
+			</table>
+			<!-- TODO: Localization of field names: Modules, string IDs -->
+			<table caption='Composition of Field Names'>
+				<tr>
+					<th>Aggregation</th>
+					<th>String ID</th>
+				</tr>
+				<tr>
+					<td>%0%, Min</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>%0%, Max</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>%0%, Average</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>%0%, Mean</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>%0%, StdDev</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>%0%, Sum</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>%0%, Consumption</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>%0%, Start</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>%0%, End</td>
+					<td></td>
+				</tr>
+			</table>
+		</section2>
+		<section2 topic='Units'>
+			<!-- TODO: Units: Categories, Units, conversion tables. -->
+			<!--<section2 topic='Tables for unit conversion'></section2>-->
+			<!-- TODO: Temperature, Pressure, Energy, Power, Volume, Flow, Distance -->
+		</section2>
+		<section2 topic='Privilege IDs'>
+			<!-- TODO: Privilege IDs -->
+			<!-- TODO: Data Source ID -> Privilege ID: ...DataSources.SourceId -->
+			<!-- TODO: Node Command ID -> Privilege ID: ...Commands.CommandId -->
+			<!-- TODO: Node Properties -> Privilege ID: ...Parameters.Page.ParameterId -->
+		</section2>
+		<section2 topic='Data Sources'>
+			<!-- TODO: required data sources, optional data sources -->
+		</section2>
 	</section1>
 	<section1 topic='Security Considerations' anchor='security'>
 		<p>REQUIRED.</p>
 	</section1>
 	<section1 topic='IANA Considerations' anchor='iana'>
-		<p>REQUIRED.</p>
+		<p>This document requires no interaction with &IANA;.</p>
 	</section1>
 	<section1 topic='XMPP Registrar Considerations' anchor='registrar'>
 		<p>REQUIRED.</p>
+		<!-- TODO -->
 	</section1>
 	<section1 topic='XML Schema' anchor='schema'>
 		<p>REQUIRED for protocol specifications.</p>
+	</section1>
+	<section1 topic='Acknowledgements' anchor='ack'>
+		<p>Thanks to Joachim Lindborg for all valuable feedback.</p>
 	</section1>
 </xep>
