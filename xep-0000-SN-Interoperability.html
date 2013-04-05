@@ -2,31 +2,31 @@
 <html>
   <head>
     <META http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>XEP-xxxx: XEP Template</title>
+    <title>XEP-xxxx: Sensor Networks - Interoperability</title>
     <link rel="stylesheet" type="text/css" href="xmpp.css">
     <link href="prettify.css" type="text/css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"><script type="text/javascript" src="prettify.js"></script><meta name="DC.Title" content="XEP Template">
-    <meta name="DC.Creator" content="Peter Saint-Andre">
-    <meta name="DC.Description" content="This specification provides an example of the format for XMPP Extension Protocols (XEPs).">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"><script type="text/javascript" src="prettify.js"></script><meta name="DC.Title" content="Sensor Networks - Interoperability">
+    <meta name="DC.Creator" content="Peter Waher">
+    <meta name="DC.Description" content="This specification provides interoperability guidelines for sensors and actuators in sensor networks based on XMPP.">
     <meta name="DC.Publisher" content="XMPP Standards Foundation">
     <meta name="DC.Contributor" content="XMPP Extensions Editor">
-    <meta name="DC.Date" content="2001-09-14">
+    <meta name="DC.Date" content="2013-04-04">
     <meta name="DC.Type" content="XMPP Extension Protocol">
     <meta name="DC.Format" content="XHTML">
     <meta name="DC.Identifier" content="XEP-xxxx">
     <meta name="DC.Language" content="en">
-    <meta name="DC.Rights" content="This XMPP Extension Protocol is copyright (c) 1999 - 2012 by the XMPP Standards Foundation (XSF).">
+    <meta name="DC.Rights" content="This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).">
   </head>
   <body onload="prettyPrint()">
-    <h1>XEP-xxxx: XEP Template</h1>
+    <h1>XEP-xxxx: Sensor Networks - Interoperability</h1>
     <table>
       <tr valign="top">
         <td><strong>Abstract:</strong></td>
-        <td>This specification provides an example of the format for XMPP Extension Protocols (XEPs).</td>
+        <td>This specification provides interoperability guidelines for sensors and actuators in sensor networks based on XMPP.</td>
       </tr>
       <tr valign="top">
         <td><strong>Author:</strong></td>
-        <td>Peter Saint-Andre</td>
+        <td>Peter Waher</td>
       </tr>
       <tr valign="top">
         <td><strong>Copyright:</strong></td>
@@ -46,7 +46,7 @@
       </tr>
       <tr valign="top">
         <td><strong>Last Updated:</strong></td>
-        <td>2001-09-14</td>
+        <td>2013-04-04</td>
       </tr>
     </table>
     <hr>
@@ -54,46 +54,741 @@
     <hr>
     <h2>Table of Contents</h2>
     <div class="indent">
-      <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#reqs">Requirements</a><br>3.  <a href="#glossary">Glossary</a><br>4.  <a href="#usecases">Use Cases</a><br>5.  <a href="#rules">Business Rules</a><br>6.  <a href="#impl">Implementation Notes</a><br>7.  <a href="#access">Accessibility Considerations</a><br>8.  <a href="#i18n">Internationalization Considerations</a><br>9.  <a href="#security">Security Considerations</a><br>10.  <a href="#iana">IANA Considerations</a><br>11.  <a href="#registrar">XMPP Registrar Considerations</a><br>12.  <a href="#schema">XML Schema</a></p>
+      <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
+      3.1.  <a href="#interfaces">Interfaces</a><br>      
+      3.1.1.  <a href="#sect-ID0EXIAC">XMPP.SN.Sensors</a><br>        
+      3.1.1.1.  <a href="#sect-ID0E2IAC">XMPP.SN.Sensors.Temperature</a><br>        
+      3.1.1.2.  <a href="#sect-ID0ESKAC">XMPP.SN.Sensors.Pressure</a><br>        
+      3.1.1.3.  <a href="#sect-ID0EJMAC">XMPP.SN.Sensors.LightIntensity</a><br>        
+      3.1.1.4.  <a href="#sect-ID0EQMAC">XMPP.SN.Sensors.Humidity</a><br>      
+      3.1.2.  <a href="#sect-ID0EYMAC">XMPP.SN.Meters</a><br>        
+      3.1.2.1.  <a href="#sect-ID0E3MAC">XMPP.SN.Meters.Electricity</a><br>        
+      3.1.2.2.  <a href="#sect-ID0EKPAC">XMPP.SN.Meters.Heat</a><br>        
+      3.1.2.3.  <a href="#sect-ID0EMFAE">XMPP.SN.Meters.Cooling</a><br>        
+      3.1.2.4.  <a href="#sect-ID0ENLAE">XMPP.SN.Meters.HeatingCooling</a><br>        
+      3.1.2.5.  <a href="#sect-ID0EORAE">XMPP.SN.Meters.Water</a><br>        
+      3.1.2.6.  <a href="#sect-ID0E3TAE">XMPP.SN.Meters.Gas</a><br>      
+      3.1.3.  <a href="#sect-ID0ELWAE">XMPP.SN.Actuators</a><br>        
+      3.1.3.1.  <a href="#sect-ID0EPWAE">XMPP.SN.Actuators.DigitalOutput</a><br>        
+      3.1.3.2.  <a href="#sect-ID0EWWAE">XMPP.SN.Actuators.AnalogOutput</a><br>        
+      3.1.3.3.  <a href="#sect-ID0E4WAE">XMPP.SN.Actuators.DigitalOutputs</a><br>        
+      3.1.3.4.  <a href="#sect-ID0EEXAE">XMPP.SN.Actuators.AnalogOutputs</a><br>      
+      3.1.4.  <a href="#sect-ID0EMXAE">XMPP.SN.Logistics</a><br>      
+      3.1.5.  <a href="#sect-ID0ETXAE">XMPP.SN.Identification</a><br>      
+      3.1.6.  <a href="#sect-ID0E1XAE">XMPP.SN.Cameras</a><br>      
+      3.1.7.  <a href="#sect-ID0EBYAE">XMPP.SN.Weather</a><br>        
+      3.1.7.1.  <a href="#sect-ID0EFYAE">XMPP.SN.Weather.WindDirection</a><br>        
+      3.1.7.2.  <a href="#sect-ID0EMYAE">XMPP.SN.Weather.WindSpeed</a><br>   
+      3.2.  <a href="#sect-ID0EVYAE">Field Names</a><br>   
+      3.3.  <a href="#sect-ID0ET4AE">Units</a><br>   
+      3.4.  <a href="#sect-ID0E54AE">Privilege IDs</a><br>   
+      3.5.  <a href="#sect-ID0EL5AE">Data Sources</a><br>4.  <a href="#security">Security Considerations</a><br>5.  <a href="#iana">IANA Considerations</a><br>6.  <a href="#registrar">XMPP Registrar Considerations</a><br>7.  <a href="#schema">XML Schema</a><br>8.  <a href="#ack">Acknowledgements</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
     </div>
     <hr>
     <h2>1.
        <a name="intro">Introduction</a></h2>
-		<p class="" style="">This is a template for use in writing XMPP Extension Protocol specifications (XEPs). For detailed information about the XSF's standards process and how to write a XEP, refer to "XEP-0001: XMPP Extension Protocols" and "XEP-0143: Guidelines for Authors of XMPP Extension Protocols".</p>
+		<p class="" style="">
+			There are multiple XEP's controlling how different parties exchange information between each other across the XMPP-based sensor network. However, to achieve
+			interoperability between products of different manufacturers, common rules need to be adhered to by all parties involved, so data and information can be freely 
+			interchanged and understood throughout the network. This document defines such interoperability rules.
+		</p>
+		<p class="" style="">
+			Sensor networks contains many different architectures and use cases. For this reason, the sensor network standards have been divided into multiple XEPs according to the following table:
+		</p>
+		<div class="indent">
+      <p class="caption"><a name="table-1"></a>Table 1: Sensor Network XEPs</p>
+      <table border="1" cellpadding="3" cellspacing="0">
+			<tr class="body">
+				<th colspan="" rowspan="">XEP</th>
+				<th colspan="" rowspan="">Description</th>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">XEP-0000-ColorParameter</td>
+				<td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EDE">1</a>]</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">XEP-0000-DynamicForms</td>
+				<td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0E1E">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EGF">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0ESF">4</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0E5F">5</a>].</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">exi</td>
+				<td colspan="" rowspan="">
+					Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
+					in all sensor network implementations where memory and packet size is an issue.
+				</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">xep-0000-SN-BatteryPoweredSensors</td>
+				<td colspan="" rowspan="">Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">xep-0000-SN-Concentrators</td>
+				<td colspan="" rowspan="">Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">xep-0000-SN-Control</td>
+				<td colspan="" rowspan="">Defines how to control actuators and other devices in sensor networks.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">xep-0000-SN-Discovery</td>
+				<td colspan="" rowspan="">Defines the peculiars of sensor discovery in sensor networks. Apart from discovering sensors by JID, it also defines how to discover sensors based on location, etc.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">xep-0000-SN-Events</td>
+				<td colspan="" rowspan="">Defines how sensors send events, how event subscription, hysteresis levels, etc., are configured.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">xep-0000-SN-Interoperability</td>
+				<td colspan="" rowspan="">This specification. Defines guidelines for how to achieve interoperability in sensor networks, publishing interoperability interfaces for different types of devices.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">xep-0000-SN-Multicast</td>
+				<td colspan="" rowspan="">Defines how sensor data can be multicast in efficient ways.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">sensor-network-provisioning</td>
+				<td colspan="" rowspan="">Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">xep-0000-SN-PubSub</td>
+				<td colspan="" rowspan="">Defines how efficient publication of sensor data can be made in sensor networks.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">sensor-data</td>
+				<td colspan="" rowspan="">
+					Provides the underlying architecture, basic operations and data structures for sensor data communication over XMPP networks.
+					It includes a hardware abstraction model, removing any technical detail implemented in underlying technologies. This XEP is used by all other sensor network XEPs.
+				</td>
+			</tr>
+		</table>
+    </div>
 	<h2>2.
-       <a name="reqs">Requirements</a></h2>
-		<p class="" style="">STRONGLY RECOMMENDED.</p>
-	<h2>3.
        <a name="glossary">Glossary</a></h2>
-		<p class="" style="">OPTIONAL.</p>
-	<h2>4.
+		<p class="" style="">The following table lists common terms and corresponding descriptions.</p>
+		<div class="indent">
+      <dl>
+			<di>
+				<dt><strong>Actuator</strong></dt>
+				<dd>Device containing at least one configurable property or output that can and should be controlled by some other entity or device.</dd>
+			</di>
+			<di>
+				<dt><strong>Computed Value</strong></dt>
+				<dd>A value that is computed instead of measured.</dd>
+			</di>
+			<di>
+				<dt><strong>Concentrator</strong></dt>
+				<dd>Device managing a set of devices which it publishes on the XMPP network.</dd>
+			</di>
+			<di>
+				<dt><strong>Field</strong></dt>
+				<dd>
+					One item of sensor data. Contains information about: Node, Field Name, Value, Precision, Unit, Value Type, Status, Timestamp, Localization information, etc.
+					Fields should be unique within the triple (Node ID, Field Name, Timestamp).
+				</dd>
+			</di>
+			<di>
+				<dt><strong>Field Name</strong></dt>
+				<dd>Name of a field of sensor data. Examples: Energy, Volume, Flow, Power, etc.</dd>
+			</di>
+			<di>
+				<dt><strong>Field Type</strong></dt>
+				<dd>What type of value the field represents. Examples: Momentary Value, Status Value, Identification Value, Calculated Value, Peak Value, Historical Value, etc.</dd>
+			</di>
+			<di>
+				<dt><strong>Historical Value</strong></dt>
+				<dd>A value stored in memory from a previous timestamp.</dd>
+			</di>
+			<di>
+				<dt><strong>Identification Value</strong></dt>
+				<dd>A value that can be used for identification. (Serial numbers, meter IDs, locations, names, etc.)</dd>
+			</di>
+			<di>
+				<dt><strong>Localization information</strong></dt>
+				<dd>Optional information for a field, allowing the sensor to control how the information should be presented to human viewers.</dd>
+			</di>
+			<di>
+				<dt><strong>Meter</strong></dt>
+				<dd>A device possible containing multiple sensors, used in metering applications. Examples: Electricity meter, Water Meter, Heat Meter, Cooling Meter, etc.</dd>
+			</di>
+			<di>
+				<dt><strong>Momentary Value</strong></dt>
+				<dd>A momentary value represents a value measured at the time of the read-out.</dd>
+			</di>
+			<di>
+				<dt><strong>Node</strong></dt>
+				<dd>
+					Graphs contain nodes and edges between nodes. In Sensor Networks, sensors, actuators, meters, devices, gatewats, etc., are often depicted as nodes and links between sensors (friendships)
+					are depicted as edges. In abstract terms, it's easier to talk about a Node, than have to list different types of nodes possible (sensors, actuators, meters, devices, gateways, etc.).
+					Each Node has a Node ID.
+				</dd>
+			</di>
+			<di>
+				<dt><strong>Node ID</strong></dt>
+				<dd>
+					An ID uniquelly identifying a node within its corresponding context. If a globally unique ID is desired, an architechture should be used using a universally accepted
+					ID scheme.
+				</dd>
+			</di>
+			<di>
+				<dt><strong>Parameter</strong></dt>
+				<dd>
+					Readable and/or writable property on a node/device. The XEP xep-0000-SN-Concentrators deals with reading and writing parameters
+					on nodes/devices. Fields are not parameters, and parameters are not fields.
+				</dd>
+			</di>
+			<di>
+				<dt><strong>Peak Value</strong></dt>
+				<dd>A maximum or minimum value during a given period.</dd>
+			</di>
+			<di>
+				<dt><strong>Precision</strong></dt>
+				<dd>
+					In physics, precision determines the number of digits of precision. In sensor networks however, this definition is not easily applicable. Instead, precision
+					determines, for example, the number of decimals of precision, or power of precision. Example: 123.200 MWh contains 3 decimals of precision. All entities parsing and
+					delivering field information in sensor networks should always retain the number of decimals in a message.
+				</dd>
+			</di>
+			<di>
+				<dt><strong>Sensor</strong></dt>
+				<dd>
+					Device measuring at least one digital value (0 or 1) or analog value (value with precision and physical unit). Examples: Temperature sensor, pressure sensor, etc.
+					Sensor values are reported as fields during read-out. Each sensor has a unique Node ID.
+				</dd>
+			</di>
+			<di>
+				<dt><strong>SN</strong></dt>
+				<dd>Sensor Network. A network consisting, but not limited to sensors, where transport and use of sensor data is of primary concern. A sensor network may contain actuators, network applications, monitors, services, etc.</dd>
+			</di>
+			<di>
+				<dt><strong>Status Value</strong></dt>
+				<dd>A value displaying status information about something.</dd>
+			</di>
+			<di>
+				<dt><strong>Timestamp</strong></dt>
+				<dd>Timestamp of value, when the value was sampled or recorded.</dd>
+			</di>
+			<di>
+				<dt><strong>Token</strong></dt>
+				<dd>
+					A client, device or user can get a token from a provisioning server. These tokens can be included in requeests to other entities in the network, so these entities can validate
+					access rights with the provisioning server.
+				</dd>
+			</di>
+			<di>
+				<dt><strong>Unit</strong></dt>
+				<dd>Physical unit of value. Example: MWh, l/s, etc.</dd>
+			</di>
+			<di>
+				<dt><strong>Value</strong></dt>
+				<dd>A field value.</dd>
+			</di>
+			<di>
+				<dt><strong>Value Status</strong></dt>
+				<dd>Status of field value. Contains important status information for Quality of Service purposes. Examples: Ok, Error, Warning, Time Shifted, Missing, Signed, etc.</dd>
+			</di>
+			<di>
+				<dt><strong>Value Type</strong></dt>
+				<dd>Can be numeric, string, boolean, Date &amp; Time, Time Span or Enumeration.</dd>
+			</di>
+			<di>
+				<dt><strong>WSN</strong></dt>
+				<dd>Wireless Sensor Network, a sensor network including wireless devices.</dd>
+			</di>
+			<di>
+				<dt><strong>XMPP Client</strong></dt>
+				<dd>Application connected to an XMPP network, having a JID. Note that sensors, as well as applications requesting sensor data can be XMPP clients.</dd>
+			</di>
+		</dl>
+    </div>
+	<h2>3.
        <a name="usecases">Use Cases</a></h2>
-		<p class="" style="">STRONGLY RECOMMENDED.</p>
-	<h2>5.
-       <a name="rules">Business Rules</a></h2>
-		<p class="" style="">OPTIONAL.</p>
-	<h2>6.
-       <a name="impl">Implementation Notes</a></h2>
-		<p class="" style="">OPTIONAL.</p>
-	<h2>7.
-       <a name="access">Accessibility Considerations</a></h2>
-		<p class="" style="">OPTIONAL.</p>
-	<h2>8.
-       <a name="i18n">Internationalization Considerations</a></h2>
-		<p class="" style="">OPTIONAL.</p>
-	<h2>9.
+		<div class="indent">
+      <h3>3.1 <a name="interfaces">Interfaces</a></h3>
+			<p class="" style="">
+				The basic tool for creating interoperability in large networks where many different devices from many different manufacturers needs to interoperate, is to
+				create recognized interfaces with well defined attributes. The following sub-sections lists interfaces that should be adhered to by parties interested in
+				creating interoperable devices in sensor networks based on XMPP. A device can implement any number of interfaces.
+			</p>
+			<div class="indent">
+        <h3>3.1.1 <a name="sect-ID0EXIAC">XMPP.SN.Sensors</a></h3>
+				<div class="indent">
+          <h3>3.1.1.1 <a name="sect-ID0E2IAC">XMPP.SN.Sensors.Temperature</a></h3>
+					<div class="indent">
+            <p class="caption"><a name="table-2"></a>Table 2: XMPP.SN.Sensors.Temperature Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Temperature</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary Temperature value.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+				<div class="indent">
+          <h3>3.1.1.2 <a name="sect-ID0ESKAC">XMPP.SN.Sensors.Pressure</a></h3>
+					<div class="indent">
+            <p class="caption"><a name="table-3"></a>Table 3: XMPP.SN.Sensors.Pressure Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Pressure</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary Pressure value.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+				<div class="indent">
+          <h3>3.1.1.3 <a name="sect-ID0EJMAC">XMPP.SN.Sensors.LightIntensity</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.1.4 <a name="sect-ID0EQMAC">XMPP.SN.Sensors.Humidity</a></h3>
+					
+				</div>
+			</div>
+			<div class="indent">
+        <h3>3.1.2 <a name="sect-ID0EYMAC">XMPP.SN.Meters</a></h3>
+				<div class="indent">
+          <h3>3.1.2.1 <a name="sect-ID0E3MAC">XMPP.SN.Meters.Electricity</a></h3>
+					<div class="indent">
+            <p class="caption"><a name="table-4"></a>Table 4: XMPP.SN.Meters.Electricity Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Energy</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Accumulated Energy.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Power</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary power value.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+				<div class="indent">
+          <h3>3.1.2.2 <a name="sect-ID0EKPAC">XMPP.SN.Meters.Heat</a></h3>
+					<div class="indent">
+            <p class="caption"><a name="table-5"></a>Table 5: XMPP.SN.Meters.Heat Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Energy</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Accumulated Energy.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Volume</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Accumulated Volume.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Power</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary power value.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Flow</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary flow value.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Temperature Difference</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary temperatude difference value.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Supply Temperature</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary temperatude difference value.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Return Temperature</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary temperatude difference value.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+				<div class="indent">
+          <h3>3.1.2.3 <a name="sect-ID0EMFAE">XMPP.SN.Meters.Cooling</a></h3>
+					<div class="indent">
+            <p class="caption"><a name="table-6"></a>Table 6: XMPP.SN.Meters.Cooling Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Energy</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Accumulated Energy.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Volume</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Accumulated Volume.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Power</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary power value.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Flow</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary flow value.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Temperature Difference</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary temperatude difference value.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Supply Temperature</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary temperatude difference value.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Return Temperature</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary temperatude difference value.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+				<div class="indent">
+          <h3>3.1.2.4 <a name="sect-ID0ENLAE">XMPP.SN.Meters.HeatingCooling</a></h3>
+					<div class="indent">
+            <p class="caption"><a name="table-7"></a>Table 7: XMPP.SN.Meters.HeatingCooling Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Energy</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Accumulated Energy.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Volume</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Accumulated Volume.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Power</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary power value.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Flow</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary flow value.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Temperature Difference</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary temperatude difference value.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Supply Temperature</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary temperatude difference value.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Return Temperature</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary temperatude difference value.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+				<div class="indent">
+          <h3>3.1.2.5 <a name="sect-ID0EORAE">XMPP.SN.Meters.Water</a></h3>
+					<div class="indent">
+            <p class="caption"><a name="table-8"></a>Table 8: XMPP.SN.Meters.Water Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Volume</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Accumulated Volume.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Flow</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary flow value.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+				<div class="indent">
+          <h3>3.1.2.6 <a name="sect-ID0E3TAE">XMPP.SN.Meters.Gas</a></h3>
+					<div class="indent">
+            <p class="caption"><a name="table-9"></a>Table 9: XMPP.SN.Meters.Gas Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Volume</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Accumulated Volume.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Flow</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary flow value.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+			</div>
+			<div class="indent">
+        <h3>3.1.3 <a name="sect-ID0ELWAE">XMPP.SN.Actuators</a></h3>
+				<div class="indent">
+          <h3>3.1.3.1 <a name="sect-ID0EPWAE">XMPP.SN.Actuators.DigitalOutput</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.3.2 <a name="sect-ID0EWWAE">XMPP.SN.Actuators.AnalogOutput</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.3.3 <a name="sect-ID0E4WAE">XMPP.SN.Actuators.DigitalOutputs</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.3.4 <a name="sect-ID0EEXAE">XMPP.SN.Actuators.AnalogOutputs</a></h3>
+					
+				</div>
+			</div>
+			<div class="indent">
+        <h3>3.1.4 <a name="sect-ID0EMXAE">XMPP.SN.Logistics</a></h3>
+				
+			</div>
+			<div class="indent">
+        <h3>3.1.5 <a name="sect-ID0ETXAE">XMPP.SN.Identification</a></h3>
+				
+			</div>
+			<div class="indent">
+        <h3>3.1.6 <a name="sect-ID0E1XAE">XMPP.SN.Cameras</a></h3>
+				
+			</div>
+			<div class="indent">
+        <h3>3.1.7 <a name="sect-ID0EBYAE">XMPP.SN.Weather</a></h3>
+				<div class="indent">
+          <h3>3.1.7.1 <a name="sect-ID0EFYAE">XMPP.SN.Weather.WindDirection</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.7.2 <a name="sect-ID0EMYAE">XMPP.SN.Weather.WindSpeed</a></h3>
+					
+				</div>
+			</div>
+		</div>
+		<div class="indent">
+      <h3>3.2 <a name="sect-ID0EVYAE">Field Names</a></h3>
+			<div class="indent">
+        <p class="caption"><a name="table-10"></a>Table 10: Localization of Field Names</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+				<tr class="body">
+					<th colspan="" rowspan="">Field Name</th>
+					<th colspan="" rowspan="">String ID</th>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">Pressure</td>
+					<td colspan="" rowspan=""></td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">Temperature</td>
+					<td colspan="" rowspan=""></td>
+				</tr>
+			</table>
+      </div>
+			
+			<div class="indent">
+        <p class="caption"><a name="table-11"></a>Table 11: Composition of Field Names</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+				<tr class="body">
+					<th colspan="" rowspan="">Aggregation</th>
+					<th colspan="" rowspan="">String ID</th>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">%0%, Min</td>
+					<td colspan="" rowspan=""></td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">%0%, Max</td>
+					<td colspan="" rowspan=""></td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">%0%, Average</td>
+					<td colspan="" rowspan=""></td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">%0%, Mean</td>
+					<td colspan="" rowspan=""></td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">%0%, StdDev</td>
+					<td colspan="" rowspan=""></td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">%0%, Sum</td>
+					<td colspan="" rowspan=""></td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">%0%, Consumption</td>
+					<td colspan="" rowspan=""></td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">%0%, Start</td>
+					<td colspan="" rowspan=""></td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">%0%, End</td>
+					<td colspan="" rowspan=""></td>
+				</tr>
+			</table>
+      </div>
+		</div>
+		<div class="indent">
+      <h3>3.3 <a name="sect-ID0ET4AE">Units</a></h3>
+			
+			
+			
+		</div>
+		<div class="indent">
+      <h3>3.4 <a name="sect-ID0E54AE">Privilege IDs</a></h3>
+			
+			
+			
+			
+		</div>
+		<div class="indent">
+      <h3>3.5 <a name="sect-ID0EL5AE">Data Sources</a></h3>
+			
+		</div>
+	<h2>4.
        <a name="security">Security Considerations</a></h2>
 		<p class="" style="">REQUIRED.</p>
-	<h2>10.
+	<h2>5.
        <a name="iana">IANA Considerations</a></h2>
-		<p class="" style="">REQUIRED.</p>
-	<h2>11.
+		<p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EK6AE">6</a>].</p>
+	<h2>6.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
 		<p class="" style="">REQUIRED.</p>
-	<h2>12.
+		
+	<h2>7.
        <a name="schema">XML Schema</a></h2>
 		<p class="" style="">REQUIRED for protocol specifications.</p>
+	<h2>8.
+       <a name="ack">Acknowledgements</a></h2>
+		<p class="" style="">Thanks to Joachim Lindborg for all valuable feedback.</p>
 	<hr><a name="appendices"></a><h2>Appendices</h2>
     <hr><a name="appendix-docinfo"></a><h3>Appendix A: Document Information</h3>
     <p class="indent">
@@ -105,8 +800,8 @@
             Type:
             <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
             Version: 0.0.1<br>
-            Last Updated: 2001-09-14<br>
-                Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001, Etc.<br>
+            Last Updated: 2013-04-04<br>
+                Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XEP-0001, XEP-0030, sensor-data, sensor-network-provisioning, xep-0000-Concentrators, xep-0000-Control<br>
                 Supersedes: None<br>
                 Superseded By: None<br>
             Short Name: NOT_YET_ASSIGNED<br>
@@ -115,16 +810,18 @@
                 <a class="standardsButton" href="http://xmpp.org/extensions/xep-xxxx.pdf">PDF</a></p>
     <hr><a name="appendix-authorinfo"></a><h3>Appendix B: Author Information</h3>
     <div class="indent">
-      <h3>Peter Saint-Andre</h3>
+      <h3>Peter Waher</h3>
       <p class="indent">
         Email:
-        <a href="mailto:stpeter@jabber.org">stpeter@jabber.org</a><br>
+        <a href="mailto:peter.waher@clayster.com">peter.waher@clayster.com</a><br>
         JabberID: 
-        <a href="xmpp:stpeter@jabber.org">stpeter@jabber.org</a><br></p>
+        <a href="xmpp:peter.waher@jabber.org">peter.waher@jabber.org</a><br>
+        URI: 
+        <a href="http://se.linkedin.com/pub/peter-waher/1a/71b/a29/">http://se.linkedin.com/pub/peter-waher/1a/71b/a29/</a><br></p>
     </div>
     <hr><a name="appendix-legal"></a><h3>Appendix C: Legal Notices</h3>
     <div class="indent">
-      <h4>Copyright</h4>This XMPP Extension Protocol is copyright (c) 1999 - 2012 by the XMPP Standards Foundation (XSF).<h4>Permissions</h4>Permission is hereby granted, free of charge, to any person obtaining a copy of this specification (the "Specification"), to make use of the Specification without restriction, including without limitation the rights to implement the Specification in a software program, deploy the Specification in a network service, and copy, modify, merge, publish, translate, distribute, sublicense, or sell copies of the Specification, and to permit persons to whom the Specification is furnished to do so, subject to the condition that the foregoing copyright notice and this permission notice shall be included in all copies or substantial portions of the Specification. Unless separate permission is granted, modified works that are redistributed shall not contain misleading information regarding the authors, title, number, or publisher of the Specification, and shall not claim endorsement of the modified works by the authors, any organization or project to which the authors belong, or the XMPP Standards Foundation.<h4>Disclaimer of Warranty</h4><span style="font-weight: bold">## NOTE WELL: This Specification is provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. In no event shall the XMPP Standards Foundation or the authors of this Specification be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Specification or the implementation, deployment, or other use of the Specification. ##</span><h4>Limitation of Liability</h4>In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall the XMPP Standards Foundation or any author of this Specification be liable for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising out of the use or inability to use the Specification (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if the XMPP Standards Foundation or such author has been advised of the possibility of such damages.<h4>IPR Conformance</h4>
+      <h4>Copyright</h4>This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).<h4>Permissions</h4>Permission is hereby granted, free of charge, to any person obtaining a copy of this specification (the "Specification"), to make use of the Specification without restriction, including without limitation the rights to implement the Specification in a software program, deploy the Specification in a network service, and copy, modify, merge, publish, translate, distribute, sublicense, or sell copies of the Specification, and to permit persons to whom the Specification is furnished to do so, subject to the condition that the foregoing copyright notice and this permission notice shall be included in all copies or substantial portions of the Specification. Unless separate permission is granted, modified works that are redistributed shall not contain misleading information regarding the authors, title, number, or publisher of the Specification, and shall not claim endorsement of the modified works by the authors, any organization or project to which the authors belong, or the XMPP Standards Foundation.<h4>Disclaimer of Warranty</h4><span style="font-weight: bold">## NOTE WELL: This Specification is provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. In no event shall the XMPP Standards Foundation or the authors of this Specification be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Specification or the implementation, deployment, or other use of the Specification. ##</span><h4>Limitation of Liability</h4>In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall the XMPP Standards Foundation or any author of this Specification be liable for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising out of the use or inability to use the Specification (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if the XMPP Standards Foundation or such author has been advised of the possibility of such damages.<h4>IPR Conformance</h4>
 				This XMPP Extension Protocol has been contributed in full conformance with the XSF's Intellectual Property Rights Policy (a copy of which may be found at &lt;<a href="http://www.xmpp.org/extensions/ipr-policy.shtml">http://www.xmpp.org/extensions/ipr-policy.shtml</a>&gt; or obtained by writing to XSF, P.O. Box 1641, Denver, CO 80201 USA).
 			</div>
     <hr><a name="appendix-xmpp"></a><h3>Appendix D: Relation to XMPP</h3>
@@ -136,14 +833,21 @@
     <hr><a name="appendix-conformance"></a><h3>Appendix F: Requirements Conformance</h3>
     <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
     <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
-    <div class="indent"></div>
+    <div class="indent">
+      <p><a name="nt-ID0EDE">1</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0E1E">2</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0EGF">3</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
+      <p><a name="nt-ID0ESF">4</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
+      <p><a name="nt-ID0E5F">5</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+      <p><a name="nt-ID0EK6AE">6</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+    </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
     <div class="indent">
-      <h4>Version 0.0.1 (2001-09-14)</h4>
+      <h4>Version 0.0.1 (2013-04-04)</h4>
       <div class="indent">
 				<p class="" style="">First draft.</p>
-			 (psa)
+			 (pwa)
     </div>
     </div>
     <hr>
