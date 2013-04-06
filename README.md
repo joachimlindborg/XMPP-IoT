@@ -6,9 +6,9 @@ Sensor Networks and the Internet of Things
 
 The final result will be published through the XSF foundation 
 
-# Planned XEP's 
+# working XEP's follow the links planned XEP will be provided during spring 2013
 
-[XEP-0000-Ex](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-EXI/blob/master/xep-0000-Exi.html)
+[xep-exi](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-EXI/blob/master/exi.html)
 		Defines how to EXI can be used in XMPP to achieve efficient 
 		compression of data. Albeit not a sensor network specific XEP, 
 		this XEP should be considered in all sensor network 
@@ -35,7 +35,8 @@ xep-0000-SN-Events
 		Defines how sensors send events, how event subscription, 
 		hysteresis levels, etc., are configured.
 
-xep-0000-SN-Interoperability
+
+[xep-0000-SN-Interoperability](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-SN/blob/master/sensor-data.html)
 		Defines guidelines for how to achieve interoperability in 
 		sensor networks, publishing interoperability interfaces for 
 		different types of devices.
