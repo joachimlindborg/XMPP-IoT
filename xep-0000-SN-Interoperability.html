@@ -56,33 +56,71 @@
     <div class="indent">
       <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
       3.1.  <a href="#interfaces">Interfaces</a><br>      
-      3.1.1.  <a href="#sect-ID0EXIAC">XMPP.SN.Sensors</a><br>        
-      3.1.1.1.  <a href="#sect-ID0E2IAC">XMPP.SN.Sensors.Temperature</a><br>        
-      3.1.1.2.  <a href="#sect-ID0ESKAC">XMPP.SN.Sensors.Pressure</a><br>        
-      3.1.1.3.  <a href="#sect-ID0EJMAC">XMPP.SN.Sensors.LightIntensity</a><br>        
-      3.1.1.4.  <a href="#sect-ID0EQMAC">XMPP.SN.Sensors.Humidity</a><br>      
-      3.1.2.  <a href="#sect-ID0EYMAC">XMPP.SN.Meters</a><br>        
-      3.1.2.1.  <a href="#sect-ID0E3MAC">XMPP.SN.Meters.Electricity</a><br>        
-      3.1.2.2.  <a href="#sect-ID0EKPAC">XMPP.SN.Meters.Heat</a><br>        
-      3.1.2.3.  <a href="#sect-ID0EMFAE">XMPP.SN.Meters.Cooling</a><br>        
-      3.1.2.4.  <a href="#sect-ID0ENLAE">XMPP.SN.Meters.HeatingCooling</a><br>        
-      3.1.2.5.  <a href="#sect-ID0EORAE">XMPP.SN.Meters.Water</a><br>        
-      3.1.2.6.  <a href="#sect-ID0E3TAE">XMPP.SN.Meters.Gas</a><br>      
-      3.1.3.  <a href="#sect-ID0ELWAE">XMPP.SN.Actuators</a><br>        
-      3.1.3.1.  <a href="#sect-ID0EPWAE">XMPP.SN.Actuators.DigitalOutput</a><br>        
-      3.1.3.2.  <a href="#sect-ID0EWWAE">XMPP.SN.Actuators.AnalogOutput</a><br>        
-      3.1.3.3.  <a href="#sect-ID0E4WAE">XMPP.SN.Actuators.DigitalOutputs</a><br>        
-      3.1.3.4.  <a href="#sect-ID0EEXAE">XMPP.SN.Actuators.AnalogOutputs</a><br>      
-      3.1.4.  <a href="#sect-ID0EMXAE">XMPP.SN.Logistics</a><br>      
-      3.1.5.  <a href="#sect-ID0ETXAE">XMPP.SN.Identification</a><br>      
-      3.1.6.  <a href="#sect-ID0E1XAE">XMPP.SN.Cameras</a><br>      
-      3.1.7.  <a href="#sect-ID0EBYAE">XMPP.SN.Weather</a><br>        
-      3.1.7.1.  <a href="#sect-ID0EFYAE">XMPP.SN.Weather.WindDirection</a><br>        
-      3.1.7.2.  <a href="#sect-ID0EMYAE">XMPP.SN.Weather.WindSpeed</a><br>   
-      3.2.  <a href="#sect-ID0EVYAE">Field Names</a><br>   
-      3.3.  <a href="#sect-ID0ET4AE">Units</a><br>   
-      3.4.  <a href="#sect-ID0E54AE">Privilege IDs</a><br>   
-      3.5.  <a href="#sect-ID0EL5AE">Data Sources</a><br>4.  <a href="#security">Security Considerations</a><br>5.  <a href="#iana">IANA Considerations</a><br>6.  <a href="#registrar">XMPP Registrar Considerations</a><br>7.  <a href="#schema">XML Schema</a><br>8.  <a href="#ack">Acknowledgements</a></p>
+      3.1.1.  <a href="#sect-ID0EXIAC">XMPP.IoT.Sensors</a><br>        
+      3.1.1.1.  <a href="#sect-ID0E6IAC">XMPP.IoT.Sensors.DigitalInput</a><br>        
+      3.1.1.2.  <a href="#sect-ID0E1KAC">XMPP.IoT.Sensors.AnalogInput</a><br>        
+      3.1.1.3.  <a href="#sect-ID0ELAAE">XMPP.IoT.Sensors.DigitalInputs</a><br>        
+      3.1.1.4.  <a href="#sect-ID0E4CAE">XMPP.IoT.Sensors.AnalogInputs</a><br>        
+      3.1.1.5.  <a href="#sect-ID0ELIAE">XMPP.IoT.Sensors.Temperature</a><br>        
+      3.1.1.6.  <a href="#sect-ID0EGKAE">XMPP.IoT.Sensors.Pressure</a><br>        
+      3.1.1.7.  <a href="#sect-ID0EBMAE">XMPP.IoT.Sensors.Illuminance</a><br>        
+      3.1.1.8.  <a href="#sect-ID0E3NAE">XMPP.IoT.Sensors.Humidity</a><br>        
+      3.1.1.9.  <a href="#sect-ID0EFRAE">XMPP.IoT.Sensors.Current</a><br>        
+      3.1.1.10.  <a href="#sect-ID0EATAE">XMPP.IoT.Sensors.Voltage</a><br>        
+      3.1.1.11.  <a href="#sect-ID0E2UAE">XMPP.IoT.Sensors.Resistence</a><br>        
+      3.1.1.12.  <a href="#sect-ID0EWWAE">XMPP.IoT.Sensors.Mass</a><br>        
+      3.1.1.13.  <a href="#sect-ID0ERYAE">XMPP.IoT.Sensors.Distance</a><br>        
+      3.1.1.14.  <a href="#sect-ID0EM1AE">XMPP.IoT.Sensors.Frequency</a><br>        
+      3.1.1.15.  <a href="#sect-ID0EH3AE">XMPP.IoT.Sensors.Force</a><br>      
+      3.1.2.  <a href="#sect-ID0ED5AE">XMPP.IoT.Meters</a><br>        
+      3.1.2.1.  <a href="#sect-ID0EL5AE">XMPP.IoT.Meters.Electricity</a><br>        
+      3.1.2.2.  <a href="#sect-ID0E5AAG">XMPP.IoT.Meters.Heat</a><br>        
+      3.1.2.3.  <a href="#sect-ID0EDHAG">XMPP.IoT.Meters.Cooling</a><br>        
+      3.1.2.4.  <a href="#sect-ID0EINAG">XMPP.IoT.Meters.HeatingCooling</a><br>        
+      3.1.2.5.  <a href="#sect-ID0ENTAG">XMPP.IoT.Meters.Water</a><br>        
+      3.1.2.6.  <a href="#sect-ID0E6VAG">XMPP.IoT.Meters.Gas</a><br>      
+      3.1.3.  <a href="#sect-ID0ESYAG">XMPP.IoT.Actuators</a><br>        
+      3.1.3.1.  <a href="#sect-ID0E1YAG">XMPP.IoT.Actuators.DigitalOutput</a><br>        
+      3.1.3.2.  <a href="#sect-ID0EBZAG">XMPP.IoT.Actuators.AnalogOutput</a><br>        
+      3.1.3.3.  <a href="#sect-ID0EIZAG">XMPP.IoT.Actuators.DigitalOutputs</a><br>        
+      3.1.3.4.  <a href="#sect-ID0EPZAG">XMPP.IoT.Actuators.AnalogOutputs</a><br>        
+      3.1.3.5.  <a href="#sect-ID0EWZAG">XMPP.IoT.Actuators.Lamp</a><br>        
+      3.1.3.6.  <a href="#sect-ID0E4ZAG">XMPP.IoT.Actuators.Dimmer</a><br>        
+      3.1.3.7.  <a href="#sect-ID0EE1AG">XMPP.IoT.Actuators.Fan</a><br>        
+      3.1.3.8.  <a href="#sect-ID0EL1AG">XMPP.IoT.Actuators.Blinders</a><br>      
+      3.1.4.  <a href="#sect-ID0ET1AG">XMPP.IoT.Security</a><br>        
+      3.1.4.1.  <a href="#sect-ID0E21AG">XMPP.IoT.Security.Movement</a><br>        
+      3.1.4.2.  <a href="#sect-ID0EC2AG">XMPP.IoT.Security.Smoke</a><br>        
+      3.1.4.3.  <a href="#sect-ID0EJ2AG">XMPP.IoT.Security.Fire</a><br>        
+      3.1.4.4.  <a href="#sect-ID0EQ2AG">XMPP.IoT.Security.Burglar</a><br>        
+      3.1.4.5.  <a href="#sect-ID0EX2AG">XMPP.IoT.Security.Door</a><br>      
+      3.1.5.  <a href="#sect-ID0E62AG">XMPP.IoT.Controllers</a><br>        
+      3.1.5.1.  <a href="#sect-ID0EH3AG">XMPP.IoT.Controllers.Thermostat</a><br>      
+      3.1.6.  <a href="#sect-ID0EP3AG">XMPP.IoT.Logistics</a><br>        
+      3.1.6.1.  <a href="#sect-ID0EX3AG">XMPP.IoT.Logistics.Route</a><br>        
+      3.1.6.2.  <a href="#sect-ID0E53AG">XMPP.IoT.Logistics.Contents</a><br>      
+      3.1.7.  <a href="#sect-ID0EG4AG">XMPP.IoT.Identity</a><br>        
+      3.1.7.1.  <a href="#sect-ID0EO4AG">XMPP.IoT.Identity.Location</a><br>        
+      3.1.7.2.  <a href="#sect-ID0EV4AG">XMPP.IoT.Identity.RFID</a><br>        
+      3.1.7.3.  <a href="#sect-ID0E34AG">XMPP.IoT.Identity.GSM</a><br>        
+      3.1.7.4.  <a href="#sect-ID0ED5AG">XMPP.IoT.Identity.Ethernet</a><br>        
+      3.1.7.5.  <a href="#sect-ID0EK5AG">XMPP.IoT.Identity.IP</a><br>        
+      3.1.7.6.  <a href="#sect-ID0ER5AG">XMPP.IoT.Identity.IPv6</a><br>      
+      3.1.8.  <a href="#sect-ID0EZ5AG">XMPP.IoT.Weather</a><br>        
+      3.1.8.1.  <a href="#sect-ID0EB6AG">XMPP.IoT.Weather.WindDirection</a><br>        
+      3.1.8.2.  <a href="#sect-ID0EI6AG">XMPP.IoT.Weather.WindSpeed</a><br>      
+      3.1.9.  <a href="#sect-ID0EQ6AG">XMPP.IoT.Media</a><br>        
+      3.1.9.1.  <a href="#sect-ID0EY6AG">XMPP.IoT.Media.Display</a><br>        
+      3.1.9.2.  <a href="#sect-ID0E66AG">XMPP.IoT.Media.Directory</a><br>        
+      3.1.9.3.  <a href="#sect-ID0EGABG">XMPP.IoT.Media.Camera</a><br>        
+      3.1.9.4.  <a href="#sect-ID0ENABG">XMPP.IoT.Media.Microphone</a><br>        
+      3.1.9.5.  <a href="#sect-ID0EUABG">XMPP.IoT.Media.LoudSpeakers</a><br>        
+      3.1.9.6.  <a href="#sect-ID0E2ABG">XMPP.IoT.Media.Recorder</a><br>      
+      3.1.10.  <a href="#sect-ID0EDBBG">XMPP.IoT.Gateway</a><br>   
+      3.2.  <a href="#sect-ID0EPBBG">Field Names</a><br>   
+      3.3.  <a href="#sect-ID0E1IBG">Units</a><br>   
+      3.4.  <a href="#sect-ID0EFJBG">Privilege IDs</a><br>   
+      3.5.  <a href="#sect-ID0ESJBG">Data Sources</a><br>4.  <a href="#security">Security Considerations</a><br>5.  <a href="#iana">IANA Considerations</a><br>6.  <a href="#registrar">XMPP Registrar Considerations</a><br>7.  <a href="#schema">XML Schema</a><br>8.  <a href="#ack">Acknowledgements</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
     </div>
     <hr>
@@ -311,11 +349,198 @@
 				creating interoperable devices in sensor networks based on XMPP. A device can implement any number of interfaces.
 			</p>
 			<div class="indent">
-        <h3>3.1.1 <a name="sect-ID0EXIAC">XMPP.SN.Sensors</a></h3>
+        <h3>3.1.1 <a name="sect-ID0EXIAC">XMPP.IoT.Sensors</a></h3>
+				<p class="" style="">
+					This section contains interfaces relating to sensors measuring physical magnitudes of some sort or another.
+				</p>
 				<div class="indent">
-          <h3>3.1.1.1 <a name="sect-ID0E2IAC">XMPP.SN.Sensors.Temperature</a></h3>
+          <h3>3.1.1.1 <a name="sect-ID0E6IAC">XMPP.IoT.Sensors.DigitalInput</a></h3>
+					<p class="" style="">
+						Generical digital input.
+					</p>
 					<div class="indent">
-            <p class="caption"><a name="table-2"></a>Table 2: XMPP.SN.Sensors.Temperature Fields</p>
+            <p class="caption"><a name="table-2"></a>Table 2: XMPP.IoT.Sensors.DigitalInput Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Digital Input</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">boolean</td>
+							<td colspan="" rowspan="">Momentary input value.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+				<div class="indent">
+          <h3>3.1.1.2 <a name="sect-ID0E1KAC">XMPP.IoT.Sensors.AnalogInput</a></h3>
+					<p class="" style="">
+						Generical analog input.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-3"></a>Table 3: XMPP.IoT.Sensors.AnalogInput Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Analog Input</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary input value.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Analog Input, Raw</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary raw binary input value.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Analog Input, Bits</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">status</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Number of bits of precision of input value.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Analog Input, Range, Low</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">status</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Lowest possible value.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Analog Input, Range, High</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">status</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Highest possible value.</td>
+						</tr>
+					</table>
+          </div>
+					<p class="" style="">
+						The input value must be reported using the correct precision and unit. Examples of units that could be used:
+					</p>
+					<ul class="" style="">
+						<li class="" style="">% - for instance 0-100 %</li>
+						<li class="" style="">mA - for instance 4-20 mA</li>
+						<li class="" style="">V - for instance 0-10 V</li>
+					</ul>
+					<p class="" style="">
+						The raw value should be a unit-less integer value.
+					</p>
+				</div>
+				<div class="indent">
+          <h3>3.1.1.3 <a name="sect-ID0ELAAE">XMPP.IoT.Sensors.DigitalInputs</a></h3>
+					<p class="" style="">
+						Devices containing an array of digital inputs.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-4"></a>Table 4: XMPP.IoT.Sensors.DigitalInputs Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Digital Input %1%</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">boolean</td>
+							<td colspan="" rowspan="">Momentary input value for input number %1%.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Digital Input Count</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">status</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Number of digital inputs available on the device.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+				<div class="indent">
+          <h3>3.1.1.4 <a name="sect-ID0E4CAE">XMPP.IoT.Sensors.AnalogInputs</a></h3>
+					<p class="" style="">
+						Devices containing an array of analog inputs.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-5"></a>Table 5: XMPP.IoT.Sensors.AnalogInputs Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Analog Input %1%</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary input value for input number %1%.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Analog Input %1%, Raw</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary raw binary input value for input number %1%.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Analog Input %1%, Bits</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">status</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Number of bits of precision of input value for input number %1%.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Analog Input %1%, Range, Low</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">status</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Lowest possible value for input number %1%.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Analog Input %1%, Range, High</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">status</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Highest possible value for input number %1%.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Digital Input Count</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">status</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Number of analog inputs available on the device.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+				<div class="indent">
+          <h3>3.1.1.5 <a name="sect-ID0ELIAE">XMPP.IoT.Sensors.Temperature</a></h3>
+					<p class="" style="">
+						Temperature sensors, measuring a temperature.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-6"></a>Table 6: XMPP.IoT.Sensors.Temperature Fields</p>
             <table border="1" cellpadding="3" cellspacing="0">
 						<tr class="body">
 							<th colspan="" rowspan="">Field Name</th>
@@ -335,9 +560,12 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.1.1.2 <a name="sect-ID0ESKAC">XMPP.SN.Sensors.Pressure</a></h3>
+          <h3>3.1.1.6 <a name="sect-ID0EGKAE">XMPP.IoT.Sensors.Pressure</a></h3>
+					<p class="" style="">
+						Pressure sensors, measuring a pressure.
+					</p>
 					<div class="indent">
-            <p class="caption"><a name="table-3"></a>Table 3: XMPP.SN.Sensors.Pressure Fields</p>
+            <p class="caption"><a name="table-7"></a>Table 7: XMPP.IoT.Sensors.Pressure Fields</p>
             <table border="1" cellpadding="3" cellspacing="0">
 						<tr class="body">
 							<th colspan="" rowspan="">Field Name</th>
@@ -357,20 +585,257 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.1.1.3 <a name="sect-ID0EJMAC">XMPP.SN.Sensors.LightIntensity</a></h3>
-					
+          <h3>3.1.1.7 <a name="sect-ID0EBMAE">XMPP.IoT.Sensors.Illuminance</a></h3>
+					<p class="" style="">
+						Illuminance sensors (luxmeters), measuring a illuminance.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-8"></a>Table 8: XMPP.IoT.Sensors.Illuminance Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Illuminance</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary Illuminance value.</td>
+						</tr>
+					</table>
+          </div>
 				</div>
 				<div class="indent">
-          <h3>3.1.1.4 <a name="sect-ID0EQMAC">XMPP.SN.Sensors.Humidity</a></h3>
-					
+          <h3>3.1.1.8 <a name="sect-ID0E3NAE">XMPP.IoT.Sensors.Humidity</a></h3>
+					<p class="" style="">
+						Humidity sensors (hygrometers), measuring a moisture content in the environment.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-9"></a>Table 9: XMPP.IoT.Sensors.Humidity Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Relative Humidity</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary Relative Humidity value (in %).</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Temperature</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary Temperature.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Dew Point</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary Dew Point.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+				<div class="indent">
+          <h3>3.1.1.9 <a name="sect-ID0EFRAE">XMPP.IoT.Sensors.Current</a></h3>
+					<p class="" style="">
+						Current sensors, measuring a electrical current.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-10"></a>Table 10: XMPP.IoT.Sensors.Current Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Current</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary Current value.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+				<div class="indent">
+          <h3>3.1.1.10 <a name="sect-ID0EATAE">XMPP.IoT.Sensors.Voltage</a></h3>
+					<p class="" style="">
+						Voltage sensors, measuring a electrical voltage.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-11"></a>Table 11: XMPP.IoT.Sensors.Voltage Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Voltage</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary Voltage value.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+				<div class="indent">
+          <h3>3.1.1.11 <a name="sect-ID0E2UAE">XMPP.IoT.Sensors.Resistence</a></h3>
+					<p class="" style="">
+						Resistence sensors, measuring a electrical resistence.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-12"></a>Table 12: XMPP.IoT.Sensors.Resistence Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Resistence</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary Resistence value.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+				<div class="indent">
+          <h3>3.1.1.12 <a name="sect-ID0EWWAE">XMPP.IoT.Sensors.Mass</a></h3>
+					<p class="" style="">
+						Mass sensors, measuring physical mass.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-13"></a>Table 13: XMPP.IoT.Sensors.Mass Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Mass</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary Mass value.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+				<div class="indent">
+          <h3>3.1.1.13 <a name="sect-ID0ERYAE">XMPP.IoT.Sensors.Distance</a></h3>
+					<p class="" style="">
+						Distance sensors, measuring physical distance.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-14"></a>Table 14: XMPP.IoT.Sensors.Distance Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Distance</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary Distance value.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+				<div class="indent">
+          <h3>3.1.1.14 <a name="sect-ID0EM1AE">XMPP.IoT.Sensors.Frequency</a></h3>
+					<p class="" style="">
+						Frequency sensors, measuring frequency.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-15"></a>Table 15: XMPP.IoT.Sensors.Frequency Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Frequency</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary Frequency value.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+				<div class="indent">
+          <h3>3.1.1.15 <a name="sect-ID0EH3AE">XMPP.IoT.Sensors.Force</a></h3>
+					<p class="" style="">
+						Force sensors, measuring physical force, or tension.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-16"></a>Table 16: XMPP.IoT.Sensors.Force Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Force</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">momentary</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Momentary Force or tension value.</td>
+						</tr>
+					</table>
+          </div>
 				</div>
 			</div>
 			<div class="indent">
-        <h3>3.1.2 <a name="sect-ID0EYMAC">XMPP.SN.Meters</a></h3>
+        <h3>3.1.2 <a name="sect-ID0ED5AE">XMPP.IoT.Meters</a></h3>
+				<p class="" style="">
+					This section contains interfaces relating to meters. They are more advances measurement devices measuring consumption of a physical comodity.
+				</p>
 				<div class="indent">
-          <h3>3.1.2.1 <a name="sect-ID0E3MAC">XMPP.SN.Meters.Electricity</a></h3>
+          <h3>3.1.2.1 <a name="sect-ID0EL5AE">XMPP.IoT.Meters.Electricity</a></h3>
+					<p class="" style="">
+						Measures consumption of electrical energy.
+					</p>
 					<div class="indent">
-            <p class="caption"><a name="table-4"></a>Table 4: XMPP.SN.Meters.Electricity Fields</p>
+            <p class="caption"><a name="table-17"></a>Table 17: XMPP.IoT.Meters.Electricity Fields</p>
             <table border="1" cellpadding="3" cellspacing="0">
 						<tr class="body">
 							<th colspan="" rowspan="">Field Name</th>
@@ -397,9 +862,12 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.1.2.2 <a name="sect-ID0EKPAC">XMPP.SN.Meters.Heat</a></h3>
+          <h3>3.1.2.2 <a name="sect-ID0E5AAG">XMPP.IoT.Meters.Heat</a></h3>
+					<p class="" style="">
+						Measures consumption of heat energy.
+					</p>
 					<div class="indent">
-            <p class="caption"><a name="table-5"></a>Table 5: XMPP.SN.Meters.Heat Fields</p>
+            <p class="caption"><a name="table-18"></a>Table 18: XMPP.IoT.Meters.Heat Fields</p>
             <table border="1" cellpadding="3" cellspacing="0">
 						<tr class="body">
 							<th colspan="" rowspan="">Field Name</th>
@@ -461,9 +929,12 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.1.2.3 <a name="sect-ID0EMFAE">XMPP.SN.Meters.Cooling</a></h3>
+          <h3>3.1.2.3 <a name="sect-ID0EDHAG">XMPP.IoT.Meters.Cooling</a></h3>
+					<p class="" style="">
+						Measures consumption of cooling energy.
+					</p>
 					<div class="indent">
-            <p class="caption"><a name="table-6"></a>Table 6: XMPP.SN.Meters.Cooling Fields</p>
+            <p class="caption"><a name="table-19"></a>Table 19: XMPP.IoT.Meters.Cooling Fields</p>
             <table border="1" cellpadding="3" cellspacing="0">
 						<tr class="body">
 							<th colspan="" rowspan="">Field Name</th>
@@ -525,9 +996,12 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.1.2.4 <a name="sect-ID0ENLAE">XMPP.SN.Meters.HeatingCooling</a></h3>
+          <h3>3.1.2.4 <a name="sect-ID0EINAG">XMPP.IoT.Meters.HeatingCooling</a></h3>
+					<p class="" style="">
+						Measures consumption of heating and/or cooling energy.
+					</p>
 					<div class="indent">
-            <p class="caption"><a name="table-7"></a>Table 7: XMPP.SN.Meters.HeatingCooling Fields</p>
+            <p class="caption"><a name="table-20"></a>Table 20: XMPP.IoT.Meters.HeatingCooling Fields</p>
             <table border="1" cellpadding="3" cellspacing="0">
 						<tr class="body">
 							<th colspan="" rowspan="">Field Name</th>
@@ -589,9 +1063,12 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.1.2.5 <a name="sect-ID0EORAE">XMPP.SN.Meters.Water</a></h3>
+          <h3>3.1.2.5 <a name="sect-ID0ENTAG">XMPP.IoT.Meters.Water</a></h3>
+					<p class="" style="">
+						Measures consumption of water.
+					</p>
 					<div class="indent">
-            <p class="caption"><a name="table-8"></a>Table 8: XMPP.SN.Meters.Water Fields</p>
+            <p class="caption"><a name="table-21"></a>Table 21: XMPP.IoT.Meters.Water Fields</p>
             <table border="1" cellpadding="3" cellspacing="0">
 						<tr class="body">
 							<th colspan="" rowspan="">Field Name</th>
@@ -618,9 +1095,12 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.1.2.6 <a name="sect-ID0E3TAE">XMPP.SN.Meters.Gas</a></h3>
+          <h3>3.1.2.6 <a name="sect-ID0E6VAG">XMPP.IoT.Meters.Gas</a></h3>
+					<p class="" style="">
+						Measures consumption of gas.
+					</p>
 					<div class="indent">
-            <p class="caption"><a name="table-9"></a>Table 9: XMPP.SN.Meters.Gas Fields</p>
+            <p class="caption"><a name="table-22"></a>Table 22: XMPP.IoT.Meters.Gas Fields</p>
             <table border="1" cellpadding="3" cellspacing="0">
 						<tr class="body">
 							<th colspan="" rowspan="">Field Name</th>
@@ -648,70 +1128,225 @@
 				</div>
 			</div>
 			<div class="indent">
-        <h3>3.1.3 <a name="sect-ID0ELWAE">XMPP.SN.Actuators</a></h3>
+        <h3>3.1.3 <a name="sect-ID0ESYAG">XMPP.IoT.Actuators</a></h3>
+				<p class="" style="">
+					This section contains interfaces relating to generic actuators. They can be used to act with the world in different ways.
+				</p>
 				<div class="indent">
-          <h3>3.1.3.1 <a name="sect-ID0EPWAE">XMPP.SN.Actuators.DigitalOutput</a></h3>
+          <h3>3.1.3.1 <a name="sect-ID0E1YAG">XMPP.IoT.Actuators.DigitalOutput</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.1.3.2 <a name="sect-ID0EWWAE">XMPP.SN.Actuators.AnalogOutput</a></h3>
+          <h3>3.1.3.2 <a name="sect-ID0EBZAG">XMPP.IoT.Actuators.AnalogOutput</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.1.3.3 <a name="sect-ID0E4WAE">XMPP.SN.Actuators.DigitalOutputs</a></h3>
+          <h3>3.1.3.3 <a name="sect-ID0EIZAG">XMPP.IoT.Actuators.DigitalOutputs</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.1.3.4 <a name="sect-ID0EEXAE">XMPP.SN.Actuators.AnalogOutputs</a></h3>
+          <h3>3.1.3.4 <a name="sect-ID0EPZAG">XMPP.IoT.Actuators.AnalogOutputs</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.3.5 <a name="sect-ID0EWZAG">XMPP.IoT.Actuators.Lamp</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.3.6 <a name="sect-ID0E4ZAG">XMPP.IoT.Actuators.Dimmer</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.3.7 <a name="sect-ID0EE1AG">XMPP.IoT.Actuators.Fan</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.3.8 <a name="sect-ID0EL1AG">XMPP.IoT.Actuators.Blinders</a></h3>
 					
 				</div>
 			</div>
 			<div class="indent">
-        <h3>3.1.4 <a name="sect-ID0EMXAE">XMPP.SN.Logistics</a></h3>
+        <h3>3.1.4 <a name="sect-ID0ET1AG">XMPP.IoT.Security</a></h3>
+				<p class="" style="">
+					This section contains interfaces relating to security.
+				</p>
+				<div class="indent">
+          <h3>3.1.4.1 <a name="sect-ID0E21AG">XMPP.IoT.Security.Movement</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.4.2 <a name="sect-ID0EC2AG">XMPP.IoT.Security.Smoke</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.4.3 <a name="sect-ID0EJ2AG">XMPP.IoT.Security.Fire</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.4.4 <a name="sect-ID0EQ2AG">XMPP.IoT.Security.Burglar</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.4.5 <a name="sect-ID0EX2AG">XMPP.IoT.Security.Door</a></h3>
+					
+				</div>
+			</div>
+			<div class="indent">
+        <h3>3.1.5 <a name="sect-ID0E62AG">XMPP.IoT.Controllers</a></h3>
+				<p class="" style="">
+					This section contains interfaces relating to controllers, specific applications that perform a (local) service in a sensor network.
+				</p>
+				<div class="indent">
+          <h3>3.1.5.1 <a name="sect-ID0EH3AG">XMPP.IoT.Controllers.Thermostat</a></h3>
+					
+				</div>
+			</div>
+			<div class="indent">
+        <h3>3.1.6 <a name="sect-ID0EP3AG">XMPP.IoT.Logistics</a></h3>
+				<p class="" style="">
+					This section contains interfaces relating to logistics.
+				</p>
+				<div class="indent">
+          <h3>3.1.6.1 <a name="sect-ID0EX3AG">XMPP.IoT.Logistics.Route</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.6.2 <a name="sect-ID0E53AG">XMPP.IoT.Logistics.Contents</a></h3>
+					
+				</div>
+			</div>
+			<div class="indent">
+        <h3>3.1.7 <a name="sect-ID0EG4AG">XMPP.IoT.Identity</a></h3>
+				<p class="" style="">
+					This section contains interfaces relating to identification of devices.
+				</p>
+				<div class="indent">
+          <h3>3.1.7.1 <a name="sect-ID0EO4AG">XMPP.IoT.Identity.Location</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.7.2 <a name="sect-ID0EV4AG">XMPP.IoT.Identity.RFID</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.7.3 <a name="sect-ID0E34AG">XMPP.IoT.Identity.GSM</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.7.4 <a name="sect-ID0ED5AG">XMPP.IoT.Identity.Ethernet</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.7.5 <a name="sect-ID0EK5AG">XMPP.IoT.Identity.IP</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.7.6 <a name="sect-ID0ER5AG">XMPP.IoT.Identity.IPv6</a></h3>
+					
+				</div>
+			</div>
+			<div class="indent">
+        <h3>3.1.8 <a name="sect-ID0EZ5AG">XMPP.IoT.Weather</a></h3>
+				<p class="" style="">
+					This section contains interfaces relating to weather stations.
+				</p>
+				<div class="indent">
+          <h3>3.1.8.1 <a name="sect-ID0EB6AG">XMPP.IoT.Weather.WindDirection</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.8.2 <a name="sect-ID0EI6AG">XMPP.IoT.Weather.WindSpeed</a></h3>
+					
+				</div>
+			</div>
+			<div class="indent">
+        <h3>3.1.9 <a name="sect-ID0EQ6AG">XMPP.IoT.Media</a></h3>
+				<p class="" style="">
+					This section contains interfaces relating to multi media.
+				</p>
+				<div class="indent">
+          <h3>3.1.9.1 <a name="sect-ID0EY6AG">XMPP.IoT.Media.Display</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.9.2 <a name="sect-ID0E66AG">XMPP.IoT.Media.Directory</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.9.3 <a name="sect-ID0EGABG">XMPP.IoT.Media.Camera</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.9.4 <a name="sect-ID0ENABG">XMPP.IoT.Media.Microphone</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.9.5 <a name="sect-ID0EUABG">XMPP.IoT.Media.LoudSpeakers</a></h3>
+					
+				</div>
+				<div class="indent">
+          <h3>3.1.9.6 <a name="sect-ID0E2ABG">XMPP.IoT.Media.Recorder</a></h3>
+					
+				</div>
+			</div>
+			<div class="indent">
+        <h3>3.1.10 <a name="sect-ID0EDBBG">XMPP.IoT.Gateway</a></h3>
+				<p class="" style="">
+					This section contains interfaces relating to gateways in the networ.
+				</p>
 				
-			</div>
-			<div class="indent">
-        <h3>3.1.5 <a name="sect-ID0ETXAE">XMPP.SN.Identification</a></h3>
-				
-			</div>
-			<div class="indent">
-        <h3>3.1.6 <a name="sect-ID0E1XAE">XMPP.SN.Cameras</a></h3>
-				
-			</div>
-			<div class="indent">
-        <h3>3.1.7 <a name="sect-ID0EBYAE">XMPP.SN.Weather</a></h3>
-				<div class="indent">
-          <h3>3.1.7.1 <a name="sect-ID0EFYAE">XMPP.SN.Weather.WindDirection</a></h3>
-					
-				</div>
-				<div class="indent">
-          <h3>3.1.7.2 <a name="sect-ID0EMYAE">XMPP.SN.Weather.WindSpeed</a></h3>
-					
-				</div>
 			</div>
 		</div>
 		<div class="indent">
-      <h3>3.2 <a name="sect-ID0EVYAE">Field Names</a></h3>
+      <h3>3.2 <a name="sect-ID0EPBBG">Field Names</a></h3>
 			<div class="indent">
-        <p class="caption"><a name="table-10"></a>Table 10: Localization of Field Names</p>
+        <p class="caption"><a name="table-23"></a>Table 23: Localization of Field Names</p>
         <table border="1" cellpadding="3" cellspacing="0">
 				<tr class="body">
 					<th colspan="" rowspan="">Field Name</th>
 					<th colspan="" rowspan="">String ID</th>
 				</tr>
 				<tr class="body">
+					<td colspan="" rowspan="">Energy</td>
+					<td colspan="" rowspan=""></td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">Flow</td>
+					<td colspan="" rowspan=""></td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">Power</td>
+					<td colspan="" rowspan=""></td>
+				</tr>
+				<tr class="body">
 					<td colspan="" rowspan="">Pressure</td>
+					<td colspan="" rowspan=""></td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">Return Temperature</td>
+					<td colspan="" rowspan=""></td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">Supply Temperature</td>
 					<td colspan="" rowspan=""></td>
 				</tr>
 				<tr class="body">
 					<td colspan="" rowspan="">Temperature</td>
 					<td colspan="" rowspan=""></td>
 				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">Temperature Difference</td>
+					<td colspan="" rowspan=""></td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">Volume</td>
+					<td colspan="" rowspan=""></td>
+				</tr>
 			</table>
       </div>
 			
 			<div class="indent">
-        <p class="caption"><a name="table-11"></a>Table 11: Composition of Field Names</p>
+        <p class="caption"><a name="table-24"></a>Table 24: Composition of Field Names</p>
         <table border="1" cellpadding="3" cellspacing="0">
 				<tr class="body">
 					<th colspan="" rowspan="">Aggregation</th>
@@ -757,20 +1392,20 @@
       </div>
 		</div>
 		<div class="indent">
-      <h3>3.3 <a name="sect-ID0ET4AE">Units</a></h3>
+      <h3>3.3 <a name="sect-ID0E1IBG">Units</a></h3>
 			
 			
 			
 		</div>
 		<div class="indent">
-      <h3>3.4 <a name="sect-ID0E54AE">Privilege IDs</a></h3>
+      <h3>3.4 <a name="sect-ID0EFJBG">Privilege IDs</a></h3>
 			
 			
 			
 			
 		</div>
 		<div class="indent">
-      <h3>3.5 <a name="sect-ID0EL5AE">Data Sources</a></h3>
+      <h3>3.5 <a name="sect-ID0ESJBG">Data Sources</a></h3>
 			
 		</div>
 	<h2>4.
@@ -778,7 +1413,7 @@
 		<p class="" style="">REQUIRED.</p>
 	<h2>5.
        <a name="iana">IANA Considerations</a></h2>
-		<p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EK6AE">6</a>].</p>
+		<p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0ERKBG">6</a>].</p>
 	<h2>6.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
 		<p class="" style="">REQUIRED.</p>
@@ -839,7 +1474,7 @@
       <p><a name="nt-ID0EGF">3</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
       <p><a name="nt-ID0ESF">4</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
       <p><a name="nt-ID0E5F">5</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
-      <p><a name="nt-ID0EK6AE">6</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+      <p><a name="nt-ID0ERKBG">6</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>

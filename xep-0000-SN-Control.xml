@@ -650,7 +650,7 @@
             <section3 topic='Getting a control form, Failure'>
                 <p>
                     A device can reject a control form request. It does this returning an <strong>error</strong> iq stanza, and detailing the error in the <strong>result</strong>
-                    attribute of the <strong>getformResponse</strong> element, as is shown in the following example:
+                    attribute of the <strong>getFormResponse</strong> element, as is shown in the following example:
                 </p>
                 <example caption='Getting a control form, Failure'>
                     <![CDATA[
@@ -871,13 +871,13 @@
                 </example>
                 <p>
                     Note that only parameters that are common between the nodes defined in the request must be returned. However, all parameters must have the
-                    <strong>>notSame</strong> flag set, regardless of current output status.
+                    <strong>notSame</strong> flag set, regardless of current output status.
                 </p>
             </section3>
             <section3 topic='Getting a control form from multiple nodes, Failure'>
                 <p>
                     A device can reject a control form request. It does this returning an <strong>error</strong> iq stanza, and detailing the error in the <strong>result</strong>
-                    attribute of the <strong>getformResponse</strong> element. The following example shows the device rejecting a control form request, because it does not support
+                    attribute of the <strong>getFormResponse</strong> element. The following example shows the device rejecting a control form request, because it does not support
                     the handling of common parameters between multiple nodes:
                 </p>
                 <example caption='Getting a control form from multiple nodes, Failure'>
@@ -1289,8 +1289,15 @@
             <p>
                 To solve the problem of grouping parameters together, so a client can know which parameters belong together, a new element is defined that can be used in
                 data forms: <strong>parameterGroup</strong>. It is optional, but can be added to control parameters in forms, as a way to tell the client that parameters
-                having the same <strong>parameterGroup</strong> belong together and should be written together. The following example illustrates this.
+                having the same <strong>parameterGroup</strong> belong together and should be written together.
             </p>
+			<p>
+				<strong>Note:</strong> If used, the server must not include a parameter in more than one parameter group at a time. The form may contain multiple group, but each 
+				parameter must only have at most one <strong>parameterGroup</strong> element.
+			</p>
+			<p>
+				The following example illustrates the use of the <strong>parameterGroup</strong> element to group parameters together.
+			</p>
             <example caption='Grouping control parameters'>
                 <![CDATA[
    <iq type='get'
@@ -1734,6 +1741,6 @@
 		</ul>
 	</section1>
 	<section1 topic='Acknowledgements' anchor='ack'>
-        <p>Thanks to Joachim Lindborg for all valuable feedback.</p>
+        <p>Thanks to Joachim Lindborg and Tina Beckman for all valuable feedback.</p>
     </section1>
 </xep>

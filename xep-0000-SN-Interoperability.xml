@@ -266,9 +266,180 @@
 				create recognized interfaces with well defined attributes. The following sub-sections lists interfaces that should be adhered to by parties interested in
 				creating interoperable devices in sensor networks based on XMPP. A device can implement any number of interfaces.
 			</p>
-			<section3 topic='XMPP.SN.Sensors'>
-				<section4 topic='XMPP.SN.Sensors.Temperature'>
-					<table caption='XMPP.SN.Sensors.Temperature Fields'>
+			<section3 topic='XMPP.IoT.Sensors'>
+				<p>
+					This section contains interfaces relating to sensors measuring physical magnitudes of some sort or another.
+				</p>
+				<section4 topic='XMPP.IoT.Sensors.DigitalInput'>
+					<p>
+						Generical digital input.
+					</p>
+					<table caption='XMPP.IoT.Sensors.DigitalInput Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Digital Input</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>boolean</td>
+							<td>Momentary input value.</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.IoT.Sensors.AnalogInput'>
+					<p>
+						Generical analog input.
+					</p>
+					<table caption='XMPP.IoT.Sensors.AnalogInput Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Analog Input</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary input value.</td>
+						</tr>
+						<tr>
+							<td>Analog Input, Raw</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary raw binary input value.</td>
+						</tr>
+						<tr>
+							<td>Analog Input, Bits</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>numeric</td>
+							<td>Number of bits of precision of input value.</td>
+						</tr>
+						<tr>
+							<td>Analog Input, Range, Low</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>numeric</td>
+							<td>Lowest possible value.</td>
+						</tr>
+						<tr>
+							<td>Analog Input, Range, High</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>numeric</td>
+							<td>Highest possible value.</td>
+						</tr>
+					</table>
+					<p>
+						The input value must be reported using the correct precision and unit. Examples of units that could be used:
+					</p>
+					<ul>
+						<li>% - for instance 0-100 %</li>
+						<li>mA - for instance 4-20 mA</li>
+						<li>V - for instance 0-10 V</li>
+					</ul>
+					<p>
+						The raw value should be a unit-less integer value.
+					</p>
+				</section4>
+				<section4 topic='XMPP.IoT.Sensors.DigitalInputs'>
+					<p>
+						Devices containing an array of digital inputs.
+					</p>
+					<table caption='XMPP.IoT.Sensors.DigitalInputs Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Digital Input %1%</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>boolean</td>
+							<td>Momentary input value for input number %1%.</td>
+						</tr>
+						<tr>
+							<td>Digital Input Count</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>numeric</td>
+							<td>Number of digital inputs available on the device.</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.IoT.Sensors.AnalogInputs'>
+					<p>
+						Devices containing an array of analog inputs.
+					</p>
+					<table caption='XMPP.IoT.Sensors.AnalogInputs Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Analog Input %1%</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary input value for input number %1%.</td>
+						</tr>
+						<tr>
+							<td>Analog Input %1%, Raw</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary raw binary input value for input number %1%.</td>
+						</tr>
+						<tr>
+							<td>Analog Input %1%, Bits</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>numeric</td>
+							<td>Number of bits of precision of input value for input number %1%.</td>
+						</tr>
+						<tr>
+							<td>Analog Input %1%, Range, Low</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>numeric</td>
+							<td>Lowest possible value for input number %1%.</td>
+						</tr>
+						<tr>
+							<td>Analog Input %1%, Range, High</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>numeric</td>
+							<td>Highest possible value for input number %1%.</td>
+						</tr>
+						<tr>
+							<td>Digital Input Count</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>numeric</td>
+							<td>Number of analog inputs available on the device.</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.IoT.Sensors.Temperature'>
+					<p>
+						Temperature sensors, measuring a temperature.
+					</p>
+					<table caption='XMPP.IoT.Sensors.Temperature Fields'>
 						<tr>
 							<th>Field Name</th>
 							<th>Use</th>
@@ -285,8 +456,11 @@
 						</tr>
 					</table>
 				</section4>
-				<section4 topic='XMPP.SN.Sensors.Pressure'>
-					<table caption='XMPP.SN.Sensors.Pressure Fields'>
+				<section4 topic='XMPP.IoT.Sensors.Pressure'>
+					<p>
+						Pressure sensors, measuring a pressure.
+					</p>
+					<table caption='XMPP.IoT.Sensors.Pressure Fields'>
 						<tr>
 							<th>Field Name</th>
 							<th>Use</th>
@@ -303,16 +477,219 @@
 						</tr>
 					</table>
 				</section4>
-				<section4 topic='XMPP.SN.Sensors.LightIntensity'>
-					<!-- TODO -->
+				<section4 topic='XMPP.IoT.Sensors.Illuminance'>
+					<p>
+						Illuminance sensors (luxmeters), measuring a illuminance.
+					</p>
+					<table caption='XMPP.IoT.Sensors.Illuminance Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Illuminance</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary Illuminance value.</td>
+						</tr>
+					</table>
 				</section4>
-				<section4 topic='XMPP.SN.Sensors.Humidity'>
-					<!-- TODO -->
+				<section4 topic='XMPP.IoT.Sensors.Humidity'>
+					<p>
+						Humidity sensors (hygrometers), measuring a moisture content in the environment.
+					</p>
+					<table caption='XMPP.IoT.Sensors.Humidity Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Relative Humidity</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary Relative Humidity value (in %).</td>
+						</tr>
+						<tr>
+							<td>Temperature</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary Temperature.</td>
+						</tr>
+						<tr>
+							<td>Dew Point</td>
+							<td>Optional</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary Dew Point.</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.IoT.Sensors.Current'>
+					<p>
+						Current sensors, measuring a electrical current.
+					</p>
+					<table caption='XMPP.IoT.Sensors.Current Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Current</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary Current value.</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.IoT.Sensors.Voltage'>
+					<p>
+						Voltage sensors, measuring a electrical voltage.
+					</p>
+					<table caption='XMPP.IoT.Sensors.Voltage Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Voltage</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary Voltage value.</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.IoT.Sensors.Resistence'>
+					<p>
+						Resistence sensors, measuring a electrical resistence.
+					</p>
+					<table caption='XMPP.IoT.Sensors.Resistence Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Resistence</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary Resistence value.</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.IoT.Sensors.Mass'>
+					<p>
+						Mass sensors, measuring physical mass.
+					</p>
+					<table caption='XMPP.IoT.Sensors.Mass Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Mass</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary Mass value.</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.IoT.Sensors.Distance'>
+					<p>
+						Distance sensors, measuring physical distance.
+					</p>
+					<table caption='XMPP.IoT.Sensors.Distance Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Distance</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary Distance value.</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.IoT.Sensors.Frequency'>
+					<p>
+						Frequency sensors, measuring frequency.
+					</p>
+					<table caption='XMPP.IoT.Sensors.Frequency Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Frequency</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary Frequency value.</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.IoT.Sensors.Force'>
+					<p>
+						Force sensors, measuring physical force, or tension.
+					</p>
+					<table caption='XMPP.IoT.Sensors.Force Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Force</td>
+							<td>Required</td>
+							<td>momentary</td>
+							<td>numeric</td>
+							<td>Momentary Force or tension value.</td>
+						</tr>
+					</table>
 				</section4>
 			</section3>
-			<section3 topic='XMPP.SN.Meters'>
-				<section4 topic='XMPP.SN.Meters.Electricity'>
-					<table caption='XMPP.SN.Meters.Electricity Fields'>
+			<section3 topic='XMPP.IoT.Meters'>
+				<p>
+					This section contains interfaces relating to meters. They are more advances measurement devices measuring consumption of a physical comodity.
+				</p>
+				<section4 topic='XMPP.IoT.Meters.Electricity'>
+					<p>
+						Measures consumption of electrical energy.
+					</p>
+					<table caption='XMPP.IoT.Meters.Electricity Fields'>
 						<tr>
 							<th>Field Name</th>
 							<th>Use</th>
@@ -336,8 +713,11 @@
 						</tr>
 					</table>
 				</section4>
-				<section4 topic='XMPP.SN.Meters.Heat'>
-					<table caption='XMPP.SN.Meters.Heat Fields'>
+				<section4 topic='XMPP.IoT.Meters.Heat'>
+					<p>
+						Measures consumption of heat energy.
+					</p>
+					<table caption='XMPP.IoT.Meters.Heat Fields'>
 						<tr>
 							<th>Field Name</th>
 							<th>Use</th>
@@ -396,8 +776,11 @@
 						</tr>
 					</table>
 				</section4>
-				<section4 topic='XMPP.SN.Meters.Cooling'>
-					<table caption='XMPP.SN.Meters.Cooling Fields'>
+				<section4 topic='XMPP.IoT.Meters.Cooling'>
+					<p>
+						Measures consumption of cooling energy.
+					</p>
+					<table caption='XMPP.IoT.Meters.Cooling Fields'>
 						<tr>
 							<th>Field Name</th>
 							<th>Use</th>
@@ -456,8 +839,11 @@
 						</tr>
 					</table>
 				</section4>
-				<section4 topic='XMPP.SN.Meters.HeatingCooling'>
-					<table caption='XMPP.SN.Meters.HeatingCooling Fields'>
+				<section4 topic='XMPP.IoT.Meters.HeatingCooling'>
+					<p>
+						Measures consumption of heating and/or cooling energy.
+					</p>
+					<table caption='XMPP.IoT.Meters.HeatingCooling Fields'>
 						<tr>
 							<th>Field Name</th>
 							<th>Use</th>
@@ -516,8 +902,11 @@
 						</tr>
 					</table>
 				</section4>
-				<section4 topic='XMPP.SN.Meters.Water'>
-					<table caption='XMPP.SN.Meters.Water Fields'>
+				<section4 topic='XMPP.IoT.Meters.Water'>
+					<p>
+						Measures consumption of water.
+					</p>
+					<table caption='XMPP.IoT.Meters.Water Fields'>
 						<tr>
 							<th>Field Name</th>
 							<th>Use</th>
@@ -541,8 +930,11 @@
 						</tr>
 					</table>
 				</section4>
-				<section4 topic='XMPP.SN.Meters.Gas'>
-					<table caption='XMPP.SN.Meters.Gas Fields'>
+				<section4 topic='XMPP.IoT.Meters.Gas'>
+					<p>
+						Measures consumption of gas.
+					</p>
+					<table caption='XMPP.IoT.Meters.Gas Fields'>
 						<tr>
 							<th>Field Name</th>
 							<th>Use</th>
@@ -567,36 +959,136 @@
 					</table>
 				</section4>
 			</section3>
-			<section3 topic='XMPP.SN.Actuators'>
-				<section4 topic='XMPP.SN.Actuators.DigitalOutput'>
+			<section3 topic='XMPP.IoT.Actuators'>
+				<p>
+					This section contains interfaces relating to generic actuators. They can be used to act with the world in different ways.
+				</p>
+				<section4 topic='XMPP.IoT.Actuators.DigitalOutput'>
 					<!-- TODO -->
 				</section4>
-				<section4 topic='XMPP.SN.Actuators.AnalogOutput'>
+				<section4 topic='XMPP.IoT.Actuators.AnalogOutput'>
 					<!-- TODO -->
 				</section4>
-				<section4 topic='XMPP.SN.Actuators.DigitalOutputs'>
+				<section4 topic='XMPP.IoT.Actuators.DigitalOutputs'>
 					<!-- TODO -->
 				</section4>
-				<section4 topic='XMPP.SN.Actuators.AnalogOutputs'>
+				<section4 topic='XMPP.IoT.Actuators.AnalogOutputs'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.IoT.Actuators.Lamp'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.IoT.Actuators.Dimmer'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.IoT.Actuators.Fan'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.IoT.Actuators.Blinders'>
 					<!-- TODO -->
 				</section4>
 			</section3>
-			<section3 topic='XMPP.SN.Logistics'>
+			<section3 topic='XMPP.IoT.Security'>
+				<p>
+					This section contains interfaces relating to security.
+				</p>
+				<section4 topic='XMPP.IoT.Security.Movement'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.IoT.Security.Smoke'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.IoT.Security.Fire'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.IoT.Security.Burglar'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.IoT.Security.Door'>
+					<!-- TODO -->
+				</section4>
+			</section3>
+			<section3 topic='XMPP.IoT.Controllers'>
+				<p>
+					This section contains interfaces relating to controllers, specific applications that perform a (local) service in a sensor network.
+				</p>
+				<section4 topic='XMPP.IoT.Controllers.Thermostat'>
+					<!-- TODO -->
+				</section4>
+			</section3>
+			<section3 topic='XMPP.IoT.Logistics'>
+				<p>
+					This section contains interfaces relating to logistics.
+				</p>
+				<section4 topic='XMPP.IoT.Logistics.Route'>
+					<!-- TODO: Destination URL, Source URL, Waypoint URLs -->
+				</section4>
+				<section4 topic='XMPP.IoT.Logistics.Contents'>
+					<!-- TODO: Contents description -->
+				</section4>
+			</section3>
+			<section3 topic='XMPP.IoT.Identity'>
+				<p>
+					This section contains interfaces relating to identification of devices.
+				</p>
+				<section4 topic='XMPP.IoT.Identity.Location'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.IoT.Identity.RFID'>
+					<!-- TODO: RF ID Tag, Reader ID, Reader Location, Reader Person, -->
+				</section4>
+				<section4 topic='XMPP.IoT.Identity.GSM'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.IoT.Identity.Ethernet'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.IoT.Identity.IP'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.IoT.Identity.IPv6'>
+					<!-- TODO -->
+				</section4>
+			</section3>
+			<section3 topic='XMPP.IoT.Weather'>
+				<p>
+					This section contains interfaces relating to weather stations.
+				</p>
+				<section4 topic='XMPP.IoT.Weather.WindDirection'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.IoT.Weather.WindSpeed'>
+					<!-- TODO -->
+				</section4>
+			</section3>
+			<section3 topic='XMPP.IoT.Media'>
+				<p>
+					This section contains interfaces relating to multi media.
+				</p>
+				<section4 topic='XMPP.IoT.Media.Display'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.IoT.Media.Directory'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.IoT.Media.Camera'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.IoT.Media.Microphone'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.IoT.Media.LoudSpeakers'>
+					<!-- TODO -->
+				</section4>
+				<section4 topic='XMPP.IoT.Media.Recorder'>
+					<!-- TODO -->
+				</section4>
+			</section3>
+			<section3 topic='XMPP.IoT.Gateway'>
+				<p>
+					This section contains interfaces relating to gateways in the networ.
+				</p>
 				<!-- TODO -->
-			</section3>
-			<section3 topic='XMPP.SN.Identification'>
-				<!-- TODO -->
-			</section3>
-			<section3 topic='XMPP.SN.Cameras'>
-				<!-- TODO -->
-			</section3>
-			<section3 topic='XMPP.SN.Weather'>
-				<section4 topic='XMPP.SN.Weather.WindDirection'>
-					<!-- TODO -->
-				</section4>
-				<section4 topic='XMPP.SN.Weather.WindSpeed'>
-					<!-- TODO -->
-				</section4>
 			</section3>
 		</section2>
 		<section2 topic='Field Names'>
@@ -606,11 +1098,39 @@
 					<th>String ID</th>
 				</tr>
 				<tr>
+					<td>Energy</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Flow</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Power</td>
+					<td></td>
+				</tr>
+				<tr>
 					<td>Pressure</td>
 					<td></td>
 				</tr>
 				<tr>
+					<td>Return Temperature</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Supply Temperature</td>
+					<td></td>
+				</tr>
+				<tr>
 					<td>Temperature</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Temperature Difference</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Volume</td>
 					<td></td>
 				</tr>
 			</table>

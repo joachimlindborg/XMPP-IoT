@@ -38,7 +38,15 @@
             <jid>peter.waher@jabber.org</jid>
             <uri>http://se.linkedin.com/pub/peter-waher/1a/71b/a29/</uri>
         </author>
-        <revision>
+		<revision>
+			<version>0.0.6</version>
+			<date>?</date>
+			<initials>pwa</initials>
+			<remark>
+				<p>Corrected downloadPrivileges example.</p>
+			</remark>
+		</revision>
+		<revision>
             <version>0.0.5</version>
             <date>2013-04-04</date>
             <initials>pwa</initials>
@@ -386,7 +394,7 @@
                 </p>
                 <p>
                     <strong>Note:</strong> In many cases, an address to a provisioning server might be preprogrammed during production of the
-                    device. In these cases, parts of the above procedure may not neccessary. All the client needs to do, if the provisioning server is not available
+                    device. In these cases, parts of the above procedure may not be neccessary. All the client needs to do, if the provisioning server is not available
                     in the roster of the device, is to send a subscription request to the provisioning server, to alert the server of the existence of the device,
                     and possibly request a device token.
                 </p>
@@ -602,9 +610,6 @@
       </rejected>
    </iq>]]>
                 </example>
-                <p>
-                    Note that the provisioning server responds with a <strong>canReadResponse</strong> element, with the same content as the <strong>canRead</strong> element in the request.
-                </p>
             </section3>
             <section3 topic='Restricting nodes during read-out'>
                 <p>
@@ -1072,7 +1077,7 @@
                 </table>
                 <p>
                     The provisioning server receives these credentials, and decides if the user should have access to the service or not, based on rules configured in the provisioning service.
-                    If the user is granted access, a <strong>userToken</strong> is generated and returned to the service. This token
+                    If the user is granted access, a <strong>userToken</strong> is generated and returned to the service.
                 </p>
                 <p>
                     Now, the service can determine if this access grant is sufficient or not. It can require the user to login into the service first. If so, the service should provide the provisioning
@@ -1250,14 +1255,18 @@
        from='provisioning@clayster.com'
        to='service@clayster.com/service'
        id='12'>
-       <privileges>
+       <downloadPrivilegesResponse>
            <exclude id='Sensors.Delete'/>
            <include id='Sensors'/>
-       </privileges>
+       </downloadPrivilegesResponse>
    </iq>
  
    <!-- user performs actions without interaction with the provisioning server -->]]>
                 </example>
+				<p>
+					<strong>Note:</strong> If the user or service has not been correctly identified, logged in, etc., the resulting list must only include privileges
+					that default users that are not logged in can have. This list can be empty.
+				</p>
             </section3>
         </section2>
     </section1>
@@ -1685,6 +1694,6 @@
 		</ul>
 	</section1>
 	<section1 topic='Acknowledgements' anchor='ack'>
-        <p>Thanks to Joachim Lindborg and Karin Forsell for all valuable feedback.</p>
+        <p>Thanks to Joachim Lindborg, Karin Forsell and Tina Beckman for all valuable feedback.</p>
     </section1>
 </xep>
