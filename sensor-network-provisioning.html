@@ -10,7 +10,7 @@
     <meta name="DC.Description" content="This specification describes an architecture for efficient provisioning of services, access rights and user privileges in sensor networks.">
     <meta name="DC.Publisher" content="XMPP Standards Foundation">
     <meta name="DC.Contributor" content="XMPP Extensions Editor">
-    <meta name="DC.Date" content="2013-04-04">
+    <meta name="DC.Date" content="?">
     <meta name="DC.Type" content="XMPP Extension Protocol">
     <meta name="DC.Format" content="XHTML">
     <meta name="DC.Identifier" content="XEP-xxxx">
@@ -42,11 +42,11 @@
       </tr>
       <tr valign="top">
         <td><strong>Version:</strong></td>
-        <td>0.0.5</td>
+        <td>0.0.6</td>
       </tr>
       <tr valign="top">
         <td><strong>Last Updated:</strong></td>
-        <td>2013-04-04</td>
+        <td>?</td>
       </tr>
     </table>
     <hr>
@@ -55,36 +55,36 @@
     <h2>Table of Contents</h2>
     <div class="indent">
       <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
-      3.1.  <a href="#sect-ID0EENAC">Delegating trust</a><br>      
-      3.1.1.  <a href="#sect-ID0EINAC">Delegating original trust to a Provisioning Server</a><br>      
-      3.1.2.  <a href="#sect-ID0EJAAE">Delegating Secondary Trust</a><br>      
-      3.1.3.  <a href="#sect-ID0EDBAE">Multiple tokens</a><br>   
-      3.2.  <a href="#sect-ID0EUBAE">Friendships</a><br>      
-      3.2.1.  <a href="#sect-ID0EYBAE">Friendship request accepted</a><br>      
-      3.2.2.  <a href="#sect-ID0EADAE">Friendship request rejected</a><br>      
-      3.2.3.  <a href="#sect-ID0EYDAE">Unfriending existing friends</a><br>      
-      3.2.4.  <a href="#sect-ID0EXEAE">Recommending friendships</a><br>   
-      3.3.  <a href="#sect-ID0ETFAE">Device Read-out</a><br>      
-      3.3.1.  <a href="#sect-ID0EXFAE">Rejecting read-outs</a><br>      
-      3.3.2.  <a href="#sect-ID0ECHAE">Restricting nodes during read-out</a><br>      
-      3.3.3.  <a href="#sect-ID0EUIAE">Restricting fields during read-out</a><br>   
-      3.4.  <a href="#sect-ID0EBKAE">Device Control</a><br>      
-      3.4.1.  <a href="#sect-ID0EFKAE">Rejecting control actions</a><br>      
-      3.4.2.  <a href="#sect-ID0E6KAE">Restricting nodes during control</a><br>      
-      3.4.3.  <a href="#sect-ID0ENMAE">Restricting parameters during control</a><br>   
-      3.5.  <a href="#sect-ID0E3NAE">Cache</a><br>      
-      3.5.1.  <a href="#sect-ID0EAOAE">Clear cache</a><br>   
-      3.6.  <a href="#sect-ID0E4OAE">Services</a><br>      
+      3.1.  <a href="#sect-ID0EUNAC">Delegating trust</a><br>      
+      3.1.1.  <a href="#sect-ID0EYNAC">Delegating original trust to a Provisioning Server</a><br>      
+      3.1.2.  <a href="#sect-ID0EZAAE">Delegating Secondary Trust</a><br>      
+      3.1.3.  <a href="#sect-ID0ETBAE">Multiple tokens</a><br>   
+      3.2.  <a href="#sect-ID0EECAE">Friendships</a><br>      
+      3.2.1.  <a href="#sect-ID0EICAE">Friendship request accepted</a><br>      
+      3.2.2.  <a href="#sect-ID0EQDAE">Friendship request rejected</a><br>      
+      3.2.3.  <a href="#sect-ID0EIEAE">Unfriending existing friends</a><br>      
+      3.2.4.  <a href="#sect-ID0EHFAE">Recommending friendships</a><br>   
+      3.3.  <a href="#sect-ID0EDGAE">Device Read-out</a><br>      
+      3.3.1.  <a href="#sect-ID0EHGAE">Rejecting read-outs</a><br>      
+      3.3.2.  <a href="#sect-ID0EJHAE">Restricting nodes during read-out</a><br>      
+      3.3.3.  <a href="#sect-ID0E2IAE">Restricting fields during read-out</a><br>   
+      3.4.  <a href="#sect-ID0EIKAE">Device Control</a><br>      
+      3.4.1.  <a href="#sect-ID0EMKAE">Rejecting control actions</a><br>      
+      3.4.2.  <a href="#sect-ID0EGLAE">Restricting nodes during control</a><br>      
+      3.4.3.  <a href="#sect-ID0EUMAE">Restricting parameters during control</a><br>   
+      3.5.  <a href="#sect-ID0EDOAE">Cache</a><br>      
+      3.5.1.  <a href="#sect-ID0EHOAE">Clear cache</a><br>   
+      3.6.  <a href="#sect-ID0EEPAE">Services</a><br>      
       3.6.1.  <a href="#servicetoken">Getting a service token</a><br>      
       3.6.2.  <a href="#usertoken">User access to service</a><br>   
-      3.7.  <a href="#sect-ID0E6VAE">User privileges</a><br>      
-      3.7.1.  <a href="#sect-ID0EDWAE">User privileges in service</a><br>      
-      3.7.2.  <a href="#sect-ID0EK1AE">Download all user privileges</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
+      3.7.  <a href="#sect-ID0EGWAE">User privileges</a><br>      
+      3.7.1.  <a href="#sect-ID0EKWAE">User privileges in service</a><br>      
+      3.7.2.  <a href="#sect-ID0ER1AE">Download all user privileges</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
       5.1.  <a href="#cache">Caching and cache time</a><br>   
-      5.2.  <a href="#sect-ID0ER4AE">Working with multiple provisioning servers</a><br>   
-      5.3.  <a href="#sect-ID0EP5AE">Automatic aggregation of services, users and privileges</a><br>   
-      5.4.  <a href="#sect-ID0EY5AE">Reading devices from large subsystems</a><br>   
-      5.5.  <a href="#sect-ID0E46AE">Different types of tokens</a><br>6.  <a href="#security">Security Considerations</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a><br>10.  <a href="#moreinfo">For more information</a><br>11.  <a href="#ack">Acknowledgements</a></p>
+      5.2.  <a href="#sect-ID0E64AE">Working with multiple provisioning servers</a><br>   
+      5.3.  <a href="#sect-ID0E45AE">Automatic aggregation of services, users and privileges</a><br>   
+      5.4.  <a href="#sect-ID0EG6AE">Reading devices from large subsystems</a><br>   
+      5.5.  <a href="#sect-ID0EMAAG">Different types of tokens</a><br>6.  <a href="#security">Security Considerations</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a><br>10.  <a href="#moreinfo">For more information</a><br>11.  <a href="#ack">Acknowledgements</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
     </div>
     <hr>
@@ -102,7 +102,7 @@
             efficiently using a trusted third party with more power and options when it comes to user interface design and storage.
         </p>
         <p class="" style="">
-            This XEP relies heavily on <a href="sensor-data.html">sensor-data</a>  [<a href="#nt-ID0EIG">1</a>].
+            This XEP relies heavily on <a href="sensor-data.html">sensor-data</a>  [<a href="#nt-ID0EYG">1</a>].
             Sensor networks contain many different architectures and use cases. For this reason, the sensor network standards have been divided into multiple XEPs according to the following table:
         </p>
 
@@ -115,11 +115,11 @@
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">XEP-0000-ColorParameter</td>
-                <td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0ELH">2</a>]</td>
+                <td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0E2H">2</a>]</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">XEP-0000-DynamicForms</td>
-                <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EDAAC">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EPAAC">4</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0E2AAC">5</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EHBAC">6</a>].</td>
+                <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0ETAAC">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0E6AAC">4</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0ELBAC">5</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EXBAC">6</a>].</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">exi</td>
@@ -339,9 +339,9 @@
             <li class="" style="">Provide additional interoperability services to nodes in the network (for instance, unit conversion).</li>
         </ul>
         <div class="indent">
-      <h3>3.1 <a name="sect-ID0EENAC">Delegating trust</a></h3>
+      <h3>3.1 <a name="sect-ID0EUNAC">Delegating trust</a></h3>
             <div class="indent">
-        <h3>3.1.1 <a name="sect-ID0EINAC">Delegating original trust to a Provisioning Server</a></h3>
+        <h3>3.1.1 <a name="sect-ID0EYNAC">Delegating original trust to a Provisioning Server</a></h3>
                 <p class="" style="">
                     Trust is delegated to a provisioning server by a device, simply by befriending the provisioning server and asking it questions and complying with
                     its answers.
@@ -399,7 +399,7 @@
                 </p>
                 <p class="" style="">
                     <span class="strong">Note:</span> In many cases, an address to a provisioning server might be preprogrammed during production of the
-                    device. In these cases, parts of the above procedure may not neccessary. All the client needs to do, if the provisioning server is not available
+                    device. In these cases, parts of the above procedure may not be neccessary. All the client needs to do, if the provisioning server is not available
                     in the roster of the device, is to send a subscription request to the provisioning server, to alert the server of the existence of the device,
                     and possibly request a device token.
                 </p>
@@ -408,7 +408,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.1.2 <a name="sect-ID0EJAAE">Delegating Secondary Trust</a></h3>
+        <h3>3.1.2 <a name="sect-ID0EZAAE">Delegating Secondary Trust</a></h3>
                 <p class="" style="">
                     The <span class="strong">isFriendResponse</span> element returned by the provisioning server contains an attribute <span class="strong">secondaryTrustAllowed</span> that is by default
                     set to false. If the provisioning server has no problem with allowing multiple trust to be delegated by devices in the network, it can choose to set this
@@ -423,7 +423,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.1.3 <a name="sect-ID0EDBAE">Multiple tokens</a></h3>
+        <h3>3.1.3 <a name="sect-ID0ETBAE">Multiple tokens</a></h3>
                 <p class="" style="">
                     When multiple trust is used, the entity (client, user, service, etc.) has one token from each provisioning server. However, when sending a token to a third party,
                     the sender does not know what provisioning server(s) the third party uses to check access rights and user privileges. Therefore, the client must send all tokens, separated
@@ -468,9 +468,9 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.2 <a name="sect-ID0EUBAE">Friendships</a></h3>
+      <h3>3.2 <a name="sect-ID0EECAE">Friendships</a></h3>
             <div class="indent">
-        <h3>3.2.1 <a name="sect-ID0EYBAE">Friendship request accepted</a></h3>
+        <h3>3.2.1 <a name="sect-ID0EICAE">Friendship request accepted</a></h3>
                 <p class="" style="">
                     The following diagram displays how a friendship request from an external party can be handled, delegating the responsibility to a trusted third party:
                 </p>
@@ -508,7 +508,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.2.2 <a name="sect-ID0EADAE">Friendship request rejected</a></h3>
+        <h3>3.2.2 <a name="sect-ID0EQDAE">Friendship request rejected</a></h3>
                 <p class="" style="">
                     The following diagram displays a friendship request from an external party being rejected as a result of the trusted third party negating the friendship:
                 </p>
@@ -539,7 +539,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.3 <a name="sect-ID0EYDAE">Unfriending existing friends</a></h3>
+        <h3>3.2.3 <a name="sect-ID0EIEAE">Unfriending existing friends</a></h3>
                 <p class="" style="">
                     If the provisioning server decides that two friends in the network should no longer be friends and communicate with each other, it simply sends a message to
                     at least one of the friends as follows:
@@ -567,7 +567,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.4 <a name="sect-ID0EXEAE">Recommending friendships</a></h3>
+        <h3>3.2.4 <a name="sect-ID0EHFAE">Recommending friendships</a></h3>
                 <p class="" style="">
                     The provisioning server can, apart from accepting new friendships and rejecting old friendships, also recommend new friendships. In this case, the provisioning server
                     simply sends a message to one or both of the soon to be friends, as follows:
@@ -591,9 +591,9 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.3 <a name="sect-ID0ETFAE">Device Read-out</a></h3>
+      <h3>3.3 <a name="sect-ID0EDGAE">Device Read-out</a></h3>
             <div class="indent">
-        <h3>3.3.1 <a name="sect-ID0EXFAE">Rejecting read-outs</a></h3>
+        <h3>3.3.1 <a name="sect-ID0EHGAE">Rejecting read-outs</a></h3>
                 <p class="" style="">
                     An important use case for provisioning in sensor networks is who gets to read out sensor data from which sensors. This use case details how communication with a
                     provisioning server can help the device determine if a client has sufficient access rights to read the values of the device.
@@ -642,12 +642,9 @@
    &lt;/iq&gt;
                 </pre>
         </div>
-                <p class="" style="">
-                    Note that the provisioning server responds with a <span class="strong">canReadResponse</span> element, with the same content as the <span class="strong">canRead</span> element in the request.
-                </p>
             </div>
             <div class="indent">
-        <h3>3.3.2 <a name="sect-ID0ECHAE">Restricting nodes during read-out</a></h3>
+        <h3>3.3.2 <a name="sect-ID0EJHAE">Restricting nodes during read-out</a></h3>
                 <p class="" style="">
                     In case the device handles multiple nodes that can be read, the provisioning server has the possibility to grant read-out, but to limit the nodes that can be read out.
                     The provisioning server does this by returning the list of nodes that can be read.
@@ -714,7 +711,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.3 <a name="sect-ID0EUIAE">Restricting fields during read-out</a></h3>
+        <h3>3.3.3 <a name="sect-ID0E2IAE">Restricting fields during read-out</a></h3>
                 <p class="" style="">
                     In case the provisioning server wants to limit the fields a device can send to a client, the provisioning server has the possibility to grant read-out, but
                     list a set of fields the device is allowed to send to the corresponding client.
@@ -777,9 +774,9 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.4 <a name="sect-ID0EBKAE">Device Control</a></h3>
+      <h3>3.4 <a name="sect-ID0EIKAE">Device Control</a></h3>
             <div class="indent">
-        <h3>3.4.1 <a name="sect-ID0EFKAE">Rejecting control actions</a></h3>
+        <h3>3.4.1 <a name="sect-ID0EMKAE">Rejecting control actions</a></h3>
                 <p class="" style="">
                     An important use case for provisioning in sensor networks is who gets to control devices, and what they can control. This use case details how communication with a
                     provisioning server can help the device determine if a client has sufficient access rights to perform control actions on the device.
@@ -830,7 +827,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.4.2 <a name="sect-ID0E6KAE">Restricting nodes during control</a></h3>
+        <h3>3.4.2 <a name="sect-ID0EGLAE">Restricting nodes during control</a></h3>
                 <p class="" style="">
                     In case the device handles multiple nodes that can be read, the provisioning server has the possibility to grant control access, but to limit the nodes that can be controlled.
                     The provisioning server does this by returning the list of nodes that can be controlled.
@@ -909,7 +906,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.4.3 <a name="sect-ID0ENMAE">Restricting parameters during control</a></h3>
+        <h3>3.4.3 <a name="sect-ID0EUMAE">Restricting parameters during control</a></h3>
                 <p class="" style="">
                     In case the provisioning server wants to limit the control parameters a client can control in a device, the provisioning server has the possibility to grant 
                     control access, but list a set of parameters the client is allowed to control in the corresponding device.
@@ -998,9 +995,9 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.5 <a name="sect-ID0E3NAE">Cache</a></h3>
+      <h3>3.5 <a name="sect-ID0EDOAE">Cache</a></h3>
             <div class="indent">
-        <h3>3.5.1 <a name="sect-ID0EAOAE">Clear cache</a></h3>
+        <h3>3.5.1 <a name="sect-ID0EHOAE">Clear cache</a></h3>
                 <p class="" style="">
                     When the provisioning server updates access rights and user privileges in the system, it will send a <span class="strong">clearCache</span> command to corresponding devices.
                     If a device was offline during the change, the provisioning server must send the <span class="strong">clearCache</span> message when the device comes online again. To acknowledge
@@ -1036,7 +1033,7 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.6 <a name="sect-ID0E4OAE">Services</a></h3>
+      <h3>3.6 <a name="sect-ID0EEPAE">Services</a></h3>
             <div class="indent">
         <h3>3.6.1 <a name="servicetoken">Getting a service token</a></h3>
                 <p class="" style="">
@@ -1130,7 +1127,7 @@
                         <td colspan="" rowspan="">HTML5 over HTTP(S), XMPP</td>
                         <td colspan="" rowspan="">
                             If the geographic location (longitude, latitude and possibly altitude) of the user client is known, it can be used. HTML 5 provides mechanism whereby the location
-                            of the client can be fetched. <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0080.html">User Geolocation</a></span>  [<a href="#nt-ID0EIUAE">7</a>] provides a mechanism whereby client location can be obtained over XMPP.
+                            of the client can be fetched. <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0080.html">User Geolocation</a></span>  [<a href="#nt-ID0EPUAE">7</a>] provides a mechanism whereby client location can be obtained over XMPP.
                         </td>
                     </tr>
                     <tr class="body">
@@ -1147,7 +1144,7 @@
         </div>
                 <p class="" style="">
                     The provisioning server receives these credentials, and decides if the user should have access to the service or not, based on rules configured in the provisioning service.
-                    If the user is granted access, a <span class="strong">userToken</span> is generated and returned to the service. This token
+                    If the user is granted access, a <span class="strong">userToken</span> is generated and returned to the service.
                 </p>
                 <p class="" style="">
                     Now, the service can determine if this access grant is sufficient or not. It can require the user to login into the service first. If so, the service should provide the provisioning
@@ -1190,9 +1187,9 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.7 <a name="sect-ID0E6VAE">User privileges</a></h3>
+      <h3>3.7 <a name="sect-ID0EGWAE">User privileges</a></h3>
             <div class="indent">
-        <h3>3.7.1 <a name="sect-ID0EDWAE">User privileges in service</a></h3>
+        <h3>3.7.1 <a name="sect-ID0EKWAE">User privileges in service</a></h3>
                 <p class="" style="">
                     When a user has been given access to a service, and properly been identified, the service can ask the provisioning service for detailed user privileges to control
                     different aspects of the service. This can be done using the <span class="strong">hasPrivilege</span> command. Here, the service sends its <span class="strong">serviceToken</span> and
@@ -1284,7 +1281,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.7.2 <a name="sect-ID0EK1AE">Download all user privileges</a></h3>
+        <h3>3.7.2 <a name="sect-ID0ER1AE">Download all user privileges</a></h3>
                 <p class="" style="">
                     To improve performance, services can download the entire set of user privileges, and perform privilege checks internally. The following diagram displays
                     how the above two use cases could be handled in such a case:
@@ -1339,20 +1336,24 @@
        from='provisioning@clayster.com'
        to='service@clayster.com/service'
        id='12'&gt;
-       &lt;privileges&gt;
+       &lt;downloadPrivilegesResponse&gt;
            &lt;exclude id='Sensors.Delete'/&gt;
            &lt;include id='Sensors'/&gt;
-       &lt;/privileges&gt;
+       &lt;/downloadPrivilegesResponse&gt;
    &lt;/iq&gt;
  
    &lt;!-- user performs actions without interaction with the provisioning server --&gt;
                 </pre>
         </div>
+				<p class="" style="">
+					<span class="strong">Note:</span> If the user or service has not been correctly identified, logged in, etc., the resulting list must only include privileges
+					that default users that are not logged in can have. This list can be empty.
+				</p>
             </div>
         </div>
     <h2>4.
        <a name="support">Determining Support</a></h2>
-        <p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:sn:provisioning" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EV2AE">8</a>] information requests.</p>
+        <p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:sn:provisioning" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0ED3AE">8</a>] information requests.</p>
         <p class="caption"><a name="example-18"></a>Example 18. Service discovery information request</p>
     <div class="indent">
       <pre class="prettyprint">
@@ -1383,7 +1384,7 @@
     </div>
         <p class="" style="">
             In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
-            in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EM3AE">9</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
+            in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0E13AE">9</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
         </p>
     <h2>5.
        <a name="impl">Implementation Notes</a></h2>
@@ -1410,7 +1411,7 @@
             </p>
         </div>
         <div class="indent">
-      <h3>5.2 <a name="sect-ID0ER4AE">Working with multiple provisioning servers</a></h3>
+      <h3>5.2 <a name="sect-ID0E64AE">Working with multiple provisioning servers</a></h3>
             <p class="" style="">
                 When working with multiple provisioning servers, there are some things that should be considered:
             </p>
@@ -1436,7 +1437,7 @@
             </ul>
         </div>
         <div class="indent">
-      <h3>5.3 <a name="sect-ID0EP5AE">Automatic aggregation of services, users and privileges</a></h3>
+      <h3>5.3 <a name="sect-ID0E45AE">Automatic aggregation of services, users and privileges</a></h3>
             <p class="" style="">
                 One important design consideration when implementing a provisioning server is how to handle new services, users and privileges. One option might be to automatically
                 ignore anything not recognized. Another option might be to dynamically add new services, user names and privileges to internal data sources, making it easier to manage
@@ -1444,11 +1445,11 @@
             </p>
         </div>
         <div class="indent">
-      <h3>5.4 <a name="sect-ID0EY5AE">Reading devices from large subsystems</a></h3>
+      <h3>5.4 <a name="sect-ID0EG6AE">Reading devices from large subsystems</a></h3>
             <p class="" style="">
                 All examples in this document have been simplified examples where a few devices containing a few fields have been read. However, in many cases large subsystems with
                 very many sensors containing many fields have to be read, as is documented in <a href="xep-0000-SN-Concentrators.html">xep-0000-SN-Concentrators.html</a>
-                 [<a href="#nt-ID0ED6AE">10</a>]. In such cases, a node may have to be specified using two or perhaps
+                 [<a href="#nt-ID0ER6AE">10</a>]. In such cases, a node may have to be specified using two or perhaps
                 even three ID's: a <span class="strong">sourceId</span> identifying the data source controlling the device, a possible <span class="strong">cacheType</span> narrowing down the search to
                 a specific kind of node, and the common <span class="strong">nodeId</span>. For more information about this, see <a href="xep-0000-SN-Concentrators.html">xep-0000-SN-Concentrators.html</a>.
             </p>
@@ -1458,7 +1459,7 @@
             </p>
         </div>
         <div class="indent">
-      <h3>5.5 <a name="sect-ID0E46AE">Different types of tokens</a></h3>
+      <h3>5.5 <a name="sect-ID0EMAAG">Different types of tokens</a></h3>
             <p class="" style="">
                 A small note regarding the use of different tokens. A service can get a <span class="strong">Service Token</span>, a device a <span class="strong">Device Token</span> and a user
                 a <span class="strong">User Token</span>. When delegating these tokens to third parties, a service sends its <span class="strong">Service Token</span>. But, if the service does this
@@ -1494,7 +1495,7 @@
         </ul>
     <h2>7.
        <a name="iana">IANA Considerations</a></h2>
-        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0ELCAG">11</a>].</p>
+        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EZCAG">11</a>].</p>
     <h2>8.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
         <p class="" style="">REQUIRED.</p>
@@ -1790,7 +1791,7 @@
 		</ul>
 	<h2>11.
        <a name="ack">Acknowledgements</a></h2>
-        <p class="" style="">Thanks to Joachim Lindborg and Karin Forsell for all valuable feedback.</p>
+        <p class="" style="">Thanks to Joachim Lindborg, Karin Forsell and Tina Beckman for all valuable feedback.</p>
     <hr><a name="appendices"></a><h2>Appendices</h2>
     <hr><a name="appendix-docinfo"></a><h3>Appendix A: Document Information</h3>
     <p class="indent">
@@ -1801,8 +1802,8 @@
             <a href="http://xmpp.org/extensions/xep-0001.html#states-ProtoXEP">ProtoXEP</a><br>
             Type:
             <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
-            Version: 0.0.5<br>
-            Last Updated: 2013-04-04<br>
+            Version: 0.0.6<br>
+            Last Updated: ?<br>
                 Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001, XEP-0030, sensor-data<br>
                 Supersedes: None<br>
                 Superseded By: None<br>
@@ -1836,21 +1837,26 @@
     <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
     <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
     <div class="indent">
-      <p><a name="nt-ID0EIG">1</a>. <a href="sensor-data.html">sensor-data</a></p>
-      <p><a name="nt-ID0ELH">2</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0EDAAC">3</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0EPAAC">4</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
-      <p><a name="nt-ID0E2AAC">5</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
-      <p><a name="nt-ID0EHBAC">6</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
-      <p><a name="nt-ID0EIUAE">7</a>. XEP-0080: User Geolocation &lt;<a href="http://xmpp.org/extensions/xep-0080.html">http://xmpp.org/extensions/xep-0080.html</a>&gt;.</p>
-      <p><a name="nt-ID0EV2AE">8</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
-      <p><a name="nt-ID0EM3AE">9</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
-      <p><a name="nt-ID0ED6AE">10</a>. <a href="xep-0000-SN-Concentrators.html">xep-0000-SN-Concentrators.html</a></p>
-      <p><a name="nt-ID0ELCAG">11</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+      <p><a name="nt-ID0EYG">1</a>. <a href="sensor-data.html">sensor-data</a></p>
+      <p><a name="nt-ID0E2H">2</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0ETAAC">3</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0E6AAC">4</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
+      <p><a name="nt-ID0ELBAC">5</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
+      <p><a name="nt-ID0EXBAC">6</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+      <p><a name="nt-ID0EPUAE">7</a>. XEP-0080: User Geolocation &lt;<a href="http://xmpp.org/extensions/xep-0080.html">http://xmpp.org/extensions/xep-0080.html</a>&gt;.</p>
+      <p><a name="nt-ID0ED3AE">8</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0E13AE">9</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0ER6AE">10</a>. <a href="xep-0000-SN-Concentrators.html">xep-0000-SN-Concentrators.html</a></p>
+      <p><a name="nt-ID0EZCAG">11</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
     <div class="indent">
+      <h4>Version 0.0.6 (?)</h4>
+      <div class="indent">
+				<p class="" style="">Corrected downloadPrivileges example.</p>
+			 (pwa)
+    </div>
       <h4>Version 0.0.5 (2013-04-04)</h4>
       <div class="indent">
                 <p class="" style="">Added control use cases.</p>

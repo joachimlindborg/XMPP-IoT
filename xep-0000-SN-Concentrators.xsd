@@ -247,7 +247,16 @@
 	</xs:element>
     <xs:element name='unsubscribeResponse' type='Response'/>
  
-	<xs:element name='nodeAdded' type='NodeSourceInformation'/>
+	<xs:element name='nodeAdded'>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='NodeSourceInformation'>
+					<xs:attribute name='afterNodeId' type='xs:string' use='optional'/>
+					<xs:attribute name='afterNodeCacheType' type='xs:string' use='optional'/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
 	<xs:element name='nodeUpdated'>
 		<xs:complexType>
 			<xs:complexContent>
@@ -514,7 +523,7 @@
 		<xs:attribute name='hasChildren' type='xs:boolean' use='required'/>
 		<xs:attribute name='childrenOrdered' type='xs:boolean' use='optional' default='false'/>
 		<xs:attribute name='isReadable' type='xs:boolean' use='optional' default='false'/>
-        <xs:attribute name='isConfigurable' type='xs:boolean' use='optional' default='false'/>
+        <xs:attribute name='isControllable' type='xs:boolean' use='optional' default='false'/>
         <xs:attribute name='hasCommands' type='xs:boolean' use='optional' default='false'/>
         <xs:attribute name='parentId' type='xs:string' use='optional'/>
         <xs:attribute name='parentCacheType' type='xs:string' use='optional'/>
@@ -727,7 +736,15 @@
 		<xs:complexContent>
 			<xs:extension base='ExecuteNodeCommandResponse'>
 				<xs:choice minOccurs='0' maxOccurs='unbounded'>
-					<xs:element name='result' type='xs:boolean'/>
+					<xs:element name='result'>
+						<xs:complexType>
+							<xs:simpleContent>
+								<xs:extension base='xs:boolean'>
+									<xs:attribute name='error' type='xs:string' use='optional'/>
+								</xs:extension>
+							</xs:simpleContent>	
+						</xs:complexType>
+					</xs:element>
 				</xs:choice>
 			</xs:extension>
 		</xs:complexContent>
