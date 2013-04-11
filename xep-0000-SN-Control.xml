@@ -981,7 +981,36 @@
             </section3>
         </section2>
     </section1>
-    <section1 topic='Implementation Notes' anchor='impl'>
+	<section1 topic='Determining Support' anchor='support'>
+		<p>If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:sn:control" in response to &xep0030; information requests.</p>
+		<example caption="Service discovery information request">
+			<![CDATA[
+<iq type='get'
+    from='device@clayster.com/device'
+    to='provisioning@clayster.com'
+    id='disco1'>
+  <query xmlns='http://jabber.org/protocol/disco#info'/>
+</iq>]]>
+		</example>
+		<example caption="Service discovery information response">
+			<![CDATA[
+<iq type='result'
+    from='provisioning@clayster.com'
+    to='device@clayster.com/device'
+    id='disco1'>
+  <query xmlns='http://jabber.org/protocol/disco#info'>
+    ...
+    <feature var='urn:xmpp:sn:control'/>
+    ...
+  </query>
+</iq>]]>
+		</example>
+		<p>
+			In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
+			in &xep0115;. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
+		</p>
+	</section1>
+	<section1 topic='Implementation Notes' anchor='impl'>
         <section2 topic='Reading current control states'>
             <p>
                 If a client wants to know the current status of control parameters, it must perform a readout of <strong>Momentary</strong> and <strong>Status</strong> values 

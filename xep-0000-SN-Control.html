@@ -84,17 +84,17 @@
       3.4.4.  <a href="#sect-ID0E2GAE">Getting a control form from multiple nodes</a><br>      
       3.4.5.  <a href="#sect-ID0ETHAE">Getting a control form from multiple nodes, Failure</a><br>      
       3.4.6.  <a href="#sect-ID0EGIAE">Setting a (partial) control form to multiple nodes</a><br>      
-      3.4.7.  <a href="#sect-ID0EXIAE">Setting a (partial) control form to multiple nodes, Failure</a><br>4.  <a href="#impl">Implementation Notes</a><br>   
-      4.1.  <a href="#sect-ID0EQJAE">Reading current control states</a><br>   
-      4.2.  <a href="#nodeparamsvscontrolparams">Difference between node parameters and node control parameters</a><br>   
-      4.3.  <a href="#parametergroups">Grouping control parameters</a><br>   
-      4.4.  <a href="#sect-ID0EJBAG">Node commands vs. control parameters</a><br>   
-      4.5.  <a href="#sect-ID0EZDAG">Tokens</a><br>   
-      4.6.  <a href="#sect-ID0EUFAG">Controlling devices in large subsystems</a><br>5.  <a href="#i18n">Internationalization Considerations</a><br>   
-      5.1.  <a href="#sect-ID0E1GAG">Time Zones</a><br>   
-      5.2.  <a href="#sect-ID0EOHAG">xml:lang</a><br>6.  <a href="#security">Security Considerations</a><br>   
-      6.1.  <a href="#sect-ID0EDIAG">Encryption &amp; Authentication</a><br>   
-      6.2.  <a href="#sect-ID0EQIAG">Provisioning</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a><br>10.  <a href="#moreinfo">For more information</a><br>11.  <a href="#ack">Acknowledgements</a></p>
+      3.4.7.  <a href="#sect-ID0EXIAE">Setting a (partial) control form to multiple nodes, Failure</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
+      5.1.  <a href="#sect-ID0E4KAE">Reading current control states</a><br>   
+      5.2.  <a href="#nodeparamsvscontrolparams">Difference between node parameters and node control parameters</a><br>   
+      5.3.  <a href="#parametergroups">Grouping control parameters</a><br>   
+      5.4.  <a href="#sect-ID0EWCAG">Node commands vs. control parameters</a><br>   
+      5.5.  <a href="#sect-ID0EGFAG">Tokens</a><br>   
+      5.6.  <a href="#sect-ID0EBHAG">Controlling devices in large subsystems</a><br>6.  <a href="#i18n">Internationalization Considerations</a><br>   
+      6.1.  <a href="#sect-ID0EHIAG">Time Zones</a><br>   
+      6.2.  <a href="#sect-ID0E2IAG">xml:lang</a><br>7.  <a href="#security">Security Considerations</a><br>   
+      7.1.  <a href="#sect-ID0EQJAG">Encryption &amp; Authentication</a><br>   
+      7.2.  <a href="#sect-ID0E4JAG">Provisioning</a><br>8.  <a href="#iana">IANA Considerations</a><br>9.  <a href="#registrar">XMPP Registrar Considerations</a><br>10.  <a href="#schema">XML Schema</a><br>11.  <a href="#moreinfo">For more information</a><br>12.  <a href="#ack">Acknowledgements</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
     </div>
     <hr>
@@ -1134,13 +1134,48 @@
             </div>
         </div>
     <h2>4.
+       <a name="support">Determining Support</a></h2>
+		<p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:sn:control" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0E1JAE">9</a>] information requests.</p>
+		<p class="caption"><a name="example-27"></a>Example 27. Service discovery information request</p>
+    <div class="indent">
+      <pre class="prettyprint">
+			
+&lt;iq type='get'
+    from='device@clayster.com/device'
+    to='provisioning@clayster.com'
+    id='disco1'&gt;
+  &lt;query xmlns='http://jabber.org/protocol/disco#info'/&gt;
+&lt;/iq&gt;
+		</pre>
+    </div>
+		<p class="caption"><a name="example-28"></a>Example 28. Service discovery information response</p>
+    <div class="indent">
+      <pre class="prettyprint">
+			
+&lt;iq type='result'
+    from='provisioning@clayster.com'
+    to='device@clayster.com/device'
+    id='disco1'&gt;
+  &lt;query xmlns='http://jabber.org/protocol/disco#info'&gt;
+    ...
+    &lt;feature var='urn:xmpp:sn:control'/&gt;
+    ...
+  &lt;/query&gt;
+&lt;/iq&gt;
+		</pre>
+    </div>
+		<p class="" style="">
+			In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
+			in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0ERKAE">10</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
+		</p>
+	<h2>5.
        <a name="impl">Implementation Notes</a></h2>
         <div class="indent">
-      <h3>4.1 <a name="sect-ID0EQJAE">Reading current control states</a></h3>
+      <h3>5.1 <a name="sect-ID0E4KAE">Reading current control states</a></h3>
             <p class="" style="">
                 If a client wants to know the current status of control parameters, it must perform a readout of <span class="strong">Momentary</span> and <span class="strong">Status</span> values 
                 from the device, according to
-                 [<a href="#nt-ID0E3JAE">9</a>], and from the returned set of values take the current control parameter value according to the following rules, ordered by priority:
+                 [<a href="#nt-ID0EJLAE">11</a>], and from the returned set of values take the current control parameter value according to the following rules, ordered by priority:
             </p>
             <ul class="" style="">
                 <li class="" style="">
@@ -1384,7 +1419,7 @@
             </p>
         </div>
         <div class="indent">
-      <h3>4.2 <a name="nodeparamsvscontrolparams">Difference between node parameters and node control parameters</a></h3>
+      <h3>5.2 <a name="nodeparamsvscontrolparams">Difference between node parameters and node control parameters</a></h3>
             <p class="" style="">
                 A node defined in a concentrator, as defined by <a href="xep-0000-SN-Concentrators.html">xep-0000-SN-Concentrators.html</a>, supporting control has
                 two sets of parameters that are different: First a set of node parameters and then a set of control parameters.
@@ -1400,7 +1435,7 @@
             </p>
         </div>
         <div class="indent">
-      <h3>4.3 <a name="parametergroups">Grouping control parameters</a></h3>
+      <h3>5.3 <a name="parametergroups">Grouping control parameters</a></h3>
             <p class="" style="">
                 Many control actions avilable in a device can be controlled using only one control parameter. If a device only publishes such control parameters, the order
                 of control paramters is not that important.
@@ -1458,7 +1493,7 @@
 			<p class="" style="">
 				The following example illustrates the use of the <span class="strong">parameterGroup</span> element to group parameters together.
 			</p>
-            <p class="caption"><a name="example-27"></a>Example 27. Grouping control parameters</p>
+            <p class="caption"><a name="example-29"></a>Example 29. Grouping control parameters</p>
       <div class="indent">
         <pre class="prettyprint">
                 
@@ -1528,7 +1563,7 @@
             </p>
         </div>
         <div class="indent">
-      <h3>4.4 <a name="sect-ID0EJBAG">Node commands vs. control parameters</a></h3>
+      <h3>5.4 <a name="sect-ID0EWCAG">Node commands vs. control parameters</a></h3>
             <p class="" style="">
                 Nodes behind a concentrator, as defined in <a href="xep-0000-SN-Concentrators.html">xep-0000-SN-Concentrators.html</a>, have an additional means of
                 publishing control interfaces: Node Commands.
@@ -1576,10 +1611,10 @@
             </p>
         </div>
         <div class="indent">
-      <h3>4.5 <a name="sect-ID0EZDAG">Tokens</a></h3>
+      <h3>5.5 <a name="sect-ID0EGFAG">Tokens</a></h3>
             <p class="" style="">
                 If control interaction is performed in a context of delegated trust, as defined in the Sensor Network Provisioning XEP 
-                 [<a href="#nt-ID0EBEAG">10</a>], tokens should always be included in all calls. This to allow devices to check privileges with provisioning servers.
+                 [<a href="#nt-ID0EOFAG">12</a>], tokens should always be included in all calls. This to allow devices to check privileges with provisioning servers.
             </p>
             <p class="" style="">
                 The <span class="strong">set</span> and <span class="strong">getForm</span> commands support the following token attributes:
@@ -1600,7 +1635,7 @@
             </p>
         </div>
         <div class="indent">
-      <h3>4.6 <a name="sect-ID0EUFAG">Controlling devices in large subsystems</a></h3>
+      <h3>5.6 <a name="sect-ID0EBHAG">Controlling devices in large subsystems</a></h3>
             <p class="" style="">
                 Most examples in this document have been simplified examples where a few devices containing a few control parameters have been used. However, in many cases large subsystems with
                 very many actuators containing many different control actions have to be controlled, as is documented in <a href="xep-0000-SN-Concentrators.html">xep-0000-SN-Concentrators.html</a>. 
@@ -1613,10 +1648,10 @@
                 If there is ambiguity in the request, the receptor must treat the request as a request with a set of nodes, all with the corresponding <span class="strong">nodeId</span> as requested.
             </p>
         </div>
-    <h2>5.
+    <h2>6.
        <a name="i18n">Internationalization Considerations</a></h2>
         <div class="indent">
-      <h3>5.1 <a name="sect-ID0E1GAG">Time Zones</a></h3>
+      <h3>6.1 <a name="sect-ID0EHIAG">Time Zones</a></h3>
             <p class="" style="">
                 All timestamps and dateTime values use the XML data type xs:dateTime to specify values. These values include a date, an optional time and an optional time zone.
             </p>
@@ -1629,20 +1664,20 @@
             </p>
         </div>
         <div class="indent">
-      <h3>5.2 <a name="sect-ID0EOHAG">xml:lang</a></h3>
+      <h3>6.2 <a name="sect-ID0E2IAG">xml:lang</a></h3>
             <p class="" style="">
                 Control commands sent using IQ stanzas instead of messages, should consider using the <span class="strong">xml:lang</span> attribute to specify the desired language
                 used (if possible) when returning information back to the caller, like error messages, localized control forms, etc.
             </p>
         </div>
-    <h2>6.
+    <h2>7.
        <a name="security">Security Considerations</a></h2>
         <p class="" style="">
             Controlling devices in a large sensor network is a hackers wet dream. Therefore, consideration of how network security is implemented should not be underestimated.
             The following sections provide some general items that should be considered.
         </p>
         <div class="indent">
-      <h3>6.1 <a name="sect-ID0EDIAG">Encryption &amp; Authentication</a></h3>
+      <h3>7.1 <a name="sect-ID0EQJAG">Encryption &amp; Authentication</a></h3>
             <p class="" style="">
                 Consider to always use an encrypted connection with any XMPP Server used in the network. Also, make sure the server is properly authenticated and any server
                 certificate properly validated.
@@ -1653,7 +1688,7 @@
             </p>
         </div>
         <div class="indent">
-      <h3>6.2 <a name="sect-ID0EQIAG">Provisioning</a></h3>
+      <h3>7.2 <a name="sect-ID0E4JAG">Provisioning</a></h3>
             <p class="" style="">
                 Consider using provisioning servers to allow for detailed control of who can do what in a sensor network. Implementing proper provisioning support decreases
                 the risk for adverse effects, not only from intentional hacking, but also from unintentional errors.
@@ -1665,14 +1700,14 @@
                 More information about provisioning can be found in <a href="sensor-network-provisioning.html">sensor-network-provisioning.html</a>.
             </p>
         </div>
-    <h2>7.
-       <a name="iana">IANA Considerations</a></h2>
-        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EUJAG">11</a>].</p>
     <h2>8.
+       <a name="iana">IANA Considerations</a></h2>
+        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EBLAG">13</a>].</p>
+    <h2>9.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
         <p class="" style="">REQUIRED.</p>
         
-    <h2>9.
+    <h2>10.
        <a name="schema">XML Schema</a></h2>
         <p class="caption">
     </p>
@@ -1893,7 +1928,7 @@
 &lt;/xs:schema&gt;
         </pre>
     </div>
-    <h2>10.
+    <h2>11.
        <a name="moreinfo">For more information</a></h2>
 		<p class="" style="">
 			For more information, please see the following resources:
@@ -1911,7 +1946,7 @@
 				</p>
 			</li>
 		</ul>
-	<h2>11.
+	<h2>12.
        <a name="ack">Acknowledgements</a></h2>
         <p class="" style="">Thanks to Joachim Lindborg and Tina Beckman for all valuable feedback.</p>
     <hr><a name="appendices"></a><h2>Appendices</h2>
@@ -1973,13 +2008,15 @@
       <p><a name="nt-ID0EECAE">8</a>. 
                         XEP-xxxx: Dynamic Data Forms &lt;<a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms.html</a>&gt;
                     </p>
-      <p><a name="nt-ID0E3JAE">9</a>. 
+      <p><a name="nt-ID0E1JAE">9</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0ERKAE">10</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0EJLAE">11</a>. 
                     XEP-xxxx: Sensor Data &lt;<a href="sensor-data.html">sensor-data.html</a>&gt;
                 </p>
-      <p><a name="nt-ID0EBEAG">10</a>. 
+      <p><a name="nt-ID0EOFAG">12</a>. 
                     XEP-xxxx: Sensor Networks - Provisioning &lt;<a href="sensor-network-provisioning.html">sensor-network-provisioning.html</a>&gt;
                 </p>
-      <p><a name="nt-ID0EUJAG">11</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+      <p><a name="nt-ID0EBLAG">13</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
