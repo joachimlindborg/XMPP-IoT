@@ -6,7 +6,7 @@
 <?xml-stylesheet type='text/xsl' href='xep.xsl'?>
 <xep>
 	<header>
-		<title>Sensor Networks - Sensor Data</title>
+		<title>Internet of Things - Sensor Data</title>
 		<abstract>This specification provides the common framework for sensor data interchange over XMPP networks.</abstract>
 		<legal>
 			<copyright>This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).</copyright>
@@ -116,31 +116,31 @@
 				in all sensor network implementations where memory and packet size is an issue.</td>
 			</tr>
 			<tr>
-				<td>xep-0000-SN-BatteryPoweredSensors</td>
+				<td>xep-0000-IoT-BatteryPoweredSensors</td>
 				<td>Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
 			</tr>
 			<tr>
-				<td>xep-0000-SN-Concentrators</td>
+				<td>xep-0000-IoT-Concentrators</td>
 				<td>Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
 			</tr>
 			<tr>
-				<td>xep-0000-SN-Control</td>
+				<td>xep-0000-IoT-Control</td>
 				<td>Defines how to control actuators and other devices in sensor networks.</td>
 			</tr>
 			<tr>
-				<td>xep-0000-SN-Discovery</td>
+				<td>xep-0000-IoT-Discovery</td>
 				<td>Defines the peculiars of sensor discovery in sensor networks. Apart from discovering sensors by JID, it also defines how to discover sensors based on location, etc.</td>
 			</tr>
 			<tr>
-				<td>xep-0000-SN-Events</td>
+				<td>xep-0000-IoT-Events</td>
 				<td>Defines how sensors send events, how event subscription, hysteresis levels, etc., are configured.</td>
 			</tr>
 			<tr>
-				<td>xep-0000-SN-Interoperability</td>
+				<td>xep-0000-IoT-Interoperability</td>
 				<td>Defines guidelines for how to achieve interoperability in sensor networks, publishing interoperability interfaces for different types of devices.</td>
 			</tr>
 			<tr>
-				<td>xep-0000-SN-Multicast</td>
+				<td>xep-0000-IoT-Multicast</td>
 				<td>Defines how sensor data can be multicast in efficient ways.</td>
 			</tr>
 			<tr>
@@ -148,7 +148,7 @@
 				<td>Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
 			</tr>
 			<tr>
-				<td>xep-0000-SN-PubSub</td>
+				<td>xep-0000-IoT-PubSub</td>
 				<td>Defines how efficient publication of sensor data can be made in sensor networks.</td>
 			</tr>
 			<tr>
@@ -208,18 +208,19 @@
 			</di>
 			<di>
 				<dt>Node</dt>
-				<dd>Graphs contain nodes and edges between nodes. In Sensor Networks, sensors, actuators, meters, devices, gatewats, etc., are often depicted as nodes and links between sensors (friendships) 
-				are depicted as edges. In abstract terms, it's easier to talk about a Node, than have to list different types of nodes possible (sensors, actuators, meters, devices, gateways, etc.).
-				Each Node has a Node ID.</dd>
+				<dd>
+					Graphs contain nodes and edges between nodes. In Internet of Things, sensors, actuators, meters, devices, gateways, etc., are often depicted as nodes whereas links between sensors (friendships)
+					are depicted as edges. In abstract terms, it's easier to talk about a Node, rather than list different possible node types (sensors, actuators, meters, devices, gateways, etc.).
+					Each Node has a Node ID.</dd>
 			</di>
 			<di>
 				<dt>Node ID</dt>
-				<dd>An ID uniquelly identifying a node within its corresponding context. If a globally unique ID is desired, an architechture should be used using a universally accepted 
+				<dd>An ID uniquely identifying a node within its corresponding context. If a globally unique ID is desired, an architecture should be used using a universally accepted 
 				ID scheme.</dd>
 			</di>
 			<di>
 				<dt>Parameter</dt>
-				<dd>Readable and/or writable property on a node/device. The XEP xep-0000-SN-Concentrators deals with reading and writing parameters
+				<dd>Readable and/or writable property on a node/device. The XEP xep-0000-IoT-Concentrators deals with reading and writing parameters
 				on nodes/devices. Fields are not parameters, and parameters are not fields.</dd>
 			</di>
 			<di>
@@ -252,7 +253,7 @@
 			<di>
 				<dt>Token</dt>
 				<dd>
-					A client, device or user can get a token from a provisioning server. These tokens can be included in requeests to other entities in the network, so these entities can validate
+					A client, device or user can get a token from a provisioning server. These tokens can be included in requests to other entities in the network, so these entities can validate
 					access rights with the provisioning server.
 				</dd>
 			</di>
@@ -747,7 +748,7 @@
 			</p>
 			<ul>
 				<li>Since free strings are used, XML validation cannot be used to secure correct names are used.</li>
-				<li>xep-0000-SN-Interoperability lists recommendations on how field names and units should be used in order to achieve maximum interoperability in SN.</li>
+				<li>xep-0000-IoT-Interoperability lists recommendations on how field names and units should be used in order to achieve maximum interoperability in SN.</li>
 				<li>Consumers of sensor data need to include unit conversion algorithms.</li>
 			</ul>
 		</section2>
@@ -998,21 +999,21 @@
 				can also be included.
 			</p>
 			<p>
-				More information about how multiple devices behind a JID can be handled, is described in the XEP <link url='xep-0000-SN-Concentrators.html'>xep-0000-SN-Concentrators</link>.
+				More information about how multiple devices behind a JID can be handled, is described in the XEP <link url='xep-0000-IoT-Concentrators.html'>xep-0000-IoT-Concentrators</link>.
 			</p>
 		</section2>
 		<section2 topic='Reading devices from large subsystems'>
 			<p>
 				All examples in this document have been simplified examples where a few devices containing a few fields have been read. However, in many cases large subsystems with
-				very many sensors containing many fields have to be read, as is documented in <link url='xep-0000-SN-Concentrators.html'>xep-0000-SN-Concentrators.html</link>
+				very many sensors containing many fields have to be read, as is documented in <link url='xep-0000-IoT-Concentrators.html'>xep-0000-IoT-Concentrators.html</link>
 				<note>
-					<link url='xep-0000-SN-Concentrators.html'>xep-0000-SN-Concentrators.html</link>
+					<link url='xep-0000-IoT-Concentrators.html'>xep-0000-IoT-Concentrators.html</link>
 				</note>. In such cases, a node may have to be specified using two or perhaps
 				even three ID's: a <strong>sourceId</strong> identifying the data source controlling the device, a possible <strong>cacheType</strong> narrowing down the search to
-				a specific kind of node, and the common <strong>nodeId</strong>. For more information about this, see <link url='xep-0000-SN-Concentrators.html'>xep-0000-SN-Concentrators.html</link>.
+				a specific kind of node, and the common <strong>nodeId</strong>. For more information about this, see <link url='xep-0000-IoT-Concentrators.html'>xep-0000-IoT-Concentrators.html</link>.
 			</p>
 			<p>
-				<strong>Note:</strong> For cases where the <strong>nodeId</strong> is sufficient to uniquelly identify the node, it is sufficient to provide this attribute in the request.
+				<strong>Note:</strong> For cases where the <strong>nodeId</strong> is sufficient to uniquely identify the node, it is sufficient to provide this attribute in the request.
 				If there is ambiguity in the request, the receptor must treat the request as a request with a set of nodes, all with the corresponding <strong>nodeId</strong> as requested.
 			</p>
 		</section2>
@@ -1034,7 +1035,7 @@
 			<p>
 				This specification allows for localization of field names in meter data read-out. This is performed by assigning each localizable string a <strong>String ID</strong>
 				which should be unique within a given <strong>Language Module</strong>. A <strong>Language Module</strong> can be any string, including URI's or namespace names.
-				The XEP <link url='xep-0000-SN-Interoperability.html'>xep-0000-SN-Interoperability</link> details how such localizations can be made in an interoperable way.
+				The XEP <link url='xep-0000-IoT-Interoperability.html'>xep-0000-IoT-Interoperability</link> details how such localizations can be made in an interoperable way.
 			</p>
 			<p>
 				<strong>Note:</strong> Localization of strings are for human consumption only. Machines should use the unlocalized strings in program logic.
@@ -1112,7 +1113,7 @@
 				different from the one used by the sensor.
 			</p>
 			<p>
-				<strong>Note:</strong> The XEP <link url='xep-0000-SN-Interoperability.html'>xep-0000-SN-Interoperability</link> details how such localizations can be made in an interoperable way.
+				<strong>Note:</strong> The XEP <link url='xep-0000-IoT-Interoperability.html'>xep-0000-IoT-Interoperability</link> details how such localizations can be made in an interoperable way.
 			</p>
 			<p>
 				The <strong>stringIds</strong> attribute merits some further explanation. The value of this attribute must match the following regular expression:
@@ -1182,7 +1183,7 @@
 			<li>
 				Communication should be restricted to friends as long as possible. Approved friendships provide a mechanism of limiting sensor information to authorized and authenticated users.
 				However, there are cases where multicast messages may want to go outside of recognized friendships. More information about such use cases, see the
-				XEP <link url='xep-0000-SN-Multicast.html'>xep-0000-SN-Multicast</link>.
+				XEP <link url='xep-0000-IoT-Multicast.html'>xep-0000-IoT-Multicast</link>.
 			</li>
 			<li>
 				Sensors may have very limited user interfaces. Even though installation of sensor networks is beyond the scope of this document, a simple installation scheme may include a
