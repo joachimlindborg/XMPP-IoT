@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema
+    xmlns:xs='http://www.w3.org/2001/XMLSchema'
+    targetNamespace='urn:xmpp:sn:interoperability'
+    xmlns='urn:xmpp:sn:interoperability'
+    elementFormDefault='qualified'>
+ 
+	<xs:element name='getInterfaces'>
+		<xs:complexType>
+			<xs:attributeGroup ref='nodeReference'/>
+			<xs:attributeGroup ref='tokens'/>
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:element name='getInterfacesResponse'>
+		<xs:complexType>
+			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+				<xs:element name='interface'>
+					<xs:complexType>
+						<xs:attribute name='name' type='xs:string' use='required'/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:attributeGroup name='nodeReference'>
+		<xs:attribute name='nodeId' type='xs:string' use='required'/>
+		<xs:attribute name='sourceId' type='xs:string' use='optional'/>
+		<xs:attribute name='cacheType' type='xs:string' use='optional'/>
+	</xs:attributeGroup>
+ 
+	<xs:attributeGroup name='tokens'>
+		<xs:attribute name='serviceToken' type='xs:string' use='optional'/>
+		<xs:attribute name='deviceToken' type='xs:string' use='optional'/>
+		<xs:attribute name='userToken' type='xs:string' use='optional'/>
+	</xs:attributeGroup>
+ 
+</xs:schema>
