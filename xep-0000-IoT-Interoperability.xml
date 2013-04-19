@@ -3,14 +3,14 @@
     <!ENTITY % ents SYSTEM 'xep.ent'>
     %ents;
 ]>
-<!-- TODO: Sensor networks -> Internet of Things -->
 <!-- TODO: Interface inheritence -->
 <!-- TODO: byte codes for identification + xml file with interface data. + version numbers -->
+<!-- TODO: Another XEP: Billing interfaces. Tariffs. Prepayment. -->
 <?xml-stylesheet type='text/xsl' href='xep.xsl'?>
 <xep>
     <header>
         <title>Internet of Things - Interoperability</title>
-        <abstract>This specification provides interoperability guidelines for sensors and actuators in sensor networks based on XMPP.</abstract>
+        <abstract>This specification provides interoperability guidelines for sensors and actuators in Internet of Things based on XMPP.</abstract>
         <legal>
             <copyright>This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).</copyright>
             <permissions>Permission is hereby granted, free of charge, to any person obtaining a copy of this specification (the &quot;Specification&quot;), to make use of the Specification without restriction, including without limitation the rights to implement the Specification in a software program, deploy the Specification in a network service, and copy, modify, merge, publish, translate, distribute, sublicense, or sell copies of the Specification, and to permit persons to whom the Specification is furnished to do so, subject to the condition that the foregoing copyright notice and this permission notice shall be included in all copies or substantial portions of the Specification. Unless separate permission is granted, modified works that are redistributed shall not contain misleading information regarding the authors, title, number, or publisher of the Specification, and shall not claim endorsement of the modified works by the authors, any organization or project to which the authors belong, or the XMPP Standards Foundation.</permissions>
@@ -59,7 +59,7 @@
             interchanged and understood throughout the network. This document defines such interoperability rules.
         </p>
         <p>
-            Sensor networks contains many different architectures and use cases. For this reason, the sensor network standards have been divided into multiple XEPs according to the following table:
+            Internet of Things contains many different architectures and use cases. For this reason, the IoT standards have been divided into multiple XEPs according to the following table:
         </p>
         <table caption='Sensor Network XEPs'>
             <tr>
@@ -91,11 +91,11 @@
             </tr>
             <tr>
                 <td>xep-0000-IoT-Control</td>
-                <td>Defines how to control actuators and other devices in sensor networks.</td>
+                <td>Defines how to control actuators and other devices in Internet of Things.</td>
             </tr>
             <tr>
                 <td>xep-0000-IoT-Discovery</td>
-                <td>Defines the peculiars of sensor discovery in sensor networks. Apart from discovering sensors by JID, it also defines how to discover sensors based on location, etc.</td>
+                <td>Defines the peculiars of Thing discovery in IoT. Apart from discovering sensors by JID, it also defines how to discover sensors based on location, etc.</td>
             </tr>
             <tr>
                 <td>xep-0000-IoT-Events</td>
@@ -103,7 +103,7 @@
             </tr>
             <tr>
                 <td>xep-0000-IoT-Interoperability</td>
-                <td>This specification. Defines guidelines for how to achieve interoperability in sensor networks, publishing interoperability interfaces for different types of devices.</td>
+                <td>This specification. Defines guidelines for how to achieve interoperability in Internet of Things, publishing interoperability interfaces for different types of devices.</td>
             </tr>
             <tr>
                 <td>xep-0000-IoT-Multicast</td>
@@ -115,7 +115,7 @@
             </tr>
             <tr>
                 <td>xep-0000-IoT-PubSub</td>
-                <td>Defines how efficient publication of sensor data can be made in sensor networks.</td>
+                <td>Defines how efficient publication of sensor data can be made in Internet of Things.</td>
             </tr>
             <tr>
                 <td>sensor-data</td>
@@ -332,7 +332,7 @@
         </section2>
         <section2 topic='Interfaces' anchor='interfaces'>
             <p>
-                The following sub-sections lists interfaces that should be adhered to by parties interested in creating interoperable devices in sensor networks based on XMPP.
+                The following sub-sections lists interfaces that should be adhered to by parties interested in creating interoperable devices in Internet of Things based on XMPP.
                 A device can implement any number of interfaces.
             </p>
             <section3 topic='XMPP.IoT.Sensor'>
@@ -2962,50 +2962,233 @@
                 <p>
                     This section contains interfaces relating to security.
                 </p>
-                <section4 topic='XMPP.IoT.Security.Alarm'>
-                    <!-- TODO: State -->
-                    <!-- TODO: Commands: On/Off, Enable/Disable -->
+                <section4 topic='XMPP.IoT.Security.Alarm' anchor='XMPP_IoT_Security_Alarm'>
+					<p>
+						Interface for a generic alarm device.
+					</p>
+					<table caption='XMPP.IoT.Security.Alarm Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>State</td>
+							<td>Required</td>
+							<td>status</td>
+							<td>boolean</td>
+							<td>If the alarm is currently activated or not.</td>
+						</tr>
+					</table>
+					<table caption='XMPP.IoT.Security.Alarm Control Parameters'>
+						<tr>
+							<th>Parameter</th>
+							<th>Use</th>
+							<th>Parameter Type</th>
+							<th>Range</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>State</td>
+							<td>Optional</td>
+							<td>boolean</td>
+							<td>-</td>
+							<td>If the alarm should be activated (true) or deactivated (false).</td>
+						</tr>
+						<tr>
+							<td>Enabled</td>
+							<td>Optional</td>
+							<td>boolean</td>
+							<td>-</td>
+							<td>If the alarm should be enabled (true) or disabled (false). Only enabled alarms can be activated.</td>
+						</tr>
+					</table>
+					<!-- TODO: Alarm events. -->
                 </section4>
                 <section4 topic='XMPP.IoT.Security.Burglar'>
-                    <!-- TODO -->
+					<p>
+						Interface for a burglar alarm.
+					</p>
+					<p>
+						A burglar alarm has the same fields, control parameters and events as do <link url='#XMPP_IoT_Security_Alarm'>XMPP.IoT.Security.Alarm</link>.
+					</p>
                 </section4>
                 <section4 topic='XMPP.IoT.Security.Clock'>
-                    <!-- TODO -->
-                </section4>
+					<p>
+						Interface for devices with an internal configurable real-time clock.
+					</p>
+					<table caption='XMPP.IoT.Security.Clock Control Parameters'>
+						<tr>
+							<th>Parameter</th>
+							<th>Use</th>
+							<th>Parameter Type</th>
+							<th>Range</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>CurrentTime</td>
+							<td>Required</td>
+							<td>dateTime</td>
+							<td>-</td>
+							<td>Sets the current date &amp; time (and possible it's time zone if available) of the device.</td>
+						</tr>
+					</table>
+				</section4>
                 <section4 topic='XMPP.IoT.Security.CO'>
-                    <!-- TODO -->
-                </section4>
+					<p>
+						Interface for a carbon monoxide (CO) detector.
+					</p>
+					<p>
+						A carbon monoxide (CO) detector has the same fields, control parameters and events as do <link url='#XMPP_IoT_Security_Alarm'>XMPP.IoT.Security.Alarm</link>.
+					</p>
+				</section4>
                 <section4 topic='XMPP.IoT.Security.CO2'>
-                    <!-- TODO -->
-                </section4>
-                <section4 topic='XMPP.IoT.Security.Door'>
-                    <!-- TODO: Open/Closed -->
-                </section4>
+					<p>
+						Interface for a carbon dioxide (CO2) detector.
+					</p>
+					<p>
+						A carbon dioxide (CO2) detector has the same fields, control parameters and events as do <link url='#XMPP_IoT_Security_Alarm'>XMPP.IoT.Security.Alarm</link>.
+					</p>
+				</section4>
+                <section4 topic='XMPP.IoT.Security.Door' anchor='XMPP_IoT_Security_Door'>
+					<p>
+						Interface for a door state detectors.
+					</p>
+					<table caption='XMPP.IoT.Security.Door Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Open</td>
+							<td>Required</td>
+							<td>status</td>
+							<td>boolean</td>
+							<td>If the door is currently open or not.</td>
+						</tr>
+					</table>
+					<!-- TODO: Door events. -->
+				</section4>
                 <section4 topic='XMPP.IoT.Security.Emergency'>
-                    <!-- TODO -->
-                </section4>
+					<p>
+						Interface for an emergency alarm.
+					</p>
+					<p>
+						An emergency alarm has the same fields, control parameters and events as do <link url='#XMPP_IoT_Security_Alarm'>XMPP.IoT.Security.Alarm</link>.
+					</p>
+				</section4>
 				<section4 topic='XMPP.IoT.Security.Gas'>
-					<!-- TODO -->
+					<p>
+						Interface for a gas detector.
+					</p>
+					<p>
+						A gas detector has the same fields, control parameters and events as do <link url='#XMPP_IoT_Security_Alarm'>XMPP.IoT.Security.Alarm</link>.
+					</p>
 				</section4>
 				<section4 topic='XMPP.IoT.Security.Heat'>
-                    <!-- TODO -->
-                </section4>
+					<p>
+						Interface for a heat detector.
+					</p>
+					<p>
+						A heat detector has the same fields, control parameters and events as do <link url='#XMPP_IoT_Security_Alarm'>XMPP.IoT.Security.Alarm</link>.
+					</p>
+				</section4>
                 <section4 topic='XMPP.IoT.Security.Lock'>
-                    <!-- TODO: Open/Closed, Locked/Unlocked -->
-                </section4>
+					<p>
+						Interface for a lock.
+					</p>
+					<table caption='XMPP.IoT.Security.Lock Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Locked</td>
+							<td>Required</td>
+							<td>status</td>
+							<td>boolean</td>
+							<td>If the lock is currently locked or not.</td>
+						</tr>
+					</table>
+					<table caption='XMPP.IoT.Security.Lock Control Parameters'>
+						<tr>
+							<th>Parameter</th>
+							<th>Use</th>
+							<th>Parameter Type</th>
+							<th>Range</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Locked</td>
+							<td>Optional</td>
+							<td>boolean</td>
+							<td>-</td>
+							<td>If the lock should be locked (true) or unlocked (false).</td>
+						</tr>
+					</table>
+					<p>
+						<strong>Note:</strong> A device implementing this lock interface as well as <link url='#XMPP_IoT_Security_Door'>XMPP.IoT.Security.Door</link> or
+						<link url='#XMPP_IoT_Security_Window'>XMPP.IoT.Security.Window</link>, the device is allowed to reject a lock request if the corresponding
+						door or window is in an open state. This is done by returning a corresponding error message if an <strong>iq</strong> stanza is used or by
+						simply ignoring the command if a <strong>message</strong> stanza is used.
+					</p>
+					<!-- TODO: Lock events. -->
+				</section4>
                 <section4 topic='XMPP.IoT.Security.Movement'>
-                    <!-- TODO -->
-                </section4>
+					<p>
+						Interface for a movement detector.
+					</p>
+					<p>
+						A movement detector has the same fields, control parameters and events as do <link url='#XMPP_IoT_Security_Alarm'>XMPP.IoT.Security.Alarm</link>.
+					</p>
+				</section4>
                 <section4 topic='XMPP.IoT.Security.Smoke'>
-                    <!-- TODO -->
-                </section4>
-                <section4 topic='XMPP.IoT.Security.System'>
-                    <!-- TODO -->
-                </section4>
+					<p>
+						Interface for a smoke detector.
+					</p>
+					<p>
+						A smoke detector has the same fields, control parameters and events as do <link url='#XMPP_IoT_Security_Alarm'>XMPP.IoT.Security.Alarm</link>.
+					</p>
+				</section4>
                 <section4 topic='XMPP.IoT.Security.Water'>
-                    <!-- TODO -->
-                </section4>
-            </section3>
+					<p>
+						Interface for a water detector.
+					</p>
+					<p>
+						A water detector has the same fields, control parameters and events as do <link url='#XMPP_IoT_Security_Alarm'>XMPP.IoT.Security.Alarm</link>.
+					</p>
+				</section4>
+				<section4 topic='XMPP.IoT.Security.Window' anchor='XMPP_IoT_Security_Window'>
+					<p>
+						Interface for a window state detectors.
+					</p>
+					<table caption='XMPP.IoT.Security.Window Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Open</td>
+							<td>Required</td>
+							<td>status</td>
+							<td>boolean</td>
+							<td>If the window is currently open or not.</td>
+						</tr>
+					</table>
+					<!-- TODO: Window events. -->
+				</section4>
+			</section3>
             <section3 topic='XMPP.IoT.Controller'>
                 <p>
                     This section contains interfaces relating to controllers, specific applications that perform a (local) service in a sensor network.
@@ -3051,12 +3234,6 @@
                 <section4 topic='XMPP.IoT.Media.TextDisplay'>
                     <!-- TODO -->
                 </section4>
-            </section3>
-            <section3 topic='XMPP.IoT.Gateway'>
-                <p>
-                    This section contains interfaces relating to gateways in the network.
-                </p>
-                <!-- TODO -->
             </section3>
 			<section3 topic='XMPP.IoT.Network'>
 				<p>
@@ -3301,8 +3478,6 @@
 					</table>
 				</section4>
 			</section3>
-			<!-- TODO: Kolla zigbee interface -->
-            <!-- TODO: Sensor Andrew: http://sensor.andrew.cmu.edu/xep/sox-xep.html#devices -->
         </section2>
         <section2 topic='Interface aggregations'>
 			<section3 topic='Control programming aggregations'>
@@ -3436,11 +3611,1092 @@
             </table>
         </section2>
         <section2 topic='Units'>
-            <!-- TODO: Units: Categories, Units, conversion tables. -->
-            <!--<section2 topic='Tables for unit conversion'></section2>-->
-            <!-- TODO: Temperature, Pressure, Energy, Power, Volume, Flow, Distance -->
-            <!-- TODO: Another XEP: Billing interfaces. Tariffs. Prepayment. -->
-        </section2>
+			<p>
+				This section contains tables for units and unit conversions that devices and sytems in IoT should use, so that data interchange is interoperable.
+				Units are divided into categories, each category listed in a separate subsection. Devices reporting fields using units of a specific category should
+				only use units marked as SHOULD, to make sure values are understood and communication be interoperable.
+			</p>
+			<section3 topic="Angle">
+				<table caption="Angle">
+					<tr>
+						<th>Unit</th>
+						<th>Scale</th>
+						<th>Offset</th>
+						<th>Use</th>
+					</tr>
+					<tr>
+						<td>°</td>
+						<td>1</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>rad</td>
+						<td>0.01745329251994</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+				</table>
+			</section3>
+			<section3 topic="Area">
+				<table caption="Area">
+					<tr>
+						<th>Unit</th>
+						<th>Scale</th>
+						<th>Offset</th>
+						<th>Use</th>
+					</tr>
+					<tr>
+						<td>m²</td>
+						<td>1</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>m2</td>
+						<td>1</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>ft²</td>
+						<td>10.76391041671</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>ft2</td>
+						<td>10.76391041671</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>in²</td>
+						<td>1550.003100006</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>in2</td>
+						<td>1550.003100006</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>yd²</td>
+						<td>1.195990046301</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>yd2</td>
+						<td>1.195990046301</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+				</table>
+			</section3>
+			<section3 topic="Distance">
+				<table caption="Distance">
+					<tr>
+						<th>Unit</th>
+						<th>Scale</th>
+						<th>Offset</th>
+						<th>Use</th>
+					</tr>
+					<tr>
+						<td>nm</td>
+						<td>1e9</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>µm</td>
+						<td>1e6</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>mm</td>
+						<td>1e3</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>cm</td>
+						<td>1e2</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>dm</td>
+						<td>1e1</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>m</td>
+						<td>1</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>km</td>
+						<td>1e-3</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>ft</td>
+						<td>3.280839895013</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>in</td>
+						<td>39.37007874016</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>yd</td>
+						<td>1.093613298338</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>sm</td>
+						<td>0.000621371192</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>mi</td>
+						<td>0.000621371192</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+				</table>
+			</section3>
+			<section3 topic="Energy">
+				<table caption="Energy">
+					<tr>
+						<th>Unit</th>
+						<th>Scale</th>
+						<th>Offset</th>
+						<th>Use</th>
+					</tr>
+					<tr>
+						<td>µWh</td>
+						<td>1e6</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>mWh</td>
+						<td>1e3</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>Wh</td>
+						<td>1</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>kWh</td>
+						<td>1e-3</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>MWh</td>
+						<td>1e-6</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>GWh</td>
+						<td>1e-9</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>TWh</td>
+						<td>1e-12</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>µBTU</td>
+						<td>3.412141156488e6</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>mBTU</td>
+						<td>3.412141156488e3</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>BTU</td>
+						<td>3.412141156488</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>kBTU</td>
+						<td>3.412141156488e-3</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>MBTU</td>
+						<td>3.412141156488e-6</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>GBTU</td>
+						<td>3.412141156488e-9</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>TBTU</td>
+						<td>3.412141156488e-12</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>µcal</td>
+						<td>859.8452278591e6</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>mcal</td>
+						<td>859.8452278591e3</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>cal</td>
+						<td>859.845227859</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>kcal</td>
+						<td>859.8452278591e-3</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>Mcal</td>
+						<td>859.8452278591e-6</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>Gcal</td>
+						<td>859.8452278591e-9</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>Tcal</td>
+						<td>859.8452278591e-12</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>µJ</td>
+						<td>3.600e+9</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>mJ</td>
+						<td>3.600e+6</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>J</td>
+						<td>3.600e+3</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>kJ</td>
+						<td>3.600</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>MJ</td>
+						<td>3.600e-3</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>GJ</td>
+						<td>3.600e-6</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>TJ</td>
+						<td>3.600e-9</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+				</table>
+			</section3>
+			<section3 topic="Flow">
+				<table caption="Flow">
+					<tr>
+						<th>Unit</th>
+						<th>Scale</th>
+						<th>Offset</th>
+						<th>Use</th>
+					</tr>
+					<tr>
+						<td>µl/h</td>
+						<td>1e6</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>ml/h</td>
+						<td>1e3</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>cl/h</td>
+						<td>1e2</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>l/h</td>
+						<td>1</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>m³/h</td>
+						<td>1e-3</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>m3/h</td>
+						<td>1e-3</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>ft³/h</td>
+						<td>0.03531466672149</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>ft3/h</td>
+						<td>0.03531466672149</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>in³/h</td>
+						<td>61.02374409473</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>in3/h</td>
+						<td>61.02374409473</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>UsGal/h</td>
+						<td>0.2641720523582</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>UkGal/h</td>
+						<td>0.2199692482991</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>µl/min</td>
+						<td>16666.6666666667</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>ml/min</td>
+						<td>16.6666666666667</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>cl/min</td>
+						<td>1.66666666666667</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>l/min</td>
+						<td>0.0166666666666667</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>m³/min</td>
+						<td>0.000016666666666667</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>m3/min</td>
+						<td>0.000016666666666667</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>ft³/min</td>
+						<td>0.0005885777786915</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>ft3/min</td>
+						<td>0.0005885777786915</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>in³/min</td>
+						<td>1.01706240157883</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>in3/min</td>
+						<td>1.01706240157883</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>UsGal/min</td>
+						<td>0.0044028675393033333333333333333333</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>UkGal/min</td>
+						<td>0.0036661541383183333333333333333333</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+				</table>
+			</section3>
+			<section3 topic="Mass">
+				<table caption="Mass">
+					<tr>
+						<th>Unit</th>
+						<th>Scale</th>
+						<th>Offset</th>
+						<th>Use</th>
+					</tr>
+					<tr>
+						<td>µg</td>
+						<td>1e6</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>mg</td>
+						<td>1e3</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>g</td>
+						<td>1</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>gram</td>
+						<td>1</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>kg</td>
+						<td>1e-3</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>t</td>
+						<td>1e-6</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>ton</td>
+						<td>1e-6</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>oz</td>
+						<td>35.27396194958</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>lb</td>
+						<td>2.204622621849</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+				</table>
+			</section3>
+			<section3 topic="Power">
+				<table caption="Power">
+					<tr>
+						<th>Unit</th>
+						<th>Scale</th>
+						<th>Offset</th>
+						<th>Use</th>
+					</tr>
+					<tr>
+						<td>µW</td>
+						<td>1e6</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>mW</td>
+						<td>1e3</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>W</td>
+						<td>1</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>kW</td>
+						<td>1e-3</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>MW</td>
+						<td>1e-6</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>GW</td>
+						<td>1e-9</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>TW</td>
+						<td>1e-12</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>VA</td>
+						<td>1</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>µJ/s</td>
+						<td>1e6</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>mJ/s</td>
+						<td>1e3</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>J/s</td>
+						<td>1</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>kJ/s</td>
+						<td>1e-3</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>MJ/s</td>
+						<td>1e-6</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>GJ/s</td>
+						<td>1e-9</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>TJ/s</td>
+						<td>1e-12</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>µBTU/h</td>
+						<td>3.412141156488e6</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>mBTU/h</td>
+						<td>3.412141156488e3</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>BTU/h</td>
+						<td>3.412141156488</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>kBTU/h</td>
+						<td>3.412141156488e-3</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>MBTU/h</td>
+						<td>3.412141156488e-6</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>GBTU/h</td>
+						<td>3.412141156488e-9</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>TBTU/h</td>
+						<td>3.412141156488e-12</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>µBTU/s</td>
+						<td>0.0009478169879134e6</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>mBTU/s</td>
+						<td>0.0009478169879134e3</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>BTU/s</td>
+						<td>0.0009478169879134</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>kBTU/s</td>
+						<td>0.0009478169879134e-3</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>MBTU/s</td>
+						<td>0.0009478169879134e-6</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>GBTU/s</td>
+						<td>0.0009478169879134e-9</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>TBTU/s</td>
+						<td>0.0009478169879134e-12</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>µcal/s</td>
+						<td>0.2388458966275e6</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>mcal/s</td>
+						<td>0.2388458966275e3</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>cal/s</td>
+						<td>0.2388458966275</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>kcal/s</td>
+						<td>0.2388458966275e-3</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>Mcal/s</td>
+						<td>0.2388458966275e-6</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>Gcal/s</td>
+						<td>0.2388458966275e-9</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>Tcal/s</td>
+						<td>0.2388458966275e-12</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+				</table>
+			</section3>
+			<section3 topic="Pressure">
+				<table caption="Pressure">
+					<tr>
+						<th>Unit</th>
+						<th>Scale</th>
+						<th>Offset</th>
+						<th>Use</th>
+					</tr>
+					<tr>
+						<td>Pa</td>
+						<td>1</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>hPa</td>
+						<td>1e-2</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>kPa</td>
+						<td>1e-3</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>atm</td>
+						<td>0.00000986923266716</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>bar</td>
+						<td>1e-5</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>mbar</td>
+						<td>1e-2</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>mmHg</td>
+						<td>0.007500616827042</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>inHg</td>
+						<td>0.00029529980164712323362732397252649</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>psf</td>
+						<td>0.02088545632547</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>psi</td>
+						<td>0.0001450378911491</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>torr</td>
+						<td>0.007500616827042</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+				</table>
+			</section3>
+			<section3 topic="Speed">
+				<table caption="Speed">
+					<tr>
+						<th>Unit</th>
+						<th>Scale</th>
+						<th>Offset</th>
+						<th>Use</th>
+					</tr>
+					<tr>
+						<td>m/s</td>
+						<td>1</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>km/h</td>
+						<td>3.6</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>kph</td>
+						<td>3.6</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>kn</td>
+						<td>1.943844492441</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>mph</td>
+						<td>2.236936292054</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+				</table>
+			</section3>
+			<section3 topic="Temperature">
+				<table caption="Temperature">
+					<tr>
+						<th>Unit</th>
+						<th>Scale</th>
+						<th>Offset</th>
+						<th>Use</th>
+					</tr>
+					<tr>
+						<td>°C</td>
+						<td>1</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>C</td>
+						<td>1</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>°F</td>
+						<td>1.8</td>
+						<td>32</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>F</td>
+						<td>1.8</td>
+						<td>32</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>°K</td>
+						<td>1</td>
+						<td>273.15</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>K</td>
+						<td>1</td>
+						<td>273.15</td>
+						<td>SHOULD</td>
+					</tr>
+				</table>
+			</section3>
+			<section3 topic="Time">
+				<table caption="Time">
+					<tr>
+						<th>Unit</th>
+						<th>Scale</th>
+						<th>Offset</th>
+						<th>Use</th>
+					</tr>
+					<tr>
+						<td>ns</td>
+						<td>1e9</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>µs</td>
+						<td>1e6</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>ms</td>
+						<td>1e3</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>s</td>
+						<td>1</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>min</td>
+						<td>60</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>h</td>
+						<td>3600</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>d</td>
+						<td>86400</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+				</table>
+			</section3>
+			<section3 topic="Volume">
+				<table caption="Volume">
+					<tr>
+						<th>Unit</th>
+						<th>Scale</th>
+						<th>Offset</th>
+						<th>Use</th>
+					</tr>
+					<tr>
+						<td>µl</td>
+						<td>1e6</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>ml</td>
+						<td>1e3</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>cl</td>
+						<td>1e2</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>l</td>
+						<td>1</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>m³</td>
+						<td>1e-3</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>m3</td>
+						<td>1e-3</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>ft³</td>
+						<td>0.03531466672149</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>ft3</td>
+						<td>0.03531466672149</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>in³</td>
+						<td>61.02374409473</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>in3</td>
+						<td>61.02374409473</td>
+						<td>0</td>
+						<td>COULD</td>
+					</tr>
+					<tr>
+						<td>UsGal</td>
+						<td>0.2641720523582</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+					<tr>
+						<td>UkGal</td>
+						<td>0.2199692482991</td>
+						<td>0</td>
+						<td>SHOULD</td>
+					</tr>
+				</table>
+			</section3>
+		</section2>
         <section2 topic='Privilege IDs'>
             <!-- TODO: Privilege IDs -->
             <!-- TODO: Data Source ID -> Privilege ID: ...DataSources.SourceId -->
@@ -3488,7 +4744,7 @@
     </section1>
     <section1 topic='Security Considerations' anchor='security'>
         <p>
-            This document has not touched upon security in sensor networks. There are mainly three concerns that implementers of sensor networks need to consider:
+            This document has not touched upon security in Internet of Things. Following is a list of major concerns that implementers of Internet of Things need to consider:
         </p>
         <ul>
             <li>

@@ -7,7 +7,7 @@
     <link href="prettify.css" type="text/css" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"><script type="text/javascript" src="prettify.js"></script><meta name="DC.Title" content="Internet of Things - Interoperability">
     <meta name="DC.Creator" content="Peter Waher">
-    <meta name="DC.Description" content="This specification provides interoperability guidelines for sensors and actuators in sensor networks based on XMPP.">
+    <meta name="DC.Description" content="This specification provides interoperability guidelines for sensors and actuators in Internet of Things based on XMPP.">
     <meta name="DC.Publisher" content="XMPP Standards Foundation">
     <meta name="DC.Contributor" content="XMPP Extensions Editor">
     <meta name="DC.Date" content="2013-04-04">
@@ -22,7 +22,7 @@
     <table>
       <tr valign="top">
         <td><strong>Abstract:</strong></td>
-        <td>This specification provides interoperability guidelines for sensors and actuators in sensor networks based on XMPP.</td>
+        <td>This specification provides interoperability guidelines for sensors and actuators in Internet of Things based on XMPP.</td>
       </tr>
       <tr valign="top">
         <td><strong>Author:</strong></td>
@@ -128,61 +128,72 @@
       3.2.5.1.  <a href="#sect-ID0ERMDI">XMPP.IoT.Logistics.Contents</a><br>        
       3.2.5.2.  <a href="#sect-ID0EFYDI">XMPP.IoT.Logistics.Route</a><br>      
       3.2.6.  <a href="#sect-ID0EJJAK">XMPP.IoT.Security</a><br>        
-      3.2.6.1.  <a href="#sect-ID0ERJAK">XMPP.IoT.Security.Alarm</a><br>        
-      3.2.6.2.  <a href="#sect-ID0E1JAK">XMPP.IoT.Security.Burglar</a><br>        
-      3.2.6.3.  <a href="#sect-ID0EBKAK">XMPP.IoT.Security.Clock</a><br>        
-      3.2.6.4.  <a href="#sect-ID0EIKAK">XMPP.IoT.Security.CO</a><br>        
-      3.2.6.5.  <a href="#sect-ID0EPKAK">XMPP.IoT.Security.CO2</a><br>        
-      3.2.6.6.  <a href="#sect-ID0EWKAK">XMPP.IoT.Security.Door</a><br>        
-      3.2.6.7.  <a href="#sect-ID0E4KAK">XMPP.IoT.Security.Emergency</a><br>        
-      3.2.6.8.  <a href="#sect-ID0EELAK">XMPP.IoT.Security.Gas</a><br>        
-      3.2.6.9.  <a href="#sect-ID0ELLAK">XMPP.IoT.Security.Heat</a><br>        
-      3.2.6.10.  <a href="#sect-ID0ESLAK">XMPP.IoT.Security.Lock</a><br>        
-      3.2.6.11.  <a href="#sect-ID0EZLAK">XMPP.IoT.Security.Movement</a><br>        
-      3.2.6.12.  <a href="#sect-ID0EAMAK">XMPP.IoT.Security.Smoke</a><br>        
-      3.2.6.13.  <a href="#sect-ID0EHMAK">XMPP.IoT.Security.System</a><br>        
-      3.2.6.14.  <a href="#sect-ID0EOMAK">XMPP.IoT.Security.Water</a><br>      
-      3.2.7.  <a href="#sect-ID0EWMAK">XMPP.IoT.Controller</a><br>        
-      3.2.7.1.  <a href="#sect-ID0E5MAK">XMPP.IoT.Controller.AccessControl</a><br>        
-      3.2.7.2.  <a href="#sect-ID0EFNAK">XMPP.IoT.Controller.Thermostat</a><br>        
-      3.2.7.3.  <a href="#sect-ID0EMNAK">XMPP.IoT.Controller.Ventilation</a><br>      
-      3.2.8.  <a href="#sect-ID0EUNAK">XMPP.IoT.Media</a><br>        
-      3.2.8.1.  <a href="#sect-ID0E3NAK">XMPP.IoT.Media.BarCode</a><br>        
-      3.2.8.2.  <a href="#sect-ID0EDOAK">XMPP.IoT.Media.Camera</a><br>        
-      3.2.8.3.  <a href="#sect-ID0EKOAK">XMPP.IoT.Media.Directory</a><br>        
-      3.2.8.4.  <a href="#sect-ID0EROAK">XMPP.IoT.Media.Display</a><br>        
-      3.2.8.5.  <a href="#sect-ID0EYOAK">XMPP.IoT.Media.LoudSpeakers</a><br>        
-      3.2.8.6.  <a href="#sect-ID0E6OAK">XMPP.IoT.Media.Microphone</a><br>        
-      3.2.8.7.  <a href="#sect-ID0EGPAK">XMPP.IoT.Media.QrCode</a><br>        
-      3.2.8.8.  <a href="#sect-ID0ENPAK">XMPP.IoT.Media.Recorder</a><br>        
-      3.2.8.9.  <a href="#sect-ID0EUPAK">XMPP.IoT.Media.TextDisplay</a><br>      
-      3.2.9.  <a href="#sect-ID0E3PAK">XMPP.IoT.Gateway</a><br>      
-      3.2.10.  <a href="#sect-ID0EHQAK">XMPP.IoT.Network</a><br>        
-      3.2.10.1.  <a href="#sect-ID0EPQAK">XMPP.IoT.Network.Ethernet</a><br>        
-      3.2.10.2.  <a href="#sect-ID0EZYAK">XMPP.IoT.Network.IP</a><br>        
-      3.2.10.3.  <a href="#sect-ID0E55AK">XMPP.IoT.Network.IPv6</a><br>        
-      3.2.10.4.  <a href="#sect-ID0EDFBK">XMPP.IoT.Network.Radio</a><br>   
-      3.3.  <a href="#sect-ID0E2HBK">Interface aggregations</a><br>      
-      3.3.1.  <a href="#sect-ID0E6HBK">Control programming aggregations</a><br>        
-      3.3.1.1.  <a href="#sect-ID0EDIBK">*.TimeChannels</a><br>      
-      3.3.2.  <a href="#sect-ID0ELIBK">Event aggregations</a><br>        
-      3.3.2.1.  <a href="#sect-ID0EPIBK">*.BinaryEvent</a><br>        
-      3.3.2.2.  <a href="#sect-ID0EWIBK">*.HysteresisEvent</a><br>        
-      3.3.2.3.  <a href="#sect-ID0E4IBK">*.TimedEvent</a><br>      
-      3.3.3.  <a href="#sect-ID0EFJBK">Readout aggregations</a><br>        
-      3.3.3.1.  <a href="#sect-ID0EJJBK">*.Average</a><br>        
-      3.3.3.2.  <a href="#sect-ID0EQJBK">*.Consumption</a><br>        
-      3.3.3.3.  <a href="#sect-ID0EXJBK">*.History</a><br>        
-      3.3.3.4.  <a href="#sect-ID0E5JBK">*.Mean</a><br>        
-      3.3.3.5.  <a href="#sect-ID0EFKBK">*.Min</a><br>        
-      3.3.3.6.  <a href="#sect-ID0EMKBK">*.Max</a><br>        
-      3.3.3.7.  <a href="#sect-ID0ETKBK">*.StdDev</a><br>        
-      3.3.3.8.  <a href="#sect-ID0E1KBK">*.Sum</a><br>   
-      3.4.  <a href="#sect-ID0EDLBK">Field Names</a><br>   
-      3.5.  <a href="#sect-ID0EOSBK">Units</a><br>   
-      3.6.  <a href="#sect-ID0E2SBK">Privilege IDs</a><br>   
-      3.7.  <a href="#sect-ID0EITBK">Data Sources</a><br>   
-      3.8.  <a href="#sect-ID0EPTBK">Identification Schemes</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#newinterfaces">Extending the Interoperability Document</a><br>6.  <a href="#security">Security Considerations</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a><br>10.  <a href="#ack">Acknowledgements</a></p>
+      3.2.6.1.  <a href="#XMPP_IoT_Security_Alarm">XMPP.IoT.Security.Alarm</a><br>        
+      3.2.6.2.  <a href="#sect-ID0EXNAK">XMPP.IoT.Security.Burglar</a><br>        
+      3.2.6.3.  <a href="#sect-ID0EIOAK">XMPP.IoT.Security.Clock</a><br>        
+      3.2.6.4.  <a href="#sect-ID0EDQAK">XMPP.IoT.Security.CO</a><br>        
+      3.2.6.5.  <a href="#sect-ID0EUQAK">XMPP.IoT.Security.CO2</a><br>        
+      3.2.6.6.  <a href="#XMPP_IoT_Security_Door">XMPP.IoT.Security.Door</a><br>        
+      3.2.6.7.  <a href="#sect-ID0ECTAK">XMPP.IoT.Security.Emergency</a><br>        
+      3.2.6.8.  <a href="#sect-ID0ETTAK">XMPP.IoT.Security.Gas</a><br>        
+      3.2.6.9.  <a href="#sect-ID0EEUAK">XMPP.IoT.Security.Heat</a><br>        
+      3.2.6.10.  <a href="#sect-ID0EVUAK">XMPP.IoT.Security.Lock</a><br>        
+      3.2.6.11.  <a href="#sect-ID0EVYAK">XMPP.IoT.Security.Movement</a><br>        
+      3.2.6.12.  <a href="#sect-ID0EGZAK">XMPP.IoT.Security.Smoke</a><br>        
+      3.2.6.13.  <a href="#sect-ID0EXZAK">XMPP.IoT.Security.Water</a><br>        
+      3.2.6.14.  <a href="#XMPP_IoT_Security_Window">XMPP.IoT.Security.Window</a><br>      
+      3.2.7.  <a href="#sect-ID0EG3AK">XMPP.IoT.Controller</a><br>        
+      3.2.7.1.  <a href="#sect-ID0EO3AK">XMPP.IoT.Controller.AccessControl</a><br>        
+      3.2.7.2.  <a href="#sect-ID0EV3AK">XMPP.IoT.Controller.Thermostat</a><br>        
+      3.2.7.3.  <a href="#sect-ID0E33AK">XMPP.IoT.Controller.Ventilation</a><br>      
+      3.2.8.  <a href="#sect-ID0EE4AK">XMPP.IoT.Media</a><br>        
+      3.2.8.1.  <a href="#sect-ID0EM4AK">XMPP.IoT.Media.BarCode</a><br>        
+      3.2.8.2.  <a href="#sect-ID0ET4AK">XMPP.IoT.Media.Camera</a><br>        
+      3.2.8.3.  <a href="#sect-ID0E14AK">XMPP.IoT.Media.Directory</a><br>        
+      3.2.8.4.  <a href="#sect-ID0EB5AK">XMPP.IoT.Media.Display</a><br>        
+      3.2.8.5.  <a href="#sect-ID0EI5AK">XMPP.IoT.Media.LoudSpeakers</a><br>        
+      3.2.8.6.  <a href="#sect-ID0EP5AK">XMPP.IoT.Media.Microphone</a><br>        
+      3.2.8.7.  <a href="#sect-ID0EW5AK">XMPP.IoT.Media.QrCode</a><br>        
+      3.2.8.8.  <a href="#sect-ID0E45AK">XMPP.IoT.Media.Recorder</a><br>        
+      3.2.8.9.  <a href="#sect-ID0EE6AK">XMPP.IoT.Media.TextDisplay</a><br>      
+      3.2.9.  <a href="#sect-ID0EM6AK">XMPP.IoT.Network</a><br>        
+      3.2.9.1.  <a href="#sect-ID0EU6AK">XMPP.IoT.Network.Ethernet</a><br>        
+      3.2.9.2.  <a href="#sect-ID0E5HBK">XMPP.IoT.Network.IP</a><br>        
+      3.2.9.3.  <a href="#sect-ID0EDOBK">XMPP.IoT.Network.IPv6</a><br>        
+      3.2.9.4.  <a href="#sect-ID0EIUBK">XMPP.IoT.Network.Radio</a><br>   
+      3.3.  <a href="#sect-ID0E3WBK">Interface aggregations</a><br>      
+      3.3.1.  <a href="#sect-ID0EAXBK">Control programming aggregations</a><br>        
+      3.3.1.1.  <a href="#sect-ID0EEXBK">*.TimeChannels</a><br>      
+      3.3.2.  <a href="#sect-ID0EMXBK">Event aggregations</a><br>        
+      3.3.2.1.  <a href="#sect-ID0EQXBK">*.BinaryEvent</a><br>        
+      3.3.2.2.  <a href="#sect-ID0EXXBK">*.HysteresisEvent</a><br>        
+      3.3.2.3.  <a href="#sect-ID0E5XBK">*.TimedEvent</a><br>      
+      3.3.3.  <a href="#sect-ID0EGYBK">Readout aggregations</a><br>        
+      3.3.3.1.  <a href="#sect-ID0EKYBK">*.Average</a><br>        
+      3.3.3.2.  <a href="#sect-ID0ERYBK">*.Consumption</a><br>        
+      3.3.3.3.  <a href="#sect-ID0EYYBK">*.History</a><br>        
+      3.3.3.4.  <a href="#sect-ID0E6YBK">*.Mean</a><br>        
+      3.3.3.5.  <a href="#sect-ID0EGZBK">*.Min</a><br>        
+      3.3.3.6.  <a href="#sect-ID0ENZBK">*.Max</a><br>        
+      3.3.3.7.  <a href="#sect-ID0EUZBK">*.StdDev</a><br>        
+      3.3.3.8.  <a href="#sect-ID0E2ZBK">*.Sum</a><br>   
+      3.4.  <a href="#sect-ID0EE1BK">Field Names</a><br>   
+      3.5.  <a href="#sect-ID0EPBCK">Units</a><br>      
+      3.5.1.  <a href="#sect-ID0EXBCK">Angle</a><br>      
+      3.5.2.  <a href="#sect-ID0EZDCK">Area</a><br>      
+      3.5.3.  <a href="#sect-ID0ENJCK">Distance</a><br>      
+      3.5.4.  <a href="#sect-ID0ENRCK">Energy</a><br>      
+      3.5.5.  <a href="#sect-ID0E4CDK">Flow</a><br>      
+      3.5.6.  <a href="#sect-ID0EBSDK">Mass</a><br>      
+      3.5.7.  <a href="#sect-ID0EIYDK">Power</a><br>      
+      3.5.8.  <a href="#sect-ID0EQOEK">Pressure</a><br>      
+      3.5.9.  <a href="#sect-ID0E4VEK">Speed</a><br>      
+      3.5.10.  <a href="#sect-ID0EYZEK">Temperature</a><br>      
+      3.5.11.  <a href="#sect-ID0EG5EK">Time</a><br>      
+      3.5.12.  <a href="#sect-ID0EHDFK">Volume</a><br>   
+      3.6.  <a href="#sect-ID0EILFK">Privilege IDs</a><br>   
+      3.7.  <a href="#sect-ID0EVLFK">Data Sources</a><br>   
+      3.8.  <a href="#sect-ID0E3LFK">Identification Schemes</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#newinterfaces">Extending the Interoperability Document</a><br>6.  <a href="#security">Security Considerations</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a><br>10.  <a href="#ack">Acknowledgements</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
     </div>
     <hr>
@@ -194,7 +205,7 @@
             interchanged and understood throughout the network. This document defines such interoperability rules.
         </p>
         <p class="" style="">
-            Sensor networks contains many different architectures and use cases. For this reason, the sensor network standards have been divided into multiple XEPs according to the following table:
+            Internet of Things contains many different architectures and use cases. For this reason, the IoT standards have been divided into multiple XEPs according to the following table:
         </p>
         <div class="indent">
       <p class="caption"><a name="table-1"></a>Table 1: Sensor Network XEPs</p>
@@ -228,11 +239,11 @@
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">xep-0000-IoT-Control</td>
-                <td colspan="" rowspan="">Defines how to control actuators and other devices in sensor networks.</td>
+                <td colspan="" rowspan="">Defines how to control actuators and other devices in Internet of Things.</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">xep-0000-IoT-Discovery</td>
-                <td colspan="" rowspan="">Defines the peculiars of sensor discovery in sensor networks. Apart from discovering sensors by JID, it also defines how to discover sensors based on location, etc.</td>
+                <td colspan="" rowspan="">Defines the peculiars of Thing discovery in IoT. Apart from discovering sensors by JID, it also defines how to discover sensors based on location, etc.</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">xep-0000-IoT-Events</td>
@@ -240,7 +251,7 @@
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">xep-0000-IoT-Interoperability</td>
-                <td colspan="" rowspan="">This specification. Defines guidelines for how to achieve interoperability in sensor networks, publishing interoperability interfaces for different types of devices.</td>
+                <td colspan="" rowspan="">This specification. Defines guidelines for how to achieve interoperability in Internet of Things, publishing interoperability interfaces for different types of devices.</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">xep-0000-IoT-Multicast</td>
@@ -252,7 +263,7 @@
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">xep-0000-IoT-PubSub</td>
-                <td colspan="" rowspan="">Defines how efficient publication of sensor data can be made in sensor networks.</td>
+                <td colspan="" rowspan="">Defines how efficient publication of sensor data can be made in Internet of Things.</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">sensor-data</td>
@@ -477,7 +488,7 @@
         <div class="indent">
       <h3>3.2 <a name="interfaces">Interfaces</a></h3>
             <p class="" style="">
-                The following sub-sections lists interfaces that should be adhered to by parties interested in creating interoperable devices in sensor networks based on XMPP.
+                The following sub-sections lists interfaces that should be adhered to by parties interested in creating interoperable devices in Internet of Things based on XMPP.
                 A device can implement any number of interfaces.
             </p>
             <div class="indent">
@@ -3422,142 +3433,339 @@
                     This section contains interfaces relating to security.
                 </p>
                 <div class="indent">
-          <h3>3.2.6.1 <a name="sect-ID0ERJAK">XMPP.IoT.Security.Alarm</a></h3>
-                    
-                    
+          <h3>3.2.6.1 <a name="XMPP_IoT_Security_Alarm">XMPP.IoT.Security.Alarm</a></h3>
+					<p class="" style="">
+						Interface for a generic alarm device.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-83"></a>Table 83: XMPP.IoT.Security.Alarm Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">State</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">status</td>
+							<td colspan="" rowspan="">boolean</td>
+							<td colspan="" rowspan="">If the alarm is currently activated or not.</td>
+						</tr>
+					</table>
+          </div>
+					<div class="indent">
+            <p class="caption"><a name="table-84"></a>Table 84: XMPP.IoT.Security.Alarm Control Parameters</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Parameter</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Parameter Type</th>
+							<th colspan="" rowspan="">Range</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">State</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">boolean</td>
+							<td colspan="" rowspan="">-</td>
+							<td colspan="" rowspan="">If the alarm should be activated (true) or deactivated (false).</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Enabled</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">boolean</td>
+							<td colspan="" rowspan="">-</td>
+							<td colspan="" rowspan="">If the alarm should be enabled (true) or disabled (false). Only enabled alarms can be activated.</td>
+						</tr>
+					</table>
+          </div>
+					
                 </div>
                 <div class="indent">
-          <h3>3.2.6.2 <a name="sect-ID0E1JAK">XMPP.IoT.Security.Burglar</a></h3>
-                    
+          <h3>3.2.6.2 <a name="sect-ID0EXNAK">XMPP.IoT.Security.Burglar</a></h3>
+					<p class="" style="">
+						Interface for a burglar alarm.
+					</p>
+					<p class="" style="">
+						A burglar alarm has the same fields, control parameters and events as do <a href="#XMPP_IoT_Security_Alarm">XMPP.IoT.Security.Alarm</a>.
+					</p>
                 </div>
                 <div class="indent">
-          <h3>3.2.6.3 <a name="sect-ID0EBKAK">XMPP.IoT.Security.Clock</a></h3>
-                    
-                </div>
+          <h3>3.2.6.3 <a name="sect-ID0EIOAK">XMPP.IoT.Security.Clock</a></h3>
+					<p class="" style="">
+						Interface for devices with an internal configurable real-time clock.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-85"></a>Table 85: XMPP.IoT.Security.Clock Control Parameters</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Parameter</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Parameter Type</th>
+							<th colspan="" rowspan="">Range</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">CurrentTime</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">dateTime</td>
+							<td colspan="" rowspan="">-</td>
+							<td colspan="" rowspan="">Sets the current date &amp; time (and possible it's time zone if available) of the device.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
                 <div class="indent">
-          <h3>3.2.6.4 <a name="sect-ID0EIKAK">XMPP.IoT.Security.CO</a></h3>
-                    
-                </div>
+          <h3>3.2.6.4 <a name="sect-ID0EDQAK">XMPP.IoT.Security.CO</a></h3>
+					<p class="" style="">
+						Interface for a carbon monoxide (CO) detector.
+					</p>
+					<p class="" style="">
+						A carbon monoxide (CO) detector has the same fields, control parameters and events as do <a href="#XMPP_IoT_Security_Alarm">XMPP.IoT.Security.Alarm</a>.
+					</p>
+				</div>
                 <div class="indent">
-          <h3>3.2.6.5 <a name="sect-ID0EPKAK">XMPP.IoT.Security.CO2</a></h3>
-                    
-                </div>
+          <h3>3.2.6.5 <a name="sect-ID0EUQAK">XMPP.IoT.Security.CO2</a></h3>
+					<p class="" style="">
+						Interface for a carbon dioxide (CO2) detector.
+					</p>
+					<p class="" style="">
+						A carbon dioxide (CO2) detector has the same fields, control parameters and events as do <a href="#XMPP_IoT_Security_Alarm">XMPP.IoT.Security.Alarm</a>.
+					</p>
+				</div>
                 <div class="indent">
-          <h3>3.2.6.6 <a name="sect-ID0EWKAK">XMPP.IoT.Security.Door</a></h3>
-                    
-                </div>
-                <div class="indent">
-          <h3>3.2.6.7 <a name="sect-ID0E4KAK">XMPP.IoT.Security.Emergency</a></h3>
-                    
-                </div>
-				<div class="indent">
-          <h3>3.2.6.8 <a name="sect-ID0EELAK">XMPP.IoT.Security.Gas</a></h3>
+          <h3>3.2.6.6 <a name="XMPP_IoT_Security_Door">XMPP.IoT.Security.Door</a></h3>
+					<p class="" style="">
+						Interface for a door state detectors.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-86"></a>Table 86: XMPP.IoT.Security.Door Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Open</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">status</td>
+							<td colspan="" rowspan="">boolean</td>
+							<td colspan="" rowspan="">If the door is currently open or not.</td>
+						</tr>
+					</table>
+          </div>
 					
 				</div>
+                <div class="indent">
+          <h3>3.2.6.7 <a name="sect-ID0ECTAK">XMPP.IoT.Security.Emergency</a></h3>
+					<p class="" style="">
+						Interface for an emergency alarm.
+					</p>
+					<p class="" style="">
+						An emergency alarm has the same fields, control parameters and events as do <a href="#XMPP_IoT_Security_Alarm">XMPP.IoT.Security.Alarm</a>.
+					</p>
+				</div>
 				<div class="indent">
-          <h3>3.2.6.9 <a name="sect-ID0ELLAK">XMPP.IoT.Security.Heat</a></h3>
-                    
-                </div>
+          <h3>3.2.6.8 <a name="sect-ID0ETTAK">XMPP.IoT.Security.Gas</a></h3>
+					<p class="" style="">
+						Interface for a gas detector.
+					</p>
+					<p class="" style="">
+						A gas detector has the same fields, control parameters and events as do <a href="#XMPP_IoT_Security_Alarm">XMPP.IoT.Security.Alarm</a>.
+					</p>
+				</div>
+				<div class="indent">
+          <h3>3.2.6.9 <a name="sect-ID0EEUAK">XMPP.IoT.Security.Heat</a></h3>
+					<p class="" style="">
+						Interface for a heat detector.
+					</p>
+					<p class="" style="">
+						A heat detector has the same fields, control parameters and events as do <a href="#XMPP_IoT_Security_Alarm">XMPP.IoT.Security.Alarm</a>.
+					</p>
+				</div>
                 <div class="indent">
-          <h3>3.2.6.10 <a name="sect-ID0ESLAK">XMPP.IoT.Security.Lock</a></h3>
-                    
-                </div>
+          <h3>3.2.6.10 <a name="sect-ID0EVUAK">XMPP.IoT.Security.Lock</a></h3>
+					<p class="" style="">
+						Interface for a lock.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-87"></a>Table 87: XMPP.IoT.Security.Lock Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Locked</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">status</td>
+							<td colspan="" rowspan="">boolean</td>
+							<td colspan="" rowspan="">If the lock is currently locked or not.</td>
+						</tr>
+					</table>
+          </div>
+					<div class="indent">
+            <p class="caption"><a name="table-88"></a>Table 88: XMPP.IoT.Security.Lock Control Parameters</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Parameter</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Parameter Type</th>
+							<th colspan="" rowspan="">Range</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Locked</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">boolean</td>
+							<td colspan="" rowspan="">-</td>
+							<td colspan="" rowspan="">If the lock should be locked (true) or unlocked (false).</td>
+						</tr>
+					</table>
+          </div>
+					<p class="" style="">
+						<span class="strong">Note:</span> A device implementing this lock interface as well as <a href="#XMPP_IoT_Security_Door">XMPP.IoT.Security.Door</a> or
+						<a href="#XMPP_IoT_Security_Window">XMPP.IoT.Security.Window</a>, the device is allowed to reject a lock request if the corresponding
+						door or window is in an open state. This is done by returning a corresponding error message if an <span class="strong">iq</span> stanza is used or by
+						simply ignoring the command if a <span class="strong">message</span> stanza is used.
+					</p>
+					
+				</div>
                 <div class="indent">
-          <h3>3.2.6.11 <a name="sect-ID0EZLAK">XMPP.IoT.Security.Movement</a></h3>
-                    
-                </div>
+          <h3>3.2.6.11 <a name="sect-ID0EVYAK">XMPP.IoT.Security.Movement</a></h3>
+					<p class="" style="">
+						Interface for a movement detector.
+					</p>
+					<p class="" style="">
+						A movement detector has the same fields, control parameters and events as do <a href="#XMPP_IoT_Security_Alarm">XMPP.IoT.Security.Alarm</a>.
+					</p>
+				</div>
                 <div class="indent">
-          <h3>3.2.6.12 <a name="sect-ID0EAMAK">XMPP.IoT.Security.Smoke</a></h3>
-                    
-                </div>
+          <h3>3.2.6.12 <a name="sect-ID0EGZAK">XMPP.IoT.Security.Smoke</a></h3>
+					<p class="" style="">
+						Interface for a smoke detector.
+					</p>
+					<p class="" style="">
+						A smoke detector has the same fields, control parameters and events as do <a href="#XMPP_IoT_Security_Alarm">XMPP.IoT.Security.Alarm</a>.
+					</p>
+				</div>
                 <div class="indent">
-          <h3>3.2.6.13 <a name="sect-ID0EHMAK">XMPP.IoT.Security.System</a></h3>
-                    
-                </div>
-                <div class="indent">
-          <h3>3.2.6.14 <a name="sect-ID0EOMAK">XMPP.IoT.Security.Water</a></h3>
-                    
-                </div>
-            </div>
+          <h3>3.2.6.13 <a name="sect-ID0EXZAK">XMPP.IoT.Security.Water</a></h3>
+					<p class="" style="">
+						Interface for a water detector.
+					</p>
+					<p class="" style="">
+						A water detector has the same fields, control parameters and events as do <a href="#XMPP_IoT_Security_Alarm">XMPP.IoT.Security.Alarm</a>.
+					</p>
+				</div>
+				<div class="indent">
+          <h3>3.2.6.14 <a name="XMPP_IoT_Security_Window">XMPP.IoT.Security.Window</a></h3>
+					<p class="" style="">
+						Interface for a window state detectors.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-89"></a>Table 89: XMPP.IoT.Security.Window Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Open</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">status</td>
+							<td colspan="" rowspan="">boolean</td>
+							<td colspan="" rowspan="">If the window is currently open or not.</td>
+						</tr>
+					</table>
+          </div>
+					
+				</div>
+			</div>
             <div class="indent">
-        <h3>3.2.7 <a name="sect-ID0EWMAK">XMPP.IoT.Controller</a></h3>
+        <h3>3.2.7 <a name="sect-ID0EG3AK">XMPP.IoT.Controller</a></h3>
                 <p class="" style="">
                     This section contains interfaces relating to controllers, specific applications that perform a (local) service in a sensor network.
                 </p>
 				<div class="indent">
-          <h3>3.2.7.1 <a name="sect-ID0E5MAK">XMPP.IoT.Controller.AccessControl</a></h3>
+          <h3>3.2.7.1 <a name="sect-ID0EO3AK">XMPP.IoT.Controller.AccessControl</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.2.7.2 <a name="sect-ID0EFNAK">XMPP.IoT.Controller.Thermostat</a></h3>
+          <h3>3.2.7.2 <a name="sect-ID0EV3AK">XMPP.IoT.Controller.Thermostat</a></h3>
                     
                 </div>
                 <div class="indent">
-          <h3>3.2.7.3 <a name="sect-ID0EMNAK">XMPP.IoT.Controller.Ventilation</a></h3>
+          <h3>3.2.7.3 <a name="sect-ID0E33AK">XMPP.IoT.Controller.Ventilation</a></h3>
                     
                 </div>
             </div>
             <div class="indent">
-        <h3>3.2.8 <a name="sect-ID0EUNAK">XMPP.IoT.Media</a></h3>
+        <h3>3.2.8 <a name="sect-ID0EE4AK">XMPP.IoT.Media</a></h3>
                 <p class="" style="">
                     This section contains interfaces relating to multi media.
                 </p>
 				<div class="indent">
-          <h3>3.2.8.1 <a name="sect-ID0E3NAK">XMPP.IoT.Media.BarCode</a></h3>
+          <h3>3.2.8.1 <a name="sect-ID0EM4AK">XMPP.IoT.Media.BarCode</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.2.8.2 <a name="sect-ID0EDOAK">XMPP.IoT.Media.Camera</a></h3>
+          <h3>3.2.8.2 <a name="sect-ID0ET4AK">XMPP.IoT.Media.Camera</a></h3>
                     
                 </div>
                 <div class="indent">
-          <h3>3.2.8.3 <a name="sect-ID0EKOAK">XMPP.IoT.Media.Directory</a></h3>
+          <h3>3.2.8.3 <a name="sect-ID0E14AK">XMPP.IoT.Media.Directory</a></h3>
                     
                 </div>
                 <div class="indent">
-          <h3>3.2.8.4 <a name="sect-ID0EROAK">XMPP.IoT.Media.Display</a></h3>
+          <h3>3.2.8.4 <a name="sect-ID0EB5AK">XMPP.IoT.Media.Display</a></h3>
                     
                 </div>
                 <div class="indent">
-          <h3>3.2.8.5 <a name="sect-ID0EYOAK">XMPP.IoT.Media.LoudSpeakers</a></h3>
+          <h3>3.2.8.5 <a name="sect-ID0EI5AK">XMPP.IoT.Media.LoudSpeakers</a></h3>
                     
                 </div>
                 <div class="indent">
-          <h3>3.2.8.6 <a name="sect-ID0E6OAK">XMPP.IoT.Media.Microphone</a></h3>
+          <h3>3.2.8.6 <a name="sect-ID0EP5AK">XMPP.IoT.Media.Microphone</a></h3>
                     
                 </div>
 				<div class="indent">
-          <h3>3.2.8.7 <a name="sect-ID0EGPAK">XMPP.IoT.Media.QrCode</a></h3>
+          <h3>3.2.8.7 <a name="sect-ID0EW5AK">XMPP.IoT.Media.QrCode</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.2.8.8 <a name="sect-ID0ENPAK">XMPP.IoT.Media.Recorder</a></h3>
+          <h3>3.2.8.8 <a name="sect-ID0E45AK">XMPP.IoT.Media.Recorder</a></h3>
                     
                 </div>
                 <div class="indent">
-          <h3>3.2.8.9 <a name="sect-ID0EUPAK">XMPP.IoT.Media.TextDisplay</a></h3>
+          <h3>3.2.8.9 <a name="sect-ID0EE6AK">XMPP.IoT.Media.TextDisplay</a></h3>
                     
                 </div>
-            </div>
-            <div class="indent">
-        <h3>3.2.9 <a name="sect-ID0E3PAK">XMPP.IoT.Gateway</a></h3>
-                <p class="" style="">
-                    This section contains interfaces relating to gateways in the network.
-                </p>
-                
             </div>
 			<div class="indent">
-        <h3>3.2.10 <a name="sect-ID0EHQAK">XMPP.IoT.Network</a></h3>
+        <h3>3.2.9 <a name="sect-ID0EM6AK">XMPP.IoT.Network</a></h3>
 				<p class="" style="">
 					This section contains interfaces relating to network interface status.
 				</p>
 				<div class="indent">
-          <h3>3.2.10.1 <a name="sect-ID0EPQAK">XMPP.IoT.Network.Ethernet</a></h3>
+          <h3>3.2.9.1 <a name="sect-ID0EU6AK">XMPP.IoT.Network.Ethernet</a></h3>
 					<p class="" style="">
 						Interface handling Ehternet adapter status information.
 					</p>
 					<div class="indent">
-            <p class="caption"><a name="table-83"></a>Table 83: XMPP.IoT.Network.Ethernet Fields</p>
+            <p class="caption"><a name="table-90"></a>Table 90: XMPP.IoT.Network.Ethernet Fields</p>
             <table border="1" cellpadding="3" cellspacing="0">
 						<tr class="body">
 							<th colspan="" rowspan="">Field Name</th>
@@ -3640,12 +3848,12 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.10.2 <a name="sect-ID0EZYAK">XMPP.IoT.Network.IP</a></h3>
+          <h3>3.2.9.2 <a name="sect-ID0E5HBK">XMPP.IoT.Network.IP</a></h3>
 					<p class="" style="">
 						Interface handling IPv4 network layer status information.
 					</p>
 					<div class="indent">
-            <p class="caption"><a name="table-84"></a>Table 84: XMPP.IoT.Network.IP Fields</p>
+            <p class="caption"><a name="table-91"></a>Table 91: XMPP.IoT.Network.IP Fields</p>
             <table border="1" cellpadding="3" cellspacing="0">
 						<tr class="body">
 							<th colspan="" rowspan="">Field Name</th>
@@ -3707,12 +3915,12 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.10.3 <a name="sect-ID0E55AK">XMPP.IoT.Network.IPv6</a></h3>
+          <h3>3.2.9.3 <a name="sect-ID0EDOBK">XMPP.IoT.Network.IPv6</a></h3>
 					<p class="" style="">
 						Interface handling IPv6 network layer status information.
 					</p>
 					<div class="indent">
-            <p class="caption"><a name="table-85"></a>Table 85: XMPP.IoT.Network.IPv6 Fields</p>
+            <p class="caption"><a name="table-92"></a>Table 92: XMPP.IoT.Network.IPv6 Fields</p>
             <table border="1" cellpadding="3" cellspacing="0">
 						<tr class="body">
 							<th colspan="" rowspan="">Field Name</th>
@@ -3774,12 +3982,12 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.10.4 <a name="sect-ID0EDFBK">XMPP.IoT.Network.Radio</a></h3>
+          <h3>3.2.9.4 <a name="sect-ID0EIUBK">XMPP.IoT.Network.Radio</a></h3>
 					<p class="" style="">
 						Interface handling radio network layer status information.
 					</p>
 					<div class="indent">
-            <p class="caption"><a name="table-86"></a>Table 86: XMPP.IoT.Network.Radio Fields</p>
+            <p class="caption"><a name="table-93"></a>Table 93: XMPP.IoT.Network.Radio Fields</p>
             <table border="1" cellpadding="3" cellspacing="0">
 						<tr class="body">
 							<th colspan="" rowspan="">Field Name</th>
@@ -3806,73 +4014,71 @@
           </div>
 				</div>
 			</div>
-			
-            
         </div>
         <div class="indent">
-      <h3>3.3 <a name="sect-ID0E2HBK">Interface aggregations</a></h3>
+      <h3>3.3 <a name="sect-ID0E3WBK">Interface aggregations</a></h3>
 			<div class="indent">
-        <h3>3.3.1 <a name="sect-ID0E6HBK">Control programming aggregations</a></h3>
+        <h3>3.3.1 <a name="sect-ID0EAXBK">Control programming aggregations</a></h3>
 				<div class="indent">
-          <h3>3.3.1.1 <a name="sect-ID0EDIBK">*.TimeChannels</a></h3>
+          <h3>3.3.1.1 <a name="sect-ID0EEXBK">*.TimeChannels</a></h3>
 					
 				</div>
 			</div>
 			<div class="indent">
-        <h3>3.3.2 <a name="sect-ID0ELIBK">Event aggregations</a></h3>
+        <h3>3.3.2 <a name="sect-ID0EMXBK">Event aggregations</a></h3>
 				<div class="indent">
-          <h3>3.3.2.1 <a name="sect-ID0EPIBK">*.BinaryEvent</a></h3>
+          <h3>3.3.2.1 <a name="sect-ID0EQXBK">*.BinaryEvent</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.3.2.2 <a name="sect-ID0EWIBK">*.HysteresisEvent</a></h3>
+          <h3>3.3.2.2 <a name="sect-ID0EXXBK">*.HysteresisEvent</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.3.2.3 <a name="sect-ID0E4IBK">*.TimedEvent</a></h3>
+          <h3>3.3.2.3 <a name="sect-ID0E5XBK">*.TimedEvent</a></h3>
 					
 				</div>
 			</div>
 			<div class="indent">
-        <h3>3.3.3 <a name="sect-ID0EFJBK">Readout aggregations</a></h3>
+        <h3>3.3.3 <a name="sect-ID0EGYBK">Readout aggregations</a></h3>
 				<div class="indent">
-          <h3>3.3.3.1 <a name="sect-ID0EJJBK">*.Average</a></h3>
+          <h3>3.3.3.1 <a name="sect-ID0EKYBK">*.Average</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.3.3.2 <a name="sect-ID0EQJBK">*.Consumption</a></h3>
+          <h3>3.3.3.2 <a name="sect-ID0ERYBK">*.Consumption</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.3.3.3 <a name="sect-ID0EXJBK">*.History</a></h3>
+          <h3>3.3.3.3 <a name="sect-ID0EYYBK">*.History</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.3.3.4 <a name="sect-ID0E5JBK">*.Mean</a></h3>
+          <h3>3.3.3.4 <a name="sect-ID0E6YBK">*.Mean</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.3.3.5 <a name="sect-ID0EFKBK">*.Min</a></h3>
+          <h3>3.3.3.5 <a name="sect-ID0EGZBK">*.Min</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.3.3.6 <a name="sect-ID0EMKBK">*.Max</a></h3>
+          <h3>3.3.3.6 <a name="sect-ID0ENZBK">*.Max</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.3.3.7 <a name="sect-ID0ETKBK">*.StdDev</a></h3>
+          <h3>3.3.3.7 <a name="sect-ID0EUZBK">*.StdDev</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.3.3.8 <a name="sect-ID0E1KBK">*.Sum</a></h3>
+          <h3>3.3.3.8 <a name="sect-ID0E2ZBK">*.Sum</a></h3>
 					
 				</div>
 			</div>
 		</div>
         <div class="indent">
-      <h3>3.4 <a name="sect-ID0EDLBK">Field Names</a></h3>
+      <h3>3.4 <a name="sect-ID0EE1BK">Field Names</a></h3>
             <div class="indent">
-        <p class="caption"><a name="table-87"></a>Table 87: Localization of Field Names</p>
+        <p class="caption"><a name="table-94"></a>Table 94: Localization of Field Names</p>
         <table border="1" cellpadding="3" cellspacing="0">
                 <tr class="body">
                     <th colspan="" rowspan="">Field Name</th>
@@ -3918,7 +4124,7 @@
       </div>
             
             <div class="indent">
-        <p class="caption"><a name="table-88"></a>Table 88: Composition of Field Names</p>
+        <p class="caption"><a name="table-95"></a>Table 95: Composition of Field Names</p>
         <table border="1" cellpadding="3" cellspacing="0">
                 <tr class="body">
                     <th colspan="" rowspan="">Aggregation</th>
@@ -3964,30 +4170,1159 @@
       </div>
         </div>
         <div class="indent">
-      <h3>3.5 <a name="sect-ID0EOSBK">Units</a></h3>
+      <h3>3.5 <a name="sect-ID0EPBCK">Units</a></h3>
+			<p class="" style="">
+				This section contains tables for units and unit conversions that devices and sytems in IoT should use, so that data interchange is interoperable.
+				Units are divided into categories, each category listed in a separate subsection. Devices reporting fields using units of a specific category should
+				only use units marked as SHOULD, to make sure values are understood and communication be interoperable.
+			</p>
+			<div class="indent">
+        <h3>3.5.1 <a name="sect-ID0EXBCK">Angle</a></h3>
+				<div class="indent">
+          <p class="caption"><a name="table-96"></a>Table 96: Angle</p>
+          <table border="1" cellpadding="3" cellspacing="0">
+					<tr class="body">
+						<th colspan="" rowspan="">Unit</th>
+						<th colspan="" rowspan="">Scale</th>
+						<th colspan="" rowspan="">Offset</th>
+						<th colspan="" rowspan="">Use</th>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">°</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">rad</td>
+						<td colspan="" rowspan="">0.01745329251994</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+				</table>
+        </div>
+			</div>
+			<div class="indent">
+        <h3>3.5.2 <a name="sect-ID0EZDCK">Area</a></h3>
+				<div class="indent">
+          <p class="caption"><a name="table-97"></a>Table 97: Area</p>
+          <table border="1" cellpadding="3" cellspacing="0">
+					<tr class="body">
+						<th colspan="" rowspan="">Unit</th>
+						<th colspan="" rowspan="">Scale</th>
+						<th colspan="" rowspan="">Offset</th>
+						<th colspan="" rowspan="">Use</th>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">m²</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">m2</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">ft²</td>
+						<td colspan="" rowspan="">10.76391041671</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">ft2</td>
+						<td colspan="" rowspan="">10.76391041671</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">in²</td>
+						<td colspan="" rowspan="">1550.003100006</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">in2</td>
+						<td colspan="" rowspan="">1550.003100006</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">yd²</td>
+						<td colspan="" rowspan="">1.195990046301</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">yd2</td>
+						<td colspan="" rowspan="">1.195990046301</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+				</table>
+        </div>
+			</div>
+			<div class="indent">
+        <h3>3.5.3 <a name="sect-ID0ENJCK">Distance</a></h3>
+				<div class="indent">
+          <p class="caption"><a name="table-98"></a>Table 98: Distance</p>
+          <table border="1" cellpadding="3" cellspacing="0">
+					<tr class="body">
+						<th colspan="" rowspan="">Unit</th>
+						<th colspan="" rowspan="">Scale</th>
+						<th colspan="" rowspan="">Offset</th>
+						<th colspan="" rowspan="">Use</th>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">nm</td>
+						<td colspan="" rowspan="">1e9</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">µm</td>
+						<td colspan="" rowspan="">1e6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">mm</td>
+						<td colspan="" rowspan="">1e3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">cm</td>
+						<td colspan="" rowspan="">1e2</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">dm</td>
+						<td colspan="" rowspan="">1e1</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">m</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">km</td>
+						<td colspan="" rowspan="">1e-3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">ft</td>
+						<td colspan="" rowspan="">3.280839895013</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">in</td>
+						<td colspan="" rowspan="">39.37007874016</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">yd</td>
+						<td colspan="" rowspan="">1.093613298338</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">sm</td>
+						<td colspan="" rowspan="">0.000621371192</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">mi</td>
+						<td colspan="" rowspan="">0.000621371192</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+				</table>
+        </div>
+			</div>
+			<div class="indent">
+        <h3>3.5.4 <a name="sect-ID0ENRCK">Energy</a></h3>
+				<div class="indent">
+          <p class="caption"><a name="table-99"></a>Table 99: Energy</p>
+          <table border="1" cellpadding="3" cellspacing="0">
+					<tr class="body">
+						<th colspan="" rowspan="">Unit</th>
+						<th colspan="" rowspan="">Scale</th>
+						<th colspan="" rowspan="">Offset</th>
+						<th colspan="" rowspan="">Use</th>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">µWh</td>
+						<td colspan="" rowspan="">1e6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">mWh</td>
+						<td colspan="" rowspan="">1e3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Wh</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">kWh</td>
+						<td colspan="" rowspan="">1e-3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">MWh</td>
+						<td colspan="" rowspan="">1e-6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">GWh</td>
+						<td colspan="" rowspan="">1e-9</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">TWh</td>
+						<td colspan="" rowspan="">1e-12</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">µBTU</td>
+						<td colspan="" rowspan="">3.412141156488e6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">mBTU</td>
+						<td colspan="" rowspan="">3.412141156488e3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">BTU</td>
+						<td colspan="" rowspan="">3.412141156488</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">kBTU</td>
+						<td colspan="" rowspan="">3.412141156488e-3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">MBTU</td>
+						<td colspan="" rowspan="">3.412141156488e-6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">GBTU</td>
+						<td colspan="" rowspan="">3.412141156488e-9</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">TBTU</td>
+						<td colspan="" rowspan="">3.412141156488e-12</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">µcal</td>
+						<td colspan="" rowspan="">859.8452278591e6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">mcal</td>
+						<td colspan="" rowspan="">859.8452278591e3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">cal</td>
+						<td colspan="" rowspan="">859.845227859</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">kcal</td>
+						<td colspan="" rowspan="">859.8452278591e-3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Mcal</td>
+						<td colspan="" rowspan="">859.8452278591e-6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Gcal</td>
+						<td colspan="" rowspan="">859.8452278591e-9</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Tcal</td>
+						<td colspan="" rowspan="">859.8452278591e-12</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">µJ</td>
+						<td colspan="" rowspan="">3.600e+9</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">mJ</td>
+						<td colspan="" rowspan="">3.600e+6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">J</td>
+						<td colspan="" rowspan="">3.600e+3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">kJ</td>
+						<td colspan="" rowspan="">3.600</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">MJ</td>
+						<td colspan="" rowspan="">3.600e-3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">GJ</td>
+						<td colspan="" rowspan="">3.600e-6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">TJ</td>
+						<td colspan="" rowspan="">3.600e-9</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+				</table>
+        </div>
+			</div>
+			<div class="indent">
+        <h3>3.5.5 <a name="sect-ID0E4CDK">Flow</a></h3>
+				<div class="indent">
+          <p class="caption"><a name="table-100"></a>Table 100: Flow</p>
+          <table border="1" cellpadding="3" cellspacing="0">
+					<tr class="body">
+						<th colspan="" rowspan="">Unit</th>
+						<th colspan="" rowspan="">Scale</th>
+						<th colspan="" rowspan="">Offset</th>
+						<th colspan="" rowspan="">Use</th>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">µl/h</td>
+						<td colspan="" rowspan="">1e6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">ml/h</td>
+						<td colspan="" rowspan="">1e3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">cl/h</td>
+						<td colspan="" rowspan="">1e2</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">l/h</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">m³/h</td>
+						<td colspan="" rowspan="">1e-3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">m3/h</td>
+						<td colspan="" rowspan="">1e-3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">ft³/h</td>
+						<td colspan="" rowspan="">0.03531466672149</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">ft3/h</td>
+						<td colspan="" rowspan="">0.03531466672149</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">in³/h</td>
+						<td colspan="" rowspan="">61.02374409473</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">in3/h</td>
+						<td colspan="" rowspan="">61.02374409473</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">UsGal/h</td>
+						<td colspan="" rowspan="">0.2641720523582</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">UkGal/h</td>
+						<td colspan="" rowspan="">0.2199692482991</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">µl/min</td>
+						<td colspan="" rowspan="">16666.6666666667</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">ml/min</td>
+						<td colspan="" rowspan="">16.6666666666667</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">cl/min</td>
+						<td colspan="" rowspan="">1.66666666666667</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">l/min</td>
+						<td colspan="" rowspan="">0.0166666666666667</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">m³/min</td>
+						<td colspan="" rowspan="">0.000016666666666667</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">m3/min</td>
+						<td colspan="" rowspan="">0.000016666666666667</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">ft³/min</td>
+						<td colspan="" rowspan="">0.0005885777786915</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">ft3/min</td>
+						<td colspan="" rowspan="">0.0005885777786915</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">in³/min</td>
+						<td colspan="" rowspan="">1.01706240157883</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">in3/min</td>
+						<td colspan="" rowspan="">1.01706240157883</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">UsGal/min</td>
+						<td colspan="" rowspan="">0.0044028675393033333333333333333333</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">UkGal/min</td>
+						<td colspan="" rowspan="">0.0036661541383183333333333333333333</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+				</table>
+        </div>
+			</div>
+			<div class="indent">
+        <h3>3.5.6 <a name="sect-ID0EBSDK">Mass</a></h3>
+				<div class="indent">
+          <p class="caption"><a name="table-101"></a>Table 101: Mass</p>
+          <table border="1" cellpadding="3" cellspacing="0">
+					<tr class="body">
+						<th colspan="" rowspan="">Unit</th>
+						<th colspan="" rowspan="">Scale</th>
+						<th colspan="" rowspan="">Offset</th>
+						<th colspan="" rowspan="">Use</th>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">µg</td>
+						<td colspan="" rowspan="">1e6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">mg</td>
+						<td colspan="" rowspan="">1e3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">g</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">gram</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">kg</td>
+						<td colspan="" rowspan="">1e-3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">t</td>
+						<td colspan="" rowspan="">1e-6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">ton</td>
+						<td colspan="" rowspan="">1e-6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">oz</td>
+						<td colspan="" rowspan="">35.27396194958</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">lb</td>
+						<td colspan="" rowspan="">2.204622621849</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+				</table>
+        </div>
+			</div>
+			<div class="indent">
+        <h3>3.5.7 <a name="sect-ID0EIYDK">Power</a></h3>
+				<div class="indent">
+          <p class="caption"><a name="table-102"></a>Table 102: Power</p>
+          <table border="1" cellpadding="3" cellspacing="0">
+					<tr class="body">
+						<th colspan="" rowspan="">Unit</th>
+						<th colspan="" rowspan="">Scale</th>
+						<th colspan="" rowspan="">Offset</th>
+						<th colspan="" rowspan="">Use</th>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">µW</td>
+						<td colspan="" rowspan="">1e6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">mW</td>
+						<td colspan="" rowspan="">1e3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">W</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">kW</td>
+						<td colspan="" rowspan="">1e-3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">MW</td>
+						<td colspan="" rowspan="">1e-6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">GW</td>
+						<td colspan="" rowspan="">1e-9</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">TW</td>
+						<td colspan="" rowspan="">1e-12</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">VA</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">µJ/s</td>
+						<td colspan="" rowspan="">1e6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">mJ/s</td>
+						<td colspan="" rowspan="">1e3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">J/s</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">kJ/s</td>
+						<td colspan="" rowspan="">1e-3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">MJ/s</td>
+						<td colspan="" rowspan="">1e-6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">GJ/s</td>
+						<td colspan="" rowspan="">1e-9</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">TJ/s</td>
+						<td colspan="" rowspan="">1e-12</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">µBTU/h</td>
+						<td colspan="" rowspan="">3.412141156488e6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">mBTU/h</td>
+						<td colspan="" rowspan="">3.412141156488e3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">BTU/h</td>
+						<td colspan="" rowspan="">3.412141156488</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">kBTU/h</td>
+						<td colspan="" rowspan="">3.412141156488e-3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">MBTU/h</td>
+						<td colspan="" rowspan="">3.412141156488e-6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">GBTU/h</td>
+						<td colspan="" rowspan="">3.412141156488e-9</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">TBTU/h</td>
+						<td colspan="" rowspan="">3.412141156488e-12</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">µBTU/s</td>
+						<td colspan="" rowspan="">0.0009478169879134e6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">mBTU/s</td>
+						<td colspan="" rowspan="">0.0009478169879134e3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">BTU/s</td>
+						<td colspan="" rowspan="">0.0009478169879134</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">kBTU/s</td>
+						<td colspan="" rowspan="">0.0009478169879134e-3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">MBTU/s</td>
+						<td colspan="" rowspan="">0.0009478169879134e-6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">GBTU/s</td>
+						<td colspan="" rowspan="">0.0009478169879134e-9</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">TBTU/s</td>
+						<td colspan="" rowspan="">0.0009478169879134e-12</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">µcal/s</td>
+						<td colspan="" rowspan="">0.2388458966275e6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">mcal/s</td>
+						<td colspan="" rowspan="">0.2388458966275e3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">cal/s</td>
+						<td colspan="" rowspan="">0.2388458966275</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">kcal/s</td>
+						<td colspan="" rowspan="">0.2388458966275e-3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Mcal/s</td>
+						<td colspan="" rowspan="">0.2388458966275e-6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Gcal/s</td>
+						<td colspan="" rowspan="">0.2388458966275e-9</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Tcal/s</td>
+						<td colspan="" rowspan="">0.2388458966275e-12</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+				</table>
+        </div>
+			</div>
+			<div class="indent">
+        <h3>3.5.8 <a name="sect-ID0EQOEK">Pressure</a></h3>
+				<div class="indent">
+          <p class="caption"><a name="table-103"></a>Table 103: Pressure</p>
+          <table border="1" cellpadding="3" cellspacing="0">
+					<tr class="body">
+						<th colspan="" rowspan="">Unit</th>
+						<th colspan="" rowspan="">Scale</th>
+						<th colspan="" rowspan="">Offset</th>
+						<th colspan="" rowspan="">Use</th>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Pa</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">hPa</td>
+						<td colspan="" rowspan="">1e-2</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">kPa</td>
+						<td colspan="" rowspan="">1e-3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">atm</td>
+						<td colspan="" rowspan="">0.00000986923266716</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">bar</td>
+						<td colspan="" rowspan="">1e-5</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">mbar</td>
+						<td colspan="" rowspan="">1e-2</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">mmHg</td>
+						<td colspan="" rowspan="">0.007500616827042</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">inHg</td>
+						<td colspan="" rowspan="">0.00029529980164712323362732397252649</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">psf</td>
+						<td colspan="" rowspan="">0.02088545632547</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">psi</td>
+						<td colspan="" rowspan="">0.0001450378911491</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">torr</td>
+						<td colspan="" rowspan="">0.007500616827042</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+				</table>
+        </div>
+			</div>
+			<div class="indent">
+        <h3>3.5.9 <a name="sect-ID0E4VEK">Speed</a></h3>
+				<div class="indent">
+          <p class="caption"><a name="table-104"></a>Table 104: Speed</p>
+          <table border="1" cellpadding="3" cellspacing="0">
+					<tr class="body">
+						<th colspan="" rowspan="">Unit</th>
+						<th colspan="" rowspan="">Scale</th>
+						<th colspan="" rowspan="">Offset</th>
+						<th colspan="" rowspan="">Use</th>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">m/s</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">km/h</td>
+						<td colspan="" rowspan="">3.6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">kph</td>
+						<td colspan="" rowspan="">3.6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">kn</td>
+						<td colspan="" rowspan="">1.943844492441</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">mph</td>
+						<td colspan="" rowspan="">2.236936292054</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+				</table>
+        </div>
+			</div>
+			<div class="indent">
+        <h3>3.5.10 <a name="sect-ID0EYZEK">Temperature</a></h3>
+				<div class="indent">
+          <p class="caption"><a name="table-105"></a>Table 105: Temperature</p>
+          <table border="1" cellpadding="3" cellspacing="0">
+					<tr class="body">
+						<th colspan="" rowspan="">Unit</th>
+						<th colspan="" rowspan="">Scale</th>
+						<th colspan="" rowspan="">Offset</th>
+						<th colspan="" rowspan="">Use</th>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">°C</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">C</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">°F</td>
+						<td colspan="" rowspan="">1.8</td>
+						<td colspan="" rowspan="">32</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">F</td>
+						<td colspan="" rowspan="">1.8</td>
+						<td colspan="" rowspan="">32</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">°K</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">273.15</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">K</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">273.15</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+				</table>
+        </div>
+			</div>
+			<div class="indent">
+        <h3>3.5.11 <a name="sect-ID0EG5EK">Time</a></h3>
+				<div class="indent">
+          <p class="caption"><a name="table-106"></a>Table 106: Time</p>
+          <table border="1" cellpadding="3" cellspacing="0">
+					<tr class="body">
+						<th colspan="" rowspan="">Unit</th>
+						<th colspan="" rowspan="">Scale</th>
+						<th colspan="" rowspan="">Offset</th>
+						<th colspan="" rowspan="">Use</th>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">ns</td>
+						<td colspan="" rowspan="">1e9</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">µs</td>
+						<td colspan="" rowspan="">1e6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">ms</td>
+						<td colspan="" rowspan="">1e3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">s</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">min</td>
+						<td colspan="" rowspan="">60</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">h</td>
+						<td colspan="" rowspan="">3600</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">d</td>
+						<td colspan="" rowspan="">86400</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+				</table>
+        </div>
+			</div>
+			<div class="indent">
+        <h3>3.5.12 <a name="sect-ID0EHDFK">Volume</a></h3>
+				<div class="indent">
+          <p class="caption"><a name="table-107"></a>Table 107: Volume</p>
+          <table border="1" cellpadding="3" cellspacing="0">
+					<tr class="body">
+						<th colspan="" rowspan="">Unit</th>
+						<th colspan="" rowspan="">Scale</th>
+						<th colspan="" rowspan="">Offset</th>
+						<th colspan="" rowspan="">Use</th>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">µl</td>
+						<td colspan="" rowspan="">1e6</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">ml</td>
+						<td colspan="" rowspan="">1e3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">cl</td>
+						<td colspan="" rowspan="">1e2</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">l</td>
+						<td colspan="" rowspan="">1</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">m³</td>
+						<td colspan="" rowspan="">1e-3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">m3</td>
+						<td colspan="" rowspan="">1e-3</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">ft³</td>
+						<td colspan="" rowspan="">0.03531466672149</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">ft3</td>
+						<td colspan="" rowspan="">0.03531466672149</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">in³</td>
+						<td colspan="" rowspan="">61.02374409473</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">in3</td>
+						<td colspan="" rowspan="">61.02374409473</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">COULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">UsGal</td>
+						<td colspan="" rowspan="">0.2641720523582</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">UkGal</td>
+						<td colspan="" rowspan="">0.2199692482991</td>
+						<td colspan="" rowspan="">0</td>
+						<td colspan="" rowspan="">SHOULD</td>
+					</tr>
+				</table>
+        </div>
+			</div>
+		</div>
+        <div class="indent">
+      <h3>3.6 <a name="sect-ID0EILFK">Privilege IDs</a></h3>
             
             
             
             
         </div>
         <div class="indent">
-      <h3>3.6 <a name="sect-ID0E2SBK">Privilege IDs</a></h3>
-            
-            
-            
-            
-        </div>
-        <div class="indent">
-      <h3>3.7 <a name="sect-ID0EITBK">Data Sources</a></h3>
+      <h3>3.7 <a name="sect-ID0EVLFK">Data Sources</a></h3>
             
         </div>
 		<div class="indent">
-      <h3>3.8 <a name="sect-ID0EPTBK">Identification Schemes</a></h3>
+      <h3>3.8 <a name="sect-ID0E3LFK">Identification Schemes</a></h3>
 			
 		</div>
 	<h2>4.
        <a name="support">Determining Support</a></h2>
-        <p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:sn:control" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EFUBK">6</a>] information requests.</p>
+        <p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:sn:control" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0ESMFK">6</a>] information requests.</p>
         <p class="caption"><a name="example-2"></a>Example 2. Service discovery information request</p>
     <div class="indent">
       <pre class="prettyprint">
@@ -4018,7 +5353,7 @@
     </div>
         <p class="" style="">
             In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
-            in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0E3UBK">7</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
+            in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EJNFK">7</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
         </p>
     <h2>5.
        <a name="newinterfaces">Extending the Interoperability Document</a></h2>
@@ -4026,7 +5361,7 @@
     <h2>6.
        <a name="security">Security Considerations</a></h2>
         <p class="" style="">
-            This document has not touched upon security in sensor networks. There are mainly three concerns that implementers of sensor networks need to consider:
+            This document has not touched upon security in Internet of Things. Following is a list of major concerns that implementers of Internet of Things need to consider:
         </p>
         <ul class="" style="">
             <li class="" style="">
@@ -4041,7 +5376,7 @@
         </ul>
     <h2>7.
        <a name="iana">IANA Considerations</a></h2>
-        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EZWBK">8</a>].</p>
+        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EGPFK">8</a>].</p>
     <h2>8.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
         <p class="" style="">REQUIRED.</p>
@@ -4147,9 +5482,9 @@
       <p><a name="nt-ID0EJF">3</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
       <p><a name="nt-ID0EVF">4</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
       <p><a name="nt-ID0EBG">5</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
-      <p><a name="nt-ID0EFUBK">6</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
-      <p><a name="nt-ID0E3UBK">7</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
-      <p><a name="nt-ID0EZWBK">8</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+      <p><a name="nt-ID0ESMFK">6</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0EJNFK">7</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0EGPFK">8</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
@@ -4157,7 +5492,7 @@
       <h4>Version 0.0.1 (2013-04-04)</h4>
       <div class="indent">
                 <p class="" style="">First draft.</p>
-             (pwa)
+             (pw)
     </div>
     </div>
     <hr>
