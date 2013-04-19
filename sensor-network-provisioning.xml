@@ -18,7 +18,7 @@
                 This XMPP Extension Protocol has been contributed in full conformance with the XSF's Intellectual Property Rights Policy (a copy of which may be found at &lt;<link url='http://www.xmpp.org/extensions/ipr-policy.shtml'>http://www.xmpp.org/extensions/ipr-policy.shtml</link>&gt; or obtained by writing to XSF, P.O. Box 1641, Denver, CO 80201 USA).
             </conformance>
         </legal>
-        <number>xxxx</number>
+        <number>0324</number>
         <status>ProtoXEP</status>
         <type>Standards Track</type>
         <sig>Standards</sig>
@@ -43,7 +43,7 @@
 		<revision>
 			<version>0.0.6</version>
 			<date>2013-04-12</date>
-			<initials>pwa</initials>
+			<initials>pw</initials>
 			<remark>
 				<p>Corrected downloadPrivileges example.</p>
 				<p>Made several corrections of the language.</p>
@@ -54,7 +54,7 @@
 		<revision>
             <version>0.0.5</version>
             <date>2013-04-04</date>
-            <initials>pwa</initials>
+            <initials>pw</initials>
             <remark>
                 <p>Added control use cases.</p>
                 <p>Grouped use cases.</p>
@@ -63,7 +63,7 @@
         <revision>
             <version>0.0.4</version>
             <date>2013-04-01</date>
-            <initials>pwa</initials>
+            <initials>pw</initials>
             <remark>
                 <p>Added altitude credentials.</p>
                 <p>Added resource information of original called to their corresponding JIDs.</p>
@@ -75,7 +75,7 @@
         <revision>
             <version>0.0.3</version>
             <date>2013-03-18</date>
-            <initials>pwa</initials>
+            <initials>pw</initials>
             <remark>
                 <p>Added information about how to read sensors from large subsystems.</p>
                 <p>Added friend recommendation message.</p>
@@ -85,7 +85,7 @@
         <revision>
             <version>0.0.2</version>
             <date>2013-03-12</date>
-            <initials>pwa</initials>
+            <initials>pw</initials>
             <remark>
                 <p>Added use cases for service access rights and corresponding user privileges.</p>
             </remark>
@@ -93,7 +93,7 @@
         <revision>
             <version>0.0.1</version>
             <date>2013-03-11</date>
-            <initials>pwa</initials>
+            <initials>pw</initials>
             <remark>
                 <p>First draft.</p>
             </remark>
