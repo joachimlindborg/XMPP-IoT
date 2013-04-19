@@ -37,7 +37,7 @@ xep-0000-IoT-Events
 		hysteresis levels, etc., are configured.
 
 
-[xep-0000-IoT-Interoperability](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/sensor-data.html)
+[xep-0000-IoT-Interoperability](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/xep-0000-IoT-Interoperability.html)
 		Defines guidelines for how to achieve interoperability in 
 		sensor networks, publishing interoperability interfaces for 
 		different types of devices.
