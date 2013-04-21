@@ -55,145 +55,155 @@
     <h2>Table of Contents</h2>
     <div class="indent">
       <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
-      3.1.  <a href="#sect-ID0E2JAC">Getting supported interfaces</a><br>   
+      3.1.  <a href="#sect-ID0E1JAC">Getting supported interfaces</a><br>   
       3.2.  <a href="#interfaces">Interfaces</a><br>      
-      3.2.1.  <a href="#sect-ID0EPKAC">XMPP.IoT.Sensor</a><br>        
-      3.2.1.1.  <a href="#sect-ID0EXKAC">XMPP.IoT.Sensor.AnalogInput</a><br>        
-      3.2.1.2.  <a href="#sect-ID0EIAAE">XMPP.IoT.Sensor.AnalogInputs</a><br>        
-      3.2.1.3.  <a href="#sect-ID0EWFAE">XMPP.IoT.Sensor.Current</a><br>        
-      3.2.1.4.  <a href="#sect-ID0ERHAE">XMPP.IoT.Sensor.DewPoint</a><br>        
-      3.2.1.5.  <a href="#sect-ID0EMJAE">XMPP.IoT.Sensor.DigitalInput</a><br>        
-      3.2.1.6.  <a href="#sect-ID0EHLAE">XMPP.IoT.Sensor.DigitalInputs</a><br>        
-      3.2.1.7.  <a href="#sect-ID0EZNAE">XMPP.IoT.Sensor.Direction</a><br>        
-      3.2.1.8.  <a href="#sect-ID0EUPAE">XMPP.IoT.Sensor.Distance</a><br>        
-      3.2.1.9.  <a href="#sect-ID0EPRAE">XMPP.IoT.Sensor.Force</a><br>        
-      3.2.1.10.  <a href="#sect-ID0EKTAE">XMPP.IoT.Sensor.Frequency</a><br>        
-      3.2.1.11.  <a href="#sect-ID0EFVAE">XMPP.IoT.Sensor.Humidity</a><br>        
-      3.2.1.12.  <a href="#sect-ID0EOYAE">XMPP.IoT.Sensor.Illuminance</a><br>        
-      3.2.1.13.  <a href="#sect-ID0EJ1AE">XMPP.IoT.Sensor.Mass</a><br>        
-      3.2.1.14.  <a href="#sect-ID0EE3AE">XMPP.IoT.Sensor.MassFlow</a><br>        
-      3.2.1.15.  <a href="#sect-ID0E64AE">XMPP.IoT.Sensor.Pressure</a><br>        
-      3.2.1.16.  <a href="#sect-ID0E16AE">XMPP.IoT.Sensor.Rain</a><br>        
-      3.2.1.17.  <a href="#sect-ID0ENCAG">XMPP.IoT.Sensor.Resistence</a><br>        
-      3.2.1.18.  <a href="#sect-ID0EIEAG">XMPP.IoT.Sensor.SolarRadiation</a><br>        
-      3.2.1.19.  <a href="#sect-ID0EDGAG">XMPP.IoT.Sensor.Speed</a><br>        
-      3.2.1.20.  <a href="#sect-ID0E5HAG">XMPP.IoT.Sensor.Temperature</a><br>        
-      3.2.1.21.  <a href="#sect-ID0EZJAG">XMPP.IoT.Sensor.TideLevel</a><br>        
-      3.2.1.22.  <a href="#sect-ID0EULAG">XMPP.IoT.Sensor.Velocity</a><br>        
-      3.2.1.23.  <a href="#sect-ID0EGOAG">XMPP.IoT.Sensor.Voltage</a><br>        
-      3.2.1.24.  <a href="#sect-ID0EBQAG">XMPP.IoT.Sensor.Volume</a><br>        
-      3.2.1.25.  <a href="#sect-ID0E3RAG">XMPP.IoT.Sensor.Weight</a><br>        
-      3.2.1.26.  <a href="#sect-ID0EXTAG">XMPP.IoT.Sensor.WindDirection</a><br>        
-      3.2.1.27.  <a href="#sect-ID0EJWAG">XMPP.IoT.Sensor.WindSpeed</a><br>      
-      3.2.2.  <a href="#sect-ID0E3YAG">XMPP.IoT.Meter</a><br>        
-      3.2.2.1.  <a href="#sect-ID0EEZAG">XMPP.IoT.Meter.Cooling</a><br>        
-      3.2.2.2.  <a href="#sect-ID0EJ6AG">XMPP.IoT.Meter.Electricity</a><br>        
-      3.2.2.3.  <a href="#sect-ID0E2BBG">XMPP.IoT.Meter.Gas</a><br>        
-      3.2.2.4.  <a href="#sect-ID0ENEBG">XMPP.IoT.Meter.Heat</a><br>        
-      3.2.2.5.  <a href="#sect-ID0ESKBG">XMPP.IoT.Meter.HeatingCooling</a><br>        
-      3.2.2.6.  <a href="#sect-ID0EXQBG">XMPP.IoT.Meter.PulseCounter</a><br>        
-      3.2.2.7.  <a href="#sect-ID0ESSBG">XMPP.IoT.Meter.PulseCounters</a><br>        
-      3.2.2.8.  <a href="#sect-ID0EEVBG">XMPP.IoT.Meter.Water</a><br>      
-      3.2.3.  <a href="#sect-ID0EXXBG">XMPP.IoT.Actuator</a><br>        
-      3.2.3.1.  <a href="#sect-ID0E6XBG">XMPP.IoT.Actuator.AnalogOutput</a><br>        
-      3.2.3.2.  <a href="#sect-ID0EY6BG">XMPP.IoT.Actuator.AnalogOutputs</a><br>        
-      3.2.3.3.  <a href="#sect-ID0EQHAI">XMPP.IoT.Actuator.Blinds</a><br>        
-      3.2.3.4.  <a href="#sect-ID0E4KAI">XMPP.IoT.Actuator.DigitalOutput</a><br>        
-      3.2.3.5.  <a href="#sect-ID0EKOAI">XMPP.IoT.Actuator.DigitalOutputs</a><br>        
-      3.2.3.6.  <a href="#sect-ID0EOSAI">XMPP.IoT.Actuator.Dimmer</a><br>        
-      3.2.3.7.  <a href="#sect-ID0EJXAI">XMPP.IoT.Actuator.DoorBell</a><br>        
-      3.2.3.8.  <a href="#sect-ID0E23AI">XMPP.IoT.Actuator.Fan</a><br>        
-      3.2.3.9.  <a href="#sect-ID0EIABI">XMPP.IoT.Actuator.Lamp</a><br>      
-      3.2.4.  <a href="#sect-ID0EWDBI">XMPP.IoT.Identity</a><br>        
-      3.2.4.1.  <a href="#sect-ID0E5DBI">XMPP.IoT.Identity.Address</a><br>        
-      3.2.4.2.  <a href="#sect-ID0ERLBI">XMPP.IoT.Identity.Application</a><br>        
-      3.2.4.3.  <a href="#sect-ID0E1OBI">XMPP.IoT.Identity.Battery</a><br>        
-      3.2.4.4.  <a href="#sect-ID0EVTBI">XMPP.IoT.Identity.Clock</a><br>        
-      3.2.4.5.  <a href="#sect-ID0EZXBI">XMPP.IoT.Identity.DeviceID</a><br>        
-      3.2.4.6.  <a href="#sect-ID0EL1BI">XMPP.IoT.Identity.Ethernet</a><br>        
-      3.2.4.7.  <a href="#sect-ID0EG3BI">XMPP.IoT.Identity.GSM</a><br>        
-      3.2.4.8.  <a href="#sect-ID0ECDCI">XMPP.IoT.Identity.Language</a><br>        
-      3.2.4.9.  <a href="#sect-ID0EPGCI">XMPP.IoT.Identity.IP</a><br>        
-      3.2.4.10.  <a href="#sect-ID0EUMCI">XMPP.IoT.Identity.IPv6</a><br>        
-      3.2.4.11.  <a href="#sect-ID0E4PCI">XMPP.IoT.Identity.Location</a><br>        
-      3.2.4.12.  <a href="#sect-ID0EGWCI">XMPP.IoT.Identity.Manufacturer</a><br>        
-      3.2.4.13.  <a href="#sect-ID0EYYCI">XMPP.IoT.Identity.Name</a><br>        
-      3.2.4.14.  <a href="#sect-ID0EF3CI">XMPP.IoT.Identity.NodeID</a><br>        
-      3.2.4.15.  <a href="#sect-ID0EX5CI">XMPP.IoT.Identity.RFID</a><br>        
-      3.2.4.16.  <a href="#sect-ID0EJBDI">XMPP.IoT.Identity.UserID</a><br>        
-      3.2.4.17.  <a href="#sect-ID0E2DDI">XMPP.IoT.Identity.Version</a><br>        
-      3.2.4.18.  <a href="#sect-ID0EEHDI">XMPP.IoT.Identity.Wink</a><br>        
-      3.2.4.19.  <a href="#sect-ID0E6IDI">XMPP.IoT.Identity.ZWave</a><br>      
-      3.2.5.  <a href="#sect-ID0EJMDI">XMPP.IoT.Logistics</a><br>        
-      3.2.5.1.  <a href="#sect-ID0ERMDI">XMPP.IoT.Logistics.Contents</a><br>        
-      3.2.5.2.  <a href="#sect-ID0EFYDI">XMPP.IoT.Logistics.Route</a><br>      
-      3.2.6.  <a href="#sect-ID0EJJAK">XMPP.IoT.Security</a><br>        
+      3.2.1.  <a href="#sect-ID0EOKAC">XMPP.IoT.Sensor</a><br>        
+      3.2.1.1.  <a href="#sect-ID0EWKAC">XMPP.IoT.Sensor.AnalogInput</a><br>        
+      3.2.1.2.  <a href="#sect-ID0EHAAE">XMPP.IoT.Sensor.AnalogInputs</a><br>        
+      3.2.1.3.  <a href="#sect-ID0EVFAE">XMPP.IoT.Sensor.Current</a><br>        
+      3.2.1.4.  <a href="#sect-ID0EQHAE">XMPP.IoT.Sensor.DewPoint</a><br>        
+      3.2.1.5.  <a href="#sect-ID0ELJAE">XMPP.IoT.Sensor.DigitalInput</a><br>        
+      3.2.1.6.  <a href="#sect-ID0EGLAE">XMPP.IoT.Sensor.DigitalInputs</a><br>        
+      3.2.1.7.  <a href="#sect-ID0EYNAE">XMPP.IoT.Sensor.Direction</a><br>        
+      3.2.1.8.  <a href="#sect-ID0ETPAE">XMPP.IoT.Sensor.Distance</a><br>        
+      3.2.1.9.  <a href="#sect-ID0EORAE">XMPP.IoT.Sensor.Force</a><br>        
+      3.2.1.10.  <a href="#sect-ID0EJTAE">XMPP.IoT.Sensor.Frequency</a><br>        
+      3.2.1.11.  <a href="#sect-ID0EEVAE">XMPP.IoT.Sensor.Humidity</a><br>        
+      3.2.1.12.  <a href="#sect-ID0ENYAE">XMPP.IoT.Sensor.Illuminance</a><br>        
+      3.2.1.13.  <a href="#sect-ID0EI1AE">XMPP.IoT.Sensor.Mass</a><br>        
+      3.2.1.14.  <a href="#sect-ID0ED3AE">XMPP.IoT.Sensor.MassFlow</a><br>        
+      3.2.1.15.  <a href="#sect-ID0E54AE">XMPP.IoT.Sensor.Pressure</a><br>        
+      3.2.1.16.  <a href="#sect-ID0EZ6AE">XMPP.IoT.Sensor.Rain</a><br>        
+      3.2.1.17.  <a href="#sect-ID0EMCAG">XMPP.IoT.Sensor.Resistence</a><br>        
+      3.2.1.18.  <a href="#sect-ID0EHEAG">XMPP.IoT.Sensor.SolarRadiation</a><br>        
+      3.2.1.19.  <a href="#sect-ID0ECGAG">XMPP.IoT.Sensor.Speed</a><br>        
+      3.2.1.20.  <a href="#sect-ID0E4HAG">XMPP.IoT.Sensor.Temperature</a><br>        
+      3.2.1.21.  <a href="#sect-ID0EYJAG">XMPP.IoT.Sensor.TideLevel</a><br>        
+      3.2.1.22.  <a href="#sect-ID0ETLAG">XMPP.IoT.Sensor.Velocity</a><br>        
+      3.2.1.23.  <a href="#sect-ID0EFOAG">XMPP.IoT.Sensor.Voltage</a><br>        
+      3.2.1.24.  <a href="#sect-ID0EAQAG">XMPP.IoT.Sensor.Volume</a><br>        
+      3.2.1.25.  <a href="#sect-ID0E2RAG">XMPP.IoT.Sensor.Weight</a><br>        
+      3.2.1.26.  <a href="#sect-ID0EWTAG">XMPP.IoT.Sensor.WindDirection</a><br>        
+      3.2.1.27.  <a href="#sect-ID0EIWAG">XMPP.IoT.Sensor.WindSpeed</a><br>      
+      3.2.2.  <a href="#sect-ID0E2YAG">XMPP.IoT.Meter</a><br>        
+      3.2.2.1.  <a href="#sect-ID0EDZAG">XMPP.IoT.Meter.Cooling</a><br>        
+      3.2.2.2.  <a href="#XMPP_IoT_Meter_Electricity">XMPP.IoT.Meter.Electricity</a><br>        
+      3.2.2.3.  <a href="#sect-ID0E1BBG">XMPP.IoT.Meter.Gas</a><br>        
+      3.2.2.4.  <a href="#sect-ID0EMEBG">XMPP.IoT.Meter.Heat</a><br>        
+      3.2.2.5.  <a href="#sect-ID0ERKBG">XMPP.IoT.Meter.HeatingCooling</a><br>        
+      3.2.2.6.  <a href="#sect-ID0EWQBG">XMPP.IoT.Meter.PulseCounter</a><br>        
+      3.2.2.7.  <a href="#sect-ID0ERSBG">XMPP.IoT.Meter.PulseCounters</a><br>        
+      3.2.2.8.  <a href="#sect-ID0EDVBG">XMPP.IoT.Meter.Water</a><br>      
+      3.2.3.  <a href="#sect-ID0EWXBG">XMPP.IoT.Actuator</a><br>        
+      3.2.3.1.  <a href="#sect-ID0E5XBG">XMPP.IoT.Actuator.AnalogOutput</a><br>        
+      3.2.3.2.  <a href="#sect-ID0EX6BG">XMPP.IoT.Actuator.AnalogOutputs</a><br>        
+      3.2.3.3.  <a href="#sect-ID0EPHAI">XMPP.IoT.Actuator.Blinds</a><br>        
+      3.2.3.4.  <a href="#sect-ID0E3KAI">XMPP.IoT.Actuator.DigitalOutput</a><br>        
+      3.2.3.5.  <a href="#sect-ID0EJOAI">XMPP.IoT.Actuator.DigitalOutputs</a><br>        
+      3.2.3.6.  <a href="#sect-ID0ENSAI">XMPP.IoT.Actuator.Dimmer</a><br>        
+      3.2.3.7.  <a href="#sect-ID0EIXAI">XMPP.IoT.Actuator.DoorBell</a><br>        
+      3.2.3.8.  <a href="#sect-ID0E13AI">XMPP.IoT.Actuator.Fan</a><br>        
+      3.2.3.9.  <a href="#sect-ID0EHABI">XMPP.IoT.Actuator.Lamp</a><br>      
+      3.2.4.  <a href="#sect-ID0EVDBI">XMPP.IoT.Identity</a><br>        
+      3.2.4.1.  <a href="#sect-ID0E4DBI">XMPP.IoT.Identity.Address</a><br>        
+      3.2.4.2.  <a href="#sect-ID0EQLBI">XMPP.IoT.Identity.Application</a><br>        
+      3.2.4.3.  <a href="#sect-ID0EZOBI">XMPP.IoT.Identity.Battery</a><br>        
+      3.2.4.4.  <a href="#sect-ID0EUTBI">XMPP.IoT.Identity.Clock</a><br>        
+      3.2.4.5.  <a href="#sect-ID0EYXBI">XMPP.IoT.Identity.DeviceID</a><br>        
+      3.2.4.6.  <a href="#sect-ID0EK1BI">XMPP.IoT.Identity.Ethernet</a><br>        
+      3.2.4.7.  <a href="#sect-ID0EF3BI">XMPP.IoT.Identity.GSM</a><br>        
+      3.2.4.8.  <a href="#sect-ID0EBDCI">XMPP.IoT.Identity.Language</a><br>        
+      3.2.4.9.  <a href="#sect-ID0EOGCI">XMPP.IoT.Identity.IP</a><br>        
+      3.2.4.10.  <a href="#sect-ID0ETMCI">XMPP.IoT.Identity.IPv6</a><br>        
+      3.2.4.11.  <a href="#sect-ID0E3PCI">XMPP.IoT.Identity.Location</a><br>        
+      3.2.4.12.  <a href="#sect-ID0EFWCI">XMPP.IoT.Identity.Manufacturer</a><br>        
+      3.2.4.13.  <a href="#sect-ID0EXYCI">XMPP.IoT.Identity.Name</a><br>        
+      3.2.4.14.  <a href="#sect-ID0EE3CI">XMPP.IoT.Identity.NodeID</a><br>        
+      3.2.4.15.  <a href="#sect-ID0EW5CI">XMPP.IoT.Identity.RFID</a><br>        
+      3.2.4.16.  <a href="#sect-ID0EIBDI">XMPP.IoT.Identity.UserID</a><br>        
+      3.2.4.17.  <a href="#sect-ID0E1DDI">XMPP.IoT.Identity.Version</a><br>        
+      3.2.4.18.  <a href="#sect-ID0EDHDI">XMPP.IoT.Identity.Wink</a><br>        
+      3.2.4.19.  <a href="#sect-ID0E5IDI">XMPP.IoT.Identity.ZWave</a><br>      
+      3.2.5.  <a href="#sect-ID0EIMDI">XMPP.IoT.Logistics</a><br>        
+      3.2.5.1.  <a href="#sect-ID0EQMDI">XMPP.IoT.Logistics.Contents</a><br>        
+      3.2.5.2.  <a href="#sect-ID0EEYDI">XMPP.IoT.Logistics.Route</a><br>      
+      3.2.6.  <a href="#sect-ID0EIJAK">XMPP.IoT.Security</a><br>        
       3.2.6.1.  <a href="#XMPP_IoT_Security_Alarm">XMPP.IoT.Security.Alarm</a><br>        
-      3.2.6.2.  <a href="#sect-ID0EXNAK">XMPP.IoT.Security.Burglar</a><br>        
-      3.2.6.3.  <a href="#sect-ID0EIOAK">XMPP.IoT.Security.Clock</a><br>        
-      3.2.6.4.  <a href="#sect-ID0EDQAK">XMPP.IoT.Security.CO</a><br>        
-      3.2.6.5.  <a href="#sect-ID0EUQAK">XMPP.IoT.Security.CO2</a><br>        
+      3.2.6.2.  <a href="#sect-ID0EWNAK">XMPP.IoT.Security.Burglar</a><br>        
+      3.2.6.3.  <a href="#sect-ID0EHOAK">XMPP.IoT.Security.Clock</a><br>        
+      3.2.6.4.  <a href="#sect-ID0ECQAK">XMPP.IoT.Security.CO</a><br>        
+      3.2.6.5.  <a href="#sect-ID0ETQAK">XMPP.IoT.Security.CO2</a><br>        
       3.2.6.6.  <a href="#XMPP_IoT_Security_Door">XMPP.IoT.Security.Door</a><br>        
-      3.2.6.7.  <a href="#sect-ID0ECTAK">XMPP.IoT.Security.Emergency</a><br>        
-      3.2.6.8.  <a href="#sect-ID0ETTAK">XMPP.IoT.Security.Gas</a><br>        
-      3.2.6.9.  <a href="#sect-ID0EEUAK">XMPP.IoT.Security.Heat</a><br>        
-      3.2.6.10.  <a href="#sect-ID0EVUAK">XMPP.IoT.Security.Lock</a><br>        
-      3.2.6.11.  <a href="#sect-ID0EVYAK">XMPP.IoT.Security.Movement</a><br>        
-      3.2.6.12.  <a href="#sect-ID0EGZAK">XMPP.IoT.Security.Smoke</a><br>        
-      3.2.6.13.  <a href="#sect-ID0EXZAK">XMPP.IoT.Security.Water</a><br>        
+      3.2.6.7.  <a href="#sect-ID0EBTAK">XMPP.IoT.Security.Emergency</a><br>        
+      3.2.6.8.  <a href="#sect-ID0ESTAK">XMPP.IoT.Security.Gas</a><br>        
+      3.2.6.9.  <a href="#sect-ID0EDUAK">XMPP.IoT.Security.Heat</a><br>        
+      3.2.6.10.  <a href="#sect-ID0EUUAK">XMPP.IoT.Security.Lock</a><br>        
+      3.2.6.11.  <a href="#sect-ID0EUYAK">XMPP.IoT.Security.Movement</a><br>        
+      3.2.6.12.  <a href="#sect-ID0EFZAK">XMPP.IoT.Security.Smoke</a><br>        
+      3.2.6.13.  <a href="#sect-ID0EWZAK">XMPP.IoT.Security.Water</a><br>        
       3.2.6.14.  <a href="#XMPP_IoT_Security_Window">XMPP.IoT.Security.Window</a><br>      
-      3.2.7.  <a href="#sect-ID0EG3AK">XMPP.IoT.Controller</a><br>        
-      3.2.7.1.  <a href="#sect-ID0EO3AK">XMPP.IoT.Controller.AccessControl</a><br>        
-      3.2.7.2.  <a href="#sect-ID0EV3AK">XMPP.IoT.Controller.Thermostat</a><br>        
-      3.2.7.3.  <a href="#sect-ID0E33AK">XMPP.IoT.Controller.Ventilation</a><br>      
-      3.2.8.  <a href="#sect-ID0EE4AK">XMPP.IoT.Media</a><br>        
-      3.2.8.1.  <a href="#sect-ID0EM4AK">XMPP.IoT.Media.BarCode</a><br>        
-      3.2.8.2.  <a href="#sect-ID0ET4AK">XMPP.IoT.Media.Camera</a><br>        
-      3.2.8.3.  <a href="#sect-ID0E14AK">XMPP.IoT.Media.Directory</a><br>        
-      3.2.8.4.  <a href="#sect-ID0EB5AK">XMPP.IoT.Media.Display</a><br>        
-      3.2.8.5.  <a href="#sect-ID0EI5AK">XMPP.IoT.Media.LoudSpeakers</a><br>        
-      3.2.8.6.  <a href="#sect-ID0EP5AK">XMPP.IoT.Media.Microphone</a><br>        
-      3.2.8.7.  <a href="#sect-ID0EW5AK">XMPP.IoT.Media.QrCode</a><br>        
-      3.2.8.8.  <a href="#sect-ID0E45AK">XMPP.IoT.Media.Recorder</a><br>        
-      3.2.8.9.  <a href="#sect-ID0EE6AK">XMPP.IoT.Media.TextDisplay</a><br>      
-      3.2.9.  <a href="#sect-ID0EM6AK">XMPP.IoT.Network</a><br>        
-      3.2.9.1.  <a href="#sect-ID0EU6AK">XMPP.IoT.Network.Ethernet</a><br>        
-      3.2.9.2.  <a href="#sect-ID0E5HBK">XMPP.IoT.Network.IP</a><br>        
-      3.2.9.3.  <a href="#sect-ID0EDOBK">XMPP.IoT.Network.IPv6</a><br>        
-      3.2.9.4.  <a href="#sect-ID0EIUBK">XMPP.IoT.Network.Radio</a><br>   
-      3.3.  <a href="#sect-ID0E3WBK">Interface aggregations</a><br>      
-      3.3.1.  <a href="#sect-ID0EAXBK">Control programming aggregations</a><br>        
-      3.3.1.1.  <a href="#sect-ID0EEXBK">*.TimeChannels</a><br>      
-      3.3.2.  <a href="#sect-ID0EMXBK">Event aggregations</a><br>        
-      3.3.2.1.  <a href="#sect-ID0EQXBK">*.BinaryEvent</a><br>        
-      3.3.2.2.  <a href="#sect-ID0EXXBK">*.HysteresisEvent</a><br>        
-      3.3.2.3.  <a href="#sect-ID0E5XBK">*.TimedEvent</a><br>      
-      3.3.3.  <a href="#sect-ID0EGYBK">Readout aggregations</a><br>        
-      3.3.3.1.  <a href="#sect-ID0EKYBK">*.Average</a><br>        
-      3.3.3.2.  <a href="#sect-ID0ERYBK">*.Consumption</a><br>        
-      3.3.3.3.  <a href="#sect-ID0EYYBK">*.History</a><br>        
-      3.3.3.4.  <a href="#sect-ID0E6YBK">*.Mean</a><br>        
-      3.3.3.5.  <a href="#sect-ID0EGZBK">*.Min</a><br>        
-      3.3.3.6.  <a href="#sect-ID0ENZBK">*.Max</a><br>        
-      3.3.3.7.  <a href="#sect-ID0EUZBK">*.StdDev</a><br>        
-      3.3.3.8.  <a href="#sect-ID0E2ZBK">*.Sum</a><br>   
-      3.4.  <a href="#sect-ID0EE1BK">Field Names</a><br>   
-      3.5.  <a href="#sect-ID0EPBCK">Units</a><br>      
-      3.5.1.  <a href="#sect-ID0EXBCK">Angle</a><br>      
-      3.5.2.  <a href="#sect-ID0EZDCK">Area</a><br>      
-      3.5.3.  <a href="#sect-ID0ENJCK">Distance</a><br>      
-      3.5.4.  <a href="#sect-ID0ENRCK">Energy</a><br>      
-      3.5.5.  <a href="#sect-ID0E4CDK">Flow</a><br>      
-      3.5.6.  <a href="#sect-ID0EBSDK">Mass</a><br>      
-      3.5.7.  <a href="#sect-ID0EIYDK">Power</a><br>      
-      3.5.8.  <a href="#sect-ID0EQOEK">Pressure</a><br>      
-      3.5.9.  <a href="#sect-ID0E4VEK">Speed</a><br>      
-      3.5.10.  <a href="#sect-ID0EYZEK">Temperature</a><br>      
-      3.5.11.  <a href="#sect-ID0EG5EK">Time</a><br>      
-      3.5.12.  <a href="#sect-ID0EHDFK">Volume</a><br>   
-      3.6.  <a href="#sect-ID0EILFK">Privilege IDs</a><br>   
-      3.7.  <a href="#sect-ID0EVLFK">Data Sources</a><br>   
-      3.8.  <a href="#sect-ID0E3LFK">Identification Schemes</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#newinterfaces">Extending the Interoperability Document</a><br>6.  <a href="#security">Security Considerations</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a><br>10.  <a href="#ack">Acknowledgements</a></p>
+      3.2.7.  <a href="#sect-ID0EF3AK">XMPP.IoT.Controller</a><br>        
+      3.2.7.1.  <a href="#sect-ID0EN3AK">XMPP.IoT.Controller.AccessControl</a><br>        
+      3.2.7.2.  <a href="#sect-ID0EU3AK">XMPP.IoT.Controller.Thermostat</a><br>        
+      3.2.7.3.  <a href="#sect-ID0E23AK">XMPP.IoT.Controller.Ventilation</a><br>      
+      3.2.8.  <a href="#sect-ID0ED4AK">XMPP.IoT.Media</a><br>        
+      3.2.8.1.  <a href="#sect-ID0EL4AK">XMPP.IoT.Media.Camera</a><br>        
+      3.2.8.2.  <a href="#sect-ID0ECMBK">XMPP.IoT.Media.Directory</a><br>        
+      3.2.8.3.  <a href="#AudioItem">XMPP.IoT.Media.Directory.AudioItem</a><br>        
+      3.2.8.4.  <a href="#DirectoryItem">XMPP.IoT.Media.Directory.DirectoryItem</a><br>        
+      3.2.8.5.  <a href="#DublinCore">XMPP.IoT.Media.Directory.DublinCore</a><br>        
+      3.2.8.6.  <a href="#ImageItem">XMPP.IoT.Media.Directory.ImageItem</a><br>        
+      3.2.8.7.  <a href="#VideoItem">XMPP.IoT.Media.Directory.VideoItem</a><br>        
+      3.2.8.8.  <a href="#sect-ID0EQOCK">XMPP.IoT.Media.Display</a><br>        
+      3.2.8.9.  <a href="#sect-ID0EXOCK">XMPP.IoT.Media.LoudSpeakers</a><br>        
+      3.2.8.10.  <a href="#sect-ID0E5OCK">XMPP.IoT.Media.Microphone</a><br>        
+      3.2.8.11.  <a href="#sect-ID0EFPCK">XMPP.IoT.Media.Recorder</a><br>        
+      3.2.8.12.  <a href="#sect-ID0EMPCK">XMPP.IoT.Media.TextDisplay</a><br>      
+      3.2.9.  <a href="#sect-ID0EUPCK">XMPP.IoT.Network</a><br>        
+      3.2.9.1.  <a href="#sect-ID0E3PCK">XMPP.IoT.Network.Ethernet</a><br>        
+      3.2.9.2.  <a href="#sect-ID0EGYCK">XMPP.IoT.Network.IP</a><br>        
+      3.2.9.3.  <a href="#sect-ID0EL5CK">XMPP.IoT.Network.IPv6</a><br>        
+      3.2.9.4.  <a href="#sect-ID0EQEDK">XMPP.IoT.Network.Radio</a><br>   
+      3.3.  <a href="#sect-ID0EEHDK">Interface aggregations</a><br>      
+      3.3.1.  <a href="#sect-ID0EIHDK">Control programming aggregations</a><br>        
+      3.3.1.1.  <a href="#sect-ID0EMHDK">*.TimeChannels</a><br>      
+      3.3.2.  <a href="#sect-ID0EUHDK">Event aggregations</a><br>        
+      3.3.2.1.  <a href="#sect-ID0EYHDK">*.BinaryEvent</a><br>        
+      3.3.2.2.  <a href="#sect-ID0E6HDK">*.HysteresisEvent</a><br>        
+      3.3.2.3.  <a href="#sect-ID0EGIDK">*.TimedEvent</a><br>      
+      3.3.3.  <a href="#sect-ID0EOIDK">Readout aggregations</a><br>        
+      3.3.3.1.  <a href="#average">*.Average</a><br>        
+      3.3.3.2.  <a href="#consumption">*.Consumption</a><br>        
+      3.3.3.3.  <a href="#history">*.History</a><br>        
+      3.3.3.4.  <a href="#sect-ID0EXSDK">*.Mean</a><br>        
+      3.3.3.5.  <a href="#sect-ID0ESWDK">*.Min</a><br>        
+      3.3.3.6.  <a href="#sect-ID0EN1DK">*.Max</a><br>        
+      3.3.3.7.  <a href="#sect-ID0EI5DK">*.StdDev</a><br>        
+      3.3.3.8.  <a href="#sect-ID0EDCEK">*.Sum</a><br>   
+      3.4.  <a href="#sect-ID0EAGEK">Field Names</a><br>   
+      3.5.  <a href="#sect-ID0ELNEK">Units</a><br>      
+      3.5.1.  <a href="#sect-ID0E1REK">Angle</a><br>      
+      3.5.2.  <a href="#sect-ID0E3TEK">Area</a><br>      
+      3.5.3.  <a href="#sect-ID0EQZEK">Distance</a><br>      
+      3.5.4.  <a href="#sect-ID0EQBFK">Energy</a><br>      
+      3.5.5.  <a href="#sect-ID0EATFK">Flow</a><br>      
+      3.5.6.  <a href="#sect-ID0EECGK">Mass</a><br>      
+      3.5.7.  <a href="#sect-ID0ELIGK">Power</a><br>      
+      3.5.8.  <a href="#sect-ID0ET5GK">Pressure</a><br>      
+      3.5.9.  <a href="#sect-ID0EAGHK">Speed</a><br>      
+      3.5.10.  <a href="#sect-ID0E2JHK">Temperature</a><br>      
+      3.5.11.  <a href="#sect-ID0EJOHK">Time</a><br>      
+      3.5.12.  <a href="#sect-ID0EKTHK">Volume</a><br>   
+      3.6.  <a href="#sect-ID0EL2HK">Privilege IDs</a><br>   
+      3.7.  <a href="#sect-ID0EY2HK">Data Sources</a><br>   
+      3.8.  <a href="#sect-ID0E62HK">Identification Schemes</a><br>   
+      3.9.  <a href="#sect-ID0EG3HK">Media Types</a><br>      
+      3.9.1.  <a href="#TransportProtocol">Transport Protocol</a><br>      
+      3.9.2.  <a href="#VideoContainerFormat">Video Container Format</a><br>      
+      3.9.3.  <a href="#AudioContainerFormat">Audio Container Format</a><br>      
+      3.9.4.  <a href="#VideoStreamFormat">Video Stream Format</a><br>      
+      3.9.5.  <a href="#AudioStreamFormat">Audio Stream Format</a><br>      
+      3.9.6.  <a href="#ImageFormat">Image Format</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#newinterfaces">Extending the Interoperability Document</a><br>6.  <a href="#security">Security Considerations</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a><br>10.  <a href="#ack">Acknowledgements</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
     </div>
     <hr>
@@ -216,11 +226,11 @@
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">XEP-0000-ColorParameter</td>
-                <td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EGE">1</a>]</td>
+                <td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EFE">1</a>]</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">XEP-0000-DynamicForms</td>
-                <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0E4E">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EJF">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0EVF">4</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EBG">5</a>].</td>
+                <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0E3E">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EIF">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0EUF">4</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EAG">5</a>].</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">exi</td>
@@ -440,7 +450,7 @@
             XMPP networks. For more information, please see <a href="#newinterfaces">Extending the Interoperability Document</a>.
         </p>
         <div class="indent">
-      <h3>3.1 <a name="sect-ID0E2JAC">Getting supported interfaces</a></h3>
+      <h3>3.1 <a name="sect-ID0E1JAC">Getting supported interfaces</a></h3>
             <p class="" style="">
                 The following example shows how a client can get the interfaces supported by a device:
             </p>
@@ -492,12 +502,12 @@
                 A device can implement any number of interfaces.
             </p>
             <div class="indent">
-        <h3>3.2.1 <a name="sect-ID0EPKAC">XMPP.IoT.Sensor</a></h3>
+        <h3>3.2.1 <a name="sect-ID0EOKAC">XMPP.IoT.Sensor</a></h3>
                 <p class="" style="">
                     This section contains interfaces relating to sensors measuring physical magnitudes of some sort or another.
                 </p>
                 <div class="indent">
-          <h3>3.2.1.1 <a name="sect-ID0EXKAC">XMPP.IoT.Sensor.AnalogInput</a></h3>
+          <h3>3.2.1.1 <a name="sect-ID0EWKAC">XMPP.IoT.Sensor.AnalogInput</a></h3>
                     <p class="" style="">
                         Generical analog input.
                     </p>
@@ -561,7 +571,7 @@
                     </p>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.2 <a name="sect-ID0EIAAE">XMPP.IoT.Sensor.AnalogInputs</a></h3>
+          <h3>3.2.1.2 <a name="sect-ID0EHAAE">XMPP.IoT.Sensor.AnalogInputs</a></h3>
                     <p class="" style="">
                         Devices containing an array of analog inputs.
                     </p>
@@ -621,7 +631,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.3 <a name="sect-ID0EWFAE">XMPP.IoT.Sensor.Current</a></h3>
+          <h3>3.2.1.3 <a name="sect-ID0EVFAE">XMPP.IoT.Sensor.Current</a></h3>
                     <p class="" style="">
                         Current sensors, measuring a electrical current.
                     </p>
@@ -646,7 +656,7 @@
           </div>
                 </div>
 				<div class="indent">
-          <h3>3.2.1.4 <a name="sect-ID0ERHAE">XMPP.IoT.Sensor.DewPoint</a></h3>
+          <h3>3.2.1.4 <a name="sect-ID0EQHAE">XMPP.IoT.Sensor.DewPoint</a></h3>
 					<p class="" style="">
 						Dew Point sensors, measuring current dew point in the environment.
 					</p>
@@ -671,7 +681,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.1.5 <a name="sect-ID0EMJAE">XMPP.IoT.Sensor.DigitalInput</a></h3>
+          <h3>3.2.1.5 <a name="sect-ID0ELJAE">XMPP.IoT.Sensor.DigitalInput</a></h3>
                     <p class="" style="">
                         Generical digital input.
                     </p>
@@ -696,7 +706,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.6 <a name="sect-ID0EHLAE">XMPP.IoT.Sensor.DigitalInputs</a></h3>
+          <h3>3.2.1.6 <a name="sect-ID0EGLAE">XMPP.IoT.Sensor.DigitalInputs</a></h3>
                     <p class="" style="">
                         Devices containing an array of digital inputs.
                     </p>
@@ -728,7 +738,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.7 <a name="sect-ID0EZNAE">XMPP.IoT.Sensor.Direction</a></h3>
+          <h3>3.2.1.7 <a name="sect-ID0EYNAE">XMPP.IoT.Sensor.Direction</a></h3>
                     <p class="" style="">
                         Direction sensors, measuring a direction.
                     </p>
@@ -753,7 +763,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.8 <a name="sect-ID0EUPAE">XMPP.IoT.Sensor.Distance</a></h3>
+          <h3>3.2.1.8 <a name="sect-ID0ETPAE">XMPP.IoT.Sensor.Distance</a></h3>
                     <p class="" style="">
                         Distance sensors, measuring physical distance.
                     </p>
@@ -778,7 +788,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.9 <a name="sect-ID0EPRAE">XMPP.IoT.Sensor.Force</a></h3>
+          <h3>3.2.1.9 <a name="sect-ID0EORAE">XMPP.IoT.Sensor.Force</a></h3>
                     <p class="" style="">
                         Force sensors, measuring physical force, or tension.
                     </p>
@@ -803,7 +813,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.10 <a name="sect-ID0EKTAE">XMPP.IoT.Sensor.Frequency</a></h3>
+          <h3>3.2.1.10 <a name="sect-ID0EJTAE">XMPP.IoT.Sensor.Frequency</a></h3>
                     <p class="" style="">
                         Frequency sensors, measuring frequency.
                     </p>
@@ -828,7 +838,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.11 <a name="sect-ID0EFVAE">XMPP.IoT.Sensor.Humidity</a></h3>
+          <h3>3.2.1.11 <a name="sect-ID0EEVAE">XMPP.IoT.Sensor.Humidity</a></h3>
                     <p class="" style="">
                         Humidity sensors (hygrometers), measuring a moisture content in the environment.
                     </p>
@@ -867,7 +877,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.12 <a name="sect-ID0EOYAE">XMPP.IoT.Sensor.Illuminance</a></h3>
+          <h3>3.2.1.12 <a name="sect-ID0ENYAE">XMPP.IoT.Sensor.Illuminance</a></h3>
                     <p class="" style="">
                         Illuminance sensors (luxmeters), measuring a illuminance.
                     </p>
@@ -892,7 +902,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.13 <a name="sect-ID0EJ1AE">XMPP.IoT.Sensor.Mass</a></h3>
+          <h3>3.2.1.13 <a name="sect-ID0EI1AE">XMPP.IoT.Sensor.Mass</a></h3>
                     <p class="" style="">
                         Mass sensors, measuring physical mass.
                     </p>
@@ -917,7 +927,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.14 <a name="sect-ID0EE3AE">XMPP.IoT.Sensor.MassFlow</a></h3>
+          <h3>3.2.1.14 <a name="sect-ID0ED3AE">XMPP.IoT.Sensor.MassFlow</a></h3>
                     <p class="" style="">
                         Mass flow sensors (for example air flow sensors), measuring physical mass flow.
                     </p>
@@ -942,7 +952,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.15 <a name="sect-ID0E64AE">XMPP.IoT.Sensor.Pressure</a></h3>
+          <h3>3.2.1.15 <a name="sect-ID0E54AE">XMPP.IoT.Sensor.Pressure</a></h3>
                     <p class="" style="">
                         Pressure sensors, measuring a pressure.
                     </p>
@@ -967,7 +977,7 @@
           </div>
                 </div>
 				<div class="indent">
-          <h3>3.2.1.16 <a name="sect-ID0E16AE">XMPP.IoT.Sensor.Rain</a></h3>
+          <h3>3.2.1.16 <a name="sect-ID0EZ6AE">XMPP.IoT.Sensor.Rain</a></h3>
 					<p class="" style="">
 						Rain sensors (udometers, pluviometers, ombrometers), measuring if it is raining, and how much.
 					</p>
@@ -999,7 +1009,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.1.17 <a name="sect-ID0ENCAG">XMPP.IoT.Sensor.Resistence</a></h3>
+          <h3>3.2.1.17 <a name="sect-ID0EMCAG">XMPP.IoT.Sensor.Resistence</a></h3>
                     <p class="" style="">
                         Resistence sensors, measuring a electrical resistence.
                     </p>
@@ -1024,7 +1034,7 @@
           </div>
                 </div>
 				<div class="indent">
-          <h3>3.2.1.18 <a name="sect-ID0EIEAG">XMPP.IoT.Sensor.SolarRadiation</a></h3>
+          <h3>3.2.1.18 <a name="sect-ID0EHEAG">XMPP.IoT.Sensor.SolarRadiation</a></h3>
                     <p class="" style="">
                         Solar radiation sensors (pyranometers), measuring solar radiation.
                     </p>
@@ -1049,7 +1059,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.19 <a name="sect-ID0EDGAG">XMPP.IoT.Sensor.Speed</a></h3>
+          <h3>3.2.1.19 <a name="sect-ID0ECGAG">XMPP.IoT.Sensor.Speed</a></h3>
                     <p class="" style="">
                         Speed sensors, measuring speed.
                     </p>
@@ -1074,7 +1084,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.20 <a name="sect-ID0E5HAG">XMPP.IoT.Sensor.Temperature</a></h3>
+          <h3>3.2.1.20 <a name="sect-ID0E4HAG">XMPP.IoT.Sensor.Temperature</a></h3>
                     <p class="" style="">
                         Temperature sensors, measuring a temperature.
                     </p>
@@ -1099,7 +1109,7 @@
           </div>
                 </div>
 				<div class="indent">
-          <h3>3.2.1.21 <a name="sect-ID0EZJAG">XMPP.IoT.Sensor.TideLevel</a></h3>
+          <h3>3.2.1.21 <a name="sect-ID0EYJAG">XMPP.IoT.Sensor.TideLevel</a></h3>
 					<p class="" style="">
 						tide level sensors, measuring the change in sea level relative to a datum.
 					</p>
@@ -1124,7 +1134,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.1.22 <a name="sect-ID0EULAG">XMPP.IoT.Sensor.Velocity</a></h3>
+          <h3>3.2.1.22 <a name="sect-ID0ETLAG">XMPP.IoT.Sensor.Velocity</a></h3>
                     <p class="" style="">
                         Distance sensors, measuring physical distance.
                     </p>
@@ -1156,7 +1166,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.23 <a name="sect-ID0EGOAG">XMPP.IoT.Sensor.Voltage</a></h3>
+          <h3>3.2.1.23 <a name="sect-ID0EFOAG">XMPP.IoT.Sensor.Voltage</a></h3>
                     <p class="" style="">
                         Voltage sensors, measuring a electrical voltage.
                     </p>
@@ -1181,7 +1191,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.24 <a name="sect-ID0EBQAG">XMPP.IoT.Sensor.Volume</a></h3>
+          <h3>3.2.1.24 <a name="sect-ID0EAQAG">XMPP.IoT.Sensor.Volume</a></h3>
                     <p class="" style="">
                         Volume sensors (for example tank capacity), measuring a physical volume.
                     </p>
@@ -1206,7 +1216,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.25 <a name="sect-ID0E3RAG">XMPP.IoT.Sensor.Weight</a></h3>
+          <h3>3.2.1.25 <a name="sect-ID0E2RAG">XMPP.IoT.Sensor.Weight</a></h3>
                     <p class="" style="">
                         Weight sensors, measuring weight.
                     </p>
@@ -1231,7 +1241,7 @@
           </div>
                 </div>
 				<div class="indent">
-          <h3>3.2.1.26 <a name="sect-ID0EXTAG">XMPP.IoT.Sensor.WindDirection</a></h3>
+          <h3>3.2.1.26 <a name="sect-ID0EWTAG">XMPP.IoT.Sensor.WindDirection</a></h3>
 					<p class="" style="">
 						Wind Direction sensors, measuring where wind is blowing from.
 					</p>
@@ -1265,7 +1275,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.1.27 <a name="sect-ID0EJWAG">XMPP.IoT.Sensor.WindSpeed</a></h3>
+          <h3>3.2.1.27 <a name="sect-ID0EIWAG">XMPP.IoT.Sensor.WindSpeed</a></h3>
 					<p class="" style="">
 						Wind Speed sensors, measuring the speed of current wind conditions.
 					</p>
@@ -1300,12 +1310,12 @@
 				</div>
 			</div>
             <div class="indent">
-        <h3>3.2.2 <a name="sect-ID0E3YAG">XMPP.IoT.Meter</a></h3>
+        <h3>3.2.2 <a name="sect-ID0E2YAG">XMPP.IoT.Meter</a></h3>
                 <p class="" style="">
                     This section contains interfaces relating to meters. They are more advances measurement devices measuring consumption of a physical comodity.
                 </p>
                 <div class="indent">
-          <h3>3.2.2.1 <a name="sect-ID0EEZAG">XMPP.IoT.Meter.Cooling</a></h3>
+          <h3>3.2.2.1 <a name="sect-ID0EDZAG">XMPP.IoT.Meter.Cooling</a></h3>
                     <p class="" style="">
                         Measures consumption of cooling energy.
                     </p>
@@ -1372,7 +1382,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.2.2 <a name="sect-ID0EJ6AG">XMPP.IoT.Meter.Electricity</a></h3>
+          <h3>3.2.2.2 <a name="XMPP_IoT_Meter_Electricity">XMPP.IoT.Meter.Electricity</a></h3>
                     <p class="" style="">
                         Measures consumption of electrical energy.
                     </p>
@@ -1404,7 +1414,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.2.3 <a name="sect-ID0E2BBG">XMPP.IoT.Meter.Gas</a></h3>
+          <h3>3.2.2.3 <a name="sect-ID0E1BBG">XMPP.IoT.Meter.Gas</a></h3>
                     <p class="" style="">
                         Measures consumption of gas.
                     </p>
@@ -1436,7 +1446,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.2.4 <a name="sect-ID0ENEBG">XMPP.IoT.Meter.Heat</a></h3>
+          <h3>3.2.2.4 <a name="sect-ID0EMEBG">XMPP.IoT.Meter.Heat</a></h3>
                     <p class="" style="">
                         Measures consumption of heat energy.
                     </p>
@@ -1503,7 +1513,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.2.5 <a name="sect-ID0ESKBG">XMPP.IoT.Meter.HeatingCooling</a></h3>
+          <h3>3.2.2.5 <a name="sect-ID0ERKBG">XMPP.IoT.Meter.HeatingCooling</a></h3>
                     <p class="" style="">
                         Measures consumption of heating and/or cooling energy.
                     </p>
@@ -1570,7 +1580,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.2.6 <a name="sect-ID0EXQBG">XMPP.IoT.Meter.PulseCounter</a></h3>
+          <h3>3.2.2.6 <a name="sect-ID0EWQBG">XMPP.IoT.Meter.PulseCounter</a></h3>
                     <p class="" style="">
                         Measures pulses.
                     </p>
@@ -1595,7 +1605,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.2.7 <a name="sect-ID0ESSBG">XMPP.IoT.Meter.PulseCounters</a></h3>
+          <h3>3.2.2.7 <a name="sect-ID0ERSBG">XMPP.IoT.Meter.PulseCounters</a></h3>
                     <p class="" style="">
                         Measures pulses on multiple pulse inputs.
                     </p>
@@ -1627,7 +1637,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.2.8 <a name="sect-ID0EEVBG">XMPP.IoT.Meter.Water</a></h3>
+          <h3>3.2.2.8 <a name="sect-ID0EDVBG">XMPP.IoT.Meter.Water</a></h3>
                     <p class="" style="">
                         Measures consumption of water.
                     </p>
@@ -1660,12 +1670,12 @@
                 </div>
             </div>
             <div class="indent">
-        <h3>3.2.3 <a name="sect-ID0EXXBG">XMPP.IoT.Actuator</a></h3>
+        <h3>3.2.3 <a name="sect-ID0EWXBG">XMPP.IoT.Actuator</a></h3>
                 <p class="" style="">
                     This section contains interfaces relating to generic actuators. They can be used to act with the world in different ways.
                 </p>
                 <div class="indent">
-          <h3>3.2.3.1 <a name="sect-ID0E6XBG">XMPP.IoT.Actuator.AnalogOutput</a></h3>
+          <h3>3.2.3.1 <a name="sect-ID0E5XBG">XMPP.IoT.Actuator.AnalogOutput</a></h3>
                     <p class="" style="">
                         Generical analog output.
                     </p>
@@ -1761,7 +1771,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.3.2 <a name="sect-ID0EY6BG">XMPP.IoT.Actuator.AnalogOutputs</a></h3>
+          <h3>3.2.3.2 <a name="sect-ID0EX6BG">XMPP.IoT.Actuator.AnalogOutputs</a></h3>
                     <p class="" style="">
                         Devices containing an array of analog outputs.
                     </p>
@@ -1853,7 +1863,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.3.3 <a name="sect-ID0EQHAI">XMPP.IoT.Actuator.Blinds</a></h3>
+          <h3>3.2.3.3 <a name="sect-ID0EPHAI">XMPP.IoT.Actuator.Blinds</a></h3>
 					<p class="" style="">
 						Actuator controlling window blinds (or similar equipment).
 					</p>
@@ -1901,7 +1911,7 @@
           </div>
 				</div>
                 <div class="indent">
-          <h3>3.2.3.4 <a name="sect-ID0E4KAI">XMPP.IoT.Actuator.DigitalOutput</a></h3>
+          <h3>3.2.3.4 <a name="sect-ID0E3KAI">XMPP.IoT.Actuator.DigitalOutput</a></h3>
                     <p class="" style="">
                         Generical digital output.
                     </p>
@@ -1945,7 +1955,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.3.5 <a name="sect-ID0EKOAI">XMPP.IoT.Actuator.DigitalOutputs</a></h3>
+          <h3>3.2.3.5 <a name="sect-ID0EJOAI">XMPP.IoT.Actuator.DigitalOutputs</a></h3>
                     <p class="" style="">
                         Devices containing an array of digital outputs.
                     </p>
@@ -1996,7 +2006,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.3.6 <a name="sect-ID0EOSAI">XMPP.IoT.Actuator.Dimmer</a></h3>
+          <h3>3.2.3.6 <a name="sect-ID0ENSAI">XMPP.IoT.Actuator.Dimmer</a></h3>
 					<p class="" style="">
 						Actuator controlling a dimmer.
 					</p>
@@ -2061,7 +2071,7 @@
           </div>
 				</div>
                 <div class="indent">
-          <h3>3.2.3.7 <a name="sect-ID0EJXAI">XMPP.IoT.Actuator.DoorBell</a></h3>
+          <h3>3.2.3.7 <a name="sect-ID0EIXAI">XMPP.IoT.Actuator.DoorBell</a></h3>
 					<p class="" style="">
 						Actuator producing a door bell sound.
 					</p>
@@ -2134,7 +2144,7 @@
           </div>
 				</div>
                 <div class="indent">
-          <h3>3.2.3.8 <a name="sect-ID0E23AI">XMPP.IoT.Actuator.Fan</a></h3>
+          <h3>3.2.3.8 <a name="sect-ID0E13AI">XMPP.IoT.Actuator.Fan</a></h3>
 					<p class="" style="">
 						Actuator controlling a fan.
 					</p>
@@ -2182,7 +2192,7 @@
           </div>
 				</div>
                 <div class="indent">
-          <h3>3.2.3.9 <a name="sect-ID0EIABI">XMPP.IoT.Actuator.Lamp</a></h3>
+          <h3>3.2.3.9 <a name="sect-ID0EHABI">XMPP.IoT.Actuator.Lamp</a></h3>
 					<p class="" style="">
 						Actuator controlling a lamp.
 					</p>
@@ -2227,12 +2237,12 @@
 				</div>
             </div>
 			<div class="indent">
-        <h3>3.2.4 <a name="sect-ID0EWDBI">XMPP.IoT.Identity</a></h3>
+        <h3>3.2.4 <a name="sect-ID0EVDBI">XMPP.IoT.Identity</a></h3>
 				<p class="" style="">
 					This section contains interfaces relating to identification of devices.
 				</p>
 				<div class="indent">
-          <h3>3.2.4.1 <a name="sect-ID0E5DBI">XMPP.IoT.Identity.Address</a></h3>
+          <h3>3.2.4.1 <a name="sect-ID0E4DBI">XMPP.IoT.Identity.Address</a></h3>
 					<p class="" style="">
 						Interface for address information in the device.
 					</p>
@@ -2313,7 +2323,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.2 <a name="sect-ID0ERLBI">XMPP.IoT.Identity.Application</a></h3>
+          <h3>3.2.4.2 <a name="sect-ID0EQLBI">XMPP.IoT.Identity.Application</a></h3>
 					<p class="" style="">
 						Interface for application information in the device.
 					</p>
@@ -2355,7 +2365,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.3 <a name="sect-ID0E1OBI">XMPP.IoT.Identity.Battery</a></h3>
+          <h3>3.2.4.3 <a name="sect-ID0EZOBI">XMPP.IoT.Identity.Battery</a></h3>
 					<p class="" style="">
 						Interface handling battery status.
 					</p>
@@ -2416,7 +2426,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.4 <a name="sect-ID0EVTBI">XMPP.IoT.Identity.Clock</a></h3>
+          <h3>3.2.4.4 <a name="sect-ID0EUTBI">XMPP.IoT.Identity.Clock</a></h3>
 					<p class="" style="">
 						Interface handling battery status.
 					</p>
@@ -2470,7 +2480,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.5 <a name="sect-ID0EZXBI">XMPP.IoT.Identity.DeviceID</a></h3>
+          <h3>3.2.4.5 <a name="sect-ID0EYXBI">XMPP.IoT.Identity.DeviceID</a></h3>
 					<p class="" style="">
 						Interface handling a unique ID (according to some scheme) of the device.
 					</p>
@@ -2502,7 +2512,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.6 <a name="sect-ID0EL1BI">XMPP.IoT.Identity.Ethernet</a></h3>
+          <h3>3.2.4.6 <a name="sect-ID0EK1BI">XMPP.IoT.Identity.Ethernet</a></h3>
 					<p class="" style="">
 						Interface containing Ehternet adapter identity information.
 					</p>
@@ -2530,7 +2540,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.7 <a name="sect-ID0EG3BI">XMPP.IoT.Identity.GSM</a></h3>
+          <h3>3.2.4.7 <a name="sect-ID0EF3BI">XMPP.IoT.Identity.GSM</a></h3>
 					<p class="" style="">
 						Interface containing GSM adapter identity information.
 					</p>
@@ -2604,7 +2614,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.8 <a name="sect-ID0ECDCI">XMPP.IoT.Identity.Language</a></h3>
+          <h3>3.2.4.8 <a name="sect-ID0EBDCI">XMPP.IoT.Identity.Language</a></h3>
 					<p class="" style="">
 						Interface handling device language.
 					</p>
@@ -2651,7 +2661,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.9 <a name="sect-ID0EPGCI">XMPP.IoT.Identity.IP</a></h3>
+          <h3>3.2.4.9 <a name="sect-ID0EOGCI">XMPP.IoT.Identity.IP</a></h3>
 					<p class="" style="">
 						Interface containing IPv4 identity information.
 					</p>
@@ -2718,7 +2728,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.10 <a name="sect-ID0EUMCI">XMPP.IoT.Identity.IPv6</a></h3>
+          <h3>3.2.4.10 <a name="sect-ID0ETMCI">XMPP.IoT.Identity.IPv6</a></h3>
 					<p class="" style="">
 						Interface containing IPv6 identity information.
 					</p>
@@ -2757,7 +2767,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.11 <a name="sect-ID0E4PCI">XMPP.IoT.Identity.Location</a></h3>
+          <h3>3.2.4.11 <a name="sect-ID0E3PCI">XMPP.IoT.Identity.Location</a></h3>
 					<p class="" style="">
 						Interface handling geospatial location of the device.
 					</p>
@@ -2829,7 +2839,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.12 <a name="sect-ID0EGWCI">XMPP.IoT.Identity.Manufacturer</a></h3>
+          <h3>3.2.4.12 <a name="sect-ID0EFWCI">XMPP.IoT.Identity.Manufacturer</a></h3>
 					<p class="" style="">
 						Interface handling manufacturer information.
 					</p>
@@ -2861,7 +2871,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.13 <a name="sect-ID0EYYCI">XMPP.IoT.Identity.Name</a></h3>
+          <h3>3.2.4.13 <a name="sect-ID0EXYCI">XMPP.IoT.Identity.Name</a></h3>
 					<p class="" style="">
 						Interface handling geospatial location of the device.
 					</p>
@@ -2905,7 +2915,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.14 <a name="sect-ID0EF3CI">XMPP.IoT.Identity.NodeID</a></h3>
+          <h3>3.2.4.14 <a name="sect-ID0EE3CI">XMPP.IoT.Identity.NodeID</a></h3>
 					<p class="" style="">
 						Interface handling information related to identifying the node.
 					</p>
@@ -2937,7 +2947,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.15 <a name="sect-ID0EX5CI">XMPP.IoT.Identity.RFID</a></h3>
+          <h3>3.2.4.15 <a name="sect-ID0EW5CI">XMPP.IoT.Identity.RFID</a></h3>
 					<p class="" style="">
 						Interface handling RFID information read from the device.
 					</p>
@@ -2969,7 +2979,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.16 <a name="sect-ID0EJBDI">XMPP.IoT.Identity.UserID</a></h3>
+          <h3>3.2.4.16 <a name="sect-ID0EIBDI">XMPP.IoT.Identity.UserID</a></h3>
 					<p class="" style="">
 						Interface handling information related to a user. Can be used to identify the user during manual read-out.
 					</p>
@@ -3001,7 +3011,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.17 <a name="sect-ID0E2DDI">XMPP.IoT.Identity.Version</a></h3>
+          <h3>3.2.4.17 <a name="sect-ID0E1DDI">XMPP.IoT.Identity.Version</a></h3>
 					<p class="" style="">
 						Interface for version information in the device.
 					</p>
@@ -3046,7 +3056,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.18 <a name="sect-ID0EEHDI">XMPP.IoT.Identity.Wink</a></h3>
+          <h3>3.2.4.18 <a name="sect-ID0EDHDI">XMPP.IoT.Identity.Wink</a></h3>
 					<p class="" style="">
 						Allows clients to send a wink command to devices for real-world identification.
 					</p>
@@ -3071,7 +3081,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.19 <a name="sect-ID0E6IDI">XMPP.IoT.Identity.ZWave</a></h3>
+          <h3>3.2.4.19 <a name="sect-ID0E5IDI">XMPP.IoT.Identity.ZWave</a></h3>
 					<p class="" style="">
 						Interface for identity information of ZWave libraries used in the device.
 					</p>
@@ -3111,12 +3121,12 @@
 				</div>
 			</div>
 			<div class="indent">
-        <h3>3.2.5 <a name="sect-ID0EJMDI">XMPP.IoT.Logistics</a></h3>
+        <h3>3.2.5 <a name="sect-ID0EIMDI">XMPP.IoT.Logistics</a></h3>
 				<p class="" style="">
 					This section contains interfaces relating to logistics.
 				</p>
 				<div class="indent">
-          <h3>3.2.5.1 <a name="sect-ID0ERMDI">XMPP.IoT.Logistics.Contents</a></h3>
+          <h3>3.2.5.1 <a name="sect-ID0EQMDI">XMPP.IoT.Logistics.Contents</a></h3>
 					<p class="" style="">
 						Interface for descibing contents.
 					</p>
@@ -3242,7 +3252,7 @@
 					</ul>
 				</div>
 				<div class="indent">
-          <h3>3.2.5.2 <a name="sect-ID0EFYDI">XMPP.IoT.Logistics.Route</a></h3>
+          <h3>3.2.5.2 <a name="sect-ID0EEYDI">XMPP.IoT.Logistics.Route</a></h3>
 					<p class="" style="">
 						Interface for descibing routes.
 					</p>
@@ -3428,7 +3438,7 @@
 				</div>
 			</div>
 			<div class="indent">
-        <h3>3.2.6 <a name="sect-ID0EJJAK">XMPP.IoT.Security</a></h3>
+        <h3>3.2.6 <a name="sect-ID0EIJAK">XMPP.IoT.Security</a></h3>
                 <p class="" style="">
                     This section contains interfaces relating to security.
                 </p>
@@ -3485,7 +3495,7 @@
 					
                 </div>
                 <div class="indent">
-          <h3>3.2.6.2 <a name="sect-ID0EXNAK">XMPP.IoT.Security.Burglar</a></h3>
+          <h3>3.2.6.2 <a name="sect-ID0EWNAK">XMPP.IoT.Security.Burglar</a></h3>
 					<p class="" style="">
 						Interface for a burglar alarm.
 					</p>
@@ -3494,7 +3504,7 @@
 					</p>
                 </div>
                 <div class="indent">
-          <h3>3.2.6.3 <a name="sect-ID0EIOAK">XMPP.IoT.Security.Clock</a></h3>
+          <h3>3.2.6.3 <a name="sect-ID0EHOAK">XMPP.IoT.Security.Clock</a></h3>
 					<p class="" style="">
 						Interface for devices with an internal configurable real-time clock.
 					</p>
@@ -3519,7 +3529,7 @@
           </div>
 				</div>
                 <div class="indent">
-          <h3>3.2.6.4 <a name="sect-ID0EDQAK">XMPP.IoT.Security.CO</a></h3>
+          <h3>3.2.6.4 <a name="sect-ID0ECQAK">XMPP.IoT.Security.CO</a></h3>
 					<p class="" style="">
 						Interface for a carbon monoxide (CO) detector.
 					</p>
@@ -3528,7 +3538,7 @@
 					</p>
 				</div>
                 <div class="indent">
-          <h3>3.2.6.5 <a name="sect-ID0EUQAK">XMPP.IoT.Security.CO2</a></h3>
+          <h3>3.2.6.5 <a name="sect-ID0ETQAK">XMPP.IoT.Security.CO2</a></h3>
 					<p class="" style="">
 						Interface for a carbon dioxide (CO2) detector.
 					</p>
@@ -3563,7 +3573,7 @@
 					
 				</div>
                 <div class="indent">
-          <h3>3.2.6.7 <a name="sect-ID0ECTAK">XMPP.IoT.Security.Emergency</a></h3>
+          <h3>3.2.6.7 <a name="sect-ID0EBTAK">XMPP.IoT.Security.Emergency</a></h3>
 					<p class="" style="">
 						Interface for an emergency alarm.
 					</p>
@@ -3572,7 +3582,7 @@
 					</p>
 				</div>
 				<div class="indent">
-          <h3>3.2.6.8 <a name="sect-ID0ETTAK">XMPP.IoT.Security.Gas</a></h3>
+          <h3>3.2.6.8 <a name="sect-ID0ESTAK">XMPP.IoT.Security.Gas</a></h3>
 					<p class="" style="">
 						Interface for a gas detector.
 					</p>
@@ -3581,7 +3591,7 @@
 					</p>
 				</div>
 				<div class="indent">
-          <h3>3.2.6.9 <a name="sect-ID0EEUAK">XMPP.IoT.Security.Heat</a></h3>
+          <h3>3.2.6.9 <a name="sect-ID0EDUAK">XMPP.IoT.Security.Heat</a></h3>
 					<p class="" style="">
 						Interface for a heat detector.
 					</p>
@@ -3590,7 +3600,7 @@
 					</p>
 				</div>
                 <div class="indent">
-          <h3>3.2.6.10 <a name="sect-ID0EVUAK">XMPP.IoT.Security.Lock</a></h3>
+          <h3>3.2.6.10 <a name="sect-ID0EUUAK">XMPP.IoT.Security.Lock</a></h3>
 					<p class="" style="">
 						Interface for a lock.
 					</p>
@@ -3641,7 +3651,7 @@
 					
 				</div>
                 <div class="indent">
-          <h3>3.2.6.11 <a name="sect-ID0EVYAK">XMPP.IoT.Security.Movement</a></h3>
+          <h3>3.2.6.11 <a name="sect-ID0EUYAK">XMPP.IoT.Security.Movement</a></h3>
 					<p class="" style="">
 						Interface for a movement detector.
 					</p>
@@ -3650,7 +3660,7 @@
 					</p>
 				</div>
                 <div class="indent">
-          <h3>3.2.6.12 <a name="sect-ID0EGZAK">XMPP.IoT.Security.Smoke</a></h3>
+          <h3>3.2.6.12 <a name="sect-ID0EFZAK">XMPP.IoT.Security.Smoke</a></h3>
 					<p class="" style="">
 						Interface for a smoke detector.
 					</p>
@@ -3659,7 +3669,7 @@
 					</p>
 				</div>
                 <div class="indent">
-          <h3>3.2.6.13 <a name="sect-ID0EXZAK">XMPP.IoT.Security.Water</a></h3>
+          <h3>3.2.6.13 <a name="sect-ID0EWZAK">XMPP.IoT.Security.Water</a></h3>
 					<p class="" style="">
 						Interface for a water detector.
 					</p>
@@ -3695,77 +3705,615 @@
 				</div>
 			</div>
             <div class="indent">
-        <h3>3.2.7 <a name="sect-ID0EG3AK">XMPP.IoT.Controller</a></h3>
+        <h3>3.2.7 <a name="sect-ID0EF3AK">XMPP.IoT.Controller</a></h3>
                 <p class="" style="">
                     This section contains interfaces relating to controllers, specific applications that perform a (local) service in a sensor network.
                 </p>
 				<div class="indent">
-          <h3>3.2.7.1 <a name="sect-ID0EO3AK">XMPP.IoT.Controller.AccessControl</a></h3>
+          <h3>3.2.7.1 <a name="sect-ID0EN3AK">XMPP.IoT.Controller.AccessControl</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.2.7.2 <a name="sect-ID0EV3AK">XMPP.IoT.Controller.Thermostat</a></h3>
+          <h3>3.2.7.2 <a name="sect-ID0EU3AK">XMPP.IoT.Controller.Thermostat</a></h3>
                     
                 </div>
                 <div class="indent">
-          <h3>3.2.7.3 <a name="sect-ID0E33AK">XMPP.IoT.Controller.Ventilation</a></h3>
+          <h3>3.2.7.3 <a name="sect-ID0E23AK">XMPP.IoT.Controller.Ventilation</a></h3>
                     
                 </div>
             </div>
             <div class="indent">
-        <h3>3.2.8 <a name="sect-ID0EE4AK">XMPP.IoT.Media</a></h3>
+        <h3>3.2.8 <a name="sect-ID0ED4AK">XMPP.IoT.Media</a></h3>
                 <p class="" style="">
                     This section contains interfaces relating to multi media.
                 </p>
 				<div class="indent">
-          <h3>3.2.8.1 <a name="sect-ID0EM4AK">XMPP.IoT.Media.BarCode</a></h3>
+          <h3>3.2.8.1 <a name="sect-ID0EL4AK">XMPP.IoT.Media.Camera</a></h3>
+					<p class="" style="">
+						This interface defines a camera.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-90"></a>Table 90: XMPP.IoT.Media.Camera Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">URL</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">URL to the camera video stream.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Width</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Width in pixels of the video.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Height</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Height in pixels of the video.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Transport</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">Transport protocol used to transfer stream. (1)</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Container</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">Video Container Format used to encapsulate stream. (2)</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Video Stream</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">Video Stream Format used to transfer stream. (3)</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Audio Stream</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">Audio Stream Format used to transfer stream. (4)</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Image Type</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">Image Format, in case camera supports still images. (5)</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Enabled</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">status</td>
+							<td colspan="" rowspan="">boolean</td>
+							<td colspan="" rowspan="">If the camera is enabled or not.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Angle</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">status</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Rotation of camera around an imaginary vertical axis (looking left-right). Value must be of an angle unit.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Elevation</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">status</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Rotation of camera around an imaginary horizontal axis (looking up-down). Value must be of an angle unit.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Rotation</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">status</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Rotation of camera around an imaginary depth axis (tilting head). Value must be of an angle unit.</td>
+						</tr>
+					</table>
+          </div>
+					<p class="" style="">
+						(1) For more information, see <a href="#TransportProtocol">Transport Protocols</a>.
+					</p>
+					<p class="" style="">
+						(2) For more information, see <a href="#VideoContainerFormat">Video Container Formats</a>.
+					</p>
+					<p class="" style="">
+						(3) For more information, see <a href="#VideoStreamFormat">Video Stream Formats</a>.
+					</p>
+					<p class="" style="">
+						(4) For more information, see <a href="#AudioStreamFormat">Audio Stream Formats</a>.
+					</p>
+					<p class="" style="">
+						(5) For more information, see <a href="#ImageFormat">Image Formats</a>.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-91"></a>Table 91: XMPP.IoT.Media.Camera Control Parameters</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Parameter</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Parameter Type</th>
+							<th colspan="" rowspan="">Range</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Enabled</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">boolean</td>
+							<td colspan="" rowspan="">-</td>
+							<td colspan="" rowspan="">If the camera should be enabled (true) or disabled (false).</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Angle</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">&lt;range&gt;</td>
+							<td colspan="" rowspan="">
+								Rotation of camera around an imaginary vertical axis (looking left-right).
+								The range must be defined in the corresponding control form, using the &lt;range&gt; element. Must have the same
+								resolution and unit as the value in the field with the same name, if available.
+							</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Elevation</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">&lt;range&gt;</td>
+							<td colspan="" rowspan="">
+								Rotation of camera around an imaginary horizontal axis (looking up-down).
+								The range must be defined in the corresponding control form, using the &lt;range&gt; element. Must have the same
+								resolution and unit as the value in the field with the same name, if available.
+							</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Rotation</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">&lt;range&gt;</td>
+							<td colspan="" rowspan="">
+								Rotation of camera around an imaginary depth axis (tilting head).
+								The range must be defined in the corresponding control form, using the &lt;range&gt; element. Must have the same
+								resolution and unit as the value in the field with the same name, if available.
+							</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+                <div class="indent">
+          <h3>3.2.8.2 <a name="sect-ID0ECMBK">XMPP.IoT.Media.Directory</a></h3>
+					<p class="" style="">
+						A Media Directory device or node contains subnodes representing different media items in the media directory catalog.
+					</p>
+					<ul class="" style="">
+						<li class="" style="">
+							Nodes implementing the <a href="#AudioItem">XMPP.IoT.Media.Directory.AudioItem</a> interface represent audio items in the directory.
+						</li>
+						<li class="" style="">
+							Nodes implementing the <a href="#DirectoryItem">XMPP.IoT.Media.Directory.DirectoryItem</a> interface represent possibly multi-resolution or
+							multi-format directory items in the directory.
+						</li>
+						<li class="" style="">
+							Nodes implementing the <a href="#ImageItem">XMPP.IoT.Media.Directory.ImageItem</a> interface represent images in the directory.
+						</li>
+						<li class="" style="">
+							Nodes implementing the <a href="#VideoItem">XMPP.IoT.Media.Directory.VideoItem</a> interface represent video items in the directory.
+						</li>
+					</ul>
+					<p class="" style="">
+						Also, items in the directory can also implement the <a href="#DublinCore">XMPP.IoT.Media.Directory.DublinCore</a> interface to aggregate
+						Dublin Core meta-data for each item.
+					</p>
 					
+                </div>
+				<div class="indent">
+          <h3>3.2.8.3 <a name="AudioItem">XMPP.IoT.Media.Directory.AudioItem</a></h3>
+					<p class="" style="">
+						Represents an audio item (song, radio station, etc.)
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-92"></a>Table 92: XMPP.IoT.Media.Directory.AudioItem Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">URL</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">URL to the audio.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Duration</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">timeSpan</td>
+							<td colspan="" rowspan="">Duration of item.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Transport</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">Transport protocol used to transfer stream. (1)</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Container</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">Audio Container Format used to encapsulate stream. (2)</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Audio Stream</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">Audio Stream Format used to transfer stream. (3)</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Language</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">IETF Language tag for the language of the audio.</td>
+						</tr>
+					</table>
+          </div>
+					<p class="" style="">
+						(1) For more information, see <a href="#TransportProtocol">Transport Protocols</a>.
+					</p>
+					<p class="" style="">
+						(2) For more information, see <a href="#AudioContainerFormat">Audio Container Formats</a>.
+					</p>
+					<p class="" style="">
+						(3) For more information, see <a href="#AudioStreamFormat">Audio Stream Formats</a>.
+					</p>
 				</div>
 				<div class="indent">
-          <h3>3.2.8.2 <a name="sect-ID0ET4AK">XMPP.IoT.Media.Camera</a></h3>
-                    
-                </div>
-                <div class="indent">
-          <h3>3.2.8.3 <a name="sect-ID0E14AK">XMPP.IoT.Media.Directory</a></h3>
-                    
-                </div>
-                <div class="indent">
-          <h3>3.2.8.4 <a name="sect-ID0EB5AK">XMPP.IoT.Media.Display</a></h3>
-                    
-                </div>
-                <div class="indent">
-          <h3>3.2.8.5 <a name="sect-ID0EI5AK">XMPP.IoT.Media.LoudSpeakers</a></h3>
-                    
-                </div>
-                <div class="indent">
-          <h3>3.2.8.6 <a name="sect-ID0EP5AK">XMPP.IoT.Media.Microphone</a></h3>
-                    
-                </div>
-				<div class="indent">
-          <h3>3.2.8.7 <a name="sect-ID0EW5AK">XMPP.IoT.Media.QrCode</a></h3>
-					
+          <h3>3.2.8.4 <a name="DirectoryItem">XMPP.IoT.Media.Directory.DirectoryItem</a></h3>
+					<p class="" style="">
+						Represents an item in a directory. If the item is a single format, the node will also implement an interface corresponding to the type of
+						item it represends, such as:
+					</p>
+					<ul class="" style="">
+						<li class="" style="">
+							<a href="#AudioItem">Audio</a>
+						</li>
+						<li class="" style="">
+							<a href="#ImageItem">Image</a>
+						</li>
+						<li class="" style="">
+							<a href="#VideoItem">Video</a>
+						</li>
+					</ul>
+					<p class="" style="">
+						If the directory item contains different sources for the same item (for instance different resolutions, languages, etc.), the node will not implement
+						corresponding type interfaces, but instead contain subnodes representing each of the different formats supported.
+					</p>
 				</div>
 				<div class="indent">
-          <h3>3.2.8.8 <a name="sect-ID0E45AK">XMPP.IoT.Media.Recorder</a></h3>
+          <h3>3.2.8.5 <a name="DublinCore">XMPP.IoT.Media.Directory.DublinCore</a></h3>
+					<p class="" style="">
+						<span class="strong">Note:</span> The fields used in this interface, comes from the <a href="http://dublincore.org/">DCMI Dublin Core Metadata Initiative</a>.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-93"></a>Table 93: XMPP.IoT.Media.Directory.DirectoryItem Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Contributor</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">An entity responsible for making contributions to the resource.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Coverage</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Creator</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">An entity primarily responsible for making the resource.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Date</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">dateTime</td>
+							<td colspan="" rowspan="">A point or period of time associated with an event in the lifecycle of the resource.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Description</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">An account of the resource.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Format</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">The file format, physical medium, or dimensions of the resource.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Identifier</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">An unambiguous reference to the resource within a given context.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Language</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">A language of the resource.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Publisher</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">An entity responsible for making the resource available.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Relation</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">A related resource.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Rights</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">Information about rights held in and over the resource.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Source</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">A related resource from which the described resource is derived.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Subject</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">The topic of the resource.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Title</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">A name given to the resource.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Type</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">The nature or genre of the resource.</td>
+						</tr>
+					</table>
+          </div>
+				</div>
+				<div class="indent">
+          <h3>3.2.8.6 <a name="ImageItem">XMPP.IoT.Media.Directory.ImageItem</a></h3>
+					<p class="" style="">
+						Represents an image item (photo, drawing, etc.)
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-94"></a>Table 94: XMPP.IoT.Media.Directory.ImageItem Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">URL</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">URL to the image.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Width</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Width in pixels of the video.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Height</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Height in pixels of the video.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Image Type</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">Image Format. (1)</td>
+						</tr>
+					</table>
+          </div>
+					<p class="" style="">
+						(1) For more information, see <a href="#ImageFormat">Image Formats</a>.
+					</p>
+				</div>
+				<div class="indent">
+          <h3>3.2.8.7 <a name="VideoItem">XMPP.IoT.Media.Directory.VideoItem</a></h3>
+					<p class="" style="">
+						Represents a video item (movie, TV, etc.)
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-95"></a>Table 95: XMPP.IoT.Media.Directory.VideoItem Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">URL</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">URL to the camera video stream.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Duration</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">timeSpan</td>
+							<td colspan="" rowspan="">Duration of item.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Width</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Width in pixels of the video.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Height</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Height in pixels of the video.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Transport</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">Transport protocol used to transfer stream. (1)</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Container</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">Video Container Format used to encapsulate stream. (2)</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Video Stream</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">Video Stream Format used to transfer stream. (3)</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Audio Stream</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">Audio Stream Format used to transfer stream. (4)</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">Language</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">identity</td>
+							<td colspan="" rowspan="">string</td>
+							<td colspan="" rowspan="">IETF Language tag for the language of the audio.</td>
+						</tr>
+					</table>
+          </div>
+					<p class="" style="">
+						(1) For more information, see <a href="#TransportProtocol">Transport Protocols</a>.
+					</p>
+					<p class="" style="">
+						(2) For more information, see <a href="#VideoContainerFormat">Video Container Formats</a>.
+					</p>
+					<p class="" style="">
+						(3) For more information, see <a href="#VideoStreamFormat">Video Stream Formats</a>.
+					</p>
+					<p class="" style="">
+						(4) For more information, see <a href="#AudioStreamFormat">Audio Stream Formats</a>.
+					</p>
+					<p class="" style="">
+						(5) For more information, see <a href="#ImageFormat">Image Formats</a>.
+					</p>
+				</div>
+				<div class="indent">
+          <h3>3.2.8.8 <a name="sect-ID0EQOCK">XMPP.IoT.Media.Display</a></h3>
                     
                 </div>
                 <div class="indent">
-          <h3>3.2.8.9 <a name="sect-ID0EE6AK">XMPP.IoT.Media.TextDisplay</a></h3>
+          <h3>3.2.8.9 <a name="sect-ID0EXOCK">XMPP.IoT.Media.LoudSpeakers</a></h3>
+                    
+                </div>
+                <div class="indent">
+          <h3>3.2.8.10 <a name="sect-ID0E5OCK">XMPP.IoT.Media.Microphone</a></h3>
+                    
+                </div>
+				<div class="indent">
+          <h3>3.2.8.11 <a name="sect-ID0EFPCK">XMPP.IoT.Media.Recorder</a></h3>
+                    
+                </div>
+                <div class="indent">
+          <h3>3.2.8.12 <a name="sect-ID0EMPCK">XMPP.IoT.Media.TextDisplay</a></h3>
                     
                 </div>
             </div>
 			<div class="indent">
-        <h3>3.2.9 <a name="sect-ID0EM6AK">XMPP.IoT.Network</a></h3>
+        <h3>3.2.9 <a name="sect-ID0EUPCK">XMPP.IoT.Network</a></h3>
 				<p class="" style="">
 					This section contains interfaces relating to network interface status.
 				</p>
 				<div class="indent">
-          <h3>3.2.9.1 <a name="sect-ID0EU6AK">XMPP.IoT.Network.Ethernet</a></h3>
+          <h3>3.2.9.1 <a name="sect-ID0E3PCK">XMPP.IoT.Network.Ethernet</a></h3>
 					<p class="" style="">
 						Interface handling Ehternet adapter status information.
 					</p>
 					<div class="indent">
-            <p class="caption"><a name="table-90"></a>Table 90: XMPP.IoT.Network.Ethernet Fields</p>
+            <p class="caption"><a name="table-96"></a>Table 96: XMPP.IoT.Network.Ethernet Fields</p>
             <table border="1" cellpadding="3" cellspacing="0">
 						<tr class="body">
 							<th colspan="" rowspan="">Field Name</th>
@@ -3848,12 +4396,12 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.9.2 <a name="sect-ID0E5HBK">XMPP.IoT.Network.IP</a></h3>
+          <h3>3.2.9.2 <a name="sect-ID0EGYCK">XMPP.IoT.Network.IP</a></h3>
 					<p class="" style="">
 						Interface handling IPv4 network layer status information.
 					</p>
 					<div class="indent">
-            <p class="caption"><a name="table-91"></a>Table 91: XMPP.IoT.Network.IP Fields</p>
+            <p class="caption"><a name="table-97"></a>Table 97: XMPP.IoT.Network.IP Fields</p>
             <table border="1" cellpadding="3" cellspacing="0">
 						<tr class="body">
 							<th colspan="" rowspan="">Field Name</th>
@@ -3915,12 +4463,12 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.9.3 <a name="sect-ID0EDOBK">XMPP.IoT.Network.IPv6</a></h3>
+          <h3>3.2.9.3 <a name="sect-ID0EL5CK">XMPP.IoT.Network.IPv6</a></h3>
 					<p class="" style="">
 						Interface handling IPv6 network layer status information.
 					</p>
 					<div class="indent">
-            <p class="caption"><a name="table-92"></a>Table 92: XMPP.IoT.Network.IPv6 Fields</p>
+            <p class="caption"><a name="table-98"></a>Table 98: XMPP.IoT.Network.IPv6 Fields</p>
             <table border="1" cellpadding="3" cellspacing="0">
 						<tr class="body">
 							<th colspan="" rowspan="">Field Name</th>
@@ -3982,12 +4530,12 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.9.4 <a name="sect-ID0EIUBK">XMPP.IoT.Network.Radio</a></h3>
+          <h3>3.2.9.4 <a name="sect-ID0EQEDK">XMPP.IoT.Network.Radio</a></h3>
 					<p class="" style="">
 						Interface handling radio network layer status information.
 					</p>
 					<div class="indent">
-            <p class="caption"><a name="table-93"></a>Table 93: XMPP.IoT.Network.Radio Fields</p>
+            <p class="caption"><a name="table-99"></a>Table 99: XMPP.IoT.Network.Radio Fields</p>
             <table border="1" cellpadding="3" cellspacing="0">
 						<tr class="body">
 							<th colspan="" rowspan="">Field Name</th>
@@ -4016,69 +4564,433 @@
 			</div>
         </div>
         <div class="indent">
-      <h3>3.3 <a name="sect-ID0E3WBK">Interface aggregations</a></h3>
+      <h3>3.3 <a name="sect-ID0EEHDK">Interface aggregations</a></h3>
 			<div class="indent">
-        <h3>3.3.1 <a name="sect-ID0EAXBK">Control programming aggregations</a></h3>
+        <h3>3.3.1 <a name="sect-ID0EIHDK">Control programming aggregations</a></h3>
 				<div class="indent">
-          <h3>3.3.1.1 <a name="sect-ID0EEXBK">*.TimeChannels</a></h3>
+          <h3>3.3.1.1 <a name="sect-ID0EMHDK">*.TimeChannels</a></h3>
 					
 				</div>
 			</div>
 			<div class="indent">
-        <h3>3.3.2 <a name="sect-ID0EMXBK">Event aggregations</a></h3>
+        <h3>3.3.2 <a name="sect-ID0EUHDK">Event aggregations</a></h3>
 				<div class="indent">
-          <h3>3.3.2.1 <a name="sect-ID0EQXBK">*.BinaryEvent</a></h3>
+          <h3>3.3.2.1 <a name="sect-ID0EYHDK">*.BinaryEvent</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.3.2.2 <a name="sect-ID0EXXBK">*.HysteresisEvent</a></h3>
+          <h3>3.3.2.2 <a name="sect-ID0E6HDK">*.HysteresisEvent</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.3.2.3 <a name="sect-ID0E5XBK">*.TimedEvent</a></h3>
+          <h3>3.3.2.3 <a name="sect-ID0EGIDK">*.TimedEvent</a></h3>
 					
 				</div>
 			</div>
 			<div class="indent">
-        <h3>3.3.3 <a name="sect-ID0EGYBK">Readout aggregations</a></h3>
+        <h3>3.3.3 <a name="sect-ID0EOIDK">Readout aggregations</a></h3>
+				<p class="" style="">
+					The following interfaces aggregates information in a defined way. Instead of having to list each combination, the interface which is being
+					aggregated to is simply named *.
+				</p>
 				<div class="indent">
-          <h3>3.3.3.1 <a name="sect-ID0EKYBK">*.Average</a></h3>
-					
+          <h3>3.3.3.1 <a name="average">*.Average</a></h3>
+					<p class="" style="">
+						This interface adds average values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time 
+						of the other (the momentary value), only the momentary value is aggregated.
+					</p>
+					<p class="" style="">
+						For example: Energy is the integration over time of Power in <a href="#XMPP_IoT_Meter_Electricity">XMPP.IoT.Meter.Electricity</a>. The interface
+						XMPP.IoT.Meter.Electricity.Average must thus include field <span class="strong">Power, Average</span>.
+					</p>
+					<p class="" style="">
+						In the case there are multiple fields in the interface * that matches, all fields can be aggregated, maintaining the same usage (required/optional) in the 
+						aggregated interface as in the original interface.
+					</p>
+					<p class="" style="">
+						In the table below, %0% represents the name of the corresponding field in the original interface *.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-100"></a>Table 100: *.Average Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, Average</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">computed</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Average value of %0% during period.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, Average, Start</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">computed</td>
+							<td colspan="" rowspan="">dateTime</td>
+							<td colspan="" rowspan="">Start of period.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, Average, Stop</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">computed</td>
+							<td colspan="" rowspan="">dateTime</td>
+							<td colspan="" rowspan="">Stop of period.</td>
+						</tr>
+					</table>
+          </div>
 				</div>
 				<div class="indent">
-          <h3>3.3.3.2 <a name="sect-ID0ERYBK">*.Consumption</a></h3>
-					
+          <h3>3.3.3.2 <a name="consumption">*.Consumption</a></h3>
+					<p class="" style="">
+						This interface adds consumption values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time
+						of the other (the momentary value), only the accumulated value is aggregated.
+					</p>
+					<p class="" style="">
+						For example: Energy is the integration over time of Power in <a href="#XMPP_IoT_Meter_Electricity">XMPP.IoT.Meter.Electricity</a>. The interface
+						XMPP.IoT.Meter.Electricity.Consumption must thus include field <span class="strong">Energy, Consumption</span>.
+					</p>
+					<p class="" style="">
+						In the case there are multiple fields in the interface * that matches, all fields can be aggregated, maintaining the same usage (required/optional) in the
+						aggregated interface as in the original interface.
+					</p>
+					<p class="" style="">
+						In the table below, %0% represents the name of the corresponding field in the original interface *.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-101"></a>Table 101: *.Consumption Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, Consumption</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">computed</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Consumption value of %0% during period.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, Consumption, Start</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">computed</td>
+							<td colspan="" rowspan="">dateTime</td>
+							<td colspan="" rowspan="">Start of period.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, Consumption, Stop</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">computed</td>
+							<td colspan="" rowspan="">dateTime</td>
+							<td colspan="" rowspan="">Stop of period.</td>
+						</tr>
+					</table>
+          </div>
 				</div>
 				<div class="indent">
-          <h3>3.3.3.3 <a name="sect-ID0EYYBK">*.History</a></h3>
-					
+          <h3>3.3.3.3 <a name="history">*.History</a></h3>
+					<p class="" style="">
+						This interface adds historical values to the interface *. In the case there are multiple fields in the interface * that matches, all fields can be aggregated, 
+						maintaining the same usage (required/optional) in the aggregated interface as in the original interface.
+					</p>
+					<p class="" style="">
+						In the table below, %0% represents the name of the corresponding field in the original interface *.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-102"></a>Table 102: *.History Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">historical (1)</td>
+							<td colspan="" rowspan="">(2)</td>
+							<td colspan="" rowspan="">Sampled value of %0% for a given point in time in history. The timestamp of the field records the time when the value was sampled.</td>
+						</tr>
+					</table>
+          </div>
+					<p class="" style="">
+						(1) The value must be reported using the correct historical period, as according to XEP <a href="sensor-data.html#fieldtypes">sensor-data</a>.
+					</p>
+					<p class="" style="">
+						(2) The value must be reported using the same field type as the field of the original interface.
+					</p>
 				</div>
 				<div class="indent">
-          <h3>3.3.3.4 <a name="sect-ID0E6YBK">*.Mean</a></h3>
-					
+          <h3>3.3.3.4 <a name="sect-ID0EXSDK">*.Mean</a></h3>
+					<p class="" style="">
+						This interface adds mean values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time
+						of the other (the momentary value), only the momentary value is aggregated.
+					</p>
+					<p class="" style="">
+						For example: Energy is the integration over time of Power in <a href="#XMPP_IoT_Meter_Electricity">XMPP.IoT.Meter.Electricity</a>. The interface
+						XMPP.IoT.Meter.Electricity.Mean must thus include field <span class="strong">Power, Mean</span>.
+					</p>
+					<p class="" style="">
+						In the case there are multiple fields in the interface * that matches, all fields can be aggregated, maintaining the same usage (required/optional) in the
+						aggregated interface as in the original interface.
+					</p>
+					<p class="" style="">
+						In the table below, %0% represents the name of the corresponding field in the original interface *.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-103"></a>Table 103: *.Mean Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, Mean</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">computed</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Mean value of %0% during period.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, Mean, Start</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">computed</td>
+							<td colspan="" rowspan="">dateTime</td>
+							<td colspan="" rowspan="">Start of period.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, Mean, Stop</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">computed</td>
+							<td colspan="" rowspan="">dateTime</td>
+							<td colspan="" rowspan="">Stop of period.</td>
+						</tr>
+					</table>
+          </div>
 				</div>
 				<div class="indent">
-          <h3>3.3.3.5 <a name="sect-ID0EGZBK">*.Min</a></h3>
-					
+          <h3>3.3.3.5 <a name="sect-ID0ESWDK">*.Min</a></h3>
+					<p class="" style="">
+						This interface adds minimum values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time
+						of the other (the momentary value), only the momentary value is aggregated.
+					</p>
+					<p class="" style="">
+						For example: Energy is the integration over time of Power in <a href="#XMPP_IoT_Meter_Electricity">XMPP.IoT.Meter.Electricity</a>. The interface
+						XMPP.IoT.Meter.Electricity.Min must thus include field <span class="strong">Power, Min</span>.
+					</p>
+					<p class="" style="">
+						In the case there are multiple fields in the interface * that matches, all fields can be aggregated, maintaining the same usage (required/optional) in the
+						aggregated interface as in the original interface.
+					</p>
+					<p class="" style="">
+						In the table below, %0% represents the name of the corresponding field in the original interface *.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-104"></a>Table 104: *.Min Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, Min</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">computed</td>
+							<td colspan="" rowspan="">peak</td>
+							<td colspan="" rowspan="">Smallest value of %0% during period.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, Min, Start</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">peak</td>
+							<td colspan="" rowspan="">dateTime</td>
+							<td colspan="" rowspan="">Start of period.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, Min, Stop</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">peak</td>
+							<td colspan="" rowspan="">dateTime</td>
+							<td colspan="" rowspan="">Stop of period.</td>
+						</tr>
+					</table>
+          </div>
 				</div>
 				<div class="indent">
-          <h3>3.3.3.6 <a name="sect-ID0ENZBK">*.Max</a></h3>
-					
+          <h3>3.3.3.6 <a name="sect-ID0EN1DK">*.Max</a></h3>
+					<p class="" style="">
+						This interface adds maximum values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time
+						of the other (the momentary value), only the momentary value is aggregated.
+					</p>
+					<p class="" style="">
+						For example: Energy is the integration over time of Power in <a href="#XMPP_IoT_Meter_Electricity">XMPP.IoT.Meter.Electricity</a>. The interface
+						XMPP.IoT.Meter.Electricity.Max must thus include field <span class="strong">Power, Max</span>.
+					</p>
+					<p class="" style="">
+						In the case there are multiple fields in the interface * that matches, all fields can be aggregated, maintaining the same usage (required/optional) in the
+						aggregated interface as in the original interface.
+					</p>
+					<p class="" style="">
+						In the table below, %0% represents the name of the corresponding field in the original interface *.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-105"></a>Table 105: *.Max Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, Max</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">peak</td>
+							<td colspan="" rowspan="">peak</td>
+							<td colspan="" rowspan="">Greatest value of %0% during period.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, Max, Start</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">peak</td>
+							<td colspan="" rowspan="">dateTime</td>
+							<td colspan="" rowspan="">Start of period.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, Max, Stop</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">peak</td>
+							<td colspan="" rowspan="">dateTime</td>
+							<td colspan="" rowspan="">Stop of period.</td>
+						</tr>
+					</table>
+          </div>
 				</div>
 				<div class="indent">
-          <h3>3.3.3.7 <a name="sect-ID0EUZBK">*.StdDev</a></h3>
-					
+          <h3>3.3.3.7 <a name="sect-ID0EI5DK">*.StdDev</a></h3>
+					<p class="" style="">
+						This interface adds stadard deviation values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time
+						of the other (the momentary value), only the momentary value is aggregated.
+					</p>
+					<p class="" style="">
+						For example: Energy is the integration over time of Power in <a href="#XMPP_IoT_Meter_Electricity">XMPP.IoT.Meter.Electricity</a>. The interface
+						XMPP.IoT.Meter.Electricity.StdDev must thus include field <span class="strong">Power, StdDev</span>.
+					</p>
+					<p class="" style="">
+						In the case there are multiple fields in the interface * that matches, all fields can be aggregated, maintaining the same usage (required/optional) in the
+						aggregated interface as in the original interface.
+					</p>
+					<p class="" style="">
+						In the table below, %0% represents the name of the corresponding field in the original interface *.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-106"></a>Table 106: *.StdDev Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, StdDev</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">computed</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Standard deviation of %0% during period.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, StdDev, Start</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">computed</td>
+							<td colspan="" rowspan="">dateTime</td>
+							<td colspan="" rowspan="">Start of period.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, StdDev, Stop</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">computed</td>
+							<td colspan="" rowspan="">dateTime</td>
+							<td colspan="" rowspan="">Stop of period.</td>
+						</tr>
+					</table>
+          </div>
 				</div>
 				<div class="indent">
-          <h3>3.3.3.8 <a name="sect-ID0E2ZBK">*.Sum</a></h3>
-					
+          <h3>3.3.3.8 <a name="sect-ID0EDCEK">*.Sum</a></h3>
+					<p class="" style="">
+						This interface adds sum values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time
+						of the other (the momentary value), only the accumulated value is aggregated.
+					</p>
+					<p class="" style="">
+						For example: Energy is the integration over time of Power in <a href="#XMPP_IoT_Meter_Electricity">XMPP.IoT.Meter.Electricity</a>. The interface
+						XMPP.IoT.Meter.Electricity.Sum must thus include field <span class="strong">Energy, Sum</span>.
+					</p>
+					<p class="" style="">
+						In the case there are multiple fields in the interface * that matches, all fields can be aggregated, maintaining the same usage (required/optional) in the
+						aggregated interface as in the original interface.
+					</p>
+					<p class="" style="">
+						In the table below, %0% represents the name of the corresponding field in the original interface *.
+					</p>
+					<div class="indent">
+            <p class="caption"><a name="table-107"></a>Table 107: *.Sum Fields</p>
+            <table border="1" cellpadding="3" cellspacing="0">
+						<tr class="body">
+							<th colspan="" rowspan="">Field Name</th>
+							<th colspan="" rowspan="">Use</th>
+							<th colspan="" rowspan="">Field Type</th>
+							<th colspan="" rowspan="">Value Type</th>
+							<th colspan="" rowspan="">Description</th>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, Sum</td>
+							<td colspan="" rowspan="">Required</td>
+							<td colspan="" rowspan="">computed</td>
+							<td colspan="" rowspan="">numeric</td>
+							<td colspan="" rowspan="">Summed value of %0% during period.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, Sum, Start</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">computed</td>
+							<td colspan="" rowspan="">dateTime</td>
+							<td colspan="" rowspan="">Start of period.</td>
+						</tr>
+						<tr class="body">
+							<td colspan="" rowspan="">%0%, Sum, Stop</td>
+							<td colspan="" rowspan="">Optional</td>
+							<td colspan="" rowspan="">computed</td>
+							<td colspan="" rowspan="">dateTime</td>
+							<td colspan="" rowspan="">Stop of period.</td>
+						</tr>
+					</table>
+          </div>
 				</div>
 			</div>
 		</div>
         <div class="indent">
-      <h3>3.4 <a name="sect-ID0EE1BK">Field Names</a></h3>
+      <h3>3.4 <a name="sect-ID0EAGEK">Field Names</a></h3>
             <div class="indent">
-        <p class="caption"><a name="table-94"></a>Table 94: Localization of Field Names</p>
+        <p class="caption"><a name="table-108"></a>Table 108: Localization of Field Names</p>
         <table border="1" cellpadding="3" cellspacing="0">
                 <tr class="body">
                     <th colspan="" rowspan="">Field Name</th>
@@ -4124,7 +5036,7 @@
       </div>
             
             <div class="indent">
-        <p class="caption"><a name="table-95"></a>Table 95: Composition of Field Names</p>
+        <p class="caption"><a name="table-109"></a>Table 109: Composition of Field Names</p>
         <table border="1" cellpadding="3" cellspacing="0">
                 <tr class="body">
                     <th colspan="" rowspan="">Aggregation</th>
@@ -4163,23 +5075,86 @@
                     <td colspan="" rowspan=""></td>
                 </tr>
                 <tr class="body">
-                    <td colspan="" rowspan="">%0%, End</td>
+                    <td colspan="" rowspan="">%0%, Stop</td>
                     <td colspan="" rowspan=""></td>
                 </tr>
             </table>
       </div>
         </div>
         <div class="indent">
-      <h3>3.5 <a name="sect-ID0EPBCK">Units</a></h3>
+      <h3>3.5 <a name="sect-ID0ELNEK">Units</a></h3>
 			<p class="" style="">
 				This section contains tables for units and unit conversions that devices and sytems in IoT should use, so that data interchange is interoperable.
 				Units are divided into categories, each category listed in a separate subsection. Devices reporting fields using units of a specific category should
-				only use units marked as SHOULD, to make sure values are understood and communication be interoperable.
+				only use units marked as SHOULD, to make sure values are understood and used interoperably.
+			</p>
+			<p class="" style="">
+				Each category of units has a reference point somewhere. Each unit for a given category is then listed in a table together with a scale factor from
+				the reference point (applied first) and an offset (applied after scaling).
+			</p>
+			<p class="" style="">
+				We know that each unit relates to its reference value accoding to:
+			</p>
+			<p class="" style="">
+				<img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAAbCAIAAACvG7nuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQVSURBVGhD7ZtNdhMxDMdTLlKOwoJFuucGbFlOHpeZ3KB7WPDe9BjdkZwkSLJsS7I1cSZfbfFv05EtS3/JSjo84OFwOKw6nQY+8c9O5xh9VjqtfOBZ2W+fHpCn7Z5XbgAnvWnOjCn5wh0IsxKDMpsXWlXrR/K9bMAnnbsQRhbSmgL0fH79eTjsxvXv17+86ELqCSpzv90s7e7j91+HaVh/+/rICxdEt6O4EFPyaR1oAt5tAxBztRomtjK7cRh3/NzONFRCLYBUrVnANIDgaMyBjs35MUUKSvmacrhA8iW1z/a5kFW0wpR8UgcM3t3lWfGiT9PpKRe2q4K6yNCyo5GxkvbbxpgqJCycI37pcX9WqOqiINULU/JpHdD4d5dmpWgZM42YE5MDwSEYSQvvsc0WUZFLFbbXge7CmYJLlTmblBZwKrYUN6EvLQhGjOhU9oQeKRn4K0er0MWblaJmJuo2JZcdyBXYOFabPGuqReKsYMDKNo8KAh4YEeLxD+GuG6T3fKQ0A9ekVAX3XC3avImPaUMZLXAzyzO0EVLooCQlmOFw2lKd8BRWqc8KZcoRBUKcja7MbKgMuFw5Dc/VbAjPCiau+ahRoY9QTCu/hVSDzN45YCSJiIpbKafTGwd0KDxoUS/jUrVvOoNyE53wFWY4a43gTQ6Vg7E32Us4aRMdbQRXW805EWZFnRWItxx4uR+GOJcmJGTL1my600hV4IPSBwts45bc80o5Dp7Mociq1ZFEBXQ+2OQ9X6FD7XvFPyp3TMlFB4oFVxt6+ncXZgWPVHzUqIiYJiTsudYcJLQORRCqTLnipMmFjq350XtUrhQ3nBbJFWZd54NNfvYVerizUjlPWeOGKbnaAaXa15b115iZFXkQnvVVCe/CEp7nAJFyYNWBoh27aeKU6tAxII72xdNBPaao1aHjk5BswyY+w58cZxR61GaFwhQyUIPOKlNJM3/YMRI/+9rg6Nzd8fsKpZd+WgCEF5uwB1vxVYYTsCxtnYFtk7JJbswg2kAb7ZkpTM7hpsANXsdlfoRVAJ346wkXxl0wXIUuM++24nCws+awIoJLU+SVyxSj7oOB3bvjWQHwUEa5hyawER3ZIx7L+YRVEtxlrRU4SCCGSvpoQbgYaW7qgtCUFBdQZ3MKKTe7wyobvB8OROe6wgVIgWUsU7IyZR/Vubo2XnUbmGflepAGV8EFMX1L3ExAIxfUMzcqZ2N0fqS/O9z/eV6NP76w9V9gSr5yB3hm3jH8WYIf533XvyNMyTfqwNVnBetArlcFZ/ASXF/AaVxCjyn5SAeWUeq8wfdKSHrHq7q7AMNb0+NhdfZ/F9dppc9Kp5U+K51W+qx0muH3lqsRX6fv9jJ3dwGGt6bHo9TZ/y9Zp5X+O6jTxmr1D9/snSkMYWylAAAAAElFTkSuQmCC">
+				
+				
+			</p>
+			<p class="" style="">
+				Reversely, we get:
+			</p>
+			<p class="" style="">
+				<img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAI0AAAA3CAIAAAC+bV7hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAVDSURBVHhe7Zw7UuRIEIbFXoQh1sGYQ0DEGj2x7twADCIYU8SeAbbNNcZQ3wB3YtqYCHEIDBxium/ADXozs7JUmaXq7hKSmhLU57SyHqqs/JVS6QFHm82myCTPH/ybSZus0zTIOvVkvfhyhHxZrAPmYKSpk50tc/PQLt8TiIcbaNP0ezXakdaYMMqnp382m1U1Wz799s1BgXVEmsBki6Ks2XKsqrJa8XY8dRnY1U5o/GLmxqpLbVOB2KtndmKve+nqtG3add09FrCvbhEkkaQmhDp00D9PxVaHSCLcS1YnjElQpgqDgVEBTANjNEHiOrbZImLjSH0Cg1v15D6hmWfahozej2srfTfsci9VnXCmIb+NTAi0wKnCRPlHNIc6Yem6vVDogh2sTriNrYQEynSGOkljcaA3bO93L1GdomSaVbXRyrR3UdMy6bq9YAjD7XFHtkoGGtBmaEQsa5ySzePcS1MnNSmBuNzW5aws7cHqzRXC4Ky4ODSQTMHjW9Z4Drb8bRVAZ7a9ASLdS1MnnEvAeSWTmKw3V6jbamkoZhbTiooCHXCMpoIM18gzDbijpkwM5LXb5Z5gQjrJGcG2OFz1XFuWOrD3QTFv9YC9yBCjqcdoTHcsiaOnJeSqrs0Ise4len2iuMgJ6MjAvFsy2UsXz5zjpa0oaGwxmLG3O6NMIY4spn2E28S5l6hOAB2DDWoeWiZuyC1sNxcIYcWix5YSIVgrdqhMHo9Q/USFKI92L12dxoOC01E5wS6ZerPNt/wctivrX/dF9e2MLd8cDdYrswdOG/ih05Znjs6Hy6c+Lx7m50dXxfefF8dBsz+7fGO9PhCYCu3FQRps9W2QfOpzjGaiYJ30+zAi9iXbmC/HMhbW6fjiJ6WczThYHs7PY9Lj4eZ8Xtb/wnoHdrHB38wY6PPe7Otf5qJ49g1U258eqNLsEKvSDKUPgOkkrl+t+y2+cwZMqbOD92XJXqyNY0h6zu3wzeqkZDIauOijzZW42VQoYztSUo+I3hmEdXJKGkT8Wgp2lSkzAPzdMizazosa1gG48Vit3M0bFNyeko1VcDVq6mCN+On+q2jah7u7O97KtLi+vjb5JDJDpY86Z3mpQykYlU4x5z22MyFeXl5IJ3UCU/FvidG84MpnvYMCOpEWIoWUTbkgVbPbWaaDYhLLIOVwBeKs5YnpyyQ1NfsQHaYOB+WtZmTX5R0JyaRzLw3cQUYBft03zw11+WYH3ut0ApkmkCp4MDVuDpDgIPqbHYWddOIsCqpk4pDSqY69dUBBnzj37N6Pzu81tr0cO774zkqlxPxWPUv+fHrCW/IVgfe8Ge4TTekDtnB/0/PrvhDdbTOg/5/vRMB6DYDJqJTOh5zj7SygCuMpXsFcA3GJNZ2bKjDd1LAZW7r/aLxrnRCKvA6liLJGx1w1EzLhPJvyA8n0/nUCtGNkhULrhVzJgZVcB1tcjB0ONd93qtOqqpQSFFITaE+OBq9cywmVTiZLaC9jMZhORiUkAaXAGR1EjK7xS6eJQ8tkZuPLVNe1lg9wD9JGZZDvWBB87W4Y5gF6L34/LeVnA+vF7dy+qz7+83OxvPzPLNFwzSdWe4/PtAmlV/fwW/59slhgw/Xz4+z0ZL14Ls6wezH/wSs8fGXwozjIdDm47wrzWb3LcO8U5U5dMrFccyhlg+tNB9vYddeJSeVqoAHJ/zdnMOj9HOg0ysc8WadpMNj16YNjn26M9alp1mkYxn5slnWaBlmnaZB1mgZZp2mQdRqG9eLqcgm/y8urUVZ8+f5pGuR8mgZZpylQFP8DJzUMdKYqrp0AAAAASUVORK5CYII=">
+				
+				
+			</p>
+			<p class="" style="">
+				Combining the two, we get a formula for converting a Unit <span class="strong">i</span> to a unit <span class="strong">j</span> (in the same category of units), as follows:
+			</p>
+			<p class="" style="">
+				<img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQIAAAA3CAIAAABo7dOtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAgRSURBVHhe7ZwxbuNKDECVf5HsYhsXOUQC/CJBgK32BkmRYksbe4YgLn+xhQ3sAdIG62IB6RAp0hix272EP8mhNORopFiW5UgxXxNxhjNDieRIo4x8stlsEsM4bv7hv4ZxxFgaGIalQVes51cnyNV8HRGNfjG4NMjjiZlk5fI3Qi2bgE7Rbje0FaUBYYhPLz82m9XscvHyGopG/4Al8uCAcEqSccqSZzUbz1Z8vD3pONJVNTR4cukHSsdapgLRZSA2oqFtxo4MMg2qAitNm8cM9NUg0igHZMgTKi3RuCBJSg22pJltxu4MMQ0w6qJZMMNww7gDnIITijDkOpZZIraKVGoQGTlPDtkhqAVirsjofryuNNyxaxYZWzPANMBYikWGywIENDCYIJT4j1CHOiHpunooMqPaeRrgMWqJCFeiF9TjGxZHWsPx1rYZ7Rjem6L1n8fF5bd/T1ksyJYJF4JGMkrmV0/Xm4fzZL18Ts6+5OpY5xvrunqypymE6I+bsjZalHA/qDW+PncVofh5lN8MTm8euCNYbF88z1a/SZTqTWwz2sLpMBgq7wV+MZmOL8fjfLZFfT07eymoqwXn6fjsLGsC60rGlgr8lB8M0MQ2oy2DSwOMlkh4qCwQ4RREE9RVSgIKyRynQkURbRygqCDBKwWiAzsqysRAgV6lbUYHfIw0kDEDx2K+1dFUktTMXAuFdEkdupARjKIeoBB9norMLOXJKk3dCI1sM9oyvCUyRZ4MER17EFmlLMgXzxxbHJFaehsaWIzk5GpLlChiXxZTH3GdRrYZ7RjgmyKeRAtUpOgsYEXWyJv5UBPSVuiBZQYgWCt6UyIPRqh2okKU72Cb0YJBpkF3UPjtGHx1WbAP2thm1GNb6/YFvoqdfS9elQai0Wvss5uWrOdXuG3u+/LqLvn5+ybRor32HwZ2N/Dk20Ybb4aeXpzIoA/EvbCzbcZWuGcjg3BL4HDp2w/6bNvgsbuBsQ18N3qnm1FwL9z/rdGlQd4v807fshj7hrxCkPvW88mugXN683uTjmN7udqjo68UaAf5honvCnzTjbyPO8i3LD3hQz0UYYNCfQ9nlu62vaM2fkpm0VthaSYWiGEDsRE1Mekfil5fFnJvZMHrl+vGi71scpFEujIOCO579RtiYTaHkGuzY3W9fI6FRwvgLvDpNoGQF28Tzh/AzMXtf/xcAYE0vfTvnQOxEfUxyelAeRlLlv1/y7KHiakbnGFI/4xrbhu1kMp6Wq7ssHBnihpFSIC+UvR+fmNyrrobUAeRtrndMpBALRBzRUb3E9om28YvX54G2GdMo+NvWaSBAfrMjOZwnJQvJFU4F6EDvAK5w4mucVGlPIxqLOn2MeJpQCNFo0QYF/auRC+oEbA40hqOo6MxnAY4dkxNZQFNEPnI8t6hrlFQZxwEdHnsqlO5rhGBopFhE6gJD6N7i3LdpIBHjeG0SSHS0HUvtYSSFmNhVmlbTFni/ouMT2mP3/gTKEE2mSQPD/RAlU2unpKz0Xf6agr1YbXuarDuxH3phQR1Lfn79++vX79YMDSj0ejr168sVEKP4AuIDnIvSWdp2T/gxIvEl+uQ8B6Go/sRFWMDeFIvR41mPZ/8+Tf/1o6pbiprtAmhGCmotA0162OSkiFIuxyxtEYN6NYJQW5BXaX0BthtBa6T1WrFslHi/v6ermKJ1WymXECX2V1QPIz5JyinSbmQvU+Fw2K9RIg9FAl7FDRqXqFNCEWHsrraNm9/BTVpINvCcZEEYa8lSWga7wFEjPYmOIW9gsEU8w9q+DYqHAsPp2laisXiO6FKYmlA3ZTMQBv0qHIoKfr5GXvi42rboOkbMclrA7JAqmobYARRCXVQtZ9vWYwOCLypgo7q2DlYweVYzIfo7EuKKL6pOO87QTan9m/6uWaJLBo72dvsSkTnUhTjymLqI66DHdfFZP6myLXzqBbuOrCQK7JG3swPKaQC0lIt5BkPGT7/Pp2O83fuGES5g10ESKO9OpTqk3INcmXfvHTS1Cx0fSXSwHhfoislChN0u7htXBoaJq31aXBU+OtFlys+Y21NOg6daLSkLgs64BBb62DZvs9tUK1Zu58GchfgZ3J3cvLpcdRis0z2NLUfFNqvlzv/him01gVDx/RquizNLFDQZqZp2fzj0N7L7Br4wzdpJe4XZe1BNlqvl889my6n92raOht95iO6V+BGRz1ZIDSBYGmGGn4XLsxUonmuBhzZhts9efkA3zAhgbWcDl3Su+kSZxmgbBRVuEkCVw9egdYSTnSNiyo1VaEaS7r9EdA7L9cSWHuANFCB0ht4kSyvhQhijQ5ppSZODg59+TFmQQ+9XEVobfdp0N/rg3HrI5qkWOQGEY16/oSgkuvgiIuxgVA5Cvrr5Rgla7tPg54tj/uzy+BDMax3xiVrO18i9+ptIixnX/jQc0kLXPwddXek0T/Nvp7f3Yqvk6ASj7Msw+Z5/NMOrjWUOaVjYFjvjMvWdpYG2QRftKzn9889+tGq15fF9MK/AALrpgl/X3v65SwpvnrCt0XiPdHzkg6h9O4R/o6vP8/nqAixD5mzni+Tc2yeTJ/43RDuaHxKBhMWu9NLL1dSYy3NXx3gHhL6dad8t10GVPURn5X66OVqqq21X607BBluf4c0qNnwbrwnlgaGYT/e2D35v6XFYsPoGZYGnXN681OsRow+YmlgGJYGhmFpYBiApYFhWBp0j9uAkSSL2zt7V9RT7P8GhmF3A8OwNDCMJEn+Bys2o1OWWp2mAAAAAElFTkSuQmCC">
+				
+				
+			</p>
+			<p class="" style="">
+				If the case where offsets are not used, this simplifies to:
+			</p>
+			<p class="" style="">
+				<img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJMAAAA3CAIAAACHCu+6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQLSURBVHhe7ZvbmdsgEEa3PPfhFtREetD37ZPrkEtxJ87cBDMykhG6QTLnJQsCefgPyE42/nk7beLmWsXNtYqbu4pXf/sBbv1LOlbi5tYxdBg3QpG/+q40eWToisW5uTXgMQlR85kpTx6AbdAN8vNq3Fw+6MokDR3lyW+d7ubyoVOmD5l9VvIhRCYHUZ6wt37AEUEWjDcD44M4y6ebW4PI+UxWSUUBcQDp4CZPTovDYdKy8+dxc2uRo6HDVblbrAUzTIlDpaE/V5ybK4FPjw4+GfZEghGEF+Ua/CTdOEENWcbN5fHqe+OGQuboJ4ICk34rGC5GcSOpu8zi5rKA2G2smDefDnuUIlYcefsQNwyDFQq8oE9+XMTNZUEHI/qhuMcmXZPslcboFnsBHCRHFzv6Fzf0dJqvNS7g5nIYOoyTfAkmXgqfiHL1cLJEDWV1op7R87/g5mqHnCfOoZtrFTdXNfQgTT9C3VzlzP46wc3VDbzLzXzWdHNVMy9OzMUPsEQYrPq/fF41fyvZj2oLOwdY5uzy4pmjMBJLLPu1L/8NaBeqLexwlsQpc7g5U4sahvUrhXvtl0+1hR3O4n92COZwZyfz6XEyPXPGALkRbirXpC0tIv26dIa+PeQi5xVWG1DxwjYbzWE+qfVwPgiMwPvI7eAPNRyuqZa9toiOc4IUfVFhV8JHzZb+iZjLyod+Hc+B4niJFrAvYq9t5MTCaBftVvgGeDsvagPY3Gw+8e0cNkLXjR8JJhnIdme+5LOOiwt7Pp9/6uP39xdqY3NoObEok4/aBUv5TFpfwNvOQDe5rDDm8XhINTVxv9+htgVzeqXws9r6S4nYkVuBu9VZ2PXI+xwsyz5ZsSMuG/byRz7jO40kIsfAtrZTbWGXI+YAfNJEzPpsPjJQRozTpElJT6YDNMrM0DaWGV+B2bMw6jM95yIl5kehieb+Q8rMyR4AKPKrvlpwhjlaamF9tYHHJCyFz8ymlUE2hYf+nDNXvLEOZHyarqoMJ5mkoWPL43bD9FPMbVzeUbC71ebMjOu+WnCGuUrFSc6rzAU5nwuiC3wzFBAHkA5u8uRwCZrx1XGYtOz8GU4wZ+qrCc6xoDY5GjpclbvFWjDDVDBYSujPEneCuWrFlZsD7FxqpcKeSDCC8KJcg5+kGyfklXS8uRo/nTArzVX21YLDzcX6KoO9IXnuYLxdCObNU+1Rilhx/IKhLcEUf7XgMHN81KCo7D1dOXQw4mIo7rFJ1yR7pTG6pSD2/WrBgeagmuRObBP+B0/yJZh4ebmIXnIcTpaoIddtPnG6jcw4tRz/PudswM39g7i5ehmfteb5GXBzNcPu3Fx7uLlWcXOt4uZaxc21CXtDUu7cXKu4uVZxc23yfv8F6vJaxyXqyjYAAAAASUVORK5CYII=">
+				
+				
+			</p>
+			<p class="" style="">
+				As an example, consider the two following temperature units:
 			</p>
 			<div class="indent">
-        <h3>3.5.1 <a name="sect-ID0EXBCK">Angle</a></h3>
+        <p class="caption"><a name="table-110"></a>Table 110: Example of temperature units</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+				<tr class="body">
+					<th colspan="" rowspan="">Unit</th>
+					<th colspan="" rowspan="">Scale</th>
+					<th colspan="" rowspan="">Offset</th>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">°F</td>
+					<td colspan="" rowspan="">1.8</td>
+					<td colspan="" rowspan="">32</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">K</td>
+					<td colspan="" rowspan="">1</td>
+					<td colspan="" rowspan="">273.15</td>
+				</tr>
+			</table>
+      </div>
+			<p class="" style="">
+				So, assume we have a temperature of 50 °F. Let <span class="strong">i</span> represent the index of unit °F, and <span class="strong">j</span> the index of unit K. That would give us
+				K=((F-32)/1.8)*1+273.15=((50-32)/1.8)*1+273.15=283.15. So 50 °F = 283.15 K.
+			</p>
+			<div class="indent">
+        <h3>3.5.1 <a name="sect-ID0E1REK">Angle</a></h3>
 				<div class="indent">
-          <p class="caption"><a name="table-96"></a>Table 96: Angle</p>
+          <p class="caption"><a name="table-111"></a>Table 111: Angle</p>
           <table border="1" cellpadding="3" cellspacing="0">
 					<tr class="body">
 						<th colspan="" rowspan="">Unit</th>
@@ -4203,9 +5178,9 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.2 <a name="sect-ID0EZDCK">Area</a></h3>
+        <h3>3.5.2 <a name="sect-ID0E3TEK">Area</a></h3>
 				<div class="indent">
-          <p class="caption"><a name="table-97"></a>Table 97: Area</p>
+          <p class="caption"><a name="table-112"></a>Table 112: Area</p>
           <table border="1" cellpadding="3" cellspacing="0">
 					<tr class="body">
 						<th colspan="" rowspan="">Unit</th>
@@ -4265,9 +5240,9 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.3 <a name="sect-ID0ENJCK">Distance</a></h3>
+        <h3>3.5.3 <a name="sect-ID0EQZEK">Distance</a></h3>
 				<div class="indent">
-          <p class="caption"><a name="table-98"></a>Table 98: Distance</p>
+          <p class="caption"><a name="table-113"></a>Table 113: Distance</p>
           <table border="1" cellpadding="3" cellspacing="0">
 					<tr class="body">
 						<th colspan="" rowspan="">Unit</th>
@@ -4351,9 +5326,9 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.4 <a name="sect-ID0ENRCK">Energy</a></h3>
+        <h3>3.5.4 <a name="sect-ID0EQBFK">Energy</a></h3>
 				<div class="indent">
-          <p class="caption"><a name="table-99"></a>Table 99: Energy</p>
+          <p class="caption"><a name="table-114"></a>Table 114: Energy</p>
           <table border="1" cellpadding="3" cellspacing="0">
 					<tr class="body">
 						<th colspan="" rowspan="">Unit</th>
@@ -4533,9 +5508,9 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.5 <a name="sect-ID0E4CDK">Flow</a></h3>
+        <h3>3.5.5 <a name="sect-ID0EATFK">Flow</a></h3>
 				<div class="indent">
-          <p class="caption"><a name="table-100"></a>Table 100: Flow</p>
+          <p class="caption"><a name="table-115"></a>Table 115: Flow</p>
           <table border="1" cellpadding="3" cellspacing="0">
 					<tr class="body">
 						<th colspan="" rowspan="">Unit</th>
@@ -4691,9 +5666,9 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.6 <a name="sect-ID0EBSDK">Mass</a></h3>
+        <h3>3.5.6 <a name="sect-ID0EECGK">Mass</a></h3>
 				<div class="indent">
-          <p class="caption"><a name="table-101"></a>Table 101: Mass</p>
+          <p class="caption"><a name="table-116"></a>Table 116: Mass</p>
           <table border="1" cellpadding="3" cellspacing="0">
 					<tr class="body">
 						<th colspan="" rowspan="">Unit</th>
@@ -4759,9 +5734,9 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.7 <a name="sect-ID0EIYDK">Power</a></h3>
+        <h3>3.5.7 <a name="sect-ID0ELIGK">Power</a></h3>
 				<div class="indent">
-          <p class="caption"><a name="table-102"></a>Table 102: Power</p>
+          <p class="caption"><a name="table-117"></a>Table 117: Power</p>
           <table border="1" cellpadding="3" cellspacing="0">
 					<tr class="body">
 						<th colspan="" rowspan="">Unit</th>
@@ -4989,9 +5964,9 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.8 <a name="sect-ID0EQOEK">Pressure</a></h3>
+        <h3>3.5.8 <a name="sect-ID0ET5GK">Pressure</a></h3>
 				<div class="indent">
-          <p class="caption"><a name="table-103"></a>Table 103: Pressure</p>
+          <p class="caption"><a name="table-118"></a>Table 118: Pressure</p>
           <table border="1" cellpadding="3" cellspacing="0">
 					<tr class="body">
 						<th colspan="" rowspan="">Unit</th>
@@ -5069,9 +6044,9 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.9 <a name="sect-ID0E4VEK">Speed</a></h3>
+        <h3>3.5.9 <a name="sect-ID0EAGHK">Speed</a></h3>
 				<div class="indent">
-          <p class="caption"><a name="table-104"></a>Table 104: Speed</p>
+          <p class="caption"><a name="table-119"></a>Table 119: Speed</p>
           <table border="1" cellpadding="3" cellspacing="0">
 					<tr class="body">
 						<th colspan="" rowspan="">Unit</th>
@@ -5113,9 +6088,9 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.10 <a name="sect-ID0EYZEK">Temperature</a></h3>
+        <h3>3.5.10 <a name="sect-ID0E2JHK">Temperature</a></h3>
 				<div class="indent">
-          <p class="caption"><a name="table-105"></a>Table 105: Temperature</p>
+          <p class="caption"><a name="table-120"></a>Table 120: Temperature</p>
           <table border="1" cellpadding="3" cellspacing="0">
 					<tr class="body">
 						<th colspan="" rowspan="">Unit</th>
@@ -5163,9 +6138,9 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.11 <a name="sect-ID0EG5EK">Time</a></h3>
+        <h3>3.5.11 <a name="sect-ID0EJOHK">Time</a></h3>
 				<div class="indent">
-          <p class="caption"><a name="table-106"></a>Table 106: Time</p>
+          <p class="caption"><a name="table-121"></a>Table 121: Time</p>
           <table border="1" cellpadding="3" cellspacing="0">
 					<tr class="body">
 						<th colspan="" rowspan="">Unit</th>
@@ -5219,9 +6194,9 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.12 <a name="sect-ID0EHDFK">Volume</a></h3>
+        <h3>3.5.12 <a name="sect-ID0EKTHK">Volume</a></h3>
 				<div class="indent">
-          <p class="caption"><a name="table-107"></a>Table 107: Volume</p>
+          <p class="caption"><a name="table-122"></a>Table 122: Volume</p>
           <table border="1" cellpadding="3" cellspacing="0">
 					<tr class="body">
 						<th colspan="" rowspan="">Unit</th>
@@ -5306,23 +6281,319 @@
 			</div>
 		</div>
         <div class="indent">
-      <h3>3.6 <a name="sect-ID0EILFK">Privilege IDs</a></h3>
+      <h3>3.6 <a name="sect-ID0EL2HK">Privilege IDs</a></h3>
             
             
             
             
         </div>
         <div class="indent">
-      <h3>3.7 <a name="sect-ID0EVLFK">Data Sources</a></h3>
+      <h3>3.7 <a name="sect-ID0EY2HK">Data Sources</a></h3>
             
         </div>
 		<div class="indent">
-      <h3>3.8 <a name="sect-ID0E3LFK">Identification Schemes</a></h3>
+      <h3>3.8 <a name="sect-ID0E62HK">Identification Schemes</a></h3>
 			
+		</div>
+		<div class="indent">
+      <h3>3.9 <a name="sect-ID0EG3HK">Media Types</a></h3>
+			<p class="" style="">
+				The following sections list possible enumerations for different aspects of media streams.
+			</p>
+			<div class="indent">
+        <h3>3.9.1 <a name="TransportProtocol">Transport Protocol</a></h3>
+				<p class="" style="">
+					The following table lists different transport protocols that can be used for transporting video or audio streams.
+				</p>
+				<div class="indent">
+          <p class="caption"><a name="table-123"></a>Table 123: Transport Protocol</p>
+          <table border="1" cellpadding="3" cellspacing="0">
+					<tr class="body">
+						<th colspan="" rowspan="">Value</th>
+						<th colspan="" rowspan="">Description</th>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Dvb</td>
+						<td colspan="" rowspan="">Digital Video Broadcast (DVB) Tuner</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Http</td>
+						<td colspan="" rowspan="">Hyper Text Transfer Protocol</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Https</td>
+						<td colspan="" rowspan="">Hyper Text Transfer Protocol (SSL)</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Mms</td>
+						<td colspan="" rowspan="">Microsoft Media Stream</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Rtsp</td>
+						<td colspan="" rowspan="">RTSP (Real Time Streaming Protocol)</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Shoutcast</td>
+						<td colspan="" rowspan="">AOL Shoutcast</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">UdpMulticast</td>
+						<td colspan="" rowspan="">UDP Multicast</td>
+					</tr>
+				</table>
+        </div>
+			</div>
+			<div class="indent">
+        <h3>3.9.2 <a name="VideoContainerFormat">Video Container Format</a></h3>
+				<p class="" style="">
+					The following table lists different video container formats that can be used for encapsulating video.
+				</p>
+				<div class="indent">
+          <p class="caption"><a name="table-124"></a>Table 124: Video Container Format</p>
+          <table border="1" cellpadding="3" cellspacing="0">
+					<tr class="body">
+						<th colspan="" rowspan="">Value</th>
+						<th colspan="" rowspan="">Description</th>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">3GP</td>
+						<td colspan="" rowspan="">3GPP</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Avi</td>
+						<td colspan="" rowspan="">Avi</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">DivX</td>
+						<td colspan="" rowspan="">DivX</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Dvb</td>
+						<td colspan="" rowspan="">Direct Video Broadcast (DVB).</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">FlashVideo</td>
+						<td colspan="" rowspan="">Flash Video</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">MotionJPeg</td>
+						<td colspan="" rowspan="">Motion JPEG</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Mov</td>
+						<td colspan="" rowspan="">QuickTime</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">MPeg</td>
+						<td colspan="" rowspan="">MPeg</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">MPeg4</td>
+						<td colspan="" rowspan="">MPeg-4</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Ogg</td>
+						<td colspan="" rowspan="">OGG</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">RealMedia</td>
+						<td colspan="" rowspan="">Real Media</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">StillImages</td>
+						<td colspan="" rowspan="">Video is created by repeatedly reading a still image.</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">TS</td>
+						<td colspan="" rowspan="">MPeg TS</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">WebM</td>
+						<td colspan="" rowspan="">WebM</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Wmv</td>
+						<td colspan="" rowspan="">Windows Media Video Stream</td>
+					</tr>
+				</table>
+        </div>
+			</div>
+			<div class="indent">
+        <h3>3.9.3 <a name="AudioContainerFormat">Audio Container Format</a></h3>
+				<p class="" style="">
+					The following table lists different audio container formats that can be used for encapsulating video.
+				</p>
+				<div class="indent">
+          <p class="caption"><a name="table-125"></a>Table 125: Audio Container Format</p>
+          <table border="1" cellpadding="3" cellspacing="0">
+					<tr class="body">
+						<th colspan="" rowspan="">Value</th>
+						<th colspan="" rowspan="">Description</th>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">3GP</td>
+						<td colspan="" rowspan="">3GPP</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Aiff</td>
+						<td colspan="" rowspan="">Audio Interchange File Format (AIFF).</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Flac</td>
+						<td colspan="" rowspan="">FLAC</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">M3U</td>
+						<td colspan="" rowspan="">M3U</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">MPeg3</td>
+						<td colspan="" rowspan="">MPeg-3.</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">MPeg4</td>
+						<td colspan="" rowspan="">MPeg-4 audio</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Ogg</td>
+						<td colspan="" rowspan="">OGG</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Pls</td>
+						<td colspan="" rowspan="">Pls</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">RealMedia</td>
+						<td colspan="" rowspan="">Real Media</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Wav</td>
+						<td colspan="" rowspan="">Wave Audio.</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">WebM</td>
+						<td colspan="" rowspan="">WebM</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Wma</td>
+						<td colspan="" rowspan="">Windows Media Audio Stream</td>
+					</tr>
+				</table>
+        </div>
+			</div>
+			<div class="indent">
+        <h3>3.9.4 <a name="VideoStreamFormat">Video Stream Format</a></h3>
+				<p class="" style="">
+					The following table lists different video stream formats that can be used for encoding video streams.
+				</p>
+				<div class="indent">
+          <p class="caption"><a name="table-126"></a>Table 126: Video Stream Format</p>
+          <table border="1" cellpadding="3" cellspacing="0">
+					<tr class="body">
+						<th colspan="" rowspan="">Value</th>
+						<th colspan="" rowspan="">Description</th>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">H263</td>
+						<td colspan="" rowspan="">H.263</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">MPeg1</td>
+						<td colspan="" rowspan="">MPeg-1</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">MPeg2</td>
+						<td colspan="" rowspan="">MPeg-2</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">MPeg4</td>
+						<td colspan="" rowspan="">MPeg-4</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Wmv8</td>
+						<td colspan="" rowspan="">Windows Media Video v8</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Wmv9</td>
+						<td colspan="" rowspan="">Windows Media Video v9</td>
+					</tr>
+				</table>
+        </div>
+			</div>
+			<div class="indent">
+        <h3>3.9.5 <a name="AudioStreamFormat">Audio Stream Format</a></h3>
+				<p class="" style="">
+					The following table lists different audio stream formats that can be used for encoding audio streams.
+				</p>
+				<div class="indent">
+          <p class="caption"><a name="table-127"></a>Table 127: Audio Stream Format</p>
+          <table border="1" cellpadding="3" cellspacing="0">
+					<tr class="body">
+						<th colspan="" rowspan="">Value</th>
+						<th colspan="" rowspan="">Description</th>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Aac</td>
+						<td colspan="" rowspan="">Advanced Audio Coding (AAC)</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Arm</td>
+						<td colspan="" rowspan="">Adaptive Rate Modulation (ARM)</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">MPeg1</td>
+						<td colspan="" rowspan="">MPeg-1</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">MPeg3</td>
+						<td colspan="" rowspan="">MPeg-3</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Pcm</td>
+						<td colspan="" rowspan="">Pulse Code Modulation (PCM)</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Wma9</td>
+						<td colspan="" rowspan="">Windows Media Audio v9</td>
+					</tr>
+				</table>
+        </div>
+			</div>
+			<div class="indent">
+        <h3>3.9.6 <a name="ImageFormat">Image Format</a></h3>
+				<p class="" style="">
+					The following table lists different image formats that can be used for encoding images.
+				</p>
+				<div class="indent">
+          <p class="caption"><a name="table-128"></a>Table 128: Image Format</p>
+          <table border="1" cellpadding="3" cellspacing="0">
+					<tr class="body">
+						<th colspan="" rowspan="">Value</th>
+						<th colspan="" rowspan="">Description</th>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Png</td>
+						<td colspan="" rowspan="">PNG</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Jpeg</td>
+						<td colspan="" rowspan="">JPEG</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Gif</td>
+						<td colspan="" rowspan="">GIF</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Svg</td>
+						<td colspan="" rowspan="">SVG</td>
+					</tr>
+				</table>
+        </div>
+			</div>
 		</div>
 	<h2>4.
        <a name="support">Determining Support</a></h2>
-        <p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:sn:control" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0ESMFK">6</a>] information requests.</p>
+        <p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:sn:control" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EVSAM">6</a>] information requests.</p>
         <p class="caption"><a name="example-2"></a>Example 2. Service discovery information request</p>
     <div class="indent">
       <pre class="prettyprint">
@@ -5353,7 +6624,7 @@
     </div>
         <p class="" style="">
             In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
-            in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EJNFK">7</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
+            in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EMTAM">7</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
         </p>
     <h2>5.
        <a name="newinterfaces">Extending the Interoperability Document</a></h2>
@@ -5376,7 +6647,7 @@
         </ul>
     <h2>7.
        <a name="iana">IANA Considerations</a></h2>
-        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EGPFK">8</a>].</p>
+        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EJVAM">8</a>].</p>
     <h2>8.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
         <p class="" style="">REQUIRED.</p>
@@ -5477,14 +6748,14 @@
     <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
     <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
     <div class="indent">
-      <p><a name="nt-ID0EGE">1</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0E4E">2</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0EJF">3</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
-      <p><a name="nt-ID0EVF">4</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
-      <p><a name="nt-ID0EBG">5</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
-      <p><a name="nt-ID0ESMFK">6</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
-      <p><a name="nt-ID0EJNFK">7</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
-      <p><a name="nt-ID0EGPFK">8</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+      <p><a name="nt-ID0EFE">1</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0E3E">2</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0EIF">3</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
+      <p><a name="nt-ID0EUF">4</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
+      <p><a name="nt-ID0EAG">5</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+      <p><a name="nt-ID0EVSAM">6</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0EMTAM">7</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0EJVAM">8</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>

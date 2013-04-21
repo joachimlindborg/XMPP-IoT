@@ -3,7 +3,6 @@
     <!ENTITY % ents SYSTEM 'xep.ent'>
     %ents;
 ]>
-<!-- TODO: Interface inheritence -->
 <!-- TODO: byte codes for identification + xml file with interface data. + version numbers -->
 <!-- TODO: Another XEP: Billing interfaces. Tariffs. Prepayment. -->
 <?xml-stylesheet type='text/xsl' href='xep.xsl'?>
@@ -1101,7 +1100,7 @@
                         </tr>
                     </table>
                 </section4>
-                <section4 topic='XMPP.IoT.Meter.Electricity'>
+                <section4 topic='XMPP.IoT.Meter.Electricity' anchor='XMPP_IoT_Meter_Electricity'>
                     <p>
                         Measures consumption of electrical energy.
                     </p>
@@ -3207,16 +3206,536 @@
                 <p>
                     This section contains interfaces relating to multi media.
                 </p>
-				<section4 topic='XMPP.IoT.Media.BarCode'>
-					<!-- TODO -->
-				</section4>
 				<section4 topic='XMPP.IoT.Media.Camera'>
-                    <!-- TODO -->
-                </section4>
+					<p>
+						This interface defines a camera.
+					</p>
+					<table caption='XMPP.IoT.Media.Camera Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>URL</td>
+							<td>Required</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>URL to the camera video stream.</td>
+						</tr>
+						<tr>
+							<td>Width</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>numeric</td>
+							<td>Width in pixels of the video.</td>
+						</tr>
+						<tr>
+							<td>Height</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>numeric</td>
+							<td>Height in pixels of the video.</td>
+						</tr>
+						<tr>
+							<td>Transport</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>Transport protocol used to transfer stream. (1)</td>
+						</tr>
+						<tr>
+							<td>Container</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>Video Container Format used to encapsulate stream. (2)</td>
+						</tr>
+						<tr>
+							<td>Video Stream</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>Video Stream Format used to transfer stream. (3)</td>
+						</tr>
+						<tr>
+							<td>Audio Stream</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>Audio Stream Format used to transfer stream. (4)</td>
+						</tr>
+						<tr>
+							<td>Image Type</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>Image Format, in case camera supports still images. (5)</td>
+						</tr>
+						<tr>
+							<td>Enabled</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>boolean</td>
+							<td>If the camera is enabled or not.</td>
+						</tr>
+						<tr>
+							<td>Angle</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>numeric</td>
+							<td>Rotation of camera around an imaginary vertical axis (looking left-right). Value must be of an angle unit.</td>
+						</tr>
+						<tr>
+							<td>Elevation</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>numeric</td>
+							<td>Rotation of camera around an imaginary horizontal axis (looking up-down). Value must be of an angle unit.</td>
+						</tr>
+						<tr>
+							<td>Rotation</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>numeric</td>
+							<td>Rotation of camera around an imaginary depth axis (tilting head). Value must be of an angle unit.</td>
+						</tr>
+					</table>
+					<p>
+						(1) For more information, see <link url='#TransportProtocol'>Transport Protocols</link>.
+					</p>
+					<p>
+						(2) For more information, see <link url='#VideoContainerFormat'>Video Container Formats</link>.
+					</p>
+					<p>
+						(3) For more information, see <link url='#VideoStreamFormat'>Video Stream Formats</link>.
+					</p>
+					<p>
+						(4) For more information, see <link url='#AudioStreamFormat'>Audio Stream Formats</link>.
+					</p>
+					<p>
+						(5) For more information, see <link url='#ImageFormat'>Image Formats</link>.
+					</p>
+					<table caption='XMPP.IoT.Media.Camera Control Parameters'>
+						<tr>
+							<th>Parameter</th>
+							<th>Use</th>
+							<th>Parameter Type</th>
+							<th>Range</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Enabled</td>
+							<td>Optional</td>
+							<td>boolean</td>
+							<td>-</td>
+							<td>If the camera should be enabled (true) or disabled (false).</td>
+						</tr>
+						<tr>
+							<td>Angle</td>
+							<td>Optional</td>
+							<td>numeric</td>
+							<td>&lt;range&gt;</td>
+							<td>
+								Rotation of camera around an imaginary vertical axis (looking left-right).
+								The range must be defined in the corresponding control form, using the &lt;range&gt; element. Must have the same
+								resolution and unit as the value in the field with the same name, if available.
+							</td>
+						</tr>
+						<tr>
+							<td>Elevation</td>
+							<td>Optional</td>
+							<td>numeric</td>
+							<td>&lt;range&gt;</td>
+							<td>
+								Rotation of camera around an imaginary horizontal axis (looking up-down).
+								The range must be defined in the corresponding control form, using the &lt;range&gt; element. Must have the same
+								resolution and unit as the value in the field with the same name, if available.
+							</td>
+						</tr>
+						<tr>
+							<td>Rotation</td>
+							<td>Optional</td>
+							<td>numeric</td>
+							<td>&lt;range&gt;</td>
+							<td>
+								Rotation of camera around an imaginary depth axis (tilting head).
+								The range must be defined in the corresponding control form, using the &lt;range&gt; element. Must have the same
+								resolution and unit as the value in the field with the same name, if available.
+							</td>
+						</tr>
+					</table>
+				</section4>
                 <section4 topic='XMPP.IoT.Media.Directory'>
-                    <!-- TODO -->
+					<p>
+						A Media Directory device or node contains subnodes representing different media items in the media directory catalog.
+					</p>
+					<ul>
+						<li>
+							Nodes implementing the <link url='#AudioItem'>XMPP.IoT.Media.Directory.AudioItem</link> interface represent audio items in the directory.
+						</li>
+						<li>
+							Nodes implementing the <link url='#DirectoryItem'>XMPP.IoT.Media.Directory.DirectoryItem</link> interface represent possibly multi-resolution or
+							multi-format directory items in the directory.
+						</li>
+						<li>
+							Nodes implementing the <link url='#ImageItem'>XMPP.IoT.Media.Directory.ImageItem</link> interface represent images in the directory.
+						</li>
+						<li>
+							Nodes implementing the <link url='#VideoItem'>XMPP.IoT.Media.Directory.VideoItem</link> interface represent video items in the directory.
+						</li>
+					</ul>
+					<p>
+						Also, items in the directory can also implement the <link url='#DublinCore'>XMPP.IoT.Media.Directory.DublinCore</link> interface to aggregate
+						Dublin Core meta-data for each item.
+					</p>
+					<!-- TODO: Content search commands -->
                 </section4>
-                <section4 topic='XMPP.IoT.Media.Display'>
+				<section4 topic='XMPP.IoT.Media.Directory.AudioItem' anchor='AudioItem'>
+					<p>
+						Represents an audio item (song, radio station, etc.)
+					</p>
+					<table caption='XMPP.IoT.Media.Directory.AudioItem Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>URL</td>
+							<td>Required</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>URL to the audio.</td>
+						</tr>
+						<tr>
+							<td>Duration</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>timeSpan</td>
+							<td>Duration of item.</td>
+						</tr>
+						<tr>
+							<td>Transport</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>Transport protocol used to transfer stream. (1)</td>
+						</tr>
+						<tr>
+							<td>Container</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>Audio Container Format used to encapsulate stream. (2)</td>
+						</tr>
+						<tr>
+							<td>Audio Stream</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>Audio Stream Format used to transfer stream. (3)</td>
+						</tr>
+						<tr>
+							<td>Language</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>IETF Language tag for the language of the audio.</td>
+						</tr>
+					</table>
+					<p>
+						(1) For more information, see <link url='#TransportProtocol'>Transport Protocols</link>.
+					</p>
+					<p>
+						(2) For more information, see <link url='#AudioContainerFormat'>Audio Container Formats</link>.
+					</p>
+					<p>
+						(3) For more information, see <link url='#AudioStreamFormat'>Audio Stream Formats</link>.
+					</p>
+				</section4>
+				<section4 topic='XMPP.IoT.Media.Directory.DirectoryItem' anchor='DirectoryItem'>
+					<p>
+						Represents an item in a directory. If the item is a single format, the node will also implement an interface corresponding to the type of
+						item it represends, such as:
+					</p>
+					<ul>
+						<li>
+							<link url='#AudioItem'>Audio</link>
+						</li>
+						<li>
+							<link url='#ImageItem'>Image</link>
+						</li>
+						<li>
+							<link url='#VideoItem'>Video</link>
+						</li>
+					</ul>
+					<p>
+						If the directory item contains different sources for the same item (for instance different resolutions, languages, etc.), the node will not implement
+						corresponding type interfaces, but instead contain subnodes representing each of the different formats supported.
+					</p>
+				</section4>
+				<section4 topic='XMPP.IoT.Media.Directory.DublinCore' anchor='DublinCore'>
+					<p>
+						<strong>Note:</strong> The fields used in this interface, comes from the <link url='http://dublincore.org/'>DCMI Dublin Core Metadata Initiative</link>.
+					</p>
+					<table caption='XMPP.IoT.Media.Directory.DirectoryItem Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Contributor</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>An entity responsible for making contributions to the resource.</td>
+						</tr>
+						<tr>
+							<td>Coverage</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.</td>
+						</tr>
+						<tr>
+							<td>Creator</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>An entity primarily responsible for making the resource.</td>
+						</tr>
+						<tr>
+							<td>Date</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>dateTime</td>
+							<td>A point or period of time associated with an event in the lifecycle of the resource.</td>
+						</tr>
+						<tr>
+							<td>Description</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>An account of the resource.</td>
+						</tr>
+						<tr>
+							<td>Format</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>The file format, physical medium, or dimensions of the resource.</td>
+						</tr>
+						<tr>
+							<td>Identifier</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>An unambiguous reference to the resource within a given context.</td>
+						</tr>
+						<tr>
+							<td>Language</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>A language of the resource.</td>
+						</tr>
+						<tr>
+							<td>Publisher</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>An entity responsible for making the resource available.</td>
+						</tr>
+						<tr>
+							<td>Relation</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>A related resource.</td>
+						</tr>
+						<tr>
+							<td>Rights</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>Information about rights held in and over the resource.</td>
+						</tr>
+						<tr>
+							<td>Source</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>A related resource from which the described resource is derived.</td>
+						</tr>
+						<tr>
+							<td>Subject</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>The topic of the resource.</td>
+						</tr>
+						<tr>
+							<td>Title</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>A name given to the resource.</td>
+						</tr>
+						<tr>
+							<td>Type</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>The nature or genre of the resource.</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.IoT.Media.Directory.ImageItem' anchor='ImageItem'>
+					<p>
+						Represents an image item (photo, drawing, etc.)
+					</p>
+					<table caption='XMPP.IoT.Media.Directory.ImageItem Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>URL</td>
+							<td>Required</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>URL to the image.</td>
+						</tr>
+						<tr>
+							<td>Width</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>numeric</td>
+							<td>Width in pixels of the video.</td>
+						</tr>
+						<tr>
+							<td>Height</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>numeric</td>
+							<td>Height in pixels of the video.</td>
+						</tr>
+						<tr>
+							<td>Image Type</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>Image Format. (1)</td>
+						</tr>
+					</table>
+					<p>
+						(1) For more information, see <link url='#ImageFormat'>Image Formats</link>.
+					</p>
+				</section4>
+				<section4 topic='XMPP.IoT.Media.Directory.VideoItem' anchor='VideoItem'>
+					<p>
+						Represents a video item (movie, TV, etc.)
+					</p>
+					<table caption='XMPP.IoT.Media.Directory.VideoItem Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>URL</td>
+							<td>Required</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>URL to the camera video stream.</td>
+						</tr>
+						<tr>
+							<td>Duration</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>timeSpan</td>
+							<td>Duration of item.</td>
+						</tr>
+						<tr>
+							<td>Width</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>numeric</td>
+							<td>Width in pixels of the video.</td>
+						</tr>
+						<tr>
+							<td>Height</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>numeric</td>
+							<td>Height in pixels of the video.</td>
+						</tr>
+						<tr>
+							<td>Transport</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>Transport protocol used to transfer stream. (1)</td>
+						</tr>
+						<tr>
+							<td>Container</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>Video Container Format used to encapsulate stream. (2)</td>
+						</tr>
+						<tr>
+							<td>Video Stream</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>Video Stream Format used to transfer stream. (3)</td>
+						</tr>
+						<tr>
+							<td>Audio Stream</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>Audio Stream Format used to transfer stream. (4)</td>
+						</tr>
+						<tr>
+							<td>Language</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>IETF Language tag for the language of the audio.</td>
+						</tr>
+					</table>
+					<p>
+						(1) For more information, see <link url='#TransportProtocol'>Transport Protocols</link>.
+					</p>
+					<p>
+						(2) For more information, see <link url='#VideoContainerFormat'>Video Container Formats</link>.
+					</p>
+					<p>
+						(3) For more information, see <link url='#VideoStreamFormat'>Video Stream Formats</link>.
+					</p>
+					<p>
+						(4) For more information, see <link url='#AudioStreamFormat'>Audio Stream Formats</link>.
+					</p>
+					<p>
+						(5) For more information, see <link url='#ImageFormat'>Image Formats</link>.
+					</p>
+				</section4>
+				<section4 topic='XMPP.IoT.Media.Display'>
                     <!-- TODO -->
                 </section4>
                 <section4 topic='XMPP.IoT.Media.LoudSpeakers'>
@@ -3225,9 +3744,6 @@
                 <section4 topic='XMPP.IoT.Media.Microphone'>
                     <!-- TODO -->
                 </section4>
-				<section4 topic='XMPP.IoT.Media.QrCode'>
-					<!-- TODO -->
-				</section4>
 				<section4 topic='XMPP.IoT.Media.Recorder'>
                     <!-- TODO -->
                 </section4>
@@ -3497,29 +4013,369 @@
 				</section4>
 			</section3>
 			<section3 topic='Readout aggregations'>
-				<section4 topic='*.Average'>
-					<!-- TODO -->
+				<p>
+					The following interfaces aggregates information in a defined way. Instead of having to list each combination, the interface which is being
+					aggregated to is simply named *.
+				</p>
+				<section4 topic='*.Average' anchor='average'>
+					<p>
+						This interface adds average values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time 
+						of the other (the momentary value), only the momentary value is aggregated.
+					</p>
+					<p>
+						For example: Energy is the integration over time of Power in <link url='#XMPP_IoT_Meter_Electricity'>XMPP.IoT.Meter.Electricity</link>. The interface
+						XMPP.IoT.Meter.Electricity.Average must thus include field <strong>Power, Average</strong>.
+					</p>
+					<p>
+						In the case there are multiple fields in the interface * that matches, all fields can be aggregated, maintaining the same usage (required/optional) in the 
+						aggregated interface as in the original interface.
+					</p>
+					<p>
+						In the table below, %0% represents the name of the corresponding field in the original interface *.
+					</p>
+					<table caption='*.Average Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>%0%, Average</td>
+							<td>Required</td>
+							<td>computed</td>
+							<td>numeric</td>
+							<td>Average value of %0% during period.</td>
+						</tr>
+						<tr>
+							<td>%0%, Average, Start</td>
+							<td>Optional</td>
+							<td>computed</td>
+							<td>dateTime</td>
+							<td>Start of period.</td>
+						</tr>
+						<tr>
+							<td>%0%, Average, Stop</td>
+							<td>Optional</td>
+							<td>computed</td>
+							<td>dateTime</td>
+							<td>Stop of period.</td>
+						</tr>
+					</table>
 				</section4>
-				<section4 topic='*.Consumption'>
-					<!-- TODO -->
+				<section4 topic='*.Consumption' anchor='consumption'>
+					<p>
+						This interface adds consumption values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time
+						of the other (the momentary value), only the accumulated value is aggregated.
+					</p>
+					<p>
+						For example: Energy is the integration over time of Power in <link url='#XMPP_IoT_Meter_Electricity'>XMPP.IoT.Meter.Electricity</link>. The interface
+						XMPP.IoT.Meter.Electricity.Consumption must thus include field <strong>Energy, Consumption</strong>.
+					</p>
+					<p>
+						In the case there are multiple fields in the interface * that matches, all fields can be aggregated, maintaining the same usage (required/optional) in the
+						aggregated interface as in the original interface.
+					</p>
+					<p>
+						In the table below, %0% represents the name of the corresponding field in the original interface *.
+					</p>
+					<table caption='*.Consumption Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>%0%, Consumption</td>
+							<td>Required</td>
+							<td>computed</td>
+							<td>numeric</td>
+							<td>Consumption value of %0% during period.</td>
+						</tr>
+						<tr>
+							<td>%0%, Consumption, Start</td>
+							<td>Optional</td>
+							<td>computed</td>
+							<td>dateTime</td>
+							<td>Start of period.</td>
+						</tr>
+						<tr>
+							<td>%0%, Consumption, Stop</td>
+							<td>Optional</td>
+							<td>computed</td>
+							<td>dateTime</td>
+							<td>Stop of period.</td>
+						</tr>
+					</table>
 				</section4>
-				<section4 topic='*.History'>
-					<!-- TODO -->
+				<section4 topic='*.History' anchor='history'>
+					<p>
+						This interface adds historical values to the interface *. In the case there are multiple fields in the interface * that matches, all fields can be aggregated, 
+						maintaining the same usage (required/optional) in the aggregated interface as in the original interface.
+					</p>
+					<p>
+						In the table below, %0% represents the name of the corresponding field in the original interface *.
+					</p>
+					<table caption='*.History Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>%0%</td>
+							<td>Required</td>
+							<td>historical (1)</td>
+							<td>(2)</td>
+							<td>Sampled value of %0% for a given point in time in history. The timestamp of the field records the time when the value was sampled.</td>
+						</tr>
+					</table>
+					<p>
+						(1) The value must be reported using the correct historical period, as according to XEP <link url='sensor-data.html#fieldtypes'>sensor-data</link>.
+					</p>
+					<p>
+						(2) The value must be reported using the same field type as the field of the original interface.
+					</p>
 				</section4>
 				<section4 topic='*.Mean'>
-					<!-- TODO -->
+					<p>
+						This interface adds mean values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time
+						of the other (the momentary value), only the momentary value is aggregated.
+					</p>
+					<p>
+						For example: Energy is the integration over time of Power in <link url='#XMPP_IoT_Meter_Electricity'>XMPP.IoT.Meter.Electricity</link>. The interface
+						XMPP.IoT.Meter.Electricity.Mean must thus include field <strong>Power, Mean</strong>.
+					</p>
+					<p>
+						In the case there are multiple fields in the interface * that matches, all fields can be aggregated, maintaining the same usage (required/optional) in the
+						aggregated interface as in the original interface.
+					</p>
+					<p>
+						In the table below, %0% represents the name of the corresponding field in the original interface *.
+					</p>
+					<table caption='*.Mean Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>%0%, Mean</td>
+							<td>Required</td>
+							<td>computed</td>
+							<td>numeric</td>
+							<td>Mean value of %0% during period.</td>
+						</tr>
+						<tr>
+							<td>%0%, Mean, Start</td>
+							<td>Optional</td>
+							<td>computed</td>
+							<td>dateTime</td>
+							<td>Start of period.</td>
+						</tr>
+						<tr>
+							<td>%0%, Mean, Stop</td>
+							<td>Optional</td>
+							<td>computed</td>
+							<td>dateTime</td>
+							<td>Stop of period.</td>
+						</tr>
+					</table>
 				</section4>
 				<section4 topic='*.Min'>
-					<!-- TODO -->
+					<p>
+						This interface adds minimum values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time
+						of the other (the momentary value), only the momentary value is aggregated.
+					</p>
+					<p>
+						For example: Energy is the integration over time of Power in <link url='#XMPP_IoT_Meter_Electricity'>XMPP.IoT.Meter.Electricity</link>. The interface
+						XMPP.IoT.Meter.Electricity.Min must thus include field <strong>Power, Min</strong>.
+					</p>
+					<p>
+						In the case there are multiple fields in the interface * that matches, all fields can be aggregated, maintaining the same usage (required/optional) in the
+						aggregated interface as in the original interface.
+					</p>
+					<p>
+						In the table below, %0% represents the name of the corresponding field in the original interface *.
+					</p>
+					<table caption='*.Min Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>%0%, Min</td>
+							<td>Required</td>
+							<td>computed</td>
+							<td>peak</td>
+							<td>Smallest value of %0% during period.</td>
+						</tr>
+						<tr>
+							<td>%0%, Min, Start</td>
+							<td>Optional</td>
+							<td>peak</td>
+							<td>dateTime</td>
+							<td>Start of period.</td>
+						</tr>
+						<tr>
+							<td>%0%, Min, Stop</td>
+							<td>Optional</td>
+							<td>peak</td>
+							<td>dateTime</td>
+							<td>Stop of period.</td>
+						</tr>
+					</table>
 				</section4>
 				<section4 topic='*.Max'>
-					<!-- TODO -->
+					<p>
+						This interface adds maximum values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time
+						of the other (the momentary value), only the momentary value is aggregated.
+					</p>
+					<p>
+						For example: Energy is the integration over time of Power in <link url='#XMPP_IoT_Meter_Electricity'>XMPP.IoT.Meter.Electricity</link>. The interface
+						XMPP.IoT.Meter.Electricity.Max must thus include field <strong>Power, Max</strong>.
+					</p>
+					<p>
+						In the case there are multiple fields in the interface * that matches, all fields can be aggregated, maintaining the same usage (required/optional) in the
+						aggregated interface as in the original interface.
+					</p>
+					<p>
+						In the table below, %0% represents the name of the corresponding field in the original interface *.
+					</p>
+					<table caption='*.Max Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>%0%, Max</td>
+							<td>Required</td>
+							<td>peak</td>
+							<td>peak</td>
+							<td>Greatest value of %0% during period.</td>
+						</tr>
+						<tr>
+							<td>%0%, Max, Start</td>
+							<td>Optional</td>
+							<td>peak</td>
+							<td>dateTime</td>
+							<td>Start of period.</td>
+						</tr>
+						<tr>
+							<td>%0%, Max, Stop</td>
+							<td>Optional</td>
+							<td>peak</td>
+							<td>dateTime</td>
+							<td>Stop of period.</td>
+						</tr>
+					</table>
 				</section4>
 				<section4 topic='*.StdDev'>
-					<!-- TODO -->
+					<p>
+						This interface adds stadard deviation values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time
+						of the other (the momentary value), only the momentary value is aggregated.
+					</p>
+					<p>
+						For example: Energy is the integration over time of Power in <link url='#XMPP_IoT_Meter_Electricity'>XMPP.IoT.Meter.Electricity</link>. The interface
+						XMPP.IoT.Meter.Electricity.StdDev must thus include field <strong>Power, StdDev</strong>.
+					</p>
+					<p>
+						In the case there are multiple fields in the interface * that matches, all fields can be aggregated, maintaining the same usage (required/optional) in the
+						aggregated interface as in the original interface.
+					</p>
+					<p>
+						In the table below, %0% represents the name of the corresponding field in the original interface *.
+					</p>
+					<table caption='*.StdDev Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>%0%, StdDev</td>
+							<td>Required</td>
+							<td>computed</td>
+							<td>numeric</td>
+							<td>Standard deviation of %0% during period.</td>
+						</tr>
+						<tr>
+							<td>%0%, StdDev, Start</td>
+							<td>Optional</td>
+							<td>computed</td>
+							<td>dateTime</td>
+							<td>Start of period.</td>
+						</tr>
+						<tr>
+							<td>%0%, StdDev, Stop</td>
+							<td>Optional</td>
+							<td>computed</td>
+							<td>dateTime</td>
+							<td>Stop of period.</td>
+						</tr>
+					</table>
 				</section4>
 				<section4 topic='*.Sum'>
-					<!-- TODO -->
+					<p>
+						This interface adds sum values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time
+						of the other (the momentary value), only the accumulated value is aggregated.
+					</p>
+					<p>
+						For example: Energy is the integration over time of Power in <link url='#XMPP_IoT_Meter_Electricity'>XMPP.IoT.Meter.Electricity</link>. The interface
+						XMPP.IoT.Meter.Electricity.Sum must thus include field <strong>Energy, Sum</strong>.
+					</p>
+					<p>
+						In the case there are multiple fields in the interface * that matches, all fields can be aggregated, maintaining the same usage (required/optional) in the
+						aggregated interface as in the original interface.
+					</p>
+					<p>
+						In the table below, %0% represents the name of the corresponding field in the original interface *.
+					</p>
+					<table caption='*.Sum Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>%0%, Sum</td>
+							<td>Required</td>
+							<td>computed</td>
+							<td>numeric</td>
+							<td>Summed value of %0% during period.</td>
+						</tr>
+						<tr>
+							<td>%0%, Sum, Start</td>
+							<td>Optional</td>
+							<td>computed</td>
+							<td>dateTime</td>
+							<td>Start of period.</td>
+						</tr>
+						<tr>
+							<td>%0%, Sum, Stop</td>
+							<td>Optional</td>
+							<td>computed</td>
+							<td>dateTime</td>
+							<td>Stop of period.</td>
+						</tr>
+					</table>
 				</section4>
 			</section3>
 		</section2>
@@ -3605,7 +4461,7 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>%0%, End</td>
+                    <td>%0%, Stop</td>
                     <td></td>
                 </tr>
             </table>
@@ -3614,7 +4470,67 @@
 			<p>
 				This section contains tables for units and unit conversions that devices and sytems in IoT should use, so that data interchange is interoperable.
 				Units are divided into categories, each category listed in a separate subsection. Devices reporting fields using units of a specific category should
-				only use units marked as SHOULD, to make sure values are understood and communication be interoperable.
+				only use units marked as SHOULD, to make sure values are understood and used interoperably.
+			</p>
+			<p>
+				Each category of units has a reference point somewhere. Each unit for a given category is then listed in a table together with a scale factor from
+				the reference point (applied first) and an offset (applied after scaling).
+			</p>
+			<p>
+				We know that each unit relates to its reference value accoding to:
+			</p>
+			<p>
+				<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAAbCAIAAACvG7nuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQVSURBVGhD7ZtNdhMxDMdTLlKOwoJFuucGbFlOHpeZ3KB7WPDe9BjdkZwkSLJsS7I1cSZfbfFv05EtS3/JSjo84OFwOKw6nQY+8c9O5xh9VjqtfOBZ2W+fHpCn7Z5XbgAnvWnOjCn5wh0IsxKDMpsXWlXrR/K9bMAnnbsQRhbSmgL0fH79eTjsxvXv17+86ELqCSpzv90s7e7j91+HaVh/+/rICxdEt6O4EFPyaR1oAt5tAxBztRomtjK7cRh3/NzONFRCLYBUrVnANIDgaMyBjs35MUUKSvmacrhA8iW1z/a5kFW0wpR8UgcM3t3lWfGiT9PpKRe2q4K6yNCyo5GxkvbbxpgqJCycI37pcX9WqOqiINULU/JpHdD4d5dmpWgZM42YE5MDwSEYSQvvsc0WUZFLFbbXge7CmYJLlTmblBZwKrYUN6EvLQhGjOhU9oQeKRn4K0er0MWblaJmJuo2JZcdyBXYOFabPGuqReKsYMDKNo8KAh4YEeLxD+GuG6T3fKQ0A9ekVAX3XC3avImPaUMZLXAzyzO0EVLooCQlmOFw2lKd8BRWqc8KZcoRBUKcja7MbKgMuFw5Dc/VbAjPCiau+ahRoY9QTCu/hVSDzN45YCSJiIpbKafTGwd0KDxoUS/jUrVvOoNyE53wFWY4a43gTQ6Vg7E32Us4aRMdbQRXW805EWZFnRWItxx4uR+GOJcmJGTL1my600hV4IPSBwts45bc80o5Dp7Mociq1ZFEBXQ+2OQ9X6FD7XvFPyp3TMlFB4oFVxt6+ncXZgWPVHzUqIiYJiTsudYcJLQORRCqTLnipMmFjq350XtUrhQ3nBbJFWZd54NNfvYVerizUjlPWeOGKbnaAaXa15b115iZFXkQnvVVCe/CEp7nAJFyYNWBoh27aeKU6tAxII72xdNBPaao1aHjk5BswyY+w58cZxR61GaFwhQyUIPOKlNJM3/YMRI/+9rg6Nzd8fsKpZd+WgCEF5uwB1vxVYYTsCxtnYFtk7JJbswg2kAb7ZkpTM7hpsANXsdlfoRVAJ346wkXxl0wXIUuM++24nCws+awIoJLU+SVyxSj7oOB3bvjWQHwUEa5hyawER3ZIx7L+YRVEtxlrRU4SCCGSvpoQbgYaW7qgtCUFBdQZ3MKKTe7wyobvB8OROe6wgVIgWUsU7IyZR/Vubo2XnUbmGflepAGV8EFMX1L3ExAIxfUMzcqZ2N0fqS/O9z/eV6NP76w9V9gSr5yB3hm3jH8WYIf533XvyNMyTfqwNVnBetArlcFZ/ASXF/AaVxCjyn5SAeWUeq8wfdKSHrHq7q7AMNb0+NhdfZ/F9dppc9Kp5U+K51W+qx0muH3lqsRX6fv9jJ3dwGGt6bHo9TZ/y9Zp5X+O6jTxmr1D9/snSkMYWylAAAAAElFTkSuQmCC'/>
+				<!-- xep-0000-IoT-Interoperability-1.png -->
+				<!-- Unit[i]:=Ref[i]*Scale[i]+Offset[i]; -->
+			</p>
+			<p>
+				Reversely, we get:
+			</p>
+			<p>
+				<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAI0AAAA3CAIAAAC+bV7hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAVDSURBVHhe7Zw7UuRIEIbFXoQh1sGYQ0DEGj2x7twADCIYU8SeAbbNNcZQ3wB3YtqYCHEIDBxium/ADXozs7JUmaXq7hKSmhLU57SyHqqs/JVS6QFHm82myCTPH/ybSZus0zTIOvVkvfhyhHxZrAPmYKSpk50tc/PQLt8TiIcbaNP0ezXakdaYMMqnp382m1U1Wz799s1BgXVEmsBki6Ks2XKsqrJa8XY8dRnY1U5o/GLmxqpLbVOB2KtndmKve+nqtG3add09FrCvbhEkkaQmhDp00D9PxVaHSCLcS1YnjElQpgqDgVEBTANjNEHiOrbZImLjSH0Cg1v15D6hmWfahozej2srfTfsci9VnXCmIb+NTAi0wKnCRPlHNIc6Yem6vVDogh2sTriNrYQEynSGOkljcaA3bO93L1GdomSaVbXRyrR3UdMy6bq9YAjD7XFHtkoGGtBmaEQsa5ySzePcS1MnNSmBuNzW5aws7cHqzRXC4Ky4ODSQTMHjW9Z4Drb8bRVAZ7a9ASLdS1MnnEvAeSWTmKw3V6jbamkoZhbTiooCHXCMpoIM18gzDbijpkwM5LXb5Z5gQjrJGcG2OFz1XFuWOrD3QTFv9YC9yBCjqcdoTHcsiaOnJeSqrs0Ise4len2iuMgJ6MjAvFsy2UsXz5zjpa0oaGwxmLG3O6NMIY4spn2E28S5l6hOAB2DDWoeWiZuyC1sNxcIYcWix5YSIVgrdqhMHo9Q/USFKI92L12dxoOC01E5wS6ZerPNt/wctivrX/dF9e2MLd8cDdYrswdOG/ih05Znjs6Hy6c+Lx7m50dXxfefF8dBsz+7fGO9PhCYCu3FQRps9W2QfOpzjGaiYJ30+zAi9iXbmC/HMhbW6fjiJ6WczThYHs7PY9Lj4eZ8Xtb/wnoHdrHB38wY6PPe7Otf5qJ49g1U258eqNLsEKvSDKUPgOkkrl+t+y2+cwZMqbOD92XJXqyNY0h6zu3wzeqkZDIauOijzZW42VQoYztSUo+I3hmEdXJKGkT8Wgp2lSkzAPzdMizazosa1gG48Vit3M0bFNyeko1VcDVq6mCN+On+q2jah7u7O97KtLi+vjb5JDJDpY86Z3mpQykYlU4x5z22MyFeXl5IJ3UCU/FvidG84MpnvYMCOpEWIoWUTbkgVbPbWaaDYhLLIOVwBeKs5YnpyyQ1NfsQHaYOB+WtZmTX5R0JyaRzLw3cQUYBft03zw11+WYH3ut0ApkmkCp4MDVuDpDgIPqbHYWddOIsCqpk4pDSqY69dUBBnzj37N6Pzu81tr0cO774zkqlxPxWPUv+fHrCW/IVgfe8Ge4TTekDtnB/0/PrvhDdbTOg/5/vRMB6DYDJqJTOh5zj7SygCuMpXsFcA3GJNZ2bKjDd1LAZW7r/aLxrnRCKvA6liLJGx1w1EzLhPJvyA8n0/nUCtGNkhULrhVzJgZVcB1tcjB0ONd93qtOqqpQSFFITaE+OBq9cywmVTiZLaC9jMZhORiUkAaXAGR1EjK7xS6eJQ8tkZuPLVNe1lg9wD9JGZZDvWBB87W4Y5gF6L34/LeVnA+vF7dy+qz7+83OxvPzPLNFwzSdWe4/PtAmlV/fwW/59slhgw/Xz4+z0ZL14Ls6wezH/wSs8fGXwozjIdDm47wrzWb3LcO8U5U5dMrFccyhlg+tNB9vYddeJSeVqoAHJ/zdnMOj9HOg0ysc8WadpMNj16YNjn26M9alp1mkYxn5slnWaBlmnaZB1mgZZp2mQdRqG9eLqcgm/y8urUVZ8+f5pGuR8mgZZpylQFP8DJzUMdKYqrp0AAAAASUVORK5CYII='/>
+				<!-- xep-0000-IoT-Interoperability-2.png -->
+				<!-- Ref[i]:=(Unit[i]-Offset[i])/Scale[i]; -->
+			</p>
+			<p>
+				Combining the two, we get a formula for converting a Unit <strong>i</strong> to a unit <strong>j</strong> (in the same category of units), as follows:
+			</p>
+			<p>
+				<img src='data:image/png;base64,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'/>
+				<!-- xep-0000-IoT-Interoperability-3.png -->
+				<!-- Unit[j]:=((Unit[i]-Offset[i])/Scale[i])*Scale[j]+Offset[j] -->
+			</p>
+			<p>
+				If the case where offsets are not used, this simplifies to:
+			</p>
+			<p>
+				<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJMAAAA3CAIAAACHCu+6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQLSURBVHhe7ZvbmdsgEEa3PPfhFtREetD37ZPrkEtxJ87cBDMykhG6QTLnJQsCefgPyE42/nk7beLmWsXNtYqbu4pXf/sBbv1LOlbi5tYxdBg3QpG/+q40eWToisW5uTXgMQlR85kpTx6AbdAN8vNq3Fw+6MokDR3lyW+d7ubyoVOmD5l9VvIhRCYHUZ6wt37AEUEWjDcD44M4y6ebW4PI+UxWSUUBcQDp4CZPTovDYdKy8+dxc2uRo6HDVblbrAUzTIlDpaE/V5ybK4FPjw4+GfZEghGEF+Ua/CTdOEENWcbN5fHqe+OGQuboJ4ICk34rGC5GcSOpu8zi5rKA2G2smDefDnuUIlYcefsQNwyDFQq8oE9+XMTNZUEHI/qhuMcmXZPslcboFnsBHCRHFzv6Fzf0dJqvNS7g5nIYOoyTfAkmXgqfiHL1cLJEDWV1op7R87/g5mqHnCfOoZtrFTdXNfQgTT9C3VzlzP46wc3VDbzLzXzWdHNVMy9OzMUPsEQYrPq/fF41fyvZj2oLOwdY5uzy4pmjMBJLLPu1L/8NaBeqLexwlsQpc7g5U4sahvUrhXvtl0+1hR3O4n92COZwZyfz6XEyPXPGALkRbirXpC0tIv26dIa+PeQi5xVWG1DxwjYbzWE+qfVwPgiMwPvI7eAPNRyuqZa9toiOc4IUfVFhV8JHzZb+iZjLyod+Hc+B4niJFrAvYq9t5MTCaBftVvgGeDsvagPY3Gw+8e0cNkLXjR8JJhnIdme+5LOOiwt7Pp9/6uP39xdqY3NoObEok4/aBUv5TFpfwNvOQDe5rDDm8XhINTVxv9+htgVzeqXws9r6S4nYkVuBu9VZ2PXI+xwsyz5ZsSMuG/byRz7jO40kIsfAtrZTbWGXI+YAfNJEzPpsPjJQRozTpElJT6YDNMrM0DaWGV+B2bMw6jM95yIl5kehieb+Q8rMyR4AKPKrvlpwhjlaamF9tYHHJCyFz8ymlUE2hYf+nDNXvLEOZHyarqoMJ5mkoWPL43bD9FPMbVzeUbC71ebMjOu+WnCGuUrFSc6rzAU5nwuiC3wzFBAHkA5u8uRwCZrx1XGYtOz8GU4wZ+qrCc6xoDY5GjpclbvFWjDDVDBYSujPEneCuWrFlZsD7FxqpcKeSDCC8KJcg5+kGyfklXS8uRo/nTArzVX21YLDzcX6KoO9IXnuYLxdCObNU+1Rilhx/IKhLcEUf7XgMHN81KCo7D1dOXQw4mIo7rFJ1yR7pTG6pSD2/WrBgeagmuRObBP+B0/yJZh4ebmIXnIcTpaoIddtPnG6jcw4tRz/PudswM39g7i5ehmfteb5GXBzNcPu3Fx7uLlWcXOt4uZaxc21CXtDUu7cXKu4uVZxc23yfv8F6vJaxyXqyjYAAAAASUVORK5CYII='/>
+				<!-- xep-0000-IoT-Interoperability-4.png -->
+				<!-- Unit[j]:=Unit[i]*(Scale[j]/Scale[i]) -->
+			</p>
+			<p>
+				As an example, consider the two following temperature units:
+			</p>
+			<table caption='Example of temperature units'>
+				<tr>
+					<th>Unit</th>
+					<th>Scale</th>
+					<th>Offset</th>
+				</tr>
+				<tr>
+					<td>°F</td>
+					<td>1.8</td>
+					<td>32</td>
+				</tr>
+				<tr>
+					<td>K</td>
+					<td>1</td>
+					<td>273.15</td>
+				</tr>
+			</table>
+			<p>
+				So, assume we have a temperature of 50 °F. Let <strong>i</strong> represent the index of unit °F, and <strong>j</strong> the index of unit K. That would give us
+				K=((F-32)/1.8)*1+273.15=((50-32)/1.8)*1+273.15=283.15. So 50 °F = 283.15 K.
 			</p>
 			<section3 topic="Angle">
 				<table caption="Angle">
@@ -4708,6 +5624,277 @@
         </section2>
 		<section2 topic='Identification Schemes'>
 			<!-- TODO: Device ID, User ID, Node ID identification schemes. -->
+		</section2>
+		<section2 topic='Media Types'>
+			<p>
+				The following sections list possible enumerations for different aspects of media streams.
+			</p>
+			<section3 topic='Transport Protocol' anchor='TransportProtocol'>
+				<p>
+					The following table lists different transport protocols that can be used for transporting video or audio streams.
+				</p>
+				<table caption='Transport Protocol'>
+					<tr>
+						<th>Value</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>Dvb</td>
+						<td>Digital Video Broadcast (DVB) Tuner</td>
+					</tr>
+					<tr>
+						<td>Http</td>
+						<td>Hyper Text Transfer Protocol</td>
+					</tr>
+					<tr>
+						<td>Https</td>
+						<td>Hyper Text Transfer Protocol (SSL)</td>
+					</tr>
+					<tr>
+						<td>Mms</td>
+						<td>Microsoft Media Stream</td>
+					</tr>
+					<tr>
+						<td>Rtsp</td>
+						<td>RTSP (Real Time Streaming Protocol)</td>
+					</tr>
+					<tr>
+						<td>Shoutcast</td>
+						<td>AOL Shoutcast</td>
+					</tr>
+					<tr>
+						<td>UdpMulticast</td>
+						<td>UDP Multicast</td>
+					</tr>
+				</table>
+			</section3>
+			<section3 topic='Video Container Format' anchor='VideoContainerFormat'>
+				<p>
+					The following table lists different video container formats that can be used for encapsulating video.
+				</p>
+				<table caption='Video Container Format'>
+					<tr>
+						<th>Value</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>3GP</td>
+						<td>3GPP</td>
+					</tr>
+					<tr>
+						<td>Avi</td>
+						<td>Avi</td>
+					</tr>
+					<tr>
+						<td>DivX</td>
+						<td>DivX</td>
+					</tr>
+					<tr>
+						<td>Dvb</td>
+						<td>Direct Video Broadcast (DVB).</td>
+					</tr>
+					<tr>
+						<td>FlashVideo</td>
+						<td>Flash Video</td>
+					</tr>
+					<tr>
+						<td>MotionJPeg</td>
+						<td>Motion JPEG</td>
+					</tr>
+					<tr>
+						<td>Mov</td>
+						<td>QuickTime</td>
+					</tr>
+					<tr>
+						<td>MPeg</td>
+						<td>MPeg</td>
+					</tr>
+					<tr>
+						<td>MPeg4</td>
+						<td>MPeg-4</td>
+					</tr>
+					<tr>
+						<td>Ogg</td>
+						<td>OGG</td>
+					</tr>
+					<tr>
+						<td>RealMedia</td>
+						<td>Real Media</td>
+					</tr>
+					<tr>
+						<td>StillImages</td>
+						<td>Video is created by repeatedly reading a still image.</td>
+					</tr>
+					<tr>
+						<td>TS</td>
+						<td>MPeg TS</td>
+					</tr>
+					<tr>
+						<td>WebM</td>
+						<td>WebM</td>
+					</tr>
+					<tr>
+						<td>Wmv</td>
+						<td>Windows Media Video Stream</td>
+					</tr>
+				</table>
+			</section3>
+			<section3 topic='Audio Container Format' anchor='AudioContainerFormat'>
+				<p>
+					The following table lists different audio container formats that can be used for encapsulating video.
+				</p>
+				<table caption='Audio Container Format'>
+					<tr>
+						<th>Value</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>3GP</td>
+						<td>3GPP</td>
+					</tr>
+					<tr>
+						<td>Aiff</td>
+						<td>Audio Interchange File Format (AIFF).</td>
+					</tr>
+					<tr>
+						<td>Flac</td>
+						<td>FLAC</td>
+					</tr>
+					<tr>
+						<td>M3U</td>
+						<td>M3U</td>
+					</tr>
+					<tr>
+						<td>MPeg3</td>
+						<td>MPeg-3.</td>
+					</tr>
+					<tr>
+						<td>MPeg4</td>
+						<td>MPeg-4 audio</td>
+					</tr>
+					<tr>
+						<td>Ogg</td>
+						<td>OGG</td>
+					</tr>
+					<tr>
+						<td>Pls</td>
+						<td>Pls</td>
+					</tr>
+					<tr>
+						<td>RealMedia</td>
+						<td>Real Media</td>
+					</tr>
+					<tr>
+						<td>Wav</td>
+						<td>Wave Audio.</td>
+					</tr>
+					<tr>
+						<td>WebM</td>
+						<td>WebM</td>
+					</tr>
+					<tr>
+						<td>Wma</td>
+						<td>Windows Media Audio Stream</td>
+					</tr>
+				</table>
+			</section3>
+			<section3 topic='Video Stream Format' anchor='VideoStreamFormat'>
+				<p>
+					The following table lists different video stream formats that can be used for encoding video streams.
+				</p>
+				<table caption='Video Stream Format'>
+					<tr>
+						<th>Value</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>H263</td>
+						<td>H.263</td>
+					</tr>
+					<tr>
+						<td>MPeg1</td>
+						<td>MPeg-1</td>
+					</tr>
+					<tr>
+						<td>MPeg2</td>
+						<td>MPeg-2</td>
+					</tr>
+					<tr>
+						<td>MPeg4</td>
+						<td>MPeg-4</td>
+					</tr>
+					<tr>
+						<td>Wmv8</td>
+						<td>Windows Media Video v8</td>
+					</tr>
+					<tr>
+						<td>Wmv9</td>
+						<td>Windows Media Video v9</td>
+					</tr>
+				</table>
+			</section3>
+			<section3 topic='Audio Stream Format' anchor='AudioStreamFormat'>
+				<p>
+					The following table lists different audio stream formats that can be used for encoding audio streams.
+				</p>
+				<table caption='Audio Stream Format'>
+					<tr>
+						<th>Value</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>Aac</td>
+						<td>Advanced Audio Coding (AAC)</td>
+					</tr>
+					<tr>
+						<td>Arm</td>
+						<td>Adaptive Rate Modulation (ARM)</td>
+					</tr>
+					<tr>
+						<td>MPeg1</td>
+						<td>MPeg-1</td>
+					</tr>
+					<tr>
+						<td>MPeg3</td>
+						<td>MPeg-3</td>
+					</tr>
+					<tr>
+						<td>Pcm</td>
+						<td>Pulse Code Modulation (PCM)</td>
+					</tr>
+					<tr>
+						<td>Wma9</td>
+						<td>Windows Media Audio v9</td>
+					</tr>
+				</table>
+			</section3>
+			<section3 topic='Image Format' anchor='ImageFormat'>
+				<p>
+					The following table lists different image formats that can be used for encoding images.
+				</p>
+				<table caption='Image Format'>
+					<tr>
+						<th>Value</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>Png</td>
+						<td>PNG</td>
+					</tr>
+					<tr>
+						<td>Jpeg</td>
+						<td>JPEG</td>
+					</tr>
+					<tr>
+						<td>Gif</td>
+						<td>GIF</td>
+					</tr>
+					<tr>
+						<td>Svg</td>
+						<td>SVG</td>
+					</tr>
+				</table>
+			</section3>
 		</section2>
 	</section1>
     <section1 topic='Determining Support' anchor='support'>

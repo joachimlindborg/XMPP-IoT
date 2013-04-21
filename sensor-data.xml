@@ -803,7 +803,7 @@
 				</tr>
 			</table>
 		</section2>
-		<section2 topic='Field Types'>
+		<section2 topic='Field Types' anchor='fieldtypes'>
 			<p>
 				There are different types of fields, apart from types of values a field can have. These types are conceptual types, similar to categories. They are not exclusive,
 				and can be combined.
