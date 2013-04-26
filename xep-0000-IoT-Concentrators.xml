@@ -51,10 +51,11 @@
         </author>
         <revision>
             <version>0.0.2</version>
-            <date>2013-04-05</date>
+            <date>2013-04-22</date>
             <initials>pw</initials>
             <remark>
-                <p>First draft.</p>
+                <p>Corrected language and examples.</p>
+                <p>Node Query command type added.</p>
             </remark>
         </revision>
         <revision>
@@ -308,11 +309,11 @@
             <di>
                 <dt>Node</dt>
                 <dd>
-					Graphs contain nodes and edges between nodes. In Internet of Things, sensors, actuators, meters, devices, gateways, etc., are often depicted as nodes whereas links between sensors (friendships)
-					are depicted as edges. In abstract terms, it's easier to talk about a Node, rather than list different possible node types (sensors, actuators, meters, devices, gateways, etc.).
-					Each Node has a Node ID. Nodes belong to a data source, and all nodes have a Node Type. Some nodes have a parent node, and some nodes have child nodes. Nodes with the same
-					parent nodes a called sibling nodes.
-				</dd>
+                    Graphs contain nodes and edges between nodes. In Internet of Things, sensors, actuators, meters, devices, gateways, etc., are often depicted as nodes whereas links between sensors (friendships)
+                    are depicted as edges. In abstract terms, it's easier to talk about a Node, rather than list different possible node types (sensors, actuators, meters, devices, gateways, etc.).
+                    Each Node has a Node ID. Nodes belong to a data source, and all nodes have a Node Type. Some nodes have a parent node, and some nodes have child nodes. Nodes with the same
+                    parent nodes a called sibling nodes.
+                </dd>
             </di>
             <di>
                 <dt>Node ID</dt>
@@ -452,9 +453,13 @@
           <value>getNodeCommands</value>
           <value>getCommandParameters</value>
           <value>executeNodeCommand</value>
+          <value>executeNodeQuery</value>
+          <value>abortNodeQuery</value>
           <value>getCommonNodeCommands</value>
           <value>getCommonCommandParameters</value>
           <value>executeCommonNodeCommand</value>
+          <value>executeCommonNodeQuery</value>
+          <value>abortCommonNodeQuery</value>
           <value>moveNodeUp</value>
           <value>moveNodeDown</value>
           <value>moveNodesUp</value>
@@ -512,9 +517,13 @@
           <value>getNodeCommands</value>
           <value>getCommandParameters</value>
           <value>executeNodeCommand</value>
+          <value>executeNodeQuery</value>
+          <value>abortNodeQuery</value>
           <value>getCommonNodeCommands</value>
           <value>getCommonCommandParameters</value>
           <value>executeCommonNodeCommand</value>
+          <value>executeCommonNodeQuery</value>
+          <value>abortCommonNodeQuery</value>
           <value>moveNodeUp</value>
           <value>moveNodeDown</value>
           <value>moveNodesUp</value>
@@ -560,6 +569,8 @@
           <value>getNodeCommands</value>
           <value>getCommandParameters</value>
           <value>executeNodeCommand</value>
+          <value>executeNodeQuery</value>
+          <value>abortNodeQuery</value>
           <value>moveNodeUp</value>
           <value>moveNodeDown</value>
           <value>moveNodesUp</value>
@@ -595,6 +606,8 @@
           <value>getNodeCommands</value>
           <value>getCommandParameters</value>
           <value>executeNodeCommand</value>
+          <value>executeNodeQuery</value>
+          <value>abortNodeQuery</value>
       </getCapabilitiesResponse>
    </iq>]]>
                 </example>
@@ -946,7 +959,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='9'>
-      <getNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1'/>
+      <getNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en'/>
    </iq>
    
    <iq type='result'
@@ -981,7 +994,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='10'>
-      <getNodes xmlns='urn:xmpp:sn:concentrators'>
+      <getNodes xmlns='urn:xmpp:sn:concentrators' xml:lang='en'>
           <node sourceId='MeteringTopology' nodeId='Node1'/>
           <node sourceId='MeteringTopology' nodeId='Node2'/>
           <node sourceId='MeteringTopology' nodeId='Node3'/>
@@ -1023,8 +1036,9 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='11'>
-      <getNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' 
-                       hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'>
+      <getNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' 
+                       state='WarningUnsigned' hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' 
+                       parentId='Root' lastChanged='2013-03-19T17:58:01'>
           <string id='id' name='Node ID' value='Node1'/>
           <string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/>
           <string id='sn' name='Serial Number' value='123456'/>
@@ -1050,7 +1064,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='12'>
-      <getNodes xmlns='urn:xmpp:sn:concentrators' parameters='true' xml:lang='true'>
+      <getNodes xmlns='urn:xmpp:sn:concentrators' parameters='true' xml:lang='en'>
           <node sourceId='MeteringTopology' nodeId='Node1'/>
           <node sourceId='MeteringTopology' nodeId='Node2'/>
           <node sourceId='MeteringTopology' nodeId='Node3'/>
@@ -1112,7 +1126,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='13'>
-      <getAllNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology'/>
+      <getAllNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' xml:lang='en'/>
    </iq>
    
    <iq type='result'
@@ -1202,7 +1216,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='15'>
-      <getAllNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology'>
+      <getAllNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' xml:lang='en'>
           <onlyIfDerivedFrom>Namespace.BaseClass1</onlyIfDerivedFrom>
       </getAllNodes>
    </iq>
@@ -1313,7 +1327,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='18'>
-      <getRootNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' />
+      <getRootNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' xml:lang='en'/>
    </iq>
    
    <iq type='result'
@@ -1371,7 +1385,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='20'>
-      <getChildNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' />
+      <getChildNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en'/>
    </iq>
    
    <iq type='result'
@@ -1471,7 +1485,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='23'>
-      <getNodesFromIndex xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' index='apartment' indexValue='A1-1' />
+      <getNodesFromIndex xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' index='apartment' indexValue='A1-1' xml:lang='en'/>
    </iq>
    
    <iq type='result'
@@ -1524,7 +1538,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='25'>
-      <getNodesFromIndices xmlns='urn:xmpp:sn:concentrators'>
+      <getNodesFromIndices xmlns='urn:xmpp:sn:concentrators' xml:lang='en'>
           <indexRef sourceId='MeteringGroups' index='apartment' indexValue='A1-1'/>
           <indexRef sourceId='MeteringGroups' index='apartment' indexValue='A1-2'/>
       </getNodesFromIndices>
@@ -2427,7 +2441,8 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='37'>
-      <getParametersForNewNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='B1' type='Namespace.MeteringTopologyReference' xml:lang='en'/>
+      <getParametersForNewNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='B1' 
+                               type='Namespace.MeteringTopologyReference' xml:lang='en'/>
    </iq>
    
    <iq type='result'
@@ -2473,7 +2488,8 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='38'>
-      <createNewNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='B1' type='Namespace.MeteringTopologyReference' xml:lang='en'>
+      <createNewNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='B1' 
+                     type='Namespace.MeteringTopologyReference' xml:lang='en'>
           <x type='submit' xmlns='jabber:x:data'>
               <field var='xdd session' type='hidden'>
                   <value>0B146517-8EA3-4BEC-A2E9-CF3F209D4A5D</value>
@@ -2520,7 +2536,8 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='39'>
-      <createNewNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='B1' type='Namespace.MeteringTopologyReference' xml:lang='en'>
+      <createNewNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='B1' 
+                     type='Namespace.MeteringTopologyReference' xml:lang='en'>
           <x type='submit' xmlns='jabber:x:data'>
               <field var='xdd session' type='hidden'>
                   <value>0B146517-8EA3-4BEC-A2E9-CF3F209D4A5D</value>
@@ -2627,13 +2644,21 @@
           <command id='scheduleWakeupCall' name='Schedule wakeup call' type='Parameterized' 
                    failureString='Unable to schedule the wakeup call.'
                    successString='Wakeup call scheduled.'/>
+          <command id='searchEvents' name='Search events...' type='Query' 
+                   failureString='Unable to search for events.'
+                   successString='Search for events started...'/>
       </getNodeCommandsResponse>
    </iq>]]>
                 </example>
                 <p>
-                    There are two types of commands available: <strong>Simple</strong> and <strong>Parameterized</strong>. <strong>Simple</strong> commands take no parameters, and
-                    are therefore simpler to execute. <strong>Parameterized</strong> commands require the client to get a set of parameters for the corresponding command before it
-                    can be executed. For more information about command attributes, see <link url='#nodecommands'>Node Commands</link>.
+                    There are three types of commands available: <strong>Simple</strong>, <strong>Parameterized</strong> and <strong>Query</strong>. <strong>Simple</strong> commands 
+                    take no parameters, and are therefore simpler to execute. <strong>Parameterized</strong> commands require the client to get a set of parameters for the corresponding 
+                    command before it can be executed. <strong>Query</strong> commands also require a set of parameters to be executed, but return a response after (or during) execution
+                    in an asynchronous fashion. Queries can also be aborted during execution. A Query with an empty parameter set is considered to be a simple query, not requiring a 
+                    parameter dialog to be shown.
+                </p>
+                <p>
+                    For more information about command attributes, see <link url='#nodecommands'>Node Commands</link>.
                 </p>
             </section3>
             <section3 topic='Execute Simple Node Command'>
@@ -2646,7 +2671,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='44'>
-      <executeNodeCommand xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='knockDoor'/>
+      <executeNodeCommand xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='knockDoor' xml:lang='en'/>
    </iq>
    
    <iq type='result'
@@ -2659,7 +2684,7 @@
             </section3>
             <section3 topic='Get Node Command Parameters'>
                 <p>
-                    To execute a parameterized command on the node, the client first needs to get (and edit) a set of parameters for the command. Getting a set of parameters for a
+                    To execute a parameterized command or a query on the node, the client first needs to get (and edit) a set of parameters for the command. Getting a set of parameters for a
                     parameterized command is done as follows:
                 </p>
                 <example caption='Get Node Command Parameters'>
@@ -2668,7 +2693,8 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='45'>
-      <getCommandParameters xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='scheduleWakeupCall'/>
+      <getCommandParameters xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' 
+                            command='scheduleWakeupCall' xml:lang='en'/>
    </iq>
    
    <iq type='result'
@@ -2716,7 +2742,8 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='46'>
-      <executeNodeCommand xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='scheduleWakeupCall' xml:lang='en'>
+      <executeNodeCommand xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' 
+                          command='scheduleWakeupCall' xml:lang='en'>
           <x type='submit' xmlns='jabber:x:data'>
               <field var='xdd session' type='hidden'>
                   <value>E14E330F-8496-46F0-8F40-178808AB13A7</value>
@@ -2753,7 +2780,8 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='47'>
-      <executeNodeCommand xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='scheduleWakeupCall' xml:lang='en'>
+      <executeNodeCommand xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' 
+                          command='scheduleWakeupCall' xml:lang='en'>
           <x type='submit' xmlns='jabber:x:data'>
               <field var='xdd session' type='hidden'>
                   <value>E14E330F-8496-46F0-8F40-178808AB13A7</value>
@@ -2777,6 +2805,173 @@
       </executeNodeCommandResponse>
    </iq>]]>
                 </example>
+            </section3>
+            <section3 topic='Execute Node Query'>
+                <p>
+                    Executing a Node Query also requires the client to get a set of parameters for the query. This is done in the same way as for parametrized commands, 
+                    as is shown in the following example:
+                </p>
+                <example caption='Get Node Query Parameters'>
+                    <![CDATA[
+   <iq type='get'
+       from='client@clayster.com/client'
+       to='concentrator@clayster.com'
+       id='74'>
+      <getCommandParameters xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' 
+                            command='searchEvents' xml:lang='en'/>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com/client'
+       id='74'>
+      <getCommandParametersResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+          <x type='form' 
+             xmlns='jabber:x:data' 
+             xmlns:xdv='http://jabber.org/protocol/xdata-validate'
+             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'>
+              <title>Search for events</title>
+              <field var='xdd session' type='hidden'>
+                  <value>E14E330F-8496-46F0-8F40-178808AB13A7</value>
+              </field>
+              <field var='from' type='text-single' label='From:'>
+                  <desc>From what point in time events will be fetched.</desc>
+                  <required/>
+                  <value>2013-04-16T12:58:00</value>
+                  <xdv:validate datatype='xs:dateTime'/>
+                      <xdv:basic/>
+                  </xdv:validate>
+              </field>
+              <field var='to' type='text-single' label='To:'>
+                  <desc>To what point in time events will be fetched.</desc>
+                  <required/>
+                  <value>2013-04-23T12:58:00</value>
+                  <xdv:validate datatype='xs:dateTime'/>
+                      <xdv:basic/>
+                  </xdv:validate>
+              </field>
+              <field var='searchText' type='text-single' label='Search Text:'>
+                  <desc>Only return events including this text.</desc>
+                  <required/>
+                  <value></value>
+              </field>
+          </x>
+      </getCommandParametersResponse>
+   </iq>]]>
+                </example>
+                <p>
+                    Executing the query is then done by sending the <strong>executeNodeQuery</strong> command to the concentrator, but including the edited form parameters,
+                    as is shown in the following example:
+                </p>
+                <example caption='Execute Node Query'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com/client'
+       to='concentrator@clayster.com'
+       id='75'>
+      <executeNodeQuery xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='searchEvents' xml:lang='en'>
+          <x type='submit' xmlns='jabber:x:data'>
+              <field var='from' type='text-single'>
+                  <value>2013-04-16T12:58:00</value>
+              </field>
+              <field var='to' type='text-single'>
+                  <value>2013-04-23T12:58:00</value>
+              </field>
+              <field var='searchText' type='text-single'>
+                  <value>Harass</value>
+              </field>
+          </x>
+      </executeNodeQuery>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com/client'
+       id='75'>
+      <executeNodeQueryResponse xmlns='urn:xmpp:sn:concentrators' result='OK' queryId='Query0001'/>
+   </iq>
+   
+   ...]]>
+                </example>
+                <p>
+                    After the successful execution of a query command, a sequence of query events will follow. These events will include a <strong>queryId</strong> 
+                    attribute to identify to which query the corresponding events correspond. See section about <link url='#queryevents'>Query Events</link>
+                    for more information about this.
+                </p>
+                <p>
+                    <strong>Note:</strong> Queries with no visible parameters in the command parameter form need not display a parameter form to the user before being executed.
+                    However, if a confirmation question is defined for the command, such a confirmation question should always be presented to the user (if possible) before
+                    executing the command.
+                </p>
+            </section3>
+            <section3 topic='Execute Node Query, Failure'>
+                <p>
+                    If an error occurs during the reception of a query or if the server rejects the execution of a query, the server returns a response code different from
+                    <strong>OK</strong>. If the response code is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
+                    dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
+                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
+                    <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
+                </p>
+                <example caption='Execute Node Query, Failure'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com/client'
+       to='concentrator@clayster.com'
+       id='76'>
+      <executeNodeQuery xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='searchEvents' xml:lang='en'>
+          <x type='submit' xmlns='jabber:x:data'>
+              <field var='from' type='text-single'>
+                  <value>2013-04-23T12:58:00</value>
+              </field>
+              <field var='to' type='text-single'>
+                  <value>2013-04-16T12:58:00</value>
+              </field>
+              <field var='searchText' type='text-single'>
+                  <value>Harass</value>
+              </field>
+          </x>
+      </executeNodeQuery>
+   </iq>
+   
+   <iq type='error'
+       from='concentrator@clayster.com'
+       to='client@clayster.com/client'
+       id='76'>
+      <executeNodeQueryResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'>
+          <error var='to'>The TO timestamp needs to be later than the FROM timestamp.</error>
+      </executeNodeQueryResponse>
+   </iq>]]>
+</example>
+            </section3>
+            <section3 topic='Abort Node Query'>
+                <p>
+                    One a query has been accepted and started running, the client can abort it using the <strong>abortNodeQuery</strong> command, as is shown in the
+                    following example.
+                </p>
+                <example caption='Abort Node Query'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com/client'
+       to='concentrator@clayster.com'
+       id='77'>
+      <abortNodeQuery xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='searchEvents' 
+                      queryId='Query0001' xml:lang='en'/>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com/client'
+       id='77'>
+      <abortNodeQueryResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+   </iq>]]>
+                </example>
+                <p>
+                    <strong>Note:</strong> The execution of a query is an asynchronous process, with a small delay between the compilation and transmission of 
+                    <link url='#queryevents'>query events</link> and the reception of them by a client. A client may thinkt a query is still active when asking
+                    to abort it, when the query might actually have been finished and removed on the query side. Therefore, clients should be aware of this
+                    when receiving <strong>NotFound</strong> responses from a concentrator, that the query might already have been finished.
+                </p>
             </section3>
             <section3 topic='Get Common Commands for Nodes'>
                 <p>
@@ -2826,7 +3021,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='49'>
-      <executeCommonNodeCommand xmlns='urn:xmpp:sn:concentrators' command='knockDoor'>
+      <executeCommonNodeCommand xmlns='urn:xmpp:sn:concentrators' command='knockDoor' xml:lang='en'>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-1'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-2'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-3'/>
@@ -2862,7 +3057,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='50'>
-      <getCommonCommandParameters xmlns='urn:xmpp:sn:concentrators' command='scheduleWakeupCall'>
+      <getCommonCommandParameters xmlns='urn:xmpp:sn:concentrators' command='scheduleWakeupCall' xml:lang='en'>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-1'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-2'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-3'/>
@@ -2902,7 +3097,7 @@
                   <option label='Harass'><value>Harass</value></option>
               </field>
           </x>
-      </getCommandParametersResponse>
+      </getCommonCommandParametersResponse>
    </iq>]]>
                 </example>
             </section3>
@@ -3006,8 +3201,8 @@
                 </p>
                 <p>
                     The following example shows the execution of a parameterized command on multiple nodes that fail on some nodes but are executed on others. Note that
-					individual error messages can be provided as <strong>error</strong> attribute messages for each node that fails in the corresponding <strong>result</strong>
-					element.
+                    individual error messages can be provided as <strong>error</strong> attribute messages for each node that fails in the corresponding <strong>result</strong>
+                    element.
                 </p>
                 <example caption='Execute Command on Multiple Nodes, Partial Failure'>
                     <![CDATA[
@@ -3051,6 +3246,420 @@
    </iq>]]>
                 </example>
             </section3>
+            <section3 topic='Execute Common Query on multiple nodes'>
+                <p>
+                    Executing a Node Query on multiple nodes also requires the client to get a set of parameters for the query common to all nodes. 
+                    This is done in the same way as for parametrized commands, as is shown in the following example:
+                </p>
+                <example caption='Get Common Query Parameters from query on multiple nodes'>
+                    <![CDATA[
+   <iq type='get'
+       from='client@clayster.com/client'
+       to='concentrator@clayster.com'
+       id='78'>
+      <getCommonCommandParameters xmlns='urn:xmpp:sn:concentrators' command='searchEvents' xml:lang='en'>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-1'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-2'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-3'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-4'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-5'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-6'/>
+      </getCommonCommandParameters>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com/client'
+       id='78'>
+      <getCommonCommandParametersResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+          <x type='form' 
+             xmlns='jabber:x:data' 
+             xmlns:xdv='http://jabber.org/protocol/xdata-validate'
+             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'>
+              <title>Schedule wake-up call</title>
+              <field var='xdd session' type='hidden'>
+                  <value>E14E330F-8496-46F0-8F40-178808AB13A7</value>
+              </field>
+              <field var='from' type='text-single' label='From:'>
+                  <desc>From what point in time events will be fetched.</desc>
+                  <required/>
+                  <value>2013-04-16T12:58:00</value>
+                  <xdv:validate datatype='xs:dateTime'/>
+                      <xdv:basic/>
+                  </xdv:validate>
+              </field>
+              <field var='to' type='text-single' label='To:'>
+                  <desc>To what point in time events will be fetched.</desc>
+                  <required/>
+                  <value>2013-04-23T12:58:00</value>
+                  <xdv:validate datatype='xs:dateTime'/>
+                      <xdv:basic/>
+                  </xdv:validate>
+              </field>
+              <field var='searchText' type='text-single' label='Search Text:'>
+                  <desc>Only return events including this text.</desc>
+                  <required/>
+                  <value></value>
+              </field>
+          </x>
+      </getCommonCommandParametersResponse>]]>
+                </example>
+                <p>
+                    Executing the query is then done by sending the <strong>executeCommonNodeQuery</strong> command to the concentrator, but including the edited form parameters,
+                    as is shown in the following example:
+                </p>
+                <example caption='Execute Common Query on multiple nodes'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com/client'
+       to='concentrator@clayster.com'
+       id='79'>
+      <executeCommonNodeQuery xmlns='urn:xmpp:sn:concentrators' command='searchEvents' xml:lang='en'>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-1'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-2'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-3'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-4'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-5'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-6'/>
+          <x type='submit' xmlns='jabber:x:data'>
+              <field var='from' type='text-single'>
+                  <value>2013-04-16T12:58:00</value>
+              </field>
+              <field var='to' type='text-single'>
+                  <value>2013-04-23T12:58:00</value>
+              </field>
+              <field var='searchText' type='text-single'>
+                  <value>Harass</value>
+              </field>
+          </x>
+      </executeCommonNodeQuery>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com/client'
+       id='79'>
+      <executeCommonNodeQueryResponse xmlns='urn:xmpp:sn:concentrators' result='OK' queryId='Query0001'/>
+   </iq>
+   
+   ...]]>
+                </example>
+                <p>
+                    After the successful execution of a query command, a sequence of query events will follow. These events will include a <strong>queryId</strong>
+                    attribute to identify to which query the corresponding events correspond. They will also include node reference attributes so the receptor can
+                    distinguish information from different nodes in the query. See section about <link url='#queryevents'>Query Events</link>
+                    for more information about this.
+                </p>
+                <p>
+                    <strong>Note:</strong> Queries with no visible parameters in the command parameter form need not display a parameter form to the user before being executed.
+                    However, if a confirmation question is defined for the command, such a confirmation question should always be presented to the user (if possible) before
+                    executing the command.
+                </p>
+            </section3>
+            <section3 topic='Execute Common Query on multiple nodes, Failure'>
+                <p>
+                    If an error occurs during the execution of a common query or if the server rejects the execution of a common query, the server returns a response code different from
+                    <strong>OK</strong>. If the response code is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
+                    dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
+                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
+                    <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
+                </p>
+                <example caption='Execute Parameterized Query on multiple nodes, Failure'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com/client'
+       to='concentrator@clayster.com'
+       id='80'>
+      <executeCommonNodeQuery xmlns='urn:xmpp:sn:concentrators' command='searchEvents' xml:lang='en'>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-1'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-2'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-3'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-4'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-5'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-6'/>
+          <x type='submit' xmlns='jabber:x:data'>
+              <field var='from' type='text-single'>
+                  <value>2013-04-23T12:58:00</value>
+              </field>
+              <field var='to' type='text-single'>
+                  <value>2013-04-16T12:58:00</value>
+              </field>
+              <field var='searchText' type='text-single'>
+                  <value>Harass</value>
+              </field>
+          </x>
+      </executeCommonNodeQuery>
+   </iq>
+   
+   <iq type='error'
+       from='concentrator@clayster.com'
+       to='client@clayster.com/client'
+       id='80'>
+      <executeCommonNodeQueryResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'>
+          <error var='to'>The TO timestamp needs to be later than the FROM timestamp.</error>
+      </executeCommonNodeQueryResponse>
+   </iq>]]>
+                </example>
+            </section3>
+            <section3 topic='Execute Common Query on multiple nodes, Partial Failure'>
+                <p>
+                    When executing a query on multiple nodes, it might happen that the query is rejected on some nodes, but not on others, even though
+                    any parameters are validated beforehand. Therefore, the client needs to check any <strong>result</strong> elements in the response, even though the
+                    response code is <strong>OK</strong>.
+                </p>
+                <p>
+                    The following example shows the execution of a query on multiple nodes that fail on some nodes but are executed on others. Note that
+                    individual error messages can be provided as <strong>error</strong> attribute messages for each node that fails in the corresponding <strong>result</strong>
+                    element.
+                </p>
+                <example caption='Execute Common Query on multiple nodes, Partial Failure'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com/client'
+       to='concentrator@clayster.com'
+       id='81'>
+      <executeCommonNodeQuery xmlns='urn:xmpp:sn:concentrators' command='searchEvents' xml:lang='en'>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-1'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-2'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-3'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-4'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-5'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-6'/>
+          <x type='submit' xmlns='jabber:x:data'>
+              <field var='from' type='text-single'>
+                  <value>2013-04-23T12:58:00</value>
+              </field>
+              <field var='to' type='text-single'>
+                  <value>2013-04-16T12:58:00</value>
+              </field>
+              <field var='searchText' type='text-single'>
+                  <value>Harass</value>
+              </field>
+          </x>
+      </executeCommonNodeQuery>
+   </iq>
+   
+   <iq type='error'
+       from='concentrator@clayster.com'
+       to='client@clayster.com/client'
+       id='81'>
+      <executeCommonNodeQueryResponse xmlns='urn:xmpp:sn:concentrators' result='OK' queryId='Query0002'>
+          <result>true</result>
+          <result>true</result>
+          <result error='Event Database not available!'>false</result>
+          <result>true</result>
+          <result>true</result>
+          <result>true</result>
+      </executeCommonNodeQueryResponse>
+   </iq>]]>
+                </example>
+            </section3>
+            <section3 topic='Abort Common Query on multiple nodes'>
+                <p>
+                    To abort a query common to a set of nodes you use the <strong>abortCommonNodeQuery</strong> command, as is shown in the following example:
+                </p>
+                <example caption='Abort Common Query on multiple nodes'>
+                    <![CDATA[
+   <iq type='set'
+       from='client@clayster.com/client'
+       to='concentrator@clayster.com'
+       id='82'>
+      <abortCommonNodeQuery xmlns='urn:xmpp:sn:concentrators' queryId='Query0002' xml:lang='en'>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-1'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-2'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-3'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-4'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-5'/>
+          <node sourceId='MeteringGroups' nodeId='Apartment 1-6'/>
+      </abortCommonNodeQuery>
+   </iq>
+   
+   <iq type='result'
+       from='concentrator@clayster.com'
+       to='client@clayster.com/client'
+       id='82'>
+      <abortCommonNodeQueryResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+   </iq>]]>
+                </example>
+                <p>
+                    <strong>Note:</strong> The execution of a query is an asynchronous process, with a small delay between the compilation and transmission of
+                    <link url='#queryevents'>query events</link> and the reception of them by a client. A client may thinkt a query is still active when asking
+                    to abort it, when the query might actually have been finished and removed on the query side. Therefore, clients should be aware of this
+                    when receiving <strong>NotFound</strong> responses from a concentrator, that the query might already have been finished. In the case of
+					aborting queries on multiple nodes, servers must ignore nodes where the query has already finished executing.
+                </p>
+            </section3>
+        </section2>
+        <section2 topic='Query Events' anchor='queryevents'>
+            <p>
+                Query events are sent as a response to executing queries on nodes. They are reported asynchronously from the concentrator to the client executing the query. Each
+                event is wrapped in a <strong>queryProgress</strong> element within a message sent from the concentrator to the client. Each such <strong>queryProgress</strong>
+                element can include any number of query events, and the client must process them in the order they appear in the message.
+            </p>
+            <p>
+                Each <strong>queryProgress</strong> element contains a <strong>queryId</strong> attribute identifying the query to which the events correspond. They also contain
+                <strong>sourceId</strong>, <strong>nodeId</strong> and an optional <strong>cacheType</strong> to identify from which node in a concentrator the events originated.
+            </p>
+            <p>
+                <strong>Note:</strong> A <strong>queryProgress</strong> element can only contain events from a single query executed on a single node. If a query is executed on
+                multiple nodes, events resulting from different nodes will be sent in different messages.
+            </p>
+            <p>
+                The following subsections describe each query event in turn.
+            </p>
+            <section3 topic='Query Started'>
+                <p>
+                    This event is sent when the query is started on a node. It is sent using a <strong>queryStarted</strong> event element. This element does not take any
+                    attributes.
+                </p>
+                <example caption='Query Started'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com/client'>
+      <queryProgress xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+          <queryStarted/>
+          ...
+      </queryProgress>
+   </message>]]>
+                </example>
+            </section3>
+            <section3 topic='Query Done'>
+                <p>
+                    This event is sent when the query is done on a node. It is sent using a <strong>queryDone</strong> event element. This element does not take any
+                    attributes.
+                </p>
+                <example caption='Query Done'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com/client'>
+      <queryProgress xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+          ...
+          <queryDone/>
+      </queryProgress>
+   </message>]]>
+                </example>
+            </section3>
+            <section3 topic='Query Aborted'>
+                <p>
+                    This event is sent when the query has been aborted on a node. It is sent using a <strong>queryAborted</strong> event element. This element does not take any
+                    attributes.
+                </p>
+                <example caption='Query Aborted'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com/client'>
+      <queryProgress xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+          ...
+          <queryAborted/>
+      </queryProgress>
+   </message>]]>
+                </example>
+            </section3>
+            <section3 topic='New Table'>
+                <p>
+                    A query result can consist of zero or more data tables. Each data table consists of a set of columns and records containing value items for the these
+                    columns. A new table is identified by a query event named <strong>newTable</strong>. a <strong>newTable</strong> event contains a sequence of
+                    <strong>column</strong> events each identifying a column in the table.
+                </p>
+                <example caption='New Table'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com/client'>
+      <queryProgress xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+          ...
+          <newTable tableId='table1' tableName='Events'>
+              <column columnId='timestamp' header='Timestamp'>
+              <column columnId='message' header='Message'>
+          </newTable>
+          ...
+      </queryProgress>
+   </message>]]>
+                </example>
+                <p>
+                    For more information about column definitions, see <link url='#columndef'>Table Column definitions in query results</link>.
+                </p>
+            </section3>
+            <section3 topic='New Records'>
+                <p>
+                    A set of records in an open table is reported using the <strong>newRecords</strong> query event.
+                </p>
+                <example caption='New Records'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com/client'>
+      <queryProgress xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+          ...
+          <newRecords tableId='table1'>
+              <record>
+                  <dateTime>2013-04-24T17:43:15</dateTime>
+                  <string>Harassed</string>
+              </record>
+              ...
+          </newRecords>
+          ...
+      </queryProgress>
+   </message>]]>
+                </example>
+                <p>
+                    For more information about records, see <link url='#recorddef'>Record Item definitions in query results</link>.
+                </p>
+            </section3>
+            <section3 topic='Table Done'>
+                <p>
+                    This event is sent when the query is done with a table. It is sent using a <strong>tableDone</strong> event element. The query must not send any more records
+                    to a table that has been closed using this query event.
+                </p>
+                <example caption='Table Done'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com/client'>
+      <queryProgress xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+          ...
+          <tableDone tableId='table1'/>
+          ...
+      </queryProgress>
+   </message>]]>
+                </example>
+            </section3>
+            <section3 topic='New Object'>
+                <p>
+                    Some queries may want to return other types of data than tables, like images, graphs, etc. These may be combined with table information or not.
+                    A query returns such an object using the <strong>newObject</strong> query event. Each object is MIME encoded, and the MIME Type is sent in the
+                    <strong>contentType</strong> attribute. The object itself is Base-64 encoded.
+                </p>
+                <example caption='New Object'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com/client'>
+      <queryProgress xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+          ...
+          <newObject contentType='image/png'>...</newObject>
+          ...
+      </queryProgress>
+   </message>]]>
+                </example>
+            </section3>
+            <section3 topic='Query Message'>
+                <p>
+                    During the processing of a query, the query might want to report a message of some kind. This is done using the <strong>queryMessage</strong> 
+                    query event.
+                </p>
+                <example caption='Query Message'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com/client'>
+      <queryProgress xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+          ...
+          <queryMessage type='Information' level='Minor'>30 events found.</queryMessage>
+          ...
+      </queryProgress>
+   </message>]]>
+                </example>
+                <p>
+                    For more information about query messages, see <link url='#messagedef'>Message definitions in query results</link>.
+                </p>
+            </section3>
         </section2>
         <section2 topic='Data Source Events' anchor='sourceevents'>
             <p>
@@ -3081,16 +3690,18 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeAdded xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
-                 hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/>
+      <nodeAdded xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' 
+                 cacheType='Node' state='None' hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' 
+                 parentId='Root' lastChanged='2013-03-19T17:58:01'/>
    </message>]]>
                 </example>
                 <example caption='Node added event, with parameters'>
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeAdded xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
-                 hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'>
+      <nodeAdded xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' 
+                 cacheType='Node' state='None' hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' 
+                 parentId='Root' lastChanged='2013-03-19T17:58:01'>
           <string id='id' name='Node ID' value='Node1'/>
           <string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/>
           <string id='sn' name='Serial Number' value='123456'/>
@@ -3115,9 +3726,9 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeAdded xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node2' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
-                 hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'
-                 afterNodeId='Node1' afterNodeCacheType='Node'/>
+      <nodeAdded xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node2' nodeType='Namespace.NodeType1' 
+                 cacheType='Node' state='None' hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' 
+                 parentId='Root' lastChanged='2013-03-19T17:58:01' afterNodeId='Node1' afterNodeCacheType='Node'/>
    </message>]]>
                 </example>
             </section3>
@@ -3148,16 +3759,18 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
-                 hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/>
+      <nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' 
+                   cacheType='Node' state='None' hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' 
+                   parentId='Root' lastChanged='2013-03-19T17:58:01'/>
    </message>]]>
                 </example>
                 <example caption='Node updated event, with parameters'>
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
-                 hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'>
+      <nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' 
+                   cacheType='Node' state='None' hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' 
+                   parentId='Root' lastChanged='2013-03-19T17:58:01'>
           <string id='id' name='Node ID' value='Node1'/>
           <string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/>
           <string id='sn' name='Serial Number' value='123456'/>
@@ -3177,16 +3790,18 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' oldId='OldNode1' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
-                 hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/>
+      <nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' oldId='OldNode1' id='Node1' 
+                   nodeType='Namespace.NodeType1' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
+                   isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/>
    </message>]]>
                 </example>
                 <example caption='Node renamed event, with parameters'>
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' oldId='OldNode1' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='None' 
-                 hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'>
+      <nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' oldId='OldNode1' id='Node1' 
+                   nodeType='Namespace.NodeType1' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
+                   isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'>
           <string id='id' name='Node ID' value='Node1'/>
           <string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/>
           <string id='sn' name='Serial Number' value='123456'/>
@@ -4159,6 +4774,160 @@
                 More information can be found in the <note>XEP-xxxx: Interoperability <link url='#interop'>Interoperability section</link></note>.
             </p>
         </section2>
+        <section2 topic='Table Column definitions in query results' anchor='columndef'>
+            <p>
+                Table columns in query results can have the following attributes:
+            </p>
+            <table caption='Table Column attributes'>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Use</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>columnId</td>
+                    <td>Required</td>
+                    <td>ID of column</td>
+                </tr>
+                <tr>
+                    <td>header</td>
+                    <td>Optional</td>
+                    <td>If provided, a localized name to be displayed instead of the column ID.</td>
+                </tr>
+                <tr>
+                    <td>alignment</td>
+                    <td>Optional</td>
+                    <td>Alignment of contents in the column. If provided, the client does not need to guess alignment from the type of data reported.</td>
+                </tr>
+                <tr>
+                    <td>nrDecimals</td>
+                    <td>Optional</td>
+                    <td>If floating point data is presented in the column and a fixed number of decimals is desired, this attribute is used to fix the number of decimals used.</td>
+                </tr>
+                <tr>
+                    <td>dataSourceId</td>
+                    <td>Optional</td>
+                    <td>If contents of columns contains references to nodes in a data source, this attribute defines the data source ID.</td>
+                </tr>
+                <tr>
+                    <td>cacheTypeName</td>
+                    <td>Optional</td>
+                    <td>If contents of columns contains references to nodes in a data source, this attribute defines the cache type.</td>
+                </tr>
+                <tr>
+                    <td>fgColor</td>
+                    <td>Optional</td>
+                    <td>If presentation of this column should be done using a specific foreground color.</td>
+                </tr>
+                <tr>
+                    <td>bgColor</td>
+                    <td>Optional</td>
+                    <td>If presentation of this column should be done using a specific background color.</td>
+                </tr>
+            </table>
+        </section2>
+        <section2 topic='Record Item definitions in query results' anchor='recorddef'>
+            <p>
+                Records contain arrays of items, each item correspond to a specific column with the same ordinal index. Each item is specified together with its type.
+                This, so receptors can integrate the result with type information if necessary. The following different type elements are available:
+            </p>
+            <table caption='Table Column attributes'>
+                <tr>
+                    <th>Element</th>
+                    <th>Contents</th>
+                </tr>
+                <tr>
+                    <td>boolean</td>
+                    <td>A boolean value, corresponding to the xs:boolean data type.</td>
+                </tr>
+                <tr>
+                    <td>color</td>
+                    <td>A color value. These are strings containing 6 case-insensitive hexadecimal digits of the form RRGGBB, where RR=Red component, GG=Green component, BB=Blue component.</td>
+                </tr>
+                <tr>
+                    <td>dateTime</td>
+                    <td>A Date &amp; Time value, corresponding to the xs:dateTime data type.</td>
+                </tr>
+                <tr>
+                    <td>double</td>
+                    <td>A floating-point value, corresponding to the xs:double data type.</td>
+                </tr>
+                <tr>
+                    <td>duration</td>
+                    <td>A duration value, corresponding to the xs:duration data type.</td>
+                </tr>
+                <tr>
+                    <td>int</td>
+                    <td>A 32-bit integer value, corresponding to the xs:int data type.</td>
+                </tr>
+                <tr>
+                    <td>long</td>
+                    <td>A 64-bit value, corresponding to the xs:long data type.</td>
+                </tr>
+                <tr>
+                    <td>string</td>
+                    <td>A string value, corresponding to the xs:string data type.</td>
+                </tr>
+                <tr>
+                    <td>time</td>
+                    <td>A time value, corresponding to the xs:time data type.</td>
+                </tr>
+                <tr>
+                    <td>base64</td>
+                    <td>A base-64 encoded object. The object is MIME encoded, and the attribute contentType contains the MIME Type which includes information on how to decode the value.</td>
+                </tr>
+                <tr>
+                    <td>void</td>
+                    <td>Contains no information. This represents a NULL value.</td>
+                </tr>
+            </table>
+        </section2>
+        <section2 topic='Message definitions in query results' anchor='messagedef'>
+            <p>
+                Messages in query results contain apart from a message text, also contain some classification on what the message is using two attributes: The
+                <strong>type</strong> attribute gives a rough idea about the type of message and <strong>level</strong> the importance of the message.
+            </p>
+            <table caption='Message Types'>
+                <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Information</td>
+                    <td>Information message</td>
+                </tr>
+                <tr>
+                    <td>Warning</td>
+                    <td>Message contains a warning. The situation could turn into an error if consideration or action is not taken.</td>
+                </tr>
+                <tr>
+                    <td>Error</td>
+                    <td>Message contains an error. The error message describes the error, and the error has been handled correctly by the device performing the query.</td>
+                </tr>
+                <tr>
+                    <td>Exception</td>
+                    <td>Message contains an exception message. An unforseen and perhaps an unhandled event has occurred during the execution of the query.</td>
+                </tr>
+            </table>
+            <table caption='Message Levels'>
+                <tr>
+                    <th>Level</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Minor</td>
+                    <td>Minor event. Message describes common tasks.</td>
+                </tr>
+                <tr>
+                    <td>Medium</td>
+                    <td>Medium event. Message might describe a state change, something has been updated, or important information.</td>
+                </tr>
+                <tr>
+                    <td>Major</td>
+                    <td>Major event. Message might describe architectural change or vital information.</td>
+                </tr>
+            </table>
+        </section2>
     </section1>
     <section1 topic='Internationalization Considerations' anchor='i18n'>
         <section2 topic='Localization'>
@@ -4483,6 +5252,27 @@
     </xs:element>
     <xs:element name='executeNodeCommandResponse' type='ExecuteNodeCommandResponse'/>
  
+    <xs:element name='executeNodeQuery'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeCommandReferenceRequest'>
+                    <xs:sequence>
+                        <xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='executeNodeQueryResponse'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='ExecuteNodeCommandResponse'>
+                    <xs:attribute name="queryId" type="xs:string" use="optional"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+ 
     <xs:element name='getCommonNodeCommands' type='NodeReferencesRequest'/>
     <xs:element name='getCommonNodeCommandsResponse' type='CommandArray'/>
      
@@ -4504,11 +5294,33 @@
                     <xs:sequence>
                         <xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
                     </xs:sequence>
+                    <xs:attribute name="queryId" type="xs:string" use="optional"/>
                 </xs:extension>
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
     <xs:element name='executeCommonNodeCommandResponse' type='ExecuteCommonNodeCommandResponse'/>
+ 
+    <xs:element name='executeCommonNodeQuery'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeReferencesRequest'>
+                    <xs:sequence>
+                        <xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='executeCommonNodeQueryResponse'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='ExecuteCommonNodeCommandResponse'>
+                    <xs:attribute name="queryId" type="xs:string" use="optional"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
  
     <xs:element name='moveNodeUp' type='NodeReferenceRequest'/>
     <xs:element name='moveNodeUpResponse' type='Response'/>
@@ -4556,6 +5368,7 @@
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
+ 
     <xs:element name='nodeUpdated'>
         <xs:complexType>
             <xs:complexContent>
@@ -4565,6 +5378,7 @@
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
+ 
     <xs:element name='nodeStatusChanged'>
         <xs:complexType>
             <xs:complexContent>
@@ -4577,6 +5391,7 @@
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
+ 
     <xs:element name='nodeRemoved' type='NodeReference'/>
     <xs:element name='nodeMovedUp' type='NodeReference'/>
     <xs:element name='nodeMovedDown' type='NodeReference'/>
@@ -4613,6 +5428,133 @@
         </xs:complexType>
     </xs:element>
     <xs:element name='startDatabaseReadoutResponse' type='ExecuteNodeCommandResponse'/>
+ 
+    <xs:element name='queryProgress'>
+        <xs:complexType>
+            <xs:choice minOccurs='1' maxOccurs='unbounded'>
+                <xs:element name='queryStarted'>
+                    <xs:complexType/>
+                </xs:element>
+                <xs:element name='queryDone'>
+                    <xs:complexType/>
+                </xs:element>
+                <xs:element name='queryAborted'>
+                    <xs:complexType/>
+                </xs:element>
+                <xs:element name='newTable'>
+                    <xs:complexType>
+                        <xs:sequence minOccurs='0' maxOccurs='unbounded'>
+                            <xs:element name='column'>
+                                <xs:complexType>
+                                    <xs:attribute name='columnId' type='xs:string' use='required'/>
+                                    <xs:attribute name='header' type='xs:string' use='optional'/>
+                                    <xs:attribute name='dataSourceId' type='xs:string' use='optional'/>
+                                    <xs:attribute name='cacheTypeName' type='xs:string' use='optional'/>
+                                    <xs:attribute name='fgColor' type='Color' use='optional'/>
+                                    <xs:attribute name='bgColor' type='Color' use='optional'/>
+                                    <xs:attribute name='alignment' type='Alignment' use='optional'/>
+                                    <xs:attribute name='nrDecimals' type='xs:nonNegativeInteger' use='optional'/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name='tableId' type='xs:string' use='required'/>
+                        <xs:attribute name='tableName' type='xs:string' use='required'/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name='newRecords'>
+                    <xs:complexType>
+                        <xs:sequence minOccurs='0' maxOccurs='unbounded'>
+                            <xs:element name='record'>
+                                <xs:complexType>
+                                    <xs:choice minOccurs='0' maxOccurs='unbounded'>
+                                        <xs:element name='boolean' type='xs:boolean'/>
+                                        <xs:element name='color' type='Color'/>
+                                        <xs:element name='date' type='xs:date'/>
+                                        <xs:element name='dateTime' type='xs:dateTime'/>
+                                        <xs:element name='double' type='xs:double'/>
+                                        <xs:element name='duration' type='xs:duration'/>
+                                        <xs:element name='int' type='xs:int'/>
+                                        <xs:element name='long' type='xs:long'/>
+                                        <xs:element name='string' type='xs:string'/>
+                                        <xs:element name='time' type='xs:time'/>
+                                        <xs:element name='base64'>
+                                            <xs:complexType>
+                                                <xs:simpleContent>
+                                                    <xs:extension base='xs:base64Binary'>
+                                                        <xs:attribute name='contentType' type='xs:string' use='required'/>
+                                                    </xs:extension>
+                                                </xs:simpleContent>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name='void'>
+                                            <xs:complexType/>
+                                        </xs:element>
+                                    </xs:choice>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name='tableId' type='xs:string' use='required'/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name='tableDone'>
+                    <xs:complexType>
+                        <xs:attribute name='tableId' type='xs:string' use='required'/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name='newObject'>
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base='xs:base64Binary'>
+                                <xs:attribute name='contentType' type='xs:string' use='required'/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name='queryMessage'>
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base='xs:string'>
+                                <xs:attribute name='type' type='EventType' use='optional' default='Information'/>
+                                <xs:attribute name='level' type='EventLevel' use='optional' default='Minor'/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+            <xs:attributeGroup ref='nodeReference'/>
+            <xs:attribute name='queryId' type='xs:string' use='required'/>
+        </xs:complexType>
+    </xs:element>
+ 
+    <xs:element name='abortNodeQuery'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeReferenceRequest'>
+                    <xs:attribute name='queryId' type='xs:string' use='required'/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='abortNodeQueryResponse'>
+        <xs:complexType>
+            <xs:attributeGroup ref='responseCode'/>
+        </xs:complexType>
+    </xs:element>
+ 
+    <xs:element name='abortCommonNodeQuery'>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base='NodeReferencesRequest'>
+                    <xs:attribute name='queryId' type='xs:string' use='required'/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name='abortCommonNodeQueryResponse'>
+        <xs:complexType>
+            <xs:attributeGroup ref='responseCode'/>
+        </xs:complexType>
+    </xs:element>
  
     <xs:simpleType name='ResponseCode'>
         <xs:restriction base='xs:string'>
@@ -4655,6 +5597,32 @@
         <xs:restriction base='xs:string'>
             <xs:enumeration value='Simple'/>
             <xs:enumeration value='Parameterized'/>
+            <xs:enumeration value='Query'/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
+    <xs:simpleType name='Alignment'>
+        <xs:restriction base='xs:string'>
+            <xs:enumeration value='Left'/>
+            <xs:enumeration value='Center'/>
+            <xs:enumeration value='Right'/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
+    <xs:simpleType name='EventType'>
+        <xs:restriction base='xs:string'>
+            <xs:enumeration value='Information'/>
+            <xs:enumeration value='Warning'/>
+            <xs:enumeration value='Error'/>
+            <xs:enumeration value='Exception'/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
+    <xs:simpleType name='EventLevel'>
+        <xs:restriction base='xs:string'>
+            <xs:enumeration value='Minor'/>
+            <xs:enumeration value='Medium'/>
+            <xs:enumeration value='Major'/>
         </xs:restriction>
     </xs:simpleType>
  
@@ -4798,7 +5766,7 @@
         <xs:attribute name='parameterName' type='xs:string' use='required'/>
         <xs:attribute name='ascending' type='xs:boolean' use='optional' default='true'/>
     </xs:complexType>
-  
+ 
     <xs:complexType name='NodeInformation'>
         <xs:choice minOccurs='0' maxOccurs='unbounded'>
             <xs:element name='boolean' type='BooleanParameter'/>

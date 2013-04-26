@@ -178,13 +178,34 @@
                     <xs:sequence>
                         <xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
                     </xs:sequence>
-                </xs:extension>
+				</xs:extension>
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
     <xs:element name='executeNodeCommandResponse' type='ExecuteNodeCommandResponse'/>
  
-    <xs:element name='getCommonNodeCommands' type='NodeReferencesRequest'/>
+	<xs:element name='executeNodeQuery'>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='NodeCommandReferenceRequest'>
+					<xs:sequence>
+						<xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='executeNodeQueryResponse'>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='ExecuteNodeCommandResponse'>
+					<xs:attribute name="queryId" type="xs:string" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:element name='getCommonNodeCommands' type='NodeReferencesRequest'/>
     <xs:element name='getCommonNodeCommandsResponse' type='CommandArray'/>
      
     <xs:element name='getCommonCommandParameters'>
@@ -205,13 +226,35 @@
                     <xs:sequence>
                         <xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
                     </xs:sequence>
-                </xs:extension>
+					<xs:attribute name="queryId" type="xs:string" use="optional"/>
+				</xs:extension>
             </xs:complexContent>
         </xs:complexType>
     </xs:element>
     <xs:element name='executeCommonNodeCommandResponse' type='ExecuteCommonNodeCommandResponse'/>
  
-    <xs:element name='moveNodeUp' type='NodeReferenceRequest'/>
+	<xs:element name='executeCommonNodeQuery'>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='NodeReferencesRequest'>
+					<xs:sequence>
+						<xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='executeCommonNodeQueryResponse'>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='ExecuteCommonNodeCommandResponse'>
+					<xs:attribute name="queryId" type="xs:string" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:element name='moveNodeUp' type='NodeReferenceRequest'/>
     <xs:element name='moveNodeUpResponse' type='Response'/>
  
     <xs:element name='moveNodeDown' type='NodeReferenceRequest'/>
@@ -257,6 +300,7 @@
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
+ 
 	<xs:element name='nodeUpdated'>
 		<xs:complexType>
 			<xs:complexContent>
@@ -266,6 +310,7 @@
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
+ 
 	<xs:element name='nodeStatusChanged'>
 		<xs:complexType>
 			<xs:complexContent>
@@ -278,6 +323,7 @@
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
+ 
 	<xs:element name='nodeRemoved' type='NodeReference'/>
 	<xs:element name='nodeMovedUp' type='NodeReference'/>
 	<xs:element name='nodeMovedDown' type='NodeReference'/>
@@ -314,6 +360,133 @@
 		</xs:complexType>
 	</xs:element>
 	<xs:element name='startDatabaseReadoutResponse' type='ExecuteNodeCommandResponse'/>
+ 
+	<xs:element name='queryProgress'>
+		<xs:complexType>
+			<xs:choice minOccurs='1' maxOccurs='unbounded'>
+				<xs:element name='queryStarted'>
+					<xs:complexType/>
+				</xs:element>
+				<xs:element name='queryDone'>
+					<xs:complexType/>
+				</xs:element>
+				<xs:element name='queryAborted'>
+					<xs:complexType/>
+				</xs:element>
+				<xs:element name='newTable'>
+					<xs:complexType>
+						<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+							<xs:element name='column'>
+								<xs:complexType>
+									<xs:attribute name='columnId' type='xs:string' use='required'/>
+									<xs:attribute name='header' type='xs:string' use='optional'/>
+									<xs:attribute name='dataSourceId' type='xs:string' use='optional'/>
+									<xs:attribute name='cacheTypeName' type='xs:string' use='optional'/>
+									<xs:attribute name='fgColor' type='Color' use='optional'/>
+									<xs:attribute name='bgColor' type='Color' use='optional'/>
+									<xs:attribute name='alignment' type='Alignment' use='optional'/>
+									<xs:attribute name='nrDecimals' type='xs:nonNegativeInteger' use='optional'/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name='tableId' type='xs:string' use='required'/>
+						<xs:attribute name='tableName' type='xs:string' use='required'/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='newRecords'>
+					<xs:complexType>
+						<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+							<xs:element name='record'>
+								<xs:complexType>
+									<xs:choice minOccurs='0' maxOccurs='unbounded'>
+										<xs:element name='boolean' type='xs:boolean'/>
+										<xs:element name='color' type='Color'/>
+										<xs:element name='date' type='xs:date'/>
+										<xs:element name='dateTime' type='xs:dateTime'/>
+										<xs:element name='double' type='xs:double'/>
+										<xs:element name='duration' type='xs:duration'/>
+										<xs:element name='int' type='xs:int'/>
+										<xs:element name='long' type='xs:long'/>
+										<xs:element name='string' type='xs:string'/>
+										<xs:element name='time' type='xs:time'/>
+										<xs:element name='base64'>
+											<xs:complexType>
+												<xs:simpleContent>
+													<xs:extension base='xs:base64Binary'>
+														<xs:attribute name='contentType' type='xs:string' use='required'/>
+													</xs:extension>
+												</xs:simpleContent>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name='void'>
+											<xs:complexType/>
+										</xs:element>
+									</xs:choice>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name='tableId' type='xs:string' use='required'/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='tableDone'>
+					<xs:complexType>
+						<xs:attribute name='tableId' type='xs:string' use='required'/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='newObject'>
+					<xs:complexType>
+						<xs:simpleContent>
+							<xs:extension base='xs:base64Binary'>
+								<xs:attribute name='contentType' type='xs:string' use='required'/>
+							</xs:extension>
+						</xs:simpleContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='queryMessage'>
+					<xs:complexType>
+						<xs:simpleContent>
+							<xs:extension base='xs:string'>
+								<xs:attribute name='type' type='EventType' use='optional' default='Information'/>
+								<xs:attribute name='level' type='EventLevel' use='optional' default='Minor'/>
+							</xs:extension>
+						</xs:simpleContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+			<xs:attributeGroup ref='nodeReference'/>
+			<xs:attribute name='queryId' type='xs:string' use='required'/>
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:element name='abortNodeQuery'>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='NodeReferenceRequest'>
+					<xs:attribute name='queryId' type='xs:string' use='required'/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='abortNodeQueryResponse'>
+		<xs:complexType>
+			<xs:attributeGroup ref='responseCode'/>
+		</xs:complexType>
+	</xs:element>
+ 
+	<xs:element name='abortCommonNodeQuery'>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='NodeReferencesRequest'>
+					<xs:attribute name='queryId' type='xs:string' use='required'/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name='abortCommonNodeQueryResponse'>
+		<xs:complexType>
+			<xs:attributeGroup ref='responseCode'/>
+		</xs:complexType>
+	</xs:element>
  
 	<xs:simpleType name='ResponseCode'>
         <xs:restriction base='xs:string'>
@@ -356,10 +529,36 @@
         <xs:restriction base='xs:string'>
             <xs:enumeration value='Simple'/>
             <xs:enumeration value='Parameterized'/>
-        </xs:restriction>
+			<xs:enumeration value='Query'/>
+		</xs:restriction>
     </xs:simpleType>
  
-    <xs:attributeGroup name='tokens'>
+	<xs:simpleType name='Alignment'>
+		<xs:restriction base='xs:string'>
+			<xs:enumeration value='Left'/>
+			<xs:enumeration value='Center'/>
+			<xs:enumeration value='Right'/>
+		</xs:restriction>
+	</xs:simpleType>
+ 
+	<xs:simpleType name='EventType'>
+		<xs:restriction base='xs:string'>
+			<xs:enumeration value='Information'/>
+			<xs:enumeration value='Warning'/>
+			<xs:enumeration value='Error'/>
+			<xs:enumeration value='Exception'/>
+		</xs:restriction>
+	</xs:simpleType>
+ 
+	<xs:simpleType name='EventLevel'>
+		<xs:restriction base='xs:string'>
+			<xs:enumeration value='Minor'/>
+			<xs:enumeration value='Medium'/>
+			<xs:enumeration value='Major'/>
+		</xs:restriction>
+	</xs:simpleType>
+ 
+	<xs:attributeGroup name='tokens'>
         <xs:attribute name='deviceToken' type='xs:string' use='optional'/>
         <xs:attribute name='serviceToken' type='xs:string' use='optional'/>
         <xs:attribute name='userToken' type='xs:string' use='optional'/>
@@ -499,7 +698,7 @@
         <xs:attribute name='parameterName' type='xs:string' use='required'/>
         <xs:attribute name='ascending' type='xs:boolean' use='optional' default='true'/>
     </xs:complexType>
-  
+ 
     <xs:complexType name='NodeInformation'>
         <xs:choice minOccurs='0' maxOccurs='unbounded'>
             <xs:element name='boolean' type='BooleanParameter'/>

@@ -3391,8 +3391,27 @@
 						Also, items in the directory can also implement the <link url='#DublinCore'>XMPP.IoT.Media.Directory.DublinCore</link> interface to aggregate
 						Dublin Core meta-data for each item.
 					</p>
-					<!-- TODO: Content search commands -->
-                </section4>
+					<table caption='XMPP.IoT.Media.Directory Control Parameters'>
+						<tr>
+							<th>Command</th>
+							<th>Type</th>
+							<th>Use</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>SearchContent</td>
+							<td>Query</td>
+							<td>Required</td>
+							<td>This query command allows clients to search for content in the media directory. (*)</td>
+						</tr>
+						<p>
+							(*) The Query command can have any search parameters in its parameter form. The form should however include parameters corresponding to media items available 
+							in the directory, but can also include additional search parameters. The query result must include one table with Table ID <strong>SearchResult</strong>. This table
+							can have any number of result columns. One of these columns must have Column ID <strong>NodeId</strong> and point to the corresponding node with the corresponding
+							media interface matching the search parameters.
+						</p>
+					</table>
+					</section4>
 				<section4 topic='XMPP.IoT.Media.Directory.AudioItem' anchor='AudioItem'>
 					<p>
 						Represents an audio item (song, radio station, etc.)
@@ -3735,21 +3754,446 @@
 						(5) For more information, see <link url='#ImageFormat'>Image Formats</link>.
 					</p>
 				</section4>
-				<section4 topic='XMPP.IoT.Media.Display'>
-                    <!-- TODO -->
-                </section4>
-                <section4 topic='XMPP.IoT.Media.LoudSpeakers'>
-                    <!-- TODO -->
-                </section4>
-                <section4 topic='XMPP.IoT.Media.Microphone'>
-                    <!-- TODO -->
-                </section4>
-				<section4 topic='XMPP.IoT.Media.Recorder'>
-                    <!-- TODO -->
-                </section4>
+				<section4 topic='XMPP.IoT.Media.Display' anchor='XMPP_IoT_Media_Display'>
+					<p>
+						Represents an display that can show display video streams. If the node also implements the
+						<link url='#XMPP_IoT_Media_LoudSpeakers'>XMPP.IoT.Media.LoudSpeakers</link> interface, the node
+						can play both video and audio streams.
+					</p>
+					<table caption='XMPP.IoT.Media.Display Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>URL</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>string</td>
+							<td>URL of the stream currently being played.</td>
+						</tr>
+						<tr>
+							<td>Width</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>numeric</td>
+							<td>Width in pixels of the video.</td>
+						</tr>
+						<tr>
+							<td>Height</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>numeric</td>
+							<td>Height in pixels of the video.</td>
+						</tr>
+						<tr>
+							<td>Position</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>timeSpan</td>
+							<td>Current position in stream.</td>
+						</tr>
+						<tr>
+							<td>Rate</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>numeric</td>
+							<td>Current playback rate. 1 = Normal playback. 2 = Twice the speed of normal playback. 0.5 = Half the speed of normal playback, etc.</td>
+						</tr>
+						<tr>
+							<td>Volume</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>numeric</td>
+							<td>Current volume, in percent. 0% = Volume off, 100% = Maximum volume.</td>
+						</tr>
+						<tr>
+							<td>Mute</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>boolean</td>
+							<td>If volume is muted or not.</td>
+						</tr>
+					</table>
+					<table caption='XMPP.IoT.Media.Display Control Parameters'>
+						<tr>
+							<th>Parameter</th>
+							<th>Use</th>
+							<th>Parameter Type</th>
+							<th>Range</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Load</td>
+							<td>Required</td>
+							<td>string</td>
+							<td>-</td>
+							<td>URL of new stream to play. Playback starts automatically.</td>
+						</tr>
+						<tr>
+							<td>Play</td>
+							<td>Required</td>
+							<td>boolean</td>
+							<td>-</td>
+							<td>If true, starts playback of current stream. If false, stops playback.</td>
+						</tr>
+						<tr>
+							<td>Rate</td>
+							<td>Required</td>
+							<td>double</td>
+							<td>Positive</td>
+							<td>
+								Desired playback rate. The display can choose the play back rate closest to the desired value.
+								The range must be defined in the corresponding control form, using the &lt;range&gt; element.
+							</td>
+						</tr>
+						<tr>
+							<td>Volume</td>
+							<td>Required</td>
+							<td>double</td>
+							<td>0-100</td>
+							<td>
+								Desired volume, in percent. The range must be defined in the corresponding control form, using the &lt;range&gt; element.
+							</td>
+						</tr>
+						<tr>
+							<td>Mute</td>
+							<td>Required</td>
+							<td>boolean</td>
+							<td>-</td>
+							<td>If volume should be muted or not.</td>
+						</tr>
+						<tr>
+							<td>Position</td>
+							<td>Optional</td>
+							<td>duration</td>
+							<td>&lt;range&gt;</td>
+							<td>
+								Move the current position to a given timestamp within the current stream.
+								The range must be defined in the corresponding control form, using the &lt;range&gt; element.
+							</td>
+						</tr>
+					</table>
+				</section4>
+                <section4 topic='XMPP.IoT.Media.LoudSpeakers' anchor='XMPP_IoT_Media_LoudSpeakers'>
+					<p>
+						Represents an display that can play audio streams. If the node also implements the
+						<link url='#XMPP_IoT_Media_Display'>XMPP.IoT.Media.Display</link> interface, the node
+						can play both video and audio streams.
+					</p>
+					<table caption='XMPP.IoT.Media.LoudSpeakers Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>URL</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>string</td>
+							<td>URL of the stream currently being played.</td>
+						</tr>
+						<tr>
+							<td>Position</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>timeSpan</td>
+							<td>Current position in stream.</td>
+						</tr>
+						<tr>
+							<td>Rate</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>numeric</td>
+							<td>Current playback rate. 1 = Normal playback. 2 = Twice the speed of normal playback. 0.5 = Half the speed of normal playback, etc.</td>
+						</tr>
+						<tr>
+							<td>Volume</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>numeric</td>
+							<td>Current volume, in percent. 0% = Volume off, 100% = Maximum volume.</td>
+						</tr>
+						<tr>
+							<td>Mute</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>boolean</td>
+							<td>If volume is muted or not.</td>
+						</tr>
+					</table>
+					<table caption='XMPP.IoT.Media.LoadSpeakers Control Parameters'>
+						<tr>
+							<th>Parameter</th>
+							<th>Use</th>
+							<th>Parameter Type</th>
+							<th>Range</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Load</td>
+							<td>Required</td>
+							<td>string</td>
+							<td>-</td>
+							<td>URL of new stream to play. Playback starts automatically.</td>
+						</tr>
+						<tr>
+							<td>Play</td>
+							<td>Required</td>
+							<td>boolean</td>
+							<td>-</td>
+							<td>If true, starts playback of current stream. If false, stops playback.</td>
+						</tr>
+						<tr>
+							<td>Rate</td>
+							<td>Required</td>
+							<td>double</td>
+							<td>Positive</td>
+							<td>
+								Desired playback rate. The display can choose the play back rate closest to the desired value.
+								The range must be defined in the corresponding control form, using the &lt;range&gt; element.
+							</td>
+						</tr>
+						<tr>
+							<td>Volume</td>
+							<td>Required</td>
+							<td>double</td>
+							<td>0-100</td>
+							<td>
+								Desired volume, in percent. The range must be defined in the corresponding control form, using the &lt;range&gt; element.
+							</td>
+						</tr>
+						<tr>
+							<td>Mute</td>
+							<td>Required</td>
+							<td>boolean</td>
+							<td>-</td>
+							<td>If volume should be muted or not.</td>
+						</tr>
+						<tr>
+							<td>Position</td>
+							<td>Optional</td>
+							<td>duration</td>
+							<td>&lt;range&gt;</td>
+							<td>
+								Move the current position to a given timestamp within the current stream.
+								The range must be defined in the corresponding control form, using the &lt;range&gt; element.
+							</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.IoT.Media.Microphone'>
+					<p>
+						Represents a live Microphone.
+					</p>
+					<table caption='XMPP.IoT.Media.Microphone Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>URL</td>
+							<td>Required</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>URL to the audio stream.</td>
+						</tr>
+						<tr>
+							<td>Transport</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>Transport protocol used to transfer stream. (1)</td>
+						</tr>
+						<tr>
+							<td>Container</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>Audio Container Format used to encapsulate stream. (2)</td>
+						</tr>
+						<tr>
+							<td>Audio Stream</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>Audio Stream Format used to transfer stream. (3)</td>
+						</tr>
+						<tr>
+							<td>Enabled</td>
+							<td>Required</td>
+							<td>status</td>
+							<td>boolean</td>
+							<td>If the microphone is enabled or not.</td>
+						</tr>
+					</table>
+					<p>
+						(1) For more information, see <link url='#TransportProtocol'>Transport Protocols</link>.
+					</p>
+					<p>
+						(2) For more information, see <link url='#AudioContainerFormat'>Audio Container Formats</link>.
+					</p>
+					<p>
+						(3) For more information, see <link url='#AudioStreamFormat'>Audio Stream Formats</link>.
+					</p>
+					<table caption='XMPP.IoT.Media.Microphone Control Parameters'>
+						<tr>
+							<th>Parameter</th>
+							<th>Use</th>
+							<th>Parameter Type</th>
+							<th>Range</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Enabled</td>
+							<td>Optional</td>
+							<td>boolean</td>
+							<td>-</td>
+							<td>If the microphone should be enabled (true) or disabled (false).</td>
+						</tr>
+					</table>
+				</section4>
+				<section4 topic='XMPP.IoT.Media.Recorder' anchor='XMPP_IoT_Media_Recorder'>
+					<p>
+						Represents a recorder record video or audio streams.
+					</p>
+					<table caption='XMPP.IoT.Media.Recorder Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Recording</td>
+							<td>Required</td>
+							<td>status</td>
+							<td>boolean</td>
+							<td>If recording is being performed or not.</td>
+						</tr>
+						<tr>
+							<td>Recording, URL</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>string</td>
+							<td>URL of stream being recorded.</td>
+						</tr>
+						<tr>
+							<td>Duration</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>timeSpan</td>
+							<td>Time spent on current recording.</td>
+						</tr>
+						<tr>
+							<td>Time Left</td>
+							<td>Optional</td>
+							<td>status</td>
+							<td>timeSpan</td>
+							<td>Estimated Time Left of recording. If recording is indefinite, this field reports an estimation of how much
+							can be recorded using current settings.</td>
+						</tr>
+					</table>
+					<table caption='XMPP.IoT.Media.Recorder Control Parameters'>
+						<tr>
+							<th>Parameter</th>
+							<th>Use</th>
+							<th>Parameter Type</th>
+							<th>Range</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>StartRecording</td>
+							<td>Required</td>
+							<td>string</td>
+							<td>-</td>
+							<td>URL of stream to start recording.</td>
+						</tr>
+						<tr>
+							<td>StopRecording</td>
+							<td>Required</td>
+							<td>string</td>
+							<td>&lt;regex&gt;</td>
+							<td>Stops current recording, and names the recorded stream according to the value of this parameter. If the 
+							parameter is the empty string, the recording is discarded. In a control form, the parameter must be validated
+							using a &lt;regex&gt; validation rule so that only allowed characters and file names are accepted.</td>
+						</tr>
+					</table>
+				</section4>
                 <section4 topic='XMPP.IoT.Media.TextDisplay'>
-                    <!-- TODO -->
-                </section4>
+					<p>
+						A Text display is a simpler form of display displaying simple unformatted text arranged in rows and columns. Each row is controlled by
+						a separate parameter. This allows for provisioning of different parts of the display to different clients, if desired.
+					</p>
+					<table caption='XMPP.IoT.Media.TextDisplay Fields'>
+						<tr>
+							<th>Field Name</th>
+							<th>Use</th>
+							<th>Field Type</th>
+							<th>Value Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Nr Rows</td>
+							<td>Required</td>
+							<td>identity</td>
+							<td>numeric</td>
+							<td>Number of rows on the display. (1)</td>
+						</tr>
+						<tr>
+							<td>Nr Columns</td>
+							<td>Required</td>
+							<td>identity</td>
+							<td>numeric</td>
+							<td>Number of columns on the display. (2)</td>
+						</tr>
+						<tr>
+							<td>Row %1%</td>
+							<td>Required</td>
+							<td>status</td>
+							<td>string</td>
+							<td>Contents currently displayed at Row %1%. Rows are numbered 1, 2, ...</td>
+						</tr>
+					</table>
+					<p>
+						(1) Even though the interface lists contents in rows, the display itself is not required to display the items exactly as a sequence of rows.
+						It might for instance contain one set of rows offset from the others.
+					</p>
+					<p>
+						(2) The interface allows for different column lengths for different rows. This value should be considered the maximum column length, or main
+						column length, of the display. Actual column lengths for each row is controlled using regular expressions in the corresponding control form.
+					</p>
+					<table caption='XMPP.IoT.Media.TextDisplay Control Parameters'>
+						<tr>
+							<th>Parameter</th>
+							<th>Use</th>
+							<th>Parameter Type</th>
+							<th>Range</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Row %1%</td>
+							<td>Required</td>
+							<td>string</td>
+							<td>&lt;regex&gt;</td>
+							<td>
+								Changes the contents of Row number %1%. Rows are numbered 1, 2, ...
+								In a control form, the parameter must be validated using a &lt;regex&gt; validation rule so that only allowed 
+								characters are accepted and the maximum length of the row is not exceeded.
+							</td>
+						</tr>
+					</table>
+				</section4>
             </section3>
 			<section3 topic='XMPP.IoT.Network'>
 				<p>
@@ -5667,6 +6111,7 @@
 						<td>UDP Multicast</td>
 					</tr>
 				</table>
+				<!-- XMPP-based transports -->
 			</section3>
 			<section3 topic='Video Container Format' anchor='VideoContainerFormat'>
 				<p>
