@@ -151,25 +151,25 @@
       3.9.2.  <a href="#sect-ID0E4CBG">Get Database Readout Parameters</a><br>      
       3.9.3.  <a href="#sect-ID0EMDBG">Start Database Readout</a><br>      
       3.9.4.  <a href="#sect-ID0E2EBG">Start Database Readout, Failure</a><br>      
-      3.9.5.  <a href="#sect-ID0EOFBG">Cancelling a database read-out</a><br>4.  <a href="#impl">Implementation Notes</a><br>   
-      4.1.  <a href="#nodeinfo">Node Information</a><br>   
-      4.2.  <a href="#sect-ID0E2QBG">Parameter Types</a><br>   
-      4.3.  <a href="#sect-ID0EWUBG">Response Codes</a><br>   
-      4.4.  <a href="#sect-ID0E2XBG">Unimplemented commands</a><br>   
-      4.5.  <a href="#nodecommands">Command attributes</a><br>   
-      4.6.  <a href="#sect-ID0EZ4BG">Node States</a><br>   
-      4.7.  <a href="#sect-ID0EUAAI">Required Data Sources</a><br>   
-      4.8.  <a href="#columndef">Table Column definitions in query results</a><br>   
-      4.9.  <a href="#recorddef">Record Item definitions in query results</a><br>   
-      4.10.  <a href="#messagedef">Message definitions in query results</a><br>5.  <a href="#i18n">Internationalization Considerations</a><br>   
-      5.1.  <a href="#sect-ID0EEPAI">Localization</a><br>   
-      5.2.  <a href="#sect-ID0EUPAI">Time Zones</a><br>   
-      5.3.  <a href="#interop">Interoperability</a><br>6.  <a href="#security">Security Considerations</a><br>   
-      6.1.  <a href="#sect-ID0ETQAI">Access rights</a><br>   
-      6.2.  <a href="#sect-ID0EISAI">Integration with provisioning servers</a><br>      
-      6.2.1.  <a href="#sect-ID0EDTAI">Restricting access to data source per contact</a><br>      
-      6.2.2.  <a href="#sect-ID0EBVAI">Restricting access to node properties per contact</a><br>      
-      6.2.3.  <a href="#sect-ID0EDWAI">Restricting access to node commands per contact</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a><br>10.  <a href="#moreinfo">For more information</a><br>11.  <a href="#ack">Acknowledgements</a></p>
+      3.9.5.  <a href="#sect-ID0EOFBG">Cancelling a database read-out</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
+      5.1.  <a href="#nodeinfo">Node Information</a><br>   
+      5.2.  <a href="#sect-ID0EISBG">Parameter Types</a><br>   
+      5.3.  <a href="#sect-ID0EDWBG">Response Codes</a><br>   
+      5.4.  <a href="#sect-ID0EIZBG">Unimplemented commands</a><br>   
+      5.5.  <a href="#nodecommands">Command attributes</a><br>   
+      5.6.  <a href="#sect-ID0EG6BG">Node States</a><br>   
+      5.7.  <a href="#sect-ID0EBCAI">Required Data Sources</a><br>   
+      5.8.  <a href="#columndef">Table Column definitions in query results</a><br>   
+      5.9.  <a href="#recorddef">Record Item definitions in query results</a><br>   
+      5.10.  <a href="#messagedef">Message definitions in query results</a><br>6.  <a href="#i18n">Internationalization Considerations</a><br>   
+      6.1.  <a href="#sect-ID0ERQAI">Localization</a><br>   
+      6.2.  <a href="#sect-ID0EBRAI">Time Zones</a><br>   
+      6.3.  <a href="#interop">Interoperability</a><br>7.  <a href="#security">Security Considerations</a><br>   
+      7.1.  <a href="#sect-ID0EASAI">Access rights</a><br>   
+      7.2.  <a href="#sect-ID0EVTAI">Integration with provisioning servers</a><br>      
+      7.2.1.  <a href="#sect-ID0EQUAI">Restricting access to data source per contact</a><br>      
+      7.2.2.  <a href="#sect-ID0EOWAI">Restricting access to node properties per contact</a><br>      
+      7.2.3.  <a href="#sect-ID0EQXAI">Restricting access to node commands per contact</a><br>8.  <a href="#iana">IANA Considerations</a><br>9.  <a href="#registrar">XMPP Registrar Considerations</a><br>10.  <a href="#schema">XML Schema</a><br>11.  <a href="#moreinfo">For more information</a><br>12.  <a href="#ack">Acknowledgements</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
     </div>
     <hr>
@@ -4920,9 +4920,44 @@
             </div>
         </div>
     <h2>4.
+       <a name="support">Determining Support</a></h2>
+		<p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:sn:concentrators" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0ERGBG">11</a>] information requests.</p>
+		<p class="caption"><a name="example-101"></a>Example 101. Service discovery information request</p>
+    <div class="indent">
+      <pre class="prettyprint">
+			
+&lt;iq type='get'
+    from='device@clayster.com/device'
+    to='provisioning@clayster.com'
+    id='disco1'&gt;
+  &lt;query xmlns='http://jabber.org/protocol/disco#info'/&gt;
+&lt;/iq&gt;
+		</pre>
+    </div>
+		<p class="caption"><a name="example-102"></a>Example 102. Service discovery information response</p>
+    <div class="indent">
+      <pre class="prettyprint">
+			
+&lt;iq type='result'
+    from='provisioning@clayster.com'
+    to='device@clayster.com/device'
+    id='disco1'&gt;
+  &lt;query xmlns='http://jabber.org/protocol/disco#info'&gt;
+    ...
+    &lt;feature var='urn:xmpp:sn:concentrators'/&gt;
+    ...
+  &lt;/query&gt;
+&lt;/iq&gt;
+		</pre>
+    </div>
+		<p class="" style="">
+			In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
+			in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EIHBG">12</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
+		</p>
+	<h2>5.
        <a name="impl">Implementation Notes</a></h2>
         <div class="indent">
-      <h3>4.1 <a name="nodeinfo">Node Information</a></h3>
+      <h3>5.1 <a name="nodeinfo">Node Information</a></h3>
             <p class="" style="">
                 Several commands return basic node information. The following table lists possible fields with corresponding descriptions.
             </p>
@@ -5049,7 +5084,7 @@
             </p>
         </div>
         <div class="indent">
-      <h3>4.2 <a name="sect-ID0E2QBG">Parameter Types</a></h3>
+      <h3>5.2 <a name="sect-ID0EISBG">Parameter Types</a></h3>
             <p class="" style="">
                 Nodes can report parameters of different types. The following table lists available parameter types.
             </p>
@@ -5100,7 +5135,7 @@
       </div>
         </div>
         <div class="indent">
-      <h3>4.3 <a name="sect-ID0EWUBG">Response Codes</a></h3>
+      <h3>5.3 <a name="sect-ID0EDWBG">Response Codes</a></h3>
             <p class="" style="">
                 All responses have a response code that the client is required to check. The following table lists possible response codes and their corresponding meanings.
             </p>
@@ -5144,7 +5179,7 @@
       </div>
         </div>
         <div class="indent">
-      <h3>4.4 <a name="sect-ID0E2XBG">Unimplemented commands</a></h3>
+      <h3>5.4 <a name="sect-ID0EIZBG">Unimplemented commands</a></h3>
             <p class="" style="">
                 It's important that the concentrator responds to unrecognized commands. This, to make sure future extensions to this document does not produce unexpected
                 results in concentrators implementing a previous version, or in concentrators implementing only a subset of available commands.
@@ -5161,7 +5196,7 @@
             <p class="" style="">
                 The following example shows how unrecognized commands must be handled by the concentrator:
             </p>
-            <p class="caption"><a name="example-101"></a>Example 101. Unimplemented commands</p>
+            <p class="caption"><a name="example-103"></a>Example 103. Unimplemented commands</p>
       <div class="indent">
         <pre class="prettyprint">
                 
@@ -5184,7 +5219,7 @@
       </div>
         </div>
         <div class="indent">
-      <h3>4.5 <a name="nodecommands">Command attributes</a></h3>
+      <h3>5.5 <a name="nodecommands">Command attributes</a></h3>
             <p class="" style="">
                 Node commands have a set of attributes. The following table lists available attributes and what they mean.
             </p>
@@ -5252,7 +5287,7 @@
       </div>
         </div>
         <div class="indent">
-      <h3>4.6 <a name="sect-ID0EZ4BG">Node States</a></h3>
+      <h3>5.6 <a name="sect-ID0EG6BG">Node States</a></h3>
             <p class="" style="">
                 Nodes can be in different states. Even though nodes are free to publish any amount of states as parameters, there are a set of states that are so crucial to the 
                 concept of a node state, that they are published using a separate attribute and separate events. These node states are as follows:
@@ -5292,7 +5327,7 @@
       </div>
         </div>
         <div class="indent">
-      <h3>4.7 <a name="sect-ID0EUAAI">Required Data Sources</a></h3>
+      <h3>5.7 <a name="sect-ID0EBCAI">Required Data Sources</a></h3>
             <p class="" style="">
                 The following table lists required data sources for concentrators (of sensors, actuators, meters, etc.) in sensor networks:
             </p>
@@ -5310,11 +5345,11 @@
             </table>
       </div>
             <p class="" style="">
-                More information can be found in the  [<a href="#nt-ID0E1BAI">11</a>].
+                More information can be found in the  [<a href="#nt-ID0EHDAI">13</a>].
             </p>
         </div>
         <div class="indent">
-      <h3>4.8 <a name="columndef">Table Column definitions in query results</a></h3>
+      <h3>5.8 <a name="columndef">Table Column definitions in query results</a></h3>
             <p class="" style="">
                 Table columns in query results can have the following attributes:
             </p>
@@ -5370,7 +5405,7 @@
       </div>
         </div>
         <div class="indent">
-      <h3>4.9 <a name="recorddef">Record Item definitions in query results</a></h3>
+      <h3>5.9 <a name="recorddef">Record Item definitions in query results</a></h3>
             <p class="" style="">
                 Records contain arrays of items, each item correspond to a specific column with the same ordinal index. Each item is specified together with its type.
                 This, so receptors can integrate the result with type information if necessary. The following different type elements are available:
@@ -5430,7 +5465,7 @@
       </div>
         </div>
         <div class="indent">
-      <h3>4.10 <a name="messagedef">Message definitions in query results</a></h3>
+      <h3>5.10 <a name="messagedef">Message definitions in query results</a></h3>
             <p class="" style="">
                 Messages in query results contain apart from a message text, also contain some classification on what the message is using two attributes: The
                 <span class="strong">type</span> attribute gives a rough idea about the type of message and <span class="strong">level</span> the importance of the message.
@@ -5482,10 +5517,10 @@
             </table>
       </div>
         </div>
-    <h2>5.
+    <h2>6.
        <a name="i18n">Internationalization Considerations</a></h2>
         <div class="indent">
-      <h3>5.1 <a name="sect-ID0EEPAI">Localization</a></h3>
+      <h3>6.1 <a name="sect-ID0ERQAI">Localization</a></h3>
             <p class="" style="">
                 Localization of content can be performed if clients provide <span class="strong">xml:lang</span> attributes in commands made to the concentrator. If omitted, the
                 <span class="strong">default language</span> will be used in responses. If provided, but the concentrator does not support localization, or the requested language,
@@ -5493,7 +5528,7 @@
             </p>
         </div>
         <div class="indent">
-      <h3>5.2 <a name="sect-ID0EUPAI">Time Zones</a></h3>
+      <h3>6.2 <a name="sect-ID0EBRAI">Time Zones</a></h3>
             <p class="" style="">
                 Concentrators of larger sub-systems spanning multiple time-zones should specify all timestamps with time-zone information, so readers can perform comparisons
                 of time information.
@@ -5504,16 +5539,16 @@
             </p>
         </div>
         <div class="indent">
-      <h3>5.3 <a name="interop">Interoperability</a></h3>
+      <h3>6.3 <a name="interop">Interoperability</a></h3>
             <p class="" style="">
                 For concentrators to be interoperable in sensor networks, they need to adhere to rules and guidelines described in the
                 <a href="xep-0000-IoT-Interoperability.html">xep-0000-IoT-Interoperability</a> document.
             </p>
         </div>
-    <h2>6.
+    <h2>7.
        <a name="security">Security Considerations</a></h2>
         <div class="indent">
-      <h3>6.1 <a name="sect-ID0ETQAI">Access rights</a></h3>
+      <h3>7.1 <a name="sect-ID0EASAI">Access rights</a></h3>
             <p class="" style="">
                 This document publishes a lot of commands with which to interact with a concentrator. If security and access rights is an issue, it might not be sufficient
                 to allow all friends access to the system. There are many ways in which to restrict access to the contents of the concentrator. Following are some examples:
@@ -5523,7 +5558,7 @@
                     The concentrator can restrict friendships to trusted friends, and then assign access rights internally to the approved contacts.
                 </li>
                 <li class="" style="">
-                    The concentrator can use a provisioning server (see  [<a href="#nt-ID0EHRAI">12</a>]) 
+                    The concentrator can use a provisioning server (see  [<a href="#nt-ID0EUSAI">14</a>]) 
                     to delegate trust to a third party responsible for controlling who can get access to the concentrator (<span class="strong">isFriend</span> or <span class="strong">canAccess</span> commands), 
                     and what items can be viewed (<span class="strong">hasPrivilege</span> or <span class="strong">downloadPrivileges</span> commands).
                 </li>
@@ -5536,7 +5571,7 @@
             </ul>
         </div>
         <div class="indent">
-      <h3>6.2 <a name="sect-ID0EISAI">Integration with provisioning servers</a></h3>
+      <h3>7.2 <a name="sect-ID0EVTAI">Integration with provisioning servers</a></h3>
             <p class="" style="">
                 The <a href="sensor-network-provisioning.html">sensor-network-provisioning</a> document describes how trust can be delegated to trusted provisioning servers
                 that can be used to restrict access to and privileges in a network.
@@ -5551,7 +5586,7 @@
                 The following subsections show different examples of how such an integration can be performed.
             </p>
             <div class="indent">
-        <h3>6.2.1 <a name="sect-ID0EDTAI">Restricting access to data source per contact</a></h3>
+        <h3>7.2.1 <a name="sect-ID0EQUAI">Restricting access to data source per contact</a></h3>
                 <p class="" style="">
                     This section shows how a provisioning server can be used to restrict access to data sources to users allowed to access those data sources.
                 </p>
@@ -5579,7 +5614,7 @@
                 </ul>
             </div>
             <div class="indent">
-        <h3>6.2.2 <a name="sect-ID0EBVAI">Restricting access to node properties per contact</a></h3>
+        <h3>7.2.2 <a name="sect-ID0EOWAI">Restricting access to node properties per contact</a></h3>
                 <p class="" style="">
                     This section shows how a provisioning server can be used to restrict access to node parameters that users allowed to access and edit.
                 </p>
@@ -5597,7 +5632,7 @@
                 </ul>
             </div>
             <div class="indent">
-        <h3>6.2.3 <a name="sect-ID0EDWAI">Restricting access to node commands per contact</a></h3>
+        <h3>7.2.3 <a name="sect-ID0EQXAI">Restricting access to node commands per contact</a></h3>
                 <p class="" style="">
                     This section shows how a provisioning server can be used to restrict access to node commands to users allowed to access those commands.
                 </p>
@@ -5617,14 +5652,14 @@
                 </ul>
             </div>
         </div>
-    <h2>7.
-       <a name="iana">IANA Considerations</a></h2>
-        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EZXAI">13</a>].</p>
     <h2>8.
+       <a name="iana">IANA Considerations</a></h2>
+        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EGZAI">15</a>].</p>
+    <h2>9.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
         <p class="" style="">REQUIRED.</p>
         
-    <h2>9.
+    <h2>10.
        <a name="schema">XML Schema</a></h2>
         <p class="caption">
     </p>
@@ -6606,7 +6641,7 @@
 &lt;/xs:schema&gt;
         </pre>
     </div>
-    <h2>10.
+    <h2>11.
        <a name="moreinfo">For more information</a></h2>
         <p class="" style="">
             For more information, please see the following resources:
@@ -6624,7 +6659,7 @@
                 </p>
             </li>
         </ul>
-    <h2>11.
+    <h2>12.
        <a name="ack">Acknowledgements</a></h2>
         <p class="" style="">Thanks to Joachim Lindborg, Karin Forsell and Tina Beckman for all valuable feedback.</p>
     <hr><a name="appendices"></a><h2>Appendices</h2>
@@ -6686,9 +6721,11 @@
       <p><a name="nt-ID0EZDBG">10</a>. 
                         XEP-xxxx: Sensor Data <a href="sensor-data.html">sensor-data</a>
                     </p>
-      <p><a name="nt-ID0E1BAI">11</a>. XEP-xxxx: Interoperability <a href="#interop">Interoperability section</a></p>
-      <p><a name="nt-ID0EHRAI">12</a>. XEP-xxxx: Provisioning <a href="sensor-network-provisioning.html">sensor-network-provisioning</a></p>
-      <p><a name="nt-ID0EZXAI">13</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+      <p><a name="nt-ID0ERGBG">11</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0EIHBG">12</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0EHDAI">13</a>. XEP-xxxx: Interoperability <a href="#interop">Interoperability section</a></p>
+      <p><a name="nt-ID0EUSAI">14</a>. XEP-xxxx: Provisioning <a href="sensor-network-provisioning.html">sensor-network-provisioning</a></p>
+      <p><a name="nt-ID0EGZAI">15</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
