@@ -3404,14 +3404,14 @@
 							<td>Required</td>
 							<td>This query command allows clients to search for content in the media directory. (*)</td>
 						</tr>
-						<p>
-							(*) The Query command can have any search parameters in its parameter form. The form should however include parameters corresponding to media items available 
-							in the directory, but can also include additional search parameters. The query result must include one table with Table ID <strong>SearchResult</strong>. This table
-							can have any number of result columns. One of these columns must have Column ID <strong>NodeId</strong> and point to the corresponding node with the corresponding
-							media interface matching the search parameters.
-						</p>
 					</table>
-					</section4>
+					<p>
+						(*) The Query command can have any search parameters in its parameter form. The form should however include parameters corresponding to media items available
+						in the directory, but can also include additional search parameters. The query result must include one table with Table ID <strong>SearchResult</strong>. This table
+						can have any number of result columns. One of these columns must have Column ID <strong>NodeId</strong> and point to the corresponding node with the corresponding
+						media interface matching the search parameters.
+					</p>
+				</section4>
 				<section4 topic='XMPP.IoT.Media.Directory.AudioItem' anchor='AudioItem'>
 					<p>
 						Represents an audio item (song, radio station, etc.)

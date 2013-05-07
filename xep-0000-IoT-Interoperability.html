@@ -3935,15 +3935,15 @@
 							<td colspan="" rowspan="">Required</td>
 							<td colspan="" rowspan="">This query command allows clients to search for content in the media directory. (*)</td>
 						</tr>
-						<p class="" style="">
-							(*) The Query command can have any search parameters in its parameter form. The form should however include parameters corresponding to media items available 
-							in the directory, but can also include additional search parameters. The query result must include one table with Table ID <span class="strong">SearchResult</span>. This table
-							can have any number of result columns. One of these columns must have Column ID <span class="strong">NodeId</span> and point to the corresponding node with the corresponding
-							media interface matching the search parameters.
-						</p>
 					</table>
           </div>
-					</div>
+					<p class="" style="">
+						(*) The Query command can have any search parameters in its parameter form. The form should however include parameters corresponding to media items available
+						in the directory, but can also include additional search parameters. The query result must include one table with Table ID <span class="strong">SearchResult</span>. This table
+						can have any number of result columns. One of these columns must have Column ID <span class="strong">NodeId</span> and point to the corresponding node with the corresponding
+						media interface matching the search parameters.
+					</p>
+				</div>
 				<div class="indent">
           <h3>3.2.8.3 <a name="AudioItem">XMPP.IoT.Media.Directory.AudioItem</a></h3>
 					<p class="" style="">
