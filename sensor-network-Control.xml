@@ -29,8 +29,8 @@
             <spec>XEP-0122</spec>
             <spec>XEP-0137</spec>
             <spec>XEP-0141</spec>
-            <spec>sensor-data</spec>
-            <spec>sensor-network-provisioning</spec>
+            <spec>XEP-0323</spec>
+            <spec>XEP-0324</spec>
             <spec>xep-0000-DynamicForms</spec>
             <spec>xep-0000-ColorParameter</spec>
         </dependencies>
@@ -44,7 +44,24 @@
             <jid>peter.waher@jabber.org</jid>
             <uri>http://se.linkedin.com/pub/peter-waher/1a/71b/a29/</uri>
         </author>
-        <revision>
+		<revision>
+			<version>0.1.1</version>
+			<date>2013-05-07</date>
+			<initials>pw</initials>
+			<remark>
+				<p>Fixed links to documents with new numbers.</p>
+				<p>Changed namespace urn:xmpp:sn to urn:xmpp:iot</p>
+			</remark>
+		</revision>
+		<revision>
+			<version>0.1</version>
+			<date>2013-05-06</date>
+			<initials>psa</initials>
+			<remark>
+				<p>Initial published version approved by the XMPP Council.</p>
+			</remark>
+		</revision>
+		<revision>
             <version>0.0.1</version>
             <date>2013-03-27</date>
             <initials>pw</initials>
@@ -80,23 +97,8 @@
                 <td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
             </tr>
             <tr>
-                <td>exi</td>
-                <td>
-                    Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
-                    in all sensor network implementations where memory and packet size is an issue.
-                </td>
-            </tr>
-            <tr>
                 <td>xep-0000-IoT-BatteryPoweredSensors</td>
                 <td>Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
-            </tr>
-            <tr>
-                <td>xep-0000-IoT-Concentrators</td>
-                <td>Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
-            </tr>
-            <tr>
-                <td>xep-0000-IoT-Control</td>
-                <td>This specification. Defines how to control actuators and other devices in sensor networks.</td>
             </tr>
             <tr>
                 <td>xep-0000-IoT-Discovery</td>
@@ -115,21 +117,36 @@
                 <td>Defines how sensor data can be multicast in efficient ways.</td>
             </tr>
             <tr>
-                <td>sensor-network-provisioning</td>
-                <td>Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
-            </tr>
-            <tr>
                 <td>xep-0000-IoT-PubSub</td>
                 <td>Defines how efficient publication of sensor data can be made in sensor networks.</td>
             </tr>
-            <tr>
-                <td>sensor-data</td>
+			<tr>
+				<td>XEP-0322</td>
+				<td>
+					Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
+					in all sensor network implementations where memory and packet size is an issue.
+				</td>
+			</tr>
+			<tr>
+                <td>XEP-0323</td>
                 <td>
                     Provides the underlying architecture, basic operations and data structures for sensor data communication over XMPP networks.
                     It includes a hardware abstraction model, removing any technical detail implemented in underlying technologies. This XEP is used by all other sensor network XEPs.
                 </td>
             </tr>
-        </table>
+			<tr>
+				<td>XEP-0324</td>
+				<td>Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
+			</tr>
+			<tr>
+				<td>XEP-0325</td>
+				<td>This specification. Defines how to control actuators and other devices in Internet of Things.</td>
+			</tr>
+			<tr>
+				<td>XEP-0326</td>
+				<td>Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
+			</tr>
+		</table>
     </section1>
     <section1 topic='Glossary' anchor='glossary'>
         <p>The following table lists common terms and corresponding descriptions.</p>
@@ -199,7 +216,7 @@
             <di>
                 <dt>Parameter</dt>
                 <dd>
-                    Readable and/or writable property on a node/device. The XEP xep-0000-IoT-Concentrators deals with reading and writing parameters
+                    Readable and/or writable property on a node/device. The XEP-0326 &xep0326; deals with reading and writing parameters
                     on nodes/devices. Fields are not parameters, and parameters are not fields.
                 </dd>
             </di>
@@ -288,10 +305,8 @@
             </note>.
         </p>
         <p>
-            If the device is a concentrator, as defined in
-            <note>
-				XEP-xxxx: Internet of Things - Concentrators &lt;<link url='xep-0000-IoT-Concentrators.html'>xep-0000-IoT-Concentrators.html</link>&gt;
-            </note>, an handles multiple nodes behind it, which node(s) to control is defined using <strong>node</strong> elements. If not a concentrator,
+            If the device is a concentrator, as defined in <link url='http://xmpp.org/extensions/xep-0326.html'>Internet of Things - Concentrators</link>, 
+			an handles multiple nodes behind it, which node(s) to control is defined using <strong>node</strong> elements. If not a concentrator,
             the use of <strong>node</strong> elements is not necessary, and control commands are sent directly to the device itself.
         </p>
         <section2 topic='Control commands'>
@@ -303,7 +318,7 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='digital.output@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control'>
+      <set xmlns='urn:xmpp:iot:control'>
          <boolean name='Output' value='true'/>
       </set>
    </message>]]>
@@ -323,7 +338,7 @@
        from='master@clayster.com/amr'
        to='digital.output@clayster.com'
        id='1'>
-      <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
+      <set xmlns='urn:xmpp:iot:control' xml:lang='en'>
          <boolean name='Output' value='true'/>
       </set>
    </iq>
@@ -332,7 +347,7 @@
        from='digital.output@clayster.com'
        to='master@clayster.com/amr'
        id='1'>
-      <setResponse xmlns='urn:xmpp:sn:control' responseCode='OK'/>
+      <setResponse xmlns='urn:xmpp:iot:control' responseCode='OK'/>
    </iq>]]>
                 </example>
                 <p>
@@ -350,7 +365,7 @@
        from='master@clayster.com/amr'
        to='analog.output@clayster.com'
        id='2'>
-      <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
+      <set xmlns='urn:xmpp:iot:control' xml:lang='en'>
          <boolean name='Output' value='true'/>
       </set>
    </iq>
@@ -359,7 +374,7 @@
        from='analog.output@clayster.com'
        to='master@clayster.com/amr'
        id='2'>
-      <setResponse xmlns='urn:xmpp:sn:control' responseCode='OtherError'>
+      <setResponse xmlns='urn:xmpp:iot:control' responseCode='OtherError'>
           <error var='Output'>Invalid parameter type.</error>
       </setResponse>
    </iq>]]>
@@ -379,7 +394,7 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='digital.output@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control'>
+      <set xmlns='urn:xmpp:iot:control'>
          <boolean name='Output' value='true'/>
       </set>
    </message>]]>
@@ -394,7 +409,7 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='analog.output@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control'>
+      <set xmlns='urn:xmpp:iot:control'>
          <int name='Output' value='50000'/>
       </set>
    </message>]]>
@@ -410,7 +425,7 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='megaprecision.analog.output@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control'>
+      <set xmlns='urn:xmpp:iot:control'>
          <long name='Output' value='500000000000000'/>
       </set>
    </message>]]>
@@ -425,7 +440,7 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='text.display@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control'>
+      <set xmlns='urn:xmpp:iot:control'>
          <string name='Row1' value='Temperature: 21.4 °C'/>
       </set>
    </message>]]>
@@ -440,7 +455,7 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='analog.output2@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control'>
+      <set xmlns='urn:xmpp:iot:control'>
          <double name='4-20mA' value='8.192'/>
       </set>
    </message>]]>
@@ -455,7 +470,7 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='alarm@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control'>
+      <set xmlns='urn:xmpp:iot:control'>
          <date name='TariffStartDate' value='2013-05-01'/>
       </set>
    </message>]]>
@@ -470,7 +485,7 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='alarm@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control'>
+      <set xmlns='urn:xmpp:iot:control'>
          <time name='Alarm Time' value='08:00:00'/>
       </set>
    </message>]]>
@@ -485,7 +500,7 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='alarm@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control'>
+      <set xmlns='urn:xmpp:iot:control'>
          <dateTime name='Alarm Time' value='2013-04-02T08:00:00'/>
       </set>
    </message>]]>
@@ -500,7 +515,7 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='alarm@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control'>
+      <set xmlns='urn:xmpp:iot:control'>
          <time name='Alarm Time' value='08:00:00'/>
       </set>
    </message>]]>
@@ -515,7 +530,7 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='alarm@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control'>
+      <set xmlns='urn:xmpp:iot:control'>
          <duration name='Alarm Duration' value='PT3M30S'/>
       </set>
    </message>]]>
@@ -530,7 +545,7 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='spotlight@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control'>
+      <set xmlns='urn:xmpp:iot:control'>
          <color name='Color' value='3399FF'/>
       </set>
    </message>]]>
@@ -545,7 +560,7 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='dimmer@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control'>
+      <set xmlns='urn:xmpp:iot:control'>
          <int name='FadeTimeMilliseconds' value='500'/>
          <int name='OutputPercent' value='10'/>
       </set>
@@ -576,14 +591,14 @@
        from='master@clayster.com/amr'
        to='dimmer@clayster.com'
        id='3'>
-      <getForm xmlns='urn:xmpp:sn:control' xml:lang='en'/>
+      <getForm xmlns='urn:xmpp:iot:control' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='dimmer@clayster.com'
        to='master@clayster.com/amr'
        id='3'>
-      <getFormResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getFormResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
@@ -642,7 +657,8 @@
                     MUST also be ordered in a way so that when set in that order using the typed commands, the corresponding control actions can be successfully executed.
                 </p>
                 <p>
-                    <strong>Note:</strong> There's a difference between node parameters, as described in XEP <link url='xep-0000-IoT-Concentrators.html'>xep-0000-IoT-Concentrators</link>,
+                    <strong>Note:</strong> There's a difference between node parameters, as described in XEP-0326 
+					<link url='http://xmpp.org/extensions/xep-0326.html'>Internet of Things - Concentrators</link>,
                     and control parameters as described in this document. For more information about this, please see
                     <link url='#nodeparamsvscontrolparams'>Difference between node parameters and node control parameters</link>.
                 </p>
@@ -658,14 +674,14 @@
        from='master@clayster.com/amr'
        to='dimmer@clayster.com'
        id='4'>
-      <getForm xmlns='urn:xmpp:sn:control' xml:lang='en'/>
+      <getForm xmlns='urn:xmpp:iot:control' xml:lang='en'/>
    </iq>
    
    <iq type='error'
        from='dimmer@clayster.com'
        to='master@clayster.com/amr'
        id='4'>
-      <getFormResponse xmlns='urn:xmpp:sn:concentrators' result='InsufficientPrivileges'/>
+      <getFormResponse xmlns='urn:xmpp:iot:concentrators' result='InsufficientPrivileges'/>
    </iq>]]>
                 </example>
             </section3>
@@ -683,7 +699,7 @@
        from='master@clayster.com/amr'
        to='dimmer@clayster.com'
        id='5'>
-      <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
+      <set xmlns='urn:xmpp:iot:control' xml:lang='en'>
           <x type='submit' xmlns='jabber:x:data'>
               <field var='xdd session' type='hidden'>
                   <value>325ED0F3-9A9A-45A4-9634-4E0D41C5EA06</value>
@@ -702,7 +718,7 @@
        from='dimmer@clayster.com'
        to='master@clayster.com/amr'
        id='5'>
-      <setResponse xmlns='urn:xmpp:sn:control' responseCode='OK'/>
+      <setResponse xmlns='urn:xmpp:iot:control' responseCode='OK'/>
    </iq>]]>
                 </example>
                 <p>
@@ -722,7 +738,7 @@
        from='master@clayster.com/amr'
        to='dimmer@clayster.com'
        id='6'>
-      <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
+      <set xmlns='urn:xmpp:iot:control' xml:lang='en'>
           <x type='submit' xmlns='jabber:x:data'>
               <field var='xdd session' type='hidden'>
                   <value>325ED0F3-9A9A-45A4-9634-4E0D41C5EA06</value>
@@ -741,7 +757,7 @@
        from='dimmer@clayster.com'
        to='master@clayster.com/amr'
        id='6'>
-      <setResponse xmlns='urn:xmpp:sn:control' responseCode='FormError'>
+      <setResponse xmlns='urn:xmpp:iot:control' responseCode='FormError'>
           <error var='OutputPercent'>Invalid parameter value.</error>
       </setResponse>
    </iq>]]>
@@ -762,7 +778,7 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='concentrator@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control'>
+      <set xmlns='urn:xmpp:iot:control'>
          <node nodeId='DigitalOutput1'/>
          <boolean name='Output' value='false'/>
       </set>
@@ -778,7 +794,7 @@
                     <![CDATA[
    <message from='master@clayster.com/amr'
             to='concentrator@clayster.com'>
-      <set xmlns='urn:xmpp:sn:control'>
+      <set xmlns='urn:xmpp:iot:control'>
          <node nodeId='DigitalOutput1'/>
          <node nodeId='DigitalOutput2'/>
          <node nodeId='DigitalOutput3'/>
@@ -801,7 +817,7 @@
        from='master@clayster.com/amr'
        to='concentrator@clayster.com'
        id='7'>
-      <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
+      <set xmlns='urn:xmpp:iot:control' xml:lang='en'>
          <node nodeId='DigitalOutput1'/>
          <node nodeId='DigitalOutput2'/>
          <node nodeId='DigitalOutput3'/>
@@ -818,7 +834,7 @@
        from='concentrator@clayster.com'
        to='master@clayster.com/amr'
        id='7'>
-      <setResponse xmlns='urn:xmpp:sn:control' responseCode='OtherError'>
+      <setResponse xmlns='urn:xmpp:iot:control' responseCode='OtherError'>
           <error var='Output'>Invalid parameter type.</error>
       </setResponse>
    </iq>]]>
@@ -835,7 +851,7 @@
        from='master@clayster.com/amr'
        to='concentrator@clayster.com'
        id='8'>
-      <getForm xmlns='urn:xmpp:sn:control' xml:lang='en'>
+      <getForm xmlns='urn:xmpp:iot:control' xml:lang='en'>
           <node nodeId='DigitalOutput1'/>
           <node nodeId='DigitalOutput2'/>
           <node nodeId='DigitalOutput3'/>
@@ -847,7 +863,7 @@
        from='concentrator@clayster.com'
        to='master@clayster.com/amr'
        id='8'>
-      <getFormResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getFormResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
@@ -886,7 +902,7 @@
        from='master@clayster.com/amr'
        to='concentrator@clayster.com'
        id='9'>
-      <getForm xmlns='urn:xmpp:sn:control' xml:lang='en'>
+      <getForm xmlns='urn:xmpp:iot:control' xml:lang='en'>
           <node nodeId='DigitalOutput1'/>
           <node nodeId='DigitalOutput2'/>
           <node nodeId='DigitalOutput3'/>
@@ -898,7 +914,7 @@
        from='concentrator@clayster.com'
        to='master@clayster.com/amr'
        id='9'>
-      <getFormResponse xmlns='urn:xmpp:sn:concentrators' result='NotImplemented'/>
+      <getFormResponse xmlns='urn:xmpp:iot:concentrators' result='NotImplemented'/>
    </iq>]]>
                 </example>
             </section3>
@@ -913,7 +929,7 @@
        from='master@clayster.com/amr'
        to='concentrator@clayster.com'
        id='10'>
-      <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
+      <set xmlns='urn:xmpp:iot:control' xml:lang='en'>
           <node nodeId='DigitalOutput1'/>
           <node nodeId='DigitalOutput2'/>
           <node nodeId='DigitalOutput3'/>
@@ -933,7 +949,7 @@
        from='concentrator@clayster.com'
        to='master@clayster.com/amr'
        id='10'>
-      <setResponse xmlns='urn:xmpp:sn:control' responseCode='OK'/>
+      <setResponse xmlns='urn:xmpp:iot:control' responseCode='OK'/>
    </iq>]]>
                 </example>
             </section3>
@@ -949,7 +965,7 @@
        from='master@clayster.com/amr'
        to='concentrator@clayster.com'
        id='11'>
-      <set xmlns='urn:xmpp:sn:control' xml:lang='en'>
+      <set xmlns='urn:xmpp:iot:control' xml:lang='en'>
           <node nodeId='DigitalOutput1'/>
           <node nodeId='DigitalOutput2'/>
           <node nodeId='DigitalOutput3'/>
@@ -973,7 +989,7 @@
        from='concentrator@clayster.com'
        to='master@clayster.com/amr'
        id='11'>
-      <setResponse xmlns='urn:xmpp:sn:control' responseCode='FormError'>
+      <setResponse xmlns='urn:xmpp:iot:control' responseCode='FormError'>
           <error var='Output'>Invalid type</error>
       </setResponse>
    </iq>]]>
@@ -982,7 +998,7 @@
         </section2>
     </section1>
 	<section1 topic='Determining Support' anchor='support'>
-		<p>If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:sn:control" in response to &xep0030; information requests.</p>
+		<p>If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:control" in response to &xep0030; information requests.</p>
 		<example caption="Service discovery information request">
 			<![CDATA[
 <iq type='get'
@@ -1000,7 +1016,7 @@
     id='disco1'>
   <query xmlns='http://jabber.org/protocol/disco#info'>
     ...
-    <feature var='urn:xmpp:sn:control'/>
+    <feature var='urn:xmpp:iot:control'/>
     ...
   </query>
 </iq>]]>
@@ -1014,10 +1030,7 @@
         <section2 topic='Reading current control states'>
             <p>
                 If a client wants to know the current status of control parameters, it must perform a readout of <strong>Momentary</strong> and <strong>Status</strong> values 
-                from the device, according to
-                <note>
-                    XEP-xxxx: Sensor Data &lt;<link url='sensor-data.html'>sensor-data.html</link>&gt;
-                </note>, and from the returned set of values take the current control parameter value according to the following rules, ordered by priority:
+                from the device, according to &xep0323;, and from the returned set of values take the current control parameter value according to the following rules, ordered by priority:
             </p>
             <ul>
                 <li>
@@ -1256,11 +1269,11 @@
         </section2>
         <section2 topic='Difference between node parameters and node control parameters' anchor='nodeparamsvscontrolparams'>
             <p>
-                A node defined in a concentrator, as defined by <link url='xep-0000-IoT-Concentrators.html'>xep-0000-IoT-Concentrators.html</link>, supporting control has
+                A node defined in a concentrator, as defined by <link url='http://xmpp.org/extensions/xep-0326.html'>Internet of Things - Concentrators</link>, supporting control has
                 two sets of parameters that are different: First a set of node parameters and then a set of control parameters.
             </p>
             <p>
-                Node parameters are defined by the node type in the concentrator, as described in <link url='xep-0000-IoT-Concentrators.html'>xep-0000-IoT-Concentrators.html</link>,
+                Node parameters are defined by the node type in the concentrator, as described in <link url='http://xmpp.org/extensions/xep-0326.html'>Internet of Things - Concentrators</link>,
                 and they are typically used by the concentrator to define the node and how to communicate or interact with the underlying device. The important part here is to know
                 that the node parameters are maintained by the concentrator, not the underlying device.
             </p>
@@ -1333,14 +1346,14 @@
        from='master@clayster.com/amr'
        to='spotlight@clayster.com'
        id='12'>
-      <getForm xmlns='urn:xmpp:sn:control' xml:lang='en'/>
+      <getForm xmlns='urn:xmpp:iot:control' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='spotlight@clayster.com'
        to='master@clayster.com/amr'
        id='12'>
-      <getFormResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getFormResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
@@ -1369,7 +1382,7 @@
                       <xdv:range min='-180' max='180'/>
                   </xdv:validate>
                   <xdd:notSame/>
-                  <parameterGroup xmlns='urn:xmpp:sn:concentrators' name='direction'/>
+                  <parameterGroup xmlns='urn:xmpp:iot:concentrators' name='direction'/>
               </field>
               <field var='ElevationAngle' type='text-single' label='Elevation angle:'>
                   <desc>Elevation angle of the spotlight.</desc>
@@ -1378,7 +1391,7 @@
                       <xdv:range min='-90' max='90'/>
                   </xdv:validate>
                   <xdd:notSame/>
-                  <parameterGroup xmlns='urn:xmpp:sn:concentrators' name='direction'/>
+                  <parameterGroup xmlns='urn:xmpp:iot:concentrators' name='direction'/>
               </field>
           </x>
       </getFormResponse>
@@ -1395,7 +1408,7 @@
         </section2>
         <section2 topic='Node commands vs. control parameters'>
             <p>
-                Nodes behind a concentrator, as defined in <link url='xep-0000-IoT-Concentrators.html'>xep-0000-IoT-Concentrators.html</link>, have an additional means of
+                Nodes behind a concentrator, as defined in <link url='http://xmpp.org/extensions/xep-0326.html'>Internet of Things - Concentrators</link>, have an additional means of
                 publishing control interfaces: Node Commands.
             </p>
             <p>
@@ -1442,10 +1455,8 @@
         </section2>
         <section2 topic='Tokens'>
             <p>
-                If control interaction is performed in a context of delegated trust, as defined in the Sensor Network Provisioning XEP 
-                <note>
-					XEP-xxxx: Internet of Things - Provisioning &lt;<link url='sensor-network-provisioning.html'>sensor-network-provisioning.html</link>&gt;
-                </note>, tokens should always be included in all calls. This to allow devices to check privileges with provisioning servers.
+                If control interaction is performed in a context of delegated trust, as defined in the Sensor Network Provisioning XEP-0324 &xep0324;, 
+				tokens should always be included in all calls. This to allow devices to check privileges with provisioning servers.
             </p>
             <p>
                 The <strong>set</strong> and <strong>getForm</strong> commands support the following token attributes:
@@ -1462,16 +1473,17 @@
                 </li>
             </ul>
             <p>
-                For more information about provisioning, see <link url='sensor-network-provisioning.html'>sensor-network-provisioning.html</link>.
+                For more information about provisioning, see <link url='http://xmpp.org/extensions/xep-0324.html'>Internet of Things - Provisioning</link>.
             </p>
         </section2>
         <section2 topic='Controlling devices in large subsystems'>
             <p>
-                Most examples in this document have been simplified examples where a few devices containing a few control parameters have been used. However, in many cases large subsystems with
-                very many actuators containing many different control actions have to be controlled, as is documented in <link url='xep-0000-IoT-Concentrators.html'>xep-0000-IoT-Concentrators.html</link>. 
+				Most examples in this document have been simplified examples where a few devices containing a few control parameters have been used. However, in many cases large subsystems with
+				very many actuators containing many different control actions have to be controlled, as is documented in
+				<link url='http://xmpp.org/extensions/xep-0326.html'>Internet of Things - Concentrators</link>. 
                 In such cases, a node may have to be specified using two or perhaps even three ID's: a <strong>sourceId</strong> identifying the data source controlling the device, a possible 
                 <strong>cacheType</strong> narrowing down the search to a specific kind of node, and the common <strong>nodeId</strong>. For more information about this, see 
-                <link url='xep-0000-IoT-Concentrators.html'>xep-0000-IoT-Concentrators.html</link>.
+                <link url='http://xmpp.org/extensions/xep-0326.html'>Internet of Things - Concentrators</link>.
             </p>
             <p>
                 <strong>Note:</strong> For cases where the <strong>nodeId</strong> is sufficient to uniquely identify the node, it is sufficient to provide this attribute in the request.
@@ -1523,7 +1535,7 @@
                 If using delegated trust, make sure the provisioning servers are properly authenticated and validated before trusting them.
             </p>
             <p>
-                More information about provisioning can be found in <link url='sensor-network-provisioning.html'>sensor-network-provisioning.html</link>.
+                More information about provisioning can be found in <link url='http://xmpp.org/extensions/xep-0324.html'>Internet of Things - Provisioning</link>.
             </p>
         </section2>
     </section1>
@@ -1540,15 +1552,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <xs:schema
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
-    targetNamespace='urn:xmpp:sn:control'
-    xmlns='urn:xmpp:sn:control'
-    xmlns:sn='urn:xmpp:sn'
+    targetNamespace='urn:xmpp:iot:control'
+    xmlns='urn:xmpp:iot:control'
+    xmlns:sn='urn:xmpp:iot:sensordata'
     xmlns:xd="jabber:x:data"
     xmlns:xdv="http://jabber.org/protocol/xdata-validate"
     xmlns:xdl="http://jabber.org/protocol/xdata-layout"
     elementFormDefault='qualified'>
  
-    <xs:import namespace='urn:xmpp:sn'/>
+    <xs:import namespace='urn:xmpp:iot:sensordata'/>
     <xs:import namespace='jabber:x:data'/>
     <xs:import namespace='http://jabber.org/protocol/xdata-validate'/>
     <xs:import namespace='http://jabber.org/protocol/xdata-layout'/>

@@ -10,7 +10,7 @@
     <meta name="DC.Description" content="This specification describes an architecture for efficient provisioning of services, access rights and user privileges in for the Internet of Things, where&#xA;		communication between Things is done using the XMPP protocol.">
     <meta name="DC.Publisher" content="XMPP Standards Foundation">
     <meta name="DC.Contributor" content="XMPP Extensions Editor">
-    <meta name="DC.Date" content="2013-04-12">
+    <meta name="DC.Date" content="2013-05-07">
     <meta name="DC.Type" content="XMPP Extension Protocol">
     <meta name="DC.Format" content="XHTML">
     <meta name="DC.Identifier" content="XEP-0324">
@@ -43,11 +43,11 @@
       </tr>
       <tr valign="top">
         <td><strong>Version:</strong></td>
-        <td>0.0.6</td>
+        <td>0.1.1</td>
       </tr>
       <tr valign="top">
         <td><strong>Last Updated:</strong></td>
-        <td>2013-04-12</td>
+        <td>2013-05-07</td>
       </tr>
     </table>
     <hr>
@@ -56,36 +56,36 @@
     <h2>Table of Contents</h2>
     <div class="indent">
       <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
-      3.1.  <a href="#sect-ID0EAAAE">Delegating trust</a><br>      
-      3.1.1.  <a href="#sect-ID0EEAAE">Delegating original trust to a Provisioning Server</a><br>      
-      3.1.2.  <a href="#sect-ID0EEDAE">Delegating Secondary Trust</a><br>      
-      3.1.3.  <a href="#sect-ID0E5DAE">Multiple tokens</a><br>   
-      3.2.  <a href="#sect-ID0EPEAE">Friendships</a><br>      
-      3.2.1.  <a href="#sect-ID0ETEAE">Friendship request accepted</a><br>      
-      3.2.2.  <a href="#sect-ID0E2FAE">Friendship request rejected</a><br>      
-      3.2.3.  <a href="#sect-ID0ETGAE">Unfriending existing friends</a><br>      
-      3.2.4.  <a href="#sect-ID0ESHAE">Recommending friendships</a><br>   
-      3.3.  <a href="#sect-ID0EOIAE">Device Read-out</a><br>      
-      3.3.1.  <a href="#sect-ID0ESIAE">Rejecting read-outs</a><br>      
-      3.3.2.  <a href="#sect-ID0EUJAE">Restricting nodes during read-out</a><br>      
-      3.3.3.  <a href="#sect-ID0EGLAE">Restricting fields during read-out</a><br>   
-      3.4.  <a href="#sect-ID0ETMAE">Device Control</a><br>      
-      3.4.1.  <a href="#sect-ID0EXMAE">Rejecting control actions</a><br>      
-      3.4.2.  <a href="#sect-ID0ERNAE">Restricting nodes during control</a><br>      
-      3.4.3.  <a href="#sect-ID0E6OAE">Restricting parameters during control</a><br>   
-      3.5.  <a href="#sect-ID0EOQAE">Cache</a><br>      
-      3.5.1.  <a href="#sect-ID0ESQAE">Clear cache</a><br>   
-      3.6.  <a href="#sect-ID0EPRAE">Services</a><br>      
+      3.1.  <a href="#sect-ID0EPBAE">Delegating trust</a><br>      
+      3.1.1.  <a href="#sect-ID0ETBAE">Delegating original trust to a Provisioning Server</a><br>      
+      3.1.2.  <a href="#sect-ID0ETEAE">Delegating Secondary Trust</a><br>      
+      3.1.3.  <a href="#sect-ID0ENFAE">Multiple tokens</a><br>   
+      3.2.  <a href="#sect-ID0E5FAE">Friendships</a><br>      
+      3.2.1.  <a href="#sect-ID0ECGAE">Friendship request accepted</a><br>      
+      3.2.2.  <a href="#sect-ID0EKHAE">Friendship request rejected</a><br>      
+      3.2.3.  <a href="#sect-ID0ECIAE">Unfriending existing friends</a><br>      
+      3.2.4.  <a href="#sect-ID0EBJAE">Recommending friendships</a><br>   
+      3.3.  <a href="#sect-ID0E4JAE">Device Read-out</a><br>      
+      3.3.1.  <a href="#sect-ID0EBKAE">Rejecting read-outs</a><br>      
+      3.3.2.  <a href="#sect-ID0EDLAE">Restricting nodes during read-out</a><br>      
+      3.3.3.  <a href="#sect-ID0EVMAE">Restricting fields during read-out</a><br>   
+      3.4.  <a href="#sect-ID0ECOAE">Device Control</a><br>      
+      3.4.1.  <a href="#sect-ID0EGOAE">Rejecting control actions</a><br>      
+      3.4.2.  <a href="#sect-ID0EAPAE">Restricting nodes during control</a><br>      
+      3.4.3.  <a href="#sect-ID0EOQAE">Restricting parameters during control</a><br>   
+      3.5.  <a href="#sect-ID0E4RAE">Cache</a><br>      
+      3.5.1.  <a href="#sect-ID0EBSAE">Clear cache</a><br>   
+      3.6.  <a href="#sect-ID0E5SAE">Services</a><br>      
       3.6.1.  <a href="#servicetoken">Getting a service token</a><br>      
       3.6.2.  <a href="#usertoken">User access to service</a><br>   
-      3.7.  <a href="#sect-ID0ERYAE">User privileges</a><br>      
-      3.7.1.  <a href="#sect-ID0EVYAE">User privileges in service</a><br>      
-      3.7.2.  <a href="#sect-ID0E33AE">Download all user privileges</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
+      3.7.  <a href="#sect-ID0EA1AE">User privileges</a><br>      
+      3.7.1.  <a href="#sect-ID0EE1AE">User privileges in service</a><br>      
+      3.7.2.  <a href="#sect-ID0EL5AE">Download all user privileges</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
       5.1.  <a href="#cache">Caching and cache time</a><br>   
-      5.2.  <a href="#sect-ID0ELAAG">Working with multiple provisioning servers</a><br>   
-      5.3.  <a href="#sect-ID0EJBAG">Automatic aggregation of services, users and privileges</a><br>   
-      5.4.  <a href="#sect-ID0ESBAG">Reading devices from large subsystems</a><br>   
-      5.5.  <a href="#sect-ID0EXCAG">Different types of tokens</a><br>6.  <a href="#security">Security Considerations</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a><br>10.  <a href="#moreinfo">For more information</a><br>11.  <a href="#ack">Acknowledgements</a></p>
+      5.2.  <a href="#sect-ID0E1BAG">Working with multiple provisioning servers</a><br>   
+      5.3.  <a href="#sect-ID0EYCAG">Automatic aggregation of services, users and privileges</a><br>   
+      5.4.  <a href="#sect-ID0EBDAG">Reading devices from large subsystems</a><br>   
+      5.5.  <a href="#sect-ID0EFEAG">Different types of tokens</a><br>6.  <a href="#security">Security Considerations</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a><br>10.  <a href="#moreinfo">For more information</a><br>11.  <a href="#ack">Acknowledgements</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
     </div>
     <hr>
@@ -116,8 +116,7 @@
 			<li class="" style="">Control generic boolean User Privileges in the network.</li>
 		</ul>
         <p class="" style="">
-            This XEP relies heavily on <a href="sensor-data.html">sensor-data</a>  [<a href="#nt-ID0EIAAC">1</a>] and
-			<a href="xep-0000-IoT-Control.html">xep-0000-IoT-Control</a>  [<a href="#nt-ID0EPAAC">2</a>].
+            This XEP relies heavily on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0323.html">Internet of Things - Sensor Data</a></span>  [<a href="#nt-ID0EDBAC">1</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0325.html">Internet of Things - Control</a></span>  [<a href="#nt-ID0EPBAC">2</a>].
             Internet of Things contain many different architectures and use cases. For this reason, the IoT standards have been divided into multiple XEPs according to the following table:
         </p>
         <div class="indent">
@@ -129,30 +128,15 @@
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">XEP-0000-ColorParameter</td>
-                <td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0ESBAC">3</a>]</td>
+                <td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EUCAC">3</a>]</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">XEP-0000-DynamicForms</td>
-                <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EJCAC">4</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EVCAC">5</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0EBDAC">6</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0ENDAC">7</a>].</td>
-            </tr>
-            <tr class="body">
-                <td colspan="" rowspan="">exi</td>
-                <td colspan="" rowspan="">
-                    Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a Internet of Things specific XEP, this XEP should be considered
-                    in all Internet of Things implementations where memory and packet size is an issue.
-                </td>
+                <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0ELDAC">4</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EXDAC">5</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0EDEAC">6</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EPEAC">7</a>].</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">xep-0000-IoT-BatteryPoweredSensors</td>
                 <td colspan="" rowspan="">Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
-            </tr>
-            <tr class="body">
-                <td colspan="" rowspan="">xep-0000-IoT-Concentrators</td>
-                <td colspan="" rowspan="">Defines how to handle architectures containing concentrators or servers handling multiple Things.</td>
-            </tr>
-            <tr class="body">
-                <td colspan="" rowspan="">xep-0000-IoT-Control</td>
-                <td colspan="" rowspan="">Defines how to control actuators and other devices in Internet of Things.</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">xep-0000-IoT-Discovery</td>
@@ -171,22 +155,37 @@
                 <td colspan="" rowspan="">Defines how sensor data can be multicast in efficient ways.</td>
             </tr>
             <tr class="body">
-                <td colspan="" rowspan="">sensor-network-provisioning</td>
+                <td colspan="" rowspan="">XEP-0324</td>
                 <td colspan="" rowspan="">This specification. Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">xep-0000-IoT-PubSub</td>
                 <td colspan="" rowspan="">Defines how efficient publication of sensor data can be made in Internet of Things.</td>
             </tr>
-            <tr class="body">
-                <td colspan="" rowspan="">sensor-data</td>
+			<tr class="body">
+				<td colspan="" rowspan="">XEP-0322</td>
+				<td colspan="" rowspan="">
+					Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a Internet of Things specific XEP, this XEP should be considered
+					in all Internet of Things implementations where memory and packet size is an issue.
+				</td>
+			</tr>
+			<tr class="body">
+                <td colspan="" rowspan="">XEP-0323</td>
                 <td colspan="" rowspan="">
                     Provides the underlying architecture, basic operations and data structures for sensor data communication over XMPP networks.
                     It includes a hardware abstraction model, removing any technical detail implemented in underlying technologies. This XEP is used by all other 
 					Internet of Things XEPs.
                 </td>
             </tr>
-        </table>
+			<tr class="body">
+				<td colspan="" rowspan="">XEP-0325</td>
+				<td colspan="" rowspan="">Defines how to control actuators and other devices in Internet of Things.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">XEP-0326</td>
+				<td colspan="" rowspan="">Defines how to handle architectures containing concentrators or servers handling multiple Things.</td>
+			</tr>
+		</table>
     </div>
     <h2>2.
        <a name="glossary">Glossary</a></h2>
@@ -262,7 +261,7 @@
             <di>
                 <dt><strong>Parameter</strong></dt>
                 <dd>
-                    Readable and/or writable property on a node/device. The XEP xep-0000-IoT-Concentrators deals with reading and writing parameters
+                    Readable and/or writable property on a node/device. The XEP-0326 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0EKMAC">8</a>] deals with reading and writing parameters
                     on nodes/devices. Fields are not parameters, and parameters are not fields.
                 </dd>
             </di>
@@ -370,9 +369,9 @@
             <li class="" style="">Provide additional interoperability services to nodes in the network (for instance, unit conversion).</li>
         </ul>
         <div class="indent">
-      <h3>3.1 <a name="sect-ID0EAAAE">Delegating trust</a></h3>
+      <h3>3.1 <a name="sect-ID0EPBAE">Delegating trust</a></h3>
             <div class="indent">
-        <h3>3.1.1 <a name="sect-ID0EEAAE">Delegating original trust to a Provisioning Server</a></h3>
+        <h3>3.1.1 <a name="sect-ID0ETBAE">Delegating original trust to a Provisioning Server</a></h3>
                 <p class="" style="">
                     Trust is delegated to a provisioning server by a device, simply by befriending the provisioning server and asking it questions and complying with
                     its answers.
@@ -414,14 +413,14 @@
        from='device@clayster.com/device'
        to='provisioning@clayster.com'
        id='13'&gt;
-      &lt;getToken xmlns='urn:xmpp:sn:provisioning' deviceId='WatchamacallitDevice1'/&gt;
+      &lt;getToken xmlns='urn:xmpp:iot:provisioning' deviceId='WatchamacallitDevice1'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='provisioning@clayster.com'
        to='device@clayster.com/device'
        id='13'&gt;
-      &lt;getTokenResponse xmlns='urn:xmpp:sn:provisioning' token='device0001'/&gt;
+      &lt;getTokenResponse xmlns='urn:xmpp:iot:provisioning' token='device0001'/&gt;
    &lt;/iq&gt;
                 </pre>
         </div>
@@ -439,7 +438,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.1.2 <a name="sect-ID0EEDAE">Delegating Secondary Trust</a></h3>
+        <h3>3.1.2 <a name="sect-ID0ETEAE">Delegating Secondary Trust</a></h3>
                 <p class="" style="">
                     The <span class="strong">isFriendResponse</span> element returned by the provisioning server contains an attribute <span class="strong">secondaryTrustAllowed</span> that is by default
                     set to false. If the provisioning server has no problem with allowing multiple trust to be delegated by devices in the network, it can choose to set this
@@ -454,7 +453,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.1.3 <a name="sect-ID0E5DAE">Multiple tokens</a></h3>
+        <h3>3.1.3 <a name="sect-ID0ENFAE">Multiple tokens</a></h3>
                 <p class="" style="">
                     When multiple trust is used, the entity (client, user, service, etc.) has one token from each provisioning server. However, when sending a token to a third party,
                     the sender does not know what provisioning server(s) the third party uses to check access rights and user privileges. Therefore, the client must send all tokens, separated
@@ -471,37 +470,37 @@
        from='master@clayster.com/amr'
        to='device@clayster.com'
        id='15'&gt;
-      &lt;req xmlns='urn:xmpp:sn' momentary='true' serviceToken='service0001 servicio0001' userToken='user0001' seqnr='4'/&gt;
+      &lt;req xmlns='urn:xmpp:iot:sensordata' momentary='true' serviceToken='service0001 servicio0001' userToken='user0001' seqnr='4'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='get'
        from='device@clayster.com/device'
        to='provisioning@clayster.com'
        id='16'&gt;
-      &lt;canRead xmlns='urn:xmpp:sn:provisioning' jid='master@clayster.com' serviceToken='service0001 servicio0001' userToken='user0001' momentary='true'/&gt;
+      &lt;canRead xmlns='urn:xmpp:iot:provisioning' jid='master@clayster.com' serviceToken='service0001 servicio0001' userToken='user0001' momentary='true'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='provisioning@clayster.com'
        to='device@clayster.com/device'
        id='16'&gt;
-      &lt;canReadResponse xmlns='urn:xmpp:sn:provisioning' jid='master@clayster.com' momentary='true' result='true'/&gt;
+      &lt;canReadResponse xmlns='urn:xmpp:iot:provisioning' jid='master@clayster.com' momentary='true' result='true'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='device@clayster.com'
        to='master@clayster.com/amr'
        id='15'&gt;
-      &lt;accepted xmlns='urn:xmpp:sn' seqnr='4'/&gt;
+      &lt;accepted xmlns='urn:xmpp:iot:sensordata' seqnr='4'/&gt;
    &lt;/iq&gt;
                 </pre>
         </div>
             </div>
         </div>
         <div class="indent">
-      <h3>3.2 <a name="sect-ID0EPEAE">Friendships</a></h3>
+      <h3>3.2 <a name="sect-ID0E5FAE">Friendships</a></h3>
             <div class="indent">
-        <h3>3.2.1 <a name="sect-ID0ETEAE">Friendship request accepted</a></h3>
+        <h3>3.2.1 <a name="sect-ID0ECGAE">Friendship request accepted</a></h3>
                 <p class="" style="">
                     The following diagram displays how a friendship request from an external party can be handled, delegating the responsibility to a trusted third party:
                 </p>
@@ -519,14 +518,14 @@
        from='device@clayster.com/device'
        to='provisioning@clayster.com'
        id='1'&gt;
-      &lt;isFriend xmlns='urn:xmpp:sn:provisioning' jid='client1@clayster.com'/&gt;
+      &lt;isFriend xmlns='urn:xmpp:iot:provisioning' jid='client1@clayster.com'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='provisioning@clayster.com'
        to='device@clayster.com/device'
        id='1'&gt;
-      &lt;isFriendResponse xmlns='urn:xmpp:sn:provisioning' jid='client1@clayster.com' result='true'/&gt;
+      &lt;isFriendResponse xmlns='urn:xmpp:iot:provisioning' jid='client1@clayster.com' result='true'/&gt;
    &lt;/iq&gt;
                 </pre>
         </div>
@@ -539,7 +538,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.2.2 <a name="sect-ID0E2FAE">Friendship request rejected</a></h3>
+        <h3>3.2.2 <a name="sect-ID0EKHAE">Friendship request rejected</a></h3>
                 <p class="" style="">
                     The following diagram displays a friendship request from an external party being rejected as a result of the trusted third party negating the friendship:
                 </p>
@@ -557,20 +556,20 @@
        from='device@clayster.com/device'
        to='provisioning@clayster.com'
        id='2'&gt;
-      &lt;isFriend xmlns='urn:xmpp:sn:provisioning' jid='client2@clayster.com'/&gt;
+      &lt;isFriend xmlns='urn:xmpp:iot:provisioning' jid='client2@clayster.com'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='provisioning@clayster.com'
        to='device@clayster.com/device'
        id='2'&gt;
-      &lt;isFriendResponse xmlns='urn:xmpp:sn:provisioning' jid='client2@clayster.com' result='false'/&gt;
+      &lt;isFriendResponse xmlns='urn:xmpp:iot:provisioning' jid='client2@clayster.com' result='false'/&gt;
    &lt;/iq&gt;
                 </pre>
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.3 <a name="sect-ID0ETGAE">Unfriending existing friends</a></h3>
+        <h3>3.2.3 <a name="sect-ID0ECIAE">Unfriending existing friends</a></h3>
                 <p class="" style="">
                     If the provisioning server decides that two friends in the network should no longer be friends and communicate with each other, it simply sends a message to
                     at least one of the friends as follows:
@@ -592,13 +591,13 @@
                     
    &lt;message from='provisioning@clayster.com'
             to='device@clayster.com'&gt;
-      &lt;unfriend xmlns='urn:xmpp:sn:provisioning' jid='client2@clayster.com'/&gt;
+      &lt;unfriend xmlns='urn:xmpp:iot:provisioning' jid='client2@clayster.com'/&gt;
    &lt;/message&gt;
                 </pre>
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.4 <a name="sect-ID0ESHAE">Recommending friendships</a></h3>
+        <h3>3.2.4 <a name="sect-ID0EBJAE">Recommending friendships</a></h3>
                 <p class="" style="">
                     The provisioning server can, apart from accepting new friendships and rejecting old friendships, also recommend new friendships. In this case, the provisioning server
                     simply sends a message to one or both of the soon to be friends, as follows:
@@ -612,7 +611,7 @@
                     
    &lt;message from='provisioning@clayster.com'
             to='device@clayster.com'&gt;
-      &lt;friend xmlns='urn:xmpp:sn:provisioning' jid='client2@clayster.com'/&gt;
+      &lt;friend xmlns='urn:xmpp:iot:provisioning' jid='client2@clayster.com'/&gt;
    &lt;/message&gt;
                 </pre>
         </div>
@@ -622,9 +621,9 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.3 <a name="sect-ID0EOIAE">Device Read-out</a></h3>
+      <h3>3.3 <a name="sect-ID0E4JAE">Device Read-out</a></h3>
             <div class="indent">
-        <h3>3.3.1 <a name="sect-ID0ESIAE">Rejecting read-outs</a></h3>
+        <h3>3.3.1 <a name="sect-ID0EBKAE">Rejecting read-outs</a></h3>
                 <p class="" style="">
                     An important use case for provisioning in sensor networks is who gets to read out sensor data from which sensors. This use case details how communication with a
                     provisioning server can help the device determine if a client has sufficient access rights to read the values of the device.
@@ -633,7 +632,8 @@
                     <img alt="" src="data:image/png;base64,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">
                 </p>
                 <p class="" style="">
-                    <span class="strong">Note:</span> This use case is an extension of the use case 'Read-out rejected' in the XEP <a href="sensor-data.html">sensor-data</a>.
+                    <span class="strong">Note:</span> This use case is an extension of the use case 'Read-out rejected' in the XEP-0323 
+					<a href="http://xmpp.org/extensions/xep-0323.html">Internet of Things - Sensor Data</a>.
                 </p>
                 <p class="" style="">
                     The following example shows the communication first between the client and the device, then between the device and the provisioning server, and last between the device and the client:
@@ -646,28 +646,28 @@
        from='master@clayster.com/amr'
        to='device@clayster.com'
        id='3'&gt;
-      &lt;req xmlns='urn:xmpp:sn' momentary='true' serviceToken='service0001' userToken='user0001' seqnr='1'/&gt;
+      &lt;req xmlns='urn:xmpp:iot:sensordata' momentary='true' serviceToken='service0001' userToken='user0001' seqnr='1'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='get'
        from='device@clayster.com/device'
        to='provisioning@clayster.com'
        id='4'&gt;
-      &lt;canRead xmlns='urn:xmpp:sn:provisioning' jid='master@clayster.com' serviceToken='service0001' userToken='user0001' momentary='true'/&gt;
+      &lt;canRead xmlns='urn:xmpp:iot:provisioning' jid='master@clayster.com' serviceToken='service0001' userToken='user0001' momentary='true'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='provisioning@clayster.com'
        to='device@clayster.com/device'
        id='4'&gt;
-      &lt;canReadResponse xmlns='urn:xmpp:sn:provisioning' jid='master@clayster.com' momentary='true' result='false'/&gt;
+      &lt;canReadResponse xmlns='urn:xmpp:iot:provisioning' jid='master@clayster.com' momentary='true' result='false'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='error'
        from='device@clayster.com'
        to='master@clayster.com/amr'
        id='3'&gt;
-      &lt;rejected xmlns='urn:xmpp:sn' seqnr='1'&gt;
+      &lt;rejected xmlns='urn:xmpp:iot:sensordata' seqnr='1'&gt;
          &lt;error&gt;Access denied.&lt;/error&gt;
       &lt;/rejected&gt;
    &lt;/iq&gt;
@@ -675,7 +675,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.2 <a name="sect-ID0EUJAE">Restricting nodes during read-out</a></h3>
+        <h3>3.3.2 <a name="sect-ID0EDLAE">Restricting nodes during read-out</a></h3>
                 <p class="" style="">
                     In case the device handles multiple nodes that can be read, the provisioning server has the possibility to grant read-out, but to limit the nodes that can be read out.
                     The provisioning server does this by returning the list of nodes that can be read.
@@ -684,7 +684,8 @@
                     <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAwMAAAFuCAIAAABStVPZAAAfx0lEQVR4nO3dba8k1WEn8PpKnjFopr6IjUkggKnPsFLiDbvBQOyA+m2yxs7ywibWSMGL1FL2wSZhtZIjh4kJtkmaBw8kxoB5Gj8D0t0X3fVc3bdv364+dU79fhqJO327T52qmn/Xf07XcLMzAIC5ykJPAAAgGE0IAJivugllAACzMdCETl3DmAanHoC50YSoOfUAzI0mRM2pB2BuNCFqTj0Ac6MJUXPqAZibSzah1SLP8sWq/2CWZVmxPMYMu0MXy7OzZZH1N7vDssjKl7Umtc84jeccuPXLGjzIe73sQmdADQJghkZoQqtFnmVFMUJdWI988X61WuT5YjXQhE6y9Us7qAldcLZqEADztE8TKtd46mpTPpIXRe8iXV6CWysny2IzQnVt7j1SbaV80bLYFKrNs+pp1DWr+5zBuZVFaPua0GqRZ1meb5ayFuUI1Yvyxergrbe2leeNDQ4d0T0PcnX0su6erae7rGe7RxlSgwCYrT2aUO/DoHq5Yd0gWhfp+pv166rr9PYv6nWP1rcamym7UOvzqfo5zcLSmdvms7Fzm1A5YFmfBh45YOvNbTXq0jndbOdBrl9VjtRtQqv914TUIADm7GJrQvWlub5zZqAlNZQX5X5daj9SL3JUCx2NlrD5criLtBrAwNyqInROE2pXtH2b0Hlbb22rMY/OzvYWhfpDDa4RbUY9tAmpQQDM3D5NqNRcv9myXNG6/lbfHa4XrUcG7oXZd02o10Xac6s+GztREzp/IWdLEWwvpJ03VN2fyiNcv2zPJqQGAcAeTegCt7B0Lr/tD51aI/Qf6d2NNHAXzuZFnTt1Wmsh3bkt6yLUWYtp3Mu0VxM6ZOvDTWjLzmbZ5k6i8245au5Jo1xVr28e8m1lSA0CgLNJ//+EDvuXXu3icsp/7B5+6xcxlbMMAEEl14SGlrBOKOzW9zWVUwwAoU24CTEO5xcAKprQvDi5ANCkCc2IMwsAHZrQXDitANA33IRIT6A/YAAwaZk1IQBgtjQhAGC+NCEAYL40IQBgvjQhAGC+NCEAYL40IQBgvjQhAGC+NCEAYL40IQBgvjQhAGC+NCEAYL5GaUKn+qGicbjkwYQTCJ2SCQl9KuB8oVMyLUc5npsv+g9dZtCfvfJPP3vln9569YW3Xn3h56/d/PlrN99+/Z/ffv2f3/npD9/56Q/fvfXiu7de/MUb//Lemy+99+ZL7//7j97/9x998B8//uA/fvzhz37y4c9+8tFbL3/01su3f/6v61+/fPvffvn2v/3qndWv3ln9+t1Xfv3uK7/5xau/+cWrv33vtd++99rv3n/9d++//vsPfvrxh7c+/vDWJx+98clHb3x6+80p/DrKSYKxyazAEhGBPW5mNaEIThKMTWYFlogI7HEzqwmNfpKe+95z61+XPKowHpkVWCIisMfNrCYUwUmCscmswBIRgT1uZjWhCE4SjE1mBZaICOxxMxtvE3ry/urG8Xu/8bv3X//9t79w/dG///jDW5/cuPv6o/+w93F8/onHnpr4SYKxjZXZ7//xnY1/4nHt4e/u9cZ64+7rjz0f77sqjO2QwP7f/3RH8x9c/cFfXawJffuua4/8fTewF4rqOLmecxN68v7sylf+cXOSvnNvdu2R5+omdKG6evOh6/dpQszdiE3onq+Vb6zf/cod2QN/M+m/YgosUTiwCf3BX5aB/btHP/uZR/+fNaH6eG6+6D900pN0oSb09OevPfzd7kkaWBN6/onNX0ivPnHzzU9vv/npjbuv33l1/dD1x56vnjDeX0C9sRKFkzShV3/z9F3ZvV//7Xvf+4vNX06vPP7CrY8/vPXsH119/OYbn95+89ObD12/86GX6787NiPci7PAMldHa0Lf/Nydn/1MlmX3fet//flnN6tF9z/9yq/ffeWZe8rlhh986dod//lH1ZrQC396PSuT+Fg/qtmDNwavto01of63qpffd/eDdz70sia0TxN68eEr9z/dq6u9JvTyY1fLo/zUg9ndz95+89Mbd2fro7x+w71tTQjOzk7WhP7xS9fu/fpLX75y7ZHnfvf+67//4BtfzL7wPz689cmNu7M/+u/rzD54o37HfPmxq9k6njcfarxplnEWWObq8p+O3flf/u6jt16+/c3PZX/4327//F9/+Gefyf7wa796Z/Wrd752f/b5v333ld88fVd2z5O/fe+1l7585YFv15+O/fjRq1+80f10rI7qjqttowl1vlVfrKtvaUIXXxP6xne+PdCEnr2v+aHo1SduNj+nfOpBTQhKp1wTeubeVjAff+HWJx/9w+N33v1s4z10ndNn7yv/fjkYZ4Flri69JlQG9pufu/O//s91E7rvW+uL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">
                 </p>
                 <p class="" style="">
-                    <span class="strong">Note:</span> This use case is an extension of the use case 'Read-out of multiple devices' in the XEP <a href="sensor-data.html">sensor-data</a>.
+                    <span class="strong">Note:</span> This use case is an extension of the use case 'Read-out of multiple devices' in the XEP-0323
+					<a href="http://xmpp.org/extensions/xep-0323.html">Internet of Things - Sensor Data</a>.
                 </p>
                 <p class="" style="">
                     <span class="strong">Note 2:</span> If the server responds, but without specifying a list of nodes, the device can assume that all nodes available in the original request are allowed
@@ -702,7 +703,7 @@
        from='master@clayster.com/amr'
        to='device@clayster.com'
        id='5'&gt;
-      &lt;req xmlns='urn:xmpp:sn' momentary='true' serviceToken='service0001' userToken='user0001' seqnr='2'&gt;
+      &lt;req xmlns='urn:xmpp:iot:sensordata' momentary='true' serviceToken='service0001' userToken='user0001' seqnr='2'&gt;
          &lt;node nodeId='Device02'/&gt;
          &lt;node nodeId='Device03'/&gt;
       &lt;/req&gt;
@@ -712,7 +713,7 @@
        from='device@clayster.com/device'
        to='provisioning@clayster.com'
        id='6'&gt;
-      &lt;canRead xmlns='urn:xmpp:sn:provisioning' jid='master@clayster.com' momentary='true' serviceToken='service0001' userToken='user0001'&gt;
+      &lt;canRead xmlns='urn:xmpp:iot:provisioning' jid='master@clayster.com' momentary='true' serviceToken='service0001' userToken='user0001'&gt;
          &lt;node nodeId='Device02'/&gt;
          &lt;node nodeId='Device03'/&gt;
       &lt;/canRead&gt;
@@ -722,7 +723,7 @@
        from='provisioning@clayster.com'
        to='device@clayster.com/device'
        id='6'&gt;
-      &lt;canReadResponse xmlns='urn:xmpp:sn:provisioning' jid='master@clayster.com' momentary='true' result='true'&gt;
+      &lt;canReadResponse xmlns='urn:xmpp:iot:provisioning' jid='master@clayster.com' momentary='true' result='true'&gt;
          &lt;node nodeId='Device02'/&gt;
       &lt;/canReadResponse&gt;
    &lt;/iq&gt;
@@ -731,7 +732,7 @@
        from='device@clayster.com'
        to='master@clayster.com/amr'
        id='5'&gt;
-      &lt;accepted xmlns='urn:xmpp:sn' seqnr='2'/&gt;
+      &lt;accepted xmlns='urn:xmpp:iot:sensordata' seqnr='2'/&gt;
    &lt;/iq&gt;
                 </pre>
         </div>
@@ -742,7 +743,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.3 <a name="sect-ID0EGLAE">Restricting fields during read-out</a></h3>
+        <h3>3.3.3 <a name="sect-ID0EVMAE">Restricting fields during read-out</a></h3>
                 <p class="" style="">
                     In case the provisioning server wants to limit the fields a device can send to a client, the provisioning server has the possibility to grant read-out, but
                     list a set of fields the device is allowed to send to the corresponding client.
@@ -766,21 +767,21 @@
        from='master@clayster.com/amr'
        to='device@clayster.com'
        id='7'&gt;
-      &lt;req xmlns='urn:xmpp:sn' momentary='true' serviceToken='service0001' userToken='user0001' seqnr='3'/&gt;
+      &lt;req xmlns='urn:xmpp:iot:sensordata' momentary='true' serviceToken='service0001' userToken='user0001' seqnr='3'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='get'
        from='device@clayster.com/device'
        to='provisioning@clayster.com'
        id='8'&gt;
-      &lt;canRead xmlns='urn:xmpp:sn:provisioning' jid='master@clayster.com' momentary='true' serviceToken='service0001' userToken='user0001'/&gt;
+      &lt;canRead xmlns='urn:xmpp:iot:provisioning' jid='master@clayster.com' momentary='true' serviceToken='service0001' userToken='user0001'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='provisioning@clayster.com'
        to='device@clayster.com/device'
        id='8'&gt;
-      &lt;canReadResponse xmlns='urn:xmpp:sn:provisioning' jid='master@clayster.com' momentary='true' result='true'&gt;
+      &lt;canReadResponse xmlns='urn:xmpp:iot:provisioning' jid='master@clayster.com' momentary='true' result='true'&gt;
          &lt;field name='Energy'/&gt;
          &lt;field name='Power'/&gt;
       &lt;/canReadResponse&gt;
@@ -790,7 +791,7 @@
        from='device@clayster.com'
        to='master@clayster.com/amr'
        id='7'&gt;
-      &lt;accepted xmlns='urn:xmpp:sn' seqnr='3'/&gt;
+      &lt;accepted xmlns='urn:xmpp:iot:sensordata' seqnr='3'/&gt;
    &lt;/iq&gt;
                 </pre>
         </div>
@@ -805,9 +806,9 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.4 <a name="sect-ID0ETMAE">Device Control</a></h3>
+      <h3>3.4 <a name="sect-ID0ECOAE">Device Control</a></h3>
             <div class="indent">
-        <h3>3.4.1 <a name="sect-ID0EXMAE">Rejecting control actions</a></h3>
+        <h3>3.4.1 <a name="sect-ID0EGOAE">Rejecting control actions</a></h3>
                 <p class="" style="">
                     An important use case for provisioning in sensor networks is who gets to control devices, and what they can control. This use case details how communication with a
                     provisioning server can help the device determine if a client has sufficient access rights to perform control actions on the device.
@@ -827,7 +828,7 @@
        from='master@clayster.com/amr'
        to='device@clayster.com'
        id='18'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control' xml:lang='en'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control' xml:lang='en'&gt;
          &lt;boolean name='Output' value='true'/&gt;
       &lt;/set&gt;
    &lt;/iq&gt;
@@ -836,7 +837,7 @@
        from='device@clayster.com/device'
        to='provisioning@clayster.com'
        id='1'&gt;
-      &lt;canControl xmlns='urn:xmpp:sn:provisioning' jid='master@clayster.com' serviceToken='service0001' userToken='user0001'&gt;
+      &lt;canControl xmlns='urn:xmpp:iot:provisioning' jid='master@clayster.com' serviceToken='service0001' userToken='user0001'&gt;
           &lt;parameter name='Output'/&gt;
       &lt;/canControl&gt;
    &lt;/iq&gt;
@@ -845,20 +846,20 @@
        from='provisioning@clayster.com'
        to='device@clayster.com/device'
        id='1'&gt;
-      &lt;canControlResponse xmlns='urn:xmpp:sn:provisioning' jid='master@clayster.com' result='false'/&gt;
+      &lt;canControlResponse xmlns='urn:xmpp:iot:provisioning' jid='master@clayster.com' result='false'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='error'
        from='device@clayster.com'
        to='master@clayster.com/amr'
        id='18'&gt;
-      &lt;setResponse xmlns='urn:xmpp:sn:control' responseCode='InsufficientPrivileges'/&gt;
+      &lt;setResponse xmlns='urn:xmpp:iot:control' responseCode='InsufficientPrivileges'/&gt;
    &lt;/iq&gt;
                 </pre>
         </div>
             </div>
             <div class="indent">
-        <h3>3.4.2 <a name="sect-ID0ERNAE">Restricting nodes during control</a></h3>
+        <h3>3.4.2 <a name="sect-ID0EAPAE">Restricting nodes during control</a></h3>
                 <p class="" style="">
                     In case the device handles multiple nodes that can be read, the provisioning server has the possibility to grant control access, but to limit the nodes that can be controlled.
                     The provisioning server does this by returning the list of nodes that can be controlled.
@@ -883,7 +884,7 @@
        from='master@clayster.com/amr'
        to='concentrator@clayster.com'
        id='19'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control' xml:lang='en'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control' xml:lang='en'&gt;
          &lt;node nodeId='DigitalOutput1'/&gt;
          &lt;node nodeId='DigitalOutput2'/&gt;
          &lt;node nodeId='DigitalOutput3'/&gt;
@@ -896,7 +897,7 @@
        from='concentrator@clayster.com/plc'
        to='provisioning@clayster.com'
        id='2'&gt;
-      &lt;canControl xmlns='urn:xmpp:sn:provisioning' jid='master@clayster.com' serviceToken='service0001' userToken='user0001'&gt;
+      &lt;canControl xmlns='urn:xmpp:iot:provisioning' jid='master@clayster.com' serviceToken='service0001' userToken='user0001'&gt;
           &lt;node nodeId='DigitalOutput1'/&gt;
           &lt;node nodeId='DigitalOutput2'/&gt;
           &lt;node nodeId='DigitalOutput3'/&gt;
@@ -909,7 +910,7 @@
        from='provisioning@clayster.com'
        to='concentrator@clayster.com/plc'
        id='2'&gt;
-      &lt;canControlResponse xmlns='urn:xmpp:sn:provisioning' jid='master@clayster.com' result='true'&gt;
+      &lt;canControlResponse xmlns='urn:xmpp:iot:provisioning' jid='master@clayster.com' result='true'&gt;
           &lt;node nodeId='DigitalOutput2'/&gt;
           &lt;node nodeId='DigitalOutput3'/&gt;
       &lt;/canControlResponse&gt;
@@ -919,7 +920,7 @@
        from='concentrator@clayster.com'
        to='master@clayster.com/amr'
        id='19'&gt;
-      &lt;setResponse xmlns='urn:xmpp:sn:control' responseCode='OK'&gt;
+      &lt;setResponse xmlns='urn:xmpp:iot:control' responseCode='OK'&gt;
           &lt;node nodeId='DigitalOutput2'/&gt;
           &lt;node nodeId='DigitalOutput3'/&gt;
       &lt;/setResponse&gt;
@@ -937,7 +938,7 @@
 				</p>
 			</div>
 			<div class="indent">
-        <h3>3.4.3 <a name="sect-ID0E6OAE">Restricting parameters during control</a></h3>
+        <h3>3.4.3 <a name="sect-ID0EOQAE">Restricting parameters during control</a></h3>
 				<p class="" style="">
 					In case the provisioning server wants to limit the control parameters a client can control in a device, the provisioning server has the possibility to grant
 					control access, but list a set of parameters the client is allowed to control in the corresponding device.
@@ -962,7 +963,7 @@
        from='master@clayster.com/amr'
        to='plc@clayster.com'
        id='20'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control' xml:lang='en'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control' xml:lang='en'&gt;
          &lt;boolean name='DigitalOutput1' value='true'/&gt;
          &lt;boolean name='DigitalOutput2' value='true'/&gt;
          &lt;boolean name='DigitalOutput3' value='true'/&gt;
@@ -978,7 +979,7 @@
        from='plc@clayster.com/plc'
        to='provisioning@clayster.com'
        id='3'&gt;
-      &lt;canControl xmlns='urn:xmpp:sn:provisioning' jid='master@clayster.com' serviceToken='service0001' userToken='user0001'&gt;
+      &lt;canControl xmlns='urn:xmpp:iot:provisioning' jid='master@clayster.com' serviceToken='service0001' userToken='user0001'&gt;
           &lt;parameter name='DigitalOutput1'/&gt;
           &lt;parameter name='DigitalOutput2'/&gt;
           &lt;parameter name='DigitalOutput3'/&gt;
@@ -994,7 +995,7 @@
        from='provisioning@clayster.com'
        to='plc@clayster.com/plc'
        id='3'&gt;
-      &lt;canControlResponse xmlns='urn:xmpp:sn:provisioning' jid='master@clayster.com' result='true'&gt;
+      &lt;canControlResponse xmlns='urn:xmpp:iot:provisioning' jid='master@clayster.com' result='true'&gt;
           &lt;parameter name='DigitalOutput1'/&gt;
           &lt;parameter name='DigitalOutput2'/&gt;
           &lt;parameter name='DigitalOutput3'/&gt;
@@ -1006,7 +1007,7 @@
        from='plc@clayster.com'
        to='master@clayster.com/amr'
        id='20'&gt;
-      &lt;setResponse xmlns='urn:xmpp:sn:control' responseCode='OK'&gt;
+      &lt;setResponse xmlns='urn:xmpp:iot:control' responseCode='OK'&gt;
           &lt;parameter name='DigitalOutput1'/&gt;
           &lt;parameter name='DigitalOutput2'/&gt;
           &lt;parameter name='DigitalOutput3'/&gt;
@@ -1026,9 +1027,9 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.5 <a name="sect-ID0EOQAE">Cache</a></h3>
+      <h3>3.5 <a name="sect-ID0E4RAE">Cache</a></h3>
             <div class="indent">
-        <h3>3.5.1 <a name="sect-ID0ESQAE">Clear cache</a></h3>
+        <h3>3.5.1 <a name="sect-ID0EBSAE">Clear cache</a></h3>
                 <p class="" style="">
                     When the provisioning server updates access rights and user privileges in the system, it will send a <span class="strong">clearCache</span> command to corresponding devices.
                     If a device was offline during the change, the provisioning server must send the <span class="strong">clearCache</span> message when the device comes online again. To acknowledge
@@ -1050,21 +1051,21 @@
        from='provisioning@clayster.com/provisioning'
        to='device@clayster.com'
        id='17'&gt;
-      &lt;clearCache xmlns='urn:xmpp:sn:provisioning'/&gt;
+      &lt;clearCache xmlns='urn:xmpp:iot:provisioning'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='device@clayster.com'
        to='provisioning@clayster.com/provisioning'
        id='17'&gt;
-      &lt;clearCacheResponse xmlns='urn:xmpp:sn:provisioning'/&gt;
+      &lt;clearCacheResponse xmlns='urn:xmpp:iot:provisioning'/&gt;
    &lt;/iq&gt;
                 </pre>
         </div>
             </div>
         </div>
         <div class="indent">
-      <h3>3.6 <a name="sect-ID0EPRAE">Services</a></h3>
+      <h3>3.6 <a name="sect-ID0E5SAE">Services</a></h3>
             <div class="indent">
         <h3>3.6.1 <a name="servicetoken">Getting a service token</a></h3>
                 <p class="" style="">
@@ -1078,14 +1079,14 @@
        from='service@clayster.com/service'
        to='provisioning@clayster.com'
        id='14'&gt;
-      &lt;getToken xmlns='urn:xmpp:sn:provisioning' serviceId='WatchamacallitService1'/&gt;
+      &lt;getToken xmlns='urn:xmpp:iot:provisioning' serviceId='WatchamacallitService1'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='provisioning@clayster.com'
        to='service@clayster.com/service'
        id='14'&gt;
-      &lt;getTokenResponse xmlns='urn:xmpp:sn:provisioning' token='service0001'/&gt;
+      &lt;getTokenResponse xmlns='urn:xmpp:iot:provisioning' token='service0001'/&gt;
    &lt;/iq&gt;
                 </pre>
         </div>
@@ -1158,7 +1159,7 @@
                         <td colspan="" rowspan="">HTML5 over HTTP(S), XMPP</td>
                         <td colspan="" rowspan="">
                             If the geographic location (longitude, latitude and possibly altitude) of the user client is known, it can be used. HTML 5 provides mechanism whereby the location
-                            of the client can be fetched. <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0080.html">User Geolocation</a></span>  [<a href="#nt-ID0E1WAE">8</a>] provides a mechanism whereby client location can be obtained over XMPP.
+                            of the client can be fetched. <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0080.html">User Geolocation</a></span>  [<a href="#nt-ID0EJYAE">9</a>] provides a mechanism whereby client location can be obtained over XMPP.
                         </td>
                     </tr>
                     <tr class="body">
@@ -1191,7 +1192,7 @@
        from='service@clayster.com/service'
        to='provisioning@clayster.com'
        id='9'&gt;
-      &lt;canAccess xmlns='urn:xmpp:sn:provisioning' serviceToken='service0001'&gt;
+      &lt;canAccess xmlns='urn:xmpp:iot:provisioning' serviceToken='service0001'&gt;
           &lt;credentials type='IpAddress' value='10.0.0.1'/&gt;
           &lt;credentials type='Longitude' value='123.45'/&gt;
           &lt;credentials type='Latitude' value='67.89'/&gt;
@@ -1202,14 +1203,14 @@
        from='provisioning@clayster.com'
        to='service@clayster.com/service'
        id='9'&gt;
-      &lt;canAccessResponse xmlns='urn:xmpp:sn:provisioning' userToken='user0001' result='true'/&gt;
+      &lt;canAccessResponse xmlns='urn:xmpp:iot:provisioning' userToken='user0001' result='true'/&gt;
    &lt;/iq&gt;
  
    &lt;!-- user performs login into service --&gt;
  
    &lt;message from='service@clayster.com/service'
             to='provisioning@clayster.com'&gt;
-      &lt;userLoggedIn xmlns='urn:xmpp:sn:provisioning' serviceToken='service0001' userToken='user0001' userName='Kermit' /&gt;
+      &lt;userLoggedIn xmlns='urn:xmpp:iot:provisioning' serviceToken='service0001' userToken='user0001' userName='Kermit' /&gt;
    &lt;/message&gt;
    
    &lt;!-- user continues interacting with service --&gt;
@@ -1218,9 +1219,9 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.7 <a name="sect-ID0ERYAE">User privileges</a></h3>
+      <h3>3.7 <a name="sect-ID0EA1AE">User privileges</a></h3>
             <div class="indent">
-        <h3>3.7.1 <a name="sect-ID0EVYAE">User privileges in service</a></h3>
+        <h3>3.7.1 <a name="sect-ID0EE1AE">User privileges in service</a></h3>
                 <p class="" style="">
                     When a user has been given access to a service, and properly been identified, the service can ask the provisioning service for detailed user privileges to control
                     different aspects of the service. This can be done using the <span class="strong">hasPrivilege</span> command. Here, the service sends its <span class="strong">serviceToken</span> and
@@ -1297,14 +1298,14 @@
        from='service@clayster.com/service'
        to='provisioning@clayster.com'
        id='10'&gt;
-      &lt;hasPrivilege xmlns='urn:xmpp:sn:provisioning' serviceToken='service0001' userToken='user0001' privilegeId='Sensors.View'/&gt;
+      &lt;hasPrivilege xmlns='urn:xmpp:iot:provisioning' serviceToken='service0001' userToken='user0001' privilegeId='Sensors.View'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='provisioning@clayster.com'
        to='service@clayster.com/service'
        id='10'&gt;
-      &lt;hasPrivilegeResponse xmlns='urn:xmpp:sn:provisioning' result='true'/&gt;
+      &lt;hasPrivilegeResponse xmlns='urn:xmpp:iot:provisioning' result='true'/&gt;
    &lt;/iq&gt;
  
    &lt;!-- user performs action --&gt;
@@ -1312,7 +1313,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.7.2 <a name="sect-ID0E33AE">Download all user privileges</a></h3>
+        <h3>3.7.2 <a name="sect-ID0EL5AE">Download all user privileges</a></h3>
                 <p class="" style="">
                     To improve performance, services can download the entire set of user privileges, and perform privilege checks internally. The following diagram displays
                     how the above two use cases could be handled in such a case:
@@ -1335,7 +1336,7 @@
        from='service@clayster.com/service'
        to='provisioning@clayster.com'
        id='11'&gt;
-      &lt;canAccess xmlns='urn:xmpp:sn:provisioning' serviceToken='service0001'&gt;
+      &lt;canAccess xmlns='urn:xmpp:iot:provisioning' serviceToken='service0001'&gt;
           &lt;credentials type='IpAddress' value='10.0.0.1'/&gt;
           &lt;credentials type='Longitude' value='123.45'/&gt;
           &lt;credentials type='Latitude' value='67.89'/&gt;
@@ -1346,21 +1347,21 @@
        from='provisioning@clayster.com'
        to='service@clayster.com/service'
        id='11'&gt;
-      &lt;canAccessResponse xmlns='urn:xmpp:sn:provisioning' userToken='user0001' result='true'/&gt;
+      &lt;canAccessResponse xmlns='urn:xmpp:iot:provisioning' userToken='user0001' result='true'/&gt;
    &lt;/iq&gt;
  
    &lt;!-- user performs login into service --&gt;
  
    &lt;message from='service@clayster.com/service'
             to='provisioning@clayster.com'&gt;
-      &lt;userLoggedIn xmlns='urn:xmpp:sn:provisioning' serviceToken='service0001' userToken='user0001' userName='Kermit' /&gt;
+      &lt;userLoggedIn xmlns='urn:xmpp:iot:provisioning' serviceToken='service0001' userToken='user0001' userName='Kermit' /&gt;
    &lt;/message&gt;
    
    &lt;iq type='get'
        from='service@clayster.com/service'
        to='provisioning@clayster.com'
        id='12'&gt;
-      &lt;downloadPrivileges xmlns='urn:xmpp:sn:provisioning' serviceToken='service0001' userToken='user0001'/&gt;
+      &lt;downloadPrivileges xmlns='urn:xmpp:iot:provisioning' serviceToken='service0001' userToken='user0001'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
@@ -1384,7 +1385,7 @@
         </div>
     <h2>4.
        <a name="support">Determining Support</a></h2>
-        <p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:sn:provisioning" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EO5AE">9</a>] information requests.</p>
+        <p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:provisioning" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0E46AE">10</a>] information requests.</p>
         <p class="caption"><a name="example-18"></a>Example 18. Service discovery information request</p>
     <div class="indent">
       <pre class="prettyprint">
@@ -1407,7 +1408,7 @@
     id='disco1'&gt;
   &lt;query xmlns='http://jabber.org/protocol/disco#info'&gt;
     ...
-    &lt;feature var='urn:xmpp:sn:provisioning'/&gt;
+    &lt;feature var='urn:xmpp:iot:provisioning'/&gt;
     ...
   &lt;/query&gt;
 &lt;/iq&gt;
@@ -1415,7 +1416,7 @@
     </div>
         <p class="" style="">
             In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
-            in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EF6AE">10</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
+            in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EVAAG">11</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
         </p>
     <h2>5.
        <a name="impl">Implementation Notes</a></h2>
@@ -1442,7 +1443,7 @@
             </p>
         </div>
         <div class="indent">
-      <h3>5.2 <a name="sect-ID0ELAAG">Working with multiple provisioning servers</a></h3>
+      <h3>5.2 <a name="sect-ID0E1BAG">Working with multiple provisioning servers</a></h3>
             <p class="" style="">
                 When working with multiple provisioning servers, there are some things that should be considered:
             </p>
@@ -1468,7 +1469,7 @@
             </ul>
         </div>
         <div class="indent">
-      <h3>5.3 <a name="sect-ID0EJBAG">Automatic aggregation of services, users and privileges</a></h3>
+      <h3>5.3 <a name="sect-ID0EYCAG">Automatic aggregation of services, users and privileges</a></h3>
             <p class="" style="">
                 One important design consideration when implementing a provisioning server is how to handle new services, users and privileges. One option might be to automatically
                 ignore anything not recognized. Another option might be to dynamically add new services, user names and privileges to internal data sources, making it easier to manage
@@ -1476,13 +1477,14 @@
             </p>
         </div>
         <div class="indent">
-      <h3>5.4 <a name="sect-ID0ESBAG">Reading devices from large subsystems</a></h3>
+      <h3>5.4 <a name="sect-ID0EBDAG">Reading devices from large subsystems</a></h3>
             <p class="" style="">
                 All examples in this document have been simplified examples where a few devices containing a few fields have been read. However, in many cases large subsystems with
-                very many sensors containing many fields have to be read, as is documented in <a href="xep-0000-IoT-Concentrators.html">xep-0000-IoT-Concentrators.html</a>
-                 [<a href="#nt-ID0E4BAG">11</a>]. In such cases, a node may have to be specified using two or perhaps
+                very many sensors containing many fields have to be read, as is documented in <a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a>
+				<a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a>. In such cases, a node may have to be specified using two or perhaps
                 even three ID's: a <span class="strong">sourceId</span> identifying the data source controlling the device, a possible <span class="strong">cacheType</span> narrowing down the search to
-                a specific kind of node, and the common <span class="strong">nodeId</span>. For more information about this, see <a href="xep-0000-IoT-Concentrators.html">xep-0000-IoT-Concentrators.html</a>.
+                a specific kind of node, and the common <span class="strong">nodeId</span>. For more information about this, see 
+				<a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a>.
             </p>
             <p class="" style="">
                 <span class="strong">Note:</span> For cases where the <span class="strong">nodeId</span> is sufficient to uniquely identify the node, it is sufficient to provide this attribute in the request.
@@ -1490,7 +1492,7 @@
             </p>
         </div>
         <div class="indent">
-      <h3>5.5 <a name="sect-ID0EXCAG">Different types of tokens</a></h3>
+      <h3>5.5 <a name="sect-ID0EFEAG">Different types of tokens</a></h3>
             <p class="" style="">
                 A small note regarding the use of different tokens. A service can get a <span class="strong">Service Token</span>, a device a <span class="strong">Device Token</span> and a user
                 a <span class="strong">User Token</span>. When delegating these tokens to third parties, a service sends its <span class="strong">Service Token</span>. But, if the service does this
@@ -1526,7 +1528,7 @@
         </ul>
     <h2>7.
        <a name="iana">IANA Considerations</a></h2>
-        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EEFAG">12</a>].</p>
+        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0ESGAG">12</a>].</p>
     <h2>8.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
         <p class="" style="">REQUIRED.</p>
@@ -1541,12 +1543,12 @@
 &lt;?xml version='1.0' encoding='UTF-8'?&gt;
 &lt;xs:schema
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
-    targetNamespace='urn:xmpp:sn:provisioning'
-    xmlns='urn:xmpp:sn:provisioning'
-    xmlns:sn='urn:xmpp:sn'
+    targetNamespace='urn:xmpp:iot:provisioning'
+    xmlns='urn:xmpp:iot:provisioning'
+    xmlns:sn='urn:xmpp:iot:sensordata'
     elementFormDefault='qualified'&gt;
  
-    &lt;xs:import namespace='urn:xmpp:sn'/&gt;
+    &lt;xs:import namespace='urn:xmpp:iot:sensordata'/&gt;
  
     &lt;xs:element name='getToken' type='GetToken'/&gt;
     &lt;xs:element name='getTokenResponse' type='GetTokenResponse'/&gt;
@@ -1833,9 +1835,9 @@
             <a href="http://xmpp.org/extensions/xep-0001.html#states-Experimental">Experimental</a><br>
             Type:
             <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
-            Version: 0.0.6<br>
-            Last Updated: 2013-04-12<br>
-                Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001, XEP-0030, sensor-data, xep-0000-IoT-Control<br>
+            Version: 0.1.1<br>
+            Last Updated: 2013-05-07<br>
+                Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001, XEP-0030, XEP-0323, XEP-0325<br>
                 Supersedes: None<br>
                 Superseded By: None<br>
             Short Name: NOT_YET_ASSIGNED<br>
@@ -1870,29 +1872,36 @@
     <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
     <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
     <div class="indent">
-      <p><a name="nt-ID0EIAAC">1</a>. <a href="sensor-data.html">sensor-data</a></p>
-      <p><a name="nt-ID0EPAAC">2</a>. <a href="xep-0000-IoT-Control.html">xep-0000-IoT-Control</a></p>
-      <p><a name="nt-ID0ESBAC">3</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0EJCAC">4</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0EVCAC">5</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
-      <p><a name="nt-ID0EBDAC">6</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
-      <p><a name="nt-ID0ENDAC">7</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
-      <p><a name="nt-ID0E1WAE">8</a>. XEP-0080: User Geolocation &lt;<a href="http://xmpp.org/extensions/xep-0080.html">http://xmpp.org/extensions/xep-0080.html</a>&gt;.</p>
-      <p><a name="nt-ID0EO5AE">9</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
-      <p><a name="nt-ID0EF6AE">10</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
-      <p><a name="nt-ID0E4BAG">11</a>. <a href="xep-0000-IoT-Concentrators.html">xep-0000-IoT-Concentrators.html</a></p>
-      <p><a name="nt-ID0EEFAG">12</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+      <p><a name="nt-ID0EDBAC">1</a>. XEP-0323: Internet of Things - Sensor Data &lt;<a href="http://xmpp.org/extensions/xep-0323.html">http://xmpp.org/extensions/xep-0323.html</a>&gt;.</p>
+      <p><a name="nt-ID0EPBAC">2</a>. XEP-0325: Internet of Things - Control &lt;<a href="http://xmpp.org/extensions/xep-0325.html">http://xmpp.org/extensions/xep-0325.html</a>&gt;.</p>
+      <p><a name="nt-ID0EUCAC">3</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0ELDAC">4</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0EXDAC">5</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
+      <p><a name="nt-ID0EDEAC">6</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
+      <p><a name="nt-ID0EPEAC">7</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+      <p><a name="nt-ID0EKMAC">8</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
+      <p><a name="nt-ID0EJYAE">9</a>. XEP-0080: User Geolocation &lt;<a href="http://xmpp.org/extensions/xep-0080.html">http://xmpp.org/extensions/xep-0080.html</a>&gt;.</p>
+      <p><a name="nt-ID0E46AE">10</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0EVAAG">11</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0ESGAG">12</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
     <div class="indent">
-      <h4>Version 0.0.6 (2013-04-12)</h4>
+      <h4>Version 0.1.1 (2013-05-07)</h4>
       <div class="indent">
 				<p class="" style="">Corrected downloadPrivileges example.</p>
 				<p class="" style="">Made several corrections of the language.</p>
 				<p class="" style="">Expanded the introduction.</p>
 				<p class="" style="">Changes "Sensor Networks" to "Internet of Things".</p>
+				<p class="" style="">Fixed links to documents with new numbers.</p>
+				<p class="" style="">Changed namespace urn:xmpp:sn to urn:xmpp:iot</p>
 			 (pw)
+    </div>
+      <h4>Version 0.1 (2013-04-16)</h4>
+      <div class="indent">
+				<p class="" style="">Initial published version approved by the XMPP Council.</p>
+			 (psa)
     </div>
       <h4>Version 0.0.5 (2013-04-04)</h4>
       <div class="indent">

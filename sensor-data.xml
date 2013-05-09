@@ -36,6 +36,23 @@
 			<uri>http://se.linkedin.com/pub/peter-waher/1a/71b/a29/</uri>
 		</author>
 		<revision>
+			<version>0.1.1</version>
+			<date>2013-05-07</date>
+			<initials>pw</initials>
+			<remark>
+				<p>Fixed links to documents with new numbers.</p>
+				<p>Changed namespace urn:xmpp:sn to urn:xmpp:iot:sensordata</p>
+			</remark>
+		</revision>
+		<revision>
+			<version>0.1</version>
+			<date>2013-04-16</date>
+			<initials>psa</initials>
+			<remark>
+				<p>Initial published version approved by the XMPP Council.</p>
+			</remark>
+		</revision>
+		<revision>
 			<version>0.0.5</version>
 			<date>2013-04-01</date>
 			<initials>pw</initials>
@@ -111,21 +128,8 @@
 				<td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
 			</tr>
 			<tr>
-				<td>exi</td>
-				<td>Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
-				in all sensor network implementations where memory and packet size is an issue.</td>
-			</tr>
-			<tr>
 				<td>xep-0000-IoT-BatteryPoweredSensors</td>
 				<td>Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
-			</tr>
-			<tr>
-				<td>xep-0000-IoT-Concentrators</td>
-				<td>Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
-			</tr>
-			<tr>
-				<td>xep-0000-IoT-Control</td>
-				<td>Defines how to control actuators and other devices in sensor networks.</td>
 			</tr>
 			<tr>
 				<td>xep-0000-IoT-Discovery</td>
@@ -144,17 +148,32 @@
 				<td>Defines how sensor data can be multicast in efficient ways.</td>
 			</tr>
 			<tr>
-				<td>sensor-network-provisioning</td>
-				<td>Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
-			</tr>
-			<tr>
 				<td>xep-0000-IoT-PubSub</td>
 				<td>Defines how efficient publication of sensor data can be made in sensor networks.</td>
 			</tr>
 			<tr>
-				<td>sensor-data</td>
+				<td>XEP-0322</td>
+				<td>
+					Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
+					in all sensor network implementations where memory and packet size is an issue.
+				</td>
+			</tr>
+			<tr>
+				<td>XEP-0323</td>
 				<td>This specification. Provides the underlying architecture, basic operations and data structures for sensor data communication over XMPP networks. 
 				It includes a hardware abstraction model, removing any technical detail implemented in underlying technologies. This XEP is used by all other sensor network XEPs.</td>
+			</tr>
+			<tr>
+				<td>XEP-0324</td>
+				<td>Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
+			</tr>
+			<tr>
+				<td>XEP-0325</td>
+				<td>Defines how to control actuators and other devices in Internet of Things.</td>
+			</tr>
+			<tr>
+				<td>XEP-0326</td>
+				<td>Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
 			</tr>
 		</table>
 	</section1>
@@ -220,7 +239,7 @@
 			</di>
 			<di>
 				<dt>Parameter</dt>
-				<dd>Readable and/or writable property on a node/device. The XEP xep-0000-IoT-Concentrators deals with reading and writing parameters
+				<dd>Readable and/or writable property on a node/device. The XEP-0326 &xep0326; deals with reading and writing parameters
 				on nodes/devices. Fields are not parameters, and parameters are not fields.</dd>
 			</di>
 			<di>
@@ -359,7 +378,7 @@
 		</p>
 		<p>
 			The device can also reject a read-out request. Reasons for rejecting a request may be missing privileges defined by provisioning rules, etc. It's not part of this XEP
-			to define such rules. A separate XEP (<link url='sensor-network-provisioning.html'>sensor-network-provisioning</link>) defines an architecture for how such provisioning can be easily implemented.
+			to define such rules. A separate XEP (&xep0324;) defines an architecture for how such provisioning can be easily implemented.
 		</p>
 		<p>
 			A rejection response is shown in the following diagram.
@@ -389,7 +408,7 @@
        from='master@clayster.com/amr'
        to='device@clayster.com'
        id='1'>
-      <req xmlns='urn:xmpp:sn' seqnr='1' momentary='true'/>
+      <req xmlns='urn:xmpp:iot:sensordata' seqnr='1' momentary='true'/>
    </iq>]]>
 			</example>
 
@@ -403,7 +422,7 @@
        from='device@clayster.com'
        to='master@clayster.com/amr'
        id='1'>
-      <accepted xmlns='urn:xmpp:sn' seqnr='1'/>
+      <accepted xmlns='urn:xmpp:iot:sensordata' seqnr='1'/>
    </iq>]]>
 			</example>
 
@@ -415,7 +434,7 @@
 				<![CDATA[
    <message from='device@clayster.com'
             to='master@clayster.com/amr'>
-      <fields xmlns='urn:xmpp:sn' seqnr='1' done='true'>
+      <fields xmlns='urn:xmpp:iot:sensordata' seqnr='1' done='true'>
          <node nodeId='Device01'>
             <timestamp value='2013-03-07T16:24:30'>
                <numeric name='Temperature' momentary='true' automaticReadout='true' value='23.4' unit='°C'/> 
@@ -437,19 +456,19 @@
        from='master@clayster.com/amr'
        to='device@clayster.com'
        id='2'>
-      <req xmlns='urn:xmpp:sn' seqnr='2' momentary='true'/>
+      <req xmlns='urn:xmpp:iot:sensordata' seqnr='2' momentary='true'/>
    </iq>
    
    <iq type='result'
        from='device@clayster.com'
        to='master@clayster.com/amr'
        id='2'>
-      <accepted xmlns='urn:xmpp:sn' seqnr='2'/>
+      <accepted xmlns='urn:xmpp:iot:sensordata' seqnr='2'/>
    </iq>
    
    <message from='device@clayster.com'
             to='master@clayster.com/amr'>
-      <failure xmlns='urn:xmpp:sn' seqnr='2' done='true'>
+      <failure xmlns='urn:xmpp:iot:sensordata' seqnr='2' done='true'>
          <error nodeId='Device01' timestamp='2013-03-07T17:13:30'>Timeout.</error>
       </failure>
    </message>]]>
@@ -466,14 +485,14 @@
        from='master@clayster.com/amr'
        to='device@clayster.com'
        id='3'>
-      <req xmlns='urn:xmpp:sn' seqnr='3' momentary='true'/>
+      <req xmlns='urn:xmpp:iot:sensordata' seqnr='3' momentary='true'/>
    </iq>
    
    <iq type='error'
        from='device@clayster.com'
        to='master@clayster.com/amr'
        id='3'>
-      <rejected xmlns='urn:xmpp:sn' seqnr='3'>
+      <rejected xmlns='urn:xmpp:iot:sensordata' seqnr='3'>
 	     <error>Access denied.</error>
       </rejected>
    </iq>]]>
@@ -493,24 +512,24 @@
        from='master@clayster.com/amr'
        to='device@clayster.com'
        id='4'>
-      <req xmlns='urn:xmpp:sn' seqnr='4' all='true' when='2013-03-07T19:00:00'/>
+      <req xmlns='urn:xmpp:iot:sensordata' seqnr='4' all='true' when='2013-03-07T19:00:00'/>
    </iq>
    
    <iq type='result'
        from='device@clayster.com'
        to='master@clayster.com/amr'
        id='4'>
-      <accepted xmlns='urn:xmpp:sn' seqnr='4' queued='true'/>
+      <accepted xmlns='urn:xmpp:iot:sensordata' seqnr='4' queued='true'/>
    </iq>
    
    <message from='device@clayster.com'
             to='master@clayster.com/amr'>
-      <started xmlns='urn:xmpp:sn' seqnr='4'/>
+      <started xmlns='urn:xmpp:iot:sensordata' seqnr='4'/>
    </message>
    
    <message from='device@clayster.com'
             to='master@clayster.com/amr'>
-      <fields xmlns='urn:xmpp:sn' seqnr='4'>
+      <fields xmlns='urn:xmpp:iot:sensordata' seqnr='4'>
          <node nodeId='Device01'>
             <timestamp value='2013-03-07T19:00:00'>
                <numeric name='Temperature' momentary='true' automaticReadout='true' value='23.4' unit='°C'/> 
@@ -523,7 +542,7 @@
    
    <message from='device@clayster.com'
             to='master@clayster.com/amr'>
-      <fields xmlns='urn:xmpp:sn' seqnr='4'>
+      <fields xmlns='urn:xmpp:iot:sensordata' seqnr='4'>
          <node nodeId='Device01'>
             <timestamp value='2013-03-07T19:00:00'>
                <numeric name='Temperature, Max' peak='true' automaticReadout='true' value='25.9' unit='°C'/> 
@@ -536,7 +555,7 @@
    
    <message from='device@clayster.com'
             to='master@clayster.com/amr'>
-      <fields xmlns='urn:xmpp:sn' seqnr='4'>
+      <fields xmlns='urn:xmpp:iot:sensordata' seqnr='4'>
          <node nodeId='Device01'>
             <timestamp value='2013-03-07T18:00:00'>
                <numeric name='Temperature' historicalHour='true' automaticReadout='true' value='24.5' unit='°C'/> 
@@ -557,7 +576,7 @@
    
    <message from='device@clayster.com'
             to='master@clayster.com/amr'>
-      <done xmlns='urn:xmpp:sn' seqnr='4'/>
+      <done xmlns='urn:xmpp:iot:sensordata' seqnr='4'/>
    </message>]]>
 			</example>
 		</section2>
@@ -572,7 +591,7 @@
        from='master@clayster.com/amr'
        to='device@clayster.com'
        id='5'>
-      <req xmlns='urn:xmpp:sn' seqnr='5' momentary='true'>
+      <req xmlns='urn:xmpp:iot:sensordata' seqnr='5' momentary='true'>
          <node nodeId='Device02'/>
          <node nodeId='Device03'/>
       </req>
@@ -582,12 +601,12 @@
        from='device@clayster.com'
        to='master@clayster.com/amr'
        id='5'>
-      <accepted xmlns='urn:xmpp:sn' seqnr='5'/>
+      <accepted xmlns='urn:xmpp:iot:sensordata' seqnr='5'/>
    </iq>
    
    <message from='device@clayster.com'
             to='master@clayster.com/amr'>
-      <fields xmlns='urn:xmpp:sn' seqnr='5'>
+      <fields xmlns='urn:xmpp:iot:sensordata' seqnr='5'>
          <node nodeId='Device02'>
             <timestamp value='2013-03-07T19:31:15'>
                <numeric name='Temperature' momentary='true' automaticReadout='true' value='23.4' unit='°C'/> 
@@ -598,7 +617,7 @@
    
    <message from='device@clayster.com'
             to='master@clayster.com/amr'>
-      <fields xmlns='urn:xmpp:sn' seqnr='5' done='true'>
+      <fields xmlns='urn:xmpp:iot:sensordata' seqnr='5' done='true'>
          <node nodeId='Device03'>
             <timestamp value='2013-03-07T19:31:16'>
                <numeric name='Temperature' momentary='true' automaticReadout='true' value='22.8' unit='°C'/> 
@@ -628,7 +647,7 @@
        from='master@clayster.com/amr'
        to='device@clayster.com'
        id='6'>
-      <req xmlns='urn:xmpp:sn' seqnr='6' momentary='true'>
+      <req xmlns='urn:xmpp:iot:sensordata' seqnr='6' momentary='true'>
          <node nodeId='Device04'/>
          <field name='Energy'/>
          <field name='Power'/>
@@ -639,12 +658,12 @@
        from='device@clayster.com'
        to='master@clayster.com/amr'
        id='6'>
-      <accepted xmlns='urn:xmpp:sn' seqnr='6'/>
+      <accepted xmlns='urn:xmpp:iot:sensordata' seqnr='6'/>
    </iq>
    
    <message from='device@clayster.com'
             to='master@clayster.com/amr'>
-      <fields xmlns='urn:xmpp:sn' seqnr='6' done='true'>
+      <fields xmlns='urn:xmpp:iot:sensordata' seqnr='6' done='true'>
          <node nodeId='Device04'>
             <timestamp value='2013-03-07T22:03:15'>
                <numeric name='Energy' momentary='true' automaticReadout='true' value='12345.67' unit='MWh'/> 
@@ -665,34 +684,34 @@
        from='master@clayster.com/amr'
        to='device@clayster.com'
        id='8'>
-      <req xmlns='urn:xmpp:sn' seqnr='8' all='true' when='2013-03-09T23:30:00'/>
+      <req xmlns='urn:xmpp:iot:sensordata' seqnr='8' all='true' when='2013-03-09T23:30:00'/>
    </iq>
    
    <iq type='result'
        from='device@clayster.com'
        to='master@clayster.com/amr'
        id='8'>
-      <accepted xmlns='urn:xmpp:sn' seqnr='8' queued='true'/>
+      <accepted xmlns='urn:xmpp:iot:sensordata' seqnr='8' queued='true'/>
    </iq>
    
    <iq type='get'
        from='master@clayster.com/amr'
        to='device@clayster.com'
        id='8'>
-      <cancel xmlns='urn:xmpp:sn' seqnr='8'/>
+      <cancel xmlns='urn:xmpp:iot:sensordata' seqnr='8'/>
    </iq>
    
    <iq type='result'
        from='device@clayster.com'
        to='master@clayster.com/amr'
        id='8'>
-      <cancelled xmlns='urn:xmpp:sn' seqnr='8'/>
+      <cancelled xmlns='urn:xmpp:iot:sensordata' seqnr='8'/>
    </iq>]]>
 			</example>
 		</section2>
 	</section1>
 	<section1 topic='Determining Support' anchor='support'>
-		<p>If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:sn" in response to &xep0030; information requests.</p>
+		<p>If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:sensordata" in response to &xep0030; information requests.</p>
 		<example caption="Service discovery information request">
 			<![CDATA[
 <iq type='get'
@@ -710,7 +729,7 @@
     id='disco1'>
   <query xmlns='http://jabber.org/protocol/disco#info'>
     ...
-    <feature var='urn:xmpp:sn'/>
+    <feature var='urn:xmpp:iot:sensordata'/>
     ...
   </query>
 </iq>]]>
@@ -725,8 +744,7 @@
 				affected negatively by this for two reasons:
 			</p>
 			<ul>
-				<li>For sensors with limited memory, or where package size is important, <span class='ref'><link url='http://www.w3.org/TR/exi/'>EXI</link></span> 
-				<note>Efficient XML Interchange (EXI) Format &lt;<link url='http://www.w3.org/TR/exi/'>http://www.w3.org/TR/exi/</link>&gt;.</note> is supposed to be used. 
+				<li>For sensors with limited memory, or where package size is important, &xep0322; is supposed to be used. 
 				EXI compresses strings as normalized index values, making the string appear only once in the packet. Therefore, shortening string length doesn't affect packet 
 				size much. Element and attribute names in known namespaces are furthermore only encoded by index in schema, not by name.</li>
 				<li>If limited memory or package size is not a consideration, readability and ease of implementation is preferred to short messages.</li>
@@ -999,18 +1017,17 @@
 				can also be included.
 			</p>
 			<p>
-				More information about how multiple devices behind a JID can be handled, is described in the XEP <link url='xep-0000-IoT-Concentrators.html'>xep-0000-IoT-Concentrators</link>.
+				More information about how multiple devices behind a JID can be handled, is described in the XEP-0326
+				<link url='http://xmpp.org/extensions/xep-0326.html'>Internet of Things - Concentrators</link>.
 			</p>
 		</section2>
 		<section2 topic='Reading devices from large subsystems'>
 			<p>
 				All examples in this document have been simplified examples where a few devices containing a few fields have been read. However, in many cases large subsystems with
-				very many sensors containing many fields have to be read, as is documented in <link url='xep-0000-IoT-Concentrators.html'>xep-0000-IoT-Concentrators.html</link>
-				<note>
-					<link url='xep-0000-IoT-Concentrators.html'>xep-0000-IoT-Concentrators.html</link>
-				</note>. In such cases, a node may have to be specified using two or perhaps
-				even three ID's: a <strong>sourceId</strong> identifying the data source controlling the device, a possible <strong>cacheType</strong> narrowing down the search to
-				a specific kind of node, and the common <strong>nodeId</strong>. For more information about this, see <link url='xep-0000-IoT-Concentrators.html'>xep-0000-IoT-Concentrators.html</link>.
+				very many sensors containing many fields have to be read, as is documented in <link url='http://xmpp.org/extensions/xep-0326.html'>Internet of Things - Concentrators</link>. 
+				In such cases, a node may have to be specified using two or perhaps even three ID's: a <strong>sourceId</strong> identifying the data source controlling the device, a possible 
+				<strong>cacheType</strong> narrowing down the search to a specific kind of node, and the common <strong>nodeId</strong>. For more information about this, see 
+				<link url='http://xmpp.org/extensions/xep-0326.html'>Internet of Things - Concentrators</link>.
 			</p>
 			<p>
 				<strong>Note:</strong> For cases where the <strong>nodeId</strong> is sufficient to uniquely identify the node, it is sufficient to provide this attribute in the request.
@@ -1051,19 +1068,19 @@
        from='master@clayster.com/amr'
        to='device@clayster.com'
        id='7'>
-      <req xmlns='urn:xmpp:sn' seqnr='7' all='true'/>
+      <req xmlns='urn:xmpp:iot:sensordata' seqnr='7' all='true'/>
    </iq>
    
    <iq type='result'
        from='device@clayster.com'
        to='master@clayster.com/amr'
        id='7'>
-      <accepted xmlns='urn:xmpp:sn' seqnr='7'/>
+      <accepted xmlns='urn:xmpp:iot:sensordata' seqnr='7'/>
    </iq>
    
    <message from='device@clayster.com'
             to='master@clayster.com/amr'>
-      <fields xmlns='urn:xmpp:sn' seqnr='7' done='true'>
+      <fields xmlns='urn:xmpp:iot:sensordata' seqnr='7' done='true'>
          <node nodeId='Device05'>
             <timestamp value='2013-03-07T22:20:45'>
                <numeric name='Temperature' momentary='true' automaticReadout='true' 
@@ -1192,7 +1209,7 @@
 			</li>
 			<li>
 				More advanced access rights, privileges, automatic friendship recognition, etc., may be managed by a third party. How to implement more advanced provisioning and detailed
-				access rights to sensor information is detailed in the XEP <link url='sensor-network-provisioning.html'>sensor-network-provisioning</link>. In short, a device, service or user can get a
+				access rights to sensor information is detailed in the XEP-0324 <link url='http://xmpp.org/extensions/xep-0324.html'>Internet of Things - Provisioning</link>. In short, a device, service or user can get a
 				<strong>deviceToken</strong>, <strong>serviceToken</strong> and <strong>userToken</strong> respectivelly from a provisioning server. The service or device then uses these tokens
 				in all readout requests and the device being read out can in turn use these tokens to validate access rights with the provisioning server.
 			</li>
@@ -1211,8 +1228,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <xs:schema
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
-    targetNamespace='urn:xmpp:sn'
-    xmlns='urn:xmpp:sn'
+    targetNamespace='urn:xmpp:iot:sensordata'
+    xmlns='urn:xmpp:iot:sensordata'
     elementFormDefault='qualified'>
    
     <xs:element name='req'>

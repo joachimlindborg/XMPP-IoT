@@ -10,7 +10,7 @@
     <meta name="DC.Description" content="This specification describes how to control devices or actuators in an XMPP-based sensor network.">
     <meta name="DC.Publisher" content="XMPP Standards Foundation">
     <meta name="DC.Contributor" content="XMPP Extensions Editor">
-    <meta name="DC.Date" content="2013-03-27">
+    <meta name="DC.Date" content="2013-05-07">
     <meta name="DC.Type" content="XMPP Extension Protocol">
     <meta name="DC.Format" content="XHTML">
     <meta name="DC.Identifier" content="XEP-xxxx">
@@ -42,11 +42,11 @@
       </tr>
       <tr valign="top">
         <td><strong>Version:</strong></td>
-        <td>0.0.1</td>
+        <td>0.1.1</td>
       </tr>
       <tr valign="top">
         <td><strong>Last Updated:</strong></td>
-        <td>2013-03-27</td>
+        <td>2013-05-07</td>
       </tr>
     </table>
     <hr>
@@ -55,46 +55,46 @@
     <h2>Table of Contents</h2>
     <div class="indent">
       <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
-      3.1.  <a href="#sect-ID0ENKAC">Control commands</a><br>      
-      3.1.1.  <a href="#sect-ID0ERKAC">Sending a control command using a message stanza</a><br>      
-      3.1.2.  <a href="#sect-ID0EBLAC">Sending a control command using an IQ stanza</a><br>      
-      3.1.3.  <a href="#sect-ID0ERLAC">Control failure response</a><br>   
-      3.2.  <a href="#sect-ID0E5LAC">Setting control parameters</a><br>      
-      3.2.1.  <a href="#sect-ID0EGMAC">Setting a single boolean-valued control parameter</a><br>      
-      3.2.2.  <a href="#sect-ID0ESMAC">Setting a single 32-bit integer-valued control parameter</a><br>      
-      3.2.3.  <a href="#sect-ID0E5MAC">Setting a single 64-bit integer-valued control parameter</a><br>      
-      3.2.4.  <a href="#sect-ID0EKNAC">Setting a single string-valued control parameter</a><br>      
-      3.2.5.  <a href="#sect-ID0EWNAC">Setting a single double-valued control parameter</a><br>      
-      3.2.6.  <a href="#sect-ID0ECOAC">Setting a single date-valued control parameter</a><br>      
-      3.2.7.  <a href="#sect-ID0EOOAC">Setting a single time-valued control parameter</a><br>      
-      3.2.8.  <a href="#sect-ID0E1OAC">Setting a single date &amp; time-valued control parameter</a><br>      
-      3.2.9.  <a href="#sect-ID0EGPAC">Setting a single time-valued control parameter</a><br>      
-      3.2.10.  <a href="#sect-ID0ESPAC">Setting a single duration-valued control parameter</a><br>      
-      3.2.11.  <a href="#sect-ID0E5PAC">Setting a single color-valued control parameter</a><br>      
-      3.2.12.  <a href="#sect-ID0ELAAE">Setting multiple control parameters at once</a><br>   
-      3.3.  <a href="#sect-ID0EKBAE">Control forms</a><br>      
+      3.1.  <a href="#sect-ID0E2LAC">Control commands</a><br>      
+      3.1.1.  <a href="#sect-ID0E6LAC">Sending a control command using a message stanza</a><br>      
+      3.1.2.  <a href="#sect-ID0EPMAC">Sending a control command using an IQ stanza</a><br>      
+      3.1.3.  <a href="#sect-ID0E6MAC">Control failure response</a><br>   
+      3.2.  <a href="#sect-ID0EMNAC">Setting control parameters</a><br>      
+      3.2.1.  <a href="#sect-ID0EUNAC">Setting a single boolean-valued control parameter</a><br>      
+      3.2.2.  <a href="#sect-ID0EAOAC">Setting a single 32-bit integer-valued control parameter</a><br>      
+      3.2.3.  <a href="#sect-ID0EMOAC">Setting a single 64-bit integer-valued control parameter</a><br>      
+      3.2.4.  <a href="#sect-ID0EYOAC">Setting a single string-valued control parameter</a><br>      
+      3.2.5.  <a href="#sect-ID0EEPAC">Setting a single double-valued control parameter</a><br>      
+      3.2.6.  <a href="#sect-ID0EQPAC">Setting a single date-valued control parameter</a><br>      
+      3.2.7.  <a href="#sect-ID0E3PAC">Setting a single time-valued control parameter</a><br>      
+      3.2.8.  <a href="#sect-ID0EJAAE">Setting a single date &amp; time-valued control parameter</a><br>      
+      3.2.9.  <a href="#sect-ID0EVAAE">Setting a single time-valued control parameter</a><br>      
+      3.2.10.  <a href="#sect-ID0EBBAE">Setting a single duration-valued control parameter</a><br>      
+      3.2.11.  <a href="#sect-ID0ENBAE">Setting a single color-valued control parameter</a><br>      
+      3.2.12.  <a href="#sect-ID0EZBAE">Setting multiple control parameters at once</a><br>   
+      3.3.  <a href="#sect-ID0EYCAE">Control forms</a><br>      
       3.3.1.  <a href="#controlform">Getting a control form</a><br>      
-      3.3.2.  <a href="#sect-ID0EJDAE">Getting a control form, Failure</a><br>      
-      3.3.3.  <a href="#sect-ID0E3DAE">Setting a (partial) control form</a><br>      
-      3.3.4.  <a href="#sect-ID0EQEAE">Setting a (partial) control form, Failure</a><br>   
-      3.4.  <a href="#sect-ID0EGFAE">Controlling devices behind a concentrator</a><br>      
-      3.4.1.  <a href="#sect-ID0ERFAE">Sending a control command to a node behind a concentrator</a><br>      
-      3.4.2.  <a href="#sect-ID0EAGAE">Sending a control command to multiple nodes</a><br>      
-      3.4.3.  <a href="#sect-ID0EPGAE">Sending a control command to multiple nodes, Failure</a><br>      
-      3.4.4.  <a href="#sect-ID0E2GAE">Getting a control form from multiple nodes</a><br>      
-      3.4.5.  <a href="#sect-ID0ETHAE">Getting a control form from multiple nodes, Failure</a><br>      
-      3.4.6.  <a href="#sect-ID0EGIAE">Setting a (partial) control form to multiple nodes</a><br>      
-      3.4.7.  <a href="#sect-ID0EXIAE">Setting a (partial) control form to multiple nodes, Failure</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
-      5.1.  <a href="#sect-ID0E4KAE">Reading current control states</a><br>   
+      3.3.2.  <a href="#sect-ID0EXEAE">Getting a control form, Failure</a><br>      
+      3.3.3.  <a href="#sect-ID0EKFAE">Setting a (partial) control form</a><br>      
+      3.3.4.  <a href="#sect-ID0E5FAE">Setting a (partial) control form, Failure</a><br>   
+      3.4.  <a href="#sect-ID0EUGAE">Controlling devices behind a concentrator</a><br>      
+      3.4.1.  <a href="#sect-ID0E6GAE">Sending a control command to a node behind a concentrator</a><br>      
+      3.4.2.  <a href="#sect-ID0EOHAE">Sending a control command to multiple nodes</a><br>      
+      3.4.3.  <a href="#sect-ID0E4HAE">Sending a control command to multiple nodes, Failure</a><br>      
+      3.4.4.  <a href="#sect-ID0EJIAE">Getting a control form from multiple nodes</a><br>      
+      3.4.5.  <a href="#sect-ID0EBJAE">Getting a control form from multiple nodes, Failure</a><br>      
+      3.4.6.  <a href="#sect-ID0EUJAE">Setting a (partial) control form to multiple nodes</a><br>      
+      3.4.7.  <a href="#sect-ID0EFKAE">Setting a (partial) control form to multiple nodes, Failure</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
+      5.1.  <a href="#sect-ID0ELMAE">Reading current control states</a><br>   
       5.2.  <a href="#nodeparamsvscontrolparams">Difference between node parameters and node control parameters</a><br>   
       5.3.  <a href="#parametergroups">Grouping control parameters</a><br>   
-      5.4.  <a href="#sect-ID0EWCAG">Node commands vs. control parameters</a><br>   
-      5.5.  <a href="#sect-ID0EGFAG">Tokens</a><br>   
-      5.6.  <a href="#sect-ID0EBHAG">Controlling devices in large subsystems</a><br>6.  <a href="#i18n">Internationalization Considerations</a><br>   
-      6.1.  <a href="#sect-ID0EHIAG">Time Zones</a><br>   
-      6.2.  <a href="#sect-ID0E2IAG">xml:lang</a><br>7.  <a href="#security">Security Considerations</a><br>   
-      7.1.  <a href="#sect-ID0EQJAG">Encryption &amp; Authentication</a><br>   
-      7.2.  <a href="#sect-ID0E4JAG">Provisioning</a><br>8.  <a href="#iana">IANA Considerations</a><br>9.  <a href="#registrar">XMPP Registrar Considerations</a><br>10.  <a href="#schema">XML Schema</a><br>11.  <a href="#moreinfo">For more information</a><br>12.  <a href="#ack">Acknowledgements</a></p>
+      5.4.  <a href="#sect-ID0EKEAG">Node commands vs. control parameters</a><br>   
+      5.5.  <a href="#sect-ID0E1GAG">Tokens</a><br>   
+      5.6.  <a href="#sect-ID0E2IAG">Controlling devices in large subsystems</a><br>6.  <a href="#i18n">Internationalization Considerations</a><br>   
+      6.1.  <a href="#sect-ID0EBKAG">Time Zones</a><br>   
+      6.2.  <a href="#sect-ID0EVKAG">xml:lang</a><br>7.  <a href="#security">Security Considerations</a><br>   
+      7.1.  <a href="#sect-ID0EKLAG">Encryption &amp; Authentication</a><br>   
+      7.2.  <a href="#sect-ID0EXLAG">Provisioning</a><br>8.  <a href="#iana">IANA Considerations</a><br>9.  <a href="#registrar">XMPP Registrar Considerations</a><br>10.  <a href="#schema">XML Schema</a><br>11.  <a href="#moreinfo">For more information</a><br>12.  <a href="#ack">Acknowledgements</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
     </div>
     <hr>
@@ -121,30 +121,15 @@
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">XEP-0000-ColorParameter</td>
-                <td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EPE">1</a>]</td>
+                <td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0ETF">1</a>]</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">XEP-0000-DynamicForms</td>
-                <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EGF">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0ESF">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0E5F">4</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EKG">5</a>].</td>
-            </tr>
-            <tr class="body">
-                <td colspan="" rowspan="">exi</td>
-                <td colspan="" rowspan="">
-                    Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
-                    in all sensor network implementations where memory and packet size is an issue.
-                </td>
+                <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EKG">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EWG">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0ECH">4</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EOH">5</a>].</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">xep-0000-IoT-BatteryPoweredSensors</td>
                 <td colspan="" rowspan="">Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
-            </tr>
-            <tr class="body">
-                <td colspan="" rowspan="">xep-0000-IoT-Concentrators</td>
-                <td colspan="" rowspan="">Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
-            </tr>
-            <tr class="body">
-                <td colspan="" rowspan="">xep-0000-IoT-Control</td>
-                <td colspan="" rowspan="">This specification. Defines how to control actuators and other devices in sensor networks.</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">xep-0000-IoT-Discovery</td>
@@ -163,21 +148,36 @@
                 <td colspan="" rowspan="">Defines how sensor data can be multicast in efficient ways.</td>
             </tr>
             <tr class="body">
-                <td colspan="" rowspan="">sensor-network-provisioning</td>
-                <td colspan="" rowspan="">Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
-            </tr>
-            <tr class="body">
                 <td colspan="" rowspan="">xep-0000-IoT-PubSub</td>
                 <td colspan="" rowspan="">Defines how efficient publication of sensor data can be made in sensor networks.</td>
             </tr>
-            <tr class="body">
-                <td colspan="" rowspan="">sensor-data</td>
+			<tr class="body">
+				<td colspan="" rowspan="">XEP-0322</td>
+				<td colspan="" rowspan="">
+					Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
+					in all sensor network implementations where memory and packet size is an issue.
+				</td>
+			</tr>
+			<tr class="body">
+                <td colspan="" rowspan="">XEP-0323</td>
                 <td colspan="" rowspan="">
                     Provides the underlying architecture, basic operations and data structures for sensor data communication over XMPP networks.
                     It includes a hardware abstraction model, removing any technical detail implemented in underlying technologies. This XEP is used by all other sensor network XEPs.
                 </td>
             </tr>
-        </table>
+			<tr class="body">
+				<td colspan="" rowspan="">XEP-0324</td>
+				<td colspan="" rowspan="">Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">XEP-0325</td>
+				<td colspan="" rowspan="">This specification. Defines how to control actuators and other devices in Internet of Things.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">XEP-0326</td>
+				<td colspan="" rowspan="">Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
+			</tr>
+		</table>
     </div>
     <h2>2.
        <a name="glossary">Glossary</a></h2>
@@ -249,7 +249,7 @@
             <di>
                 <dt><strong>Parameter</strong></dt>
                 <dd>
-                    Readable and/or writable property on a node/device. The XEP xep-0000-IoT-Concentrators deals with reading and writing parameters
+                    Readable and/or writable property on a node/device. The XEP-0326 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0EDHAC">6</a>] deals with reading and writing parameters
                     on nodes/devices. Fields are not parameters, and parameters are not fields.
                 </dd>
             </di>
@@ -334,17 +334,17 @@
         </ul>
         <p class="" style="">
             What type of control parameters there are available in different types of devices is described in
-             [<a href="#nt-ID0EXJAC">6</a>].
+             [<a href="#nt-ID0EILAC">7</a>].
         </p>
         <p class="" style="">
-            If the device is a concentrator, as defined in
-             [<a href="#nt-ID0ECKAC">7</a>], an handles multiple nodes behind it, which node(s) to control is defined using <span class="strong">node</span> elements. If not a concentrator,
+            If the device is a concentrator, as defined in <a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a>, 
+			an handles multiple nodes behind it, which node(s) to control is defined using <span class="strong">node</span> elements. If not a concentrator,
             the use of <span class="strong">node</span> elements is not necessary, and control commands are sent directly to the device itself.
         </p>
         <div class="indent">
-      <h3>3.1 <a name="sect-ID0ENKAC">Control commands</a></h3>
+      <h3>3.1 <a name="sect-ID0E2LAC">Control commands</a></h3>
             <div class="indent">
-        <h3>3.1.1 <a name="sect-ID0ERKAC">Sending a control command using a message stanza</a></h3>
+        <h3>3.1.1 <a name="sect-ID0E6LAC">Sending a control command using a message stanza</a></h3>
                 <p class="" style="">
                     Following is an example of a control command sent using a message stanza:
                 </p>
@@ -354,7 +354,7 @@
                     
    &lt;message from='master@clayster.com/amr'
             to='digital.output@clayster.com'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control'&gt;
          &lt;boolean name='Output' value='true'/&gt;
       &lt;/set&gt;
    &lt;/message&gt;
@@ -366,7 +366,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.1.2 <a name="sect-ID0EBLAC">Sending a control command using an IQ stanza</a></h3>
+        <h3>3.1.2 <a name="sect-ID0EPMAC">Sending a control command using an IQ stanza</a></h3>
                 <p class="" style="">
                     Following is an example of a control command sent using an iq stanza:
                 </p>
@@ -378,7 +378,7 @@
        from='master@clayster.com/amr'
        to='digital.output@clayster.com'
        id='1'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control' xml:lang='en'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control' xml:lang='en'&gt;
          &lt;boolean name='Output' value='true'/&gt;
       &lt;/set&gt;
    &lt;/iq&gt;
@@ -387,7 +387,7 @@
        from='digital.output@clayster.com'
        to='master@clayster.com/amr'
        id='1'&gt;
-      &lt;setResponse xmlns='urn:xmpp:sn:control' responseCode='OK'/&gt;
+      &lt;setResponse xmlns='urn:xmpp:iot:control' responseCode='OK'/&gt;
    &lt;/iq&gt;
                 </pre>
         </div>
@@ -396,7 +396,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.1.3 <a name="sect-ID0ERLAC">Control failure response</a></h3>
+        <h3>3.1.3 <a name="sect-ID0E6MAC">Control failure response</a></h3>
                 <p class="" style="">
                     By using an IQ stanza, the caller can receive an acknowledgement of the reception of the command, or error information if the command could not be processed.
                     Following is an example of a control command sent using an iq stanza, where the receiver reports an error back to the caller:
@@ -409,7 +409,7 @@
        from='master@clayster.com/amr'
        to='analog.output@clayster.com'
        id='2'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control' xml:lang='en'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control' xml:lang='en'&gt;
          &lt;boolean name='Output' value='true'/&gt;
       &lt;/set&gt;
    &lt;/iq&gt;
@@ -418,7 +418,7 @@
        from='analog.output@clayster.com'
        to='master@clayster.com/amr'
        id='2'&gt;
-      &lt;setResponse xmlns='urn:xmpp:sn:control' responseCode='OtherError'&gt;
+      &lt;setResponse xmlns='urn:xmpp:iot:control' responseCode='OtherError'&gt;
           &lt;error var='Output'&gt;Invalid parameter type.&lt;/error&gt;
       &lt;/setResponse&gt;
    &lt;/iq&gt;
@@ -427,12 +427,12 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.2 <a name="sect-ID0E5LAC">Setting control parameters</a></h3>
+      <h3>3.2 <a name="sect-ID0EMNAC">Setting control parameters</a></h3>
             <p class="" style="">
                 The following sub-sections illustrate how to set parameters of different types in a device.
             </p>
             <div class="indent">
-        <h3>3.2.1 <a name="sect-ID0EGMAC">Setting a single boolean-valued control parameter</a></h3>
+        <h3>3.2.1 <a name="sect-ID0EUNAC">Setting a single boolean-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting single boolean-valued control parameters is a common use case, for instance when controlling digital outputs. The following example shows how a boolean value
                     can be set in a device.
@@ -443,7 +443,7 @@
                     
    &lt;message from='master@clayster.com/amr'
             to='digital.output@clayster.com'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control'&gt;
          &lt;boolean name='Output' value='true'/&gt;
       &lt;/set&gt;
    &lt;/message&gt;
@@ -451,7 +451,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.2 <a name="sect-ID0ESMAC">Setting a single 32-bit integer-valued control parameter</a></h3>
+        <h3>3.2.2 <a name="sect-ID0EAOAC">Setting a single 32-bit integer-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting single integer-valued control parameters is a common use case, for instance when controlling analog outputs. The following example shows how a 32-bit integer value
                     can be set in a device.
@@ -462,7 +462,7 @@
                     
    &lt;message from='master@clayster.com/amr'
             to='analog.output@clayster.com'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control'&gt;
          &lt;int name='Output' value='50000'/&gt;
       &lt;/set&gt;
    &lt;/message&gt;
@@ -470,7 +470,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.3 <a name="sect-ID0E5MAC">Setting a single 64-bit integer-valued control parameter</a></h3>
+        <h3>3.2.3 <a name="sect-ID0EMOAC">Setting a single 64-bit integer-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting single integer-valued control parameters is a common use case, for instance when controlling analog outputs. Even though 32-bit integers may cover most control needs,
                     it might in some cases be limiting. Therefore, a 64-bit control parameters can be created. The following example shows how a 64-bit integer value
@@ -482,7 +482,7 @@
                     
    &lt;message from='master@clayster.com/amr'
             to='megaprecision.analog.output@clayster.com'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control'&gt;
          &lt;long name='Output' value='500000000000000'/&gt;
       &lt;/set&gt;
    &lt;/message&gt;
@@ -490,7 +490,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.4 <a name="sect-ID0EKNAC">Setting a single string-valued control parameter</a></h3>
+        <h3>3.2.4 <a name="sect-ID0EYOAC">Setting a single string-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting single string-valued control parameters is a common use case, for instance when controlling text displays. The following example shows how a string value
                     can be set in a device.
@@ -501,7 +501,7 @@
                     
    &lt;message from='master@clayster.com/amr'
             to='text.display@clayster.com'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control'&gt;
          &lt;string name='Row1' value='Temperature: 21.4 °C'/&gt;
       &lt;/set&gt;
    &lt;/message&gt;
@@ -509,7 +509,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.5 <a name="sect-ID0EWNAC">Setting a single double-valued control parameter</a></h3>
+        <h3>3.2.5 <a name="sect-ID0EEPAC">Setting a single double-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting single double-valued control parameters can be an alternative form of controlling analog outputs for instance. The following example shows how a double value
                     can be set in a device.
@@ -520,7 +520,7 @@
                     
    &lt;message from='master@clayster.com/amr'
             to='analog.output2@clayster.com'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control'&gt;
          &lt;double name='4-20mA' value='8.192'/&gt;
       &lt;/set&gt;
    &lt;/message&gt;
@@ -528,7 +528,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.6 <a name="sect-ID0ECOAC">Setting a single date-valued control parameter</a></h3>
+        <h3>3.2.6 <a name="sect-ID0EQPAC">Setting a single date-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting date-valued control parameters might be necessary when timing is an issue. Often it forms part of a larger context.
                     The following example shows how a date value can be set in a device.
@@ -539,7 +539,7 @@
                     
    &lt;message from='master@clayster.com/amr'
             to='alarm@clayster.com'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control'&gt;
          &lt;date name='TariffStartDate' value='2013-05-01'/&gt;
       &lt;/set&gt;
    &lt;/message&gt;
@@ -547,7 +547,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.7 <a name="sect-ID0EOOAC">Setting a single time-valued control parameter</a></h3>
+        <h3>3.2.7 <a name="sect-ID0E3PAC">Setting a single time-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting time-valued control parameters might be necessary when timing is an issue. Often it forms part of a larger context.
                     The following example shows how a time value can be set in a device.
@@ -558,7 +558,7 @@
                     
    &lt;message from='master@clayster.com/amr'
             to='alarm@clayster.com'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control'&gt;
          &lt;time name='Alarm Time' value='08:00:00'/&gt;
       &lt;/set&gt;
    &lt;/message&gt;
@@ -566,7 +566,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.8 <a name="sect-ID0E1OAC">Setting a single date &amp; time-valued control parameter</a></h3>
+        <h3>3.2.8 <a name="sect-ID0EJAAE">Setting a single date &amp; time-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting date &amp; time-valued control parameters might be necessary when timing is an issue. Often it forms part of a larger context.
                     The following example shows how a date &amp; time value can be set in a device.
@@ -577,7 +577,7 @@
                     
    &lt;message from='master@clayster.com/amr'
             to='alarm@clayster.com'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control'&gt;
          &lt;dateTime name='Alarm Time' value='2013-04-02T08:00:00'/&gt;
       &lt;/set&gt;
    &lt;/message&gt;
@@ -585,7 +585,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.9 <a name="sect-ID0EGPAC">Setting a single time-valued control parameter</a></h3>
+        <h3>3.2.9 <a name="sect-ID0EVAAE">Setting a single time-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting time-valued control parameters might be necessary when timing is an issue. Often it forms part of a larger context.
                     The following example shows how a time value can be set in a device.
@@ -596,7 +596,7 @@
                     
    &lt;message from='master@clayster.com/amr'
             to='alarm@clayster.com'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control'&gt;
          &lt;time name='Alarm Time' value='08:00:00'/&gt;
       &lt;/set&gt;
    &lt;/message&gt;
@@ -604,7 +604,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.10 <a name="sect-ID0ESPAC">Setting a single duration-valued control parameter</a></h3>
+        <h3>3.2.10 <a name="sect-ID0EBBAE">Setting a single duration-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting duration-valued control parameters might be necessary when timing is an issue. Often it forms part of a larger context.
                     The following example shows how a duration value can be set in a device.
@@ -615,7 +615,7 @@
                     
    &lt;message from='master@clayster.com/amr'
             to='alarm@clayster.com'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control'&gt;
          &lt;duration name='Alarm Duration' value='PT3M30S'/&gt;
       &lt;/set&gt;
    &lt;/message&gt;
@@ -623,7 +623,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.11 <a name="sect-ID0E5PAC">Setting a single color-valued control parameter</a></h3>
+        <h3>3.2.11 <a name="sect-ID0ENBAE">Setting a single color-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting single color values in a device can occur in instances where color or lighting is important. Sometimes color is set using enumerations (string-valued
                     or integer-valued parameters), and sometimes as a color property. The following example shows how a color value can be set in a device.
@@ -634,7 +634,7 @@
                     
    &lt;message from='master@clayster.com/amr'
             to='spotlight@clayster.com'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control'&gt;
          &lt;color name='Color' value='3399FF'/&gt;
       &lt;/set&gt;
    &lt;/message&gt;
@@ -642,7 +642,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.12 <a name="sect-ID0ELAAE">Setting multiple control parameters at once</a></h3>
+        <h3>3.2.12 <a name="sect-ID0EZBAE">Setting multiple control parameters at once</a></h3>
                 <p class="" style="">
                     Often, setting a single control parameter is not sufficient for a control action. In these cases, setting multiple control parameters at once is necessary.
                     The <span class="strong">set</span> command makes this easy however, since it allows for any number of control parameters to be set at once, as the following example shows:
@@ -653,7 +653,7 @@
                     
    &lt;message from='master@clayster.com/amr'
             to='dimmer@clayster.com'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control'&gt;
          &lt;int name='FadeTimeMilliseconds' value='500'/&gt;
          &lt;int name='OutputPercent' value='10'/&gt;
       &lt;/set&gt;
@@ -674,7 +674,7 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.3 <a name="sect-ID0EKBAE">Control forms</a></h3>
+      <h3>3.3 <a name="sect-ID0EYCAE">Control forms</a></h3>
             <div class="indent">
         <h3>3.3.1 <a name="controlform">Getting a control form</a></h3>
                 <p class="" style="">
@@ -689,14 +689,14 @@
        from='master@clayster.com/amr'
        to='dimmer@clayster.com'
        id='3'&gt;
-      &lt;getForm xmlns='urn:xmpp:sn:control' xml:lang='en'/&gt;
+      &lt;getForm xmlns='urn:xmpp:iot:control' xml:lang='en'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='dimmer@clayster.com'
        to='master@clayster.com/amr'
        id='3'&gt;
-      &lt;getFormResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+      &lt;getFormResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
           &lt;x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
@@ -739,7 +739,7 @@
         </div>
                 <p class="" style="">
                     <span class="strong">IMPORTANT:</span> The device MUST mark all control parameters in the form as <span class="strong">notSame</span>, as defined in
-                     [<a href="#nt-ID0EECAE">8</a>]. If an end user would open the control form and press OK (submitting the form) without having entered a value, no value
+                     [<a href="#nt-ID0ESDAE">8</a>]. If an end user would open the control form and press OK (submitting the form) without having entered a value, no value
                     would be written, and no action taken. If only a few parameter would be edited, only those parameters would be sent to the device
                     and only the corresponding actions taken.
                 </p>
@@ -754,13 +754,14 @@
                     MUST also be ordered in a way so that when set in that order using the typed commands, the corresponding control actions can be successfully executed.
                 </p>
                 <p class="" style="">
-                    <span class="strong">Note:</span> There's a difference between node parameters, as described in XEP <a href="xep-0000-IoT-Concentrators.html">xep-0000-IoT-Concentrators</a>,
+                    <span class="strong">Note:</span> There's a difference between node parameters, as described in XEP-0326 
+					<a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a>,
                     and control parameters as described in this document. For more information about this, please see
                     <a href="#nodeparamsvscontrolparams">Difference between node parameters and node control parameters</a>.
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.2 <a name="sect-ID0EJDAE">Getting a control form, Failure</a></h3>
+        <h3>3.3.2 <a name="sect-ID0EXEAE">Getting a control form, Failure</a></h3>
                 <p class="" style="">
                     A device can reject a control form request. It does this returning an <span class="strong">error</span> iq stanza, and detailing the error in the <span class="strong">result</span>
                     attribute of the <span class="strong">getFormResponse</span> element, as is shown in the following example:
@@ -773,20 +774,20 @@
        from='master@clayster.com/amr'
        to='dimmer@clayster.com'
        id='4'&gt;
-      &lt;getForm xmlns='urn:xmpp:sn:control' xml:lang='en'/&gt;
+      &lt;getForm xmlns='urn:xmpp:iot:control' xml:lang='en'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='error'
        from='dimmer@clayster.com'
        to='master@clayster.com/amr'
        id='4'&gt;
-      &lt;getFormResponse xmlns='urn:xmpp:sn:concentrators' result='InsufficientPrivileges'/&gt;
+      &lt;getFormResponse xmlns='urn:xmpp:iot:concentrators' result='InsufficientPrivileges'/&gt;
    &lt;/iq&gt;
                 </pre>
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.3 <a name="sect-ID0E3DAE">Setting a (partial) control form</a></h3>
+        <h3>3.3.3 <a name="sect-ID0EKFAE">Setting a (partial) control form</a></h3>
                 <p class="" style="">
                     Control actions can be requested by submitting a full or partial control form back to the device. Control parameters not edited MUST not be included
                     in the form, and the device in turn MUST ONLY invoke control actions corresponding to the parameters returned in the form.
@@ -802,7 +803,7 @@
        from='master@clayster.com/amr'
        to='dimmer@clayster.com'
        id='5'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control' xml:lang='en'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control' xml:lang='en'&gt;
           &lt;x type='submit' xmlns='jabber:x:data'&gt;
               &lt;field var='xdd session' type='hidden'&gt;
                   &lt;value&gt;325ED0F3-9A9A-45A4-9634-4E0D41C5EA06&lt;/value&gt;
@@ -821,7 +822,7 @@
        from='dimmer@clayster.com'
        to='master@clayster.com/amr'
        id='5'&gt;
-      &lt;setResponse xmlns='urn:xmpp:sn:control' responseCode='OK'/&gt;
+      &lt;setResponse xmlns='urn:xmpp:iot:control' responseCode='OK'/&gt;
    &lt;/iq&gt;
                 </pre>
         </div>
@@ -831,7 +832,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.4 <a name="sect-ID0EQEAE">Setting a (partial) control form, Failure</a></h3>
+        <h3>3.3.4 <a name="sect-ID0E5FAE">Setting a (partial) control form, Failure</a></h3>
                 <p class="" style="">
                     A device can reject a control form submission. It does this returning an <span class="strong">error</span> iq stanza, and detailing the error in the <span class="strong">result</span>
                     attribute of the <span class="strong">setResponse</span> element. If there are errors in the form, details are listed using <span class="strong">error</span> elements in the response,
@@ -845,7 +846,7 @@
        from='master@clayster.com/amr'
        to='dimmer@clayster.com'
        id='6'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control' xml:lang='en'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control' xml:lang='en'&gt;
           &lt;x type='submit' xmlns='jabber:x:data'&gt;
               &lt;field var='xdd session' type='hidden'&gt;
                   &lt;value&gt;325ED0F3-9A9A-45A4-9634-4E0D41C5EA06&lt;/value&gt;
@@ -864,7 +865,7 @@
        from='dimmer@clayster.com'
        to='master@clayster.com/amr'
        id='6'&gt;
-      &lt;setResponse xmlns='urn:xmpp:sn:control' responseCode='FormError'&gt;
+      &lt;setResponse xmlns='urn:xmpp:iot:control' responseCode='FormError'&gt;
           &lt;error var='OutputPercent'&gt;Invalid parameter value.&lt;/error&gt;
       &lt;/setResponse&gt;
    &lt;/iq&gt;
@@ -873,13 +874,13 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.4 <a name="sect-ID0EGFAE">Controlling devices behind a concentrator</a></h3>
+      <h3>3.4 <a name="sect-ID0EUGAE">Controlling devices behind a concentrator</a></h3>
             <p class="" style="">
                 Controlling devices behind a concentrator can be done by specifying what device(s) to control using <span class="strong">node</span> elements within the
                 command elements sent to the concentrator. The following sub-sections show examples of how this is done.
             </p>
             <div class="indent">
-        <h3>3.4.1 <a name="sect-ID0ERFAE">Sending a control command to a node behind a concentrator</a></h3>
+        <h3>3.4.1 <a name="sect-ID0E6GAE">Sending a control command to a node behind a concentrator</a></h3>
                 <p class="" style="">
                     To send a control message to a specific node behind a concentrator, the <span class="strong">node</span> element can be used to identify the node,
                     as is shown in the following example:
@@ -890,7 +891,7 @@
                     
    &lt;message from='master@clayster.com/amr'
             to='concentrator@clayster.com'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control'&gt;
          &lt;node nodeId='DigitalOutput1'/&gt;
          &lt;boolean name='Output' value='false'/&gt;
       &lt;/set&gt;
@@ -899,7 +900,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.4.2 <a name="sect-ID0EAGAE">Sending a control command to multiple nodes</a></h3>
+        <h3>3.4.2 <a name="sect-ID0EOHAE">Sending a control command to multiple nodes</a></h3>
                 <p class="" style="">
                     The client can send the same control command to multiple nodes behind a concentrator by simply adding more <span class="strong">node</span> elements in the request,
                     as is shown in the following example:
@@ -910,7 +911,7 @@
                     
    &lt;message from='master@clayster.com/amr'
             to='concentrator@clayster.com'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control'&gt;
          &lt;node nodeId='DigitalOutput1'/&gt;
          &lt;node nodeId='DigitalOutput2'/&gt;
          &lt;node nodeId='DigitalOutput3'/&gt;
@@ -922,7 +923,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.4.3 <a name="sect-ID0EPGAE">Sending a control command to multiple nodes, Failure</a></h3>
+        <h3>3.4.3 <a name="sect-ID0E4HAE">Sending a control command to multiple nodes, Failure</a></h3>
                 <p class="" style="">
                     By using an IQ stanza, the caller can receive an acknowledgement of the reception of the command, or error information if the command could not be processed.
                     When sending a control command to multiple nodes at a time the device must validate all parameters against all nodes before taking any control action. If
@@ -937,7 +938,7 @@
        from='master@clayster.com/amr'
        to='concentrator@clayster.com'
        id='7'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control' xml:lang='en'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control' xml:lang='en'&gt;
          &lt;node nodeId='DigitalOutput1'/&gt;
          &lt;node nodeId='DigitalOutput2'/&gt;
          &lt;node nodeId='DigitalOutput3'/&gt;
@@ -954,7 +955,7 @@
        from='concentrator@clayster.com'
        to='master@clayster.com/amr'
        id='7'&gt;
-      &lt;setResponse xmlns='urn:xmpp:sn:control' responseCode='OtherError'&gt;
+      &lt;setResponse xmlns='urn:xmpp:iot:control' responseCode='OtherError'&gt;
           &lt;error var='Output'&gt;Invalid parameter type.&lt;/error&gt;
       &lt;/setResponse&gt;
    &lt;/iq&gt;
@@ -962,7 +963,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.4.4 <a name="sect-ID0E2GAE">Getting a control form from multiple nodes</a></h3>
+        <h3>3.4.4 <a name="sect-ID0EJIAE">Getting a control form from multiple nodes</a></h3>
                 <p class="" style="">
                     A client can get a control form containing available control parameters common between a set of nodes controlled by the concentrator. This is done 
                     adding a sequence of <span class="strong">node</span> elements to a <span class="strong">getForm</span> command sent to the concentrator, as is shown in the following example:
@@ -975,7 +976,7 @@
        from='master@clayster.com/amr'
        to='concentrator@clayster.com'
        id='8'&gt;
-      &lt;getForm xmlns='urn:xmpp:sn:control' xml:lang='en'&gt;
+      &lt;getForm xmlns='urn:xmpp:iot:control' xml:lang='en'&gt;
           &lt;node nodeId='DigitalOutput1'/&gt;
           &lt;node nodeId='DigitalOutput2'/&gt;
           &lt;node nodeId='DigitalOutput3'/&gt;
@@ -987,7 +988,7 @@
        from='concentrator@clayster.com'
        to='master@clayster.com/amr'
        id='8'&gt;
-      &lt;getFormResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+      &lt;getFormResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
           &lt;x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
@@ -1016,7 +1017,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.4.5 <a name="sect-ID0ETHAE">Getting a control form from multiple nodes, Failure</a></h3>
+        <h3>3.4.5 <a name="sect-ID0EBJAE">Getting a control form from multiple nodes, Failure</a></h3>
                 <p class="" style="">
                     A device can reject a control form request. It does this returning an <span class="strong">error</span> iq stanza, and detailing the error in the <span class="strong">result</span>
                     attribute of the <span class="strong">getFormResponse</span> element. The following example shows the device rejecting a control form request, because it does not support
@@ -1030,7 +1031,7 @@
        from='master@clayster.com/amr'
        to='concentrator@clayster.com'
        id='9'&gt;
-      &lt;getForm xmlns='urn:xmpp:sn:control' xml:lang='en'&gt;
+      &lt;getForm xmlns='urn:xmpp:iot:control' xml:lang='en'&gt;
           &lt;node nodeId='DigitalOutput1'/&gt;
           &lt;node nodeId='DigitalOutput2'/&gt;
           &lt;node nodeId='DigitalOutput3'/&gt;
@@ -1042,13 +1043,13 @@
        from='concentrator@clayster.com'
        to='master@clayster.com/amr'
        id='9'&gt;
-      &lt;getFormResponse xmlns='urn:xmpp:sn:concentrators' result='NotImplemented'/&gt;
+      &lt;getFormResponse xmlns='urn:xmpp:iot:concentrators' result='NotImplemented'/&gt;
    &lt;/iq&gt;
                 </pre>
         </div>
             </div>
             <div class="indent">
-        <h3>3.4.6 <a name="sect-ID0EGIAE">Setting a (partial) control form to multiple nodes</a></h3>
+        <h3>3.4.6 <a name="sect-ID0EUJAE">Setting a (partial) control form to multiple nodes</a></h3>
                 <p class="" style="">
                     You set a control form to multiple nodes controlled by a concentrator by adding <span class="strong">node</span> elements to the set
                     command sent to the concentrator, as is shown in the following example:
@@ -1061,7 +1062,7 @@
        from='master@clayster.com/amr'
        to='concentrator@clayster.com'
        id='10'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control' xml:lang='en'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control' xml:lang='en'&gt;
           &lt;node nodeId='DigitalOutput1'/&gt;
           &lt;node nodeId='DigitalOutput2'/&gt;
           &lt;node nodeId='DigitalOutput3'/&gt;
@@ -1081,13 +1082,13 @@
        from='concentrator@clayster.com'
        to='master@clayster.com/amr'
        id='10'&gt;
-      &lt;setResponse xmlns='urn:xmpp:sn:control' responseCode='OK'/&gt;
+      &lt;setResponse xmlns='urn:xmpp:iot:control' responseCode='OK'/&gt;
    &lt;/iq&gt;
                 </pre>
         </div>
             </div>
             <div class="indent">
-        <h3>3.4.7 <a name="sect-ID0EXIAE">Setting a (partial) control form to multiple nodes, Failure</a></h3>
+        <h3>3.4.7 <a name="sect-ID0EFKAE">Setting a (partial) control form to multiple nodes, Failure</a></h3>
                 <p class="" style="">
                     A device can reject a control form submission. It does this returning an <span class="strong">error</span> iq stanza, and detailing the error in the <span class="strong">result</span>
                     attribute of the <span class="strong">setResponse</span> element. The following example shows the device rejecting a control form submission because one of the control parameters,
@@ -1101,7 +1102,7 @@
        from='master@clayster.com/amr'
        to='concentrator@clayster.com'
        id='11'&gt;
-      &lt;set xmlns='urn:xmpp:sn:control' xml:lang='en'&gt;
+      &lt;set xmlns='urn:xmpp:iot:control' xml:lang='en'&gt;
           &lt;node nodeId='DigitalOutput1'/&gt;
           &lt;node nodeId='DigitalOutput2'/&gt;
           &lt;node nodeId='DigitalOutput3'/&gt;
@@ -1125,7 +1126,7 @@
        from='concentrator@clayster.com'
        to='master@clayster.com/amr'
        id='11'&gt;
-      &lt;setResponse xmlns='urn:xmpp:sn:control' responseCode='FormError'&gt;
+      &lt;setResponse xmlns='urn:xmpp:iot:control' responseCode='FormError'&gt;
           &lt;error var='Output'&gt;Invalid type&lt;/error&gt;
       &lt;/setResponse&gt;
    &lt;/iq&gt;
@@ -1135,7 +1136,7 @@
         </div>
     <h2>4.
        <a name="support">Determining Support</a></h2>
-		<p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:sn:control" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0E1JAE">9</a>] information requests.</p>
+		<p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:control" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EILAE">9</a>] information requests.</p>
 		<p class="caption"><a name="example-27"></a>Example 27. Service discovery information request</p>
     <div class="indent">
       <pre class="prettyprint">
@@ -1158,7 +1159,7 @@
     id='disco1'&gt;
   &lt;query xmlns='http://jabber.org/protocol/disco#info'&gt;
     ...
-    &lt;feature var='urn:xmpp:sn:control'/&gt;
+    &lt;feature var='urn:xmpp:iot:control'/&gt;
     ...
   &lt;/query&gt;
 &lt;/iq&gt;
@@ -1166,16 +1167,15 @@
     </div>
 		<p class="" style="">
 			In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
-			in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0ERKAE">10</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
+			in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0E6LAE">10</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
 		</p>
 	<h2>5.
        <a name="impl">Implementation Notes</a></h2>
         <div class="indent">
-      <h3>5.1 <a name="sect-ID0E4KAE">Reading current control states</a></h3>
+      <h3>5.1 <a name="sect-ID0ELMAE">Reading current control states</a></h3>
             <p class="" style="">
                 If a client wants to know the current status of control parameters, it must perform a readout of <span class="strong">Momentary</span> and <span class="strong">Status</span> values 
-                from the device, according to
-                 [<a href="#nt-ID0EJLAE">11</a>], and from the returned set of values take the current control parameter value according to the following rules, ordered by priority:
+                from the device, according to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0323.html">Internet of Things - Sensor Data</a></span>  [<a href="#nt-ID0E4MAE">11</a>], and from the returned set of values take the current control parameter value according to the following rules, ordered by priority:
             </p>
             <ul class="" style="">
                 <li class="" style="">
@@ -1421,11 +1421,11 @@
         <div class="indent">
       <h3>5.2 <a name="nodeparamsvscontrolparams">Difference between node parameters and node control parameters</a></h3>
             <p class="" style="">
-                A node defined in a concentrator, as defined by <a href="xep-0000-IoT-Concentrators.html">xep-0000-IoT-Concentrators.html</a>, supporting control has
+                A node defined in a concentrator, as defined by <a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a>, supporting control has
                 two sets of parameters that are different: First a set of node parameters and then a set of control parameters.
             </p>
             <p class="" style="">
-                Node parameters are defined by the node type in the concentrator, as described in <a href="xep-0000-IoT-Concentrators.html">xep-0000-IoT-Concentrators.html</a>,
+                Node parameters are defined by the node type in the concentrator, as described in <a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a>,
                 and they are typically used by the concentrator to define the node and how to communicate or interact with the underlying device. The important part here is to know
                 that the node parameters are maintained by the concentrator, not the underlying device.
             </p>
@@ -1501,14 +1501,14 @@
        from='master@clayster.com/amr'
        to='spotlight@clayster.com'
        id='12'&gt;
-      &lt;getForm xmlns='urn:xmpp:sn:control' xml:lang='en'/&gt;
+      &lt;getForm xmlns='urn:xmpp:iot:control' xml:lang='en'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='spotlight@clayster.com'
        to='master@clayster.com/amr'
        id='12'&gt;
-      &lt;getFormResponse xmlns='urn:xmpp:sn:concentrators' result='OK'&gt;
+      &lt;getFormResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
           &lt;x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
@@ -1537,7 +1537,7 @@
                       &lt;xdv:range min='-180' max='180'/&gt;
                   &lt;/xdv:validate&gt;
                   &lt;xdd:notSame/&gt;
-                  &lt;parameterGroup xmlns='urn:xmpp:sn:concentrators' name='direction'/&gt;
+                  &lt;parameterGroup xmlns='urn:xmpp:iot:concentrators' name='direction'/&gt;
               &lt;/field&gt;
               &lt;field var='ElevationAngle' type='text-single' label='Elevation angle:'&gt;
                   &lt;desc&gt;Elevation angle of the spotlight.&lt;/desc&gt;
@@ -1546,7 +1546,7 @@
                       &lt;xdv:range min='-90' max='90'/&gt;
                   &lt;/xdv:validate&gt;
                   &lt;xdd:notSame/&gt;
-                  &lt;parameterGroup xmlns='urn:xmpp:sn:concentrators' name='direction'/&gt;
+                  &lt;parameterGroup xmlns='urn:xmpp:iot:concentrators' name='direction'/&gt;
               &lt;/field&gt;
           &lt;/x&gt;
       &lt;/getFormResponse&gt;
@@ -1563,9 +1563,9 @@
             </p>
         </div>
         <div class="indent">
-      <h3>5.4 <a name="sect-ID0EWCAG">Node commands vs. control parameters</a></h3>
+      <h3>5.4 <a name="sect-ID0EKEAG">Node commands vs. control parameters</a></h3>
             <p class="" style="">
-                Nodes behind a concentrator, as defined in <a href="xep-0000-IoT-Concentrators.html">xep-0000-IoT-Concentrators.html</a>, have an additional means of
+                Nodes behind a concentrator, as defined in <a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a>, have an additional means of
                 publishing control interfaces: Node Commands.
             </p>
             <p class="" style="">
@@ -1611,10 +1611,10 @@
             </p>
         </div>
         <div class="indent">
-      <h3>5.5 <a name="sect-ID0EGFAG">Tokens</a></h3>
+      <h3>5.5 <a name="sect-ID0E1GAG">Tokens</a></h3>
             <p class="" style="">
-                If control interaction is performed in a context of delegated trust, as defined in the Sensor Network Provisioning XEP 
-                 [<a href="#nt-ID0EOFAG">12</a>], tokens should always be included in all calls. This to allow devices to check privileges with provisioning servers.
+                If control interaction is performed in a context of delegated trust, as defined in the Sensor Network Provisioning XEP-0324 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0EIHAG">12</a>], 
+				tokens should always be included in all calls. This to allow devices to check privileges with provisioning servers.
             </p>
             <p class="" style="">
                 The <span class="strong">set</span> and <span class="strong">getForm</span> commands support the following token attributes:
@@ -1631,17 +1631,18 @@
                 </li>
             </ul>
             <p class="" style="">
-                For more information about provisioning, see <a href="sensor-network-provisioning.html">sensor-network-provisioning.html</a>.
+                For more information about provisioning, see <a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a>.
             </p>
         </div>
         <div class="indent">
-      <h3>5.6 <a name="sect-ID0EBHAG">Controlling devices in large subsystems</a></h3>
+      <h3>5.6 <a name="sect-ID0E2IAG">Controlling devices in large subsystems</a></h3>
             <p class="" style="">
-                Most examples in this document have been simplified examples where a few devices containing a few control parameters have been used. However, in many cases large subsystems with
-                very many actuators containing many different control actions have to be controlled, as is documented in <a href="xep-0000-IoT-Concentrators.html">xep-0000-IoT-Concentrators.html</a>. 
+				Most examples in this document have been simplified examples where a few devices containing a few control parameters have been used. However, in many cases large subsystems with
+				very many actuators containing many different control actions have to be controlled, as is documented in
+				<a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a>. 
                 In such cases, a node may have to be specified using two or perhaps even three ID's: a <span class="strong">sourceId</span> identifying the data source controlling the device, a possible 
                 <span class="strong">cacheType</span> narrowing down the search to a specific kind of node, and the common <span class="strong">nodeId</span>. For more information about this, see 
-                <a href="xep-0000-IoT-Concentrators.html">xep-0000-IoT-Concentrators.html</a>.
+                <a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a>.
             </p>
             <p class="" style="">
                 <span class="strong">Note:</span> For cases where the <span class="strong">nodeId</span> is sufficient to uniquely identify the node, it is sufficient to provide this attribute in the request.
@@ -1651,7 +1652,7 @@
     <h2>6.
        <a name="i18n">Internationalization Considerations</a></h2>
         <div class="indent">
-      <h3>6.1 <a name="sect-ID0EHIAG">Time Zones</a></h3>
+      <h3>6.1 <a name="sect-ID0EBKAG">Time Zones</a></h3>
             <p class="" style="">
                 All timestamps and dateTime values use the XML data type xs:dateTime to specify values. These values include a date, an optional time and an optional time zone.
             </p>
@@ -1664,7 +1665,7 @@
             </p>
         </div>
         <div class="indent">
-      <h3>6.2 <a name="sect-ID0E2IAG">xml:lang</a></h3>
+      <h3>6.2 <a name="sect-ID0EVKAG">xml:lang</a></h3>
             <p class="" style="">
                 Control commands sent using IQ stanzas instead of messages, should consider using the <span class="strong">xml:lang</span> attribute to specify the desired language
                 used (if possible) when returning information back to the caller, like error messages, localized control forms, etc.
@@ -1677,7 +1678,7 @@
             The following sections provide some general items that should be considered.
         </p>
         <div class="indent">
-      <h3>7.1 <a name="sect-ID0EQJAG">Encryption &amp; Authentication</a></h3>
+      <h3>7.1 <a name="sect-ID0EKLAG">Encryption &amp; Authentication</a></h3>
             <p class="" style="">
                 Consider to always use an encrypted connection with any XMPP Server used in the network. Also, make sure the server is properly authenticated and any server
                 certificate properly validated.
@@ -1688,7 +1689,7 @@
             </p>
         </div>
         <div class="indent">
-      <h3>7.2 <a name="sect-ID0E4JAG">Provisioning</a></h3>
+      <h3>7.2 <a name="sect-ID0EXLAG">Provisioning</a></h3>
             <p class="" style="">
                 Consider using provisioning servers to allow for detailed control of who can do what in a sensor network. Implementing proper provisioning support decreases
                 the risk for adverse effects, not only from intentional hacking, but also from unintentional errors.
@@ -1697,12 +1698,12 @@
                 If using delegated trust, make sure the provisioning servers are properly authenticated and validated before trusting them.
             </p>
             <p class="" style="">
-                More information about provisioning can be found in <a href="sensor-network-provisioning.html">sensor-network-provisioning.html</a>.
+                More information about provisioning can be found in <a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a>.
             </p>
         </div>
     <h2>8.
        <a name="iana">IANA Considerations</a></h2>
-        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EBLAG">13</a>].</p>
+        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0E2MAG">13</a>].</p>
     <h2>9.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
         <p class="" style="">REQUIRED.</p>
@@ -1717,15 +1718,15 @@
 &lt;?xml version='1.0' encoding='UTF-8'?&gt;
 &lt;xs:schema
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
-    targetNamespace='urn:xmpp:sn:control'
-    xmlns='urn:xmpp:sn:control'
-    xmlns:sn='urn:xmpp:sn'
+    targetNamespace='urn:xmpp:iot:control'
+    xmlns='urn:xmpp:iot:control'
+    xmlns:sn='urn:xmpp:iot:sensordata'
     xmlns:xd="jabber:x:data"
     xmlns:xdv="http://jabber.org/protocol/xdata-validate"
     xmlns:xdl="http://jabber.org/protocol/xdata-layout"
     elementFormDefault='qualified'&gt;
  
-    &lt;xs:import namespace='urn:xmpp:sn'/&gt;
+    &lt;xs:import namespace='urn:xmpp:iot:sensordata'/&gt;
     &lt;xs:import namespace='jabber:x:data'/&gt;
     &lt;xs:import namespace='http://jabber.org/protocol/xdata-validate'/&gt;
     &lt;xs:import namespace='http://jabber.org/protocol/xdata-layout'/&gt;
@@ -1959,9 +1960,9 @@
             <a href="http://xmpp.org/extensions/xep-0001.html#states-ProtoXEP">ProtoXEP</a><br>
             Type:
             <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
-            Version: 0.0.1<br>
-            Last Updated: 2013-03-27<br>
-                Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XEP-0001, XEP-0004, XEP-0030, XEP-0122, XEP-0137, XEP-0141, sensor-data, sensor-network-provisioning, xep-0000-DynamicForms, xep-0000-ColorParameter<br>
+            Version: 0.1.1<br>
+            Last Updated: 2013-05-07<br>
+                Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XEP-0001, XEP-0004, XEP-0030, XEP-0122, XEP-0137, XEP-0141, XEP-0323, XEP-0324, xep-0000-DynamicForms, xep-0000-ColorParameter<br>
                 Supersedes: None<br>
                 Superseded By: None<br>
             Short Name: NOT_YET_ASSIGNED<br>
@@ -1994,33 +1995,38 @@
     <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
     <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
     <div class="indent">
-      <p><a name="nt-ID0EPE">1</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0EGF">2</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0ESF">3</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
-      <p><a name="nt-ID0E5F">4</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
-      <p><a name="nt-ID0EKG">5</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
-      <p><a name="nt-ID0EXJAC">6</a>. 
+      <p><a name="nt-ID0ETF">1</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0EKG">2</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0EWG">3</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
+      <p><a name="nt-ID0ECH">4</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
+      <p><a name="nt-ID0EOH">5</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+      <p><a name="nt-ID0EDHAC">6</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
+      <p><a name="nt-ID0EILAC">7</a>. 
 				XEP-xxxx: Internet of Things - Interoperability &lt;<a href="xep-0000-IoT-Interoperability.html">xep-0000-IoT-Interoperability.html</a>&gt;
             </p>
-      <p><a name="nt-ID0ECKAC">7</a>. 
-				XEP-xxxx: Internet of Things - Concentrators &lt;<a href="xep-0000-IoT-Concentrators.html">xep-0000-IoT-Concentrators.html</a>&gt;
-            </p>
-      <p><a name="nt-ID0EECAE">8</a>. 
+      <p><a name="nt-ID0ESDAE">8</a>. 
                         XEP-xxxx: Dynamic Data Forms &lt;<a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms.html</a>&gt;
                     </p>
-      <p><a name="nt-ID0E1JAE">9</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
-      <p><a name="nt-ID0ERKAE">10</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
-      <p><a name="nt-ID0EJLAE">11</a>. 
-                    XEP-xxxx: Sensor Data &lt;<a href="sensor-data.html">sensor-data.html</a>&gt;
-                </p>
-      <p><a name="nt-ID0EOFAG">12</a>. 
-					XEP-xxxx: Internet of Things - Provisioning &lt;<a href="sensor-network-provisioning.html">sensor-network-provisioning.html</a>&gt;
-                </p>
-      <p><a name="nt-ID0EBLAG">13</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+      <p><a name="nt-ID0EILAE">9</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0E6LAE">10</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0E4MAE">11</a>. XEP-0323: Internet of Things - Sensor Data &lt;<a href="http://xmpp.org/extensions/xep-0323.html">http://xmpp.org/extensions/xep-0323.html</a>&gt;.</p>
+      <p><a name="nt-ID0EIHAG">12</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
+      <p><a name="nt-ID0E2MAG">13</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
     <div class="indent">
+      <h4>Version 0.1.1 (2013-05-07)</h4>
+      <div class="indent">
+				<p class="" style="">Fixed links to documents with new numbers.</p>
+				<p class="" style="">Changed namespace urn:xmpp:sn to urn:xmpp:iot</p>
+			 (pw)
+    </div>
+      <h4>Version 0.1 (2013-05-06)</h4>
+      <div class="indent">
+				<p class="" style="">Initial published version approved by the XMPP Council.</p>
+			 (psa)
+    </div>
       <h4>Version 0.0.1 (2013-03-27)</h4>
       <div class="indent">
                 <p class="" style="">First draft.</p>

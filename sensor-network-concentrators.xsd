@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <xs:schema
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
-    targetNamespace='urn:xmpp:sn:concentrators'
-    xmlns='urn:xmpp:sn:concentrators'
-    xmlns:sn='urn:xmpp:sn'
+    targetNamespace='urn:xmpp:iot:concentrators'
+    xmlns='urn:xmpp:iot:concentrators'
+    xmlns:sn='urn:xmpp:iot:sensordata'
     xmlns:xd="jabber:x:data"
     xmlns:xdv="http://jabber.org/protocol/xdata-validate"
     xmlns:xdl="http://jabber.org/protocol/xdata-layout"
     elementFormDefault='qualified'>
  
-    <xs:import namespace='urn:xmpp:sn'/>
+    <xs:import namespace='urn:xmpp:iot:sensordata'/>
     <xs:import namespace='jabber:x:data'/>
     <xs:import namespace='http://jabber.org/protocol/xdata-validate'/>
     <xs:import namespace='http://jabber.org/protocol/xdata-layout'/>

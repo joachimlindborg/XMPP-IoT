@@ -5,6 +5,7 @@
 ]>
 <!-- TODO: byte codes for identification + xml file with interface data. + version numbers -->
 <!-- TODO: Another XEP: Billing interfaces. Tariffs. Prepayment. -->
+<!-- TODO: Standardized Short field names (2 characters) for memory constrained devices. -->
 <?xml-stylesheet type='text/xsl' href='xep.xsl'?>
 <xep>
     <header>
@@ -27,11 +28,11 @@
         <dependencies>
             <spec>XEP-0001</spec>
             <spec>XEP-0030</spec>
-            <spec>sensor-data</spec>
-            <spec>sensor-network-provisioning</spec>
-            <spec>xep-0000-Concentrators</spec>
-            <spec>xep-0000-Control</spec>
-        </dependencies>
+			<spec>XEP-0323</spec>
+            <spec>XEP-0324</spec>
+			<spec>XEP-0325</spec>
+			<spec>XEP-0326</spec>
+		</dependencies>
         <supersedes/>
         <supersededby/>
         <shortname>NOT_YET_ASSIGNED</shortname>
@@ -48,7 +49,7 @@
             <initials>pw</initials>
             <remark>
                 <p>First draft.</p>
-            </remark>
+			</remark>
         </revision>
     </header>
     <section1 topic='Introduction' anchor='intro'>
@@ -74,23 +75,8 @@
                 <td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
             </tr>
             <tr>
-                <td>exi</td>
-                <td>
-                    Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
-                    in all sensor network implementations where memory and packet size is an issue.
-                </td>
-            </tr>
-            <tr>
                 <td>xep-0000-IoT-BatteryPoweredSensors</td>
                 <td>Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
-            </tr>
-            <tr>
-                <td>xep-0000-IoT-Concentrators</td>
-                <td>Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
-            </tr>
-            <tr>
-                <td>xep-0000-IoT-Control</td>
-                <td>Defines how to control actuators and other devices in Internet of Things.</td>
             </tr>
             <tr>
                 <td>xep-0000-IoT-Discovery</td>
@@ -109,21 +95,36 @@
                 <td>Defines how sensor data can be multicast in efficient ways.</td>
             </tr>
             <tr>
-                <td>sensor-network-provisioning</td>
-                <td>Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
-            </tr>
-            <tr>
                 <td>xep-0000-IoT-PubSub</td>
                 <td>Defines how efficient publication of sensor data can be made in Internet of Things.</td>
             </tr>
-            <tr>
-                <td>sensor-data</td>
+			<tr>
+				<td>XEP-0322</td>
+				<td>
+					Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
+					in all sensor network implementations where memory and packet size is an issue.
+				</td>
+			</tr>
+			<tr>
+                <td>XEP-0323</td>
                 <td>
                     Provides the underlying architecture, basic operations and data structures for sensor data communication over XMPP networks.
                     It includes a hardware abstraction model, removing any technical detail implemented in underlying technologies. This XEP is used by all other sensor network XEPs.
                 </td>
             </tr>
-        </table>
+			<tr>
+				<td>XEP-0324</td>
+				<td>Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
+			</tr>
+			<tr>
+				<td>XEP-0325</td>
+				<td>Defines how to control actuators and other devices in Internet of Things.</td>
+			</tr>
+			<tr>
+				<td>XEP-0326</td>
+				<td>Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
+			</tr>
+		</table>
     </section1>
     <section1 topic='Glossary' anchor='glossary'>
         <p>The following table lists common terms and corresponding descriptions.</p>
@@ -193,7 +194,7 @@
             <di>
                 <dt>Parameter</dt>
                 <dd>
-                    Readable and/or writable property on a node/device. The XEP xep-0000-IoT-Concentrators deals with reading and writing parameters
+                    Readable and/or writable property on a node/device. The XEP-0326 &xep0326; deals with reading and writing parameters
                     on nodes/devices. Fields are not parameters, and parameters are not fields.
                 </dd>
             </di>
@@ -297,14 +298,14 @@
        from='master@clayster.com/amr'
        to='weatherstation@clayster.com'
        id='1'>
-      <getInterfaces xmlns='urn:xmpp:sn:interoperability'/>
+      <getInterfaces xmlns='urn:xmpp:iot:interoperability'/>
    </iq>
    
    <iq type='result'
        from='weatherstation@clayster.com'
        to='master@clayster.com/amr'
        id='1'>
-      <getInterfacesResponse xmlns='urn:xmpp:sn:control'>
+      <getInterfacesResponse xmlns='urn:xmpp:iot:interoperability'>
           <interface name='XMPP.IoT.Sensor.DewPoint'/>
           <interface name='XMPP.IoT.Sensor.RainRate'/>
           <interface name='XMPP.IoT.Sensor.WindDirection'/>
@@ -4580,7 +4581,8 @@
 						</tr>
 					</table>
 					<p>
-						(1) The value must be reported using the correct historical period, as according to XEP <link url='sensor-data.html#fieldtypes'>sensor-data</link>.
+						(1) The value must be reported using the correct historical period, as according to XEP-0323
+						<link url='http://xmpp.org/extensions/xep-0323#fieldtypes.html'>Internet of Things - Sensor Data</link>.
 					</p>
 					<p>
 						(2) The value must be reported using the same field type as the field of the original interface.
@@ -6343,7 +6345,7 @@
 		</section2>
 	</section1>
     <section1 topic='Determining Support' anchor='support'>
-        <p>If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:sn:control" in response to &xep0030; information requests.</p>
+        <p>If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:interoperability" in response to &xep0030; information requests.</p>
         <example caption="Service discovery information request">
             <![CDATA[
 <iq type='get'
@@ -6361,7 +6363,7 @@
     id='disco1'>
   <query xmlns='http://jabber.org/protocol/disco#info'>
     ...
-    <feature var='urn:xmpp:sn:interoperability'/>
+    <feature var='urn:xmpp:iot:interoperability'/>
     ...
   </query>
 </iq>]]>
@@ -6384,7 +6386,7 @@
             </li>
             <li>
                 More advanced access rights, privileges, automatic friendship recognition, etc., may be managed by a third party. How to implement more advanced provisioning and detailed
-                access rights to sensor information is detailed in the XEP <link url='sensor-network-provisioning.html'>sensor-network-provisioning</link>. In short, a device, service or user can get a
+                access rights to sensor information is detailed in the XEP-0324 &xep0324;. In short, a device, service or user can get a
                 <strong>deviceToken</strong>, <strong>serviceToken</strong> and <strong>userToken</strong> respectivelly from a provisioning server. The service or device then uses these tokens
                 in all readout requests and the device being read out can in turn use these tokens to validate access rights with the provisioning server.
             </li>
@@ -6403,8 +6405,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <xs:schema
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
-    targetNamespace='urn:xmpp:sn:interoperability'
-    xmlns='urn:xmpp:sn:interoperability'
+    targetNamespace='urn:xmpp:iot:interoperability'
+    xmlns='urn:xmpp:iot:interoperability'
     elementFormDefault='qualified'>
  
     <xs:element name='getInterfaces'>

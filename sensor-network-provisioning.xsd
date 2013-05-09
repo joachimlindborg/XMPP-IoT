@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <xs:schema
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
-    targetNamespace='urn:xmpp:sn:provisioning'
-    xmlns='urn:xmpp:sn:provisioning'
-    xmlns:sn='urn:xmpp:sn'
+    targetNamespace='urn:xmpp:iot:provisioning'
+    xmlns='urn:xmpp:iot:provisioning'
+    xmlns:sn='urn:xmpp:iot:sensordata'
     elementFormDefault='qualified'>
  
-	<xs:import namespace='urn:xmpp:sn'/>
+	<xs:import namespace='urn:xmpp:iot:sensordata'/>
  
 	<xs:element name='getToken' type='GetToken'/>
 	<xs:element name='getTokenResponse' type='GetTokenResponse'/>

@@ -34,8 +34,8 @@
             <spec>XEP-0122</spec>
             <spec>XEP-0137</spec>
             <spec>XEP-0141</spec>
-            <spec>sensor-data</spec>
-            <spec>sensor-network-provisioning</spec>
+            <spec>XEP-0323</spec>
+            <spec>XEP-0324</spec>
             <spec>xep-0000-DynamicForms</spec>
             <spec>xep-0000-ColorParameter</spec>
         </dependencies>
@@ -50,23 +50,26 @@
             <uri>http://se.linkedin.com/pub/peter-waher/1a/71b/a29/</uri>
         </author>
 		<revision>
-			<version>0.0.3</version>
+			<version>0.1.1</version>
 			<date>2013-05-07</date>
 			<initials>pw</initials>
 			<remark>
 				<p>Added section about how to determine support.</p>
+                <p>Corrected language and examples.</p>
+                <p>Node Query command type added.</p>
+				<p>Fixed links to documents with new numbers.</p>
+				<p>Changed namespace urn:xmpp:sn to urn:xmpp:iot</p>
 			</remark>
 		</revision>
 		<revision>
-            <version>0.0.2</version>
-            <date>2013-04-22</date>
-            <initials>pw</initials>
-            <remark>
-                <p>Corrected language and examples.</p>
-                <p>Node Query command type added.</p>
-            </remark>
-        </revision>
-        <revision>
+			<version>0.1</version>
+			<date>2013-05-06</date>
+			<initials>psa</initials>
+			<remark>
+				<p>Initial published version approved by the XMPP Council.</p>
+			</remark>
+		</revision>
+		<revision>
             <version>0.0.1</version>
             <date>2013-03-20</date>
             <initials>pw</initials>
@@ -206,23 +209,8 @@
                 <td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
             </tr>
             <tr>
-                <td>exi</td>
-                <td>
-                    Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
-                    in all sensor network implementations where memory and packet size is an issue.
-                </td>
-            </tr>
-            <tr>
                 <td>xep-0000-IoT-BatteryPoweredSensors</td>
                 <td>Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
-            </tr>
-            <tr>
-                <td>xep-0000-IoT-Concentrators</td>
-                <td>This specification. Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
-            </tr>
-            <tr>
-                <td>xep-0000-IoT-Control</td>
-                <td>Defines how to control actuators and other devices in sensor networks.</td>
             </tr>
             <tr>
                 <td>xep-0000-IoT-Discovery</td>
@@ -241,21 +229,36 @@
                 <td>Defines how sensor data can be multicast in efficient ways.</td>
             </tr>
             <tr>
-                <td>sensor-network-provisioning</td>
-                <td>Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
-            </tr>
-            <tr>
                 <td>xep-0000-IoT-PubSub</td>
                 <td>Defines how efficient publication of sensor data can be made in sensor networks.</td>
             </tr>
-            <tr>
-                <td>sensor-data</td>
+			<tr>
+				<td>XEP-0322</td>
+				<td>
+					Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
+					in all sensor network implementations where memory and packet size is an issue.
+				</td>
+			</tr>
+			<tr>
+                <td>XEP-0323</td>
                 <td>
                     Provides the underlying architecture, basic operations and data structures for sensor data communication over XMPP networks.
                     It includes a hardware abstraction model, removing any technical detail implemented in underlying technologies. This XEP is used by all other sensor network XEPs.
                 </td>
             </tr>
-        </table>
+			<tr>
+				<td>XEP-0324</td>
+				<td>Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
+			</tr>
+			<tr>
+				<td>XEP-0325</td>
+				<td>Defines how to control actuators and other devices in Internet of Things.</td>
+			</tr>
+			<tr>
+				<td>XEP-0326</td>
+				<td>This specification. Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
+			</tr>
+		</table>
     </section1>
     <section1 topic='Glossary' anchor='glossary'>
         <p>The following table lists common terms and corresponding descriptions.</p>
@@ -337,7 +340,7 @@
             <di>
                 <dt>Parameter</dt>
                 <dd>
-                    Readable and/or writable property on a node/device. The XEP xep-0000-IoT-Concentrators deals with reading and writing parameters
+                    Readable and/or writable property on a node/device. The XEP-0326 &xep0326; deals with reading and writing parameters
                     on nodes/devices. Fields are not parameters, and parameters are not fields.
                 </dd>
             </di>
@@ -425,14 +428,14 @@
        from='client@clayster.com/client'
        to='subsystem@clayster.com'
        id='1'>
-      <getCapabilities xmlns='urn:xmpp:sn:concentrators'/>
+      <getCapabilities xmlns='urn:xmpp:iot:concentrators'/>
    </iq>
    
    <iq type='result'
        from='subsystem@clayster.com'
        to='client@clayster.com/client'
        id='1'>
-      <getCapabilitiesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getCapabilitiesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <value>getCapabilities</value>
           <value>getAllDataSources</value>
           <value>getRootDataSources</value>
@@ -489,14 +492,14 @@
        from='client@clayster.com/client'
        to='subsystem@clayster.com'
        id='63'>
-      <getCapabilities xmlns='urn:xmpp:sn:concentrators'/>
+      <getCapabilities xmlns='urn:xmpp:iot:concentrators'/>
    </iq>
    
    <iq type='result'
        from='subsystem@clayster.com'
        to='client@clayster.com/client'
        id='63'>
-      <getCapabilitiesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getCapabilitiesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <value>getCapabilities</value>
           <value>getAllDataSources</value>
           <value>getRootDataSources</value>
@@ -550,14 +553,14 @@
        from='client@clayster.com/client'
        to='gateway@clayster.com'
        id='2'>
-      <getCapabilities xmlns='urn:xmpp:sn:concentrators'/>
+      <getCapabilities xmlns='urn:xmpp:iot:concentrators'/>
    </iq>
    
    <iq type='result'
        from='gateway@clayster.com'
        to='client@clayster.com/client'
        id='2'>
-      <getCapabilitiesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getCapabilitiesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <value>getCapabilities</value>
           <value>getAllDataSources</value>
           <value>getRootDataSources</value>
@@ -597,14 +600,14 @@
        from='client@clayster.com/client'
        to='plc@clayster.com'
        id='3'>
-      <getCapabilities xmlns='urn:xmpp:sn:concentrators'/>
+      <getCapabilities xmlns='urn:xmpp:iot:concentrators'/>
    </iq>
    
    <iq type='result'
        from='plc@clayster.com'
        to='client@clayster.com/client'
        id='3'>
-      <getCapabilitiesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getCapabilitiesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <value>getCapabilities</value>
           <value>getAllDataSources</value>
           <value>containsNode</value>
@@ -635,14 +638,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='4'>
-      <getAllDataSources xmlns='urn:xmpp:sn:concentrators' xml:lang='en'/>
+      <getAllDataSources xmlns='urn:xmpp:iot:concentrators' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='4'>
-      <getAllDataSourcesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getAllDataSourcesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <dataSource id='Applications' name='Applications' hasChildren='false' lastChanged='2013-03-19T17:58:01'/>
           <dataSource id='Certificates' name='Certificates' hasChildren='false' lastChanged='2013-02-20T12:31:54'/>
           <dataSource id='Clayster.EventSink.Programmable' name='Programmable Event Log' hasChildren='false' lastChanged='2012-10-25T09:31:12'/>
@@ -662,14 +665,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='5'>
-      <getRootDataSources xmlns='urn:xmpp:sn:concentrators' xml:lang='en'/>
+      <getRootDataSources xmlns='urn:xmpp:iot:concentrators' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='5'>
-      <getRootDataSourcesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getRootDataSourcesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <dataSource id='MeteringRoot' name='Metering' hasChildren='true' lastChanged='2013-03-19T17:58:01'/>
           <dataSource id='SecurityRoot' name='Security' hasChildren='true' lastChanged='2013-01-12T22:03:50'/>
           <dataSource id='SystemRoot' name='System' hasChildren='true' lastChanged='2012-02-20T12:34:56'/>
@@ -688,14 +691,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='6'>
-      <getChildDataSources xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringRoot' xml:lang='en' lastChanged='2013-03-19T17:58:01'/>
+      <getChildDataSources xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringRoot' xml:lang='en' lastChanged='2013-03-19T17:58:01'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='6'>
-      <getChildDataSourcesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getChildDataSourcesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <dataSource id='MeteringFieldImports' name='Field Imports' hasChildren='false' lastChanged='2013-03-19T17:58:01'/>
           <dataSource id='MeteringFieldProcessors' name='Field Processors' hasChildren='false' lastChanged='2013-03-19T17:58:01'/>
           <dataSource id='MeteringFieldSinks' name='Field Sinks' hasChildren='false' lastChanged='2013-03-19T17:58:01'/>
@@ -718,14 +721,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='57'>
-      <subscribe xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology'/>
+      <subscribe xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='57'>
-      <subscribeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+      <subscribeResponse xmlns='urn:xmpp:iot:concentrators' result='OK'/>
    </iq>]]>
                 </example>
                 <p>
@@ -747,14 +750,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='60'>
-      <subscribe xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' parameters='true' messages='true' xml:lang='en'/>
+      <subscribe xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' parameters='true' messages='true' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='60'>
-      <subscribeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+      <subscribeResponse xmlns='urn:xmpp:iot:concentrators' result='OK'/>
    </iq>]]>
                 </example>
                 <p>
@@ -771,7 +774,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='61'>
-      <subscribe xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' parameters='true' messages='false' xml:lang='en'
+      <subscribe xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' parameters='true' messages='false' xml:lang='en'
                  nodeAdded='true' nodeUpdated='true' nodeStatusChanged='false' nodeRemoved='true' nodeMovedUp='false' nodeMovedDown='false'/>
    </iq>
    
@@ -779,7 +782,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='61'>
-      <subscribeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+      <subscribeResponse xmlns='urn:xmpp:iot:concentrators' result='OK'/>
    </iq>]]>
                 </example>
                 <p>
@@ -797,14 +800,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='58'>
-      <unsubscribe xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology'/>
+      <unsubscribe xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='58'>
-      <unsubscribeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+      <unsubscribeResponse xmlns='urn:xmpp:iot:concentrators' result='OK'/>
    </iq>]]>
                 </example>
                 <p>
@@ -824,7 +827,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='62'>
-      <unsubscribe xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' parameters='true' messages='false' xml:lang='en'
+      <unsubscribe xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' parameters='true' messages='false' xml:lang='en'
                  nodeAdded='false' nodeUpdated='false' nodeStatusChanged='true' nodeRemoved='false' nodeMovedUp='false' nodeMovedDown='false'/>
    </iq>
    
@@ -832,7 +835,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='62'>
-      <subscribeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+      <subscribeResponse xmlns='urn:xmpp:iot:concentrators' result='OK'/>
    </iq>]]>
                 </example>
             </section3>
@@ -848,14 +851,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='59'>
-      <subscribe xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' getEventsSince='2013-03-21T19:24:00'/>
+      <subscribe xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' getEventsSince='2013-03-21T19:24:00'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='59'>
-      <subscribeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+      <subscribeResponse xmlns='urn:xmpp:iot:concentrators' result='OK'/>
    </iq>
    
    ... Sequence of event messages sent from concentrator to client.]]>
@@ -889,14 +892,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='73'>
-      <subscribe xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' getEventsSince='2001-01-01T00:00:00'/>
+      <subscribe xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' getEventsSince='2001-01-01T00:00:00'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='73'>
-      <subscribeResponse xmlns='urn:xmpp:sn:concentrators' result='NotImplemented'/>
+      <subscribeResponse xmlns='urn:xmpp:iot:concentrators' result='NotImplemented'/>
    </iq>]]>
                 </example>
             </section3>
@@ -912,14 +915,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='7'>
-      <containsNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1'/>
+      <containsNode xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='7'>
-      <containsNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>true</containsNodeResponse>
+      <containsNodeResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>true</containsNodeResponse>
    </iq>]]>
                 </example>
             </section3>
@@ -933,7 +936,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='8'>
-      <containsNodes xmlns='urn:xmpp:sn:concentrators'>
+      <containsNodes xmlns='urn:xmpp:iot:concentrators'>
          <node sourceId='MeteringTopology' nodeId='Node1'/>
          <node sourceId='MeteringTopology' nodeId='Node2'/>
          <node sourceId='MeteringTopology' nodeId='Node3'/>
@@ -945,7 +948,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='8'>
-      <containsNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <containsNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
          <value>true</value>
          <value>true</value>
          <value>false</value>
@@ -967,14 +970,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='9'>
-      <getNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en'/>
+      <getNode xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='9'>
-      <getNodeResponse xmlns='urn:xmpp:sn:concentrators' 
+      <getNodeResponse xmlns='urn:xmpp:iot:concentrators' 
                        result='OK'
                        id='Node1' 
                        nodeType='Namespace.NodeType1' 
@@ -1002,7 +1005,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='10'>
-      <getNodes xmlns='urn:xmpp:sn:concentrators' xml:lang='en'>
+      <getNodes xmlns='urn:xmpp:iot:concentrators' xml:lang='en'>
           <node sourceId='MeteringTopology' nodeId='Node1'/>
           <node sourceId='MeteringTopology' nodeId='Node2'/>
           <node sourceId='MeteringTopology' nodeId='Node3'/>
@@ -1013,7 +1016,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='10'>
-      <getNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' isReadable='true' 
                 isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/>
           <node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
@@ -1037,14 +1040,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='11'>
-      <getNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en' parameters='true'/>
+      <getNode xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en' parameters='true'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='11'>
-      <getNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' 
+      <getNodeResponse xmlns='urn:xmpp:iot:concentrators' result='OK' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' 
                        state='WarningUnsigned' hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' 
                        parentId='Root' lastChanged='2013-03-19T17:58:01'>
           <string id='id' name='Node ID' value='Node1'/>
@@ -1072,7 +1075,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='12'>
-      <getNodes xmlns='urn:xmpp:sn:concentrators' parameters='true' xml:lang='en'>
+      <getNodes xmlns='urn:xmpp:iot:concentrators' parameters='true' xml:lang='en'>
           <node sourceId='MeteringTopology' nodeId='Node1'/>
           <node sourceId='MeteringTopology' nodeId='Node2'/>
           <node sourceId='MeteringTopology' nodeId='Node3'/>
@@ -1083,7 +1086,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='12'>
-      <getNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' isReadable='true' 
                 isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'>
               <string id='id' name='Node ID' value='Node1'/>
@@ -1134,14 +1137,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='13'>
-      <getAllNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' xml:lang='en'/>
+      <getAllNodes xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='13'>
-      <getAllNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getAllNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'/>
           <node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
@@ -1164,14 +1167,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='14'>
-      <getAllNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' parameters='true' xml:lang='en'/>
+      <getAllNodes xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' parameters='true' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='14'>
-      <getAllNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getAllNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'>
               <string id='id' name='Node ID' value='Node1'/>
@@ -1224,7 +1227,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='15'>
-      <getAllNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' xml:lang='en'>
+      <getAllNodes xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' xml:lang='en'>
           <onlyIfDerivedFrom>Namespace.BaseClass1</onlyIfDerivedFrom>
       </getAllNodes>
    </iq>
@@ -1233,7 +1236,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='15'>
-      <getAllNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getAllNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'/>
           <node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
@@ -1253,7 +1256,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='16'>
-      <getAllNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' parameters='true' xml:lang='en'>
+      <getAllNodes xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' parameters='true' xml:lang='en'>
           <onlyIfDerivedFrom>Namespace.BaseClass1</onlyIfDerivedFrom>
       </getAllNodes>
    </iq>
@@ -1262,7 +1265,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='16'>
-      <getAllNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getAllNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'>
               <string id='id' name='Node ID' value='Node1'/>
@@ -1304,14 +1307,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='17'>
-      <getNodeInheritance xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1'/>
+      <getNodeInheritance xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='17'>
-      <getNodeInheritanceResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getNodeInheritanceResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <baseClasses>
               <value>Namespace.BaseClass1</value>
               <value>Namespace.AbstractBase</value>
@@ -1335,14 +1338,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='18'>
-      <getRootNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' xml:lang='en'/>
+      <getRootNodes xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='18'>
-      <getRootNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getRootNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'/>
       </getRootNodesResponse>
@@ -1360,14 +1363,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='19'>
-      <getRootNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' parameters='true' xml:lang='en'/>
+      <getRootNodes xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' parameters='true' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='19'>
-      <getRootNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getRootNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'>
               <string id='id' name='Node ID' value='Node1'/>
@@ -1393,14 +1396,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='20'>
-      <getChildNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en'/>
+      <getChildNodes xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='20'>
-      <getChildNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getChildNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'/>
           <node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
@@ -1419,14 +1422,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='21'>
-      <getChildNodes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' parameters='true' xml:lang='en' />
+      <getChildNodes xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1' parameters='true' xml:lang='en' />
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='21'>
-      <getChildNodesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getChildNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'>
               <string id='id' name='Node ID' value='Node2'/>
@@ -1463,14 +1466,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='22'>
-      <getIndices xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' />
+      <getIndices xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' />
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='22'>
-      <getIndicesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getIndicesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <value>country</value>
           <value>region</value>
           <value>city</value>
@@ -1493,14 +1496,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='23'>
-      <getNodesFromIndex xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' index='apartment' indexValue='A1-1' xml:lang='en'/>
+      <getNodesFromIndex xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' index='apartment' indexValue='A1-1' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='23'>
-      <getNodesFromIndexResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getNodesFromIndexResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <node id='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Apartment 1-1'/>
       </getNodesFromIndexResponse>
@@ -1517,7 +1520,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='24'>
-      <getNodesFromIndex xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' index='apartment' indexValue='A1-1' 
+      <getNodesFromIndex xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' index='apartment' indexValue='A1-1' 
                          parameters='true' xml:lang='en'/>
    </iq>
    
@@ -1525,7 +1528,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='24'>
-      <getNodesFromIndexResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getNodesFromIndexResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <node id='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Apartment 1-1'>
               <string id='id' name='Node ID' value='Node2'/>
@@ -1546,7 +1549,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='25'>
-      <getNodesFromIndices xmlns='urn:xmpp:sn:concentrators' xml:lang='en'>
+      <getNodesFromIndices xmlns='urn:xmpp:iot:concentrators' xml:lang='en'>
           <indexRef sourceId='MeteringGroups' index='apartment' indexValue='A1-1'/>
           <indexRef sourceId='MeteringGroups' index='apartment' indexValue='A1-2'/>
       </getNodesFromIndices>
@@ -1556,7 +1559,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='25'>
-      <getNodesFromIndicesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getNodesFromIndicesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <node id='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Apartment 1-1'/>
           <node id='Node3' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
@@ -1575,7 +1578,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='26'>
-      <getNodesFromIndices xmlns='urn:xmpp:sn:concentrators' parameters='true' xml:lang='en'>
+      <getNodesFromIndices xmlns='urn:xmpp:iot:concentrators' parameters='true' xml:lang='en'>
           <indexRef sourceId='MeteringGroups' index='apartment' indexValue='A1-1'/>
           <indexRef sourceId='MeteringGroups' index='apartment' indexValue='A1-2'/>
       </getNodesFromIndices>
@@ -1585,7 +1588,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='26'>
-      <getNodesFromIndicesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getNodesFromIndicesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <node id='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Apartment 1-1'>
               <string id='id' name='Node ID' value='Node2'/>
@@ -1612,14 +1615,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='27'>
-      <getAllIndexValues xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' index='apartment'/>
+      <getAllIndexValues xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' index='apartment'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='27'>
-      <getAllIndexValuesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getAllIndexValuesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <value>A1-1</value>
           <value>A1-2</value>
           ...
@@ -1638,14 +1641,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='42'>
-      <getAncestors xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Node2' parameters='false' messages='false' xml:lang='en'/>
+      <getAncestors xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Node2' parameters='false' messages='false' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='42'>
-      <getAncestorsResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getAncestorsResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <node id='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Apartment 1-1'/>
           <node id='Apartment 1-1' nodeType='Namespace.Apartment' state='None' hasChildren='true' 
@@ -1683,14 +1686,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='53'>
-      <moveNodeUp xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringFieldProcessors' nodeId='LogicalOperator'/>
+      <moveNodeUp xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringFieldProcessors' nodeId='LogicalOperator'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='53'>
-      <moveNodeUpResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+      <moveNodeUpResponse xmlns='urn:xmpp:iot:concentrators' result='OK'/>
    </iq>]]>
                 </example>
                 <p>
@@ -1708,14 +1711,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='54'>
-      <moveNodeDown xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringFieldProcessors' nodeId='LogicalOperator'/>
+      <moveNodeDown xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringFieldProcessors' nodeId='LogicalOperator'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='54'>
-      <moveNodeDownResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+      <moveNodeDownResponse xmlns='urn:xmpp:iot:concentrators' result='OK'/>
    </iq>]]>
                 </example>
                 <p>
@@ -1732,7 +1735,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='55'>
-      <moveNodesUp xmlns='urn:xmpp:sn:concentrators'>
+      <moveNodesUp xmlns='urn:xmpp:iot:concentrators'>
           <node sourceId='MeteringFieldProcessors' nodeId='LogicalOperator3'/>
           <node sourceId='MeteringFieldProcessors' nodeId='LogicalOperator4'/>
           <node sourceId='MeteringFieldProcessors' nodeId='LogicalOperator5'/>
@@ -1743,7 +1746,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='55'>
-      <moveNodesUpResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+      <moveNodesUpResponse xmlns='urn:xmpp:iot:concentrators' result='OK'/>
    </iq>]]>
                 </example>
                 <p>
@@ -1761,7 +1764,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='56'>
-      <moveNodesDown xmlns='urn:xmpp:sn:concentrators'>
+      <moveNodesDown xmlns='urn:xmpp:iot:concentrators'>
           <node sourceId='MeteringFieldProcessors' nodeId='LogicalOperator3'/>
           <node sourceId='MeteringFieldProcessors' nodeId='LogicalOperator4'/>
           <node sourceId='MeteringFieldProcessors' nodeId='LogicalOperator5'/>
@@ -1772,7 +1775,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='56'>
-      <moveNodesDownResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+      <moveNodesDownResponse xmlns='urn:xmpp:iot:concentrators' result='OK'/>
    </iq>]]>
                 </example>
                 <p>
@@ -1800,14 +1803,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='28'>
-      <getNodeParametersForEdit xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en'/>
+      <getNodeParametersForEdit xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='28'>
-      <getNodeParametersForEditResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getNodeParametersForEditResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
@@ -1936,7 +1939,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='29'>
-      <setNodeParametersAfterEdit xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en'>
+      <setNodeParametersAfterEdit xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en'>
           <x type='submit' xmlns='jabber:x:data'>
               <field var='xdd session' type='hidden'>
                   <value>009c7956-001c-43fb-8edb-76bcf74272c9</value>
@@ -1970,7 +1973,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='29'>
-      <setNodeParametersAfterEditResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <setNodeParametersAfterEditResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'>
               <string id='id' name='Node ID' value='Node1'/>
@@ -2003,7 +2006,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='30'>
-      <setNodeParametersAfterEdit xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node2' xml:lang='en'>
+      <setNodeParametersAfterEdit xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node2' xml:lang='en'>
           <x type='submit' xmlns='jabber:x:data'>
               <field var='xdd session' type='hidden'>
                   <value>009c7956-001c-43fb-8edb-76bcf74272c9</value>
@@ -2037,7 +2040,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='30'>
-      <setNodeParametersAfterEditResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'>
+      <setNodeParametersAfterEditResponse xmlns='urn:xmpp:iot:concentrators' result='FormError'>
           <error var='id'>There already exists a node with this ID.</error>
       </setNodeParametersAfterEditResponse>
    </iq>]]>
@@ -2069,7 +2072,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='31'>
-      <getCommonNodeParametersForEdit xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' xml:lang='en'>
+      <getCommonNodeParametersForEdit xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' xml:lang='en'>
          <node sourceId='MeteringTopology' nodeId='Node1'/>
          <node sourceId='MeteringTopology' nodeId='Node2'/>
          <node sourceId='MeteringTopology' nodeId='Node3'/>
@@ -2080,7 +2083,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='31'>
-      <getCommonNodeParametersForEditResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getCommonNodeParametersForEditResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
@@ -2178,7 +2181,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='32'>
-      <setCommonNodeParametersAfterEdit xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en'>
+      <setCommonNodeParametersAfterEdit xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en'>
           <node sourceId='MeteringTopology' nodeId='Node1'/>
           <node sourceId='MeteringTopology' nodeId='Node2'/>
           <node sourceId='MeteringTopology' nodeId='Node3'/>
@@ -2197,7 +2200,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='32'>
-      <setCommonNodeParametersAfterEditResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'>
+      <setCommonNodeParametersAfterEditResponse xmlns='urn:xmpp:iot:concentrators' result='FormError'>
           <node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'>
               <string id='id' name='Node ID' value='Node1'/>
@@ -2256,7 +2259,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='33'>
-      <setCommonNodeParametersAfterEdit xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' xml:lang='en'>
+      <setCommonNodeParametersAfterEdit xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' xml:lang='en'>
           <node sourceId='MeteringTopology' nodeId='Node1'/>
           <node sourceId='MeteringTopology' nodeId='Node2'/>
           <node sourceId='MeteringTopology' nodeId='Node3'/>
@@ -2278,7 +2281,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='33'>
-      <setCommonNodeParametersAfterEditResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'>
+      <setCommonNodeParametersAfterEditResponse xmlns='urn:xmpp:iot:concentrators' result='FormError'>
           <error var='id'>Parameter not available.</error>
       </setCommonNodeParametersAfterEditResponse>
    </iq>]]>
@@ -2363,14 +2366,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='34'>
-      <getNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' messages='true' xml:lang='en'/>
+      <getNode xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1' messages='true' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='34'>
-      <getNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK' 
+      <getNodeResponse xmlns='urn:xmpp:iot:concentrators' result='OK' 
                        id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false'
                        isReadable='true' isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'>
           <message timestamp='2013-03-21T11:06:15' type='WarningUnsigned' id='ClockWarning'>Internal clock is offset more than 7 seconds.</message>
@@ -2387,14 +2390,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='35'>
-      <getNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en' parameters='true' messages='true'/>
+      <getNode xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en' parameters='true' messages='true'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='35'>
-      <getNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK' 
+      <getNodeResponse xmlns='urn:xmpp:iot:concentrators' result='OK' 
                        id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
                        isReadable='true' isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'>
           <string id='id' name='Node ID' value='Node1'/>
@@ -2423,14 +2426,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='36'>
-      <getAddableNodeTypes xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='B1' xml:lang='en'/>
+      <getAddableNodeTypes xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='B1' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='36'>
-      <getAddableNodeTypesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getAddableNodeTypesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <nodeType type='Namespace.Apartment' name='Apartment'/>
           <nodeType type='Namespace.MeteringTopologyReference' name='Metering Topology Reference'/>
           <nodeType type='Namespace.Location' name='Service Location'/>
@@ -2449,7 +2452,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='37'>
-      <getParametersForNewNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='B1' 
+      <getParametersForNewNode xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='B1' 
                                type='Namespace.MeteringTopologyReference' xml:lang='en'/>
    </iq>
    
@@ -2457,7 +2460,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='37'>
-      <getParametersForNewNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getParametersForNewNodeResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
@@ -2496,7 +2499,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='38'>
-      <createNewNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='B1' 
+      <createNewNode xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='B1' 
                      type='Namespace.MeteringTopologyReference' xml:lang='en'>
           <x type='submit' xmlns='jabber:x:data'>
               <field var='xdd session' type='hidden'>
@@ -2516,7 +2519,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='38'>
-      <createNewNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <createNewNodeResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <node id='Reference to Node1' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='B1'>
               <string id='id' name='Node ID' value='Reference to Node1'/>
@@ -2544,7 +2547,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='39'>
-      <createNewNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='B1' 
+      <createNewNode xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='B1' 
                      type='Namespace.MeteringTopologyReference' xml:lang='en'>
           <x type='submit' xmlns='jabber:x:data'>
               <field var='xdd session' type='hidden'>
@@ -2564,7 +2567,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='39'>
-      <createNewNodeResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'>
+      <createNewNodeResponse xmlns='urn:xmpp:iot:concentrators' result='FormError'>
           <error var='id'>There already exists a node with this ID.</error>
           <error var='referenceId'>Referenced node was not found.</error>
       </createNewNodeResponse>
@@ -2587,14 +2590,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='40'>
-      <destroyNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='B1' xml:lang='en'/>
+      <destroyNode xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='B1' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='40'>
-      <destroyNodeResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+      <destroyNodeResponse xmlns='urn:xmpp:iot:concentrators' result='OK'/>
    </iq>]]>
                 </example>
                 <p>
@@ -2612,14 +2615,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='41'>
-      <destroyNode xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='B1' xml:lang='en'/>
+      <destroyNode xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='B1' xml:lang='en'/>
    </iq>
    
    <iq type='error'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='41'>
-      <destroyNodeResponse xmlns='urn:xmpp:sn:concentrators' result='InsufficientPrivileges'/>
+      <destroyNodeResponse xmlns='urn:xmpp:iot:concentrators' result='InsufficientPrivileges'/>
    </iq>]]>
                 </example>
             </section3>
@@ -2637,14 +2640,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='43'>
-      <getNodeCommands xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' xml:lang='en'/>
+      <getNodeCommands xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='43'>
-      <getNodeCommandsResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getNodeCommandsResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <command id='knockDoor' name='Knock on door' type='Simple' 
                    confirmationString='Are you sure you want to knock on the door?'
                    failureString='Unable to knock on the door.'
@@ -2679,14 +2682,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='44'>
-      <executeNodeCommand xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='knockDoor' xml:lang='en'/>
+      <executeNodeCommand xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='knockDoor' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='44'>
-      <executeNodeCommandResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+      <executeNodeCommandResponse xmlns='urn:xmpp:iot:concentrators' result='OK'/>
    </iq>]]>
                 </example>
             </section3>
@@ -2701,7 +2704,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='45'>
-      <getCommandParameters xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' 
+      <getCommandParameters xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' 
                             command='scheduleWakeupCall' xml:lang='en'/>
    </iq>
    
@@ -2709,7 +2712,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='45'>
-      <getCommandParametersResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getCommandParametersResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
@@ -2750,7 +2753,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='46'>
-      <executeNodeCommand xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' 
+      <executeNodeCommand xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' 
                           command='scheduleWakeupCall' xml:lang='en'>
           <x type='submit' xmlns='jabber:x:data'>
               <field var='xdd session' type='hidden'>
@@ -2770,7 +2773,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='46'>
-      <executeNodeCommandResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+      <executeNodeCommandResponse xmlns='urn:xmpp:iot:concentrators' result='OK'/>
    </iq>]]>
                 </example>
             </section3>
@@ -2788,7 +2791,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='47'>
-      <executeNodeCommand xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' 
+      <executeNodeCommand xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' 
                           command='scheduleWakeupCall' xml:lang='en'>
           <x type='submit' xmlns='jabber:x:data'>
               <field var='xdd session' type='hidden'>
@@ -2808,7 +2811,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='47'>
-      <executeNodeCommandResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'>
+      <executeNodeCommandResponse xmlns='urn:xmpp:iot:concentrators' result='FormError'>
           <error var='mode'>You are not allowed to harass people at 04:30:00!</error>
       </executeNodeCommandResponse>
    </iq>]]>
@@ -2825,7 +2828,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='74'>
-      <getCommandParameters xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' 
+      <getCommandParameters xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' 
                             command='searchEvents' xml:lang='en'/>
    </iq>
    
@@ -2833,7 +2836,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='74'>
-      <getCommandParametersResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getCommandParametersResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
@@ -2878,7 +2881,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='75'>
-      <executeNodeQuery xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='searchEvents' xml:lang='en'>
+      <executeNodeQuery xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='searchEvents' xml:lang='en'>
           <x type='submit' xmlns='jabber:x:data'>
               <field var='from' type='text-single'>
                   <value>2013-04-16T12:58:00</value>
@@ -2897,7 +2900,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='75'>
-      <executeNodeQueryResponse xmlns='urn:xmpp:sn:concentrators' result='OK' queryId='Query0001'/>
+      <executeNodeQueryResponse xmlns='urn:xmpp:iot:concentrators' result='OK' queryId='Query0001'/>
    </iq>
    
    ...]]>
@@ -2927,7 +2930,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='76'>
-      <executeNodeQuery xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='searchEvents' xml:lang='en'>
+      <executeNodeQuery xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='searchEvents' xml:lang='en'>
           <x type='submit' xmlns='jabber:x:data'>
               <field var='from' type='text-single'>
                   <value>2013-04-23T12:58:00</value>
@@ -2946,7 +2949,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='76'>
-      <executeNodeQueryResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'>
+      <executeNodeQueryResponse xmlns='urn:xmpp:iot:concentrators' result='FormError'>
           <error var='to'>The TO timestamp needs to be later than the FROM timestamp.</error>
       </executeNodeQueryResponse>
    </iq>]]>
@@ -2963,7 +2966,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='77'>
-      <abortNodeQuery xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='searchEvents' 
+      <abortNodeQuery xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' command='searchEvents' 
                       queryId='Query0001' xml:lang='en'/>
    </iq>
    
@@ -2971,7 +2974,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='77'>
-      <abortNodeQueryResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+      <abortNodeQueryResponse xmlns='urn:xmpp:iot:concentrators' result='OK'/>
    </iq>]]>
                 </example>
                 <p>
@@ -2992,7 +2995,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='48'>
-      <getCommonNodeCommands xmlns='urn:xmpp:sn:concentrators' xml:lang='en'>
+      <getCommonNodeCommands xmlns='urn:xmpp:iot:concentrators' xml:lang='en'>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-1'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-2'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-3'/>
@@ -3006,7 +3009,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='48'>
-      <getNodeCommandsResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getNodeCommandsResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <command id='knockDoor' name='Knock on door' type='Simple' 
                    confirmationString='Are you sure you want to knock on the door?'
                    failureString='Unable to knock on the door.'
@@ -3029,7 +3032,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='49'>
-      <executeCommonNodeCommand xmlns='urn:xmpp:sn:concentrators' command='knockDoor' xml:lang='en'>
+      <executeCommonNodeCommand xmlns='urn:xmpp:iot:concentrators' command='knockDoor' xml:lang='en'>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-1'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-2'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-3'/>
@@ -3043,7 +3046,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='49'>
-      <executeCommonNodeCommandResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <executeCommonNodeCommandResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <result>true</result>
           <result>true</result>
           <result>true</result>
@@ -3065,7 +3068,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='50'>
-      <getCommonCommandParameters xmlns='urn:xmpp:sn:concentrators' command='scheduleWakeupCall' xml:lang='en'>
+      <getCommonCommandParameters xmlns='urn:xmpp:iot:concentrators' command='scheduleWakeupCall' xml:lang='en'>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-1'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-2'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-3'/>
@@ -3079,7 +3082,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='50'>
-      <getCommonCommandParametersResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getCommonCommandParametersResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
@@ -3120,7 +3123,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='51'>
-      <executeCommonNodeCommand xmlns='urn:xmpp:sn:concentrators' command='scheduleWakeupCall' xml:lang='en'>
+      <executeCommonNodeCommand xmlns='urn:xmpp:iot:concentrators' command='scheduleWakeupCall' xml:lang='en'>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-1'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-2'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-3'/>
@@ -3145,7 +3148,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='51'>
-      <executeCommonNodeCommandResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <executeCommonNodeCommandResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <result>true</result>
           <result>true</result>
           <result>true</result>
@@ -3170,7 +3173,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='52'>
-      <executeCommonNodeCommand xmlns='urn:xmpp:sn:concentrators' command='scheduleWakeupCall' xml:lang='en'>
+      <executeCommonNodeCommand xmlns='urn:xmpp:iot:concentrators' command='scheduleWakeupCall' xml:lang='en'>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-1'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-2'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-3'/>
@@ -3195,7 +3198,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='52'>
-      <executeCommonNodeCommandResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'>
+      <executeCommonNodeCommandResponse xmlns='urn:xmpp:iot:concentrators' result='FormError'>
           <error var='mode'>You are not allowed to harass people at 04:30:00!</error>
       </executeCommonNodeCommandResponse>
    </iq>]]>
@@ -3218,7 +3221,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='72'>
-      <executeCommonNodeCommand xmlns='urn:xmpp:sn:concentrators' command='scheduleWakeupCall' xml:lang='en'>
+      <executeCommonNodeCommand xmlns='urn:xmpp:iot:concentrators' command='scheduleWakeupCall' xml:lang='en'>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-1'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-2'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-3'/>
@@ -3243,7 +3246,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='72'>
-      <executeCommonNodeCommandResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <executeCommonNodeCommandResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <result>true</result>
           <result>true</result>
           <result error='Too early!'>false</result>
@@ -3265,7 +3268,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='78'>
-      <getCommonCommandParameters xmlns='urn:xmpp:sn:concentrators' command='searchEvents' xml:lang='en'>
+      <getCommonCommandParameters xmlns='urn:xmpp:iot:concentrators' command='searchEvents' xml:lang='en'>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-1'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-2'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-3'/>
@@ -3279,7 +3282,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='78'>
-      <getCommonCommandParametersResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getCommonCommandParametersResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
@@ -3323,7 +3326,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='79'>
-      <executeCommonNodeQuery xmlns='urn:xmpp:sn:concentrators' command='searchEvents' xml:lang='en'>
+      <executeCommonNodeQuery xmlns='urn:xmpp:iot:concentrators' command='searchEvents' xml:lang='en'>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-1'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-2'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-3'/>
@@ -3348,7 +3351,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='79'>
-      <executeCommonNodeQueryResponse xmlns='urn:xmpp:sn:concentrators' result='OK' queryId='Query0001'/>
+      <executeCommonNodeQueryResponse xmlns='urn:xmpp:iot:concentrators' result='OK' queryId='Query0001'/>
    </iq>
    
    ...]]>
@@ -3379,7 +3382,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='80'>
-      <executeCommonNodeQuery xmlns='urn:xmpp:sn:concentrators' command='searchEvents' xml:lang='en'>
+      <executeCommonNodeQuery xmlns='urn:xmpp:iot:concentrators' command='searchEvents' xml:lang='en'>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-1'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-2'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-3'/>
@@ -3404,7 +3407,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='80'>
-      <executeCommonNodeQueryResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'>
+      <executeCommonNodeQueryResponse xmlns='urn:xmpp:iot:concentrators' result='FormError'>
           <error var='to'>The TO timestamp needs to be later than the FROM timestamp.</error>
       </executeCommonNodeQueryResponse>
    </iq>]]>
@@ -3427,7 +3430,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='81'>
-      <executeCommonNodeQuery xmlns='urn:xmpp:sn:concentrators' command='searchEvents' xml:lang='en'>
+      <executeCommonNodeQuery xmlns='urn:xmpp:iot:concentrators' command='searchEvents' xml:lang='en'>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-1'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-2'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-3'/>
@@ -3452,7 +3455,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='81'>
-      <executeCommonNodeQueryResponse xmlns='urn:xmpp:sn:concentrators' result='OK' queryId='Query0002'>
+      <executeCommonNodeQueryResponse xmlns='urn:xmpp:iot:concentrators' result='OK' queryId='Query0002'>
           <result>true</result>
           <result>true</result>
           <result error='Event Database not available!'>false</result>
@@ -3473,7 +3476,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='82'>
-      <abortCommonNodeQuery xmlns='urn:xmpp:sn:concentrators' queryId='Query0002' xml:lang='en'>
+      <abortCommonNodeQuery xmlns='urn:xmpp:iot:concentrators' queryId='Query0002' xml:lang='en'>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-1'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-2'/>
           <node sourceId='MeteringGroups' nodeId='Apartment 1-3'/>
@@ -3487,7 +3490,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='82'>
-      <abortCommonNodeQueryResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+      <abortCommonNodeQueryResponse xmlns='urn:xmpp:iot:concentrators' result='OK'/>
    </iq>]]>
                 </example>
                 <p>
@@ -3525,7 +3528,7 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <queryProgress xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+      <queryProgress xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
           <queryStarted/>
           ...
       </queryProgress>
@@ -3541,7 +3544,7 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <queryProgress xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+      <queryProgress xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
           ...
           <queryDone/>
       </queryProgress>
@@ -3557,7 +3560,7 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <queryProgress xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+      <queryProgress xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
           ...
           <queryAborted/>
       </queryProgress>
@@ -3574,7 +3577,7 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <queryProgress xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+      <queryProgress xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
           ...
           <newTable tableId='table1' tableName='Events'>
               <column columnId='timestamp' header='Timestamp'>
@@ -3596,7 +3599,7 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <queryProgress xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+      <queryProgress xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
           ...
           <newRecords tableId='table1'>
               <record>
@@ -3622,7 +3625,7 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <queryProgress xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+      <queryProgress xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
           ...
           <tableDone tableId='table1'/>
           ...
@@ -3640,7 +3643,7 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <queryProgress xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+      <queryProgress xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
           ...
           <newObject contentType='image/png'>...</newObject>
           ...
@@ -3657,7 +3660,7 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <queryProgress xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+      <queryProgress xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
           ...
           <queryMessage type='Information' level='Minor'>30 events found.</queryMessage>
           ...
@@ -3698,7 +3701,7 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeAdded xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' 
+      <nodeAdded xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' 
                  cacheType='Node' state='None' hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' 
                  parentId='Root' lastChanged='2013-03-19T17:58:01'/>
    </message>]]>
@@ -3707,7 +3710,7 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeAdded xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' 
+      <nodeAdded xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' 
                  cacheType='Node' state='None' hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' 
                  parentId='Root' lastChanged='2013-03-19T17:58:01'>
           <string id='id' name='Node ID' value='Node1'/>
@@ -3734,7 +3737,7 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeAdded xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node2' nodeType='Namespace.NodeType1' 
+      <nodeAdded xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node2' nodeType='Namespace.NodeType1' 
                  cacheType='Node' state='None' hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' 
                  parentId='Root' lastChanged='2013-03-19T17:58:01' afterNodeId='Node1' afterNodeCacheType='Node'/>
    </message>]]>
@@ -3749,7 +3752,7 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeRemoved xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1'/>
+      <nodeRemoved xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node1'/>
    </message>]]>
                 </example>
                 <p>
@@ -3767,7 +3770,7 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' 
+      <nodeUpdated xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' 
                    cacheType='Node' state='None' hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' 
                    parentId='Root' lastChanged='2013-03-19T17:58:01'/>
    </message>]]>
@@ -3776,7 +3779,7 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' 
+      <nodeUpdated xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' 
                    cacheType='Node' state='None' hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' 
                    parentId='Root' lastChanged='2013-03-19T17:58:01'>
           <string id='id' name='Node ID' value='Node1'/>
@@ -3798,7 +3801,7 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' oldId='OldNode1' id='Node1' 
+      <nodeUpdated xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' oldId='OldNode1' id='Node1' 
                    nodeType='Namespace.NodeType1' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
                    isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/>
    </message>]]>
@@ -3807,7 +3810,7 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeUpdated xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' oldId='OldNode1' id='Node1' 
+      <nodeUpdated xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' oldId='OldNode1' id='Node1' 
                    nodeType='Namespace.NodeType1' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
                    isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'>
           <string id='id' name='Node ID' value='Node1'/>
@@ -3835,14 +3838,14 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeStatusChanged xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' cacheType='Node' state='ErrorUnsigned'/>
+      <nodeStatusChanged xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node1' cacheType='Node' state='ErrorUnsigned'/>
    </message>]]>
                 </example>
                 <example caption='Node status changed event, with messages'>
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeStatusChanged xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1' cacheType='Node' state='ErrorUnsigned'>
+      <nodeStatusChanged xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node1' cacheType='Node' state='ErrorUnsigned'>
           <message timestamp='2013-03-22T12:49:34' type='Error'>Sensor does not respond to read-out requests.</message>
       </nodeStatusChanged>
    </message>]]>
@@ -3857,7 +3860,7 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeMovedUp xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1'/>
+      <nodeMovedUp xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node1'/>
    </message>]]>
                 </example>
                 <p>
@@ -3875,7 +3878,7 @@
                     <![CDATA[
    <message from='concentrator@clayster.com'
             to='client@clayster.com/client'>
-      <nodeMovedDown xmlns='urn:xmpp:sn:concentrators' sourceId='MeteringTopology' id='Node1'/>
+      <nodeMovedDown xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node1'/>
    </message>]]>
                 </example>
                 <p>
@@ -3905,14 +3908,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='64'>
-      <getDatabases xmlns='urn:xmpp:sn:concentrators' xml:lang='en'/>
+      <getDatabases xmlns='urn:xmpp:iot:concentrators' xml:lang='en'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='64'>
-      <getDatabasesResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getDatabasesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <database id='LocalDB' name='Local Database'/>
           <database id='LocalDBTest' name='Local Test Database'/>
           <database id='LocalDBProduction' name='Local Production Database'/>
@@ -3932,14 +3935,14 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='65'>
-      <getDatabaseReadoutParameters xmlns='urn:xmpp:sn:concentrators' xml:lang='en' databaseId='LocalDB'/>
+      <getDatabaseReadoutParameters xmlns='urn:xmpp:iot:concentrators' xml:lang='en' databaseId='LocalDB'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='65'>
-      <getDatabaseReadoutParametersResponse xmlns='urn:xmpp:sn:concentrators' result='OK'>
+      <getDatabaseReadoutParametersResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
@@ -4169,10 +4172,8 @@
             <section3 topic='Start Database Readout'>
                 <p>
                     Once the parameter form has been filled out, a database readout can be started using the <strong>startDatabaseReadout</strong> command.
-                    Data read from the concentrator will follow the same flow of sensor data as that described in <link url='sensor-data.html'>sensor-data</link>
-                    <note>
-                        XEP-xxxx: Sensor Data <link url='sensor-data.html'>sensor-data</link>
-                    </note>. The only difference is that the read-out is started with the <strong>startDatabaseReadout</strong> command instead of the <strong>req</strong>
+                    Data read from the concentrator will follow the same flow of sensor data as that described in &xep0323;. The only difference is that the 
+					read-out is started with the <strong>startDatabaseReadout</strong> command instead of the <strong>req</strong>
                     command of the sensor data namespace.                    
                 </p>
                 <p>
@@ -4190,7 +4191,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='66'>
-      <startDatabaseReadout xmlns='urn:xmpp:sn:concentrators' xml:lang='en' databaseId='LocalDB' seqnr='1' userToken='12392748927492834'>
+      <startDatabaseReadout xmlns='urn:xmpp:iot:concentrators' xml:lang='en' databaseId='LocalDB' seqnr='1' userToken='12392748927492834'>
           <node sourceId='MeteringTopology' nodeId='Node1'/>
           <node sourceId='MeteringTopology' nodeId='Node2'/>
           <node sourceId='MeteringTopology' nodeId='Node3'/>
@@ -4301,7 +4302,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='66'>
-      <startDatabaseReadoutResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+      <startDatabaseReadoutResponse xmlns='urn:xmpp:iot:concentrators' result='OK'/>
    </iq>
    
    ... Readout messages follow.]]>
@@ -4317,7 +4318,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='67'>
-      <startDatabaseReadout xmlns='urn:xmpp:sn:concentrators' xml:lang='en' databaseId='LocalDB' seqnr='2' userToken='12392748927492834'>
+      <startDatabaseReadout xmlns='urn:xmpp:iot:concentrators' xml:lang='en' databaseId='LocalDB' seqnr='2' userToken='12392748927492834'>
           <node sourceId='MeteringTopology' nodeId='Node1'/>
           <node sourceId='MeteringTopology' nodeId='Node2'/>
           <node sourceId='MeteringTopology' nodeId='Node3'/>
@@ -4331,7 +4332,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='67'>
-      <startDatabaseReadoutResponse xmlns='urn:xmpp:sn:concentrators' result='InsufficientPrivileges'/>
+      <startDatabaseReadoutResponse xmlns='urn:xmpp:iot:concentrators' result='InsufficientPrivileges'/>
    </iq>]]>
                 </example>
                 <p>
@@ -4343,7 +4344,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='68'>
-      <startDatabaseReadout xmlns='urn:xmpp:sn:concentrators' xml:lang='en' databaseId='LocalDB' seqnr='3' userToken='12392748927492834'>
+      <startDatabaseReadout xmlns='urn:xmpp:iot:concentrators' xml:lang='en' databaseId='LocalDB' seqnr='3' userToken='12392748927492834'>
           <node sourceId='MeteringTopology' nodeId='Node1'/>
           <node sourceId='MeteringTopology' nodeId='Node2'/>
           <node sourceId='MeteringTopology' nodeId='Node3'/>
@@ -4364,7 +4365,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='68'>
-      <startDatabaseReadoutResponse xmlns='urn:xmpp:sn:concentrators' result='FormError'>
+      <startDatabaseReadoutResponse xmlns='urn:xmpp:iot:concentrators' result='FormError'>
           <error var='to'>The To timestamp cannot be older than the From timestamp.</error>
       </startDatabaseReadoutResponse>
    </iq>]]>
@@ -4372,8 +4373,8 @@
             </section3>
             <section3 topic='Cancelling a database read-out'>
                 <p>
-                    A client can cancel a database read-out using the <link url='sensor-data.html#cancelreadout'>cancel</link> read-out command,
-                    as described in <link url='sensor-data.html'>sensor-data</link>.
+                    A client can cancel a database read-out using the <link url='http://xmpp.org/extensions/xep-0323.html#cancelreadout'>cancel</link> read-out command,
+                    as described in <link url='http://xmpp.org/extensions/xep-0323.html'>Internet of Things - Sensor Data</link>.
                 </p>
                 <example caption='Cancelling a database read-out'>
                     <![CDATA[
@@ -4381,7 +4382,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='70'>
-      <startDatabaseReadout xmlns='urn:xmpp:sn:concentrators' xml:lang='en' databaseId='LocalDB' seqnr='4' userToken='12392748927492834'>
+      <startDatabaseReadout xmlns='urn:xmpp:iot:concentrators' xml:lang='en' databaseId='LocalDB' seqnr='4' userToken='12392748927492834'>
           <node sourceId='MeteringTopology' nodeId='Node1'/>
           <node sourceId='MeteringTopology' nodeId='Node2'/>
           <node sourceId='MeteringTopology' nodeId='Node3'/>
@@ -4395,7 +4396,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='70'>
-      <startDatabaseReadoutResponse xmlns='urn:xmpp:sn:concentrators' result='OK'/>
+      <startDatabaseReadoutResponse xmlns='urn:xmpp:iot:concentrators' result='OK'/>
    </iq>
    
    ...
@@ -4404,21 +4405,21 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='71'>
-      <cancel xmlns='urn:xmpp:sn' seqnr='4'/>
+      <cancel xmlns='urn:xmpp:iot:sensordata' seqnr='4'/>
    </iq>
    
    <iq type='result'
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='71'>
-      <cancelled xmlns='urn:xmpp:sn' seqnr='4'/>
+      <cancelled xmlns='urn:xmpp:iot:sensordata' seqnr='4'/>
    </iq>]]>
                 </example>
             </section3>
         </section2>
     </section1>
 	<section1 topic='Determining Support' anchor='support'>
-		<p>If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:sn:concentrators" in response to &xep0030; information requests.</p>
+		<p>If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:concentrators" in response to &xep0030; information requests.</p>
 		<example caption="Service discovery information request">
 			<![CDATA[
 <iq type='get'
@@ -4436,7 +4437,7 @@
     id='disco1'>
   <query xmlns='http://jabber.org/protocol/disco#info'>
     ...
-    <feature var='urn:xmpp:sn:concentrators'/>
+    <feature var='urn:xmpp:iot:concentrators'/>
     ...
   </query>
 </iq>]]>
@@ -4557,10 +4558,10 @@
                 </tr>
             </table>
             <p>
-                (*) See <link url='sensor-data.html'>sensor-data</link> for more information about how to read nodes.
+                (*) See <link url='http://xmpp.org/extensions/xep-0323.html'>Internet of Things - Sensor Data</link> for more information about how to read nodes.
             </p>
             <p>
-                (**) See <link url='xep-0000-IoT-Control.html'>xep-0000-IoT-Control</link> for more information about how to control nodes.
+                (**) See <link url='http://xmpp.org/extensions/xep-0325.html'>Internet of Things - Control</link> for more information about how to control nodes.
             </p>
             <p>
                 (***) Note that <strong>cacheType</strong> is optional. In some data sources it might be necessary to include a cache type to allow for IDs that are not unique
@@ -4680,7 +4681,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='69'>
-      <holabandola xmlns='urn:xmpp:sn:concentrators' ...>
+      <holabandola xmlns='urn:xmpp:iot:concentrators' ...>
           ...
       </holabandola>
    </iq>
@@ -4689,7 +4690,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='69'>
-      <holabandolaResponse xmlns='urn:xmpp:sn:concentrators' result='NotImplemented'/>
+      <holabandolaResponse xmlns='urn:xmpp:iot:concentrators' result='NotImplemented'/>
    </iq>]]>
             </example>
         </section2>
@@ -5002,7 +5003,7 @@
                     The concentrator can restrict friendships to trusted friends, and then assign access rights internally to the approved contacts.
                 </li>
                 <li>
-                    The concentrator can use a provisioning server (see <note>XEP-xxxx: Provisioning <link url='sensor-network-provisioning.html'>sensor-network-provisioning</link></note>) 
+                    The concentrator can use a provisioning server (see &xep0324;) 
                     to delegate trust to a third party responsible for controlling who can get access to the concentrator (<strong>isFriend</strong> or <strong>canAccess</strong> commands), 
                     and what items can be viewed (<strong>hasPrivilege</strong> or <strong>downloadPrivileges</strong> commands).
                 </li>
@@ -5016,7 +5017,7 @@
         </section2>
         <section2 topic='Integration with provisioning servers'>
             <p>
-                The <link url='sensor-network-provisioning.html'>sensor-network-provisioning</link> document describes how trust can be delegated to trusted provisioning servers
+                The <link url='http://xmpp.org/extensions/xep-0324.html'>Internet of Things - Provisioning</link> document describes how trust can be delegated to trusted provisioning servers
                 that can be used to restrict access to and privileges in a network.
             </p>
             <p>
@@ -5040,15 +5041,15 @@
                 </p>
                 <ul>
                     <li>
-                        The user has a <strong>userToken</strong> it received during <link url='sensor-network-provisioning#usertoken'>connection with the service</link>. This user token should
+                        The user has a <strong>userToken</strong> it received during <link url='http://xmpp.org/extensions/xep-0324.html#usertoken'>connection with the service</link>. This user token should
                         be included in all calls made by the user.
                     </li>
                     <li>
-                        The service has a <strong>serviceToken</strong> it received during <link url='sensor-network-provisioning#servicetoken'>service registration</link>. This service token
+                        The service has a <strong>serviceToken</strong> it received during <link url='http://xmpp.org/extensions/xep-0324.html#servicetoken'>service registration</link>. This service token
                         should be aggregated by all calls made by the service.
                     </li>
                     <li>
-                        The concentrators should cache all calls made to the provisioning server according to available <link url='sensor-network-provisioning#cache'>cache rules</link>.
+                        The concentrators should cache all calls made to the provisioning server according to available <link url='http://xmpp.org/extensions/xep-0324.html#cache'>cache rules</link>.
                     </li>
                     <li>
                         The conversion of a Data Source ID to a Privilege ID should be performed according to rules defined in <link url='xep-0000-IoT-Interoperability.html'>xep-0000-IoT-Interoperability</link>.
@@ -5106,15 +5107,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <xs:schema
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
-    targetNamespace='urn:xmpp:sn:concentrators'
-    xmlns='urn:xmpp:sn:concentrators'
-    xmlns:sn='urn:xmpp:sn'
+    targetNamespace='urn:xmpp:iot:concentrators'
+    xmlns='urn:xmpp:iot:concentrators'
+    xmlns:sn='urn:xmpp:iot:sensordata'
     xmlns:xd="jabber:x:data"
     xmlns:xdv="http://jabber.org/protocol/xdata-validate"
     xmlns:xdl="http://jabber.org/protocol/xdata-layout"
     elementFormDefault='qualified'>
  
-    <xs:import namespace='urn:xmpp:sn'/>
+    <xs:import namespace='urn:xmpp:iot:sensordata'/>
     <xs:import namespace='jabber:x:data'/>
     <xs:import namespace='http://jabber.org/protocol/xdata-validate'/>
     <xs:import namespace='http://jabber.org/protocol/xdata-layout'/>
