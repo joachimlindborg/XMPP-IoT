@@ -17,8 +17,8 @@
                 This XMPP Extension Protocol has been contributed in full conformance with the XSF's Intellectual Property Rights Policy (a copy of which may be found at &lt;<link url='http://www.xmpp.org/extensions/ipr-policy.shtml'>http://www.xmpp.org/extensions/ipr-policy.shtml</link>&gt; or obtained by writing to XSF, P.O. Box 1641, Denver, CO 80201 USA).
             </conformance>
         </legal>
-        <number>xxxx</number>
-        <status>ProtoXEP</status>
+        <number>0325</number>
+        <status>Experimental</status>
         <type>Standards Track</type>
         <sig>Standards</sig>
         <approver>Council</approver>

@@ -2,7 +2,7 @@
 <html>
   <head>
     <META http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>XEP-xxxx: Internet of Things - Concentrators</title>
+    <title>XEP-0326: Internet of Things - Concentrators</title>
     <link rel="stylesheet" type="text/css" href="xmpp.css">
     <link href="prettify.css" type="text/css" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"><script type="text/javascript" src="prettify.js"></script><meta name="DC.Title" content="Internet of Things - Concentrators">
@@ -10,15 +10,15 @@
     <meta name="DC.Description" content="This specification describes how to manage and get information from concentrators of devices over XMPP networks.">
     <meta name="DC.Publisher" content="XMPP Standards Foundation">
     <meta name="DC.Contributor" content="XMPP Extensions Editor">
-    <meta name="DC.Date" content="2013-05-07">
+    <meta name="DC.Date" content="2013-05-13">
     <meta name="DC.Type" content="XMPP Extension Protocol">
     <meta name="DC.Format" content="XHTML">
-    <meta name="DC.Identifier" content="XEP-xxxx">
+    <meta name="DC.Identifier" content="XEP-0326">
     <meta name="DC.Language" content="en">
     <meta name="DC.Rights" content="This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).">
   </head>
   <body onload="prettyPrint()">
-    <h1>XEP-xxxx: Internet of Things - Concentrators</h1>
+    <h1>XEP-0326: Internet of Things - Concentrators</h1>
     <table>
       <tr valign="top">
         <td><strong>Abstract:</strong></td>
@@ -34,7 +34,7 @@
       </tr>
       <tr valign="top">
         <td><strong>Status:</strong></td>
-        <td>ProtoXEP</td>
+        <td>Experimental</td>
       </tr>
       <tr valign="top">
         <td><strong>Type:</strong></td>
@@ -42,134 +42,135 @@
       </tr>
       <tr valign="top">
         <td><strong>Version:</strong></td>
-        <td>0.1.1</td>
+        <td>0.1.2</td>
       </tr>
       <tr valign="top">
         <td><strong>Last Updated:</strong></td>
-        <td>2013-05-07</td>
+        <td>2013-05-13</td>
       </tr>
     </table>
     <hr>
-    <p style="color:red">WARNING: This document has not yet been accepted for consideration or approved in any official manner by the XMPP Standards Foundation, and this document is not yet an XMPP Extension Protocol (XEP). If this document is accepted as a XEP by the XMPP Council, it will be published at &lt;<a href="http://xmpp.org/extensions/">http://xmpp.org/extensions/</a>&gt; and announced on the &lt;standards@xmpp.org&gt; mailing list.</p>
+    <p style="color:red">WARNING: This Standards-Track document is Experimental. Publication as an XMPP Extension Protocol does not imply approval of this proposal by the XMPP Standards Foundation. Implementation of the protocol described herein is encouraged in exploratory implementations, but production systems are advised to carefully consider whether it is appropriate to deploy implementations of this protocol before it advances to a status of Draft.</p>
     <hr>
     <h2>Table of Contents</h2>
     <div class="indent">
       <p><br>1.  <a href="#intro">Introduction</a><br>   
-      1.1.  <a href="#sect-ID0E6F">Relations to other extensions</a><br>      
-      1.1.1.  <a href="#sect-ID0EHG">XEP-0060</a><br>      
-      1.1.2.  <a href="#sect-ID0EQAAC">XEP-0248</a><br>      
-      1.1.3.  <a href="#sect-ID0ESBAC">XEP-0050</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
-      3.1.  <a href="#sect-ID0ETBAE">Capabilities</a><br>      
-      3.1.1.  <a href="#sect-ID0EXBAE">Get Capabilities</a><br>   
-      3.2.  <a href="#sect-ID0EADAE">Data Sources</a><br>      
-      3.2.1.  <a href="#sect-ID0EEDAE">Get All Data Sources</a><br>      
-      3.2.2.  <a href="#sect-ID0EQDAE">Get Root Data Sources</a><br>      
-      3.2.3.  <a href="#sect-ID0E3DAE">Get Child Data Sources</a><br>      
-      3.2.4.  <a href="#subscribe">Subscribe to data source changes</a><br>      
-      3.2.5.  <a href="#sect-ID0EIGAE">Unsubscribe from data source events</a><br>      
+      1.1.  <a href="#sect-ID0ETG">Relations to other extensions</a><br>      
+      1.1.1.  <a href="#sect-ID0E2G">XEP-0060</a><br>      
+      1.1.2.  <a href="#sect-ID0EEBAC">XEP-0248</a><br>      
+      1.1.3.  <a href="#sect-ID0EGCAC">XEP-0050</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
+      3.1.  <a href="#sect-ID0EHCAE">Capabilities</a><br>      
+      3.1.1.  <a href="#sect-ID0ELCAE">Get Capabilities</a><br>   
+      3.2.  <a href="#sect-ID0EUDAE">Data Sources</a><br>      
+      3.2.1.  <a href="#sect-ID0EYDAE">Get All Data Sources</a><br>      
+      3.2.2.  <a href="#sect-ID0EEEAE">Get Root Data Sources</a><br>      
+      3.2.3.  <a href="#sect-ID0EQEAE">Get Child Data Sources</a><br>      
+      3.2.4.  <a href="#subscribe">Subscribe to data source events</a><br>      
+      3.2.5.  <a href="#sect-ID0E3GAE">Unsubscribe from data source events</a><br>      
       3.2.6.  <a href="#subscribe2">Get changes since given timestamp before subscribing</a><br>      
-      3.2.7.  <a href="#sect-ID0EUIAE">Get changes since given timestamp before subscribing, Failure</a><br>   
-      3.3.  <a href="#sect-ID0ENJAE">Nodes</a><br>      
-      3.3.1.  <a href="#sect-ID0ERJAE">Contains Node</a><br>      
-      3.3.2.  <a href="#sect-ID0E4JAE">Contains Nodes</a><br>      
-      3.3.3.  <a href="#sect-ID0ENKAE">Get Node</a><br>      
-      3.3.4.  <a href="#sect-ID0EBLAE">Get Nodes</a><br>      
-      3.3.5.  <a href="#sect-ID0EVLAE">Get Node with parameters</a><br>      
-      3.3.6.  <a href="#sect-ID0EJMAE">Get Nodes with parameters</a><br>      
-      3.3.7.  <a href="#sect-ID0E4MAE">Get All Nodes</a><br>      
-      3.3.8.  <a href="#sect-ID0EJNAE">Get All Nodes with Parameters</a><br>      
-      3.3.9.  <a href="#sect-ID0EVNAE">Get All Nodes derived from</a><br>      
-      3.3.10.  <a href="#sect-ID0EBOAE">Get All Nodes derived from, with Parameters</a><br>      
-      3.3.11.  <a href="#sect-ID0EROAE">Get Node Inheritance</a><br>      
-      3.3.12.  <a href="#sect-ID0EEPAE">Get Root Nodes</a><br>      
-      3.3.13.  <a href="#sect-ID0EQPAE">Get Root Nodes with Parameters</a><br>      
-      3.3.14.  <a href="#sect-ID0E3PAE">Get Child Nodes</a><br>      
-      3.3.15.  <a href="#sect-ID0EIQAE">Get Child Nodes with Parameters</a><br>      
-      3.3.16.  <a href="#sect-ID0EUQAE">Get Indices of Data Source</a><br>      
-      3.3.17.  <a href="#sect-ID0EARAE">Get Nodes from index</a><br>      
-      3.3.18.  <a href="#sect-ID0EMRAE">Get Nodes from index with Parameters</a><br>      
-      3.3.19.  <a href="#sect-ID0EYRAE">Get Nodes from indices</a><br>      
-      3.3.20.  <a href="#sect-ID0EESAE">Get Nodes from indices with Parameters</a><br>      
-      3.3.21.  <a href="#sect-ID0EQSAE">Get All Index Values</a><br>      
-      3.3.22.  <a href="#sect-ID0E3SAE">Get Node Ancestors</a><br>      
-      3.3.23.  <a href="#sect-ID0EUTAE">Move Node Up</a><br>      
-      3.3.24.  <a href="#sect-ID0EKUAE">Move Node Down</a><br>      
-      3.3.25.  <a href="#sect-ID0EAVAE">Move Nodes Up</a><br>      
-      3.3.26.  <a href="#sect-ID0EWVAE">Move Nodes Down</a><br>   
-      3.4.  <a href="#sect-ID0ENWAE">Node Parameters</a><br>      
-      3.4.1.  <a href="#sect-ID0ERWAE">Get Node Parameters for editing</a><br>      
-      3.4.2.  <a href="#sect-ID0EG1AE">Set Node Parameters after editing</a><br>      
-      3.4.3.  <a href="#sect-ID0EC2AE">Set Node Parameters after editing, Failure</a><br>      
-      3.4.4.  <a href="#sect-ID0EA3AE">Get Common Node Parameters for editing</a><br>      
-      3.4.5.  <a href="#sect-ID0EJ4AE">Set Common Node Parameters after editing</a><br>      
-      3.4.6.  <a href="#sect-ID0EP5AE">Set Common Node Parameters after editing, Failure</a><br>      
-      3.4.7.  <a href="#sect-ID0EK6AE">Get Node Status</a><br>   
-      3.5.  <a href="#sect-ID0EZEAG">Creating and Destroying Nodes</a><br>      
-      3.5.1.  <a href="#sect-ID0E4EAG">Get Addable Node Types</a><br>      
-      3.5.2.  <a href="#sect-ID0EMFAG">Get Parameters for New Node</a><br>      
-      3.5.3.  <a href="#sect-ID0E2FAG">Create New Node</a><br>      
-      3.5.4.  <a href="#sect-ID0EXGAG">Create New Node, Failure</a><br>      
-      3.5.5.  <a href="#sect-ID0ESHAG">Destroy Node</a><br>      
-      3.5.6.  <a href="#sect-ID0EKIAG">Destroy Node, Failure</a><br>   
-      3.6.  <a href="#sect-ID0E5IAG">Node Commands</a><br>      
-      3.6.1.  <a href="#sect-ID0ECJAG">Get Node Commands</a><br>      
-      3.6.2.  <a href="#sect-ID0EPKAG">Execute Simple Node Command</a><br>      
-      3.6.3.  <a href="#sect-ID0E5KAG">Get Node Command Parameters</a><br>      
-      3.6.4.  <a href="#sect-ID0EKLAG">Execute Parameterized Node Command</a><br>      
-      3.6.5.  <a href="#sect-ID0EZLAG">Execute Node Command, Failure</a><br>      
-      3.6.6.  <a href="#sect-ID0EQMAG">Execute Node Query</a><br>      
-      3.6.7.  <a href="#sect-ID0EXNAG">Execute Node Query, Failure</a><br>      
-      3.6.8.  <a href="#sect-ID0EOOAG">Abort Node Query</a><br>      
-      3.6.9.  <a href="#sect-ID0EJPAG">Get Common Commands for Nodes</a><br>      
-      3.6.10.  <a href="#sect-ID0EYPAG">Execute Simple Command on multiple nodes</a><br>      
-      3.6.11.  <a href="#sect-ID0EHQAG">Get Common Command Parameters from command on multiple nodes</a><br>      
-      3.6.12.  <a href="#sect-ID0ETQAG">Execute Common Parameterized Command on multiple nodes</a><br>      
-      3.6.13.  <a href="#sect-ID0ECRAG">Execute Parameterized Command on Multiple Nodes, Failure</a><br>      
-      3.6.14.  <a href="#sect-ID0EZRAG">Execute Command on Multiple Nodes, Partial Failure</a><br>      
-      3.6.15.  <a href="#sect-ID0ETSAG">Execute Common Query on multiple nodes</a><br>      
-      3.6.16.  <a href="#sect-ID0E1TAG">Execute Common Query on multiple nodes, Failure</a><br>      
-      3.6.17.  <a href="#sect-ID0ERUAG">Execute Common Query on multiple nodes, Partial Failure</a><br>      
-      3.6.18.  <a href="#sect-ID0ELVAG">Abort Common Query on multiple nodes</a><br>   
+      3.2.7.  <a href="#sect-ID0EIJAE">Get changes since given timestamp before subscribing, Failure</a><br>   
+      3.3.  <a href="#sect-ID0EBKAE">Nodes</a><br>      
+      3.3.1.  <a href="#sect-ID0EFKAE">Contains Node</a><br>      
+      3.3.2.  <a href="#sect-ID0ERKAE">Contains Nodes</a><br>      
+      3.3.3.  <a href="#sect-ID0EBLAE">Get Node</a><br>      
+      3.3.4.  <a href="#sect-ID0EVLAE">Get Nodes</a><br>      
+      3.3.5.  <a href="#sect-ID0EJMAE">Get Node with parameters</a><br>      
+      3.3.6.  <a href="#sect-ID0E4MAE">Get Nodes with parameters</a><br>      
+      3.3.7.  <a href="#sect-ID0ERNAE">Get All Nodes</a><br>      
+      3.3.8.  <a href="#sect-ID0E4NAE">Get All Nodes with Parameters</a><br>      
+      3.3.9.  <a href="#sect-ID0EJOAE">Get All Nodes derived from</a><br>      
+      3.3.10.  <a href="#sect-ID0EVOAE">Get All Nodes derived from, with Parameters</a><br>      
+      3.3.11.  <a href="#sect-ID0EFPAE">Get Node Inheritance</a><br>      
+      3.3.12.  <a href="#sect-ID0EYPAE">Get Root Nodes</a><br>      
+      3.3.13.  <a href="#sect-ID0EEQAE">Get Root Nodes with Parameters</a><br>      
+      3.3.14.  <a href="#sect-ID0EQQAE">Get Child Nodes</a><br>      
+      3.3.15.  <a href="#sect-ID0E3QAE">Get Child Nodes with Parameters</a><br>      
+      3.3.16.  <a href="#sect-ID0EIRAE">Get Indices of Data Source</a><br>      
+      3.3.17.  <a href="#sect-ID0EURAE">Get Nodes from index</a><br>      
+      3.3.18.  <a href="#sect-ID0EASAE">Get Nodes from index with Parameters</a><br>      
+      3.3.19.  <a href="#sect-ID0EMSAE">Get Nodes from indices</a><br>      
+      3.3.20.  <a href="#sect-ID0EYSAE">Get Nodes from indices with Parameters</a><br>      
+      3.3.21.  <a href="#sect-ID0EETAE">Get All Index Values</a><br>      
+      3.3.22.  <a href="#sect-ID0EQTAE">Get Node Ancestors</a><br>      
+      3.3.23.  <a href="#sect-ID0EIUAE">Move Node Up</a><br>      
+      3.3.24.  <a href="#sect-ID0E5UAE">Move Node Down</a><br>      
+      3.3.25.  <a href="#sect-ID0EUVAE">Move Nodes Up</a><br>      
+      3.3.26.  <a href="#sect-ID0EKWAE">Move Nodes Down</a><br>   
+      3.4.  <a href="#sect-ID0EBXAE">Node Parameters</a><br>      
+      3.4.1.  <a href="#sect-ID0EFXAE">Get Node Parameters for editing</a><br>      
+      3.4.2.  <a href="#sect-ID0E11AE">Set Node Parameters after editing</a><br>      
+      3.4.3.  <a href="#sect-ID0EW2AE">Set Node Parameters after editing, Failure</a><br>      
+      3.4.4.  <a href="#sect-ID0EU3AE">Get Common Node Parameters for editing</a><br>      
+      3.4.5.  <a href="#sect-ID0E44AE">Set Common Node Parameters after editing</a><br>      
+      3.4.6.  <a href="#sect-ID0ED6AE">Set Common Node Parameters after editing, Failure</a><br>      
+      3.4.7.  <a href="#sect-ID0E56AE">Get Node Messages</a><br>   
+      3.5.  <a href="#sect-ID0ENFAG">Creating and Destroying Nodes</a><br>      
+      3.5.1.  <a href="#sect-ID0ERFAG">Get Addable Node Types</a><br>      
+      3.5.2.  <a href="#sect-ID0EAGAG">Get Parameters for New Node</a><br>      
+      3.5.3.  <a href="#sect-ID0EPGAG">Create New Node</a><br>      
+      3.5.4.  <a href="#sect-ID0ELHAG">Create New Node, Failure</a><br>      
+      3.5.5.  <a href="#sect-ID0EGIAG">Destroy Node</a><br>      
+      3.5.6.  <a href="#sect-ID0E5IAG">Destroy Node, Failure</a><br>   
+      3.6.  <a href="#sect-ID0ESJAG">Node Commands</a><br>      
+      3.6.1.  <a href="#sect-ID0EWJAG">Get Node Commands</a><br>      
+      3.6.2.  <a href="#sect-ID0EDLAG">Execute Simple Node Command</a><br>      
+      3.6.3.  <a href="#sect-ID0ESLAG">Get Node Command Parameters</a><br>      
+      3.6.4.  <a href="#sect-ID0E5LAG">Execute Parameterized Node Command</a><br>      
+      3.6.5.  <a href="#sect-ID0ENMAG">Execute Node Command, Failure</a><br>      
+      3.6.6.  <a href="#sect-ID0EENAG">Execute Node Query</a><br>      
+      3.6.7.  <a href="#sect-ID0ELOAG">Execute Node Query, Failure</a><br>      
+      3.6.8.  <a href="#sect-ID0ECPAG">Abort Node Query</a><br>      
+      3.6.9.  <a href="#sect-ID0E4PAG">Get Common Commands for Nodes</a><br>      
+      3.6.10.  <a href="#sect-ID0EMQAG">Execute Simple Command on multiple nodes</a><br>      
+      3.6.11.  <a href="#sect-ID0E2QAG">Get Common Command Parameters from command on multiple nodes</a><br>      
+      3.6.12.  <a href="#sect-ID0EHRAG">Execute Common Parameterized Command on multiple nodes</a><br>      
+      3.6.13.  <a href="#sect-ID0EWRAG">Execute Parameterized Command on Multiple Nodes, Failure</a><br>      
+      3.6.14.  <a href="#sect-ID0ENSAG">Execute Command on Multiple Nodes, Partial Failure</a><br>      
+      3.6.15.  <a href="#sect-ID0EHTAG">Execute Common Query on multiple nodes</a><br>      
+      3.6.16.  <a href="#sect-ID0EOUAG">Execute Common Query on multiple nodes, Failure</a><br>      
+      3.6.17.  <a href="#sect-ID0EFVAG">Execute Common Query on multiple nodes, Partial Failure</a><br>      
+      3.6.18.  <a href="#sect-ID0E6VAG">Abort Common Query on multiple nodes</a><br>   
       3.7.  <a href="#queryevents">Query Events</a><br>      
-      3.7.1.  <a href="#sect-ID0EQXAG">Query Started</a><br>      
-      3.7.2.  <a href="#sect-ID0E6XAG">Query Done</a><br>      
-      3.7.3.  <a href="#sect-ID0EOYAG">Query Aborted</a><br>      
-      3.7.4.  <a href="#sect-ID0E4YAG">New Table</a><br>      
-      3.7.5.  <a href="#sect-ID0EYZAG">New Records</a><br>      
-      3.7.6.  <a href="#sect-ID0EP1AG">Table Done</a><br>      
-      3.7.7.  <a href="#sect-ID0E51AG">New Object</a><br>      
-      3.7.8.  <a href="#sect-ID0EP2AG">Query Message</a><br>   
+      3.7.1.  <a href="#sect-ID0EEYAG">Query Started</a><br>      
+      3.7.2.  <a href="#sect-ID0ETYAG">Query Done</a><br>      
+      3.7.3.  <a href="#sect-ID0ECZAG">Query Aborted</a><br>      
+      3.7.4.  <a href="#sect-ID0ERZAG">New Table</a><br>      
+      3.7.5.  <a href="#sect-ID0EM1AG">New Records</a><br>      
+      3.7.6.  <a href="#sect-ID0ED2AG">Table Done</a><br>      
+      3.7.7.  <a href="#sect-ID0ES2AG">New Object</a><br>      
+      3.7.8.  <a href="#sect-ID0ED3AG">Query Message</a><br>   
       3.8.  <a href="#sourceevents">Data Source Events</a><br>      
-      3.8.1.  <a href="#sect-ID0ES4AG">Node added event</a><br>      
-      3.8.2.  <a href="#sect-ID0E25AG">Node removed</a><br>      
-      3.8.3.  <a href="#sect-ID0EV6AG">Node updated</a><br>      
+      3.8.1.  <a href="#sect-ID0EG5AG">Node added event</a><br>      
+      3.8.2.  <a href="#sect-ID0EP6AG">Node removed</a><br>      
+      3.8.3.  <a href="#sect-ID0EJABG">Node updated</a><br>      
       3.8.4.  <a href="##nodeStatusChanged">Node status changed</a><br>      
-      3.8.5.  <a href="#sect-ID0ETBBG">Node moved up</a><br>      
-      3.8.6.  <a href="#sect-ID0ENCBG">Node moved down</a><br>   
-      3.9.  <a href="#sect-ID0EIDBG">Field Databases</a><br>      
-      3.9.1.  <a href="#sect-ID0EXDBG">Get All Databases</a><br>      
-      3.9.2.  <a href="#sect-ID0EGEBG">Get Database Readout Parameters</a><br>      
-      3.9.3.  <a href="#sect-ID0EVEBG">Start Database Readout</a><br>      
-      3.9.4.  <a href="#sect-ID0EHGBG">Start Database Readout, Failure</a><br>      
-      3.9.5.  <a href="#sect-ID0E1GBG">Cancelling a database read-out</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
+      3.8.5.  <a href="#sect-ID0EHCBG">Node moved up</a><br>      
+      3.8.6.  <a href="#sect-ID0EBDBG">Node moved down</a><br>   
+      3.9.  <a href="#sect-ID0E3DBG">Field Databases</a><br>      
+      3.9.1.  <a href="#sect-ID0ELEBG">Get All Databases</a><br>      
+      3.9.2.  <a href="#sect-ID0E1EBG">Get Database Readout Parameters</a><br>      
+      3.9.3.  <a href="#sect-ID0EJFBG">Start Database Readout</a><br>      
+      3.9.4.  <a href="#sect-ID0E2GBG">Start Database Readout, Failure</a><br>      
+      3.9.5.  <a href="#sect-ID0EOHBG">Cancelling a database read-out</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
       5.1.  <a href="#nodeinfo">Node Information</a><br>   
-      5.2.  <a href="#sect-ID0EUTBG">Parameter Types</a><br>   
-      5.3.  <a href="#sect-ID0EPXBG">Response Codes</a><br>   
-      5.4.  <a href="#sect-ID0EU1BG">Unimplemented commands</a><br>   
+      5.2.  <a href="#sect-ID0EIUBG">Parameter Types</a><br>   
+      5.3.  <a href="#sect-ID0EDYBG">Response Codes</a><br>   
+      5.4.  <a href="#sect-ID0EI2BG">Unimplemented commands</a><br>   
       5.5.  <a href="#nodecommands">Command attributes</a><br>   
-      5.6.  <a href="#sect-ID0ETAAI">Node States</a><br>   
-      5.7.  <a href="#sect-ID0ENDAI">Required Data Sources</a><br>   
+      5.6.  <a href="#sect-ID0EHBAI">Node States</a><br>   
+      5.7.  <a href="#sect-ID0EBEAI">Required Data Sources</a><br>   
       5.8.  <a href="#columndef">Table Column definitions in query results</a><br>   
       5.9.  <a href="#recorddef">Record Item definitions in query results</a><br>   
-      5.10.  <a href="#messagedef">Message definitions in query results</a><br>6.  <a href="#i18n">Internationalization Considerations</a><br>   
-      6.1.  <a href="#sect-ID0E4RAI">Localization</a><br>   
-      6.2.  <a href="#sect-ID0ENSAI">Time Zones</a><br>   
+      5.10.  <a href="#messagedef">Message definitions in query results</a><br>   
+      5.11.  <a href="#sect-ID0EMSAI">Single vs. batch commands</a><br>6.  <a href="#i18n">Internationalization Considerations</a><br>   
+      6.1.  <a href="#sect-ID0EJTAI">Localization</a><br>   
+      6.2.  <a href="#sect-ID0EZTAI">Time Zones</a><br>   
       6.3.  <a href="#interop">Interoperability</a><br>7.  <a href="#security">Security Considerations</a><br>   
-      7.1.  <a href="#sect-ID0EMTAI">Access rights</a><br>   
-      7.2.  <a href="#sect-ID0EIVAI">Integration with provisioning servers</a><br>      
-      7.2.1.  <a href="#sect-ID0EDWAI">Restricting access to data source per contact</a><br>      
-      7.2.2.  <a href="#sect-ID0EBYAI">Restricting access to node properties per contact</a><br>      
-      7.2.3.  <a href="#sect-ID0EDZAI">Restricting access to node commands per contact</a><br>8.  <a href="#iana">IANA Considerations</a><br>9.  <a href="#registrar">XMPP Registrar Considerations</a><br>10.  <a href="#schema">XML Schema</a><br>11.  <a href="#moreinfo">For more information</a><br>12.  <a href="#ack">Acknowledgements</a></p>
+      7.1.  <a href="#sect-ID0EYUAI">Access rights</a><br>   
+      7.2.  <a href="#sect-ID0EUWAI">Integration with provisioning servers</a><br>      
+      7.2.1.  <a href="#sect-ID0EPXAI">Restricting access to data source per contact</a><br>      
+      7.2.2.  <a href="#sect-ID0ENZAI">Restricting access to node properties per contact</a><br>      
+      7.2.3.  <a href="#sect-ID0EP1AI">Restricting access to node commands per contact</a><br>8.  <a href="#iana">IANA Considerations</a><br>9.  <a href="#registrar">XMPP Registrar Considerations</a><br>10.  <a href="#schema">XML Schema</a><br>11.  <a href="#moreinfo">For more information</a><br>12.  <a href="#ack">Acknowledgements</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
     </div>
     <hr>
@@ -196,19 +197,19 @@
             <li class="" style="">Effective ways to interact with entities controlled by the concentrator.</li>
         </ul>
         <div class="indent">
-      <h3>1.1 <a name="sect-ID0E6F">Relations to other extensions</a></h3>
+      <h3>1.1 <a name="sect-ID0ETG">Relations to other extensions</a></h3>
             <p class="" style="">
                 Even though there are technologies available in forms of XEPs that solve parts of the above mentioned problem, they do not provide sufficient support. The following paragraphs will
                 take the time to list why different technologies are not applicable.
             </p>
             <div class="indent">
-        <h3>1.1.1 <a name="sect-ID0EHG">XEP-0060</a></h3>
+        <h3>1.1.1 <a name="sect-ID0E2G">XEP-0060</a></h3>
                 <p class="" style="">
-                    This XEP defines tree structures for nodes in different data sources. <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0060.html">Publish-Subscribe</a></span>  [<a href="#nt-ID0EVG">1</a>] defines a model where a tree structure of nodes is published and users can browse this
-                    tree structure. Furthermore, it allows the possibility to publish items on these nodes as well as syndicalization of this information.
+                    This XEP defines tree structures for nodes in different data sources. <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0060.html">Publish-Subscribe</a></span>  [<a href="#nt-ID0EJH">1</a>] defines a model where a tree structure of nodes is published and users can browse this
+                    tree structure. Furthermore, it allows the possibility to publish items on these nodes as well as syndication of this information.
                 </p>
                 <p class="" style="">
-                    This XEP also defines data sources (in a tree structure). These data sources contain nodes. <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0248.html">PubSub Collection Nodes</a></span>  [<a href="#nt-ID0EGH">2</a>] defines a structure called a node collection, a structure that
+                    This XEP also defines data sources (in a tree structure). These data sources contain nodes. <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0248.html">PubSub Collection Nodes</a></span>  [<a href="#nt-ID0E1H">2</a>] defines a structure called a node collection, a structure that
                     allows the creation of collections containing loosely coupled nodes.
                 </p>
                 <p class="" style="">
@@ -238,9 +239,9 @@
                 </ul>
             </div>
             <div class="indent">
-        <h3>1.1.2 <a name="sect-ID0EQAAC">XEP-0248</a></h3>
+        <h3>1.1.2 <a name="sect-ID0EEBAC">XEP-0248</a></h3>
                 <p class="" style="">
-                    XEP-0248 defines the concept of node collections and syndicalization of information from nodes in these collections. But XEP-0248 is not used in this specification.
+                    XEP-0248 defines the concept of node collections and syndication of information from nodes in these collections. But XEP-0248 is not used in this specification.
                     There are multiple reasons:
                 </p>
                 <ul class="" style="">
@@ -262,9 +263,9 @@
                 </ul>
             </div>
             <div class="indent">
-        <h3>1.1.3 <a name="sect-ID0ESBAC">XEP-0050</a></h3>
+        <h3>1.1.3 <a name="sect-ID0EGCAC">XEP-0050</a></h3>
                 <p class="" style="">
-                    <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0050.html">Ad-Hoc Commands</a></span>  [<a href="#nt-ID0EACAC">3</a>] defines how ad-hoc commands can be implemented and how clients can use such commands to interact with underlying logic. But XEP-0050 is not used in this specification.
+                    <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0050.html">Ad-Hoc Commands</a></span>  [<a href="#nt-ID0EUCAC">3</a>] defines how ad-hoc commands can be implemented and how clients can use such commands to interact with underlying logic. But XEP-0050 is not used in this specification.
                     There are multiple reasons:
                 </p>
                 <ul class="" style="">
@@ -304,11 +305,11 @@
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">XEP-0000-ColorParameter</td>
-                <td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EIEAC">4</a>]</td>
+                <td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0E3EAC">4</a>]</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">XEP-0000-DynamicForms</td>
-                <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0E6EAC">5</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0ELFAC">6</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0EXFAC">7</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EDGAC">8</a>].</td>
+                <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0ETFAC">5</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0E6FAC">6</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0ELGAC">7</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EXGAC">8</a>].</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">xep-0000-IoT-BatteryPoweredSensors</td>
@@ -334,33 +335,33 @@
                 <td colspan="" rowspan="">xep-0000-IoT-PubSub</td>
                 <td colspan="" rowspan="">Defines how efficient publication of sensor data can be made in sensor networks.</td>
             </tr>
-			<tr class="body">
-				<td colspan="" rowspan="">XEP-0322</td>
-				<td colspan="" rowspan="">
-					Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
-					in all sensor network implementations where memory and packet size is an issue.
-				</td>
-			</tr>
-			<tr class="body">
+            <tr class="body">
+                <td colspan="" rowspan="">XEP-0322</td>
+                <td colspan="" rowspan="">
+                    Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
+                    in all sensor network implementations where memory and packet size is an issue.
+                </td>
+            </tr>
+            <tr class="body">
                 <td colspan="" rowspan="">XEP-0323</td>
                 <td colspan="" rowspan="">
                     Provides the underlying architecture, basic operations and data structures for sensor data communication over XMPP networks.
                     It includes a hardware abstraction model, removing any technical detail implemented in underlying technologies. This XEP is used by all other sensor network XEPs.
                 </td>
             </tr>
-			<tr class="body">
-				<td colspan="" rowspan="">XEP-0324</td>
-				<td colspan="" rowspan="">Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
-			</tr>
-			<tr class="body">
-				<td colspan="" rowspan="">XEP-0325</td>
-				<td colspan="" rowspan="">Defines how to control actuators and other devices in Internet of Things.</td>
-			</tr>
-			<tr class="body">
-				<td colspan="" rowspan="">XEP-0326</td>
-				<td colspan="" rowspan="">This specification. Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
-			</tr>
-		</table>
+            <tr class="body">
+                <td colspan="" rowspan="">XEP-0324</td>
+                <td colspan="" rowspan="">Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">XEP-0325</td>
+                <td colspan="" rowspan="">Defines how to control actuators and other devices in Internet of Things.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">XEP-0326</td>
+                <td colspan="" rowspan="">This specification. Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
+            </tr>
+        </table>
     </div>
     <h2>2.
        <a name="glossary">Glossary</a></h2>
@@ -444,7 +445,7 @@
             <di>
                 <dt><strong>Parameter</strong></dt>
                 <dd>
-                    Readable and/or writable property on a node/device. The XEP-0326 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0EFOAC">9</a>] deals with reading and writing parameters
+                    Readable and/or writable property on a node/device. The XEP-0326 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0EZOAC">9</a>] deals with reading and writing parameters
                     on nodes/devices. Fields are not parameters, and parameters are not fields.
                 </dd>
             </di>
@@ -520,9 +521,9 @@
             concentrators of different makes and models and of these varying ranges.
         </p>
         <div class="indent">
-      <h3>3.1 <a name="sect-ID0ETBAE">Capabilities</a></h3>
+      <h3>3.1 <a name="sect-ID0EHCAE">Capabilities</a></h3>
             <div class="indent">
-        <h3>3.1.1 <a name="sect-ID0EXBAE">Get Capabilities</a></h3>
+        <h3>3.1.1 <a name="sect-ID0ELCAE">Get Capabilities</a></h3>
                 <p class="" style="">
                     This document lists a sequence of commands. Some are very basic, while others are used for managing massive amounts of devices. When developing a small PLC, it might
                     be difficult to motivate the implementation of the more advanced commands. They are simply not necessary for the management of the device. So, clients connecting to
@@ -596,7 +597,7 @@
                 <p class="" style="">
                     A concentrator without databases, but still contain a rich interface for handling masses of nodes may present itself as follows:
                 </p>
-                <p class="caption"><a name="example-2"></a>Example 2. Full capabilities</p>
+                <p class="caption"><a name="example-2"></a>Example 2. No database capabilities</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -747,9 +748,9 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.2 <a name="sect-ID0EADAE">Data Sources</a></h3>
+      <h3>3.2 <a name="sect-ID0EUDAE">Data Sources</a></h3>
             <div class="indent">
-        <h3>3.2.1 <a name="sect-ID0EEDAE">Get All Data Sources</a></h3>
+        <h3>3.2.1 <a name="sect-ID0EYDAE">Get All Data Sources</a></h3>
                 <p class="" style="">
                     This command will return a flat list of all available data sources on the concentrator. It is not structured hierarchically.
                 </p>
@@ -769,9 +770,9 @@
        to='client@clayster.com/client'
        id='4'&gt;
       &lt;getAllDataSourcesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;dataSource id='Applications' name='Applications' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
-          &lt;dataSource id='Certificates' name='Certificates' hasChildren='false' lastChanged='2013-02-20T12:31:54'/&gt;
-          &lt;dataSource id='Clayster.EventSink.Programmable' name='Programmable Event Log' hasChildren='false' lastChanged='2012-10-25T09:31:12'/&gt;
+          &lt;dataSource sourceId='Applications' name='Applications' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;dataSource sourceId='Certificates' name='Certificates' hasChildren='false' lastChanged='2013-02-20T12:31:54'/&gt;
+          &lt;dataSource sourceId='Clayster.EventSink.Programmable' name='Programmable Event Log' hasChildren='false' lastChanged='2012-10-25T09:31:12'/&gt;
           ...
       &lt;/getAllDataSourcesResponse&gt;
    &lt;/iq&gt;
@@ -779,7 +780,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.2 <a name="sect-ID0EQDAE">Get Root Data Sources</a></h3>
+        <h3>3.2.2 <a name="sect-ID0EEEAE">Get Root Data Sources</a></h3>
                 <p class="" style="">
                     If the client is interested in the hierarchical structure of available data sources, it should request only the root sources, and then ask the client for their
                     corresponding child data sources. If the client wants to present the data sources to a user, presenting them in their hierarchical order may be more intuitive.
@@ -800,9 +801,9 @@
        to='client@clayster.com/client'
        id='5'&gt;
       &lt;getRootDataSourcesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;dataSource id='MeteringRoot' name='Metering' hasChildren='true' lastChanged='2013-03-19T17:58:01'/&gt;
-          &lt;dataSource id='SecurityRoot' name='Security' hasChildren='true' lastChanged='2013-01-12T22:03:50'/&gt;
-          &lt;dataSource id='SystemRoot' name='System' hasChildren='true' lastChanged='2012-02-20T12:34:56'/&gt;
+          &lt;dataSource sourceId='MeteringRoot' name='Metering' hasChildren='true' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;dataSource sourceId='SecurityRoot' name='Security' hasChildren='true' lastChanged='2013-01-12T22:03:50'/&gt;
+          &lt;dataSource sourceId='SystemRoot' name='System' hasChildren='true' lastChanged='2012-02-20T12:34:56'/&gt;
           ...
       &lt;/getRootDataSourcesResponse&gt;
    &lt;/iq&gt;
@@ -810,7 +811,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.3 <a name="sect-ID0E3DAE">Get Child Data Sources</a></h3>
+        <h3>3.2.3 <a name="sect-ID0EQEAE">Get Child Data Sources</a></h3>
                 <p class="" style="">
                     Having the ID of a data source that contains child data sources, you can fetch the child sources as follows:
                 </p>
@@ -830,20 +831,20 @@
        to='client@clayster.com/client'
        id='6'&gt;
       &lt;getChildDataSourcesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;dataSource id='MeteringFieldImports' name='Field Imports' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
-          &lt;dataSource id='MeteringFieldProcessors' name='Field Processors' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
-          &lt;dataSource id='MeteringFieldSinks' name='Field Sinks' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
-          &lt;dataSource id='MeteringGroups' name='Groups' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
-          &lt;dataSource id='MeteringJobs' name='Jobs' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
-          &lt;dataSource id='MeteringTopology' name='Topology' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
-          &lt;dataSource id='MeteringUnitConversion' name='Unit Conversion' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;dataSource sourceId='MeteringFieldImports' name='Field Imports' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;dataSource sourceId='MeteringFieldProcessors' name='Field Processors' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;dataSource sourceId='MeteringFieldSinks' name='Field Sinks' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;dataSource sourceId='MeteringGroups' name='Groups' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;dataSource sourceId='MeteringJobs' name='Jobs' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;dataSource sourceId='MeteringTopology' name='Topology' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
+          &lt;dataSource sourceId='MeteringUnitConversion' name='Unit Conversion' hasChildren='false' lastChanged='2013-03-19T17:58:01'/&gt;
       &lt;/getChildDataSourcesResponse&gt;
    &lt;/iq&gt;
                 </pre>
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.4 <a name="subscribe">Subscribe to data source changes</a></h3>
+        <h3>3.2.4 <a name="subscribe">Subscribe to data source events</a></h3>
                 <p class="" style="">
                     A client can subscribe to changes made in a data source. It does this by sending the <span class="strong">subscribe</span> command to the concentrator,
                     as is shown in the following example:
@@ -932,7 +933,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.2.5 <a name="sect-ID0EIGAE">Unsubscribe from data source events</a></h3>
+        <h3>3.2.5 <a name="sect-ID0E3GAE">Unsubscribe from data source events</a></h3>
                 <p class="" style="">
                     A client can unsubscribe to changes made in a data source it is subscribed to. It does this by sending the <span class="strong">unsubscribe</span> command to the concentrator,
                     as is shown in the following example:
@@ -1030,7 +1031,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.2.7 <a name="sect-ID0EUIAE">Get changes since given timestamp before subscribing, Failure</a></h3>
+        <h3>3.2.7 <a name="sect-ID0EIJAE">Get changes since given timestamp before subscribing, Failure</a></h3>
                 <p class="" style="">
                     If during a subscription request the concentrator is not able to fulfill the request of retrieving previous events using the <span class="strong">getEventsSince</span> attribute,
                     perhaps the attribute stretches too far back, or includes too many records, the concentrator can return an error message using a response code of <span class="strong">NotImplemented</span>.
@@ -1062,9 +1063,9 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.3 <a name="sect-ID0ENJAE">Nodes</a></h3>
+      <h3>3.3 <a name="sect-ID0EBKAE">Nodes</a></h3>
             <div class="indent">
-        <h3>3.3.1 <a name="sect-ID0ERJAE">Contains Node</a></h3>
+        <h3>3.3.1 <a name="sect-ID0EFKAE">Contains Node</a></h3>
                 <p class="" style="">
                     This command permits the client to check the existence of a node in the concentrator.
                 </p>
@@ -1089,7 +1090,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.2 <a name="sect-ID0E4JAE">Contains Nodes</a></h3>
+        <h3>3.3.2 <a name="sect-ID0ERKAE">Contains Nodes</a></h3>
                 <p class="" style="">
                     If the client wants to check the existence of multiple nodes on the concentrator, it can use this batch command instead:
                 </p>
@@ -1127,7 +1128,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.3 <a name="sect-ID0ENKAE">Get Node</a></h3>
+        <h3>3.3.3 <a name="sect-ID0EBLAE">Get Node</a></h3>
                 <p class="" style="">
                     This command returns basic information about a node in the concentrator.
                 </p>
@@ -1148,7 +1149,7 @@
        id='9'&gt;
       &lt;getNodeResponse xmlns='urn:xmpp:iot:concentrators' 
                        result='OK'
-                       id='Node1' 
+                       nodeId='Node1' 
                        nodeType='Namespace.NodeType1' 
                        cacheType='Node' 
                        state='WarningUnsigned' 
@@ -1166,7 +1167,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.4 <a name="sect-ID0EBLAE">Get Nodes</a></h3>
+        <h3>3.3.4 <a name="sect-ID0EVLAE">Get Nodes</a></h3>
                 <p class="" style="">
                     This command lets the client get information from multiple nodes at once.
                 </p>
@@ -1190,11 +1191,11 @@
        to='client@clayster.com/client'
        id='10'&gt;
       &lt;getNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' isReadable='true' 
+          &lt;node nodeId='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' isReadable='true' 
                 isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/&gt;
-          &lt;node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
+          &lt;node nodeId='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
                 isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/&gt;
-          &lt;node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
+          &lt;node nodeId='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
                 isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/&gt;
       &lt;/getNodesResponse&gt;
    &lt;/iq&gt;
@@ -1205,7 +1206,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.5 <a name="sect-ID0EVLAE">Get Node with parameters</a></h3>
+        <h3>3.3.5 <a name="sect-ID0EJMAE">Get Node with parameters</a></h3>
                 <p class="" style="">
                     This command returns basic information about a node in the concentrator, as well as node parameters.
                 </p>
@@ -1224,7 +1225,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='11'&gt;
-      &lt;getNodeResponse xmlns='urn:xmpp:iot:concentrators' result='OK' id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' 
+      &lt;getNodeResponse xmlns='urn:xmpp:iot:concentrators' result='OK' nodeId='Node1' nodeType='Namespace.NodeType1' cacheType='Node' 
                        state='WarningUnsigned' hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' 
                        parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
           &lt;string id='id' name='Node ID' value='Node1'/&gt;
@@ -1244,7 +1245,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.6 <a name="sect-ID0EJMAE">Get Nodes with parameters</a></h3>
+        <h3>3.3.6 <a name="sect-ID0E4MAE">Get Nodes with parameters</a></h3>
                 <p class="" style="">
                     This command lets the client get information from multiple nodes at once, including node parameters.
                 </p>
@@ -1268,7 +1269,7 @@
        to='client@clayster.com/client'
        id='12'&gt;
       &lt;getNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' isReadable='true' 
+          &lt;node nodeId='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' isReadable='true' 
                 isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
               &lt;string id='id' name='Node ID' value='Node1'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/&gt;
@@ -1279,7 +1280,7 @@
               &lt;double id='lat' name='Latitude' value='12.345'/&gt;
               &lt;double id='long' name='Longitude' value='123.45'/&gt;
           &lt;/node&gt;
-          &lt;node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
+          &lt;node nodeId='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
                 isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
               &lt;string id='id' name='Node ID' value='Node2'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Pressure Sensor v1.2'/&gt;
@@ -1290,7 +1291,7 @@
               &lt;double id='lat' name='Latitude' value='12.345'/&gt;
               &lt;double id='long' name='Longitude' value='123.45'/&gt;
           &lt;/node&gt;
-          &lt;node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
+          &lt;node nodeId='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
                 isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
               &lt;string id='id' name='Node ID' value='Node3'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Electricity Meter v1.2'/&gt;
@@ -1310,7 +1311,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.7 <a name="sect-ID0E4MAE">Get All Nodes</a></h3>
+        <h3>3.3.7 <a name="sect-ID0ERNAE">Get All Nodes</a></h3>
                 <p class="" style="">
                     If the device does not manage too many nodes, it could choose to implement this function. It would return all available nodes with one call.
                 </p>
@@ -1330,13 +1331,13 @@
        to='client@clayster.com/client'
        id='13'&gt;
       &lt;getAllNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
+          &lt;node nodeId='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'/&gt;
-          &lt;node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
+          &lt;node nodeId='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'/&gt;
-          &lt;node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
+          &lt;node nodeId='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'/&gt;
-          &lt;node id='Root' nodeType='Namespace.Root' cacheType='Node' state='None' hasChildren='true' 
+          &lt;node nodeId='Root' nodeType='Namespace.Root' cacheType='Node' state='None' hasChildren='true' 
                 isReadable='false' isControllable='false' hasCommands='true'/&gt;
       &lt;/getAllNodesResponse&gt;
    &lt;/iq&gt;
@@ -1344,7 +1345,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.8 <a name="sect-ID0EJNAE">Get All Nodes with Parameters</a></h3>
+        <h3>3.3.8 <a name="sect-ID0E4NAE">Get All Nodes with Parameters</a></h3>
                 <p class="" style="">
                     If the device does not manage too many nodes, it could choose to implement this function. It would return all available nodes with their parameters with one call.
                 </p>
@@ -1364,7 +1365,7 @@
        to='client@clayster.com/client'
        id='14'&gt;
       &lt;getAllNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
+          &lt;node nodeId='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'&gt;
               &lt;string id='id' name='Node ID' value='Node1'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/&gt;
@@ -1375,7 +1376,7 @@
               &lt;double id='lat' name='Latitude' value='12.345'/&gt;
               &lt;double id='long' name='Longitude' value='123.45'/&gt;
           &lt;/node&gt;
-          &lt;node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
+          &lt;node nodeId='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'&gt;
               &lt;string id='id' name='Node ID' value='Node2'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Pressure Sensor v1.2'/&gt;
@@ -1386,7 +1387,7 @@
               &lt;double id='lat' name='Latitude' value='12.345'/&gt;
               &lt;double id='long' name='Longitude' value='123.45'/&gt;
           &lt;/node&gt;
-          &lt;node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
+          &lt;node nodeId='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'&gt;
               &lt;string id='id' name='Node ID' value='Node3'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Electricity Meter v1.2'/&gt;
@@ -1397,7 +1398,7 @@
               &lt;double id='lat' name='Latitude' value='12.345'/&gt;
               &lt;double id='long' name='Longitude' value='123.45'/&gt;
           &lt;/node&gt;
-          &lt;node id='Root' nodeType='Namespace.Root' cacheType='Node' state='None' hasChildren='true' 
+          &lt;node nodeId='Root' nodeType='Namespace.Root' cacheType='Node' state='None' hasChildren='true' 
                 isReadable='false' isControllable='false' hasCommands='true'&gt;
               &lt;string id='id' name='Node ID' value='Root'/&gt;
               &lt;string id='type' name='Node Type' value='Root Node'/&gt;
@@ -1408,7 +1409,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.9 <a name="sect-ID0EVNAE">Get All Nodes derived from</a></h3>
+        <h3>3.3.9 <a name="sect-ID0EJOAE">Get All Nodes derived from</a></h3>
                 <p class="" style="">
                     This command assumes node types exist in a class hierarchy, and allows the caller to retrieve nodes with similar inheritance.
                 </p>
@@ -1430,9 +1431,9 @@
        to='client@clayster.com/client'
        id='15'&gt;
       &lt;getAllNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
+          &lt;node nodeId='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'/&gt;
-          &lt;node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
+          &lt;node nodeId='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'/&gt;
       &lt;/getAllNodesResponse&gt;
    &lt;/iq&gt;
@@ -1440,7 +1441,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.10 <a name="sect-ID0EBOAE">Get All Nodes derived from, with Parameters</a></h3>
+        <h3>3.3.10 <a name="sect-ID0EVOAE">Get All Nodes derived from, with Parameters</a></h3>
                 <p class="" style="">
                     This command assumes node types exist in a class hierarchy, and allows the caller to retrieve nodes with similar inheritance. It also returns node parameters
                     directly in the response.
@@ -1463,7 +1464,7 @@
        to='client@clayster.com/client'
        id='16'&gt;
       &lt;getAllNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
+          &lt;node nodeId='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'&gt;
               &lt;string id='id' name='Node ID' value='Node1'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/&gt;
@@ -1474,7 +1475,7 @@
               &lt;double id='lat' name='Latitude' value='12.345'/&gt;
               &lt;double id='long' name='Longitude' value='123.45'/&gt;
           &lt;/node&gt;
-          &lt;node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
+          &lt;node nodeId='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'&gt;
               &lt;string id='id' name='Node ID' value='Node3'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Electricity Meter v1.2'/&gt;
@@ -1495,7 +1496,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.11 <a name="sect-ID0EROAE">Get Node Inheritance</a></h3>
+        <h3>3.3.11 <a name="sect-ID0EFPAE">Get Node Inheritance</a></h3>
                 <p class="" style="">
                     This command assumes node types exist in a class hierarchy. It allows the caller to get a list of the node class hierarchy and implemented interfaces the
                     node has.
@@ -1530,7 +1531,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.12 <a name="sect-ID0EEPAE">Get Root Nodes</a></h3>
+        <h3>3.3.12 <a name="sect-ID0EYPAE">Get Root Nodes</a></h3>
                 <p class="" style="">
                     This command returns the root node of a data source (in case the source is a tree-shaped data source) or the nodes of a data source (in case the
                     source is flat).
@@ -1551,7 +1552,7 @@
        to='client@clayster.com/client'
        id='18'&gt;
       &lt;getRootNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
+          &lt;node nodeId='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'/&gt;
       &lt;/getRootNodesResponse&gt;
    &lt;/iq&gt;
@@ -1559,7 +1560,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.13 <a name="sect-ID0EQPAE">Get Root Nodes with Parameters</a></h3>
+        <h3>3.3.13 <a name="sect-ID0EEQAE">Get Root Nodes with Parameters</a></h3>
                 <p class="" style="">
                     This command returns the root node of a data source (in case the source is a tree-shaped data source) or the root nodes of a data source (in case the
                     source is flat), and also returns the parameters for the corresponding nodes.
@@ -1580,7 +1581,7 @@
        to='client@clayster.com/client'
        id='19'&gt;
       &lt;getRootNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
+          &lt;node nodeId='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'&gt;
               &lt;string id='id' name='Node ID' value='Node1'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/&gt;
@@ -1597,7 +1598,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.14 <a name="sect-ID0E3PAE">Get Child Nodes</a></h3>
+        <h3>3.3.14 <a name="sect-ID0EQQAE">Get Child Nodes</a></h3>
                 <p class="" style="">
                     This command returns the child nodes of a node in a data source.
                 </p>
@@ -1617,9 +1618,9 @@
        to='client@clayster.com/client'
        id='20'&gt;
       &lt;getChildNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
+          &lt;node nodeId='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'/&gt;
-          &lt;node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
+          &lt;node nodeId='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'/&gt;
       &lt;/getChildNodesResponse&gt;
    &lt;/iq&gt;
@@ -1627,7 +1628,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.15 <a name="sect-ID0EIQAE">Get Child Nodes with Parameters</a></h3>
+        <h3>3.3.15 <a name="sect-ID0E3QAE">Get Child Nodes with Parameters</a></h3>
                 <p class="" style="">
                     This command returns the child nodes of a node in a data source, and also returns the parameters for the corresponding nodes.
                 </p>
@@ -1647,7 +1648,7 @@
        to='client@clayster.com/client'
        id='21'&gt;
       &lt;getChildNodesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
+          &lt;node nodeId='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'&gt;
               &lt;string id='id' name='Node ID' value='Node2'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Pressure Sensor v1.2'/&gt;
@@ -1658,7 +1659,7 @@
               &lt;double id='lat' name='Latitude' value='12.345'/&gt;
               &lt;double id='long' name='Longitude' value='123.45'/&gt;
           &lt;/node&gt;
-          &lt;node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
+          &lt;node nodeId='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'&gt;
               &lt;string id='id' name='Node ID' value='Node3'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Electricity Meter v1.2'/&gt;
@@ -1675,11 +1676,11 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.16 <a name="sect-ID0EUQAE">Get Indices of Data Source</a></h3>
+        <h3>3.3.16 <a name="sect-ID0EIRAE">Get Indices of Data Source</a></h3>
                 <p class="" style="">
                     This command returns a list of available indices in a data source. Indices can be used for efficient node look-up.
                 </p>
-                <p class="caption"><a name="example-30"></a>Example 30. Get Child Nodes with Parameters</p>
+                <p class="caption"><a name="example-30"></a>Example 30. Get Indices of Data Source</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -1709,7 +1710,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.17 <a name="sect-ID0EARAE">Get Nodes from index</a></h3>
+        <h3>3.3.17 <a name="sect-ID0EURAE">Get Nodes from index</a></h3>
                 <p class="" style="">
                     This command can be used to get a node or nodes from a data source using an index and an index value.
                 </p>
@@ -1729,7 +1730,7 @@
        to='client@clayster.com/client'
        id='23'&gt;
       &lt;getNodesFromIndexResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;node id='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
+          &lt;node nodeId='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Apartment 1-1'/&gt;
       &lt;/getNodesFromIndexResponse&gt;
    &lt;/iq&gt;
@@ -1737,7 +1738,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.18 <a name="sect-ID0EMRAE">Get Nodes from index with Parameters</a></h3>
+        <h3>3.3.18 <a name="sect-ID0EASAE">Get Nodes from index with Parameters</a></h3>
                 <p class="" style="">
                     This command can be used to get a node or nodes from a data source using an index and an index value, and also returns the parameters for the corresponding nodes.
                 </p>
@@ -1758,7 +1759,7 @@
        to='client@clayster.com/client'
        id='24'&gt;
       &lt;getNodesFromIndexResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;node id='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
+          &lt;node nodeId='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Apartment 1-1'&gt;
               &lt;string id='id' name='Node ID' value='Node2'/&gt;
               &lt;string id='type' name='Node Type' value='Metering Topology Reference'/&gt;
@@ -1770,7 +1771,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.19 <a name="sect-ID0EYRAE">Get Nodes from indices</a></h3>
+        <h3>3.3.19 <a name="sect-ID0EMSAE">Get Nodes from indices</a></h3>
                 <p class="" style="">
                     This command can be used to get nodes from a set of data source using indices and index values.
                 </p>
@@ -1793,9 +1794,9 @@
        to='client@clayster.com/client'
        id='25'&gt;
       &lt;getNodesFromIndicesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;node id='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
+          &lt;node nodeId='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Apartment 1-1'/&gt;
-          &lt;node id='Node3' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
+          &lt;node nodeId='Node3' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Apartment 1-2'/&gt;
       &lt;/getNodesFromIndicesResponse&gt;
    &lt;/iq&gt;
@@ -1803,7 +1804,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.20 <a name="sect-ID0EESAE">Get Nodes from indices with Parameters</a></h3>
+        <h3>3.3.20 <a name="sect-ID0EYSAE">Get Nodes from indices with Parameters</a></h3>
                 <p class="" style="">
                     This command can be used to get nodes from a set of data source using indices and index values, and also returns the parameters for the corresponding nodes.
                 </p>
@@ -1826,13 +1827,13 @@
        to='client@clayster.com/client'
        id='26'&gt;
       &lt;getNodesFromIndicesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;node id='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
+          &lt;node nodeId='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Apartment 1-1'&gt;
               &lt;string id='id' name='Node ID' value='Node2'/&gt;
               &lt;string id='type' name='Node Type' value='Metering Topology Reference'/&gt;
               &lt;string id='referenceId' name='Reference ID' value='Node2'/&gt;
           &lt;/node&gt;
-          &lt;node id='Node3' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
+          &lt;node nodeId='Node3' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Apartment 1-2'&gt;
               &lt;string id='id' name='Node ID' value='Node3'/&gt;
               &lt;string id='type' name='Node Type' value='Metering Topology Reference'/&gt;
@@ -1844,7 +1845,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.21 <a name="sect-ID0EQSAE">Get All Index Values</a></h3>
+        <h3>3.3.21 <a name="sect-ID0EETAE">Get All Index Values</a></h3>
                 <p class="" style="">
                     This command can be used to get a list of available index values, given a data source and an index.
                 </p>
@@ -1873,7 +1874,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.22 <a name="sect-ID0E3SAE">Get Node Ancestors</a></h3>
+        <h3>3.3.22 <a name="sect-ID0EQTAE">Get Node Ancestors</a></h3>
                 <p class="" style="">
                     In a tree formed data source, all nodes except the root node has a parent node. The <span class="strong">getAncestors</span> command allows the client to get a list
                     of all ancestors (parent, grand parent, etc.) of a node, as is shown in the following example:
@@ -1894,23 +1895,23 @@
        to='client@clayster.com/client'
        id='42'&gt;
       &lt;getAncestorsResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;node id='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
+          &lt;node nodeId='Node2' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Apartment 1-1'/&gt;
-          &lt;node id='Apartment 1-1' nodeType='Namespace.Apartment' state='None' hasChildren='true' 
+          &lt;node nodeId='Apartment 1-1' nodeType='Namespace.Apartment' state='None' hasChildren='true' 
                 isReadable='false' isControllable='false' hasCommands='true' parentId='Building 1'/&gt;
-          &lt;node id='Building 1' nodeType='Namespace.Building' state='None' hasChildren='true' 
+          &lt;node nodeId='Building 1' nodeType='Namespace.Building' state='None' hasChildren='true' 
                 isReadable='false' isControllable='false' hasCommands='true' parentId='Street'/&gt;
-          &lt;node id='Street' nodeType='Namespace.Street' state='None' hasChildren='true' 
+          &lt;node nodeId='Street' nodeType='Namespace.Street' state='None' hasChildren='true' 
                 isReadable='false' isControllable='false' hasCommands='true' parentId='Area'/&gt;
-          &lt;node id='Area' nodeType='Namespace.Area' state='None' hasChildren='true' 
+          &lt;node nodeId='Area' nodeType='Namespace.Area' state='None' hasChildren='true' 
                 isReadable='false' isControllable='false' hasCommands='true' parentId='City'/&gt;
-          &lt;node id='City' nodeType='Namespace.City' state='None' hasChildren='true' 
+          &lt;node nodeId='City' nodeType='Namespace.City' state='None' hasChildren='true' 
                 isReadable='false' isControllable='false' hasCommands='true' parentId='Region'/&gt;
-          &lt;node id='Region' nodeType='Namespace.Region' state='None' hasChildren='true' 
+          &lt;node nodeId='Region' nodeType='Namespace.Region' state='None' hasChildren='true' 
                 isReadable='false' isControllable='false' hasCommands='true' parentId='Country'/&gt;
-          &lt;node id='Country' nodeType='Namespace.Country' state='None' hasChildren='true' 
+          &lt;node nodeId='Country' nodeType='Namespace.Country' state='None' hasChildren='true' 
                 isReadable='false' isControllable='false' hasCommands='true' parentId='Root'/&gt;
-          &lt;node id='Root' nodeType='Namespace.Root' state='None' hasChildren='true' 
+          &lt;node nodeId='Root' nodeType='Namespace.Root' state='None' hasChildren='true' 
                 isReadable='false' isControllable='false' hasCommands='true'/&gt;
       &lt;/getAncestorsResponse&gt;
    &lt;/iq&gt;
@@ -1922,7 +1923,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.23 <a name="sect-ID0EUTAE">Move Node Up</a></h3>
+        <h3>3.3.23 <a name="sect-ID0EIUAE">Move Node Up</a></h3>
                 <p class="" style="">
                     As the order of siblings in a tree can be important, depending on the context and type of nodes involved, the client may be allowed to move nodes up and down among siblings.
                     To move a node upwards among its siblings is done using the command <span class="strong">moveNodeUp</span>, as is shown in the following example:
@@ -1951,7 +1952,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.24 <a name="sect-ID0EKUAE">Move Node Down</a></h3>
+        <h3>3.3.24 <a name="sect-ID0E5UAE">Move Node Down</a></h3>
                 <p class="" style="">
                     As the order of siblings in a tree can be important, depending on the context and type of nodes involved, the client may be allowed to move nodes up and down among siblings.
                     To move a node downwards among its siblings is done using the command <span class="strong">moveNodeDown</span>, as is shown in the following example:
@@ -1980,7 +1981,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.25 <a name="sect-ID0EAVAE">Move Nodes Up</a></h3>
+        <h3>3.3.25 <a name="sect-ID0EUVAE">Move Nodes Up</a></h3>
                 <p class="" style="">
                     To move a set of nodes upwards among its siblings is done using the command <span class="strong">moveNodesUp</span>, as is shown in the following example:
                 </p>
@@ -2013,11 +2014,11 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.26 <a name="sect-ID0EWVAE">Move Nodes Down</a></h3>
+        <h3>3.3.26 <a name="sect-ID0EKWAE">Move Nodes Down</a></h3>
                 <p class="" style="">
                     To move a set of nodes downwards among its siblings is done using the command <span class="strong">moveNodesDown</span>, as is shown in the following example:
                 </p>
-                <p class="caption"><a name="example-40"></a>Example 40. Move Node Up</p>
+                <p class="caption"><a name="example-40"></a>Example 40. Move Node Down</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2047,9 +2048,9 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.4 <a name="sect-ID0ENWAE">Node Parameters</a></h3>
+      <h3>3.4 <a name="sect-ID0EBXAE">Node Parameters</a></h3>
             <div class="indent">
-        <h3>3.4.1 <a name="sect-ID0ERWAE">Get Node Parameters for editing</a></h3>
+        <h3>3.4.1 <a name="sect-ID0EFXAE">Get Node Parameters for editing</a></h3>
                 <p class="" style="">
                     Previously described commands can return parameters for a node. But these parameters are for presentational or informational use. If the client wants to edit
                     the parameters of a node, another set of commands must be used. This use case shows how <span class="strong">getNodeParametersForEdit</span> can be used to edit available
@@ -2198,11 +2199,11 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.4.2 <a name="sect-ID0EG1AE">Set Node Parameters after editing</a></h3>
+        <h3>3.4.2 <a name="sect-ID0E11AE">Set Node Parameters after editing</a></h3>
                 <p class="" style="">
                     After editing the form, the client uses the <span class="strong">setNodeParametersAfterEdit</span> command to set the parameters in the node. Note that it is possible to
                     set the same parameters (or a sub-set of the same parameters) to a different node using this command, without the need to get new form parameters. However, after the first
-                    successful set operation, any form session used for dynamic validation during edit will not be available on the server any more and must be ignored by the server.
+                    successful set operation, any form session used for dynamic validation during edit will not be available on the server anymore and must be ignored by the server.
                 </p>
                 <p class="caption"><a name="example-42"></a>Example 42. Set Node Parameters after editing</p>
         <div class="indent">
@@ -2247,7 +2248,7 @@
        to='client@clayster.com/client'
        id='29'&gt;
       &lt;setNodeParametersAfterEditResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
+          &lt;node nodeId='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'&gt;
               &lt;string id='id' name='Node ID' value='Node1'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/&gt;
@@ -2270,7 +2271,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.4.3 <a name="sect-ID0EC2AE">Set Node Parameters after editing, Failure</a></h3>
+        <h3>3.4.3 <a name="sect-ID0EW2AE">Set Node Parameters after editing, Failure</a></h3>
                 <p class="" style="">
                     The following example shows how the server responds when the client tries to set invalid parameters. The response contains detailed information about why,
                     information which the client can use to inform the user (if any) of what went wrong.
@@ -2327,11 +2328,11 @@
                     As the <span class="strong">result</span> attribute is <span class="strong">FormError</span>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
                     explicitly cancelled or a form session time-out has occurred. See <a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms</a>
-                     [<a href="#nt-ID0EY2AE">10</a>] for more information.
+                     [<a href="#nt-ID0EM3AE">10</a>] for more information.
                 </p>
             </div>
             <div class="indent">
-        <h3>3.4.4 <a name="sect-ID0EA3AE">Get Common Node Parameters for editing</a></h3>
+        <h3>3.4.4 <a name="sect-ID0EU3AE">Get Common Node Parameters for editing</a></h3>
                 <p class="" style="">
                     Advanced concentrators handling large quantities of nodes may let users edit sets of nodes at once to be practical. This is done by publishing the
                     <span class="strong">getCommonNodeParametersForEdit</span> command. It will return a form with parameters that are common for all selected nodes. Since nodes
@@ -2450,7 +2451,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.4.5 <a name="sect-ID0EJ4AE">Set Common Node Parameters after editing</a></h3>
+        <h3>3.4.5 <a name="sect-ID0E44AE">Set Common Node Parameters after editing</a></h3>
                 <p class="" style="">
                     After editing the form, the client uses the <span class="strong">setCommonNodeParametersAfterEdit</span> command to set the parameters in the set of nodes. Note that it is possible to
                     set the same parameters (or a sub-set of the same parameters) to a different set of nodes using this command, without the need to get new form parameters. However, after the first
@@ -2484,7 +2485,7 @@
        to='client@clayster.com/client'
        id='32'&gt;
       &lt;setCommonNodeParametersAfterEditResponse xmlns='urn:xmpp:iot:concentrators' result='FormError'&gt;
-          &lt;node id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
+          &lt;node nodeId='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'&gt;
               &lt;string id='id' name='Node ID' value='Node1'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/&gt;
@@ -2495,7 +2496,7 @@
               &lt;double id='lat' name='Latitude' value='12.345'/&gt;
               &lt;double id='long' name='Longitude' value='123.45'/&gt;
           &lt;/node&gt;
-          &lt;node id='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
+          &lt;node nodeId='Node2' nodeType='Namespace.NodeType2' cacheType='Node' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'&gt;
               &lt;string id='id' name='Node ID' value='Node2'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Pressure Sensor v1.2'/&gt;
@@ -2506,7 +2507,7 @@
               &lt;double id='lat' name='Latitude' value='12.345'/&gt;
               &lt;double id='long' name='Longitude' value='123.45'/&gt;
           &lt;/node&gt;
-          &lt;node id='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
+          &lt;node nodeId='Node3' nodeType='Namespace.NodeType3' cacheType='Node' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='Root'&gt;
               &lt;string id='id' name='Node ID' value='Node3'/&gt;
               &lt;string id='type' name='Node Type' value='Watchamacallit Electricity Meter v1.2'/&gt;
@@ -2533,12 +2534,12 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.4.6 <a name="sect-ID0EP5AE">Set Common Node Parameters after editing, Failure</a></h3>
+        <h3>3.4.6 <a name="sect-ID0ED6AE">Set Common Node Parameters after editing, Failure</a></h3>
                 <p class="" style="">
                     The following example shows how the server responds when the client tries to set invalid parameters to a set of nodes. The response contains detailed information about why,
                     information which the client can use to inform the user (if any) of what went wrong.
                 </p>
-                <p class="caption"><a name="example-46"></a>Example 46. Set Node Parameters after editing, Failure</p>
+                <p class="caption"><a name="example-46"></a>Example 46. Set Common Node Parameters after editing, Failure</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2582,7 +2583,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.4.7 <a name="sect-ID0EK6AE">Get Node Status</a></h3>
+        <h3>3.4.7 <a name="sect-ID0E56AE">Get Node Messages</a></h3>
                 <p class="" style="">
                     Each node in the concentrator has a <span class="strong">state</span>. This state is a dynamic run-time state, and therefore not presented as a more static property.
                     This state can be any of the following values, in order of increasing importance:
@@ -2652,7 +2653,7 @@
                         <span class="strong">getNodesFromIndices</span>
                     </li>
                 </ul>
-                <p class="caption"><a name="example-47"></a>Example 47. Get Node Status</p>
+                <p class="caption"><a name="example-47"></a>Example 47. Get Node Messages</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2668,9 +2669,10 @@
        to='client@clayster.com/client'
        id='34'&gt;
       &lt;getNodeResponse xmlns='urn:xmpp:iot:concentrators' result='OK' 
-                       id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false'
+                       nodeId='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false'
                        isReadable='true' isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
-          &lt;message timestamp='2013-03-21T11:06:15' type='WarningUnsigned' id='ClockWarning'&gt;Internal clock is offset more than 7 seconds.&lt;/message&gt;
+          &lt;message timestamp='2013-03-21T11:06:15' type='WarningUnsigned' 
+		           eventId='ClockWarning'&gt;Internal clock is offset more than 7 seconds.&lt;/message&gt;
       &lt;/getNodeResponse&gt;                       
    &lt;/iq&gt;
                 </pre>
@@ -2679,7 +2681,7 @@
                     The <span class="strong">messages</span> attribute can be combined with the <span class="strong">parameters</span> attribute to provide both node parameters and
                     messages in the response.
                 </p>
-                <p class="caption"><a name="example-48"></a>Example 48. Get Node with parameters</p>
+                <p class="caption"><a name="example-48"></a>Example 48. Get Node with parameters and messages</p>
         <div class="indent">
           <pre class="prettyprint">
                     
@@ -2695,7 +2697,7 @@
        to='client@clayster.com/client'
        id='35'&gt;
       &lt;getNodeResponse xmlns='urn:xmpp:iot:concentrators' result='OK' 
-                       id='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
+                       nodeId='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false' 
                        isReadable='true' isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
           &lt;string id='id' name='Node ID' value='Node1'/&gt;
           &lt;string id='type' name='Node Type' value='Watchamacallit Temperature Sensor v1.2'/&gt;
@@ -2705,7 +2707,8 @@
           &lt;int id='addr' name='Address' value='123'/&gt;
           &lt;double id='lat' name='Latitude' value='12.345'/&gt;
           &lt;double id='long' name='Longitude' value='123.45'/&gt;
-          &lt;message timestamp='2013-03-21T11:06:15' type='WarningUnsigned' id='ClockWarning'&gt;Internal clock is offset more than 7 seconds.&lt;/message&gt;
+          &lt;message timestamp='2013-03-21T11:06:15' type='WarningUnsigned' 
+		           eventId='ClockWarning'&gt;Internal clock is offset more than 7 seconds.&lt;/message&gt;
       &lt;/getNodeResponse&gt;
    &lt;/iq&gt;
                 </pre>
@@ -2713,9 +2716,9 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.5 <a name="sect-ID0EZEAG">Creating and Destroying Nodes</a></h3>
+      <h3>3.5 <a name="sect-ID0ENFAG">Creating and Destroying Nodes</a></h3>
             <div class="indent">
-        <h3>3.5.1 <a name="sect-ID0E4EAG">Get Addable Node Types</a></h3>
+        <h3>3.5.1 <a name="sect-ID0ERFAG">Get Addable Node Types</a></h3>
                 <p class="" style="">
                     Since nodes are context sensitive, depending on node type and tree structure, before being able to create a new node, it is important to know what types of nodes
                     that can be added to a given node. This is done using the <span class="strong">getAddableNodeTypes</span> command, as is shown in the following example:
@@ -2745,7 +2748,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.5.2 <a name="sect-ID0EMFAG">Get Parameters for New Node</a></h3>
+        <h3>3.5.2 <a name="sect-ID0EAGAG">Get Parameters for New Node</a></h3>
                 <p class="" style="">
                     When you know what type of node you want to create, you need to get a set of parameters you need to fill in for the new node, before you can create it.
                     This is done using the <span class="strong">getParametersForNewNode</span> command, as is shown in the following example:
@@ -2797,7 +2800,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.5.3 <a name="sect-ID0E2FAG">Create New Node</a></h3>
+        <h3>3.5.3 <a name="sect-ID0EPGAG">Create New Node</a></h3>
                 <p class="" style="">
                     After editing the form, the client uses the <span class="strong">createNewNode</span> command to create the new node using the parameters provided in the form.
                 </p>
@@ -2830,7 +2833,7 @@
        to='client@clayster.com/client'
        id='38'&gt;
       &lt;createNewNodeResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;node id='Reference to Node1' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
+          &lt;node nodeId='Reference to Node1' nodeType='Namespace.MeteringTopologyReference' state='None' hasChildren='false' 
                 isReadable='true' isControllable='true' hasCommands='true' parentId='B1'&gt;
               &lt;string id='id' name='Node ID' value='Reference to Node1'/&gt;
               &lt;string id='type' name='Node Type' value='Metering Topology Reference'/&gt;
@@ -2848,7 +2851,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.5.4 <a name="sect-ID0EXGAG">Create New Node, Failure</a></h3>
+        <h3>3.5.4 <a name="sect-ID0ELHAG">Create New Node, Failure</a></h3>
                 <p class="" style="">
                     The following example shows how the server responds when it cannot accept parameters provided when trying to create a node. The response will contain detailed information
                     about why, information which the client can use to inform the user (if any) of what went wrong.
@@ -2896,7 +2899,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.5.5 <a name="sect-ID0ESHAG">Destroy Node</a></h3>
+        <h3>3.5.5 <a name="sect-ID0EGIAG">Destroy Node</a></h3>
                 <p class="" style="">
                     To destroy (remove) a node from the concentrator, the <span class="strong">destroyNode</span> command is sent, as is shown in the following example:
                 </p>
@@ -2924,7 +2927,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.5.6 <a name="sect-ID0EKIAG">Destroy Node, Failure</a></h3>
+        <h3>3.5.6 <a name="sect-ID0E5IAG">Destroy Node, Failure</a></h3>
                 <p class="" style="">
                     If the <span class="strong">result</span> attribute in the response is other than <span class="strong">OK</span>, the node was not removed from the concentrator.
                     The <span class="strong">result</span> attribute contains the reason why the operation failed, as is shown in the following example:
@@ -2951,9 +2954,9 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.6 <a name="sect-ID0E5IAG">Node Commands</a></h3>
+      <h3>3.6 <a name="sect-ID0ESJAG">Node Commands</a></h3>
             <div class="indent">
-        <h3>3.6.1 <a name="sect-ID0ECJAG">Get Node Commands</a></h3>
+        <h3>3.6.1 <a name="sect-ID0EWJAG">Get Node Commands</a></h3>
                 <p class="" style="">
                     Each node can have a context sensitive set of commands available to it. This is shown using the <span class="strong">hasCommands</span> attribute in the
                     <a href="#nodeinfo">Node Information</a> record describing the corresponding node. If the client wants to get a list of available commands,
@@ -2975,14 +2978,14 @@
        to='client@clayster.com/client'
        id='43'&gt;
       &lt;getNodeCommandsResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;command id='knockDoor' name='Knock on door' type='Simple' 
+          &lt;command command='knockDoor' name='Knock on door' type='Simple' 
                    confirmationString='Are you sure you want to knock on the door?'
                    failureString='Unable to knock on the door.'
                    successString='Door knocked.'/&gt;
-          &lt;command id='scheduleWakeupCall' name='Schedule wakeup call' type='Parameterized' 
+          &lt;command command='scheduleWakeupCall' name='Schedule wakeup call' type='Parameterized' 
                    failureString='Unable to schedule the wakeup call.'
                    successString='Wakeup call scheduled.'/&gt;
-          &lt;command id='searchEvents' name='Search events...' type='Query' 
+          &lt;command command='searchEvents' name='Search events...' type='Query' 
                    failureString='Unable to search for events.'
                    successString='Search for events started...'/&gt;
       &lt;/getNodeCommandsResponse&gt;
@@ -3001,7 +3004,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.6.2 <a name="sect-ID0EPKAG">Execute Simple Node Command</a></h3>
+        <h3>3.6.2 <a name="sect-ID0EDLAG">Execute Simple Node Command</a></h3>
                 <p class="" style="">
                     Executing a simple command is done by sending the <span class="strong">executeNodeCommand</span> command to the concentrator, as is shown in the following example:
                 </p>
@@ -3026,7 +3029,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.3 <a name="sect-ID0E5KAG">Get Node Command Parameters</a></h3>
+        <h3>3.6.3 <a name="sect-ID0ESLAG">Get Node Command Parameters</a></h3>
                 <p class="" style="">
                     To execute a parameterized command or a query on the node, the client first needs to get (and edit) a set of parameters for the command. Getting a set of parameters for a
                     parameterized command is done as follows:
@@ -3079,7 +3082,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.4 <a name="sect-ID0EKLAG">Execute Parameterized Node Command</a></h3>
+        <h3>3.6.4 <a name="sect-ID0E5LAG">Execute Parameterized Node Command</a></h3>
                 <p class="" style="">
                     Executing a parameterized command is also done by sending the <span class="strong">executeNodeCommand</span> command to the concentrator, but including the edited form parameters,
                     as is shown in the following example:
@@ -3118,7 +3121,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.5 <a name="sect-ID0EZLAG">Execute Node Command, Failure</a></h3>
+        <h3>3.6.5 <a name="sect-ID0ENMAG">Execute Node Command, Failure</a></h3>
                 <p class="" style="">
                     If an error occurs during the execution of a command or if the server rejects the execution of a command, the server returns a response code different from
                     <span class="strong">OK</span>. If the response code is <span class="strong">FormError</span>, the server maintains any parameter form resources related to the form, and features such as
@@ -3162,7 +3165,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.6 <a name="sect-ID0EQMAG">Execute Node Query</a></h3>
+        <h3>3.6.6 <a name="sect-ID0EENAG">Execute Node Query</a></h3>
                 <p class="" style="">
                     Executing a Node Query also requires the client to get a set of parameters for the query. This is done in the same way as for parametrized commands, 
                     as is shown in the following example:
@@ -3268,7 +3271,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.6.7 <a name="sect-ID0EXNAG">Execute Node Query, Failure</a></h3>
+        <h3>3.6.7 <a name="sect-ID0ELOAG">Execute Node Query, Failure</a></h3>
                 <p class="" style="">
                     If an error occurs during the reception of a query or if the server rejects the execution of a query, the server returns a response code different from
                     <span class="strong">OK</span>. If the response code is <span class="strong">FormError</span>, the server maintains any parameter form resources related to the form, and features such as
@@ -3311,7 +3314,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.8 <a name="sect-ID0EOOAG">Abort Node Query</a></h3>
+        <h3>3.6.8 <a name="sect-ID0ECPAG">Abort Node Query</a></h3>
                 <p class="" style="">
                     One a query has been accepted and started running, the client can abort it using the <span class="strong">abortNodeQuery</span> command, as is shown in the
                     following example.
@@ -3344,7 +3347,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.6.9 <a name="sect-ID0EJPAG">Get Common Commands for Nodes</a></h3>
+        <h3>3.6.9 <a name="sect-ID0E4PAG">Get Common Commands for Nodes</a></h3>
                 <p class="" style="">
                     Using the command <span class="strong">getCommonNodeCommands</span>, the client can receive commands that are common for a set of nodes,
                     as is shown in the following example:
@@ -3372,11 +3375,11 @@
        to='client@clayster.com/client'
        id='48'&gt;
       &lt;getNodeCommandsResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;command id='knockDoor' name='Knock on door' type='Simple' 
+          &lt;command command='knockDoor' name='Knock on door' type='Simple' 
                    confirmationString='Are you sure you want to knock on the door?'
                    failureString='Unable to knock on the door.'
                    successString='Door knocked.'/&gt;
-          &lt;command id='scheduleWakeupCall' name='Schedule wakeup call' type='Parameterized' 
+          &lt;command command='scheduleWakeupCall' name='Schedule wakeup call' type='Parameterized' 
                    failureString='Unable to schedule the wakeup call.'
                    successString='Wakeup call scheduled.'/&gt;
       &lt;/getNodeCommandsResponse&gt;
@@ -3385,7 +3388,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.10 <a name="sect-ID0EYPAG">Execute Simple Command on multiple nodes</a></h3>
+        <h3>3.6.10 <a name="sect-ID0EMQAG">Execute Simple Command on multiple nodes</a></h3>
                 <p class="" style="">
                     Executing a simple command on multiple nodes is done by sending the <span class="strong">executeCommonNodeCommand</span> command to the concentrator,
                     as is shown in the following example:
@@ -3425,7 +3428,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.11 <a name="sect-ID0EHQAG">Get Common Command Parameters from command on multiple nodes</a></h3>
+        <h3>3.6.11 <a name="sect-ID0E2QAG">Get Common Command Parameters from command on multiple nodes</a></h3>
                 <p class="" style="">
                     To execute a parameterized command on a set of nodes, the client first needs to get (and edit) a set of parameters for the common command. Getting a set of parameters for a
                     common parameterized command is done as follows:
@@ -3484,7 +3487,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.12 <a name="sect-ID0ETQAG">Execute Common Parameterized Command on multiple nodes</a></h3>
+        <h3>3.6.12 <a name="sect-ID0EHRAG">Execute Common Parameterized Command on multiple nodes</a></h3>
                 <p class="" style="">
                     Executing a common parameterized command is also done by sending the <span class="strong">executeCommonNodeCommand</span> command to the concentrator, but including the edited form parameters,
                     as is shown in the following example:
@@ -3535,7 +3538,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.13 <a name="sect-ID0ECRAG">Execute Parameterized Command on Multiple Nodes, Failure</a></h3>
+        <h3>3.6.13 <a name="sect-ID0EWRAG">Execute Parameterized Command on Multiple Nodes, Failure</a></h3>
                 <p class="" style="">
                     If an error occurs during the execution of a common command or if the server rejects the execution of a common command, the server returns a response code different from
                     <span class="strong">OK</span>. If the response code is <span class="strong">FormError</span>, the server maintains any parameter form resources related to the form, and features such as
@@ -3584,7 +3587,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.14 <a name="sect-ID0EZRAG">Execute Command on Multiple Nodes, Partial Failure</a></h3>
+        <h3>3.6.14 <a name="sect-ID0ENSAG">Execute Command on Multiple Nodes, Partial Failure</a></h3>
                 <p class="" style="">
                     When executing a command, simple or parameterized, on multiple nodes, it might happen that the command fails on some nodes, but not on others, even though
                     any parameters are validated beforehand. Therefore, the client needs to check any <span class="strong">result</span> elements in the response, even though the
@@ -3641,7 +3644,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.15 <a name="sect-ID0ETSAG">Execute Common Query on multiple nodes</a></h3>
+        <h3>3.6.15 <a name="sect-ID0EHTAG">Execute Common Query on multiple nodes</a></h3>
                 <p class="" style="">
                     Executing a Node Query on multiple nodes also requires the client to get a set of parameters for the query common to all nodes. 
                     This is done in the same way as for parametrized commands, as is shown in the following example:
@@ -3759,7 +3762,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.6.16 <a name="sect-ID0E1TAG">Execute Common Query on multiple nodes, Failure</a></h3>
+        <h3>3.6.16 <a name="sect-ID0EOUAG">Execute Common Query on multiple nodes, Failure</a></h3>
                 <p class="" style="">
                     If an error occurs during the execution of a common query or if the server rejects the execution of a common query, the server returns a response code different from
                     <span class="strong">OK</span>. If the response code is <span class="strong">FormError</span>, the server maintains any parameter form resources related to the form, and features such as
@@ -3808,7 +3811,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.17 <a name="sect-ID0ERUAG">Execute Common Query on multiple nodes, Partial Failure</a></h3>
+        <h3>3.6.17 <a name="sect-ID0EFVAG">Execute Common Query on multiple nodes, Partial Failure</a></h3>
                 <p class="" style="">
                     When executing a query on multiple nodes, it might happen that the query is rejected on some nodes, but not on others, even though
                     any parameters are validated beforehand. Therefore, the client needs to check any <span class="strong">result</span> elements in the response, even though the
@@ -3865,7 +3868,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.6.18 <a name="sect-ID0ELVAG">Abort Common Query on multiple nodes</a></h3>
+        <h3>3.6.18 <a name="sect-ID0E6VAG">Abort Common Query on multiple nodes</a></h3>
                 <p class="" style="">
                     To abort a query common to a set of nodes you use the <span class="strong">abortCommonNodeQuery</span> command, as is shown in the following example:
                 </p>
@@ -3900,7 +3903,7 @@
                     <a href="#queryevents">query events</a> and the reception of them by a client. A client may thinkt a query is still active when asking
                     to abort it, when the query might actually have been finished and removed on the query side. Therefore, clients should be aware of this
                     when receiving <span class="strong">NotFound</span> responses from a concentrator, that the query might already have been finished. In the case of
-					aborting queries on multiple nodes, servers must ignore nodes where the query has already finished executing.
+                    aborting queries on multiple nodes, servers must ignore nodes where the query has already finished executing.
                 </p>
             </div>
         </div>
@@ -3923,7 +3926,7 @@
                 The following subsections describe each query event in turn.
             </p>
             <div class="indent">
-        <h3>3.7.1 <a name="sect-ID0EQXAG">Query Started</a></h3>
+        <h3>3.7.1 <a name="sect-ID0EEYAG">Query Started</a></h3>
                 <p class="" style="">
                     This event is sent when the query is started on a node. It is sent using a <span class="strong">queryStarted</span> event element. This element does not take any
                     attributes.
@@ -3943,7 +3946,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.7.2 <a name="sect-ID0E6XAG">Query Done</a></h3>
+        <h3>3.7.2 <a name="sect-ID0ETYAG">Query Done</a></h3>
                 <p class="" style="">
                     This event is sent when the query is done on a node. It is sent using a <span class="strong">queryDone</span> event element. This element does not take any
                     attributes.
@@ -3963,7 +3966,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.7.3 <a name="sect-ID0EOYAG">Query Aborted</a></h3>
+        <h3>3.7.3 <a name="sect-ID0ECZAG">Query Aborted</a></h3>
                 <p class="" style="">
                     This event is sent when the query has been aborted on a node. It is sent using a <span class="strong">queryAborted</span> event element. This element does not take any
                     attributes.
@@ -3983,7 +3986,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.7.4 <a name="sect-ID0E4YAG">New Table</a></h3>
+        <h3>3.7.4 <a name="sect-ID0ERZAG">New Table</a></h3>
                 <p class="" style="">
                     A query result can consist of zero or more data tables. Each data table consists of a set of columns and records containing value items for the these
                     columns. A new table is identified by a query event named <span class="strong">newTable</span>. a <span class="strong">newTable</span> event contains a sequence of
@@ -4011,7 +4014,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.7.5 <a name="sect-ID0EYZAG">New Records</a></h3>
+        <h3>3.7.5 <a name="sect-ID0EM1AG">New Records</a></h3>
                 <p class="" style="">
                     A set of records in an open table is reported using the <span class="strong">newRecords</span> query event.
                 </p>
@@ -4040,7 +4043,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.7.6 <a name="sect-ID0EP1AG">Table Done</a></h3>
+        <h3>3.7.6 <a name="sect-ID0ED2AG">Table Done</a></h3>
                 <p class="" style="">
                     This event is sent when the query is done with a table. It is sent using a <span class="strong">tableDone</span> event element. The query must not send any more records
                     to a table that has been closed using this query event.
@@ -4061,7 +4064,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.7.7 <a name="sect-ID0E51AG">New Object</a></h3>
+        <h3>3.7.7 <a name="sect-ID0ES2AG">New Object</a></h3>
                 <p class="" style="">
                     Some queries may want to return other types of data than tables, like images, graphs, etc. These may be combined with table information or not.
                     A query returns such an object using the <span class="strong">newObject</span> query event. Each object is MIME encoded, and the MIME Type is sent in the
@@ -4083,7 +4086,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.7.8 <a name="sect-ID0EP2AG">Query Message</a></h3>
+        <h3>3.7.8 <a name="sect-ID0ED3AG">Query Message</a></h3>
                 <p class="" style="">
                     During the processing of a query, the query might want to report a message of some kind. This is done using the <span class="strong">queryMessage</span> 
                     query event.
@@ -4129,7 +4132,7 @@
                 in the <span class="strong">subscribe</span> command determine if node parameters and/or status messages should be sent in event messages.
             </p>
             <div class="indent">
-        <h3>3.8.1 <a name="sect-ID0ES4AG">Node added event</a></h3>
+        <h3>3.8.1 <a name="sect-ID0EG5AG">Node added event</a></h3>
                 <p class="" style="">
                     The <span class="strong">nodeAdded</span> event is sent when a node has been added to a data source which the client subscribes to. The following example 
                     shows how such an event message may look like:
@@ -4140,7 +4143,7 @@
                     
    &lt;message from='concentrator@clayster.com'
             to='client@clayster.com/client'&gt;
-      &lt;nodeAdded xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' 
+      &lt;nodeAdded xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1' nodeType='Namespace.NodeType1' 
                  cacheType='Node' state='None' hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' 
                  parentId='Root' lastChanged='2013-03-19T17:58:01'/&gt;
    &lt;/message&gt;
@@ -4152,7 +4155,7 @@
                     
    &lt;message from='concentrator@clayster.com'
             to='client@clayster.com/client'&gt;
-      &lt;nodeAdded xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' 
+      &lt;nodeAdded xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1' nodeType='Namespace.NodeType1' 
                  cacheType='Node' state='None' hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' 
                  parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
           &lt;string id='id' name='Node ID' value='Node1'/&gt;
@@ -4182,7 +4185,7 @@
                     
    &lt;message from='concentrator@clayster.com'
             to='client@clayster.com/client'&gt;
-      &lt;nodeAdded xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node2' nodeType='Namespace.NodeType1' 
+      &lt;nodeAdded xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node2' nodeType='Namespace.NodeType1' 
                  cacheType='Node' state='None' hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' 
                  parentId='Root' lastChanged='2013-03-19T17:58:01' afterNodeId='Node1' afterNodeCacheType='Node'/&gt;
    &lt;/message&gt;
@@ -4190,7 +4193,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.8.2 <a name="sect-ID0E25AG">Node removed</a></h3>
+        <h3>3.8.2 <a name="sect-ID0EP6AG">Node removed</a></h3>
                 <p class="" style="">
                     The <span class="strong">nodeRemoved</span> event is sent when a node in a data source has been removed or destroyed. It does not include status message or parameter
                     information about the node, only the reference to the node. The following example shows how such an event message may look like:
@@ -4201,7 +4204,7 @@
                     
    &lt;message from='concentrator@clayster.com'
             to='client@clayster.com/client'&gt;
-      &lt;nodeRemoved xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node1'/&gt;
+      &lt;nodeRemoved xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1'/&gt;
    &lt;/message&gt;
                 </pre>
         </div>
@@ -4212,7 +4215,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.8.3 <a name="sect-ID0EV6AG">Node updated</a></h3>
+        <h3>3.8.3 <a name="sect-ID0EJABG">Node updated</a></h3>
                 <p class="" style="">
                     The <span class="strong">nodeUpdated</span> event is sent when a node has been updated in a data source which the client subscribes to. The following example
                     shows how such an event message may look like:
@@ -4223,7 +4226,7 @@
                     
    &lt;message from='concentrator@clayster.com'
             to='client@clayster.com/client'&gt;
-      &lt;nodeUpdated xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' 
+      &lt;nodeUpdated xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1' nodeType='Namespace.NodeType1' 
                    cacheType='Node' state='None' hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' 
                    parentId='Root' lastChanged='2013-03-19T17:58:01'/&gt;
    &lt;/message&gt;
@@ -4235,7 +4238,7 @@
                     
    &lt;message from='concentrator@clayster.com'
             to='client@clayster.com/client'&gt;
-      &lt;nodeUpdated xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node1' nodeType='Namespace.NodeType1' 
+      &lt;nodeUpdated xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1' nodeType='Namespace.NodeType1' 
                    cacheType='Node' state='None' hasChildren='false' isReadable='true' isControllable='true' hasCommands='true' 
                    parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
           &lt;string id='id' name='Node ID' value='Node1'/&gt;
@@ -4260,7 +4263,7 @@
                     
    &lt;message from='concentrator@clayster.com'
             to='client@clayster.com/client'&gt;
-      &lt;nodeUpdated xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' oldId='OldNode1' id='Node1' 
+      &lt;nodeUpdated xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' oldId='OldNode1' nodeId='Node1' 
                    nodeType='Namespace.NodeType1' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
                    isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'/&gt;
    &lt;/message&gt;
@@ -4272,7 +4275,7 @@
                     
    &lt;message from='concentrator@clayster.com'
             to='client@clayster.com/client'&gt;
-      &lt;nodeUpdated xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' oldId='OldNode1' id='Node1' 
+      &lt;nodeUpdated xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' oldId='OldNode1' nodeId='Node1' 
                    nodeType='Namespace.NodeType1' cacheType='Node' state='None' hasChildren='false' isReadable='true' 
                    isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
           &lt;string id='id' name='Node ID' value='Node1'/&gt;
@@ -4304,7 +4307,7 @@
                     
    &lt;message from='concentrator@clayster.com'
             to='client@clayster.com/client'&gt;
-      &lt;nodeStatusChanged xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node1' cacheType='Node' state='ErrorUnsigned'/&gt;
+      &lt;nodeStatusChanged xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1' cacheType='Node' state='ErrorUnsigned'/&gt;
    &lt;/message&gt;
                 </pre>
         </div>
@@ -4314,7 +4317,7 @@
                     
    &lt;message from='concentrator@clayster.com'
             to='client@clayster.com/client'&gt;
-      &lt;nodeStatusChanged xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node1' cacheType='Node' state='ErrorUnsigned'&gt;
+      &lt;nodeStatusChanged xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1' cacheType='Node' state='ErrorUnsigned'&gt;
           &lt;message timestamp='2013-03-22T12:49:34' type='Error'&gt;Sensor does not respond to read-out requests.&lt;/message&gt;
       &lt;/nodeStatusChanged&gt;
    &lt;/message&gt;
@@ -4322,7 +4325,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.8.5 <a name="sect-ID0ETBBG">Node moved up</a></h3>
+        <h3>3.8.5 <a name="sect-ID0EHCBG">Node moved up</a></h3>
                 <p class="" style="">
                     The <span class="strong">nodeMovedUp</span> event is sent when a node in a data source has been moved up among its siblings. It does not include status message or parameter
                     information about the node, only the reference to the node. The following example shows how such an event message may look like:
@@ -4333,7 +4336,7 @@
                     
    &lt;message from='concentrator@clayster.com'
             to='client@clayster.com/client'&gt;
-      &lt;nodeMovedUp xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node1'/&gt;
+      &lt;nodeMovedUp xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1'/&gt;
    &lt;/message&gt;
                 </pre>
         </div>
@@ -4344,7 +4347,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.8.6 <a name="sect-ID0ENCBG">Node moved down</a></h3>
+        <h3>3.8.6 <a name="sect-ID0EBDBG">Node moved down</a></h3>
                 <p class="" style="">
                     The <span class="strong">nodeMovedDown</span> event is sent when a node in a data source has been moved down among its siblings. It does not include status message or parameter
                     information about the node, only the reference to the node. The following example shows how such an event message may look like:
@@ -4355,7 +4358,7 @@
                     
    &lt;message from='concentrator@clayster.com'
             to='client@clayster.com/client'&gt;
-      &lt;nodeMovedDown xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' id='Node1'/&gt;
+      &lt;nodeMovedDown xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1'/&gt;
    &lt;/message&gt;
                 </pre>
         </div>
@@ -4367,7 +4370,7 @@
             </div>
         </div>
         <div class="indent">
-      <h3>3.9 <a name="sect-ID0EIDBG">Field Databases</a></h3>
+      <h3>3.9 <a name="sect-ID0E3DBG">Field Databases</a></h3>
             <p class="" style="">
                 A concentrator can often store data from sensors locally (or remotely but controlled locally). Storage is done in <span class="strong">field databases</span>. A concentrator with
                 only communicative abilities will publish zero such field databases (and support for none of the field database commands), while a pure metering database will publish 
@@ -4378,7 +4381,7 @@
                 The following subsections lists different use cases relating to field databases and how to use them.
             </p>
             <div class="indent">
-        <h3>3.9.1 <a name="sect-ID0EXDBG">Get All Databases</a></h3>
+        <h3>3.9.1 <a name="sect-ID0ELEBG">Get All Databases</a></h3>
                 <p class="" style="">
                     The client can retrieve the list of available databases on the concentrator using the <span class="strong">getDatabases</span> command, as is shown in the following example:
                 </p>
@@ -4398,17 +4401,17 @@
        to='client@clayster.com/client'
        id='64'&gt;
       &lt;getDatabasesResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
-          &lt;database id='LocalDB' name='Local Database'/&gt;
-          &lt;database id='LocalDBTest' name='Local Test Database'/&gt;
-          &lt;database id='LocalDBProduction' name='Local Production Database'/&gt;
-          &lt;database id='RemoteDB' name='Remote Database'/&gt;
+          &lt;database databaseId='LocalDB' name='Local Database'/&gt;
+          &lt;database databaseId='LocalDBTest' name='Local Test Database'/&gt;
+          &lt;database databaseId='LocalDBProduction' name='Local Production Database'/&gt;
+          &lt;database databaseId='RemoteDB' name='Remote Database'/&gt;
       &lt;/getDatabasesResponse&gt;
    &lt;/iq&gt;
                 </pre>
         </div>
             </div>
             <div class="indent">
-        <h3>3.9.2 <a name="sect-ID0EGEBG">Get Database Readout Parameters</a></h3>
+        <h3>3.9.2 <a name="sect-ID0E1EBG">Get Database Readout Parameters</a></h3>
                 <p class="" style="">
                     Before reading data from a database can begin, a parameter form containing database specific search parameters needs to be fetched from the server.
                     This is done using the <span class="strong">getDatabaseReadoutParameters</span> command, as is shown in the following example:
@@ -4657,11 +4660,11 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.9.3 <a name="sect-ID0EVEBG">Start Database Readout</a></h3>
+        <h3>3.9.3 <a name="sect-ID0EJFBG">Start Database Readout</a></h3>
                 <p class="" style="">
                     Once the parameter form has been filled out, a database readout can be started using the <span class="strong">startDatabaseReadout</span> command.
-                    Data read from the concentrator will follow the same flow of sensor data as that described in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0323.html">Internet of Things - Sensor Data</a></span>  [<a href="#nt-ID0EFFBG">11</a>]. The only difference is that the 
-					read-out is started with the <span class="strong">startDatabaseReadout</span> command instead of the <span class="strong">req</span>
+                    Data read from the concentrator will follow the same flow of sensor data as that described in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0323.html">Internet of Things - Sensor Data</a></span>  [<a href="#nt-ID0EZFBG">11</a>]. The only difference is that the 
+                    read-out is started with the <span class="strong">startDatabaseReadout</span> command instead of the <span class="strong">req</span>
                     command of the sensor data namespace.                    
                 </p>
                 <p class="" style="">
@@ -4800,7 +4803,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.9.4 <a name="sect-ID0EHGBG">Start Database Readout, Failure</a></h3>
+        <h3>3.9.4 <a name="sect-ID0E2GBG">Start Database Readout, Failure</a></h3>
                 <p class="" style="">
                     The following example shows a response when the concentrator rejects the read-out request:
                 </p>
@@ -4870,7 +4873,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.9.5 <a name="sect-ID0E1GBG">Cancelling a database read-out</a></h3>
+        <h3>3.9.5 <a name="sect-ID0EOHBG">Cancelling a database read-out</a></h3>
                 <p class="" style="">
                     A client can cancel a database read-out using the <a href="http://xmpp.org/extensions/xep-0323.html#cancelreadout">cancel</a> read-out command,
                     as described in <a href="http://xmpp.org/extensions/xep-0323.html">Internet of Things - Sensor Data</a>.
@@ -4921,23 +4924,23 @@
         </div>
     <h2>4.
        <a name="support">Determining Support</a></h2>
-		<p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:concentrators" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0E4HBG">12</a>] information requests.</p>
-		<p class="caption"><a name="example-101"></a>Example 101. Service discovery information request</p>
+        <p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:concentrators" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0ERIBG">12</a>] information requests.</p>
+        <p class="caption"><a name="example-101"></a>Example 101. Service discovery information request</p>
     <div class="indent">
       <pre class="prettyprint">
-			
+            
 &lt;iq type='get'
     from='device@clayster.com/device'
     to='provisioning@clayster.com'
     id='disco1'&gt;
   &lt;query xmlns='http://jabber.org/protocol/disco#info'/&gt;
 &lt;/iq&gt;
-		</pre>
+        </pre>
     </div>
-		<p class="caption"><a name="example-102"></a>Example 102. Service discovery information response</p>
+        <p class="caption"><a name="example-102"></a>Example 102. Service discovery information response</p>
     <div class="indent">
       <pre class="prettyprint">
-			
+            
 &lt;iq type='result'
     from='provisioning@clayster.com'
     to='device@clayster.com/device'
@@ -4948,13 +4951,13 @@
     ...
   &lt;/query&gt;
 &lt;/iq&gt;
-		</pre>
+        </pre>
     </div>
-		<p class="" style="">
-			In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
-			in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EUIBG">13</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
-		</p>
-	<h2>5.
+        <p class="" style="">
+            In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
+            in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EIJBG">13</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
+        </p>
+    <h2>5.
        <a name="impl">Implementation Notes</a></h2>
         <div class="indent">
       <h3>5.1 <a name="nodeinfo">Node Information</a></h3>
@@ -5084,7 +5087,7 @@
             </p>
         </div>
         <div class="indent">
-      <h3>5.2 <a name="sect-ID0EUTBG">Parameter Types</a></h3>
+      <h3>5.2 <a name="sect-ID0EIUBG">Parameter Types</a></h3>
             <p class="" style="">
                 Nodes can report parameters of different types. The following table lists available parameter types.
             </p>
@@ -5135,7 +5138,7 @@
       </div>
         </div>
         <div class="indent">
-      <h3>5.3 <a name="sect-ID0EPXBG">Response Codes</a></h3>
+      <h3>5.3 <a name="sect-ID0EDYBG">Response Codes</a></h3>
             <p class="" style="">
                 All responses have a response code that the client is required to check. The following table lists possible response codes and their corresponding meanings.
             </p>
@@ -5179,7 +5182,7 @@
       </div>
         </div>
         <div class="indent">
-      <h3>5.4 <a name="sect-ID0EU1BG">Unimplemented commands</a></h3>
+      <h3>5.4 <a name="sect-ID0EI2BG">Unimplemented commands</a></h3>
             <p class="" style="">
                 It's important that the concentrator responds to unrecognized commands. This, to make sure future extensions to this document does not produce unexpected
                 results in concentrators implementing a previous version, or in concentrators implementing only a subset of available commands.
@@ -5287,7 +5290,7 @@
       </div>
         </div>
         <div class="indent">
-      <h3>5.6 <a name="sect-ID0ETAAI">Node States</a></h3>
+      <h3>5.6 <a name="sect-ID0EHBAI">Node States</a></h3>
             <p class="" style="">
                 Nodes can be in different states. Even though nodes are free to publish any amount of states as parameters, there are a set of states that are so crucial to the 
                 concept of a node state, that they are published using a separate attribute and separate events. These node states are as follows:
@@ -5327,7 +5330,7 @@
       </div>
         </div>
         <div class="indent">
-      <h3>5.7 <a name="sect-ID0ENDAI">Required Data Sources</a></h3>
+      <h3>5.7 <a name="sect-ID0EBEAI">Required Data Sources</a></h3>
             <p class="" style="">
                 The following table lists required data sources for concentrators (of sensors, actuators, meters, etc.) in sensor networks:
             </p>
@@ -5345,7 +5348,7 @@
             </table>
       </div>
             <p class="" style="">
-                More information can be found in the  [<a href="#nt-ID0ETEAI">14</a>].
+                More information can be found in the  [<a href="#nt-ID0EHFAI">14</a>].
             </p>
         </div>
         <div class="indent">
@@ -5517,10 +5520,29 @@
             </table>
       </div>
         </div>
+        <div class="indent">
+      <h3>5.11 <a name="sect-ID0EMSAI">Single vs. batch commands</a></h3>
+            <p class="" style="">
+                Many commands exist in single and batch versions. Large concentrators require efficient ways to manage sets of nodes simultaneously, while for small
+                concentrators, it is sufficient to manage nodes one at a time.
+            </p>
+            <p class="" style="">
+                A concentrator is not required to implement both sets of commands if not desired. However, it must report which commands it supports in the
+                <span class="strong">getCapabilities</span> command. A caller can then adapt its calls based on what commands are supported.
+            </p>
+            <p class="" style="">
+                If a caller wants to call the single item version of a command, but the concentrator only supports the batch version, it should call the batch version, but
+                only include the single node in the list of nodes.
+            </p>
+            <p class="" style="">
+                On the other hand, if the caller wants to perform an operation on a set of nodes, but the concentrator only supports the single item version of the command,
+                it needs to manually perform the operation on each node separately, unless failing the request is an option.
+            </p>
+        </div>
     <h2>6.
        <a name="i18n">Internationalization Considerations</a></h2>
         <div class="indent">
-      <h3>6.1 <a name="sect-ID0E4RAI">Localization</a></h3>
+      <h3>6.1 <a name="sect-ID0EJTAI">Localization</a></h3>
             <p class="" style="">
                 Localization of content can be performed if clients provide <span class="strong">xml:lang</span> attributes in commands made to the concentrator. If omitted, the
                 <span class="strong">default language</span> will be used in responses. If provided, but the concentrator does not support localization, or the requested language,
@@ -5528,7 +5550,7 @@
             </p>
         </div>
         <div class="indent">
-      <h3>6.2 <a name="sect-ID0ENSAI">Time Zones</a></h3>
+      <h3>6.2 <a name="sect-ID0EZTAI">Time Zones</a></h3>
             <p class="" style="">
                 Concentrators of larger sub-systems spanning multiple time-zones should specify all timestamps with time-zone information, so readers can perform comparisons
                 of time information.
@@ -5548,7 +5570,7 @@
     <h2>7.
        <a name="security">Security Considerations</a></h2>
         <div class="indent">
-      <h3>7.1 <a name="sect-ID0EMTAI">Access rights</a></h3>
+      <h3>7.1 <a name="sect-ID0EYUAI">Access rights</a></h3>
             <p class="" style="">
                 This document publishes a lot of commands with which to interact with a concentrator. If security and access rights is an issue, it might not be sufficient
                 to allow all friends access to the system. There are many ways in which to restrict access to the contents of the concentrator. Following are some examples:
@@ -5558,7 +5580,7 @@
                     The concentrator can restrict friendships to trusted friends, and then assign access rights internally to the approved contacts.
                 </li>
                 <li class="" style="">
-                    The concentrator can use a provisioning server (see <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0EGUAI">15</a>]) 
+                    The concentrator can use a provisioning server (see <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0ESVAI">15</a>]) 
                     to delegate trust to a third party responsible for controlling who can get access to the concentrator (<span class="strong">isFriend</span> or <span class="strong">canAccess</span> commands), 
                     and what items can be viewed (<span class="strong">hasPrivilege</span> or <span class="strong">downloadPrivileges</span> commands).
                 </li>
@@ -5571,14 +5593,14 @@
             </ul>
         </div>
         <div class="indent">
-      <h3>7.2 <a name="sect-ID0EIVAI">Integration with provisioning servers</a></h3>
+      <h3>7.2 <a name="sect-ID0EUWAI">Integration with provisioning servers</a></h3>
             <p class="" style="">
                 The <a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a> document describes how trust can be delegated to trusted provisioning servers
                 that can be used to restrict access to and privileges in a network.
             </p>
             <p class="" style="">
                 If a concentrator has a trusted relationship with a provisioning server, external or internal, the provisioning server must be used to guarantee that the
-                concetrator only allows access according to rules defiend by the provisioning server. In order to do this, it's important that clients always provide
+                concentrator only allows access according to rules defined by the provisioning server. In order to do this, it's important that clients always provide
                 available tokens (<span class="strong">userToken</span>, <span class="strong">serviceToken</span> and <span class="strong">deviceToken</span>) to the concentrator so that it can forward this
                 information to the provisioning server.
             </p>
@@ -5586,7 +5608,7 @@
                 The following subsections show different examples of how such an integration can be performed.
             </p>
             <div class="indent">
-        <h3>7.2.1 <a name="sect-ID0EDWAI">Restricting access to data source per contact</a></h3>
+        <h3>7.2.1 <a name="sect-ID0EPXAI">Restricting access to data source per contact</a></h3>
                 <p class="" style="">
                     This section shows how a provisioning server can be used to restrict access to data sources to users allowed to access those data sources.
                 </p>
@@ -5614,7 +5636,7 @@
                 </ul>
             </div>
             <div class="indent">
-        <h3>7.2.2 <a name="sect-ID0EBYAI">Restricting access to node properties per contact</a></h3>
+        <h3>7.2.2 <a name="sect-ID0ENZAI">Restricting access to node properties per contact</a></h3>
                 <p class="" style="">
                     This section shows how a provisioning server can be used to restrict access to node parameters that users allowed to access and edit.
                 </p>
@@ -5632,7 +5654,7 @@
                 </ul>
             </div>
             <div class="indent">
-        <h3>7.2.3 <a name="sect-ID0EDZAI">Restricting access to node commands per contact</a></h3>
+        <h3>7.2.3 <a name="sect-ID0EP1AI">Restricting access to node commands per contact</a></h3>
                 <p class="" style="">
                     This section shows how a provisioning server can be used to restrict access to node commands to users allowed to access those commands.
                 </p>
@@ -5654,7 +5676,7 @@
         </div>
     <h2>8.
        <a name="iana">IANA Considerations</a></h2>
-        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EZ1AI">16</a>].</p>
+        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EF3AI">16</a>].</p>
     <h2>9.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
         <p class="" style="">REQUIRED.</p>
@@ -6002,7 +6024,7 @@
             &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
                 &lt;xs:element name='database'&gt;
                     &lt;xs:complexType&gt;
-                        &lt;xs:attribute name='id' type='xs:string' use='required'/&gt;
+                        &lt;xs:attribute name='databaseId' type='xs:string' use='required'/&gt;
                         &lt;xs:attribute name='name' type='xs:string' use='optional'/&gt;
                     &lt;/xs:complexType&gt;
                 &lt;/xs:element&gt;
@@ -6291,7 +6313,7 @@
     &lt;/xs:complexType&gt;
   
     &lt;xs:complexType name='DataSource'&gt;
-        &lt;xs:attribute name='id' type='xs:string' use='required'/&gt;
+        &lt;xs:attribute name='sourceId' type='xs:string' use='required'/&gt;
         &lt;xs:attribute name='name' type='xs:string' use='required'/&gt;
         &lt;xs:attribute name='hasChildren' type='xs:boolean' use='optional' default='false'/&gt;
         &lt;xs:attribute name='lastChanged' type='xs:dateTime' use='optional'/&gt;
@@ -6380,7 +6402,7 @@
             &lt;xs:element name='time' type='TimeParameter'/&gt;
             &lt;xs:element name='message' type='Message'/&gt;
         &lt;/xs:choice&gt;
-        &lt;xs:attribute name='id' type='xs:string' use='required'/&gt;
+        &lt;xs:attribute name='nodeId' type='xs:string' use='required'/&gt;
         &lt;xs:attribute name='displayName' type='xs:string' use='optional'/&gt;
         &lt;xs:attribute name='nodeType' type='xs:string' use='optional'/&gt;
         &lt;xs:attribute name='localId' type='xs:string' use='optional'/&gt;
@@ -6487,7 +6509,7 @@
             &lt;xs:extension base='xs:string'&gt;
                 &lt;xs:attribute name='timestamp' type='xs:dateTime' use='required'/&gt;
                 &lt;xs:attribute name='type' type='MessageType' use='required'/&gt;
-                &lt;xs:attribute name='id' type='xs:string' use='optional'/&gt;
+                &lt;xs:attribute name='eventId' type='xs:string' use='optional'/&gt;
             &lt;/xs:extension&gt;
         &lt;/xs:simpleContent&gt;
     &lt;/xs:complexType&gt;
@@ -6568,7 +6590,7 @@
     &lt;/xs:complexType&gt;
   
     &lt;xs:complexType name='Command'&gt;
-        &lt;xs:attribute name='id' type='xs:string' use='required'/&gt;
+        &lt;xs:attribute name='command' type='xs:string' use='required'/&gt;
         &lt;xs:attribute name='name' type='xs:string' use='required'/&gt;
         &lt;xs:attribute name='type' type='CommandType' use='required'/&gt;
         &lt;xs:attribute name='sortCategory' type='xs:string' use='optional'/&gt;
@@ -6661,26 +6683,28 @@
         </ul>
     <h2>12.
        <a name="ack">Acknowledgements</a></h2>
-        <p class="" style="">Thanks to Joachim Lindborg, Karin Forsell and Tina Beckman for all valuable feedback.</p>
+        <p class="" style="">Thanks to Joachim Lindborg, Karin Forsell, Tina Beckman and Klaudiusz Staniek for all valuable feedback.</p>
     <hr><a name="appendices"></a><h2>Appendices</h2>
     <hr><a name="appendix-docinfo"></a><h3>Appendix A: Document Information</h3>
     <p class="indent">
             Series: <a href="http://xmpp.org/extensions/">XEP</a><br>
-            Number: xxxx<br>
+            Number: 0326<br>
             Publisher: <a href="/xsf/">XMPP Standards Foundation</a><br>
             Status: 
-            <a href="http://xmpp.org/extensions/xep-0001.html#states-ProtoXEP">ProtoXEP</a><br>
+            <a href="http://xmpp.org/extensions/xep-0001.html#states-Experimental">Experimental</a><br>
             Type:
             <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
-            Version: 0.1.1<br>
-            Last Updated: 2013-05-07<br>
+            Version: 0.1.2<br>
+            Last Updated: 2013-05-13<br>
                 Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001, XEP-0004, XEP-0030, XEP-0122, XEP-0137, XEP-0141, XEP-0323, XEP-0324, xep-0000-DynamicForms, xep-0000-ColorParameter<br>
                 Supersedes: None<br>
                 Superseded By: None<br>
             Short Name: NOT_YET_ASSIGNED<br>
+              Source Control: 
+                <a class="standardsButton" href="http://gitorious.org/xmpp/xmpp/blobs/master/extensions/xep-0326.xml">HTML</a><br>
             This document in other formats: 
-                <a class="standardsButton" href="http://xmpp.org/extensions/xep-xxxx.xml">XML</a> 
-                <a class="standardsButton" href="http://xmpp.org/extensions/xep-xxxx.pdf">PDF</a></p>
+                <a class="standardsButton" href="http://xmpp.org/extensions/xep-0326.xml">XML</a> 
+                <a class="standardsButton" href="http://xmpp.org/extensions/xep-0326.pdf">PDF</a></p>
     <hr><a name="appendix-authorinfo"></a><h3>Appendix B: Author Information</h3>
     <div class="indent">
       <h3>Peter Waher</h3>
@@ -6707,41 +6731,47 @@
     <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
     <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
     <div class="indent">
-      <p><a name="nt-ID0EVG">1</a>. XEP-0060: Publish-Subscribe &lt;<a href="http://xmpp.org/extensions/xep-0060.html">http://xmpp.org/extensions/xep-0060.html</a>&gt;.</p>
-      <p><a name="nt-ID0EGH">2</a>. XEP-0248: PubSub Collection Nodes &lt;<a href="http://xmpp.org/extensions/xep-0248.html">http://xmpp.org/extensions/xep-0248.html</a>&gt;.</p>
-      <p><a name="nt-ID0EACAC">3</a>. XEP-0050: Ad-Hoc Commands &lt;<a href="http://xmpp.org/extensions/xep-0050.html">http://xmpp.org/extensions/xep-0050.html</a>&gt;.</p>
-      <p><a name="nt-ID0EIEAC">4</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0E6EAC">5</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0ELFAC">6</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
-      <p><a name="nt-ID0EXFAC">7</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
-      <p><a name="nt-ID0EDGAC">8</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
-      <p><a name="nt-ID0EFOAC">9</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
-      <p><a name="nt-ID0EY2AE">10</a>. 
+      <p><a name="nt-ID0EJH">1</a>. XEP-0060: Publish-Subscribe &lt;<a href="http://xmpp.org/extensions/xep-0060.html">http://xmpp.org/extensions/xep-0060.html</a>&gt;.</p>
+      <p><a name="nt-ID0E1H">2</a>. XEP-0248: PubSub Collection Nodes &lt;<a href="http://xmpp.org/extensions/xep-0248.html">http://xmpp.org/extensions/xep-0248.html</a>&gt;.</p>
+      <p><a name="nt-ID0EUCAC">3</a>. XEP-0050: Ad-Hoc Commands &lt;<a href="http://xmpp.org/extensions/xep-0050.html">http://xmpp.org/extensions/xep-0050.html</a>&gt;.</p>
+      <p><a name="nt-ID0E3EAC">4</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0ETFAC">5</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0E6FAC">6</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
+      <p><a name="nt-ID0ELGAC">7</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
+      <p><a name="nt-ID0EXGAC">8</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+      <p><a name="nt-ID0EZOAC">9</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
+      <p><a name="nt-ID0EM3AE">10</a>. 
                         XEP-xxxx: Dynamic Data Forms &lt;<a href="xep-0000-DynamicForms.html">xep-0000-DynamicForms.html</a>&gt;
                     </p>
-      <p><a name="nt-ID0EFFBG">11</a>. XEP-0323: Internet of Things - Sensor Data &lt;<a href="http://xmpp.org/extensions/xep-0323.html">http://xmpp.org/extensions/xep-0323.html</a>&gt;.</p>
-      <p><a name="nt-ID0E4HBG">12</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
-      <p><a name="nt-ID0EUIBG">13</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
-      <p><a name="nt-ID0ETEAI">14</a>. XEP-xxxx: Interoperability <a href="#interop">Interoperability section</a></p>
-      <p><a name="nt-ID0EGUAI">15</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
-      <p><a name="nt-ID0EZ1AI">16</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+      <p><a name="nt-ID0EZFBG">11</a>. XEP-0323: Internet of Things - Sensor Data &lt;<a href="http://xmpp.org/extensions/xep-0323.html">http://xmpp.org/extensions/xep-0323.html</a>&gt;.</p>
+      <p><a name="nt-ID0ERIBG">12</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0EIJBG">13</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0EHFAI">14</a>. XEP-xxxx: Interoperability <a href="#interop">Interoperability section</a></p>
+      <p><a name="nt-ID0ESVAI">15</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
+      <p><a name="nt-ID0EF3AI">16</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
     <div class="indent">
+      <h4>Version 0.1.2 (2013-05-13)</h4>
+      <div class="indent">
+				<p class="" style="">Updated attribute names so queries and responses are consistent.</p>
+				<p class="" style="">Updated the language.</p>
+			 (pw)
+    </div>
       <h4>Version 0.1.1 (2013-05-07)</h4>
       <div class="indent">
-				<p class="" style="">Added section about how to determine support.</p>
+                <p class="" style="">Added section about how to determine support.</p>
                 <p class="" style="">Corrected language and examples.</p>
                 <p class="" style="">Node Query command type added.</p>
-				<p class="" style="">Fixed links to documents with new numbers.</p>
-				<p class="" style="">Changed namespace urn:xmpp:sn to urn:xmpp:iot</p>
-			 (pw)
+                <p class="" style="">Fixed links to documents with new numbers.</p>
+                <p class="" style="">Changed namespace urn:xmpp:sn to urn:xmpp:iot</p>
+             (pw)
     </div>
       <h4>Version 0.1 (2013-05-06)</h4>
       <div class="indent">
-				<p class="" style="">Initial published version approved by the XMPP Council.</p>
-			 (psa)
+                <p class="" style="">Initial published version approved by the XMPP Council.</p>
+             (psa)
     </div>
       <h4>Version 0.0.1 (2013-03-20)</h4>
       <div class="indent">

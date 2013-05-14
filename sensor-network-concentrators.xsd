@@ -334,7 +334,7 @@
 			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
 				<xs:element name='database'>
 					<xs:complexType>
-						<xs:attribute name='id' type='xs:string' use='required'/>
+						<xs:attribute name='databaseId' type='xs:string' use='required'/>
 						<xs:attribute name='name' type='xs:string' use='optional'/>
 					</xs:complexType>
 				</xs:element>
@@ -623,7 +623,7 @@
     </xs:complexType>
   
     <xs:complexType name='DataSource'>
-        <xs:attribute name='id' type='xs:string' use='required'/>
+        <xs:attribute name='sourceId' type='xs:string' use='required'/>
         <xs:attribute name='name' type='xs:string' use='required'/>
         <xs:attribute name='hasChildren' type='xs:boolean' use='optional' default='false'/>
         <xs:attribute name='lastChanged' type='xs:dateTime' use='optional'/>
@@ -712,7 +712,7 @@
             <xs:element name='time' type='TimeParameter'/>
             <xs:element name='message' type='Message'/>
         </xs:choice>
-        <xs:attribute name='id' type='xs:string' use='required'/>
+        <xs:attribute name='nodeId' type='xs:string' use='required'/>
         <xs:attribute name='displayName' type='xs:string' use='optional'/>
         <xs:attribute name='nodeType' type='xs:string' use='optional'/>
         <xs:attribute name='localId' type='xs:string' use='optional'/>
@@ -819,7 +819,7 @@
             <xs:extension base='xs:string'>
                 <xs:attribute name='timestamp' type='xs:dateTime' use='required'/>
                 <xs:attribute name='type' type='MessageType' use='required'/>
-                <xs:attribute name='id' type='xs:string' use='optional'/>
+                <xs:attribute name='eventId' type='xs:string' use='optional'/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -900,7 +900,7 @@
     </xs:complexType>
   
     <xs:complexType name='Command'>
-        <xs:attribute name='id' type='xs:string' use='required'/>
+        <xs:attribute name='command' type='xs:string' use='required'/>
         <xs:attribute name='name' type='xs:string' use='required'/>
         <xs:attribute name='type' type='CommandType' use='required'/>
         <xs:attribute name='sortCategory' type='xs:string' use='optional'/>
