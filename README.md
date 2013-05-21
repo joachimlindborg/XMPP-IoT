@@ -19,11 +19,11 @@ xep-0000-IoT-BatteryPoweredSensors
                 Defines how to handle the peculiars related to battery powered
 		devices, and other devices intermittently available on the network.
 
-[xep-0000-IoT-Concentrators](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/master/xep-0000-IoT-Concentrators.html)
+[xep-0000-IoT-Concentrators](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/sensor-network-concentrators.html)
 		Defines how to handle architectures containing concentrators 
 		or servers handling multiple sensors.
 
-[xep-0000-IoT-Control](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/xep-0000-IoT-Control.html)
+[xep-0000-IoT-Control](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/sensor-network-Control.html)
 		Defines how to control actuators and other devices in
 		sensor networks.
 
