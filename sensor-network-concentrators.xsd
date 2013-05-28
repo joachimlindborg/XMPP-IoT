@@ -54,7 +54,7 @@
     <xs:element name='getNodes' type='NodeReferenceParametersRequest'/>
     <xs:element name='getNodesResponse' type='NodeInformationArrayResponse'/>
  
-    <xs:element name='getAllNodes' type='SourceReferenceParametersRequest'/>
+    <xs:element name='getAllNodes' type='GetAllNodesRequest'/>
     <xs:element name='getAllNodesResponse' type='NodeInformationArrayResponse'/>
  
     <xs:element name='getNodeInheritance' type='NodeReferenceRequest'/>
@@ -70,7 +70,7 @@
     <xs:element name='getRootNodes' type='SourceReferenceParametersRequest'/>
     <xs:element name='getRootNodesResponse' type='NodeInformationArrayResponse'/>
  
-    <xs:element name='getChildNodes' type='NodeReferenceParametersRequest'/>
+    <xs:element name='getChildNodes' type='GetChildNodesRequest'/>
     <xs:element name='getChildNodesResponse' type='NodeInformationArrayResponse'/>
  
     <xs:element name='getIndices' type='SourceReferenceRequest'/>
@@ -676,7 +676,7 @@
  
     <xs:complexType name='GetAllNodesRequest'>
         <xs:complexContent>
-            <xs:extension base='SourceReferenceRequest'>
+            <xs:extension base='SourceReferenceParametersRequest'>
                 <xs:sequence minOccurs='0' maxOccurs='unbounded'>
                     <xs:element name='onlyIfDerivedFrom' type='xs:string'/>
                 </xs:sequence>
@@ -686,7 +686,7 @@
   
     <xs:complexType name='GetChildNodesRequest'>
         <xs:complexContent>
-            <xs:extension base='NodeReferenceRequest'>
+            <xs:extension base='NodeReferenceParametersRequest'>
                 <xs:sequence minOccurs='0' maxOccurs='unbounded'>
                     <xs:element name='sortOrder' type='SortOrder'/>
                 </xs:sequence>

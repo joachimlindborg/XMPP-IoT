@@ -700,7 +700,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='6'>
-      <getChildDataSources xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringRoot' xml:lang='en' lastChanged='2013-03-19T17:58:01'/>
+      <getChildDataSources xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringRoot' xml:lang='en'/>
    </iq>
    
    <iq type='result'
@@ -1823,8 +1823,8 @@
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
-             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
-             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'>
+             xmlns:xdl='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd='http://jabber.org/protocol/xdata-dynamic'>
               <title>Node1</title>
               <xdl:page label='Identity'>
                   <xdl:fieldref var='id'/>
@@ -2081,7 +2081,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='31'>
-      <getCommonNodeParametersForEdit xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' xml:lang='en'>
+      <getCommonNodeParametersForEdit xmlns='urn:xmpp:iot:concentrators' xml:lang='en'>
          <node sourceId='MeteringTopology' nodeId='Node1'/>
          <node sourceId='MeteringTopology' nodeId='Node2'/>
          <node sourceId='MeteringTopology' nodeId='Node3'/>
@@ -2096,8 +2096,8 @@
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
-             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
-             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'>
+             xmlns:xdl='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd='http://jabber.org/protocol/xdata-dynamic'>
               <title>Node1, Node2, Node3</title>
               <xdl:page label='Identity'>
                   <xdl:fieldref var='type'/>
@@ -2190,7 +2190,7 @@
        from='client@clayster.com/client'
        to='concentrator@clayster.com'
        id='32'>
-      <setCommonNodeParametersAfterEdit xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringTopology' nodeId='Node1' xml:lang='en'>
+      <setCommonNodeParametersAfterEdit xmlns='urn:xmpp:iot:concentrators' xml:lang='en'>
           <node sourceId='MeteringTopology' nodeId='Node1'/>
           <node sourceId='MeteringTopology' nodeId='Node2'/>
           <node sourceId='MeteringTopology' nodeId='Node3'/>
@@ -2475,8 +2475,8 @@
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
-             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
-             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'>
+             xmlns:xdl='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd='http://jabber.org/protocol/xdata-dynamic'>
               <title>Metering Topology</title>
               <xdl:page label='Identity'>
                   <xdl:fieldref var='id'/>
@@ -2727,8 +2727,8 @@
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
-             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
-             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'>
+             xmlns:xdl='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd='http://jabber.org/protocol/xdata-dynamic'>
               <title>Schedule wake-up call</title>
               <field var='xdd session' type='hidden'>
                   <value>E14E330F-8496-46F0-8F40-178808AB13A7</value>
@@ -2851,8 +2851,8 @@
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
-             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
-             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'>
+             xmlns:xdl='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd='http://jabber.org/protocol/xdata-dynamic'>
               <title>Search for events</title>
               <field var='xdd session' type='hidden'>
                   <value>E14E330F-8496-46F0-8F40-178808AB13A7</value>
@@ -3097,8 +3097,8 @@
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
-             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
-             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'>
+             xmlns:xdl='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd='http://jabber.org/protocol/xdata-dynamic'>
               <title>Schedule wake-up call</title>
               <field var='xdd session' type='hidden'>
                   <value>E14E330F-8496-46F0-8F40-178808AB13A7</value>
@@ -3297,8 +3297,8 @@
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
-             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
-             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'>
+             xmlns:xdl='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd='http://jabber.org/protocol/xdata-dynamic'>
               <title>Schedule wake-up call</title>
               <field var='xdd session' type='hidden'>
                   <value>E14E330F-8496-46F0-8F40-178808AB13A7</value>
@@ -3957,8 +3957,8 @@
           <x type='form' 
              xmlns='jabber:x:data' 
              xmlns:xdv='http://jabber.org/protocol/xdata-validate'
-             xmlns:xdl:='http://jabber.org/protocol/xdata-layout'
-             xmlns:xdd:='http://jabber.org/protocol/xdata-dynamic'>
+             xmlns:xdl='http://jabber.org/protocol/xdata-layout'
+             xmlns:xdd='http://jabber.org/protocol/xdata-dynamic'>
               <title>Database read-out</title>
               <xdl:page label='Time'>
                   <xdl:fieldref var='from'/>
