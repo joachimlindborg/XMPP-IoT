@@ -32,7 +32,7 @@
             <spec>XEP-0323</spec>
             <spec>XEP-0324</spec>
             <spec>xep-0000-DynamicForms</spec>
-            <spec>xep-0000-ColorParameter</spec>
+            <spec>color-parameter</spec>
         </dependencies>
         <supersedes/>
         <supersededby/>

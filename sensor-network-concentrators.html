@@ -2672,7 +2672,7 @@
                        nodeId='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false'
                        isReadable='true' isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'&gt;
           &lt;message timestamp='2013-03-21T11:06:15' type='WarningUnsigned' 
-		           eventId='ClockWarning'&gt;Internal clock is offset more than 7 seconds.&lt;/message&gt;
+                   eventId='ClockWarning'&gt;Internal clock is offset more than 7 seconds.&lt;/message&gt;
       &lt;/getNodeResponse&gt;                       
    &lt;/iq&gt;
                 </pre>
@@ -2708,7 +2708,7 @@
           &lt;double id='lat' name='Latitude' value='12.345'/&gt;
           &lt;double id='long' name='Longitude' value='123.45'/&gt;
           &lt;message timestamp='2013-03-21T11:06:15' type='WarningUnsigned' 
-		           eventId='ClockWarning'&gt;Internal clock is offset more than 7 seconds.&lt;/message&gt;
+                   eventId='ClockWarning'&gt;Internal clock is offset more than 7 seconds.&lt;/message&gt;
       &lt;/getNodeResponse&gt;
    &lt;/iq&gt;
                 </pre>
@@ -3374,7 +3374,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='48'&gt;
-      &lt;getNodeCommandsResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
+      &lt;getCommonNodeCommandsResponse xmlns='urn:xmpp:iot:concentrators' result='OK'&gt;
           &lt;command command='knockDoor' name='Knock on door' type='Simple' 
                    confirmationString='Are you sure you want to knock on the door?'
                    failureString='Unable to knock on the door.'
@@ -3382,7 +3382,7 @@
           &lt;command command='scheduleWakeupCall' name='Schedule wakeup call' type='Parameterized' 
                    failureString='Unable to schedule the wakeup call.'
                    successString='Wakeup call scheduled.'/&gt;
-      &lt;/getNodeCommandsResponse&gt;
+      &lt;/getCommonNodeCommandsResponse&gt;
    &lt;/iq&gt;
                 </pre>
         </div>
@@ -4974,7 +4974,7 @@
                     <th colspan="" rowspan="">Description</th>
                 </tr>
                 <tr class="body">
-                    <td colspan="" rowspan="">id</td>
+                    <td colspan="" rowspan="">nodeId</td>
                     <td colspan="" rowspan="">required</td>
                     <td colspan="" rowspan=""> </td>
                     <td colspan="" rowspan="">The ID of the node in the data source.</td>
@@ -5235,7 +5235,7 @@
                     <th colspan="" rowspan="">Description</th>
                 </tr>
                 <tr class="body">
-                    <td colspan="" rowspan="">id</td>
+                    <td colspan="" rowspan="">command</td>
                     <td colspan="" rowspan="">required</td>
                     <td colspan="" rowspan="">ID of the command. Used to identify the command.</td>
                 </tr>
@@ -5744,7 +5744,7 @@
     &lt;xs:element name='getNodes' type='NodeReferenceParametersRequest'/&gt;
     &lt;xs:element name='getNodesResponse' type='NodeInformationArrayResponse'/&gt;
  
-    &lt;xs:element name='getAllNodes' type='SourceReferenceParametersRequest'/&gt;
+    &lt;xs:element name='getAllNodes' type='GetAllNodesRequest'/&gt;
     &lt;xs:element name='getAllNodesResponse' type='NodeInformationArrayResponse'/&gt;
  
     &lt;xs:element name='getNodeInheritance' type='NodeReferenceRequest'/&gt;
@@ -5760,7 +5760,7 @@
     &lt;xs:element name='getRootNodes' type='SourceReferenceParametersRequest'/&gt;
     &lt;xs:element name='getRootNodesResponse' type='NodeInformationArrayResponse'/&gt;
  
-    &lt;xs:element name='getChildNodes' type='NodeReferenceParametersRequest'/&gt;
+    &lt;xs:element name='getChildNodes' type='GetChildNodesRequest'/&gt;
     &lt;xs:element name='getChildNodesResponse' type='NodeInformationArrayResponse'/&gt;
  
     &lt;xs:element name='getIndices' type='SourceReferenceRequest'/&gt;
@@ -6366,7 +6366,7 @@
  
     &lt;xs:complexType name='GetAllNodesRequest'&gt;
         &lt;xs:complexContent&gt;
-            &lt;xs:extension base='SourceReferenceRequest'&gt;
+            &lt;xs:extension base='SourceReferenceParametersRequest'&gt;
                 &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
                     &lt;xs:element name='onlyIfDerivedFrom' type='xs:string'/&gt;
                 &lt;/xs:sequence&gt;
@@ -6376,7 +6376,7 @@
   
     &lt;xs:complexType name='GetChildNodesRequest'&gt;
         &lt;xs:complexContent&gt;
-            &lt;xs:extension base='NodeReferenceRequest'&gt;
+            &lt;xs:extension base='NodeReferenceParametersRequest'&gt;
                 &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
                     &lt;xs:element name='sortOrder' type='SortOrder'/&gt;
                 &lt;/xs:sequence&gt;
@@ -6696,7 +6696,7 @@
             <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
             Version: 0.1.2<br>
             Last Updated: 2013-05-13<br>
-                Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001, XEP-0004, XEP-0030, XEP-0122, XEP-0137, XEP-0141, XEP-0323, XEP-0324, xep-0000-DynamicForms, xep-0000-ColorParameter<br>
+                Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001, XEP-0004, XEP-0030, XEP-0122, XEP-0137, XEP-0141, XEP-0323, XEP-0324, xep-0000-DynamicForms, color-parameter<br>
                 Supersedes: None<br>
                 Superseded By: None<br>
             Short Name: NOT_YET_ASSIGNED<br>
@@ -6755,9 +6755,9 @@
     <div class="indent">
       <h4>Version 0.1.2 (2013-05-13)</h4>
       <div class="indent">
-				<p class="" style="">Updated attribute names so queries and responses are consistent.</p>
-				<p class="" style="">Updated the language.</p>
-			 (pw)
+                <p class="" style="">Updated attribute names so queries and responses are consistent.</p>
+                <p class="" style="">Updated the language.</p>
+             (pw)
     </div>
       <h4>Version 0.1.1 (2013-05-07)</h4>
       <div class="indent">

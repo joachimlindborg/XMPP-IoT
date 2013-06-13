@@ -1139,7 +1139,7 @@
    ^\d+([|]\w+([.]\w+)*([|][^,]*)?)?(,\d+([|]\w+([.]\w+)*([|][^,]*)?)?)*$
 			</code>
 			<p>
-				This basically means, it's of the format: ID_1[|[Module_1][|Seed_1]][...[ID_n[|[Module_n][|Seed_n]]]]
+				This basically means, it's of the format: ID_1[|[Module_1][|Seed_1]][...[,ID_n[|[Module_n][|Seed_n]]]]
 			</p>
 			<p>
 				Where brackets [] mean the contents inside is optional, <strong>ID_i</strong> is an integer representing the string ID in a language module. <strong>Module_i</strong>

@@ -37,7 +37,7 @@
             <spec>XEP-0323</spec>
             <spec>XEP-0324</spec>
             <spec>xep-0000-DynamicForms</spec>
-            <spec>xep-0000-ColorParameter</spec>
+            <spec>color-parameter</spec>
         </dependencies>
         <supersedes/>
         <supersededby/>
@@ -49,16 +49,16 @@
             <jid>peter.waher@jabber.org</jid>
             <uri>http://se.linkedin.com/pub/peter-waher/1a/71b/a29/</uri>
         </author>
-		<revision>
-			<version>0.1.2</version>
-			<date>2013-05-13</date>
-			<initials>pw</initials>
-			<remark>
-				<p>Updated attribute names so queries and responses are consistent.</p>
-				<p>Updated the language.</p>
-			</remark>
-		</revision>
-		<revision>
+        <revision>
+            <version>0.1.2</version>
+            <date>2013-05-13</date>
+            <initials>pw</initials>
+            <remark>
+                <p>Updated attribute names so queries and responses are consistent.</p>
+                <p>Updated the language.</p>
+            </remark>
+        </revision>
+        <revision>
             <version>0.1.1</version>
             <date>2013-05-07</date>
             <initials>pw</initials>
@@ -2386,7 +2386,7 @@
                        nodeId='Node1' nodeType='Namespace.NodeType1' cacheType='Node' state='WarningUnsigned' hasChildren='false'
                        isReadable='true' isControllable='true' hasCommands='true' parentId='Root' lastChanged='2013-03-19T17:58:01'>
           <message timestamp='2013-03-21T11:06:15' type='WarningUnsigned' 
-		           eventId='ClockWarning'>Internal clock is offset more than 7 seconds.</message>
+                   eventId='ClockWarning'>Internal clock is offset more than 7 seconds.</message>
       </getNodeResponse>                       
    </iq>]]>
                 </example>
@@ -2419,7 +2419,7 @@
           <double id='lat' name='Latitude' value='12.345'/>
           <double id='long' name='Longitude' value='123.45'/>
           <message timestamp='2013-03-21T11:06:15' type='WarningUnsigned' 
-		           eventId='ClockWarning'>Internal clock is offset more than 7 seconds.</message>
+                   eventId='ClockWarning'>Internal clock is offset more than 7 seconds.</message>
       </getNodeResponse>
    </iq>]]>
                 </example>
@@ -3020,7 +3020,7 @@
        from='concentrator@clayster.com'
        to='client@clayster.com/client'
        id='48'>
-      <getNodeCommandsResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
+      <getCommonNodeCommandsResponse xmlns='urn:xmpp:iot:concentrators' result='OK'>
           <command command='knockDoor' name='Knock on door' type='Simple' 
                    confirmationString='Are you sure you want to knock on the door?'
                    failureString='Unable to knock on the door.'
@@ -3028,7 +3028,7 @@
           <command command='scheduleWakeupCall' name='Schedule wakeup call' type='Parameterized' 
                    failureString='Unable to schedule the wakeup call.'
                    successString='Wakeup call scheduled.'/>
-      </getNodeCommandsResponse>
+      </getCommonNodeCommandsResponse>
    </iq>]]>
                 </example>
             </section3>
@@ -4471,7 +4471,7 @@
                     <th>Description</th>
                 </tr>
                 <tr>
-                    <td>id</td>
+                    <td>nodeId</td>
                     <td>required</td>
                     <td>&nbsp;</td>
                     <td>The ID of the node in the data source.</td>
@@ -4716,7 +4716,7 @@
                     <th>Description</th>
                 </tr>
                 <tr>
-                    <td>id</td>
+                    <td>command</td>
                     <td>required</td>
                     <td>ID of the command. Used to identify the command.</td>
                 </tr>
@@ -5189,7 +5189,7 @@
     <xs:element name='getNodes' type='NodeReferenceParametersRequest'/>
     <xs:element name='getNodesResponse' type='NodeInformationArrayResponse'/>
  
-    <xs:element name='getAllNodes' type='SourceReferenceParametersRequest'/>
+    <xs:element name='getAllNodes' type='GetAllNodesRequest'/>
     <xs:element name='getAllNodesResponse' type='NodeInformationArrayResponse'/>
  
     <xs:element name='getNodeInheritance' type='NodeReferenceRequest'/>
@@ -5205,7 +5205,7 @@
     <xs:element name='getRootNodes' type='SourceReferenceParametersRequest'/>
     <xs:element name='getRootNodesResponse' type='NodeInformationArrayResponse'/>
  
-    <xs:element name='getChildNodes' type='NodeReferenceParametersRequest'/>
+    <xs:element name='getChildNodes' type='GetChildNodesRequest'/>
     <xs:element name='getChildNodesResponse' type='NodeInformationArrayResponse'/>
  
     <xs:element name='getIndices' type='SourceReferenceRequest'/>
@@ -5811,7 +5811,7 @@
  
     <xs:complexType name='GetAllNodesRequest'>
         <xs:complexContent>
-            <xs:extension base='SourceReferenceRequest'>
+            <xs:extension base='SourceReferenceParametersRequest'>
                 <xs:sequence minOccurs='0' maxOccurs='unbounded'>
                     <xs:element name='onlyIfDerivedFrom' type='xs:string'/>
                 </xs:sequence>
@@ -5821,7 +5821,7 @@
   
     <xs:complexType name='GetChildNodesRequest'>
         <xs:complexContent>
-            <xs:extension base='NodeReferenceRequest'>
+            <xs:extension base='NodeReferenceParametersRequest'>
                 <xs:sequence minOccurs='0' maxOccurs='unbounded'>
                     <xs:element name='sortOrder' type='SortOrder'/>
                 </xs:sequence>
