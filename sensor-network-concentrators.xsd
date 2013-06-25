@@ -101,7 +101,7 @@
             <xs:complexContent>
                 <xs:extension base='NodeReferenceRequest'>
                     <xs:sequence>
-                        <xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
+						<xs:element ref='xd:x' minOccurs="1" maxOccurs="1"/>
                     </xs:sequence>
                 </xs:extension>
             </xs:complexContent>
@@ -117,7 +117,7 @@
             <xs:complexContent>
                 <xs:extension base='NodeReferencesRequest'>
                     <xs:sequence>
-                        <xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
+						<xs:element ref='xd:x' minOccurs="1" maxOccurs="1"/>
                     </xs:sequence>
                 </xs:extension>
             </xs:complexContent>
@@ -147,7 +147,7 @@
             <xs:complexContent>
                 <xs:extension base='NodeTypeReferenceRequest'>
                     <xs:sequence>
-                        <xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
+						<xs:element ref='xd:x' minOccurs="1" maxOccurs="1"/>
                     </xs:sequence>
                 </xs:extension>
             </xs:complexContent>
@@ -176,7 +176,7 @@
             <xs:complexContent>
                 <xs:extension base='NodeCommandReferenceRequest'>
                     <xs:sequence>
-                        <xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
+						<xs:element ref='xd:x' minOccurs="0" maxOccurs="1"/>
                     </xs:sequence>
 				</xs:extension>
             </xs:complexContent>
@@ -189,7 +189,7 @@
 			<xs:complexContent>
 				<xs:extension base='NodeCommandReferenceRequest'>
 					<xs:sequence>
-						<xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
+						<xs:element ref='xd:x' minOccurs="0" maxOccurs="1"/>
 					</xs:sequence>
 				</xs:extension>
 			</xs:complexContent>
@@ -224,7 +224,7 @@
             <xs:complexContent>
                 <xs:extension base='NodeReferencesRequest'>
                     <xs:sequence>
-                        <xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
+						<xs:element ref='xd:x' minOccurs="0" maxOccurs="1"/>
                     </xs:sequence>
 					<xs:attribute name="queryId" type="xs:string" use="optional"/>
 				</xs:extension>
@@ -238,7 +238,7 @@
 			<xs:complexContent>
 				<xs:extension base='NodeReferencesRequest'>
 					<xs:sequence>
-						<xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
+						<xs:element ref='xd:x' minOccurs="0" maxOccurs="1"/>
 					</xs:sequence>
 				</xs:extension>
 			</xs:complexContent>
@@ -352,7 +352,7 @@
 				<xs:extension base='DatabaseReferenceRequest'>
 					<xs:sequence>
 						<xs:element name='node' type='NodeReference' minOccurs='1' maxOccurs='unbounded'/>
-						<xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
+						<xs:element ref='xd:x' minOccurs="1" maxOccurs="1"/>
 					</xs:sequence>
 					<xs:attribute name="seqnr" type="xs:int" use="required"/>
 				</xs:extension>
@@ -886,7 +886,7 @@
  
     <xs:complexType name='ParameterFormResponse'>
         <xs:sequence>
-            <xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
+			<xs:element ref='xd:x' minOccurs="1" maxOccurs="1"/>
         </xs:sequence>
         <xs:attributeGroup ref="responseCode"/>
     </xs:complexType>

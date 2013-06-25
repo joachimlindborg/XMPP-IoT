@@ -28,13 +28,7 @@
 				<xs:element name='long' type='LongParameter'/>
 				<xs:element name='string' type='StringParameter'/>
 				<xs:element name='time' type='TimeParameter'/>
-				<xs:element name='form'>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
+				<xs:element ref='xd:x'/>
 			</xs:choice>
 			<xs:attributeGroup ref='tokens'/>
 		</xs:complexType>
@@ -44,11 +38,6 @@
 		<xs:complexType>
 			<xs:choice minOccurs='0' maxOccurs='unbounded'>
 				<xs:element name='node' type='NodeReference'/>
-				<xs:element name='parameter'>
-					<xs:complexType>
-						<xs:attribute name='name' type='xs:string' use='required'/>
-					</xs:complexType>
-				</xs:element>
 				<xs:element name='error' type='ParameterError'/>
 			</xs:choice>
 			<xs:attributeGroup ref='responseCode'/>
@@ -67,7 +56,7 @@
 	<xs:element name='getFormResponse'>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
+				<xs:element ref='xd:x' minOccurs="0" maxOccurs="1"/>
 			</xs:sequence>
 			<xs:attributeGroup ref='responseCode'/>
 		</xs:complexType>
@@ -193,7 +182,7 @@
  
 	<xs:simpleType name='Color'>
 		<xs:restriction base='xs:string'>
-			<xs:pattern value='^[0-9a-fA-F]{6}$'/>
+			<xs:pattern value='^([0-9a-fA-F]{6})|([0-9a-fA-F]{8})$'/>
 		</xs:restriction>
 	</xs:simpleType>
  

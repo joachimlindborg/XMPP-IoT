@@ -45,12 +45,24 @@
             <uri>http://se.linkedin.com/pub/peter-waher/1a/71b/a29/</uri>
         </author>
 		<revision>
+			<version>0.1.2</version>
+			<date>2013-06-19</date>
+			<initials>pw</initials>
+			<remark>
+				<p>Corrected the namespace used for parameterGroup elements in the examples of the document.</p>
+				<p>Added support for color values with alpha channel.</p>
+				<p>Updated the schema to more strictly validate references to x-data forms.</p>
+				<p>Schema was updated to reflect the correct relationship between the x-data subelement in a set operation.</p>
+			</remark>
+		</revision>
+		<revision>
 			<version>0.1.1</version>
 			<date>2013-05-07</date>
 			<initials>pw</initials>
 			<remark>
 				<p>Fixed links to documents with new numbers.</p>
 				<p>Changed namespace urn:xmpp:sn to urn:xmpp:iot</p>
+				<p>Schema was corrected: The parameter sub-element in the setResponse element was removed.</p>
 			</remark>
 		</revision>
 		<revision>
@@ -1079,7 +1091,7 @@
                 <tr>
                     <th>color</th>
                     <td>N/A</td>
-                    <td>RRGGBB</td>
+                    <td>RRGGBB or RRGGBBAA</td>
                     <td>N/A</td>
                     <td>N/A</td>
                     <td>N/A</td>
@@ -1241,7 +1253,11 @@
                     <td>RRGGBB</td>
                     <td>A string of six hexadecimal characters, the first two the red component of the color, the next two the green component and the last two the blue component.</td>
                 </tr>
-                <tr>
+				<tr>
+					<td>RRGGBBAA</td>
+					<td>A string of eight hexadecimal characters, the first two the red component of the color, the next two the green component, the following two the blue component and the last two the alpha channel.</td>
+				</tr>
+				<tr>
                     <td>Date part</td>
                     <td>Only the date part of the xs:dateTime value should be used.</td>
                 </tr>
@@ -1382,7 +1398,7 @@
                       <xdv:range min='-180' max='180'/>
                   </xdv:validate>
                   <xdd:notSame/>
-                  <parameterGroup xmlns='urn:xmpp:iot:concentrators' name='direction'/>
+                  <parameterGroup xmlns='urn:xmpp:iot:control' name='direction'/>
               </field>
               <field var='ElevationAngle' type='text-single' label='Elevation angle:'>
                   <desc>Elevation angle of the spotlight.</desc>
@@ -1391,7 +1407,7 @@
                       <xdv:range min='-90' max='90'/>
                   </xdv:validate>
                   <xdd:notSame/>
-                  <parameterGroup xmlns='urn:xmpp:iot:concentrators' name='direction'/>
+                  <parameterGroup xmlns='urn:xmpp:iot:control' name='direction'/>
               </field>
           </x>
       </getFormResponse>
@@ -1579,13 +1595,7 @@
                 <xs:element name='long' type='LongParameter'/>
                 <xs:element name='string' type='StringParameter'/>
                 <xs:element name='time' type='TimeParameter'/>
-                <xs:element name='form'>
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:any minOccurs="1" maxOccurs="1" namespace="jabber:x:data"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
+                <xs:element ref='xd:x'/>
             </xs:choice>
             <xs:attributeGroup ref='tokens'/>
         </xs:complexType>
@@ -1595,11 +1605,6 @@
         <xs:complexType>
             <xs:choice minOccurs='0' maxOccurs='unbounded'>
                 <xs:element name='node' type='NodeReference'/>
-                <xs:element name='parameter'>
-                    <xs:complexType>
-                        <xs:attribute name='name' type='xs:string' use='required'/>
-                    </xs:complexType>
-                </xs:element>
                 <xs:element name='error' type='ParameterError'/>
             </xs:choice>
             <xs:attributeGroup ref='responseCode'/>
@@ -1618,7 +1623,7 @@
     <xs:element name='getFormResponse'>
         <xs:complexType>
             <xs:sequence>
-                <xs:any minOccurs="0" maxOccurs="1" namespace="jabber:x:data"/>
+                <xs:element ref='xd:x' minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attributeGroup ref='responseCode'/>
         </xs:complexType>
@@ -1744,7 +1749,7 @@
  
     <xs:simpleType name='Color'>
         <xs:restriction base='xs:string'>
-            <xs:pattern value='^[0-9a-fA-F]{6}$'/>
+            <xs:pattern value='^([0-9a-fA-F]{6})|([0-9a-fA-F]{8})$'/>
         </xs:restriction>
     </xs:simpleType>
  
