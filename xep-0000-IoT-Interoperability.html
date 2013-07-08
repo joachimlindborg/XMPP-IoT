@@ -5,7 +5,8 @@
     <title>XEP-xxxx: Internet of Things - Interoperability</title>
     <link rel="stylesheet" type="text/css" href="xmpp.css">
     <link href="prettify.css" type="text/css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"><script type="text/javascript" src="prettify.js"></script><meta name="DC.Title" content="Internet of Things - Interoperability">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"><script type="text/javascript" src="prettify.js"></script><meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=2.0">
+    <meta name="DC.Title" content="Internet of Things - Interoperability">
     <meta name="DC.Creator" content="Peter Waher">
     <meta name="DC.Description" content="This specification provides interoperability guidelines for sensors and actuators in Internet of Things based on XMPP.">
     <meta name="DC.Publisher" content="XMPP Standards Foundation">
@@ -55,100 +56,100 @@
     <h2>Table of Contents</h2>
     <div class="indent">
       <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
-      3.1.  <a href="#sect-ID0EHKAC">Getting supported interfaces</a><br>   
+      3.1.  <a href="#sect-ID0EIKAC">Getting supported interfaces</a><br>   
       3.2.  <a href="#interfaces">Interfaces</a><br>      
-      3.2.1.  <a href="#sect-ID0E2KAC">XMPP.IoT.Sensor</a><br>        
-      3.2.1.1.  <a href="#sect-ID0EDLAC">XMPP.IoT.Sensor.AnalogInput</a><br>        
-      3.2.1.2.  <a href="#sect-ID0EUAAE">XMPP.IoT.Sensor.AnalogInputs</a><br>        
-      3.2.1.3.  <a href="#sect-ID0ECGAE">XMPP.IoT.Sensor.Current</a><br>        
-      3.2.1.4.  <a href="#sect-ID0E4HAE">XMPP.IoT.Sensor.DewPoint</a><br>        
-      3.2.1.5.  <a href="#sect-ID0EYJAE">XMPP.IoT.Sensor.DigitalInput</a><br>        
-      3.2.1.6.  <a href="#sect-ID0ETLAE">XMPP.IoT.Sensor.DigitalInputs</a><br>        
-      3.2.1.7.  <a href="#sect-ID0EFOAE">XMPP.IoT.Sensor.Direction</a><br>        
-      3.2.1.8.  <a href="#sect-ID0EAQAE">XMPP.IoT.Sensor.Distance</a><br>        
-      3.2.1.9.  <a href="#sect-ID0E2RAE">XMPP.IoT.Sensor.Force</a><br>        
-      3.2.1.10.  <a href="#sect-ID0EWTAE">XMPP.IoT.Sensor.Frequency</a><br>        
-      3.2.1.11.  <a href="#sect-ID0ERVAE">XMPP.IoT.Sensor.Humidity</a><br>        
-      3.2.1.12.  <a href="#sect-ID0E1YAE">XMPP.IoT.Sensor.Illuminance</a><br>        
-      3.2.1.13.  <a href="#sect-ID0EV1AE">XMPP.IoT.Sensor.Mass</a><br>        
-      3.2.1.14.  <a href="#sect-ID0EQ3AE">XMPP.IoT.Sensor.MassFlow</a><br>        
-      3.2.1.15.  <a href="#sect-ID0EL5AE">XMPP.IoT.Sensor.Pressure</a><br>        
-      3.2.1.16.  <a href="#sect-ID0EHAAG">XMPP.IoT.Sensor.Rain</a><br>        
-      3.2.1.17.  <a href="#sect-ID0EZCAG">XMPP.IoT.Sensor.Resistence</a><br>        
-      3.2.1.18.  <a href="#sect-ID0EUEAG">XMPP.IoT.Sensor.SolarRadiation</a><br>        
-      3.2.1.19.  <a href="#sect-ID0EPGAG">XMPP.IoT.Sensor.Speed</a><br>        
-      3.2.1.20.  <a href="#sect-ID0EKIAG">XMPP.IoT.Sensor.Temperature</a><br>        
-      3.2.1.21.  <a href="#sect-ID0EFKAG">XMPP.IoT.Sensor.TideLevel</a><br>        
-      3.2.1.22.  <a href="#sect-ID0EAMAG">XMPP.IoT.Sensor.Velocity</a><br>        
-      3.2.1.23.  <a href="#sect-ID0ESOAG">XMPP.IoT.Sensor.Voltage</a><br>        
-      3.2.1.24.  <a href="#sect-ID0ENQAG">XMPP.IoT.Sensor.Volume</a><br>        
-      3.2.1.25.  <a href="#sect-ID0EISAG">XMPP.IoT.Sensor.Weight</a><br>        
-      3.2.1.26.  <a href="#sect-ID0EDUAG">XMPP.IoT.Sensor.WindDirection</a><br>        
-      3.2.1.27.  <a href="#sect-ID0EVWAG">XMPP.IoT.Sensor.WindSpeed</a><br>      
-      3.2.2.  <a href="#sect-ID0EIZAG">XMPP.IoT.Meter</a><br>        
-      3.2.2.1.  <a href="#sect-ID0EQZAG">XMPP.IoT.Meter.Cooling</a><br>        
+      3.2.1.  <a href="#sect-ID0E3KAC">XMPP.IoT.Sensor</a><br>        
+      3.2.1.1.  <a href="#sect-ID0EELAC">XMPP.IoT.Sensor.AnalogInput</a><br>        
+      3.2.1.2.  <a href="#sect-ID0EVAAE">XMPP.IoT.Sensor.AnalogInputs</a><br>        
+      3.2.1.3.  <a href="#sect-ID0EDGAE">XMPP.IoT.Sensor.Current</a><br>        
+      3.2.1.4.  <a href="#sect-ID0E5HAE">XMPP.IoT.Sensor.DewPoint</a><br>        
+      3.2.1.5.  <a href="#sect-ID0EZJAE">XMPP.IoT.Sensor.DigitalInput</a><br>        
+      3.2.1.6.  <a href="#sect-ID0EULAE">XMPP.IoT.Sensor.DigitalInputs</a><br>        
+      3.2.1.7.  <a href="#sect-ID0EGOAE">XMPP.IoT.Sensor.Direction</a><br>        
+      3.2.1.8.  <a href="#sect-ID0EBQAE">XMPP.IoT.Sensor.Distance</a><br>        
+      3.2.1.9.  <a href="#sect-ID0E3RAE">XMPP.IoT.Sensor.Force</a><br>        
+      3.2.1.10.  <a href="#sect-ID0EXTAE">XMPP.IoT.Sensor.Frequency</a><br>        
+      3.2.1.11.  <a href="#sect-ID0ESVAE">XMPP.IoT.Sensor.Humidity</a><br>        
+      3.2.1.12.  <a href="#sect-ID0E2YAE">XMPP.IoT.Sensor.Illuminance</a><br>        
+      3.2.1.13.  <a href="#sect-ID0EW1AE">XMPP.IoT.Sensor.Mass</a><br>        
+      3.2.1.14.  <a href="#sect-ID0ER3AE">XMPP.IoT.Sensor.MassFlow</a><br>        
+      3.2.1.15.  <a href="#sect-ID0EM5AE">XMPP.IoT.Sensor.Pressure</a><br>        
+      3.2.1.16.  <a href="#sect-ID0EIAAG">XMPP.IoT.Sensor.Rain</a><br>        
+      3.2.1.17.  <a href="#sect-ID0E1CAG">XMPP.IoT.Sensor.Resistence</a><br>        
+      3.2.1.18.  <a href="#sect-ID0EVEAG">XMPP.IoT.Sensor.SolarRadiation</a><br>        
+      3.2.1.19.  <a href="#sect-ID0EQGAG">XMPP.IoT.Sensor.Speed</a><br>        
+      3.2.1.20.  <a href="#sect-ID0ELIAG">XMPP.IoT.Sensor.Temperature</a><br>        
+      3.2.1.21.  <a href="#sect-ID0EGKAG">XMPP.IoT.Sensor.TideLevel</a><br>        
+      3.2.1.22.  <a href="#sect-ID0EBMAG">XMPP.IoT.Sensor.Velocity</a><br>        
+      3.2.1.23.  <a href="#sect-ID0ETOAG">XMPP.IoT.Sensor.Voltage</a><br>        
+      3.2.1.24.  <a href="#sect-ID0EOQAG">XMPP.IoT.Sensor.Volume</a><br>        
+      3.2.1.25.  <a href="#sect-ID0EJSAG">XMPP.IoT.Sensor.Weight</a><br>        
+      3.2.1.26.  <a href="#sect-ID0EEUAG">XMPP.IoT.Sensor.WindDirection</a><br>        
+      3.2.1.27.  <a href="#sect-ID0EWWAG">XMPP.IoT.Sensor.WindSpeed</a><br>      
+      3.2.2.  <a href="#sect-ID0EJZAG">XMPP.IoT.Meter</a><br>        
+      3.2.2.1.  <a href="#sect-ID0ERZAG">XMPP.IoT.Meter.Cooling</a><br>        
       3.2.2.2.  <a href="#XMPP_IoT_Meter_Electricity">XMPP.IoT.Meter.Electricity</a><br>        
-      3.2.2.3.  <a href="#sect-ID0EHCBG">XMPP.IoT.Meter.Gas</a><br>        
-      3.2.2.4.  <a href="#sect-ID0EZEBG">XMPP.IoT.Meter.Heat</a><br>        
-      3.2.2.5.  <a href="#sect-ID0E5KBG">XMPP.IoT.Meter.HeatingCooling</a><br>        
-      3.2.2.6.  <a href="#sect-ID0EDRBG">XMPP.IoT.Meter.PulseCounter</a><br>        
-      3.2.2.7.  <a href="#sect-ID0E5SBG">XMPP.IoT.Meter.PulseCounters</a><br>        
-      3.2.2.8.  <a href="#sect-ID0EQVBG">XMPP.IoT.Meter.Water</a><br>      
-      3.2.3.  <a href="#sect-ID0EDYBG">XMPP.IoT.Actuator</a><br>        
-      3.2.3.1.  <a href="#sect-ID0ELYBG">XMPP.IoT.Actuator.AnalogOutput</a><br>        
-      3.2.3.2.  <a href="#sect-ID0EFAAI">XMPP.IoT.Actuator.AnalogOutputs</a><br>        
-      3.2.3.3.  <a href="#sect-ID0E3HAI">XMPP.IoT.Actuator.Blinds</a><br>        
-      3.2.3.4.  <a href="#sect-ID0EJLAI">XMPP.IoT.Actuator.DigitalOutput</a><br>        
-      3.2.3.5.  <a href="#sect-ID0EWOAI">XMPP.IoT.Actuator.DigitalOutputs</a><br>        
-      3.2.3.6.  <a href="#sect-ID0E1SAI">XMPP.IoT.Actuator.Dimmer</a><br>        
-      3.2.3.7.  <a href="#sect-ID0EVXAI">XMPP.IoT.Actuator.DoorBell</a><br>        
-      3.2.3.8.  <a href="#sect-ID0EH4AI">XMPP.IoT.Actuator.Fan</a><br>        
-      3.2.3.9.  <a href="#sect-ID0EUABI">XMPP.IoT.Actuator.Lamp</a><br>      
-      3.2.4.  <a href="#sect-ID0ECEBI">XMPP.IoT.Identity</a><br>        
-      3.2.4.1.  <a href="#sect-ID0EKEBI">XMPP.IoT.Identity.Address</a><br>        
-      3.2.4.2.  <a href="#sect-ID0E4LBI">XMPP.IoT.Identity.Application</a><br>        
-      3.2.4.3.  <a href="#sect-ID0EGPBI">XMPP.IoT.Identity.Battery</a><br>        
-      3.2.4.4.  <a href="#sect-ID0EBUBI">XMPP.IoT.Identity.Clock</a><br>        
-      3.2.4.5.  <a href="#sect-ID0EFYBI">XMPP.IoT.Identity.DeviceID</a><br>        
-      3.2.4.6.  <a href="#sect-ID0EX1BI">XMPP.IoT.Identity.Ethernet</a><br>        
-      3.2.4.7.  <a href="#sect-ID0ES3BI">XMPP.IoT.Identity.GSM</a><br>        
-      3.2.4.8.  <a href="#sect-ID0EODCI">XMPP.IoT.Identity.Language</a><br>        
-      3.2.4.9.  <a href="#sect-ID0E2GCI">XMPP.IoT.Identity.IP</a><br>        
-      3.2.4.10.  <a href="#sect-ID0EANCI">XMPP.IoT.Identity.IPv6</a><br>        
-      3.2.4.11.  <a href="#sect-ID0EJQCI">XMPP.IoT.Identity.Location</a><br>        
-      3.2.4.12.  <a href="#sect-ID0ESWCI">XMPP.IoT.Identity.Manufacturer</a><br>        
-      3.2.4.13.  <a href="#sect-ID0EEZCI">XMPP.IoT.Identity.Name</a><br>        
-      3.2.4.14.  <a href="#sect-ID0ER3CI">XMPP.IoT.Identity.NodeID</a><br>        
-      3.2.4.15.  <a href="#sect-ID0ED6CI">XMPP.IoT.Identity.RFID</a><br>        
-      3.2.4.16.  <a href="#sect-ID0EVBDI">XMPP.IoT.Identity.UserID</a><br>        
-      3.2.4.17.  <a href="#sect-ID0EHEDI">XMPP.IoT.Identity.Version</a><br>        
-      3.2.4.18.  <a href="#sect-ID0EQHDI">XMPP.IoT.Identity.Wink</a><br>        
-      3.2.4.19.  <a href="#sect-ID0ELJDI">XMPP.IoT.Identity.ZWave</a><br>      
-      3.2.5.  <a href="#sect-ID0EVMDI">XMPP.IoT.Logistics</a><br>        
-      3.2.5.1.  <a href="#sect-ID0E4MDI">XMPP.IoT.Logistics.Contents</a><br>        
-      3.2.5.2.  <a href="#sect-ID0ERYDI">XMPP.IoT.Logistics.Route</a><br>      
-      3.2.6.  <a href="#sect-ID0EVJAK">XMPP.IoT.Security</a><br>        
+      3.2.2.3.  <a href="#sect-ID0EICBG">XMPP.IoT.Meter.Gas</a><br>        
+      3.2.2.4.  <a href="#sect-ID0E1EBG">XMPP.IoT.Meter.Heat</a><br>        
+      3.2.2.5.  <a href="#sect-ID0E6KBG">XMPP.IoT.Meter.HeatingCooling</a><br>        
+      3.2.2.6.  <a href="#sect-ID0EERBG">XMPP.IoT.Meter.PulseCounter</a><br>        
+      3.2.2.7.  <a href="#sect-ID0E6SBG">XMPP.IoT.Meter.PulseCounters</a><br>        
+      3.2.2.8.  <a href="#sect-ID0ERVBG">XMPP.IoT.Meter.Water</a><br>      
+      3.2.3.  <a href="#sect-ID0EEYBG">XMPP.IoT.Actuator</a><br>        
+      3.2.3.1.  <a href="#sect-ID0EMYBG">XMPP.IoT.Actuator.AnalogOutput</a><br>        
+      3.2.3.2.  <a href="#sect-ID0EGAAI">XMPP.IoT.Actuator.AnalogOutputs</a><br>        
+      3.2.3.3.  <a href="#sect-ID0E4HAI">XMPP.IoT.Actuator.Blinds</a><br>        
+      3.2.3.4.  <a href="#sect-ID0EKLAI">XMPP.IoT.Actuator.DigitalOutput</a><br>        
+      3.2.3.5.  <a href="#sect-ID0EXOAI">XMPP.IoT.Actuator.DigitalOutputs</a><br>        
+      3.2.3.6.  <a href="#sect-ID0E2SAI">XMPP.IoT.Actuator.Dimmer</a><br>        
+      3.2.3.7.  <a href="#sect-ID0EWXAI">XMPP.IoT.Actuator.DoorBell</a><br>        
+      3.2.3.8.  <a href="#sect-ID0EI4AI">XMPP.IoT.Actuator.Fan</a><br>        
+      3.2.3.9.  <a href="#sect-ID0EVABI">XMPP.IoT.Actuator.Lamp</a><br>      
+      3.2.4.  <a href="#sect-ID0EDEBI">XMPP.IoT.Identity</a><br>        
+      3.2.4.1.  <a href="#sect-ID0ELEBI">XMPP.IoT.Identity.Address</a><br>        
+      3.2.4.2.  <a href="#sect-ID0E5LBI">XMPP.IoT.Identity.Application</a><br>        
+      3.2.4.3.  <a href="#sect-ID0EHPBI">XMPP.IoT.Identity.Battery</a><br>        
+      3.2.4.4.  <a href="#sect-ID0ECUBI">XMPP.IoT.Identity.Clock</a><br>        
+      3.2.4.5.  <a href="#sect-ID0EGYBI">XMPP.IoT.Identity.DeviceID</a><br>        
+      3.2.4.6.  <a href="#sect-ID0EY1BI">XMPP.IoT.Identity.Ethernet</a><br>        
+      3.2.4.7.  <a href="#sect-ID0ET3BI">XMPP.IoT.Identity.GSM</a><br>        
+      3.2.4.8.  <a href="#sect-ID0EPDCI">XMPP.IoT.Identity.Language</a><br>        
+      3.2.4.9.  <a href="#sect-ID0E3GCI">XMPP.IoT.Identity.IP</a><br>        
+      3.2.4.10.  <a href="#sect-ID0EBNCI">XMPP.IoT.Identity.IPv6</a><br>        
+      3.2.4.11.  <a href="#sect-ID0EKQCI">XMPP.IoT.Identity.Location</a><br>        
+      3.2.4.12.  <a href="#sect-ID0ETWCI">XMPP.IoT.Identity.Manufacturer</a><br>        
+      3.2.4.13.  <a href="#sect-ID0EFZCI">XMPP.IoT.Identity.Name</a><br>        
+      3.2.4.14.  <a href="#sect-ID0ES3CI">XMPP.IoT.Identity.NodeID</a><br>        
+      3.2.4.15.  <a href="#sect-ID0EE6CI">XMPP.IoT.Identity.RFID</a><br>        
+      3.2.4.16.  <a href="#sect-ID0EWBDI">XMPP.IoT.Identity.UserID</a><br>        
+      3.2.4.17.  <a href="#sect-ID0EIEDI">XMPP.IoT.Identity.Version</a><br>        
+      3.2.4.18.  <a href="#sect-ID0ERHDI">XMPP.IoT.Identity.Wink</a><br>        
+      3.2.4.19.  <a href="#sect-ID0EMJDI">XMPP.IoT.Identity.ZWave</a><br>      
+      3.2.5.  <a href="#sect-ID0EWMDI">XMPP.IoT.Logistics</a><br>        
+      3.2.5.1.  <a href="#sect-ID0E5MDI">XMPP.IoT.Logistics.Contents</a><br>        
+      3.2.5.2.  <a href="#sect-ID0ESYDI">XMPP.IoT.Logistics.Route</a><br>      
+      3.2.6.  <a href="#sect-ID0EWJAK">XMPP.IoT.Security</a><br>        
       3.2.6.1.  <a href="#XMPP_IoT_Security_Alarm">XMPP.IoT.Security.Alarm</a><br>        
-      3.2.6.2.  <a href="#sect-ID0EDOAK">XMPP.IoT.Security.Burglar</a><br>        
-      3.2.6.3.  <a href="#sect-ID0EUOAK">XMPP.IoT.Security.Clock</a><br>        
-      3.2.6.4.  <a href="#sect-ID0EPQAK">XMPP.IoT.Security.CO</a><br>        
-      3.2.6.5.  <a href="#sect-ID0EARAK">XMPP.IoT.Security.CO2</a><br>        
+      3.2.6.2.  <a href="#sect-ID0EEOAK">XMPP.IoT.Security.Burglar</a><br>        
+      3.2.6.3.  <a href="#sect-ID0EVOAK">XMPP.IoT.Security.Clock</a><br>        
+      3.2.6.4.  <a href="#sect-ID0EQQAK">XMPP.IoT.Security.CO</a><br>        
+      3.2.6.5.  <a href="#sect-ID0EBRAK">XMPP.IoT.Security.CO2</a><br>        
       3.2.6.6.  <a href="#XMPP_IoT_Security_Door">XMPP.IoT.Security.Door</a><br>        
-      3.2.6.7.  <a href="#sect-ID0EOTAK">XMPP.IoT.Security.Emergency</a><br>        
-      3.2.6.8.  <a href="#sect-ID0E6TAK">XMPP.IoT.Security.Gas</a><br>        
-      3.2.6.9.  <a href="#sect-ID0EQUAK">XMPP.IoT.Security.Heat</a><br>        
-      3.2.6.10.  <a href="#sect-ID0EBVAK">XMPP.IoT.Security.Lock</a><br>        
-      3.2.6.11.  <a href="#sect-ID0EBZAK">XMPP.IoT.Security.Movement</a><br>        
-      3.2.6.12.  <a href="#sect-ID0ESZAK">XMPP.IoT.Security.Smoke</a><br>        
-      3.2.6.13.  <a href="#sect-ID0ED1AK">XMPP.IoT.Security.Water</a><br>        
+      3.2.6.7.  <a href="#sect-ID0EPTAK">XMPP.IoT.Security.Emergency</a><br>        
+      3.2.6.8.  <a href="#sect-ID0EAUAK">XMPP.IoT.Security.Gas</a><br>        
+      3.2.6.9.  <a href="#sect-ID0ERUAK">XMPP.IoT.Security.Heat</a><br>        
+      3.2.6.10.  <a href="#sect-ID0ECVAK">XMPP.IoT.Security.Lock</a><br>        
+      3.2.6.11.  <a href="#sect-ID0ECZAK">XMPP.IoT.Security.Movement</a><br>        
+      3.2.6.12.  <a href="#sect-ID0ETZAK">XMPP.IoT.Security.Smoke</a><br>        
+      3.2.6.13.  <a href="#sect-ID0EE1AK">XMPP.IoT.Security.Water</a><br>        
       3.2.6.14.  <a href="#XMPP_IoT_Security_Window">XMPP.IoT.Security.Window</a><br>      
-      3.2.7.  <a href="#sect-ID0ES3AK">XMPP.IoT.Controller</a><br>        
-      3.2.7.1.  <a href="#sect-ID0E13AK">XMPP.IoT.Controller.AccessControl</a><br>        
-      3.2.7.2.  <a href="#sect-ID0EB4AK">XMPP.IoT.Controller.Thermostat</a><br>        
-      3.2.7.3.  <a href="#sect-ID0EI4AK">XMPP.IoT.Controller.Ventilation</a><br>      
-      3.2.8.  <a href="#sect-ID0EQ4AK">XMPP.IoT.Media</a><br>        
-      3.2.8.1.  <a href="#sect-ID0EY4AK">XMPP.IoT.Media.Camera</a><br>        
-      3.2.8.2.  <a href="#sect-ID0EPMBK">XMPP.IoT.Media.Directory</a><br>        
+      3.2.7.  <a href="#sect-ID0ET3AK">XMPP.IoT.Controller</a><br>        
+      3.2.7.1.  <a href="#sect-ID0E23AK">XMPP.IoT.Controller.AccessControl</a><br>        
+      3.2.7.2.  <a href="#sect-ID0EC4AK">XMPP.IoT.Controller.Thermostat</a><br>        
+      3.2.7.3.  <a href="#sect-ID0EJ4AK">XMPP.IoT.Controller.Ventilation</a><br>      
+      3.2.8.  <a href="#sect-ID0ER4AK">XMPP.IoT.Media</a><br>        
+      3.2.8.1.  <a href="#sect-ID0EZ4AK">XMPP.IoT.Media.Camera</a><br>        
+      3.2.8.2.  <a href="#sect-ID0EQMBK">XMPP.IoT.Media.Directory</a><br>        
       3.2.8.3.  <a href="#AudioItem">XMPP.IoT.Media.Directory.AudioItem</a><br>        
       3.2.8.4.  <a href="#DirectoryItem">XMPP.IoT.Media.Directory.DirectoryItem</a><br>        
       3.2.8.5.  <a href="#DublinCore">XMPP.IoT.Media.Directory.DublinCore</a><br>        
@@ -156,48 +157,48 @@
       3.2.8.7.  <a href="#VideoItem">XMPP.IoT.Media.Directory.VideoItem</a><br>        
       3.2.8.8.  <a href="#XMPP_IoT_Media_Display">XMPP.IoT.Media.Display</a><br>        
       3.2.8.9.  <a href="#XMPP_IoT_Media_LoudSpeakers">XMPP.IoT.Media.LoudSpeakers</a><br>        
-      3.2.8.10.  <a href="#sect-ID0E3FDK">XMPP.IoT.Media.Microphone</a><br>        
+      3.2.8.10.  <a href="#sect-ID0E4FDK">XMPP.IoT.Media.Microphone</a><br>        
       3.2.8.11.  <a href="#XMPP_IoT_Media_Recorder">XMPP.IoT.Media.Recorder</a><br>        
-      3.2.8.12.  <a href="#sect-ID0EGTDK">XMPP.IoT.Media.TextDisplay</a><br>      
-      3.2.9.  <a href="#sect-ID0EKYDK">XMPP.IoT.Network</a><br>        
-      3.2.9.1.  <a href="#sect-ID0ESYDK">XMPP.IoT.Network.Ethernet</a><br>        
-      3.2.9.2.  <a href="#sect-ID0E3AEK">XMPP.IoT.Network.IP</a><br>        
-      3.2.9.3.  <a href="#sect-ID0EBHEK">XMPP.IoT.Network.IPv6</a><br>        
-      3.2.9.4.  <a href="#sect-ID0EGNEK">XMPP.IoT.Network.Radio</a><br>   
-      3.3.  <a href="#sect-ID0E1PEK">Interface aggregations</a><br>      
-      3.3.1.  <a href="#sect-ID0E5PEK">Control programming aggregations</a><br>        
-      3.3.1.1.  <a href="#sect-ID0ECQEK">*.TimeChannels</a><br>      
-      3.3.2.  <a href="#sect-ID0EKQEK">Event aggregations</a><br>        
-      3.3.2.1.  <a href="#sect-ID0EOQEK">*.BinaryEvent</a><br>        
-      3.3.2.2.  <a href="#sect-ID0EVQEK">*.HysteresisEvent</a><br>        
-      3.3.2.3.  <a href="#sect-ID0E3QEK">*.TimedEvent</a><br>      
-      3.3.3.  <a href="#sect-ID0EEREK">Readout aggregations</a><br>        
+      3.2.8.12.  <a href="#sect-ID0EHTDK">XMPP.IoT.Media.TextDisplay</a><br>      
+      3.2.9.  <a href="#sect-ID0ELYDK">XMPP.IoT.Network</a><br>        
+      3.2.9.1.  <a href="#sect-ID0ETYDK">XMPP.IoT.Network.Ethernet</a><br>        
+      3.2.9.2.  <a href="#sect-ID0E4AEK">XMPP.IoT.Network.IP</a><br>        
+      3.2.9.3.  <a href="#sect-ID0ECHEK">XMPP.IoT.Network.IPv6</a><br>        
+      3.2.9.4.  <a href="#sect-ID0EHNEK">XMPP.IoT.Network.Radio</a><br>   
+      3.3.  <a href="#sect-ID0E2PEK">Interface aggregations</a><br>      
+      3.3.1.  <a href="#sect-ID0E6PEK">Control programming aggregations</a><br>        
+      3.3.1.1.  <a href="#sect-ID0EDQEK">*.TimeChannels</a><br>      
+      3.3.2.  <a href="#sect-ID0ELQEK">Event aggregations</a><br>        
+      3.3.2.1.  <a href="#sect-ID0EPQEK">*.BinaryEvent</a><br>        
+      3.3.2.2.  <a href="#sect-ID0EWQEK">*.HysteresisEvent</a><br>        
+      3.3.2.3.  <a href="#sect-ID0E4QEK">*.TimedEvent</a><br>      
+      3.3.3.  <a href="#sect-ID0EFREK">Readout aggregations</a><br>        
       3.3.3.1.  <a href="#average">*.Average</a><br>        
       3.3.3.2.  <a href="#consumption">*.Consumption</a><br>        
       3.3.3.3.  <a href="#history">*.History</a><br>        
-      3.3.3.4.  <a href="#sect-ID0EN2EK">*.Mean</a><br>        
-      3.3.3.5.  <a href="#sect-ID0EI6EK">*.Min</a><br>        
-      3.3.3.6.  <a href="#sect-ID0EDDFK">*.Max</a><br>        
-      3.3.3.7.  <a href="#sect-ID0E5GFK">*.StdDev</a><br>        
-      3.3.3.8.  <a href="#sect-ID0EZKFK">*.Sum</a><br>   
-      3.4.  <a href="#sect-ID0EWOFK">Field Names</a><br>   
-      3.5.  <a href="#sect-ID0EBWFK">Units</a><br>      
-      3.5.1.  <a href="#sect-ID0EQ1FK">Angle</a><br>      
-      3.5.2.  <a href="#sect-ID0ES3FK">Area</a><br>      
-      3.5.3.  <a href="#sect-ID0EGCGK">Distance</a><br>      
-      3.5.4.  <a href="#sect-ID0EGKGK">Energy</a><br>      
-      3.5.5.  <a href="#sect-ID0EW2GK">Flow</a><br>      
-      3.5.6.  <a href="#sect-ID0E1KHK">Mass</a><br>      
-      3.5.7.  <a href="#sect-ID0EBRHK">Power</a><br>      
-      3.5.8.  <a href="#sect-ID0EKHAM">Pressure</a><br>      
-      3.5.9.  <a href="#sect-ID0EXOAM">Speed</a><br>      
-      3.5.10.  <a href="#sect-ID0ESSAM">Temperature</a><br>      
-      3.5.11.  <a href="#sect-ID0EAXAM">Time</a><br>      
-      3.5.12.  <a href="#sect-ID0EB3AM">Volume</a><br>   
-      3.6.  <a href="#sect-ID0ECEBM">Privilege IDs</a><br>   
-      3.7.  <a href="#sect-ID0EPEBM">Data Sources</a><br>   
-      3.8.  <a href="#sect-ID0EWEBM">Identification Schemes</a><br>   
-      3.9.  <a href="#sect-ID0E4EBM">Media Types</a><br>      
+      3.3.3.4.  <a href="#sect-ID0EO2EK">*.Mean</a><br>        
+      3.3.3.5.  <a href="#sect-ID0EJ6EK">*.Min</a><br>        
+      3.3.3.6.  <a href="#sect-ID0EEDFK">*.Max</a><br>        
+      3.3.3.7.  <a href="#sect-ID0E6GFK">*.StdDev</a><br>        
+      3.3.3.8.  <a href="#sect-ID0E1KFK">*.Sum</a><br>   
+      3.4.  <a href="#sect-ID0EXOFK">Field Names</a><br>   
+      3.5.  <a href="#sect-ID0ECWFK">Units</a><br>      
+      3.5.1.  <a href="#sect-ID0ER1FK">Angle</a><br>      
+      3.5.2.  <a href="#sect-ID0ET3FK">Area</a><br>      
+      3.5.3.  <a href="#sect-ID0EHCGK">Distance</a><br>      
+      3.5.4.  <a href="#sect-ID0EHKGK">Energy</a><br>      
+      3.5.5.  <a href="#sect-ID0EX2GK">Flow</a><br>      
+      3.5.6.  <a href="#sect-ID0E2KHK">Mass</a><br>      
+      3.5.7.  <a href="#sect-ID0ECRHK">Power</a><br>      
+      3.5.8.  <a href="#sect-ID0ELHAM">Pressure</a><br>      
+      3.5.9.  <a href="#sect-ID0EYOAM">Speed</a><br>      
+      3.5.10.  <a href="#sect-ID0ETSAM">Temperature</a><br>      
+      3.5.11.  <a href="#sect-ID0EBXAM">Time</a><br>      
+      3.5.12.  <a href="#sect-ID0EC3AM">Volume</a><br>   
+      3.6.  <a href="#sect-ID0EDEBM">Privilege IDs</a><br>   
+      3.7.  <a href="#sect-ID0EQEBM">Data Sources</a><br>   
+      3.8.  <a href="#sect-ID0EXEBM">Identification Schemes</a><br>   
+      3.9.  <a href="#sect-ID0E5EBM">Media Types</a><br>      
       3.9.1.  <a href="#TransportProtocol">Transport Protocol</a><br>      
       3.9.2.  <a href="#VideoContainerFormat">Video Container Format</a><br>      
       3.9.3.  <a href="#AudioContainerFormat">Audio Container Format</a><br>      
@@ -225,12 +226,8 @@
                 <th colspan="" rowspan="">Description</th>
             </tr>
             <tr class="body">
-                <td colspan="" rowspan="">XEP-0000-ColorParameter</td>
-                <td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EFE">1</a>]</td>
-            </tr>
-            <tr class="body">
                 <td colspan="" rowspan="">XEP-0000-DynamicForms</td>
-                <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0E3E">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EIF">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0EUF">4</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EAG">5</a>].</td>
+                <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EGE">1</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0ESE">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0E5E">3</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EKF">4</a>].</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">xep-0000-IoT-BatteryPoweredSensors</td>
@@ -281,6 +278,10 @@
 			<tr class="body">
 				<td colspan="" rowspan="">XEP-0326</td>
 				<td colspan="" rowspan="">Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">XEP-0331</td>
+				<td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0E3BAC">5</a>]</td>
 			</tr>
 		</table>
     </div>
@@ -354,7 +355,7 @@
             <di>
                 <dt><strong>Parameter</strong></dt>
                 <dd>
-                    Readable and/or writable property on a node/device. The XEP-0326 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0EVFAC">6</a>] deals with reading and writing parameters
+                    Readable and/or writable property on a node/device. The XEP-0326 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0EWFAC">6</a>] deals with reading and writing parameters
                     on nodes/devices. Fields are not parameters, and parameters are not fields.
                 </dd>
             </di>
@@ -450,7 +451,7 @@
             XMPP networks. For more information, please see <a href="#newinterfaces">Extending the Interoperability Document</a>.
         </p>
         <div class="indent">
-      <h3>3.1 <a name="sect-ID0EHKAC">Getting supported interfaces</a></h3>
+      <h3>3.1 <a name="sect-ID0EIKAC">Getting supported interfaces</a></h3>
             <p class="" style="">
                 The following example shows how a client can get the interfaces supported by a device:
             </p>
@@ -502,12 +503,12 @@
                 A device can implement any number of interfaces.
             </p>
             <div class="indent">
-        <h3>3.2.1 <a name="sect-ID0E2KAC">XMPP.IoT.Sensor</a></h3>
+        <h3>3.2.1 <a name="sect-ID0E3KAC">XMPP.IoT.Sensor</a></h3>
                 <p class="" style="">
                     This section contains interfaces relating to sensors measuring physical magnitudes of some sort or another.
                 </p>
                 <div class="indent">
-          <h3>3.2.1.1 <a name="sect-ID0EDLAC">XMPP.IoT.Sensor.AnalogInput</a></h3>
+          <h3>3.2.1.1 <a name="sect-ID0EELAC">XMPP.IoT.Sensor.AnalogInput</a></h3>
                     <p class="" style="">
                         Generical analog input.
                     </p>
@@ -571,7 +572,7 @@
                     </p>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.2 <a name="sect-ID0EUAAE">XMPP.IoT.Sensor.AnalogInputs</a></h3>
+          <h3>3.2.1.2 <a name="sect-ID0EVAAE">XMPP.IoT.Sensor.AnalogInputs</a></h3>
                     <p class="" style="">
                         Devices containing an array of analog inputs.
                     </p>
@@ -631,7 +632,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.3 <a name="sect-ID0ECGAE">XMPP.IoT.Sensor.Current</a></h3>
+          <h3>3.2.1.3 <a name="sect-ID0EDGAE">XMPP.IoT.Sensor.Current</a></h3>
                     <p class="" style="">
                         Current sensors, measuring a electrical current.
                     </p>
@@ -656,7 +657,7 @@
           </div>
                 </div>
 				<div class="indent">
-          <h3>3.2.1.4 <a name="sect-ID0E4HAE">XMPP.IoT.Sensor.DewPoint</a></h3>
+          <h3>3.2.1.4 <a name="sect-ID0E5HAE">XMPP.IoT.Sensor.DewPoint</a></h3>
 					<p class="" style="">
 						Dew Point sensors, measuring current dew point in the environment.
 					</p>
@@ -681,7 +682,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.1.5 <a name="sect-ID0EYJAE">XMPP.IoT.Sensor.DigitalInput</a></h3>
+          <h3>3.2.1.5 <a name="sect-ID0EZJAE">XMPP.IoT.Sensor.DigitalInput</a></h3>
                     <p class="" style="">
                         Generical digital input.
                     </p>
@@ -706,7 +707,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.6 <a name="sect-ID0ETLAE">XMPP.IoT.Sensor.DigitalInputs</a></h3>
+          <h3>3.2.1.6 <a name="sect-ID0EULAE">XMPP.IoT.Sensor.DigitalInputs</a></h3>
                     <p class="" style="">
                         Devices containing an array of digital inputs.
                     </p>
@@ -738,7 +739,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.7 <a name="sect-ID0EFOAE">XMPP.IoT.Sensor.Direction</a></h3>
+          <h3>3.2.1.7 <a name="sect-ID0EGOAE">XMPP.IoT.Sensor.Direction</a></h3>
                     <p class="" style="">
                         Direction sensors, measuring a direction.
                     </p>
@@ -763,7 +764,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.8 <a name="sect-ID0EAQAE">XMPP.IoT.Sensor.Distance</a></h3>
+          <h3>3.2.1.8 <a name="sect-ID0EBQAE">XMPP.IoT.Sensor.Distance</a></h3>
                     <p class="" style="">
                         Distance sensors, measuring physical distance.
                     </p>
@@ -788,7 +789,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.9 <a name="sect-ID0E2RAE">XMPP.IoT.Sensor.Force</a></h3>
+          <h3>3.2.1.9 <a name="sect-ID0E3RAE">XMPP.IoT.Sensor.Force</a></h3>
                     <p class="" style="">
                         Force sensors, measuring physical force, or tension.
                     </p>
@@ -813,7 +814,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.10 <a name="sect-ID0EWTAE">XMPP.IoT.Sensor.Frequency</a></h3>
+          <h3>3.2.1.10 <a name="sect-ID0EXTAE">XMPP.IoT.Sensor.Frequency</a></h3>
                     <p class="" style="">
                         Frequency sensors, measuring frequency.
                     </p>
@@ -838,7 +839,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.11 <a name="sect-ID0ERVAE">XMPP.IoT.Sensor.Humidity</a></h3>
+          <h3>3.2.1.11 <a name="sect-ID0ESVAE">XMPP.IoT.Sensor.Humidity</a></h3>
                     <p class="" style="">
                         Humidity sensors (hygrometers), measuring a moisture content in the environment.
                     </p>
@@ -877,7 +878,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.12 <a name="sect-ID0E1YAE">XMPP.IoT.Sensor.Illuminance</a></h3>
+          <h3>3.2.1.12 <a name="sect-ID0E2YAE">XMPP.IoT.Sensor.Illuminance</a></h3>
                     <p class="" style="">
                         Illuminance sensors (luxmeters), measuring a illuminance.
                     </p>
@@ -902,7 +903,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.13 <a name="sect-ID0EV1AE">XMPP.IoT.Sensor.Mass</a></h3>
+          <h3>3.2.1.13 <a name="sect-ID0EW1AE">XMPP.IoT.Sensor.Mass</a></h3>
                     <p class="" style="">
                         Mass sensors, measuring physical mass.
                     </p>
@@ -927,7 +928,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.14 <a name="sect-ID0EQ3AE">XMPP.IoT.Sensor.MassFlow</a></h3>
+          <h3>3.2.1.14 <a name="sect-ID0ER3AE">XMPP.IoT.Sensor.MassFlow</a></h3>
                     <p class="" style="">
                         Mass flow sensors (for example air flow sensors), measuring physical mass flow.
                     </p>
@@ -952,7 +953,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.15 <a name="sect-ID0EL5AE">XMPP.IoT.Sensor.Pressure</a></h3>
+          <h3>3.2.1.15 <a name="sect-ID0EM5AE">XMPP.IoT.Sensor.Pressure</a></h3>
                     <p class="" style="">
                         Pressure sensors, measuring a pressure.
                     </p>
@@ -977,7 +978,7 @@
           </div>
                 </div>
 				<div class="indent">
-          <h3>3.2.1.16 <a name="sect-ID0EHAAG">XMPP.IoT.Sensor.Rain</a></h3>
+          <h3>3.2.1.16 <a name="sect-ID0EIAAG">XMPP.IoT.Sensor.Rain</a></h3>
 					<p class="" style="">
 						Rain sensors (udometers, pluviometers, ombrometers), measuring if it is raining, and how much.
 					</p>
@@ -1009,7 +1010,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.1.17 <a name="sect-ID0EZCAG">XMPP.IoT.Sensor.Resistence</a></h3>
+          <h3>3.2.1.17 <a name="sect-ID0E1CAG">XMPP.IoT.Sensor.Resistence</a></h3>
                     <p class="" style="">
                         Resistence sensors, measuring a electrical resistence.
                     </p>
@@ -1034,7 +1035,7 @@
           </div>
                 </div>
 				<div class="indent">
-          <h3>3.2.1.18 <a name="sect-ID0EUEAG">XMPP.IoT.Sensor.SolarRadiation</a></h3>
+          <h3>3.2.1.18 <a name="sect-ID0EVEAG">XMPP.IoT.Sensor.SolarRadiation</a></h3>
                     <p class="" style="">
                         Solar radiation sensors (pyranometers), measuring solar radiation.
                     </p>
@@ -1059,7 +1060,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.19 <a name="sect-ID0EPGAG">XMPP.IoT.Sensor.Speed</a></h3>
+          <h3>3.2.1.19 <a name="sect-ID0EQGAG">XMPP.IoT.Sensor.Speed</a></h3>
                     <p class="" style="">
                         Speed sensors, measuring speed.
                     </p>
@@ -1084,7 +1085,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.20 <a name="sect-ID0EKIAG">XMPP.IoT.Sensor.Temperature</a></h3>
+          <h3>3.2.1.20 <a name="sect-ID0ELIAG">XMPP.IoT.Sensor.Temperature</a></h3>
                     <p class="" style="">
                         Temperature sensors, measuring a temperature.
                     </p>
@@ -1109,7 +1110,7 @@
           </div>
                 </div>
 				<div class="indent">
-          <h3>3.2.1.21 <a name="sect-ID0EFKAG">XMPP.IoT.Sensor.TideLevel</a></h3>
+          <h3>3.2.1.21 <a name="sect-ID0EGKAG">XMPP.IoT.Sensor.TideLevel</a></h3>
 					<p class="" style="">
 						tide level sensors, measuring the change in sea level relative to a datum.
 					</p>
@@ -1134,7 +1135,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.1.22 <a name="sect-ID0EAMAG">XMPP.IoT.Sensor.Velocity</a></h3>
+          <h3>3.2.1.22 <a name="sect-ID0EBMAG">XMPP.IoT.Sensor.Velocity</a></h3>
                     <p class="" style="">
                         Distance sensors, measuring physical distance.
                     </p>
@@ -1166,7 +1167,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.23 <a name="sect-ID0ESOAG">XMPP.IoT.Sensor.Voltage</a></h3>
+          <h3>3.2.1.23 <a name="sect-ID0ETOAG">XMPP.IoT.Sensor.Voltage</a></h3>
                     <p class="" style="">
                         Voltage sensors, measuring a electrical voltage.
                     </p>
@@ -1191,7 +1192,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.24 <a name="sect-ID0ENQAG">XMPP.IoT.Sensor.Volume</a></h3>
+          <h3>3.2.1.24 <a name="sect-ID0EOQAG">XMPP.IoT.Sensor.Volume</a></h3>
                     <p class="" style="">
                         Volume sensors (for example tank capacity), measuring a physical volume.
                     </p>
@@ -1216,7 +1217,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.1.25 <a name="sect-ID0EISAG">XMPP.IoT.Sensor.Weight</a></h3>
+          <h3>3.2.1.25 <a name="sect-ID0EJSAG">XMPP.IoT.Sensor.Weight</a></h3>
                     <p class="" style="">
                         Weight sensors, measuring weight.
                     </p>
@@ -1241,7 +1242,7 @@
           </div>
                 </div>
 				<div class="indent">
-          <h3>3.2.1.26 <a name="sect-ID0EDUAG">XMPP.IoT.Sensor.WindDirection</a></h3>
+          <h3>3.2.1.26 <a name="sect-ID0EEUAG">XMPP.IoT.Sensor.WindDirection</a></h3>
 					<p class="" style="">
 						Wind Direction sensors, measuring where wind is blowing from.
 					</p>
@@ -1275,7 +1276,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.1.27 <a name="sect-ID0EVWAG">XMPP.IoT.Sensor.WindSpeed</a></h3>
+          <h3>3.2.1.27 <a name="sect-ID0EWWAG">XMPP.IoT.Sensor.WindSpeed</a></h3>
 					<p class="" style="">
 						Wind Speed sensors, measuring the speed of current wind conditions.
 					</p>
@@ -1310,12 +1311,12 @@
 				</div>
 			</div>
             <div class="indent">
-        <h3>3.2.2 <a name="sect-ID0EIZAG">XMPP.IoT.Meter</a></h3>
+        <h3>3.2.2 <a name="sect-ID0EJZAG">XMPP.IoT.Meter</a></h3>
                 <p class="" style="">
                     This section contains interfaces relating to meters. They are more advances measurement devices measuring consumption of a physical comodity.
                 </p>
                 <div class="indent">
-          <h3>3.2.2.1 <a name="sect-ID0EQZAG">XMPP.IoT.Meter.Cooling</a></h3>
+          <h3>3.2.2.1 <a name="sect-ID0ERZAG">XMPP.IoT.Meter.Cooling</a></h3>
                     <p class="" style="">
                         Measures consumption of cooling energy.
                     </p>
@@ -1414,7 +1415,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.2.3 <a name="sect-ID0EHCBG">XMPP.IoT.Meter.Gas</a></h3>
+          <h3>3.2.2.3 <a name="sect-ID0EICBG">XMPP.IoT.Meter.Gas</a></h3>
                     <p class="" style="">
                         Measures consumption of gas.
                     </p>
@@ -1446,7 +1447,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.2.4 <a name="sect-ID0EZEBG">XMPP.IoT.Meter.Heat</a></h3>
+          <h3>3.2.2.4 <a name="sect-ID0E1EBG">XMPP.IoT.Meter.Heat</a></h3>
                     <p class="" style="">
                         Measures consumption of heat energy.
                     </p>
@@ -1513,7 +1514,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.2.5 <a name="sect-ID0E5KBG">XMPP.IoT.Meter.HeatingCooling</a></h3>
+          <h3>3.2.2.5 <a name="sect-ID0E6KBG">XMPP.IoT.Meter.HeatingCooling</a></h3>
                     <p class="" style="">
                         Measures consumption of heating and/or cooling energy.
                     </p>
@@ -1580,7 +1581,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.2.6 <a name="sect-ID0EDRBG">XMPP.IoT.Meter.PulseCounter</a></h3>
+          <h3>3.2.2.6 <a name="sect-ID0EERBG">XMPP.IoT.Meter.PulseCounter</a></h3>
                     <p class="" style="">
                         Measures pulses.
                     </p>
@@ -1605,7 +1606,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.2.7 <a name="sect-ID0E5SBG">XMPP.IoT.Meter.PulseCounters</a></h3>
+          <h3>3.2.2.7 <a name="sect-ID0E6SBG">XMPP.IoT.Meter.PulseCounters</a></h3>
                     <p class="" style="">
                         Measures pulses on multiple pulse inputs.
                     </p>
@@ -1637,7 +1638,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.2.8 <a name="sect-ID0EQVBG">XMPP.IoT.Meter.Water</a></h3>
+          <h3>3.2.2.8 <a name="sect-ID0ERVBG">XMPP.IoT.Meter.Water</a></h3>
                     <p class="" style="">
                         Measures consumption of water.
                     </p>
@@ -1670,12 +1671,12 @@
                 </div>
             </div>
             <div class="indent">
-        <h3>3.2.3 <a name="sect-ID0EDYBG">XMPP.IoT.Actuator</a></h3>
+        <h3>3.2.3 <a name="sect-ID0EEYBG">XMPP.IoT.Actuator</a></h3>
                 <p class="" style="">
                     This section contains interfaces relating to generic actuators. They can be used to act with the world in different ways.
                 </p>
                 <div class="indent">
-          <h3>3.2.3.1 <a name="sect-ID0ELYBG">XMPP.IoT.Actuator.AnalogOutput</a></h3>
+          <h3>3.2.3.1 <a name="sect-ID0EMYBG">XMPP.IoT.Actuator.AnalogOutput</a></h3>
                     <p class="" style="">
                         Generical analog output.
                     </p>
@@ -1771,7 +1772,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.3.2 <a name="sect-ID0EFAAI">XMPP.IoT.Actuator.AnalogOutputs</a></h3>
+          <h3>3.2.3.2 <a name="sect-ID0EGAAI">XMPP.IoT.Actuator.AnalogOutputs</a></h3>
                     <p class="" style="">
                         Devices containing an array of analog outputs.
                     </p>
@@ -1863,7 +1864,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.3.3 <a name="sect-ID0E3HAI">XMPP.IoT.Actuator.Blinds</a></h3>
+          <h3>3.2.3.3 <a name="sect-ID0E4HAI">XMPP.IoT.Actuator.Blinds</a></h3>
 					<p class="" style="">
 						Actuator controlling window blinds (or similar equipment).
 					</p>
@@ -1911,7 +1912,7 @@
           </div>
 				</div>
                 <div class="indent">
-          <h3>3.2.3.4 <a name="sect-ID0EJLAI">XMPP.IoT.Actuator.DigitalOutput</a></h3>
+          <h3>3.2.3.4 <a name="sect-ID0EKLAI">XMPP.IoT.Actuator.DigitalOutput</a></h3>
                     <p class="" style="">
                         Generical digital output.
                     </p>
@@ -1955,7 +1956,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.3.5 <a name="sect-ID0EWOAI">XMPP.IoT.Actuator.DigitalOutputs</a></h3>
+          <h3>3.2.3.5 <a name="sect-ID0EXOAI">XMPP.IoT.Actuator.DigitalOutputs</a></h3>
                     <p class="" style="">
                         Devices containing an array of digital outputs.
                     </p>
@@ -2006,7 +2007,7 @@
           </div>
                 </div>
                 <div class="indent">
-          <h3>3.2.3.6 <a name="sect-ID0E1SAI">XMPP.IoT.Actuator.Dimmer</a></h3>
+          <h3>3.2.3.6 <a name="sect-ID0E2SAI">XMPP.IoT.Actuator.Dimmer</a></h3>
 					<p class="" style="">
 						Actuator controlling a dimmer.
 					</p>
@@ -2071,7 +2072,7 @@
           </div>
 				</div>
                 <div class="indent">
-          <h3>3.2.3.7 <a name="sect-ID0EVXAI">XMPP.IoT.Actuator.DoorBell</a></h3>
+          <h3>3.2.3.7 <a name="sect-ID0EWXAI">XMPP.IoT.Actuator.DoorBell</a></h3>
 					<p class="" style="">
 						Actuator producing a door bell sound.
 					</p>
@@ -2144,7 +2145,7 @@
           </div>
 				</div>
                 <div class="indent">
-          <h3>3.2.3.8 <a name="sect-ID0EH4AI">XMPP.IoT.Actuator.Fan</a></h3>
+          <h3>3.2.3.8 <a name="sect-ID0EI4AI">XMPP.IoT.Actuator.Fan</a></h3>
 					<p class="" style="">
 						Actuator controlling a fan.
 					</p>
@@ -2192,7 +2193,7 @@
           </div>
 				</div>
                 <div class="indent">
-          <h3>3.2.3.9 <a name="sect-ID0EUABI">XMPP.IoT.Actuator.Lamp</a></h3>
+          <h3>3.2.3.9 <a name="sect-ID0EVABI">XMPP.IoT.Actuator.Lamp</a></h3>
 					<p class="" style="">
 						Actuator controlling a lamp.
 					</p>
@@ -2237,12 +2238,12 @@
 				</div>
             </div>
 			<div class="indent">
-        <h3>3.2.4 <a name="sect-ID0ECEBI">XMPP.IoT.Identity</a></h3>
+        <h3>3.2.4 <a name="sect-ID0EDEBI">XMPP.IoT.Identity</a></h3>
 				<p class="" style="">
 					This section contains interfaces relating to identification of devices.
 				</p>
 				<div class="indent">
-          <h3>3.2.4.1 <a name="sect-ID0EKEBI">XMPP.IoT.Identity.Address</a></h3>
+          <h3>3.2.4.1 <a name="sect-ID0ELEBI">XMPP.IoT.Identity.Address</a></h3>
 					<p class="" style="">
 						Interface for address information in the device.
 					</p>
@@ -2323,7 +2324,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.2 <a name="sect-ID0E4LBI">XMPP.IoT.Identity.Application</a></h3>
+          <h3>3.2.4.2 <a name="sect-ID0E5LBI">XMPP.IoT.Identity.Application</a></h3>
 					<p class="" style="">
 						Interface for application information in the device.
 					</p>
@@ -2365,7 +2366,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.3 <a name="sect-ID0EGPBI">XMPP.IoT.Identity.Battery</a></h3>
+          <h3>3.2.4.3 <a name="sect-ID0EHPBI">XMPP.IoT.Identity.Battery</a></h3>
 					<p class="" style="">
 						Interface handling battery status.
 					</p>
@@ -2426,7 +2427,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.4 <a name="sect-ID0EBUBI">XMPP.IoT.Identity.Clock</a></h3>
+          <h3>3.2.4.4 <a name="sect-ID0ECUBI">XMPP.IoT.Identity.Clock</a></h3>
 					<p class="" style="">
 						Interface handling battery status.
 					</p>
@@ -2480,7 +2481,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.5 <a name="sect-ID0EFYBI">XMPP.IoT.Identity.DeviceID</a></h3>
+          <h3>3.2.4.5 <a name="sect-ID0EGYBI">XMPP.IoT.Identity.DeviceID</a></h3>
 					<p class="" style="">
 						Interface handling a unique ID (according to some scheme) of the device.
 					</p>
@@ -2512,7 +2513,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.6 <a name="sect-ID0EX1BI">XMPP.IoT.Identity.Ethernet</a></h3>
+          <h3>3.2.4.6 <a name="sect-ID0EY1BI">XMPP.IoT.Identity.Ethernet</a></h3>
 					<p class="" style="">
 						Interface containing Ehternet adapter identity information.
 					</p>
@@ -2540,7 +2541,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.7 <a name="sect-ID0ES3BI">XMPP.IoT.Identity.GSM</a></h3>
+          <h3>3.2.4.7 <a name="sect-ID0ET3BI">XMPP.IoT.Identity.GSM</a></h3>
 					<p class="" style="">
 						Interface containing GSM adapter identity information.
 					</p>
@@ -2614,7 +2615,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.8 <a name="sect-ID0EODCI">XMPP.IoT.Identity.Language</a></h3>
+          <h3>3.2.4.8 <a name="sect-ID0EPDCI">XMPP.IoT.Identity.Language</a></h3>
 					<p class="" style="">
 						Interface handling device language.
 					</p>
@@ -2661,7 +2662,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.9 <a name="sect-ID0E2GCI">XMPP.IoT.Identity.IP</a></h3>
+          <h3>3.2.4.9 <a name="sect-ID0E3GCI">XMPP.IoT.Identity.IP</a></h3>
 					<p class="" style="">
 						Interface containing IPv4 identity information.
 					</p>
@@ -2728,7 +2729,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.10 <a name="sect-ID0EANCI">XMPP.IoT.Identity.IPv6</a></h3>
+          <h3>3.2.4.10 <a name="sect-ID0EBNCI">XMPP.IoT.Identity.IPv6</a></h3>
 					<p class="" style="">
 						Interface containing IPv6 identity information.
 					</p>
@@ -2767,7 +2768,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.11 <a name="sect-ID0EJQCI">XMPP.IoT.Identity.Location</a></h3>
+          <h3>3.2.4.11 <a name="sect-ID0EKQCI">XMPP.IoT.Identity.Location</a></h3>
 					<p class="" style="">
 						Interface handling geospatial location of the device.
 					</p>
@@ -2839,7 +2840,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.12 <a name="sect-ID0ESWCI">XMPP.IoT.Identity.Manufacturer</a></h3>
+          <h3>3.2.4.12 <a name="sect-ID0ETWCI">XMPP.IoT.Identity.Manufacturer</a></h3>
 					<p class="" style="">
 						Interface handling manufacturer information.
 					</p>
@@ -2871,7 +2872,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.13 <a name="sect-ID0EEZCI">XMPP.IoT.Identity.Name</a></h3>
+          <h3>3.2.4.13 <a name="sect-ID0EFZCI">XMPP.IoT.Identity.Name</a></h3>
 					<p class="" style="">
 						Interface handling geospatial location of the device.
 					</p>
@@ -2915,7 +2916,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.14 <a name="sect-ID0ER3CI">XMPP.IoT.Identity.NodeID</a></h3>
+          <h3>3.2.4.14 <a name="sect-ID0ES3CI">XMPP.IoT.Identity.NodeID</a></h3>
 					<p class="" style="">
 						Interface handling information related to identifying the node.
 					</p>
@@ -2947,7 +2948,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.15 <a name="sect-ID0ED6CI">XMPP.IoT.Identity.RFID</a></h3>
+          <h3>3.2.4.15 <a name="sect-ID0EE6CI">XMPP.IoT.Identity.RFID</a></h3>
 					<p class="" style="">
 						Interface handling RFID information read from the device.
 					</p>
@@ -2979,7 +2980,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.16 <a name="sect-ID0EVBDI">XMPP.IoT.Identity.UserID</a></h3>
+          <h3>3.2.4.16 <a name="sect-ID0EWBDI">XMPP.IoT.Identity.UserID</a></h3>
 					<p class="" style="">
 						Interface handling information related to a user. Can be used to identify the user during manual read-out.
 					</p>
@@ -3011,7 +3012,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.17 <a name="sect-ID0EHEDI">XMPP.IoT.Identity.Version</a></h3>
+          <h3>3.2.4.17 <a name="sect-ID0EIEDI">XMPP.IoT.Identity.Version</a></h3>
 					<p class="" style="">
 						Interface for version information in the device.
 					</p>
@@ -3056,7 +3057,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.18 <a name="sect-ID0EQHDI">XMPP.IoT.Identity.Wink</a></h3>
+          <h3>3.2.4.18 <a name="sect-ID0ERHDI">XMPP.IoT.Identity.Wink</a></h3>
 					<p class="" style="">
 						Allows clients to send a wink command to devices for real-world identification.
 					</p>
@@ -3081,7 +3082,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.4.19 <a name="sect-ID0ELJDI">XMPP.IoT.Identity.ZWave</a></h3>
+          <h3>3.2.4.19 <a name="sect-ID0EMJDI">XMPP.IoT.Identity.ZWave</a></h3>
 					<p class="" style="">
 						Interface for identity information of ZWave libraries used in the device.
 					</p>
@@ -3121,12 +3122,12 @@
 				</div>
 			</div>
 			<div class="indent">
-        <h3>3.2.5 <a name="sect-ID0EVMDI">XMPP.IoT.Logistics</a></h3>
+        <h3>3.2.5 <a name="sect-ID0EWMDI">XMPP.IoT.Logistics</a></h3>
 				<p class="" style="">
 					This section contains interfaces relating to logistics.
 				</p>
 				<div class="indent">
-          <h3>3.2.5.1 <a name="sect-ID0E4MDI">XMPP.IoT.Logistics.Contents</a></h3>
+          <h3>3.2.5.1 <a name="sect-ID0E5MDI">XMPP.IoT.Logistics.Contents</a></h3>
 					<p class="" style="">
 						Interface for descibing contents.
 					</p>
@@ -3252,7 +3253,7 @@
 					</ul>
 				</div>
 				<div class="indent">
-          <h3>3.2.5.2 <a name="sect-ID0ERYDI">XMPP.IoT.Logistics.Route</a></h3>
+          <h3>3.2.5.2 <a name="sect-ID0ESYDI">XMPP.IoT.Logistics.Route</a></h3>
 					<p class="" style="">
 						Interface for descibing routes.
 					</p>
@@ -3438,7 +3439,7 @@
 				</div>
 			</div>
 			<div class="indent">
-        <h3>3.2.6 <a name="sect-ID0EVJAK">XMPP.IoT.Security</a></h3>
+        <h3>3.2.6 <a name="sect-ID0EWJAK">XMPP.IoT.Security</a></h3>
                 <p class="" style="">
                     This section contains interfaces relating to security.
                 </p>
@@ -3495,7 +3496,7 @@
 					
                 </div>
                 <div class="indent">
-          <h3>3.2.6.2 <a name="sect-ID0EDOAK">XMPP.IoT.Security.Burglar</a></h3>
+          <h3>3.2.6.2 <a name="sect-ID0EEOAK">XMPP.IoT.Security.Burglar</a></h3>
 					<p class="" style="">
 						Interface for a burglar alarm.
 					</p>
@@ -3504,7 +3505,7 @@
 					</p>
                 </div>
                 <div class="indent">
-          <h3>3.2.6.3 <a name="sect-ID0EUOAK">XMPP.IoT.Security.Clock</a></h3>
+          <h3>3.2.6.3 <a name="sect-ID0EVOAK">XMPP.IoT.Security.Clock</a></h3>
 					<p class="" style="">
 						Interface for devices with an internal configurable real-time clock.
 					</p>
@@ -3529,7 +3530,7 @@
           </div>
 				</div>
                 <div class="indent">
-          <h3>3.2.6.4 <a name="sect-ID0EPQAK">XMPP.IoT.Security.CO</a></h3>
+          <h3>3.2.6.4 <a name="sect-ID0EQQAK">XMPP.IoT.Security.CO</a></h3>
 					<p class="" style="">
 						Interface for a carbon monoxide (CO) detector.
 					</p>
@@ -3538,7 +3539,7 @@
 					</p>
 				</div>
                 <div class="indent">
-          <h3>3.2.6.5 <a name="sect-ID0EARAK">XMPP.IoT.Security.CO2</a></h3>
+          <h3>3.2.6.5 <a name="sect-ID0EBRAK">XMPP.IoT.Security.CO2</a></h3>
 					<p class="" style="">
 						Interface for a carbon dioxide (CO2) detector.
 					</p>
@@ -3573,7 +3574,7 @@
 					
 				</div>
                 <div class="indent">
-          <h3>3.2.6.7 <a name="sect-ID0EOTAK">XMPP.IoT.Security.Emergency</a></h3>
+          <h3>3.2.6.7 <a name="sect-ID0EPTAK">XMPP.IoT.Security.Emergency</a></h3>
 					<p class="" style="">
 						Interface for an emergency alarm.
 					</p>
@@ -3582,7 +3583,7 @@
 					</p>
 				</div>
 				<div class="indent">
-          <h3>3.2.6.8 <a name="sect-ID0E6TAK">XMPP.IoT.Security.Gas</a></h3>
+          <h3>3.2.6.8 <a name="sect-ID0EAUAK">XMPP.IoT.Security.Gas</a></h3>
 					<p class="" style="">
 						Interface for a gas detector.
 					</p>
@@ -3591,7 +3592,7 @@
 					</p>
 				</div>
 				<div class="indent">
-          <h3>3.2.6.9 <a name="sect-ID0EQUAK">XMPP.IoT.Security.Heat</a></h3>
+          <h3>3.2.6.9 <a name="sect-ID0ERUAK">XMPP.IoT.Security.Heat</a></h3>
 					<p class="" style="">
 						Interface for a heat detector.
 					</p>
@@ -3600,7 +3601,7 @@
 					</p>
 				</div>
                 <div class="indent">
-          <h3>3.2.6.10 <a name="sect-ID0EBVAK">XMPP.IoT.Security.Lock</a></h3>
+          <h3>3.2.6.10 <a name="sect-ID0ECVAK">XMPP.IoT.Security.Lock</a></h3>
 					<p class="" style="">
 						Interface for a lock.
 					</p>
@@ -3651,7 +3652,7 @@
 					
 				</div>
                 <div class="indent">
-          <h3>3.2.6.11 <a name="sect-ID0EBZAK">XMPP.IoT.Security.Movement</a></h3>
+          <h3>3.2.6.11 <a name="sect-ID0ECZAK">XMPP.IoT.Security.Movement</a></h3>
 					<p class="" style="">
 						Interface for a movement detector.
 					</p>
@@ -3660,7 +3661,7 @@
 					</p>
 				</div>
                 <div class="indent">
-          <h3>3.2.6.12 <a name="sect-ID0ESZAK">XMPP.IoT.Security.Smoke</a></h3>
+          <h3>3.2.6.12 <a name="sect-ID0ETZAK">XMPP.IoT.Security.Smoke</a></h3>
 					<p class="" style="">
 						Interface for a smoke detector.
 					</p>
@@ -3669,7 +3670,7 @@
 					</p>
 				</div>
                 <div class="indent">
-          <h3>3.2.6.13 <a name="sect-ID0ED1AK">XMPP.IoT.Security.Water</a></h3>
+          <h3>3.2.6.13 <a name="sect-ID0EE1AK">XMPP.IoT.Security.Water</a></h3>
 					<p class="" style="">
 						Interface for a water detector.
 					</p>
@@ -3705,30 +3706,30 @@
 				</div>
 			</div>
             <div class="indent">
-        <h3>3.2.7 <a name="sect-ID0ES3AK">XMPP.IoT.Controller</a></h3>
+        <h3>3.2.7 <a name="sect-ID0ET3AK">XMPP.IoT.Controller</a></h3>
                 <p class="" style="">
                     This section contains interfaces relating to controllers, specific applications that perform a (local) service in a sensor network.
                 </p>
 				<div class="indent">
-          <h3>3.2.7.1 <a name="sect-ID0E13AK">XMPP.IoT.Controller.AccessControl</a></h3>
+          <h3>3.2.7.1 <a name="sect-ID0E23AK">XMPP.IoT.Controller.AccessControl</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.2.7.2 <a name="sect-ID0EB4AK">XMPP.IoT.Controller.Thermostat</a></h3>
+          <h3>3.2.7.2 <a name="sect-ID0EC4AK">XMPP.IoT.Controller.Thermostat</a></h3>
                     
                 </div>
                 <div class="indent">
-          <h3>3.2.7.3 <a name="sect-ID0EI4AK">XMPP.IoT.Controller.Ventilation</a></h3>
+          <h3>3.2.7.3 <a name="sect-ID0EJ4AK">XMPP.IoT.Controller.Ventilation</a></h3>
                     
                 </div>
             </div>
             <div class="indent">
-        <h3>3.2.8 <a name="sect-ID0EQ4AK">XMPP.IoT.Media</a></h3>
+        <h3>3.2.8 <a name="sect-ID0ER4AK">XMPP.IoT.Media</a></h3>
                 <p class="" style="">
                     This section contains interfaces relating to multi media.
                 </p>
 				<div class="indent">
-          <h3>3.2.8.1 <a name="sect-ID0EY4AK">XMPP.IoT.Media.Camera</a></h3>
+          <h3>3.2.8.1 <a name="sect-ID0EZ4AK">XMPP.IoT.Media.Camera</a></h3>
 					<p class="" style="">
 						This interface defines a camera.
 					</p>
@@ -3897,7 +3898,7 @@
           </div>
 				</div>
                 <div class="indent">
-          <h3>3.2.8.2 <a name="sect-ID0EPMBK">XMPP.IoT.Media.Directory</a></h3>
+          <h3>3.2.8.2 <a name="sect-ID0EQMBK">XMPP.IoT.Media.Directory</a></h3>
 					<p class="" style="">
 						A Media Directory device or node contains subnodes representing different media items in the media directory catalog.
 					</p>
@@ -4552,7 +4553,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.8.10 <a name="sect-ID0E3FDK">XMPP.IoT.Media.Microphone</a></h3>
+          <h3>3.2.8.10 <a name="sect-ID0E4FDK">XMPP.IoT.Media.Microphone</a></h3>
 					<p class="" style="">
 						Represents a live Microphone.
 					</p>
@@ -4708,7 +4709,7 @@
           </div>
 				</div>
                 <div class="indent">
-          <h3>3.2.8.12 <a name="sect-ID0EGTDK">XMPP.IoT.Media.TextDisplay</a></h3>
+          <h3>3.2.8.12 <a name="sect-ID0EHTDK">XMPP.IoT.Media.TextDisplay</a></h3>
 					<p class="" style="">
 						A Text display is a simpler form of display displaying simple unformatted text arranged in rows and columns. Each row is controlled by
 						a separate parameter. This allows for provisioning of different parts of the display to different clients, if desired.
@@ -4780,12 +4781,12 @@
 				</div>
             </div>
 			<div class="indent">
-        <h3>3.2.9 <a name="sect-ID0EKYDK">XMPP.IoT.Network</a></h3>
+        <h3>3.2.9 <a name="sect-ID0ELYDK">XMPP.IoT.Network</a></h3>
 				<p class="" style="">
 					This section contains interfaces relating to network interface status.
 				</p>
 				<div class="indent">
-          <h3>3.2.9.1 <a name="sect-ID0ESYDK">XMPP.IoT.Network.Ethernet</a></h3>
+          <h3>3.2.9.1 <a name="sect-ID0ETYDK">XMPP.IoT.Network.Ethernet</a></h3>
 					<p class="" style="">
 						Interface handling Ehternet adapter status information.
 					</p>
@@ -4873,7 +4874,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.9.2 <a name="sect-ID0E3AEK">XMPP.IoT.Network.IP</a></h3>
+          <h3>3.2.9.2 <a name="sect-ID0E4AEK">XMPP.IoT.Network.IP</a></h3>
 					<p class="" style="">
 						Interface handling IPv4 network layer status information.
 					</p>
@@ -4940,7 +4941,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.9.3 <a name="sect-ID0EBHEK">XMPP.IoT.Network.IPv6</a></h3>
+          <h3>3.2.9.3 <a name="sect-ID0ECHEK">XMPP.IoT.Network.IPv6</a></h3>
 					<p class="" style="">
 						Interface handling IPv6 network layer status information.
 					</p>
@@ -5007,7 +5008,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.2.9.4 <a name="sect-ID0EGNEK">XMPP.IoT.Network.Radio</a></h3>
+          <h3>3.2.9.4 <a name="sect-ID0EHNEK">XMPP.IoT.Network.Radio</a></h3>
 					<p class="" style="">
 						Interface handling radio network layer status information.
 					</p>
@@ -5041,31 +5042,31 @@
 			</div>
         </div>
         <div class="indent">
-      <h3>3.3 <a name="sect-ID0E1PEK">Interface aggregations</a></h3>
+      <h3>3.3 <a name="sect-ID0E2PEK">Interface aggregations</a></h3>
 			<div class="indent">
-        <h3>3.3.1 <a name="sect-ID0E5PEK">Control programming aggregations</a></h3>
+        <h3>3.3.1 <a name="sect-ID0E6PEK">Control programming aggregations</a></h3>
 				<div class="indent">
-          <h3>3.3.1.1 <a name="sect-ID0ECQEK">*.TimeChannels</a></h3>
+          <h3>3.3.1.1 <a name="sect-ID0EDQEK">*.TimeChannels</a></h3>
 					
 				</div>
 			</div>
 			<div class="indent">
-        <h3>3.3.2 <a name="sect-ID0EKQEK">Event aggregations</a></h3>
+        <h3>3.3.2 <a name="sect-ID0ELQEK">Event aggregations</a></h3>
 				<div class="indent">
-          <h3>3.3.2.1 <a name="sect-ID0EOQEK">*.BinaryEvent</a></h3>
+          <h3>3.3.2.1 <a name="sect-ID0EPQEK">*.BinaryEvent</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.3.2.2 <a name="sect-ID0EVQEK">*.HysteresisEvent</a></h3>
+          <h3>3.3.2.2 <a name="sect-ID0EWQEK">*.HysteresisEvent</a></h3>
 					
 				</div>
 				<div class="indent">
-          <h3>3.3.2.3 <a name="sect-ID0E3QEK">*.TimedEvent</a></h3>
+          <h3>3.3.2.3 <a name="sect-ID0E4QEK">*.TimedEvent</a></h3>
 					
 				</div>
 			</div>
 			<div class="indent">
-        <h3>3.3.3 <a name="sect-ID0EEREK">Readout aggregations</a></h3>
+        <h3>3.3.3 <a name="sect-ID0EFREK">Readout aggregations</a></h3>
 				<p class="" style="">
 					The following interfaces aggregates information in a defined way. Instead of having to list each combination, the interface which is being
 					aggregated to is simply named *.
@@ -5209,7 +5210,7 @@
 					</p>
 				</div>
 				<div class="indent">
-          <h3>3.3.3.4 <a name="sect-ID0EN2EK">*.Mean</a></h3>
+          <h3>3.3.3.4 <a name="sect-ID0EO2EK">*.Mean</a></h3>
 					<p class="" style="">
 						This interface adds mean values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time
 						of the other (the momentary value), only the momentary value is aggregated.
@@ -5260,7 +5261,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.3.3.5 <a name="sect-ID0EI6EK">*.Min</a></h3>
+          <h3>3.3.3.5 <a name="sect-ID0EJ6EK">*.Min</a></h3>
 					<p class="" style="">
 						This interface adds minimum values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time
 						of the other (the momentary value), only the momentary value is aggregated.
@@ -5311,7 +5312,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.3.3.6 <a name="sect-ID0EDDFK">*.Max</a></h3>
+          <h3>3.3.3.6 <a name="sect-ID0EEDFK">*.Max</a></h3>
 					<p class="" style="">
 						This interface adds maximum values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time
 						of the other (the momentary value), only the momentary value is aggregated.
@@ -5362,7 +5363,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.3.3.7 <a name="sect-ID0E5GFK">*.StdDev</a></h3>
+          <h3>3.3.3.7 <a name="sect-ID0E6GFK">*.StdDev</a></h3>
 					<p class="" style="">
 						This interface adds stadard deviation values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time
 						of the other (the momentary value), only the momentary value is aggregated.
@@ -5413,7 +5414,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>3.3.3.8 <a name="sect-ID0EZKFK">*.Sum</a></h3>
+          <h3>3.3.3.8 <a name="sect-ID0E1KFK">*.Sum</a></h3>
 					<p class="" style="">
 						This interface adds sum values to the interface *. In the case an interface contains two fields, one (the accumulated value) the integration over time
 						of the other (the momentary value), only the accumulated value is aggregated.
@@ -5466,7 +5467,7 @@
 			</div>
 		</div>
         <div class="indent">
-      <h3>3.4 <a name="sect-ID0EWOFK">Field Names</a></h3>
+      <h3>3.4 <a name="sect-ID0EXOFK">Field Names</a></h3>
             <div class="indent">
         <p class="caption"><a name="table-119"></a>Table 119: Localization of Field Names</p>
         <table border="1" cellpadding="3" cellspacing="0">
@@ -5560,7 +5561,7 @@
       </div>
         </div>
         <div class="indent">
-      <h3>3.5 <a name="sect-ID0EBWFK">Units</a></h3>
+      <h3>3.5 <a name="sect-ID0ECWFK">Units</a></h3>
 			<p class="" style="">
 				This section contains tables for units and unit conversions that devices and sytems in IoT should use, so that data interchange is interoperable.
 				Units are divided into categories, each category listed in a separate subsection. Devices reporting fields using units of a specific category should
@@ -5630,7 +5631,7 @@
 				K=((F-32)/1.8)*1+273.15=((50-32)/1.8)*1+273.15=283.15. So 50 °F = 283.15 K.
 			</p>
 			<div class="indent">
-        <h3>3.5.1 <a name="sect-ID0EQ1FK">Angle</a></h3>
+        <h3>3.5.1 <a name="sect-ID0ER1FK">Angle</a></h3>
 				<div class="indent">
           <p class="caption"><a name="table-122"></a>Table 122: Angle</p>
           <table border="1" cellpadding="3" cellspacing="0">
@@ -5656,7 +5657,7 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.2 <a name="sect-ID0ES3FK">Area</a></h3>
+        <h3>3.5.2 <a name="sect-ID0ET3FK">Area</a></h3>
 				<div class="indent">
           <p class="caption"><a name="table-123"></a>Table 123: Area</p>
           <table border="1" cellpadding="3" cellspacing="0">
@@ -5718,7 +5719,7 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.3 <a name="sect-ID0EGCGK">Distance</a></h3>
+        <h3>3.5.3 <a name="sect-ID0EHCGK">Distance</a></h3>
 				<div class="indent">
           <p class="caption"><a name="table-124"></a>Table 124: Distance</p>
           <table border="1" cellpadding="3" cellspacing="0">
@@ -5804,7 +5805,7 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.4 <a name="sect-ID0EGKGK">Energy</a></h3>
+        <h3>3.5.4 <a name="sect-ID0EHKGK">Energy</a></h3>
 				<div class="indent">
           <p class="caption"><a name="table-125"></a>Table 125: Energy</p>
           <table border="1" cellpadding="3" cellspacing="0">
@@ -5986,7 +5987,7 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.5 <a name="sect-ID0EW2GK">Flow</a></h3>
+        <h3>3.5.5 <a name="sect-ID0EX2GK">Flow</a></h3>
 				<div class="indent">
           <p class="caption"><a name="table-126"></a>Table 126: Flow</p>
           <table border="1" cellpadding="3" cellspacing="0">
@@ -6144,7 +6145,7 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.6 <a name="sect-ID0E1KHK">Mass</a></h3>
+        <h3>3.5.6 <a name="sect-ID0E2KHK">Mass</a></h3>
 				<div class="indent">
           <p class="caption"><a name="table-127"></a>Table 127: Mass</p>
           <table border="1" cellpadding="3" cellspacing="0">
@@ -6212,7 +6213,7 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.7 <a name="sect-ID0EBRHK">Power</a></h3>
+        <h3>3.5.7 <a name="sect-ID0ECRHK">Power</a></h3>
 				<div class="indent">
           <p class="caption"><a name="table-128"></a>Table 128: Power</p>
           <table border="1" cellpadding="3" cellspacing="0">
@@ -6442,7 +6443,7 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.8 <a name="sect-ID0EKHAM">Pressure</a></h3>
+        <h3>3.5.8 <a name="sect-ID0ELHAM">Pressure</a></h3>
 				<div class="indent">
           <p class="caption"><a name="table-129"></a>Table 129: Pressure</p>
           <table border="1" cellpadding="3" cellspacing="0">
@@ -6522,7 +6523,7 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.9 <a name="sect-ID0EXOAM">Speed</a></h3>
+        <h3>3.5.9 <a name="sect-ID0EYOAM">Speed</a></h3>
 				<div class="indent">
           <p class="caption"><a name="table-130"></a>Table 130: Speed</p>
           <table border="1" cellpadding="3" cellspacing="0">
@@ -6566,7 +6567,7 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.10 <a name="sect-ID0ESSAM">Temperature</a></h3>
+        <h3>3.5.10 <a name="sect-ID0ETSAM">Temperature</a></h3>
 				<div class="indent">
           <p class="caption"><a name="table-131"></a>Table 131: Temperature</p>
           <table border="1" cellpadding="3" cellspacing="0">
@@ -6616,7 +6617,7 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.11 <a name="sect-ID0EAXAM">Time</a></h3>
+        <h3>3.5.11 <a name="sect-ID0EBXAM">Time</a></h3>
 				<div class="indent">
           <p class="caption"><a name="table-132"></a>Table 132: Time</p>
           <table border="1" cellpadding="3" cellspacing="0">
@@ -6672,7 +6673,7 @@
         </div>
 			</div>
 			<div class="indent">
-        <h3>3.5.12 <a name="sect-ID0EB3AM">Volume</a></h3>
+        <h3>3.5.12 <a name="sect-ID0EC3AM">Volume</a></h3>
 				<div class="indent">
           <p class="caption"><a name="table-133"></a>Table 133: Volume</p>
           <table border="1" cellpadding="3" cellspacing="0">
@@ -6759,22 +6760,22 @@
 			</div>
 		</div>
         <div class="indent">
-      <h3>3.6 <a name="sect-ID0ECEBM">Privilege IDs</a></h3>
+      <h3>3.6 <a name="sect-ID0EDEBM">Privilege IDs</a></h3>
             
             
             
             
         </div>
         <div class="indent">
-      <h3>3.7 <a name="sect-ID0EPEBM">Data Sources</a></h3>
+      <h3>3.7 <a name="sect-ID0EQEBM">Data Sources</a></h3>
             
         </div>
 		<div class="indent">
-      <h3>3.8 <a name="sect-ID0EWEBM">Identification Schemes</a></h3>
+      <h3>3.8 <a name="sect-ID0EXEBM">Identification Schemes</a></h3>
 			
 		</div>
 		<div class="indent">
-      <h3>3.9 <a name="sect-ID0E4EBM">Media Types</a></h3>
+      <h3>3.9 <a name="sect-ID0E5EBM">Media Types</a></h3>
 			<p class="" style="">
 				The following sections list possible enumerations for different aspects of media streams.
 			</p>
@@ -7072,7 +7073,7 @@
 		</div>
 	<h2>4.
        <a name="support">Determining Support</a></h2>
-        <p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:interoperability" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EN2BM">7</a>] information requests.</p>
+        <p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:interoperability" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EO2BM">7</a>] information requests.</p>
         <p class="caption"><a name="example-2"></a>Example 2. Service discovery information request</p>
     <div class="indent">
       <pre class="prettyprint">
@@ -7103,7 +7104,7 @@
     </div>
         <p class="" style="">
             In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
-            in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EE3BM">8</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
+            in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EF3BM">8</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
         </p>
     <h2>5.
        <a name="newinterfaces">Extending the Interoperability Document</a></h2>
@@ -7119,19 +7120,20 @@
             </li>
             <li class="" style="">
                 More advanced access rights, privileges, automatic friendship recognition, etc., may be managed by a third party. How to implement more advanced provisioning and detailed
-                access rights to sensor information is detailed in the XEP-0324 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0EN4BM">9</a>]. In short, a device, service or user can get a
+                access rights to sensor information is detailed in the XEP-0324 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0EO4BM">9</a>]. In short, a device, service or user can get a
                 <span class="strong">deviceToken</span>, <span class="strong">serviceToken</span> and <span class="strong">userToken</span> respectivelly from a provisioning server. The service or device then uses these tokens
                 in all readout requests and the device being read out can in turn use these tokens to validate access rights with the provisioning server.
             </li>
         </ul>
     <h2>7.
        <a name="iana">IANA Considerations</a></h2>
-        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EK5BM">10</a>].</p>
+        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EL5BM">10</a>].</p>
     <h2>8.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
-        <p class="" style="">REQUIRED.</p>
-        
-    <h2>9.
+		<p class="" style="">
+			The <a href="#schema">protocol schema</a> needs to be added to the list of <a href="http://xmpp.org/resources/schemas/">XMPP protocol schemas</a>.
+		</p>
+	<h2>9.
        <a name="schema">XML Schema</a></h2>
         <p class="caption">
     </p>
@@ -7194,7 +7196,7 @@
             <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
             Version: 0.0.1<br>
             Last Updated: 2013-04-04<br>
-                Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XEP-0001, XEP-0030, XEP-0323, XEP-0324, xep-0000-Concentrators, xep-0000-Control<br>
+                Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XEP-0001, XEP-0030, XEP-0323, XEP-0324, XEP-0325, XEP-0326<br>
                 Supersedes: None<br>
                 Superseded By: None<br>
             Short Name: NOT_YET_ASSIGNED<br>
@@ -7227,16 +7229,16 @@
     <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
     <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
     <div class="indent">
-      <p><a name="nt-ID0EFE">1</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0E3E">2</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0EIF">3</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
-      <p><a name="nt-ID0EUF">4</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
-      <p><a name="nt-ID0EAG">5</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
-      <p><a name="nt-ID0EVFAC">6</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
-      <p><a name="nt-ID0EN2BM">7</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
-      <p><a name="nt-ID0EE3BM">8</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
-      <p><a name="nt-ID0EN4BM">9</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
-      <p><a name="nt-ID0EK5BM">10</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+      <p><a name="nt-ID0EGE">1</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0ESE">2</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
+      <p><a name="nt-ID0E5E">3</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
+      <p><a name="nt-ID0EKF">4</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+      <p><a name="nt-ID0E3BAC">5</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0EWFAC">6</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
+      <p><a name="nt-ID0EO2BM">7</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0EF3BM">8</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0EO4BM">9</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
+      <p><a name="nt-ID0EL5BM">10</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>

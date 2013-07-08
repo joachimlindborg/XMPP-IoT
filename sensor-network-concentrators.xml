@@ -36,8 +36,8 @@
             <spec>XEP-0141</spec>
             <spec>XEP-0323</spec>
             <spec>XEP-0324</spec>
-            <spec>xep-0000-DynamicForms</spec>
-            <spec>color-parameter</spec>
+			<spec>XEP-0331</spec>
+			<spec>xep-0000-DynamicForms</spec>
         </dependencies>
         <supersedes/>
         <supersededby/>
@@ -218,10 +218,6 @@
                 <th>Description</th>
             </tr>
             <tr>
-                <td>XEP-0000-ColorParameter</td>
-                <td>Defines extensions for how color parameters can be handled, based on &xep0004;</td>
-            </tr>
-            <tr>
                 <td>XEP-0000-DynamicForms</td>
                 <td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
             </tr>
@@ -275,7 +271,11 @@
                 <td>XEP-0326</td>
                 <td>This specification. Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
             </tr>
-        </table>
+			<tr>
+				<td>XEP-0331</td>
+				<td>Defines extensions for how color parameters can be handled, based on &xep0004;</td>
+			</tr>
+		</table>
     </section1>
     <section1 topic='Glossary' anchor='glossary'>
         <p>The following table lists common terms and corresponding descriptions.</p>
@@ -778,10 +778,13 @@
    </iq>]]>
                 </example>
                 <p>
-                    The <strong>subscribe</strong> command has a set of optional attributes, one for each event type available, and with the same names, that the
-                    client can use to subscribe to individual events, but not to others. They have the default value of true implying that if not provided, the
-                    default action is to subscribe to those events.
-                </p>
+                    The <strong>subscribe</strong> command has a set of optional attributes, one for each event type available, and with the same names (<strong>nodeAdded</strong>, 
+					<strong>nodeUpdated</strong>, <strong>nodeStatusChanged</strong>, <strong>nodeRemoved</strong>, <strong>nodeMovedUp</strong> and <strong>nodeMovedDown</strong>), that the
+					client can use to subscribe to individual events, but not to others. They have the default value of true implying that if not provided, the
+					default action is to subscribe to those events. The attributes <strong>parameters</strong> and <strong>messages</strong> can also be used to specify
+					if node parameters and node messages respectively should be available in event messages. The default value for the these later attributes is false, implying
+					that normal events do not include node parameter and node message information.
+				</p>
                 <p>
                     The following example shows how a client can subscribe to a set of events only:
                 </p>
@@ -1930,7 +1933,7 @@
                         <td>Makes it possible to layout parameters into pages and sections.</td>
                     </tr>
                     <tr>
-                        <td>XEP-0000-ColorParameter</td>
+                        <td>XEP-0331</td>
                         <td>Defines extensions for how color parameters can be handled.</td>
                     </tr>
                     <tr>
@@ -5135,9 +5138,10 @@
         <p>This document requires no interaction with &IANA;.</p>
     </section1>
     <section1 topic='XMPP Registrar Considerations' anchor='registrar'>
-        <p>REQUIRED.</p>
-        <!-- TODO -->
-    </section1>
+		<p>
+			The <link url="#schema">protocol schema</link> needs to be added to the list of <link url="http://xmpp.org/resources/schemas/">XMPP protocol schemas</link>.
+		</p>
+	</section1>
     <section1 topic='XML Schema' anchor='schema'>
         <code>
             <![CDATA[

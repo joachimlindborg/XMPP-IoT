@@ -5,7 +5,8 @@
     <title>XEP-0324: Internet of Things - Provisioning</title>
     <link rel="stylesheet" type="text/css" href="xmpp.css">
     <link href="prettify.css" type="text/css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"><script type="text/javascript" src="prettify.js"></script><meta name="DC.Title" content="Internet of Things - Provisioning">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"><script type="text/javascript" src="prettify.js"></script><meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=2.0">
+    <meta name="DC.Title" content="Internet of Things - Provisioning">
     <meta name="DC.Creator" content="Peter Waher">
     <meta name="DC.Description" content="This specification describes an architecture for efficient provisioning of services, access rights and user privileges in for the Internet of Things, where&#xA;		communication between Things is done using the XMPP protocol.">
     <meta name="DC.Publisher" content="XMPP Standards Foundation">
@@ -127,12 +128,8 @@
                 <th colspan="" rowspan="">Description</th>
             </tr>
             <tr class="body">
-                <td colspan="" rowspan="">XEP-0000-ColorParameter</td>
-                <td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EUCAC">3</a>]</td>
-            </tr>
-            <tr class="body">
                 <td colspan="" rowspan="">XEP-0000-DynamicForms</td>
-                <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0ELDAC">4</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EXDAC">5</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0EDEAC">6</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EPEAC">7</a>].</td>
+                <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EUCAC">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EADAC">4</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0EMDAC">5</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EYDAC">6</a>].</td>
             </tr>
             <tr class="body">
                 <td colspan="" rowspan="">xep-0000-IoT-BatteryPoweredSensors</td>
@@ -155,10 +152,6 @@
                 <td colspan="" rowspan="">Defines how sensor data can be multicast in efficient ways.</td>
             </tr>
             <tr class="body">
-                <td colspan="" rowspan="">XEP-0324</td>
-                <td colspan="" rowspan="">This specification. Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
-            </tr>
-            <tr class="body">
                 <td colspan="" rowspan="">xep-0000-IoT-PubSub</td>
                 <td colspan="" rowspan="">Defines how efficient publication of sensor data can be made in Internet of Things.</td>
             </tr>
@@ -178,12 +171,20 @@
                 </td>
             </tr>
 			<tr class="body">
+				<td colspan="" rowspan="">XEP-0324</td>
+				<td colspan="" rowspan="">This specification. Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
+			</tr>
+			<tr class="body">
 				<td colspan="" rowspan="">XEP-0325</td>
 				<td colspan="" rowspan="">Defines how to control actuators and other devices in Internet of Things.</td>
 			</tr>
 			<tr class="body">
 				<td colspan="" rowspan="">XEP-0326</td>
 				<td colspan="" rowspan="">Defines how to handle architectures containing concentrators or servers handling multiple Things.</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">XEP-0331</td>
+				<td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EJIAC">7</a>]</td>
 			</tr>
 		</table>
     </div>
@@ -1531,9 +1532,10 @@
         <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0ESGAG">12</a>].</p>
     <h2>8.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
-        <p class="" style="">REQUIRED.</p>
-        
-    <h2>9.
+		<p class="" style="">
+			The <a href="#schema">protocol schema</a> needs to be added to the list of <a href="http://xmpp.org/resources/schemas/">XMPP protocol schemas</a>.
+		</p>
+	<h2>9.
        <a name="schema">XML Schema</a></h2>
         <p class="caption">
     </p>
@@ -1875,10 +1877,10 @@
       <p><a name="nt-ID0EDBAC">1</a>. XEP-0323: Internet of Things - Sensor Data &lt;<a href="http://xmpp.org/extensions/xep-0323.html">http://xmpp.org/extensions/xep-0323.html</a>&gt;.</p>
       <p><a name="nt-ID0EPBAC">2</a>. XEP-0325: Internet of Things - Control &lt;<a href="http://xmpp.org/extensions/xep-0325.html">http://xmpp.org/extensions/xep-0325.html</a>&gt;.</p>
       <p><a name="nt-ID0EUCAC">3</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0ELDAC">4</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0EXDAC">5</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
-      <p><a name="nt-ID0EDEAC">6</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
-      <p><a name="nt-ID0EPEAC">7</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+      <p><a name="nt-ID0EADAC">4</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
+      <p><a name="nt-ID0EMDAC">5</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
+      <p><a name="nt-ID0EYDAC">6</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+      <p><a name="nt-ID0EJIAC">7</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
       <p><a name="nt-ID0EKMAC">8</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
       <p><a name="nt-ID0EJYAE">9</a>. XEP-0080: User Geolocation &lt;<a href="http://xmpp.org/extensions/xep-0080.html">http://xmpp.org/extensions/xep-0080.html</a>&gt;.</p>
       <p><a name="nt-ID0E46AE">10</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>

@@ -67,10 +67,6 @@
                 <th>Description</th>
             </tr>
             <tr>
-                <td>XEP-0000-ColorParameter</td>
-                <td>Defines extensions for how color parameters can be handled, based on &xep0004;</td>
-            </tr>
-            <tr>
                 <td>XEP-0000-DynamicForms</td>
                 <td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
             </tr>
@@ -123,6 +119,10 @@
 			<tr>
 				<td>XEP-0326</td>
 				<td>Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
+			</tr>
+			<tr>
+				<td>XEP-0331</td>
+				<td>Defines extensions for how color parameters can be handled, based on &xep0004;</td>
 			</tr>
 		</table>
     </section1>
@@ -6396,9 +6396,10 @@
         <p>This document requires no interaction with &IANA;.</p>
     </section1>
     <section1 topic='XMPP Registrar Considerations' anchor='registrar'>
-        <p>REQUIRED.</p>
-        <!-- TODO -->
-    </section1>
+		<p>
+			The <link url="#schema">protocol schema</link> needs to be added to the list of <link url="http://xmpp.org/resources/schemas/">XMPP protocol schemas</link>.
+		</p>
+	</section1>
     <section1 topic='XML Schema' anchor='schema'>
         <code>
             <![CDATA[
