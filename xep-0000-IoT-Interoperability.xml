@@ -41,7 +41,7 @@
             <surname>Waher</surname>
             <email>peter.waher@clayster.com</email>
             <jid>peter.waher@jabber.org</jid>
-            <uri>http://se.linkedin.com/pub/peter-waher/1a/71b/a29/</uri>
+            <uri>http://www.linkedin.com/in/peterwaher</uri>
         </author>
         <revision>
             <version>0.0.1</version>
@@ -67,7 +67,7 @@
                 <th>Description</th>
             </tr>
             <tr>
-                <td>XEP-0000-DynamicForms</td>
+                <td>dynamic-forms</td>
                 <td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
             </tr>
             <tr>

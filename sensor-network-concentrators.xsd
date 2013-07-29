@@ -452,6 +452,24 @@
 						</xs:simpleContent>
 					</xs:complexType>
 				</xs:element>
+				<xs:element name='title'>
+					<xs:complexType>
+						<xs:attribute name='name' type='xs:string' use='required'/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='status'>
+					<xs:complexType>
+						<xs:attribute name='message' type='xs:string' use='required'/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='beginSection'>
+					<xs:complexType>
+						<xs:attribute name='header' type='xs:string' use='required'/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='endSection'>
+					<xs:complexType/>
+				</xs:element>
 			</xs:choice>
 			<xs:attributeGroup ref='nodeReference'/>
 			<xs:attribute name='queryId' type='xs:string' use='required'/>

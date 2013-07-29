@@ -36,8 +36,8 @@
             <spec>XEP-0141</spec>
             <spec>XEP-0323</spec>
             <spec>XEP-0324</spec>
-			<spec>XEP-0331</spec>
-			<spec>xep-0000-DynamicForms</spec>
+            <spec>XEP-0331</spec>
+            <spec>dynamic-forms</spec>
         </dependencies>
         <supersedes/>
         <supersededby/>
@@ -47,17 +47,25 @@
             <surname>Waher</surname>
             <email>peter.waher@clayster.com</email>
             <jid>peter.waher@jabber.org</jid>
-            <uri>http://se.linkedin.com/pub/peter-waher/1a/71b/a29/</uri>
+            <uri>http://www.linkedin.com/in/peterwaher</uri>
         </author>
-		<revision>
-			<version>0.1.3</version>
-			<date>2013-06-19</date>
-			<initials>pw</initials>
-			<remark>
-				<p>Updated the schema to more strictly validate references to x-data forms.</p>
-			</remark>
-		</revision>
-		<revision>
+        <revision>
+            <version>0.1.4</version>
+            <date>2013-07-25</date>
+            <initials>pw</initials>
+            <remark>
+                <p>Added the following node query events: <strong>title</strong>, <strong>status</strong>, <strong>beginSection</strong> and <strong>endSection</strong>.</p>
+            </remark>
+        </revision>
+        <revision>
+            <version>0.1.3</version>
+            <date>2013-06-19</date>
+            <initials>pw</initials>
+            <remark>
+                <p>Updated the schema to more strictly validate references to x-data forms.</p>
+            </remark>
+        </revision>
+        <revision>
             <version>0.1.2</version>
             <date>2013-05-13</date>
             <initials>pw</initials>
@@ -201,7 +209,7 @@
                     </li>
                     <li>
                         Dialog types used for Ad-Hoc-commands are not sufficient. First, dynamic dialogs are required in the general case.
-                        (XEP <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> define how to create dynamic forms.) Furthermore, the
+                        (XEP <link url='dynamic-forms.html'>dynamic-forms.html</link> define how to create dynamic forms.) Furthermore, the
                         wizard style type of dialogs used for more complex dialogs in ad-hoc commands, are difficult to automate.
                     </li>
                 </ul>
@@ -218,7 +226,7 @@
                 <th>Description</th>
             </tr>
             <tr>
-                <td>XEP-0000-DynamicForms</td>
+                <td>dynamic-forms</td>
                 <td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
             </tr>
             <tr>
@@ -271,11 +279,11 @@
                 <td>XEP-0326</td>
                 <td>This specification. Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
             </tr>
-			<tr>
-				<td>XEP-0331</td>
-				<td>Defines extensions for how color parameters can be handled, based on &xep0004;</td>
-			</tr>
-		</table>
+            <tr>
+                <td>XEP-0331</td>
+                <td>Defines extensions for how color parameters can be handled, based on &xep0004;</td>
+            </tr>
+        </table>
     </section1>
     <section1 topic='Glossary' anchor='glossary'>
         <p>The following table lists common terms and corresponding descriptions.</p>
@@ -779,12 +787,12 @@
                 </example>
                 <p>
                     The <strong>subscribe</strong> command has a set of optional attributes, one for each event type available, and with the same names (<strong>nodeAdded</strong>, 
-					<strong>nodeUpdated</strong>, <strong>nodeStatusChanged</strong>, <strong>nodeRemoved</strong>, <strong>nodeMovedUp</strong> and <strong>nodeMovedDown</strong>), that the
-					client can use to subscribe to individual events, but not to others. They have the default value of true implying that if not provided, the
-					default action is to subscribe to those events. The attributes <strong>parameters</strong> and <strong>messages</strong> can also be used to specify
-					if node parameters and node messages respectively should be available in event messages. The default value for the these later attributes is false, implying
-					that normal events do not include node parameter and node message information.
-				</p>
+                    <strong>nodeUpdated</strong>, <strong>nodeStatusChanged</strong>, <strong>nodeRemoved</strong>, <strong>nodeMovedUp</strong> and <strong>nodeMovedDown</strong>), that the
+                    client can use to subscribe to individual events, but not to others. They have the default value of true implying that if not provided, the
+                    default action is to subscribe to those events. The attributes <strong>parameters</strong> and <strong>messages</strong> can also be used to specify
+                    if node parameters and node messages respectively should be available in event messages. The default value for the these later attributes is false, implying
+                    that normal events do not include node parameter and node message information.
+                </p>
                 <p>
                     The following example shows how a client can subscribe to a set of events only:
                 </p>
@@ -1937,12 +1945,12 @@
                         <td>Defines extensions for how color parameters can be handled.</td>
                     </tr>
                     <tr>
-                        <td>xep-0000-DynamicForms</td>
+                        <td>dynamic-forms</td>
                         <td>Makes it possible to create dynamic forms, with server-side validation and forms that change dynamically depending on input.</td>
                     </tr>
                 </table>
                 <p>
-                    Read-only parameters will be returned with the <strong>readOnly</strong> element, as defined in <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>.
+                    Read-only parameters will be returned with the <strong>readOnly</strong> element, as defined in <link url='dynamic-forms.html'>dynamic-forms</link>.
                     Clients SHOULD support this extension if using this command. However, the server MUST NOT change parameters in a node that are read-only, even if clients happen
                     to try to set them.
                 </p>
@@ -2068,9 +2076,9 @@
                 <p>
                     As the <strong>result</strong> attribute is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
+                    explicitly cancelled or a form session time-out has occurred. See <link url='dynamic-forms.html'>dynamic-forms</link>
                     <note>
-                        XEP-xxxx: Dynamic Data Forms &lt;<link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link>&gt;
+                        XEP-xxxx: Dynamic Data Forms &lt;<link url='dynamic-forms.html'>dynamic-forms.html</link>&gt;
                     </note> for more information.
                 </p>
             </section3>
@@ -2083,8 +2091,8 @@
                 </p>
                 <p>
                     <strong>Important:</strong> A parameter that exists in multiple nodes, but has different parameter values among the nodes, will be marked with the 
-                    <strong>notSame</strong> element, according to <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>. Clients using this command MUST 
-                    support the extensions defined in <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>.
+                    <strong>notSame</strong> element, according to <link url='dynamic-forms.html'>dynamic-forms</link>. Clients using this command MUST 
+                    support the extensions defined in <link url='dynamic-forms.html'>dynamic-forms</link>.
                 </p>
                 <example caption='Get Common Node Parameters for editing'>
                     <![CDATA[
@@ -2264,7 +2272,7 @@
                 </p>
                 <p>
                     <strong>Important:</strong> A parameter that exists in multiple nodes, but has different parameter values among the nodes, will be marked with the
-                    <strong>notSame</strong> element, according to <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>. Such parameters MUST NOT be sent back to the server 
+                    <strong>notSame</strong> element, according to <link url='dynamic-forms.html'>dynamic-forms</link>. Such parameters MUST NOT be sent back to the server 
                     unless they have explicitly been edited or signed by the end-user. The value sent back to the server will be set in all nodes.
                 </p>
             </section3>
@@ -2309,8 +2317,8 @@
                 <p>
                     As the <strong>result</strong> attribute is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
-                    <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
+                    explicitly cancelled or a form session time-out has occurred. See <link url='dynamic-forms.html'>dynamic-forms</link>
+                    <link url='dynamic-forms.html'>dynamic-forms.html</link> for more information.
                 </p>
             </section3>
             <section3 topic='Get Node Messages'>
@@ -2598,8 +2606,8 @@
                 <p>
                     As the <strong>result</strong> attribute is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
-                    <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
+                    explicitly cancelled or a form session time-out has occurred. See <link url='dynamic-forms.html'>dynamic-forms</link>
+                    <link url='dynamic-forms.html'>dynamic-forms.html</link> for more information.
                 </p>
             </section3>
             <section3 topic='Destroy Node'>
@@ -2804,8 +2812,8 @@
                     If an error occurs during the execution of a command or if the server rejects the execution of a command, the server returns a response code different from
                     <strong>OK</strong>. If the response code is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
-                    <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
+                    explicitly cancelled or a form session time-out has occurred. See <link url='dynamic-forms.html'>dynamic-forms</link>
+                    <link url='dynamic-forms.html'>dynamic-forms.html</link> for more information.
                 </p>
                 <example caption='Execute Node Command, Failure'>
                     <![CDATA[
@@ -2943,8 +2951,8 @@
                     If an error occurs during the reception of a query or if the server rejects the execution of a query, the server returns a response code different from
                     <strong>OK</strong>. If the response code is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
-                    <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
+                    explicitly cancelled or a form session time-out has occurred. See <link url='dynamic-forms.html'>dynamic-forms</link>
+                    <link url='dynamic-forms.html'>dynamic-forms.html</link> for more information.
                 </p>
                 <example caption='Execute Node Query, Failure'>
                     <![CDATA[
@@ -3186,8 +3194,8 @@
                     If an error occurs during the execution of a common command or if the server rejects the execution of a common command, the server returns a response code different from
                     <strong>OK</strong>. If the response code is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
-                    <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
+                    explicitly cancelled or a form session time-out has occurred. See <link url='dynamic-forms.html'>dynamic-forms</link>
+                    <link url='dynamic-forms.html'>dynamic-forms.html</link> for more information.
                 </p>
                 <example caption='Execute Parameterized Command on Multiple Nodes, Failure'>
                     <![CDATA[
@@ -3395,8 +3403,8 @@
                     If an error occurs during the execution of a common query or if the server rejects the execution of a common query, the server returns a response code different from
                     <strong>OK</strong>. If the response code is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                    explicitly cancelled or a form session time-out has occurred. See <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms</link>
-                    <link url='xep-0000-DynamicForms.html'>xep-0000-DynamicForms.html</link> for more information.
+                    explicitly cancelled or a form session time-out has occurred. See <link url='dynamic-forms.html'>dynamic-forms</link>
+                    <link url='dynamic-forms.html'>dynamic-forms.html</link> for more information.
                 </p>
                 <example caption='Execute Parameterized Query on multiple nodes, Failure'>
                     <![CDATA[
@@ -3693,6 +3701,82 @@
                     For more information about query messages, see <link url='#messagedef'>Message definitions in query results</link>.
                 </p>
             </section3>
+            <section3 topic='Title'>
+                <p>
+                    Enables the executing process of the query to set a custom title for the result. Note that the result only has one title.
+                </p>
+                <example caption='Title'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com/client'>
+      <queryProgress xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+          ...
+          <title name='Current state'/>
+          ...
+      </queryProgress>
+   </message>]]>
+                </example>
+            </section3>
+            <section3 topic='Status'>
+                <p>
+                    Permits the executing process to report the current status. This can change a lot during execution and values should not be persisted, like
+                    query messages. Instead, they can be displayed in a status bar, just to give the end-user feedback of the status of a long-running query.
+                </p>
+                <example caption='Status'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com/client'>
+      <queryProgress xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+          ...
+          <status message='Processing. 67% done.'/>
+          ...
+      </queryProgress>
+   </message>]]>
+                </example>
+            </section3>
+            <section3 topic='Starting a section or subsection'>
+                <p>
+                    Starts a new section in the query result. In large query results, sections can be used to format the result using an intuitive disposition
+                    in a visually appealing way. Nested sections should be interepreted as sub-sections. Tables and objects started or reported within a section
+                    belong in that section, and should be listed sequentially in the order they are reported to the client.
+                </p>
+                <example caption='Starting a section or subsection'>
+                    <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com/client'>
+      <queryProgress xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+          ...
+          <beginSection header='1. Stockholm'/>
+          ...
+          <beginSection header='1.1. Solna'/>
+          ...
+      </queryProgress>
+   </message>]]>
+                </example>
+                <p>
+                    Note that the use of sections in a query result is optional. Tables and objects received outside the scope of sections should be placed
+                    in a default section by the client.
+                </p>
+            </section3>
+            <section3 topic='Closing a section or subsection'>
+                <p>
+                    Closes the current section or sub-section. Tables inside closed sections can still be open and receive fields. Tables are closed using the
+                    <strong>tableDone</strong> query event.
+                </p>
+            </section3>
+            <example caption='Starting a section or subsection'>
+                <![CDATA[
+   <message from='concentrator@clayster.com'
+            to='client@clayster.com/client'>
+      <queryProgress xmlns='urn:xmpp:iot:concentrators' sourceId='MeteringGroups' nodeId='Apartment 1-1' cacheType='Apartment' queryId='Query0001'>
+          ...
+          <endSection/>
+          ...
+          <endSection/>
+          ...
+      </queryProgress>
+   </message>]]>
+            </example>
         </section2>
         <section2 topic='Data Source Events' anchor='sourceevents'>
             <p>
@@ -5138,10 +5222,10 @@
         <p>This document requires no interaction with &IANA;.</p>
     </section1>
     <section1 topic='XMPP Registrar Considerations' anchor='registrar'>
-		<p>
-			The <link url="#schema">protocol schema</link> needs to be added to the list of <link url="http://xmpp.org/resources/schemas/">XMPP protocol schemas</link>.
-		</p>
-	</section1>
+        <p>
+            The <link url="#schema">protocol schema</link> needs to be added to the list of <link url="http://xmpp.org/resources/schemas/">XMPP protocol schemas</link>.
+        </p>
+    </section1>
     <section1 topic='XML Schema' anchor='schema'>
         <code>
             <![CDATA[
@@ -5598,6 +5682,24 @@
                             </xs:extension>
                         </xs:simpleContent>
                     </xs:complexType>
+                </xs:element>
+                <xs:element name='title'>
+                    <xs:complexType>
+                        <xs:attribute name='name' type='xs:string' use='required'/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name='status'>
+                    <xs:complexType>
+                        <xs:attribute name='message' type='xs:string' use='required'/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name='beginSection'>
+                    <xs:complexType>
+                        <xs:attribute name='header' type='xs:string' use='required'/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name='endSection'>
+                    <xs:complexType/>
                 </xs:element>
             </xs:choice>
             <xs:attributeGroup ref='nodeReference'/>
