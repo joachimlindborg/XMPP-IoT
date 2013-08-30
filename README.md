@@ -1,4 +1,4 @@
-XMPP-SN
+XMPP-IoT
 =======
 
 Repository for the work with xep-0000-IoT-xx for using XMPP in wireless sensor networks or Internet of Things systems
