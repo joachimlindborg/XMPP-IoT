@@ -6,6 +6,10 @@
 <!-- TODO: byte codes for identification + xml file with interface data. + version numbers -->
 <!-- TODO: Another XEP: Billing interfaces. Tariffs. Prepayment. -->
 <!-- TODO: Standardized Short field names (2 characters) for memory constrained devices. -->
+<!-- TODO: Better anchor points. -->
+<!-- TODO: FIX: nodeId optional, inte required. -->
+<!-- TODO: getInterfaces-fråga med nodeId (concentrator-fallet) -->
+<!-- TODO: XMPP.IoT.Security.Alarm får inte användas av de andra alarm-interfacen. En enhet kan ha flera olika alarm. Fältnamnet måste identifiera alarmtypen. -->
 <?xml-stylesheet type='text/xsl' href='xep.xsl'?>
 <xep>
     <header>
@@ -2203,6 +2207,13 @@
 							<td>identity</td>
 							<td>string</td>
 							<td>Base Station Identity Code.</td>
+						</tr>
+						<tr>
+							<td>GSM, ICCID</td>
+							<td>Optional</td>
+							<td>identity</td>
+							<td>string</td>
+							<td>Integrated Circuit Card Identifier.</td>
 						</tr>
 					</table>
 				</section4>
