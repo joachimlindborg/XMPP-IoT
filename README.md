@@ -9,7 +9,7 @@ More information will be published through the [XMPP tech wiki](http://wiki.xmpp
 
 # working XEP's follow the links planned XEP will be provided during spring 2013
 
-[xep-exi](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-EXI/blob/master/exi.html)
+[xep-0322-exi](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-EXI/blob/master/exi.html)
 		Defines how to EXI can be used in XMPP to achieve efficient 
 		compression of data. Albeit not a sensor network specific XEP, 
 		this XEP should be considered in all sensor network 
@@ -19,11 +19,11 @@ xep-0000-IoT-BatteryPoweredSensors
                 Defines how to handle the peculiars related to battery powered
 		devices, and other devices intermittently available on the network.
 
-[xep-0000-IoT-Concentrators](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/sensor-network-concentrators.html)
+[xep-0326-IoT-Concentrators](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/sensor-network-concentrators.html)
 		Defines how to handle architectures containing concentrators 
 		or servers handling multiple sensors.
 
-[xep-0000-IoT-Control](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/sensor-network-Control.html)
+[xep-0325-IoT-Control](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/sensor-network-Control.html)
 		Defines how to control actuators and other devices in
 		sensor networks.
 
@@ -45,7 +45,7 @@ xep-0000-IoT-Events
 xep-0000-IoT-Multicast
 		Defines how sensor data can be multicast in efficient ways.
 
-[sensor-network-provisioning](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/sensor-network-provisioning.html)
+[xep-0324-sensor-network-provisioning](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/sensor-network-provisioning.html)
 		This specification. Defines how provisioning, the management of
 		access privileges, etc., can be efficiently and easily 
 		implemented.
@@ -54,7 +54,7 @@ xep-0000-IoT-PubSub
 		Defines how efficient publication of sensor data can be made 
 		in sensor networks.
 
-[sensor-data](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/sensor-data.html)
+[xep-0323-sensor-data](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/sensor-data.html)
 		Provides the underlying architecture, basic operations and 
 		data structures for sensor data communication over XMPP networks. 
 		It includes a hardware abstraction model, removing any technical 
