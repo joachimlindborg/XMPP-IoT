@@ -14,10 +14,20 @@ More information will be published through the [XMPP tech wiki](http://wiki.xmpp
 		compression of data. Albeit not a sensor network specific XEP, 
 		this XEP should be considered in all sensor network 
 		implementations where memory and packet size is an issue.
+		
+[xep-0323-sensor-data](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/sensor-data.html)
+		Provides the underlying architecture, basic operations and 
+		data structures for sensor data communication over XMPP networks. 
+		It includes a hardware abstraction model, removing any technical 
+		detail implemented in underlying technologies. 
+		This XEP is used by all other sensor network XEPs.
+		
+[xep-0324-sensor-network-provisioning](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/sensor-network-provisioning.html)
+		This specification. Defines how provisioning, the management of
+		access privileges, etc., can be efficiently and easily 
+		implemented.
+		
 
-xep-0000-IoT-BatteryPoweredSensors	
-                Defines how to handle the peculiars related to battery powered
-		devices, and other devices intermittently available on the network.
 
 [xep-0326-IoT-Concentrators](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/sensor-network-concentrators.html)
 		Defines how to handle architectures containing concentrators 
@@ -26,6 +36,16 @@ xep-0000-IoT-BatteryPoweredSensors
 [xep-0325-IoT-Control](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/sensor-network-Control.html)
 		Defines how to control actuators and other devices in
 		sensor networks.
+
+[xep-0000-IoT-Interoperability](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/xep-0000-IoT-Interoperability.html)
+		Defines guidelines for how to achieve interoperability in 
+		sensor networks, publishing interoperability interfaces for 
+		different types of devices.
+		
+[xep-0000-IoT-Chat](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/xep-0000-IoT-Chat.html)
+		This is a very useful extension to facilitate integration with
+		humans and other systems. Via plain chat messages this defines
+		a easy extendable syntax for 
 
 xep-0000-IoT-Discovery
 		Defines the peculiars of sensor discovery in sensor networks. 
@@ -37,29 +57,21 @@ xep-0000-IoT-Events
 		hysteresis levels, etc., are configured.
 
 
-[xep-0000-IoT-Interoperability](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/xep-0000-IoT-Interoperability.html)
-		Defines guidelines for how to achieve interoperability in 
-		sensor networks, publishing interoperability interfaces for 
-		different types of devices.
-
+xep-0000-IoT-BatteryPoweredSensors	
+                Defines how to handle the peculiars related to battery powered
+		devices, and other devices intermittently available on the network.
+		
 xep-0000-IoT-Multicast
 		Defines how sensor data can be multicast in efficient ways.
 
-[xep-0324-sensor-network-provisioning](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/sensor-network-provisioning.html)
-		This specification. Defines how provisioning, the management of
-		access privileges, etc., can be efficiently and easily 
-		implemented.
 
 xep-0000-IoT-PubSub
 		Defines how efficient publication of sensor data can be made 
 		in sensor networks.
 
-[xep-0323-sensor-data](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/sensor-data.html)
-		Provides the underlying architecture, basic operations and 
-		data structures for sensor data communication over XMPP networks. 
-		It includes a hardware abstraction model, removing any technical 
-		detail implemented in underlying technologies. 
-		This XEP is used by all other sensor network XEPs.
+
+
+
 
 ## Main author
 Email: peter.waher@clayster.com
