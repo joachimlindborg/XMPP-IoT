@@ -1,5 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- TODO: http://xmpp.org/extensions/xep-0160.html -->
+<!-- TODO: 
+http://xmpp.org/extensions/xep-0160.html (Offline messages)
+http://xmpp.org/extensions/xep-0273.html (SIFT)
+http://xmpp.org/extensions/xep-0286.html (Mobile devices)
+
+* Filtering messages
+* Forwarding messages when offline
+* Guidelines: Sending when online, not Offline or Away
+* Ronny Klauck <rklauck@informatik.tu-cottbus.de> co-author.
+* Daniele Ricci <daniele.athome@gmail.com>
+-->
 <!DOCTYPE xep SYSTEM 'xep.dtd' [
 	<!ENTITY % ents SYSTEM 'xep.ent'>
 	%ents;

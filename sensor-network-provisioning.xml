@@ -172,6 +172,10 @@
                 <td>Defines how efficient publication of sensor data can be made in Internet of Things.</td>
             </tr>
 			<tr>
+				<td>xep-0000-IoT-Chat</td>
+				<td>Defines how human-to-machine interfaces should be contructed using chat messages to be user friendly, automatable and consisten with other IoT extensions and possible underlying architecture.</td>
+			</tr>
+			<tr>
 				<td>XEP-0322</td>
 				<td>
 					Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a Internet of Things specific XEP, this XEP should be considered

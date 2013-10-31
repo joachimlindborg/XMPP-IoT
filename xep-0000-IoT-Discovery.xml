@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- TODO: http://xmpp.org/extensions/xep-0055.html -->
-<!-- TODO: http://xmpp.org/extensions/xep-0030.html -->
-<!-- TODO: http://xmpp.org/extensions/xep-0128.html -->
-<!-- TODO: http://xmpp.org/extensions/xep-0174.html -->
+<!-- TODO: http://xmpp.org/extensions/xep-0055.html Jabber Search -->
+<!-- TODO: http://xmpp.org/extensions/xep-0030.html Service Discovery -->
+<!-- TODO: http://xmpp.org/extensions/xep-0128.html Service Discovery Extensions (MUC rooms) -->
+<!-- TODO: http://xmpp.org/extensions/xep-0174.html Serverless Messaging -->
 <!DOCTYPE xep SYSTEM 'xep.dtd' [
   <!ENTITY % ents SYSTEM 'xep.ent'>
 %ents;

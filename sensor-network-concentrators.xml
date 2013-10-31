@@ -124,7 +124,81 @@
             <li>Effective synchronization of contents between interested parties.</li>
             <li>Effective ways to interact with entities controlled by the concentrator.</li>
         </ul>
-        <section2 topic='Relations to other extensions'>
+
+		<p>
+			Sensor networks contains many different architectures and use cases. For this reason, the sensor network standards have been divided into multiple XEPs according to the following table:
+		</p>
+
+		<table caption='Sensor Network XEPs'>
+			<tr>
+				<th>XEP</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td>dynamic-forms</td>
+				<td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
+			</tr>
+			<tr>
+				<td>xep-0000-IoT-BatteryPoweredSensors</td>
+				<td>Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
+			</tr>
+			<tr>
+				<td>xep-0000-IoT-Discovery</td>
+				<td>Defines the peculiars of sensor discovery in sensor networks. Apart from discovering sensors by JID, it also defines how to discover sensors based on location, etc.</td>
+			</tr>
+			<tr>
+				<td>xep-0000-IoT-Events</td>
+				<td>Defines how sensors send events, how event subscription, hysteresis levels, etc., are configured.</td>
+			</tr>
+			<tr>
+				<td>xep-0000-IoT-Interoperability</td>
+				<td>Defines guidelines for how to achieve interoperability in sensor networks, publishing interoperability interfaces for different types of devices.</td>
+			</tr>
+			<tr>
+				<td>xep-0000-IoT-Multicast</td>
+				<td>Defines how sensor data can be multicast in efficient ways.</td>
+			</tr>
+			<tr>
+				<td>xep-0000-IoT-PubSub</td>
+				<td>Defines how efficient publication of sensor data can be made in sensor networks.</td>
+			</tr>
+			<tr>
+				<td>xep-0000-IoT-Chat</td>
+				<td>Defines how human-to-machine interfaces should be contructed using chat messages to be user friendly, automatable and consisten with other IoT extensions and possible underlying architecture.</td>
+			</tr>
+			<tr>
+				<td>XEP-0322</td>
+				<td>
+					Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
+					in all sensor network implementations where memory and packet size is an issue.
+				</td>
+			</tr>
+			<tr>
+				<td>XEP-0323</td>
+				<td>
+					Provides the underlying architecture, basic operations and data structures for sensor data communication over XMPP networks.
+					It includes a hardware abstraction model, removing any technical detail implemented in underlying technologies. This XEP is used by all other sensor network XEPs.
+				</td>
+			</tr>
+			<tr>
+				<td>XEP-0324</td>
+				<td>Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
+			</tr>
+			<tr>
+				<td>XEP-0325</td>
+				<td>Defines how to control actuators and other devices in Internet of Things.</td>
+			</tr>
+			<tr>
+				<td>XEP-0326</td>
+				<td>This specification. Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
+			</tr>
+			<tr>
+				<td>XEP-0331</td>
+				<td>Defines extensions for how color parameters can be handled, based on &xep0004;</td>
+			</tr>
+		</table>
+
+		<section2 topic='Relations to other extensions'>
             <p>
                 Even though there are technologies available in forms of XEPs that solve parts of the above mentioned problem, they do not provide sufficient support. The following paragraphs will
                 take the time to list why different technologies are not applicable.
@@ -215,75 +289,6 @@
                 </ul>
             </section3>
         </section2>
-
-        <p>
-            Sensor networks contains many different architectures and use cases. For this reason, the sensor network standards have been divided into multiple XEPs according to the following table:
-        </p>
-
-        <table caption='Sensor Network XEPs'>
-            <tr>
-                <th>XEP</th>
-                <th>Description</th>
-            </tr>
-            <tr>
-                <td>dynamic-forms</td>
-                <td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
-            </tr>
-            <tr>
-                <td>xep-0000-IoT-BatteryPoweredSensors</td>
-                <td>Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
-            </tr>
-            <tr>
-                <td>xep-0000-IoT-Discovery</td>
-                <td>Defines the peculiars of sensor discovery in sensor networks. Apart from discovering sensors by JID, it also defines how to discover sensors based on location, etc.</td>
-            </tr>
-            <tr>
-                <td>xep-0000-IoT-Events</td>
-                <td>Defines how sensors send events, how event subscription, hysteresis levels, etc., are configured.</td>
-            </tr>
-            <tr>
-                <td>xep-0000-IoT-Interoperability</td>
-                <td>Defines guidelines for how to achieve interoperability in sensor networks, publishing interoperability interfaces for different types of devices.</td>
-            </tr>
-            <tr>
-                <td>xep-0000-IoT-Multicast</td>
-                <td>Defines how sensor data can be multicast in efficient ways.</td>
-            </tr>
-            <tr>
-                <td>xep-0000-IoT-PubSub</td>
-                <td>Defines how efficient publication of sensor data can be made in sensor networks.</td>
-            </tr>
-            <tr>
-                <td>XEP-0322</td>
-                <td>
-                    Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a sensor network specific XEP, this XEP should be considered
-                    in all sensor network implementations where memory and packet size is an issue.
-                </td>
-            </tr>
-            <tr>
-                <td>XEP-0323</td>
-                <td>
-                    Provides the underlying architecture, basic operations and data structures for sensor data communication over XMPP networks.
-                    It includes a hardware abstraction model, removing any technical detail implemented in underlying technologies. This XEP is used by all other sensor network XEPs.
-                </td>
-            </tr>
-            <tr>
-                <td>XEP-0324</td>
-                <td>Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
-            </tr>
-            <tr>
-                <td>XEP-0325</td>
-                <td>Defines how to control actuators and other devices in Internet of Things.</td>
-            </tr>
-            <tr>
-                <td>XEP-0326</td>
-                <td>This specification. Defines how to handle architectures containing concentrators or servers handling multiple sensors.</td>
-            </tr>
-            <tr>
-                <td>XEP-0331</td>
-                <td>Defines extensions for how color parameters can be handled, based on &xep0004;</td>
-            </tr>
-        </table>
     </section1>
     <section1 topic='Glossary' anchor='glossary'>
         <p>The following table lists common terms and corresponding descriptions.</p>
