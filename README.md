@@ -45,7 +45,8 @@ More information will be published through the [XMPP tech wiki](http://wiki.xmpp
 [xep-0000-IoT-Chat](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/xep-0000-IoT-Chat.html)
 		This is a very useful extension to facilitate integration with
 		humans and other systems. Via plain chat messages this defines
-		a easy extendable syntax for 
+		a easy extendable syntax for interacting with devices, reading values
+		and setting parameters and control values
 
 xep-0000-IoT-Discovery
 		Defines the peculiars of sensor discovery in sensor networks. 
