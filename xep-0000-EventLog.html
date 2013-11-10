@@ -1,0 +1,669 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>XEP-xxxx: Event Logging over XMPP</title>
+    <link rel="stylesheet" type="text/css" href="xmpp.css">
+    <link href="prettify.css" type="text/css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"><script type="text/javascript" src="prettify.js"></script><meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=2.0">
+    <meta name="DC.Title" content="Event Logging over XMPP">
+    <meta name="DC.Creator" content="Peter Waher">
+    <meta name="DC.Description" content="This specification provides a common framework for sending events to event logs over XMPP networks.">
+    <meta name="DC.Publisher" content="XMPP Standards Foundation">
+    <meta name="DC.Contributor" content="XMPP Extensions Editor">
+    <meta name="DC.Date" content="2013-11-10">
+    <meta name="DC.Type" content="XMPP Extension Protocol">
+    <meta name="DC.Format" content="XHTML">
+    <meta name="DC.Identifier" content="XEP-xxxx">
+    <meta name="DC.Language" content="en">
+    <meta name="DC.Rights" content="This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).">
+  </head>
+  <body onload="prettyPrint()">
+    <h1>XEP-xxxx: Event Logging over XMPP</h1>
+    <table>
+      <tr valign="top">
+        <td><strong>Abstract:</strong></td>
+        <td>This specification provides a common framework for sending events to event logs over XMPP networks.</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Author:</strong></td>
+        <td>Peter Waher</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Copyright:</strong></td>
+        <td>© 1999 - 2013 XMPP Standards Foundation. <a href="#appendix-legal">SEE LEGAL NOTICES</a>.</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Status:</strong></td>
+        <td>ProtoXEP</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Type:</strong></td>
+        <td>Standards Track</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Version:</strong></td>
+        <td>0.0.1</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Last Updated:</strong></td>
+        <td>2013-11-10</td>
+      </tr>
+    </table>
+    <hr>
+    <p style="color:red">WARNING: This document has not yet been accepted for consideration or approved in any official manner by the XMPP Standards Foundation, and this document is not yet an XMPP Extension Protocol (XEP). If this document is accepted as a XEP by the XMPP Council, it will be published at &lt;<a href="http://xmpp.org/extensions/">http://xmpp.org/extensions/</a>&gt; and announced on the &lt;standards@xmpp.org&gt; mailing list.</p>
+    <hr>
+    <h2>Table of Contents</h2>
+    <div class="indent">
+      <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
+      3.1.  <a href="#sect-ID0ETG">Sending a simple event message</a><br>   
+      3.2.  <a href="#sect-ID0EGH">Specifying type and level</a><br>   
+      3.3.  <a href="#sect-ID0ESH">Specifying object and subject</a><br>   
+      3.4.  <a href="#sect-ID0E5H">Specifying an event ID</a><br>   
+      3.5.  <a href="#sect-ID0ELAAC">Tagging events with custom information</a><br>   
+      3.6.  <a href="#sect-ID0EXAAC">Specifying program module</a><br>   
+      3.7.  <a href="#sect-ID0EDBAC">Sending debug information</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
+      5.1.  <a href="#sect-ID0EBDAC">Event Types</a><br>   
+      5.2.  <a href="#sect-ID0EUGAC">Event Levels</a><br>   
+      5.3.  <a href="#sect-ID0ENIAC">Event IDs</a><br>   
+      5.4.  <a href="#sect-ID0E4IAC">Objects</a><br>   
+      5.5.  <a href="#sect-ID0EGJAC">Subjects</a><br>   
+      5.6.  <a href="#sect-ID0EPJAC">Facilities</a><br>   
+      5.7.  <a href="#sect-ID0EYJAC">Modules</a><br>   
+      5.8.  <a href="#sect-ID0EBKAC">Stack Traces</a><br>   
+      5.9.  <a href="#sect-ID0EOKAC">Tags</a><br>   
+      5.10.  <a href="#sect-ID0EILAC">Normalized tables</a><br>6.  <a href="#i18n">Internationalization Considerations</a><br>   
+      6.1.  <a href="#sect-ID0E1LAC">Time Zones</a><br>   
+      6.2.  <a href="#sect-ID0EOMAC">xml:lang</a><br>7.  <a href="#security">Security Considerations</a><br>8.  <a href="#iana">IANA Considerations</a><br>9.  <a href="#registrar">XMPP Registrar Considerations</a><br>10.  <a href="#schema">XML Schema</a><br>11.  <a href="#ack">Acknowledgements</a></p>
+      <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
+    </div>
+    <hr>
+    <h2>1.
+       <a name="intro">Introduction</a></h2>
+        <p class="" style="">
+            This XEP provides a common framework for sending events over an XMPP network. These events can then be logged in event logs or analyzed by network monitors
+            to analyze the status or operation of the network and its participants.
+        </p>
+        <p class="" style="">
+            The basic principle behind interoperable event logging over XMPP is the definition of a common XML element defining the event. This payload is then sent in
+            a normal message stanza (i.e. with <span class="strong">type='normal'</span>) to the recipient. The recipient in turn, if it understands the payload, can choose to store it in an event log, forward it or
+            analyze it accordingly.
+        </p>
+        <p class="" style="">
+            There are various event log packages available, but none yet defined for XMPP or using a well defined and known XML format. Therefore, this document defines
+            such an XML format. This format is able to store <a href="https://tools.ietf.org/html/rfc5424">Syslog</a>  [<a href="#nt-ID0EHD">1</a>] compliant event information, even though the Syslog event model has been somewhat extended.
+        </p>
+    <h2>2.
+       <a name="glossary">Glossary</a></h2>
+        <p class="" style="">The following table lists common terms and corresponding descriptions.</p>
+        <div class="indent">
+      <dl>
+            <di>
+                <dt><strong>Event</strong></dt>
+                <dd>A piece of information describing an event in time.</dd>
+            </di>
+            <di>
+                <dt><strong>Event ID</strong></dt>
+                <dd>An attribute providing a machine readable ID to the type of event in question without having to parse the message text itself.</dd>
+            </di>
+            <di>
+                <dt><strong>Event Level</strong></dt>
+                <dd>Provides an additional level on the previous classification (Minor, Medium, Major).</dd>
+            </di>
+            <di>
+                <dt><strong>Event Type</strong></dt>
+                <dd>Coarse classification of the event (Debug, Informational, Notice, Warning, Error, Critical, Alert, Emergency).</dd>
+            </di>
+            <di>
+                <dt><strong>Facility</strong></dt>
+                <dd>What type of device, server, application, etc., is sending the message. </dd>
+            </di>
+            <di>
+                <dt><strong>Message</strong></dt>
+                <dd>A (human readable) text message describing what has occurred.</dd>
+            </di>
+            <di>
+                <dt><strong>Module</strong></dt>
+                <dd>
+                    The module reporting the event. Larger software packages are often divided into modules. Keeping track of which modules report which events can be useful when
+                    analyzing system performance.
+                </dd>
+            </di>
+            <di>
+                <dt><strong>Object</strong></dt>
+                <dd>The object to which the event message refers to, on which the current action is performed.</dd>
+            </di>
+            <di>
+                <dt><strong>Stack Trace</strong></dt>
+                <dd>
+                    Exact position in the code from whice the event was reported or error occurred. Reporting it in a separate attribute unclutters the message, and removes the need
+                    to define custom tags.
+                </dd>
+            </di>
+            <di>
+                <dt><strong>Subject</strong></dt>
+                <dd>The subject causing the event to take place or performing the action (for instance, user, process, etc.)</dd>
+            </di>
+            <di>
+                <dt><strong>Tag</strong></dt>
+                <dd>A custom tag or parameter attached to an event. Each tag has a name and a value and an optional data type.</dd>
+            </di>
+            <di>
+                <dt><strong>Timestamp</strong></dt>
+                <dd>When the event occurred.</dd>
+            </di>
+        </dl>
+    </div>
+    <h2>3.
+       <a name="usecases">Use Cases</a></h2>
+        <div class="indent">
+      <h3>3.1 <a name="sect-ID0ETG">Sending a simple event message</a></h3>
+            <p class="" style="">
+                The following example shows how to send a simple event using a normal message to an event log. There are only two parameters that are required:
+                <span class="strong">message</span> and <span class="strong">timestamp</span>. This message will be treated as a <span class="strong">Minor Informational</span> message by the
+                recipient.
+            </p>
+            <p class="caption"><a name="example-1"></a>Example 1. Simple event message</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;message from='device@clayster.com/device' to='eventlog@clayster.com' type='normal' xml:lang='en'&gt;
+      &lt;log xmlns='urn:xmpp:eventlog'
+           message='Something happened.'
+           timestamp='2013-11-10T15:52:23Z'/&gt;
+   &lt;/message&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.2 <a name="sect-ID0EGH">Specifying type and level</a></h3>
+            <p class="" style="">
+                The following example shows how an event message can be categorized with an event type and level.
+            </p>
+            <p class="caption"><a name="example-2"></a>Example 2. Specifying type and level</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;message from='device@clayster.com/device' to='eventlog@clayster.com' type='normal' xml:lang='en'&gt;
+      &lt;log xmlns='urn:xmpp:eventlog'
+           message='Low on memory.'
+           timestamp='2013-11-10T15:54:55Z'
+           type='Warning'
+           level='Major'/&gt;
+   &lt;/message&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.3 <a name="sect-ID0ESH">Specifying object and subject</a></h3>
+            <p class="" style="">
+                The following example shows how an event message can be further enhanced by providing object and subject information.
+            </p>
+            <p class="caption"><a name="example-3"></a>Example 3. Specifying object and subject</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;message from='device@clayster.com/device' to='eventlog@clayster.com' type='normal' xml:lang='en'&gt;
+      &lt;log xmlns='urn:xmpp:eventlog'
+           message='Object deleted'
+           timestamp='2013-11-10T15:58:12Z'
+           type='Informational'
+           level='Major'
+           object='Towel'
+           subject='Arhur Dent'/&gt;
+   &lt;/message&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.4 <a name="sect-ID0E5H">Specifying an event ID</a></h3>
+            <p class="" style="">
+                The following example shows how an event message can receive an ID that can be singled out later to be analyzed by administrators, for instance.
+            </p>
+            <p class="caption"><a name="example-4"></a>Example 4. Specifying an event ID</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;message from='device@clayster.com/device' to='eventlog@clayster.com' type='normal' xml:lang='en'&gt;
+      &lt;log xmlns='urn:xmpp:eventlog'
+           id='LoginFailed'
+           message='User attempted to login but provided incorrect password.'
+           timestamp='2013-11-10T16:04:45Z'
+           type='Warning'
+           level='Minor'
+           object='user1'
+           subject='10.0.0.1'/&gt;
+   &lt;/message&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.5 <a name="sect-ID0ELAAC">Tagging events with custom information</a></h3>
+            <p class="" style="">
+                The following example shows how to tag an event using custom information in a way that is easy to interpret and process.
+            </p>
+            <p class="caption"><a name="example-5"></a>Example 5. Tagging events with custom information</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;message from='device@clayster.com/device' to='eventlog@clayster.com' type='normal' xml:lang='en'&gt;
+      &lt;log xmlns='urn:xmpp:eventlog'
+           message='Current resources.'
+           timestamp='2013-11-10T16:07:01Z'
+           type='Informational'
+           level='Minor'&gt;
+          &lt;tag name='RAM' value='1655709892' type='xs:long'/&gt;
+          &lt;tag name='CPU' value='75.45' type='xs:double'/&gt;
+          &lt;tag name='HardDrive' value='163208757248' type='xs:long'/&gt;
+      &lt;/log&gt;
+   &lt;/message&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.6 <a name="sect-ID0EXAAC">Specifying program module</a></h3>
+            <p class="" style="">
+                The following example shows how module information can be provided in events to more easilly be able to single out information 
+                relating to the same application running on different machines.
+            </p>
+            <p class="caption"><a name="example-6"></a>Example 6. Specifying program module</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;message from='device@clayster.com/device' to='eventlog@clayster.com' type='normal' xml:lang='en'&gt;
+      &lt;log xmlns='urn:xmpp:eventlog'
+           message='Something horrible happened.'
+           timestamp='2013-11-10T16:17:56Z'
+           type='Error'
+           level='Major'
+           object='object1'
+           subject='user1'
+           module='applicaiton1'/&gt;
+   &lt;/message&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.7 <a name="sect-ID0EDBAC">Sending debug information</a></h3>
+            <p class="" style="">
+                The following example shows how to send a debug message with a stack trace, module and custom inforation.
+            </p>
+            <p class="caption"><a name="example-7"></a>Example 7. Sending debug information</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;message from='device@clayster.com/device' to='eventlog@clayster.com' type='normal' xml:lang='en'&gt;
+      &lt;log xmlns='urn:xmpp:eventlog'
+           message='Something is rotten in the state of Denmark.'
+           timestamp='2013-11-10T16:12:25Z'
+           type='Debug'
+           level='Major'
+           module='My new application'
+           stackTrace='file1, line 1, ...'&gt;
+          &lt;tag name='a' value='1' type='xs:int'/&gt;
+          &lt;tag name='b' value='10' type='xs:int'/&gt;
+          &lt;tag name='s' value='Hello World!' type='xs:string'/&gt;
+      &lt;/log&gt;
+   &lt;/message&gt;
+            </pre>
+      </div>
+        </div>
+    <h2>4.
+       <a name="support">Determining Support</a></h2>
+        <p class="" style="">If an entity supports the reception of events as specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:eventlog" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0E5BAC">2</a>] information requests.</p>
+        <p class="caption"><a name="example-8"></a>Example 8. Service discovery information request</p>
+    <div class="indent">
+      <pre class="prettyprint">
+            
+&lt;iq type='get'
+    from='device@clayster.com/device'
+    to='eventlog@clayster.com'
+    id='disco1'&gt;
+  &lt;query xmlns='http://jabber.org/protocol/disco#info'/&gt;
+&lt;/iq&gt;
+        </pre>
+    </div>
+        <p class="caption"><a name="example-9"></a>Example 9. Service discovery information response</p>
+    <div class="indent">
+      <pre class="prettyprint">
+            
+&lt;iq type='result'
+    from='eventlog@clayster.com'
+    to='device@clayster.com/device'
+    id='disco1'&gt;
+  &lt;query xmlns='http://jabber.org/protocol/disco#info'&gt;
+    ...
+    &lt;feature var='urn:xmpp:eventlog'/&gt;
+    ...
+  &lt;/query&gt;
+&lt;/iq&gt;
+        </pre>
+    </div>
+        <p class="" style="">
+            In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
+            in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EVCAC">3</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
+        </p>
+    <h2>5.
+       <a name="impl">Implementation Notes</a></h2>
+        <div class="indent">
+      <h3>5.1 <a name="sect-ID0EBDAC">Event Types</a></h3>
+            <p class="" style="">
+                The following table lists possible event types that can be used. If none is specified for an event, it is assumed that the event is <span class="strong">Informational</span>.
+                It is largely based on the severity levels of Syslog.
+            </p>
+            <div class="indent">
+        <p class="caption"><a name="table-1"></a>Table 1: Event Types</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+                <tr class="body">
+                    <th colspan="" rowspan="">Type</th>
+                    <th colspan="" rowspan="">Description</th>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">Debug</td>
+                    <td colspan="" rowspan="">Developers can ask applications to send debug messages during development or testing to more easily see what happens in a system.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">Informational</td>
+                    <td colspan="" rowspan="">An informational message describing a normal event.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">Notice</td>
+                    <td colspan="" rowspan="">Represents a significant condition or change that administrators should be aware of.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">Warning</td>
+                    <td colspan="" rowspan="">A warning condition. If not taken into account, the condition could turn into an error.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">Error</td>
+                    <td colspan="" rowspan="">An error condition. A condition has been detected that is considered to be an error or a fault.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">Critical</td>
+                    <td colspan="" rowspan="">A ciritical condition. An error so great that it could escalate into something graver if not addressed.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">Alert</td>
+                    <td colspan="" rowspan="">An alert condition. Action must be taken immediately.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">Emergency</td>
+                    <td colspan="" rowspan="">System is unusable.</td>
+                </tr>
+            </table>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>5.2 <a name="sect-ID0EUGAC">Event Levels</a></h3>
+            <p class="" style="">
+                Given an Event Type, an event level can provide additional information about the extent or importance of the event (a second dimension).
+            </p>
+            <div class="indent">
+        <p class="caption"><a name="table-2"></a>Table 2: Event Levels</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+                <tr class="body">
+                    <th colspan="" rowspan="">Level</th>
+                    <th colspan="" rowspan="">Description</th>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">Minor</td>
+                    <td colspan="" rowspan="">Minor events, concerning normal operating procedures.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">Medium</td>
+                    <td colspan="" rowspan="">Medium events.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">Major</td>
+                    <td colspan="" rowspan="">More substantial events or affecting larger parts of the system.</td>
+                </tr>
+            </table>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>5.3 <a name="sect-ID0ENIAC">Event IDs</a></h3>
+            <p class="" style="">
+                Using Event IDs the application can provide a machine understandable classification of the event. Examples could be "Login"-events, "ConnectionProblem"-events, etc.
+                It is easier to group, parse or interpret events and their tags if you know what type of event it is. Event IDs are manufacturer specific, and only provide a means
+                to more easilly extract subsets of events for processing without having to parse message texts (which should be allowed to be localizable).
+            </p>
+			<p class="" style="">
+				<span class="strong">Note:</span> To avoid problems when running applications using different locales, event IDs should never be localized.
+			</p>
+		</div>
+        <div class="indent">
+      <h3>5.4 <a name="sect-ID0E4IAC">Objects</a></h3>
+            <p class="" style="">
+                An event is often linked to an object, i.e. on which object an action was performed, or which object is reporting a condition. The object field permits
+                the tagging of objects in a common way. It is later easy to extract all events relating to a specific object by using this attribute.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>5.5 <a name="sect-ID0EGJAC">Subjects</a></h3>
+            <p class="" style="">
+                An event is often also linked to a subject, i.e. who or what performed a given action resulting in the event or condition. The subject field permits
+                the tagging of subjects in a common way. It is later easy to extract all events relating to a specific subbject by using this attribute.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>5.6 <a name="sect-ID0EPJAC">Facilities</a></h3>
+            <p class="" style="">
+                Facility can be either a facility in the network sense or in the system sense. This document does not restrict its use to the possible choices defined by
+                other protocols such as Syslog, and leaves it open. However, it is left as a special attribute since it is important in monitoring applications.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>5.7 <a name="sect-ID0EYJAC">Modules</a></h3>
+            <p class="" style="">
+                A module is part of a larger software package. Using the module attribute makes it easier to attribute events to specific parts of a distributed
+                application and analyze them separately.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>5.8 <a name="sect-ID0EBKAC">Stack Traces</a></h3>
+            <p class="" style="">
+                Stack Traces can be important information to developers and correlate events to actual locations in the code that generated the event. This document
+                does not specify any particular format for stack traces.
+            </p>
+            <p class="" style="">
+                Note that stack traces can be divided into multiple lines separated by CRLF. It is important to encode such strings correctly to avoid problems in
+                XML parsers.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>5.9 <a name="sect-ID0EOKAC">Tags</a></h3>
+            <p class="" style="">
+                Any event can have a custom set of tags attached to it. A tag is required to have a name and a value. It can also optionally specify a datatype.
+                Data Types are specified using Qualified Names (QNames). If possible, they should adher to the list of
+                <a href="http://xmpp.org/registrar/xdv-datatypes.html">Data Forms Validation Datatypes</a>  [<a href="#nt-ID0EZKAC">4</a>] that is maintained by the XMPP Registrar.
+            </p>
+			<p class="" style="">
+				<span class="strong">Note:</span> To avoid problems when running applications using different locales, tag names should never be localized.
+			</p>
+        </div>
+        <div class="indent">
+      <h3>5.10 <a name="sect-ID0EILAC">Normalized tables</a></h3>
+            <p class="" style="">
+                If persisting received events in a database, care should be taken if normalized tables are used for storage of tags names and values, event IDs, objects, subjects, 
+                facilities and modules. If this is the case, the receiver should look for types of values that can be incompatible with normalized tables (such as floating point values or numbers
+                in general, GUIDs, resource names in JIDs etc.) and replace them with some descriptive text and append the corresponding value in the message text instead. This to avoid problems with indexes in
+                databases because of devices implemented by third parties.
+            </p>
+            <p class="" style="">
+                It is still valid to send such information (like sequence numbers, unique GUIDs, resource names in JIDs etc., measurements, etc.) in tags names and values, but should be avoided in
+                event IDs, objects, subjects, facilities and modules, as they can cause problems further down the line.
+            </p>
+        </div>
+    <h2>6.
+       <a name="i18n">Internationalization Considerations</a></h2>
+        <div class="indent">
+      <h3>6.1 <a name="sect-ID0E1LAC">Time Zones</a></h3>
+            <p class="" style="">
+                All timestamps and dateTime values use the XML data type xs:dateTime to specify values. These values include a date, an optional time and an optional time zone.
+            </p>
+            <p class="" style="">
+                <span class="strong">Note:</span> If time zone is not available, it is supposed to be undefined. The recipient of an event message without time zone information
+                should assume the sender has the same time zone as the received, if not explicitly configured otherwise on the recipient side.
+            </p>
+            <p class="" style="">
+                If devices report time zone, this information should be propagated throughout the system. Otherwise, comparing timestamps from different time zones will be impossible.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>6.2 <a name="sect-ID0EOMAC">xml:lang</a></h3>
+            <p class="" style="">
+                Event messages SHOULD contain an <span class="strong">xml:lang</span> attribute on the message stanza to specify the language
+                used in message texts, etc. If language information is not available (for instance, if relaying messages not created by the device itself,
+                the <span class="strong">xml:lang</span> attribute can be omitted).
+            </p>
+        </div>
+    <h2>7.
+       <a name="security">Security Considerations</a></h2>
+        <p class="" style="">
+            Even though this document permits zero-configuration of devices to event logs, this might not always be the best option. Event information might be sensitive
+            and should not be sent to anybody just because they support the event log feature as defined in this document.
+        </p>
+        <p class="" style="">
+            <span class="strong">Never</span> log information that should be handled securely or encrypted, such as passwords.
+        </p>
+    <h2>8.
+       <a name="iana">IANA Considerations</a></h2>
+        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0E2NAC">5</a>].</p>
+    <h2>9.
+       <a name="registrar">XMPP Registrar Considerations</a></h2>
+        <p class="" style="">
+            The <a href="#schema">protocol schema</a> needs to be added to the list of <a href="http://xmpp.org/resources/schemas/">XMPP protocol schemas</a>.
+        </p>
+    <h2>10.
+       <a name="schema">XML Schema</a></h2>
+        <p class="caption">
+    </p>
+    <div class="indent">
+      <pre class="prettyprint">
+            
+    &lt;?xml version='1.0' encoding='UTF-8'?&gt;
+    &lt;xs:schema
+        xmlns:xs='http://www.w3.org/2001/XMLSchema'
+        targetNamespace='urn:xmpp:eventlog'
+        xmlns='urn:xmpp:eventlog'
+        elementFormDefault='qualified'&gt;
+ 
+        &lt;xs:element name='event'&gt;
+            &lt;xs:complexType&gt;
+                &lt;xs:choice minOccurs='0' maxOccurs='unbounded'&gt;
+                    &lt;xs:element name='tag'&gt;
+                        &lt;xs:complexType&gt;
+                            &lt;xs:attribute name='name' type='xs:string' use='required'/&gt;
+                            &lt;xs:attribute name='value' type='xs:string' use='required'/&gt;
+                            &lt;xs:attribute name='type' type='xs:QName' use='optional' default='xs:string'/&gt;
+                        &lt;/xs:complexType&gt;
+                    &lt;/xs:element&gt;
+                &lt;/xs:choice&gt;
+                &lt;xs:attribute name='message' type='xs:string' use='required'/&gt;
+                &lt;xs:attribute name='timestamp' type='xs:dateTime' use='required'/&gt;
+                &lt;xs:attribute name='id' type='xs:string' use='optional'/&gt;
+                &lt;xs:attribute name='type' type='EventType' use='optional' default='Informational'/&gt;
+                &lt;xs:attribute name='level' type='EventLevel' use='optional' default='Minor'/&gt;
+                &lt;xs:attribute name='object' type='xs:string' use='optional'/&gt;
+                &lt;xs:attribute name='subject' type='xs:string' use='optional'/&gt;
+                &lt;xs:attribute name='facility' type='xs:string' use='optional'/&gt;
+                &lt;xs:attribute name='module' type='xs:string' use='optional'/&gt;
+                &lt;xs:attribute name='stackTrace' type='xs:string' use='optional'/&gt;
+            &lt;/xs:complexType&gt;
+        &lt;/xs:element&gt;
+ 
+        &lt;xs:simpleType name='EventType'&gt;
+            &lt;xs:restriction base='xs:string'&gt;
+                &lt;xs:enumeration value='Debug'/&gt;
+                &lt;xs:enumeration value='Informational'/&gt;
+                &lt;xs:enumeration value='Notice'/&gt;
+                &lt;xs:enumeration value='Warning'/&gt;
+                &lt;xs:enumeration value='Error'/&gt;
+                &lt;xs:enumeration value='Critical'/&gt;
+                &lt;xs:enumeration value='Alert'/&gt;
+                &lt;xs:enumeration value='Emergency'/&gt;
+            &lt;/xs:restriction&gt;
+        &lt;/xs:simpleType&gt;
+ 
+        &lt;xs:simpleType name='EventLevel'&gt;
+            &lt;xs:restriction base='xs:string'&gt;
+                &lt;xs:enumeration value='Major'/&gt;
+                &lt;xs:enumeration value='Medium'/&gt;
+                &lt;xs:enumeration value='Minor'/&gt;
+            &lt;/xs:restriction&gt;
+        &lt;/xs:simpleType&gt;
+ 
+    &lt;/xs:schema&gt;
+        </pre>
+    </div>
+    <h2>11.
+       <a name="ack">Acknowledgements</a></h2>
+		<p class="" style="">Thanks in alphabetical order to Joachim Lindborg, Markus Kohlhase, Matthew Wild, Mike Taylor, Robert Kosten, Steffen Larsen, and Yusuke DOI for all valuable feedback.</p>
+	<hr><a name="appendices"></a><h2>Appendices</h2>
+    <hr><a name="appendix-docinfo"></a><h3>Appendix A: Document Information</h3>
+    <p class="indent">
+            Series: <a href="http://xmpp.org/extensions/">XEP</a><br>
+            Number: xxxx<br>
+            Publisher: <a href="/xsf/">XMPP Standards Foundation</a><br>
+            Status: 
+            <a href="http://xmpp.org/extensions/xep-0001.html#states-ProtoXEP">ProtoXEP</a><br>
+            Type:
+            <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
+            Version: 0.0.1<br>
+            Last Updated: 2013-11-10<br>
+                Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001<br>
+                Supersedes: None<br>
+                Superseded By: None<br>
+            Short Name: eventlog<br>
+            This document in other formats: 
+                <a class="standardsButton" href="http://xmpp.org/extensions/xep-xxxx.xml">XML</a> 
+                <a class="standardsButton" href="http://xmpp.org/extensions/xep-xxxx.pdf">PDF</a></p>
+    <hr><a name="appendix-authorinfo"></a><h3>Appendix B: Author Information</h3>
+    <div class="indent">
+      <h3>Peter Waher</h3>
+      <p class="indent">
+        Email:
+        <a href="mailto:peter.waher@clayster.com">peter.waher@clayster.com</a><br>
+        JabberID: 
+        <a href="xmpp:peter.waher@jabber.org">peter.waher@jabber.org</a><br>
+        URI: 
+        <a href="http://www.linkedin.com/in/peterwaher">http://www.linkedin.com/in/peterwaher</a><br></p>
+    </div>
+    <hr><a name="appendix-legal"></a><h3>Appendix C: Legal Notices</h3>
+    <div class="indent">
+      <h4>Copyright</h4>This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).<h4>Permissions</h4>Permission is hereby granted, free of charge, to any person obtaining a copy of this specification (the "Specification"), to make use of the Specification without restriction, including without limitation the rights to implement the Specification in a software program, deploy the Specification in a network service, and copy, modify, merge, publish, translate, distribute, sublicense, or sell copies of the Specification, and to permit persons to whom the Specification is furnished to do so, subject to the condition that the foregoing copyright notice and this permission notice shall be included in all copies or substantial portions of the Specification. Unless separate permission is granted, modified works that are redistributed shall not contain misleading information regarding the authors, title, number, or publisher of the Specification, and shall not claim endorsement of the modified works by the authors, any organization or project to which the authors belong, or the XMPP Standards Foundation.<h4>Disclaimer of Warranty</h4><span style="font-weight: bold">## NOTE WELL: This Specification is provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. In no event shall the XMPP Standards Foundation or the authors of this Specification be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Specification or the implementation, deployment, or other use of the Specification. ##</span><h4>Limitation of Liability</h4>In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall the XMPP Standards Foundation or any author of this Specification be liable for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising out of the use or inability to use the Specification (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if the XMPP Standards Foundation or such author has been advised of the possibility of such damages.<h4>IPR Conformance</h4>
+                This XMPP Extension Protocol has been contributed in full conformance with the XSF's Intellectual Property Rights Policy (a copy of which may be found at &lt;<a href="http://www.xmpp.org/extensions/ipr-policy.shtml">http://www.xmpp.org/extensions/ipr-policy.shtml</a>&gt; or obtained by writing to XSF, P.O. Box 1641, Denver, CO 80201 USA).
+            </div>
+    <hr><a name="appendix-xmpp"></a><h3>Appendix D: Relation to XMPP</h3>
+    <p class="indent">The Extensible Messaging and Presence Protocol (XMPP) is defined in the XMPP Core (RFC 6120) and XMPP IM (RFC 6121) specifications contributed by the XMPP Standards Foundation to the Internet Standards Process, which is managed by the Internet Engineering Task Force in accordance with RFC 2026. Any protocol defined in this document has been developed outside the Internet Standards Process and is to be understood as an extension to XMPP rather than as an evolution, development, or modification of XMPP itself.</p>
+    <hr><a name="appendix-discuss"></a><h3>Appendix E: Discussion Venue</h3>
+    <p class="indent">The primary venue for discussion of XMPP Extension Protocols is the &lt;<a href="http://mail.jabber.org/mailman/listinfo/standards">standards@xmpp.org</a>&gt; discussion list.</p>
+    <p class="indent">Discussion on other xmpp.org discussion lists might also be appropriate; see &lt;<a href="http://xmpp.org/about/discuss.shtml">http://xmpp.org/about/discuss.shtml</a>&gt; for a complete list.</p>
+    <p class="indent">Errata can be sent to &lt;<a href="mailto:editor@xmpp.org">editor@xmpp.org</a>&gt;.</p>
+    <hr><a name="appendix-conformance"></a><h3>Appendix F: Requirements Conformance</h3>
+    <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
+    <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
+    <div class="indent">
+      <p><a name="nt-ID0EHD">1</a>. 
+                RFC-5424: The Syslog Protocol &lt;<a href="https://tools.ietf.org/html/rfc5424">https://tools.ietf.org/html/rfc5424</a>&gt;
+            </p>
+      <p><a name="nt-ID0E5BAC">2</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0EVCAC">3</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0EZKAC">4</a>. 
+                    Data Forms Validation Datatypes &lt;<a href="http://xmpp.org/registrar/xdv-datatypes.html">http://xmpp.org/registrar/xdv-datatypes.html</a>&gt;
+                </p>
+      <p><a name="nt-ID0E2NAC">5</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+    </div>
+    <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
+    <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
+    <div class="indent">
+      <h4>Version 0.0.1 (2013-11-10)</h4>
+      <div class="indent">
+                <p class="" style="">First draft.</p>
+             (pw)
+    </div>
+    </div>
+    <hr>
+    <p>END</p>
+  </body>
+</html>

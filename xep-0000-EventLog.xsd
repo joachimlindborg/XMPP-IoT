@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema
+    xmlns:xs='http://www.w3.org/2001/XMLSchema'
+    targetNamespace='urn:xmpp:eventlog'
+    xmlns='urn:xmpp:eventlog'
+    elementFormDefault='qualified'>
+
+	<xs:element name='log'>
+		<xs:complexType>
+			<xs:choice minOccurs='0' maxOccurs='unbounded'>
+				<xs:element name='tag'>
+					<xs:complexType>
+						<xs:attribute name='name' type='xs:string' use='required'/>
+						<xs:attribute name='value' type='xs:string' use='required'/>
+						<xs:attribute name='type' type='xs:QName' use='optional' default='xs:string'/>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+			<xs:attribute name='message' type='xs:string' use='required'/>
+			<xs:attribute name='timestamp' type='xs:dateTime' use='required'/>
+			<xs:attribute name='id' type='xs:string' use='optional'/>
+			<xs:attribute name='type' type='EventType' use='optional' default='Informational'/>
+			<xs:attribute name='level' type='EventLevel' use='optional' default='Minor'/>
+			<xs:attribute name='object' type='xs:string' use='optional'/>
+			<xs:attribute name='subject' type='xs:string' use='optional'/>
+			<xs:attribute name='facility' type='xs:string' use='optional'/>
+			<xs:attribute name='module' type='xs:string' use='optional'/>
+			<xs:attribute name='stackTrace' type='xs:string' use='optional'/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name='EventType'>
+		<xs:restriction base='xs:string'>
+			<xs:enumeration value='Debug'/>
+			<xs:enumeration value='Informational'/>
+			<xs:enumeration value='Notice'/>
+			<xs:enumeration value='Warning'/>
+			<xs:enumeration value='Error'/>
+			<xs:enumeration value='Critical'/>
+			<xs:enumeration value='Alert'/>
+			<xs:enumeration value='Emergency'/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name='EventLevel'>
+		<xs:restriction base='xs:string'>
+			<xs:enumeration value='Major'/>
+			<xs:enumeration value='Medium'/>
+			<xs:enumeration value='Minor'/>
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>
