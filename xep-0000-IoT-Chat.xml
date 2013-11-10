@@ -29,13 +29,21 @@
 		<approver>Council</approver>
 		<dependencies>
 			<spec>XMPP Core</spec>
+			<spec>XEP-0004</spec>
+			<spec>XEP-0068</spec>
+			<spec>XEP-0071</spec>
+			<spec>XEP-0122</spec>
+			<spec>XEP-0137</spec>
+			<spec>XEP-0141</spec>
 			<spec>XEP-0323</spec>
 			<spec>XEP-0325</spec>
 			<spec>XEP-0326</spec>
+			<spec>XEP-0331</spec>
+			<spec>dynamic-forms</spec>
 		</dependencies>
 		<supersedes/>
 		<supersededby/>
-		<shortname>NOT_YET_ASSIGNED</shortname>
+		<shortname>iot-h2m-chat</shortname>
 		<author>
 			<firstname>Peter</firstname>
 			<surname>Waher</surname>
@@ -82,10 +90,6 @@
 				include both reading of sensors and control of actuators.
 			</li>
 		</ul>
-		<p>
-			All communication between user (human or machine) and device is done using normal text messages. Therefore, all examples in this document will only specify
-			the actual text messages being sent, not the underlying XMPP XML stanzas.
-		</p>
 	</section1>
 	<section1 topic='Requirements' anchor='reqs'>
 		<p>
@@ -241,489 +245,1340 @@
 		</dl>
 	</section1>
 	<section1 topic='Use Cases' anchor='usecases'>
+		<p>
+			All communication between user (human or machine) and device is done using normal text messages. Therefore, all examples in this document will only specify
+			the actual text messages being sent, not the underlying XMPP XML stanzas. IoT devices can choose to use &xep0071; to enhance text output, but automatons
+			interpreting received messages should use the normal text message as source for their interpretation. This document does not specify any HTML formats used.
+		</p>
+		<p>
+			Together with examples, example regular expressions will be provided to facilitate machine extraction of information from the text. This document does not
+			require the use of regular expressions in any implementation. These expressions act as a documentation of the exact syntax or format of the corresponding text messages.
+		</p>
+		<p>
+			<strong>Note:</strong> The client sending commands should not expect messages to be sent for each row, nor expect all rows in a response to be sent in one message.
+			The sender is free to send any number of messages, with any number of rows in each message. Each row should be separated by a CRLF character sequence.
+		</p>
+		<p>
+			<strong>Note 2:</strong> In examples where messages are sent in both directions, messages from the requesting party (client) will be prefixed by C:
+			and messages from the answering party (server) will be prefixed by S: This is for readability purposes only, and do not represent actual characters
+			send in messages.
+		</p>
 		<section2 topic='Readout of devices'>
 			<section3 topic='Readout of standalone devices'>
 				<section4 topic='Reading momentary values from single device or currently selected device'>
-					<!-- TODO 
-					Example:
-					?
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Requesting a readout of momentary values from single device or currently selected device'>
+						<![CDATA[
+   ?]]>
+					</example>
+					<!-- TODO: Write descriptive text 
+               Note: The readout is performed asynchronously, which may imply a delay before the response is returned. -->
+					<example caption='Momentary value response without localized field names'>
+						<![CDATA[
+   Readout of Vina del Mar started...
+   Condition   Fair
+   Condition Code   34
+   Temperature   18 °C
+   Chill   18 °C
+   Wind Direction   330 °
+   Wind Speed   14,48 km/h
+   Humidity   52 %
+   Visibility   9,99 km
+   Pressure   1015,92 mbar
+   Pressure Trend   Steady]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Momentary value response with localized field names'>
+						<![CDATA[
+   Urläsning av Vina del Mar påbörjad...
+   Condition   Fair   (Tillstånd)
+   Condition Code   34   (Tillståndskod)
+   Temperature   19 °C   (Temperatur)
+   Chill   19 °C   (Nedkylning)
+   Wind Direction   200 °   (Vindriktning)
+   Wind Speed   25,75 km/h   (Vindhastighet)
+   Humidity   46 %   (Luftfuktighet)
+   Visibility   9,99 km   (Visibilitet)
+   Pressure   1015,92 mbar   (Tryck)
+   Pressure Trend   Falling   (Lufttryckstrend)]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Multi-line regular expression for parsing readout results'>
+						<![CDATA[
+   ^(?'FieldName'[^\t]+)\t(?'Value'[^\t\n]+)(\t[(](?'Localized'[^)]+)[)])?]]>
+					</example>
 				</section4>
 				<section4 topic='Reading all values from single device or currently selected device'>
-					<!-- TODO 
-					Example:
-					??
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Requesting a readout of momentary values from single device or currently selected device'>
+						<![CDATA[
+   ??]]>
+					</example>
+					<!-- TODO: Write descriptive text 
+               Note: The readout is performed asynchronously, which may imply a delay before the response is returned.-->
+					<example caption='Full readout response without localized field names'>
+						<![CDATA[
+   Readout of Vina del Mar started...
+   Latitude   Latitude   -33,02 °   2013-11-06 16:49:56   Identity   AutomaticReadout
+   Longitude   Longitude   -71,55 °   2013-11-06 16:49:56   Identity   AutomaticReadout
+   Condition   Condition   Fair   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout
+   Condition Code   Condition Code   34   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout
+   Temperature   Temperature   19 °C   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout
+   Description   Description   Yahoo! Weather - Vina del Mar, CL   2013-11-06 16:49:56   StatusValues   AutomaticReadout
+   City   City   Vina del Mar   2013-11-06 16:49:56   StatusValues   AutomaticReadout
+   Country   Country   Chile   2013-11-06 16:49:56   StatusValues   AutomaticReadout
+   Chill   Chill   19 °C   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout
+   Wind Direction   Wind Direction   200 °   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout
+   Wind Speed   Wind Speed   25,75 km/h   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout
+   Humidity   Humidity   46 %   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout
+   Visibility   Visibility   9,99 km   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout
+   Pressure   Pressure   1015,92 mbar   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout
+   Pressure Trend   Pressure Trend   Falling   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Full readout response with localized field names'>
+						<![CDATA[
+   Urläsning av Vina del Mar påbörjad...
+   Latitude   Latitud   -33,02 °   2013-11-06 16:49:56   Identity   AutomaticReadout
+   Longitude   Longitud   -71,55 °   2013-11-06 16:49:56   Identity   AutomaticReadout
+   Condition   Tillstånd   Fair   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout
+   Condition Code   Tillståndskod   34   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout
+   Temperature   Temperatur   19 °C   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout
+   Description   Beskrivning   Yahoo! Weather - Vina del Mar, CL   2013-11-06 16:49:56   StatusValues   AutomaticReadout
+   City   Stad   Vina del Mar   2013-11-06 16:49:56   StatusValues   AutomaticReadout
+   Country   Land   Chile   2013-11-06 16:49:56   StatusValues   AutomaticReadout
+   Chill   Nedkylning   19 °C   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout
+   Wind Direction   Vindriktning   200 °   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout
+   Wind Speed   Vindhastighet   25,75 km/h   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout
+   Humidity   Luftfuktighet   46 %   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout
+   Visibility   Visibilitet   9,99 km   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout
+   Pressure   Tryck   1015,92 mbar   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout
+   Pressure Trend   Lufttryckstrend   Falling   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Multi-line regular expression for parsing readout results'>
+						<![CDATA[
+   ^(?'FieldName'[^\t]+)\t(?'Localized'[^\t]+)\t(?'Value'[^\t]+)\t(?'Year'\d{4})-(?'Month'\d{2})-(?'Day'\d{2}) (?'Hour'\d{2}):(?'Minute'\d{2}):(?'Second'\d{2})\t(?'Type'[^\t]+)\t(?'Status'[^\n]+)]]>
+					</example>
 				</section4>
-				<section4 topic='Reading specific field value from single device or currently selected device'>
-					<!-- TODO 
-					Example:
-					Temperature?
-					-->
+				<section4 topic='Reading specific momentary field value from single device or currently selected device'>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Requesting a readout of a specific momentary value from single device or currently selected device'>
+						<![CDATA[
+   Temperature?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Specific momentary value response without localized field names'>
+						<![CDATA[
+   Readout of klart.se - Stockholm (2) - Albano started...
+   Temperature   0 °C]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Specific momentary value response with localized field names'>
+						<![CDATA[
+   Temperature?
+   Urläsning av klart.se - Stockholm (2) - Albano påbörjad...
+   Temperature   0 °C   (Temperatur)]]>
+					</example>
+					<!-- TODO: Write descriptive text. 
+               Same regular expression for parsing as for ? 
+               Note: if X points to an object in the current data source in a concentrator, X? requests a readout of momentary values from X.
+               -->
+				</section4>
+				<section4 topic='Reading specific field values from single device or currently selected device'>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Requesting a readout of specific field values from single device or currently selected device'>
+						<![CDATA[
+   Temperature??]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Full readout response without localized field names'>
+						<![CDATA[
+   Readout of klart.se - Stockholm (2) - Albano started...
+   Temperature   Temperature   0 °C   2013-11-06 16:00:00   MomentaryValues   AutomaticReadout
+   Temperature   Temperature   5 °C   2013-11-06 04:00:00   Computed   AutomaticReadout
+   Temperature   Temperature   6 °C   2013-11-06 10:00:00   Computed   AutomaticReadout
+   Temperature   Temperature   5 °C   2013-11-06 16:00:00   Computed   AutomaticReadout
+   Temperature   Temperature   3 °C   2013-11-07 04:00:00   Computed   AutomaticReadout
+   Temperature   Temperature   6 °C   2013-11-07 10:00:00   Computed   AutomaticReadout
+   Temperature   Temperature   5 °C   2013-11-07 16:00:00   Computed   AutomaticReadout
+   Temperature   Temperature   5 °C   2013-11-08 04:00:00   Computed   AutomaticReadout
+   Temperature   Temperature   6 °C   2013-11-08 10:00:00   Computed   AutomaticReadout
+   Temperature   Temperature   6 °C   2013-11-08 16:00:00   Computed   AutomaticReadout
+   Temperature   Temperature   5 °C   2013-11-09 03:00:00   Computed   AutomaticReadout
+   Temperature   Temperature   7 °C   2013-11-09 09:00:00   Computed   AutomaticReadout
+   Temperature   Temperature   6 °C   2013-11-09 15:00:00   Computed   AutomaticReadout
+   Temperature   Temperature   5 °C   2013-11-10 03:00:00   Computed   AutomaticReadout
+   Temperature   Temperature   5 °C   2013-11-10 09:00:00   Computed   AutomaticReadout
+   Temperature   Temperature   4 °C   2013-11-10 15:00:00   Computed   AutomaticReadout]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Full readout response with localized field names'>
+						<![CDATA[
+   Urläsning av klart.se - Stockholm (2) - Albano påbörjad...
+   Temperature   Temperatur   0 °C   2013-11-06 16:00:00   MomentaryValues   AutomaticReadout
+   Temperature   Temperatur   5 °C   2013-11-06 04:00:00   Computed   AutomaticReadout
+   Temperature   Temperatur   6 °C   2013-11-06 10:00:00   Computed   AutomaticReadout
+   Temperature   Temperatur   5 °C   2013-11-06 16:00:00   Computed   AutomaticReadout
+   Temperature   Temperatur   3 °C   2013-11-07 04:00:00   Computed   AutomaticReadout
+   Temperature   Temperatur   6 °C   2013-11-07 10:00:00   Computed   AutomaticReadout
+   Temperature   Temperatur   5 °C   2013-11-07 16:00:00   Computed   AutomaticReadout
+   Temperature   Temperatur   5 °C   2013-11-08 04:00:00   Computed   AutomaticReadout
+   Temperature   Temperatur   6 °C   2013-11-08 10:00:00   Computed   AutomaticReadout
+   Temperature   Temperatur   6 °C   2013-11-08 16:00:00   Computed   AutomaticReadout
+   Temperature   Temperatur   5 °C   2013-11-09 03:00:00   Computed   AutomaticReadout
+   Temperature   Temperatur   7 °C   2013-11-09 09:00:00   Computed   AutomaticReadout
+   Temperature   Temperatur   6 °C   2013-11-09 15:00:00   Computed   AutomaticReadout
+   Temperature   Temperatur   5 °C   2013-11-10 03:00:00   Computed   AutomaticReadout
+   Temperature   Temperatur   5 °C   2013-11-10 09:00:00   Computed   AutomaticReadout
+   Temperature   Temperatur   4 °C   2013-11-10 15:00:00   Computed   AutomaticReadout]]>
+					</example>
+					<!-- TODO: Write descriptive text. 
+               Same regular expression for parsing as for ?? 
+               Note: if X points to an object in the current data source in a concentrator, X?? requests a full readout of X.
+               -->
 				</section4>
 			</section3>
 			<section3 topic='Readout of device behind concentrator'>
 				<section4 topic='Reading momentary values from device behind concentrator'>
-					<!-- TODO 
-					Example:
-					NodeID?
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Requesting a readout of momentary values from a device behind a concentrator'>
+						<![CDATA[
+   Vina del Mar?]]>
+					</example>
+					<!-- TODO: Write descriptive text.
+               Output same as in the corresponding example above concerning readout from a single device or the currently selected device. 
+               
+               If list of objects was last displayed (with positive index values N), the following is synonymous:
+               N?-->
 				</section4>
 				<section4 topic='Reading all values from device behind concentrator'>
-					<!-- TODO 
-					Example:
-					NodeID??
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Requesting a readout of all values from a device behind a concentrator'>
+						<![CDATA[
+   Vina del Mar??]]>
+					</example>
+					<!-- TODO: Write descriptive text.
+               Output same as in the corresponding example above concerning readout from a single device or the currently selected device. 
+               
+               If list of objects was last displayed (with positive index values N), the following is synonymous:
+               N??-->
 				</section4>
-				<section4 topic='Reading specific field value from device behind concentrator'>
-					<!-- TODO
-					Example:
-					NodeID.Temperature?
-				
-					Synonyms:
-					Temperature@NodeID?
-					-->
+				<section4 topic='Reading specific momentary field value from device behind concentrator'>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Requesting a readout of a specific momentary value from a device behind a concentrator'>
+						<![CDATA[
+   Vina del Mar.Temperature?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Alternative method of requesting a readout of a specific momentary value from a device behind a concentrator'>
+						<![CDATA[
+   Temperature@Vina del Mar?]]>
+					</example>
+					<!-- TODO: Write descriptive text.
+               Output same as in the corresponding example above concerning readout from a single device or the currently selected device. 
+               
+               If list of objects was last displayed (with positive index values N), the following are synonymous:
+               N.Temperature?
+               Temperature@N?
+               -->
+				</section4>
+				<section4 topic='Reading specific field values from device behind concentrator'>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Requesting a readout of specific field values from a device behind a concentrator'>
+						<![CDATA[
+   Vina del Mar.Temperature??]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Alternative method of requesting a readout of specific field values from a device behind a concentrator'>
+						<![CDATA[
+   Temperature@Vina del Mar??]]>
+					</example>
+					<!-- TODO: Write descriptive text.
+               Output same as in the corresponding example above concerning readout from a single device or the currently selected device. 
+               
+               If list of objects was last displayed (with positive index values N), the following are synonymous:
+               N.Temperature??
+               Temperature@N??-->
 				</section4>
 			</section3>
 		</section2>
 		<section2 topic='Control of devices'>
 			<section3 topic='Control of standalone devices'>
 				<section4 topic='Setting control parameter on single device or currently selected device'>
-					<!-- TODO 
-					Example:
-					Output=75
-				
-					Synonyms:
-					Output!75
-				
-					If list of control parametrs was last displayed (with positive index values N), the following is synonymous:
-					N=75
-					N!75
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Requesting a control parameter to be set to a new value on a single device or currently selected device'>
+						<![CDATA[
+   Output=75]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Alternative method for requesting a control parameter to be set to a new value on a single device or currently selected device'>
+						<![CDATA[
+   Output!75]]>
+					</example>
+					<!-- TODO: Write descriptive text 
+               Note: Control is performed asynchronously, which may imply a delay before the response is returned.
+               -->
+					<example caption='Control parameter response when parameter has been successfully set'>
+						<![CDATA[
+   Output=75]]>
+					</example>
+					<!-- TODO: Write descriptive text
+               If list of control parametrs was last displayed (with positive index values N), the following are synonymous:
+               N=75
+               N!75
+               
+               Note: If control action not successful, an error message will be displayed. Link to section about error messages.
+               -->
 				</section4>
 				<section4 topic='Listing control parameters on single device or currently selected device'>
-					<!-- TODO
-					Example:
-					=?
-				
-					Synonyms:
-					!?
-				
-					Output example:
-				
-					1) Control Parameter 1:Value 1
-					2) Control Parameter 2:Value 2
-					0) Back
-					...
+					<!-- TODO: Write descriptive text -->
+					<example caption='Listing control parameters on single device or currently selected device'>
+						<![CDATA[
+   =?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Alternative method for listing control parameters on single device or currently selected device'>
+						<![CDATA[
+   !?]]>
+					</example>
+					<!-- TODO: Write descriptive text 
+               Note: Control is performed asynchronously and current values might not be available. Therefore, do not consider the values presented
+               along the control parameters as factual.
+               -->
+					<example caption='List of control parameters'>
+						<![CDATA[
+   1. Output=0 (Output)
+   0. Tillbaka]]>
+					</example>
+					<!-- TODO: Write descriptive text
+					Note: Parameters in menu above can be used by referring to the corresponding menu item index.
 					-->
+					<p>
+						After the list of parameters has been sent, the device can optionally send a data form with the same parameters. If the client supports
+						forms it can present the form in a more user friendly window. See <link url='#dataforms'>Data Forms</link> for more information. Submitting the
+						form means executing the corresponding control commands.
+					</p>
+					<example caption='Using menu shortcuts'>
+						<![CDATA[
+   C: =?
+   S: 1. Output=0 (Output)
+   S: 0. Tillbaka
+   C: 1=75
+   S: Output=75]]>
+					</example>
 				</section4>
 				<section4 topic='Displaying current value of control parameter on single device or currently selected device'>
-					<!-- TODO
-					Example:
-					Output=?
-				
-					Synonyms:
-					Output!?
-				
-					If there is no Field available for the device with the given name, but a control parameter exists for the given name, the following should be synonymous with Output=?:
-					Output?
-				
-					If list of control parametrs was last displayed (with positive index values N), the following is synonymous:
-					N=?
-					N!?
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Displaying current value of control parameter on single device or currently selected device'>
+						<![CDATA[
+   Output=?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Alternative method for displaying current value of control parameter on single device or currently selected device'>
+						<![CDATA[
+   Output!?]]>
+					</example>
+					<!-- TODO: Write descriptive text 
+               Note: Control is performed asynchronously and current values might not be available. Therefore, do not consider the values presented
+               along the control parameters as factual.
+               -->
+					<example caption='Listing control parameter'>
+						<![CDATA[
+   Output=0]]>
+					</example>
+					<!-- TODO: Write descriptive text
+               Note: Parameters in menu above can be used by referring to the corresponding menu item index.
+               -->
+					<example caption='Using menu shortcuts'>
+						<![CDATA[
+   C: =?
+   S: 1. Output=0 (Output)
+   S: 0. Tillbaka
+   C: 1=?
+   S: Output=75]]>
+					</example>
 				</section4>
 			</section3>
 			<section3 topic='Control of device behind concentrator'>
 				<section4 topic='Setting control parameter on single device behind concentrator'>
-					<!-- TODO 
-					Example:
-					NodeID.Output=75
-				
-					Synonyms:
-					NodeID.Output!75
-					Output@NodeID=75
-					Output@NodeID!75
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Requesting a control parameter to be set to a new value on a single device behind concentrator'>
+						<![CDATA[
+   Analog Output.Output=75]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Alternative method for requesting a control parameter to be set to a new value on a single device behind concentrator'>
+						<![CDATA[
+   Analog Output.Output!75]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Alternative method 2 for requesting a control parameter to be set to a new value on a single device behind concentrator'>
+						<![CDATA[
+   Output@Analog Output=75]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Alternative method 3 for requesting a control parameter to be set to a new value on a single device behind concentrator'>
+						<![CDATA[
+   Output@Analog Output!75]]>
+					</example>
+					<!-- TODO: Write descriptive text 
+               Output same as in the corresponding example above concerning control of a single device or the currently selected device. 
+               -->
+					<example caption='Control parameter response when parameter has been successfully set'>
+						<![CDATA[
+   Output=75]]>
+					</example>
+					<!-- TODO: Write descriptive text
+               Note: If control action not successful, an error message will be displayed. Link to section about error messages.
+               Note 2: Control is performed asynchronously, which may imply a delay before the response is returned.
+               
+               If list of nodes was last displayed (with positive index values N), the following are synonymous:
+               N.Output=75
+               N.Output!75
+               Output@N=75
+               Output@N!75
+               -->
 				</section4>
 				<section4 topic='Listing control parameters on single device behind concentrator'>
-					<!-- TODO
-					Example:
-					NodeID.=?
-				
-					Synonyms:
-					NodeID=?
-					NodeID.!?
-					NodeID!?
-					@NodeID=?
-					@NodeID?
-				
-					Output example:
-				
-					1) Control Parameter 1
-					2) Control Parameter 2
-					0) Back
-					...
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Listing control parameters on single device behind concentrator'>
+						<![CDATA[
+   Analog Output=?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Alternative method for listing control parameters on single device behind concentrator'>
+						<![CDATA[
+   Analog Output!?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Alternative method 2 for listing control parameters on single device behind concentrator'>
+						<![CDATA[
+   Analog Output.=?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Alternative method 3 for listing control parameters on single device behind concentrator'>
+						<![CDATA[
+   Analog Output.!?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Alternative method 4 for listing control parameters on single device behind concentrator'>
+						<![CDATA[
+   @Analog Output=?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Alternative method 5 for listing control parameters on single device behind concentrator'>
+						<![CDATA[
+   @Analog Output?]]>
+					</example>
+					<!-- TODO: Write descriptive text 
+               Note: Control is performed asynchronously and current values might not be available. Therefore, do not consider the values presented
+               along the control parameters as factual.
+               
+               Output same as in the corresponding example above concerning control of a single device or the currently selected device. 
+               -->
+					<p>
+						After the list of parameters has been sent, the device can optionally send a data form with the same parameters. If the client supports
+						forms it can present the form in a more user friendly window. See <link url='#dataforms'>Data Forms</link> for more information. Submitting the
+						form means executing the corresponding control commands.
+					</p>
 				</section4>
 				<section4 topic='Displaying current value of control parameter on single device behind concentrator'>
-					<!-- TODO
-					Example:
-					NodeID.Output=?
-				
-					Synonyms: 
-					Output@NodeID=?
-				
-					If there is no Field available for the device with the given name, but a control parameter exists for the given name, the following should be synonymous with NodeID.Output=?:
-					NodeID.Output?
-					Output@NodeID?
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Displaying current value of control parameter on single device behind concentrator'>
+						<![CDATA[
+   Analog Output.Output=?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Alternative method for displaying current value of control parameter on single device behind concentrator'>
+						<![CDATA[
+   Analog Output.Output!?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Alternative method 2 for displaying current value of control parameter on single device behind concentrator'>
+						<![CDATA[
+   Output@Analog Output=?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Alternative method 3 for displaying current value of control parameter on single device behind concentrator'>
+						<![CDATA[
+   Output@Analog Output!?]]>
+					</example>
+					<!-- TODO: Write descriptive text 
+               Note: Control is performed asynchronously and current values might not be available. Therefore, do not consider the values presented
+               along the control parameters as factual.
+               
+               Output same as in the corresponding example above concerning displaying current control parameter on a single device or the currently selected device. 
+               -->
 				</section4>
 			</section3>
 		</section2>
 		<section2 topic='Configuring devices'>
 			<section3 topic='Configuring standalone devices'>
 				<section4 topic='Listing configuration parameters on currently selected device'>
-					<!-- TODO:
-					Example:
-					:?
-				
-					Output example:
-					1) param1:value1
-					2) param2:value2
-					...
-					0) Back
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Listing configuration parameters on currently selected device'>
+						<![CDATA[
+   :?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='List of configuration parameters'>
+						<![CDATA[
+   1. id:Analog Output (ID)
+   2. customPrivilegeId: (Required User Privilege)
+   3. name: (Name)
+   4. class:Other (Class)
+   5. phase:Installation (Lifecycle Phase)
+   6. enabled:true (Enabled)
+   7. meterLocationId: (Meter Location ID)
+   8. meterNumber: (Meter Number)
+   ...
+   0. Back]]>
+					</example>
+					<p>
+						After the list of parameters has been sent, the device can optionally send a data form with the same parameters. If the client supports
+						forms it can present the form in a more user friendly window. See <link url='#dataforms'>Data Forms</link> for more information. Submitting the
+						form means configuring the node.
+					</p>
 				</section4>
 				<section4 topic='Displaying current value of configuration parameter on currently selected device'>
-					<!-- TODO:
-					Example:
-					Parameter:?
-				
-					If previous menu listed configuration parameters with positive integers N, the following is synonymous:
-					N:?
-				
-					Note: If a node command is selected, this command points to parameters in the node command parameter set, not configuration parameter set.
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Displaying current value of configuration parameter on currently selected device'>
+						<![CDATA[
+   phase:?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Value of configuration parameter'>
+						<![CDATA[
+   phase:Installation]]>
+					</example>
+					<!-- TODO: Write descriptive text
+               If previous menu listed configuration parameters with positive integers N, the following is synonymous:
+               N:?
+            
+               Note: If a node command is selected, this command points to parameters in the node command parameter set, not configuration parameter set.
+               -->
 				</section4>
 				<section4 topic='Editing configuration parameter on currently selected device'>
-					<!-- TODO:
-					Example:
-					Parameter:Value
-				
-					If previous menu listed configuration parameters with positive integers N, the following is synonymous:
-					N:Value
-				
-					Note: If a node command is selected, this command points to parameters in the node command parameter set, not configuration parameter set.
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Editing configuration parameter on currently selected device'>
+						<![CDATA[
+   phase:Test]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Acknowledge that configuration was performed'>
+						<![CDATA[
+   OK]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Configuration error'>
+						<![CDATA[
+   C: phase:test
+   S: ! Select a value from the list. (Installation, Test, Production)]]>
+					</example>
+					<!-- TODO: Write descriptive text:
+               If previous menu listed configuration parameters with positive integers N, the following is synonymous:
+               N:Value
+            
+               Note: If a node command is selected, this command points to parameters in the node command parameter set, not configuration parameter set.
+               -->
 				</section4>
 			</section3>
 			<section3 topic='Configuration of device behind concentrator'>
 				<section4 topic='Listing configuration parameters on single device behind concentrator'>
-					<!-- TODO:
-					Example:
-					NodeID:?
-				
-					Output example:
-					1) param1:value1
-					2) param2:value2
-					...
-					0) Back
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Listing configuration parameters on single device behind concentrator'>
+						<![CDATA[
+   Analog Output:?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='List of configuration parameters'>
+						<![CDATA[
+   1. id:Analog Output (ID)
+   2. customPrivilegeId: (Required User Privilege)
+   3. name: (Name)
+   4. class:Other (Class)
+   5. phase:Installation (Lifecycle Phase)
+   6. enabled:true (Enabled)
+   7. meterLocationId: (Meter Location ID)
+   8. meterNumber: (Meter Number)
+   ...
+   0. Back]]>
+					</example>
+					<p>
+						After the list of parameters has been sent, the device can optionally send a data form with the same parameters. If the client supports
+						forms it can present the form in a more user friendly window. See <link url='#dataforms'>Data Forms</link> for more information. Submitting the
+						form means configuring the node.
+					</p>
 				</section4>
 				<section4 topic='Displaying current value of configuration parameter on single device behind concentrator'>
-					<!-- TODO:
-					Example:
-					NodeID.Parameter:?
-				
-					Synonyms:
-					Parameter@NodeID:?
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Displaying current value of configuration parameter on single device behind concentrator'>
+						<![CDATA[
+   Analog Output.phase:?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Alternative way to displaying current value of configuration parameter on single device behind concentrator'>
+						<![CDATA[
+   phase@Analog Output:?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Value of configuration parameter'>
+						<![CDATA[
+   phase:Installation]]>
+					</example>
 				</section4>
 				<section4 topic='Editing configuration parameter on single device behind concentrator'>
-					<!-- TODO:
-					Example:
-					NodeID.Parameter:Value
-				
-					Synonyms:
-					Parameter@NodeID:Value
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Editing configuration parameter on single device behind concentrator'>
+						<![CDATA[
+   Analog Output.phase:Test]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Alternative way to edit configuration parameter on single device behind concentrator'>
+						<![CDATA[
+   phase@Analog Output:Test]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Acknowledge that configuration was performed'>
+						<![CDATA[
+   OK]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Configuration error'>
+						<![CDATA[
+   C: Analog Output.phase:test
+   S: ! Select a value from the list. (Installation, Test, Production)]]>
+					</example>
+					<!-- TODO: Write descriptive text:
+               Note: If a node command is selected, this command points to parameters in the node command parameter set, not configuration parameter set.
+               -->
 				</section4>
 			</section3>
 		</section2>
 		<section2 topic='Node Commands on devices'>
 			<section3 topic='Node Commands on standalone devices'>
 				<section4 topic='Displaying commands available on currently selected device'>
-					<!-- TODO:
-					Example:
-					>?
-				
-					Output Example:
-					1) Command 1 (Command 1 ID)
-					2) Command 2 (Command 1 ID)
-					...
-					0) Back
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Displaying commands available on currently selected device'>
+						<![CDATA[
+   >?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Menu of available commands'>
+						<![CDATA[
+   1. ChangeToProduction (Change lifecycle phase to Production)
+   2. ChangeToTest (Change lifecycle phase to Test)
+   3. ClearMessages (Clear all messages)
+   4. Disable
+   5. LogCustomMessage (Log message...)
+   0. Back]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
 				</section4>
 				<section4 topic='Selecting command on currently selected device'>
-					<!-- TODO:
-					Example:
-					>CommandID
-				
-					if No command with the given ID was found a search for Command names is done.
-				
-					If previous menu listed configuration parameters with positive integers N, the following is synonymous:
-					>N
-					N
-				
-					Output Example:
-					1) Parameter 1:Value 1
-					2) Parameter 2:Value 2
-					...
-					!) Execute
-					0) Back
-				
-					Note: Simple commands might lack command parameters.
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Selecting command on currently selected device using Command ID'>
+						<![CDATA[
+   >LogCustomMessage]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Selecting command on currently selected device using Command Name'>
+						<![CDATA[
+   >Log message...]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Selecting command on currently selected device using menu shortcut'>
+						<![CDATA[
+   >5]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Command menu for parametrized command'>
+						<![CDATA[
+1. KeepPrevious:true (Keep previous messages.)
+2. Type:Information (Message Type)
+3. Level:Minor (Message Level)
+4. Message: (Message Text)
+0. Back
+!. Executes the current command.]]>
+					</example>
+					<p>
+						After the list of parameters has been sent, the device can optionally send a data form with the same parameters. If the client supports
+						forms it can present the form in a more user friendly window. See <link url='#dataforms'>Data Forms</link> for more information. Submitting
+						the form means executing the command.
+					</p>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Command menu for simple unparametrized command'>
+						<![CDATA[
+0. Back
+!. Executes the current command.]]>
+					</example>
 				</section4>
 				<section4 topic='Editing command parameter in currently selected node command'>
-					<!-- TODO:
-					Example:
-					Parameter:Value
-				
-					If previous menu listed configuration parameters with positive integers N, the following is synonymous:
-					N:Value
-				
-					Note: This can only be done if a node command has been selected.
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Editing command parameter in currently selected node command'>
+						<![CDATA[
+   Message:Hello there]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Using parameter menu shortcut'>
+						<![CDATA[
+   4:Hello there]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Acknowledging parameter is successfully edited'>
+						<![CDATA[
+   OK]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Errors in input'>
+						<![CDATA[
+   C: Level:major
+   S: ! Select a value from the list. (Minor, Medium, Major)]]>
+					</example>
+					<!-- TODO: Write descriptive text:
+               Note: This can only be done if a node command has been selected.
+               -->
 				</section4>
 				<section4 topic='Executing currently selected node command'>
-					<!-- TODO:
-					Example:
-					!
-				
-					Note:
-					A node command has to be selected for this command to be available.
-				
-					Output: Depends on type of command.
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Executing currently selected node command'>
+						<![CDATA[
+   !]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Some commands require confirmation'>
+						<![CDATA[
+   C: >Disable
+   S: 1. recursive:false (Disable recursive for all children.)
+   S: 0. Back
+   S: !. Executes the current command.
+   C: !
+   S: Are you sure you want to disable this node?
+   S: This node will not take part of any jobs, readouts or configurations when disabled.
+   S: <peter.waher@clayster.cl> (Type Yes or No)
+   C: Yes
+   S: Node disabled successfully.]]>
+					</example>
+					<!-- TODO: Write descriptive text
+               Note:
+               A node command has to be selected for this command to be available.
+            
+               Output: Depends on type of command.
+               -->
 				</section4>
 			</section3>
 			<section3 topic='Node Commands on device behind concentrator'>
 				<section4 topic='Displaying commands available on single device behind concentrator'>
-					<!-- TODO:
-					Example:
-					NodeID>?
-				
-					Output Example:
-					1) Command 1 (Command 1 ID)
-					2) Command 2 (Command 1 ID)
-					...
-					0) Back
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Displaying commands available on single device behind concentrator'>
+						<![CDATA[
+   Analog Output>?]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Menu of available commands'>
+						<![CDATA[
+   1. ChangeToProduction (Change lifecycle phase to Production)
+   2. ChangeToTest (Change lifecycle phase to Test)
+   3. ClearMessages (Clear all messages)
+   4. Disable
+   5. LogCustomMessage (Log message...)
+   0. Back]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
 				</section4>
 				<section4 topic='Selecting command on single device behind concentrator'>
-					<!-- TODO:
-					Example:
-					NodeID>CommandID
-				
-					if No command with the given ID was found a search for Command names is done.
-				
-					Output Example:
-					1) Parameter 1:Value 1
-					2) Parameter 2:Value 2
-					...
-					!) Execute
-					0) Back
-				
-					Note: Simple commands might lack command parameters.
-					-->
+					<!-- TODO: Write descriptive text -->
+					<example caption='Selecting command on single device behind concentrator using Command ID'>
+						<![CDATA[
+   Analog Output>LogCustomMessage]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Selecting command on single device behind concentrator using Command Name'>
+						<![CDATA[
+   Analog Output>Log message...]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Selecting command on single device behind concentrator using menu shortcut'>
+						<![CDATA[
+   >5]]>
+					</example>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Command menu for parametrized command'>
+						<![CDATA[
+   1. KeepPrevious:true (Keep previous messages.)
+   2. Type:Information (Message Type)
+   3. Level:Minor (Message Level)
+   4. Message: (Message Text)
+   0. Back
+   !. Executes the current command.]]>
+					</example>
+					<p>
+						After the list of parameters has been sent, the device can optionally send a data form with the same parameters. If the client supports
+						forms it can present the form in a more user friendly window. See <link url='#dataforms'>Data Forms</link> for more information. Submitting
+						the form means executing the command.
+					</p>
+					<!-- TODO: Write descriptive text -->
+					<example caption='Command menu for simple unparametrized command'>
+						<![CDATA[
+   0. Back
+   !. Executes the current command.]]>
+					</example>
 				</section4>
 			</section3>
 		</section2>
 		<section2 topic='Browsing Data Sources and Nodes on a concentrator'>
 			<section3 topic='Selecting Root Node in current data source'>
-				<!-- TODO
-				From the start, when starting chat session, the root node in the MeteringTopology data source is chosen by default.
-				
-				Example:
-				/
-				
-				Selects the root node of the current data source. Displays a menu containing a list of children. Menu Items containing child nodes are numbered using positive integers.
-				
-				Output Example:
-				
-				1) Node A
-				2) Node B
-				...
-				N) Node X
-				0) Back
-				
-				Current selection after operation = Root node in current data source.
-				-->
+				<!-- TODO: Write descriptive text
+            From the start, when starting chat session, the root node in the MeteringTopology data source is chosen by default.-->
+				<example caption='Selecting Root Node in current data source'>
+					<![CDATA[
+   /]]>
+				</example>
+				<!-- TODO: Write descriptive text
+            Selects the root node of the current data source. Displays a menu containing a list of children. Menu Items containing child nodes are numbered using positive integers.-->
+				<example caption='Menu of child nodes'>
+					<![CDATA[
+   1. COM4
+   2. COM7
+   3. COM9
+   4. Mockups
+   5. Script
+   0. Back]]>
+				</example>
+				<!-- TODO: Write descriptive text
+            Current selection after operation = Root node in current data source.
+            -->
 			</section3>
 			<section3 topic='Selecting Root Data Source'>
-				<!-- TODO
-				Example:
-				//
-				
-				Selects the root data source in the concentrator. Displays a menu containing a list of child sources. Menu Items containing child data sources are numbered using positive integers.
-				Menu items containing references to any root nodes are numbered using capital letters [A-Z]+.
-				
-				Output Example:
-				
-				1) Source A
-				2) Source B
-				A) Root Node
-				0) Back
-				
-				Current selection after operation = Root data source
-				-->
+				<!-- TODO: Write descriptive text -->
+				<example caption='Selecting Root Data Source'>
+					<![CDATA[
+   //]]>
+				</example>
+				<!-- TODO: Write descriptive text 
+            Selects the root data source in the concentrator. Displays a menu containing a list of child sources. Menu Items containing child data sources are numbered using positive integers.
+            Menu items containing references to any root nodes are numbered using capital letters [A-Z]+.-->
+				<example caption='Menu of child data sources'>
+					<![CDATA[
+   1. Metering
+   2. Security
+   3. Services
+   4. System
+   5. Tools
+   0. Back]]>
+				</example>
+				<!-- TODO: Write descriptive text 
+            Current selection after operation = Root data source
+            -->
 			</section3>
 			<section3 topic='Selecting Item'>
-				<!-- TODO
-				From the start, when starting chat session, the root node in the MeteringTopology data source is chosen by default.
-				
-				There are various ways to select an item:
-				
-				Specifying a positive integer, selects the item displayed in the menu shown in the previous selection. 
-				
-				Example:
-				2
-				
-				Note: In a new session, no menu has been shown, and so no number can be given.
-				
-				Note 2: Nodes can change, be inserted, removed, moved, etc. When the menu is presented, the numbers needs to be remembered, so that if a user
-				enters a number it selects the item represented by the number at the time the menu was presented.
-				
-				Specifying a caital letter (or sequence of capital letters) available in the last menu presented, selects the corresponding node.
-				
-				Example: 
-				A
-				
-				If the currently selected item is a node in a data source, specifying a Node ID will select the Node in the current data source, whereever it exists, if
-				a Node with that ID is available in the source.
-				
-				Example:
-				NodeID
-				
-				Note: Selecting a Node in a data source, will make it possible to use the commands available for single devices as if they were made on the selected
-				node directly.
-				
-				Example:
-				NodeID
-				Output=75
-				
-				Is the same as:
-				NodeID.Output=75
-				-->
+				<!-- TODO: Write descriptive text
+            From the start, when starting chat session, the root node in the MeteringTopology data source is chosen by default.
+            
+            There are various ways to select an item:
+            
+            Specifying a positive integer, selects the item displayed in the menu shown in the previous selection. -->
+				<example caption='Selecting item in current menu'>
+					<![CDATA[
+   1]]>
+				</example>
+				<!-- TODO: Write descriptive text
+            Note: In a new session, no menu has been shown, and so no number can be given.
+
+            Note 2: Nodes can change, be inserted, removed, moved, etc. When the menu is presented, the numbers needs to be remembered, so that if a user
+            enters a number it selects the item represented by the number at the time the menu was presented.
+
+            Specifying a capital letter (or sequence of capital letters) available in the last menu presented, selects the corresponding node.-->
+				<example caption='Selecting node in a data source menu'>
+					<![CDATA[
+   A]]>
+				</example>
+				<!-- TODO: Write descriptive text
+            If the currently selected item is a node in a data source, specifying a Node ID directly will select the Node in the current data source, whereever it exists, if
+            a Node with that ID is available in the source.-->
+				<example caption='Selecting node using its Node ID'>
+					<![CDATA[
+   Analog Output]]>
+				</example>
+				<!-- TODO: Write descriptive text
+            If in a data source, and the data source has other indexes defined (such as meter number, for instance), you can specify a value and the node in the source with the
+            given value for that index will be returned.-->
+				<example caption='Selecting node using an index value like meter number'>
+					<![CDATA[
+   123]]>
+				</example>
+				<!-- TODO: Write descriptive text
+            If there are multiple indices in the source that contain references to nodes given a specific value, the index with least number of hits will be used.
+            If there is no index returning just one node given an index value, a menu is displayed containing the least amount of nodes found using any of the
+            indices registered on the source.-->
+				<example caption='Menu displayed when selecting nodes using an index value shared by multiple nodes'>
+					<![CDATA[
+   C: 123
+   S: 1. Analog Output Mockup
+   S: 2. Digital Output Mockup
+   S: 0. Back]]>
+				</example>
+				<!-- TODO: Write descriptive text
+            Note: Node index values and Node IDs can be used interchangeably when referencing nodes in all commands defined in this specification. However,
+            commands requiring a unique node to operate on will only work if index values returning exactly one node is used.
+            
+            Note 2: Selecting a Node in a data source, will make it possible to use the commands available for single devices as if they were made on the selected
+            node directly.-->
+				<example caption='Selecting node and then performing an action on the node'>
+					<![CDATA[
+   C: Analog Output Mockup
+   S: 0. Back
+   C: Output=75
+   S: Output=75]]>
+				</example>
+				<!-- TODO: Write descriptive text-->
+				<example caption='Alternative way of performing the above action'>
+					<![CDATA[
+   C: Analog Output Mockup.Output=75
+   S: Output=75]]>
+				</example>
 			</section3>
 		</section2>
 		<section2 topic='Menu Commands'>
 			<section3 topic='List current options' anchor='currentoptions'>
-				<!-- TODO:
-				Example:
-				#
-				
-				The above shows the list of current options, without showing any syntax error message.
-				
-				Note: If a syntax error occurs during chat, an error message should be returned, followed by a list of current options as described here.
-				
-				Output Example:
-				
-				Describe following syntactic elements, or divide into a menu with only options available at the current level... ?
-				
-				?
-				??
-				FIELD?
-				NODE_ID?
-				NODE_ID??
-				NODE_ID.FIELD?
-				FIELD@NODE_ID?
-				CONTROL_PARAMETER=VALUE
-				CONTROL_PARAMETER!VALUE
-				=?
-				!?
-				CONTROL_PARAMETER=?
-				CONTROL_PARAMETER!?
-				NODE_ID.CONTROL_PARAMETER=VALUE
-				CONTROL_PARAMETER@NODE_ID=VALUE
-				CONTROL_PARAMETER@NODE_ID!VALUE
-				NODE_ID.=?
-				NODE_ID=?
-				NODE_ID.!?
-				NODE_ID!?
-				@NODE_ID=?
-				@NODE_ID?
-				NODE_ID.CONTROL_PARAMETER=?
-				NODE_ID.CONTROL_PARAMETER!?
-				CONTROL_PARAMETER@NODE_ID=?
-				CONTROL_PARAMETER@NODE_ID!?
-				:?
-				PARAMETER:?
-				PARAMETER:VALUE
-				NODE_ID:?
-				NODE_ID.PARAMETER:?
-				PARAMETER@NODE_ID:?
-				NODE_ID.PARAMETER:VALUE
-				PARAMETER@NODE_ID:VALUE
-				>?
-				>COMMAND_ID
-				>COMMAND_NAME
-				COMMAND_PARAMETER:VALUE
-				!
-				NODE_ID>?
-				NODE_ID>COMMAND_ID
-				NODE_ID>COMMAND_NAME
-				/
-				//
-				#
-				0
-				-->
+				<!-- TODO: Write descriptive text-->
+				<example caption='Showing brief list of options'>
+					<![CDATA[
+   #]]>
+				</example>
+				<!-- TODO: Write descriptive text-->
+				<example caption='Example response with brief list of options'>
+					<![CDATA[
+   /   Selects the root node of the current data source (Topology).
+   //   Selects the root data source.
+   #   Displays the short version of the menu.
+   ##   Displays the extended version of the menu.
+   0   Goes back to the previous menu.
+   ?   Reads momentary values of the currently selected object.
+   ??   Performs a full readout of the currently selected object.
+   =?   Lists available controllable parameters on the currently selected object.
+   !?   Same as =?.
+   :?   Lists available configurable parameters on the currently selected object.
+   >?   Lists available commands on the currently selected object.
+   !   Executes the current command.]]>
+				</example>
+				<!-- TODO: Write descriptive text-->
+				<example caption='Showing extended list of options'>
+					<![CDATA[
+   ##]]>
+				</example>
+				<!-- TODO: Write descriptive text-->
+				<example caption='Example response with extended list of options'>
+					<![CDATA[
+   /   Selects the root node of the current data source (Topology).
+   //   Selects the root data source.
+   #   Displays the short version of the menu.
+   ##   Displays the extended version of the menu.
+   0   Goes back to the previous menu.
+   ?   Reads momentary values of the currently selected object.
+   ??   Performs a full readout of the currently selected object.
+   =?   Lists available controllable parameters on the currently selected object.
+   !?   Same as =?.
+   :?   Lists available configurable parameters on the currently selected object.
+   >?   Lists available commands on the currently selected object.
+   !   Executes the current command.
+ 
+   If an object is currently selected, the following commands are also available.
+ 
+   FIELD?   Performs a momentary readout of the currently selected object and lists the value of the field FIELD.
+   CONTROL_PARAMETER=?   Shows the value of the control parameter CONTROL_PARAMETER on the currently selected object.
+   CONTROL_PARAMETER!?   Same as CONTROL_PARAMETER=?.
+   PARAMETER:?   Shows the value of the configuration parameter PARAMETER on the currently selected object.
+   >COMMAND_ID   Selects the command with ID COMMAND_ID on the currently selected object.
+   >COMMAND_NAME   Selects the command named COMMAND_NAME on the currently selected object.
+   CONTROL_PARAMETER=VALUE   Sets the control parameter named CONTROL_PARAMETER in the currently selected object to the value VALUE.
+   CONTROL_PARAMETER!VALUE   Same as CONTROL_PARAMETER=VALUE.
+   PARAMETER:VALUE   Sets the configurable parameter named PARAMETER in the currently selected object to the value VALUE.
+   COMMAND_PARAMETER:VALUE   Sets the command parameter named COMMAND_PARAMETER in the currently selected command to the value VALUE.
+ 
+   Knowing the ID (NODE_ID) of the object in the current data source, you can address it directly as follows.
+ 
+   NODE_ID?   Reads momentary values of the object NODE_ID in the current data source.
+   NODE_ID??   Reads all values of the object NODE_ID in the current data source.
+   NODE_ID.?   Lists all controllable parameters on the object NODE_ID in the current data source.
+   NODE_ID.=?   Same as NODE_ID.?.
+   NODE_ID=?   Same as NODE_ID.?.
+   NODE_ID.!?   Same as NODE_ID.?.
+   NODE_ID!?   Same as NODE_ID.?.
+   @NODE_ID=?   Same as NODE_ID.?.
+   @NODE_ID?   Same as NODE_ID.?.
+   NODE_ID:?   Lists all configurable parameters on the object NODE_ID in the current data source.
+   NODE_ID>?   Lists all commands on the object NODE_ID in the current data source.
+ 
+   You can also access commands explicitly if you know all IDs beforehand as follows.
+ 
+   NODE_ID.FIELD?   Reads the momentary value FIELD on the object NODE_ID in the current data source.
+   NODE_ID.FIELD??   Reads the value FIELD on the object NODE_ID in the current data source.
+   FIELD@NODE_ID?   Same as NODE_ID.FIELD?.
+   FIELD@NODE_ID??   Same as NODE_ID.FIELD??.
+   NODE_ID.CONTROL_PARAMETER=?   Returns the value of the controllable parameter CONTROL_PARAMETER on object NODE_ID in the current data source.
+   NODE_ID.CONTROL_PARAMETER!?   Same as NODE_ID.CONTROL_PARAMETER=?.
+   CONTROL_PARAMETER@NODE_ID=?   Same as NODE_ID.CONTROL_PARAMETER=?.
+   CONTROL_PARAMETER@NODE_ID!?   Same as NODE_ID.CONTROL_PARAMETER=?.
+   NODE_ID.PARAMETER:?   Returns the value of the configurable parameter PARAMETER on object NODE_ID in the current data source.
+   PARAMETER@NODE_ID:?   Same as NODE_ID.PARAMETER:?.
+   NODE_ID>COMMAND_ID   Selects the command with ID COMMAND_ID on object NODE_ID in the current data source.
+   NODE_ID>COMMAND_NAME   Selects the command named COMMAND_NAME on object NODE_ID in the current data source.
+   NODE_ID.CONTROL_PARAMETER=VALUE   Sets the controllable parameter CONTROL_PARAMETER on object NODE_ID to value VALUE in the current data source.
+   NODE_ID.CONTROL_PARAMETER!VALUE   Same as NODE_ID.CONTROL_PARAMETER=VALUE.
+   CONTROL_PARAMETER@NODE_ID=VALUE   Same as NODE_ID.CONTROL_PARAMETER=VALUE.
+   CONTROL_PARAMETER@NODE_ID!VALUE   Same as NODE_ID.CONTROL_PARAMETER=VALUE.
+   NODE_ID.PARAMETER:VALUE   Sets the configurable parameter PARAMETER on object NODE_ID to value VALUE in the current data source.
+   PARAMETER@NODE_ID:VALUE   Same as NODE_ID.PARAMETER:VALUE.
+ 
+   Flags:
+   html+   Turns on HTML output.
+   html-   Turns off HTML output.
+   ar   العربية
+   da   Dansk
+   de   Deutsch
+   en   English
+   es   Español
+   fi   Soumi
+   fr   Français
+   no   Norsk
+   sv   Svenska
+   zh   中文
+ 
+   Other possibilities:
+   * If in a menu, you can use the corresponding menu item numbers or letter combinations in any of the commands above, instead of typing in the corresponding literal values.
+   * When typing in an Object ID, that ID can be either global to the current data source, or an ID of any of available indices registered in the data source (if any).
+   * You can enter any Clayster Script and as long as it does not conflict with the above commands, the server will execute the script and return the response.]]>
+				</example>
+				<!-- TODO: Write descriptive text
+            Note that it is OK to extend the command set supported by the device. The commands defined in this document constitutes a minimalist set of commands. 
+            -->
 			</section3>
 			<section3 topic='Go to previous menu'>
-				<!-- TODO:
-				Example:
-				0
-				
-				Note: If menu history empty => list current options (anchor:currentoptions).
-				-->
+				<!-- TODO: Write descriptive text-->
+				<example caption='Showing brief list of options'>
+					<![CDATA[
+   0]]>
+				</example>
+				<!-- TODO: Write descriptive text:
+            Note: If menu history empty => list current options (anchor:currentoptions).
+            -->
 			</section3>
 		</section2>
-		<!-- TODO: 
-		Search in sub systems?
-		Login & user authentication?
-		-->
+		<section2 topic='User authentication'>
+			<p>
+				Sometimes a device or subsystem might want to require a client to authenticate itself before giving the user access to the chat interface described in this
+				document. If this is the case, the following guidelines should be adhered to, to make sure both a human chat interface can be used as well as an automatable one.
+			</p>
+			<p>
+				A chat session is started when a chat client says something to the chat server:
+			</p>
+			<example caption='Starting chat session'>
+				<![CDATA[
+   <message from="iotchatclient@jabber.org/client" to="device@clayster.cl" type="chat" id="aed4a">
+      <body>hello</body>
+   </message>]]>
+			</example>
+			<p>
+				The chat server decides that it wants to authenticate the user behind the chat client, and responds with a chat message asking the user to enter a user name.
+			</p>
+			<example caption='Asking for user name'>
+				<![CDATA[
+   <message from="device@clayster.cl/aa87c13e" to="iotchatclient@jabber.org/client" id="21" xml:lang="en" type="chat">
+      <body>User Name:</body>
+   </message>]]>
+			</example>
+			<p>
+				Following this message, it also sends a login form that can be used to login, if the chat client supports data forms. Data forms has the benefit of letting
+				the password be masked, so that others cannot see what the user is writing by looking on the screen. A login form is also easier to automate.
+			</p>
+			<example caption='Sending login form'>
+				<![CDATA[
+   <message from="device@clayster.cl/aa87c13e" to="iotchatclient@jabber.org/client" id="22" xml:lang="en" type="normal">
+      <x type="form" xmlns="jabber:x:data">
+         <title>Login</title>
+         <field var="FORM_TYPE" type="hidden">
+            <value>urn:xmpp:login</value>
+         </field>
+         <field var="userName" type="text-single" label="User Name">
+            <required />
+            <value />
+         </field>
+         <field var="password" type="text-private" label="Password">
+            <required />
+            <value />
+         </field>
+      </x>
+   </message>]]>
+			</example>
+			<p>
+				The login form sent thus MUST have two fields, and called <strong>userName</strong> of type <strong>text-single</strong> and the other
+				<strong>password</strong> of type <strong>text-private</strong>. It must also have the hidden <strong>FORM_TYPE</strong> parameter set to
+				value <strong>urn:xmpp:login</strong>, as defined in &xep0068; so that automatons can automate the user login if necessary.
+			</p>
+			<p>
+				When the client has filled in the form, it submits it back to the server:
+			</p>
+			<example caption='Submitting login form'>
+				<![CDATA[
+   <message from="iotchatclient@jabber.org/client" to="device@clayster.cl/aa87c13e" id="aed5a">
+      <x xmlns="jabber:x:data" type="submit">
+         <field var="FORM_TYPE" type="hidden">
+            <value>urn:xmpp:login</value>
+         </field>
+         <field type="text-single" var="userName">
+            <value>**************</value>
+         </field>
+         <field type="text-private" var="password">
+            <value>**************</value>
+         </field>
+      </x>
+   </message>]]>
+			</example>
+			<p>
+				If unsuccessful, the above procedure can be repeated. If successful the chat server would respond with a welcome message and a small note
+				on how to get more help if the user has forgotten the syntax. The welcome message must at least contain a reference to the # command, as
+				is shown in the following example:
+			</p>
+			<example caption='Welcome message'>
+				<![CDATA[
+   Welcome **************. What do you want to do?
+   Type # for options.]]>
+			</example>
+			<p>
+				Automatons are required to use the login data form for user authentication when accessing a chat server. However, if a human user uses a chat client
+				that does not support data forms, user authentication can be done using the chat interface as well. However, since automation is required to use data forms,
+				the format for authentication strings in the following example can be viewed as a recommendation only, and not a requirement. One of the reasons being that
+				login strings are locale specific and difficult for an automaton to recognize.
+			</p>
+			<example caption='User authentication using normal chat messages'>
+				<![CDATA[
+   C: Hello
+   S: User Name:
+   C: *************
+   S: Password:
+   C: *************
+   Welcome **************. What do you want to do?
+   Type # for options.]]>
+			</example>
+		</section2>
+	</section1>
+	<section1 topic='Data Forms' anchor='dataforms'>
+		<p>
+			For commandos that list a menu containing a set of parameters, the chat server can choose to send a data form to the client at the end for a richer
+			user experience. If the client supports data forms, the form will be displayed. If not, the normal chat interface can still be used.
+		</p>
+		<p>
+			When the client submits the form, the corresponding actions will take place on the chat server. Hidden parameters in the form can be used to store state
+			information. When submitting the form and after performing the corresponding actions, a menu back operation (0) must also be performed.
+		</p>
+		<p>
+			The following list details the different extensions available detailing how data forms work. For a richer user experience, it is recommended that as many
+			of these be supported by the client as possible. However, the most important, apart from XEP-0004, for Internet of Things devices is the
+			<link url='dynamic-forms.html'>dynamic-forms.html</link> XEP, since it defines how undefined values are reported and asynchronous updates of the form. These
+			are very useful for displaying parameters in control forms since all parameters should be marked as uncertain (greyed) so that only edited parameters are
+			sent and result in control actions. Furthermore, since current values might be uncertain and take time to retrieve, asynchronous updates of the form
+			are permitted when values are received. For a more detailed discussion, see &xep0326;.
+		</p>
+		<p>
+			XMPP data forms are defined and enhanced in many different XEPs, as is shown in the following list:
+		</p>
+		<ul>
+			<li>
+				<p>
+					&xep0004; defines the basics of data forms: How forms are defined, sent to the recipient, how the recipient submits forms (or cancels them)
+					and how results can be returned. It defines the concepts of field, field type and field value.
+				</p>
+			</li>
+			<li>
+				<p>
+					&xep0122; enhances the data forms architecture permitting rules for client-side validation of fields in the form.
+				</p>
+			</li>
+			<li>
+				<p>
+					&xep0137; defines a new data type that can be used to publish file upload controls.
+				</p>
+			</li>
+			<li>
+				<p>
+					&xep0141; enhances the data forms architecture permitting the form to have pages or tabs with sections containing grouped controls.
+				</p>
+			</li>
+			<li>
+				<p>
+					&xep0221; defines a means to include content such as images, video or audio in forms.
+				</p>
+			</li>
+			<li>
+				<p>
+					&xep0331; permits the publication of color fields, where the end user can be presented with a color picker dialog instead of having to
+					enter a color value manually or select one from a limited list of colors.
+				</p>
+			</li>
+			<li>
+				<p>
+					<span class='ref'><link url='dynamic-forms.html'>dynamic-forms</link></span>
+					<note>
+						XEP-xxxx: Dynamic Data Forms &lt;<link url='dynamic-forms.html'>dynamic-forms.html</link>&gt;
+					</note> handles server-side validation, asynchronous updates, editing of multiple objects,
+					undefined values, readonly values, etc.
+				</p>
+			</li>
+		</ul>
+		<p>
+			The following list of commands can return data forms containing corresponding parameters:
+		</p>
+		<table caption='Commands that may return data forms'>
+			<tr>
+				<th>Command</th>
+				<th>Meaning</th>
+			</tr>
+			<tr>
+				<td>=?</td>
+				<td>List of control parameters for single device or currently selected device.</td>
+			</tr>
+			<tr>
+				<td>!?</td>
+				<td>Alternative way of writing =?.</td>
+			</tr>
+			<tr>
+				<td>NodeID=?</td>
+				<td>List of control parameters for specific node in current data source.</td>
+			</tr>
+			<tr>
+				<td>NodeID!?</td>
+				<td>Alternative way of writing NodeID=?.</td>
+			</tr>
+			<tr>
+				<td>:?</td>
+				<td>List of configurable parameters for single device or currently selected device.</td>
+			</tr>
+			<tr>
+				<td>NodeID:?</td>
+				<td>List of configurable parameters for specific node in current data source.</td>
+			</tr>
+			<tr>
+				<td>>Command</td>
+				<td>List of command parameters for for single device or currently selected device. (Parametrized commands only.)</td>
+			</tr>
+			<tr>
+				<td>NodeID>Command</td>
+				<td>List of command parameters for for specific node in current data source. (Parametrized commands only.)</td>
+			</tr>
+		</table>
 	</section1>
 	<section1 topic='Syntax' anchor='syntax'>
-		<!-- TODO 
-		
-		! and = synonyms (on some devices, = is difficult to write).
-		NodeID.Field synonymt med Field@NodeID
+		<!-- TODO: Write descriptive text
+      
+      ! and = synonyms (on some devices, = is difficult to write).
+      NodeID.Field synonymt med Field@NodeID
 
-		Control parameter values:
-		==================================
-		Boolean Values: ON/OFF/True/False/1/0 (case insensitive)
-		Integer Values
-		Double Values: (Use . or , as decimal separator)
-		String Values: Literal, without ' or "
-		Time Values: (days[.])?HH:mm(:SS)?
-		Year Values: YYYY-MM-DD, or DD-MM-YYYY
-		Date/Time Values: YYYY-MM-DD(, | |T)HH:mm(:SS)?, or DD-MM-YYYY(, | |T)HH:mm(:SS)?
-		-->
+      Control parameter values:
+      ==================================
+      Boolean Values: ON/OFF/True/False/1/0 (case insensitive)
+      Integer Values
+      Double Values: (Use . as decimal separator, no thousand separators)
+      String Values: Literal, without ' or "
+      Time Values: (days[.])?HH:mm(:SS)?
+      Year Values: YYYY-MM-DD, or DD-MM-YYYY
+      Date/Time Values: YYYY-MM-DD(, | |T)HH:mm(:SS)?, or DD-MM-YYYY(, | |T)HH:mm(:SS)?
+      
+      Turn off/on HTML
+      
+            Describe following syntactic elements, or divide into a menu with only options available at the current level... ?
+            
+            ?
+            ??
+            FIELD?
+            NODE_ID?
+            NODE_ID??
+            NODE_ID.FIELD?
+            NODE_ID.FIELD??
+            FIELD@NODE_ID?
+            FIELD@NODE_ID??
+            CONTROL_PARAMETER=VALUE
+            CONTROL_PARAMETER!VALUE
+            =?
+            !?
+            CONTROL_PARAMETER=?
+            CONTROL_PARAMETER!?
+            NODE_ID.CONTROL_PARAMETER=VALUE
+            NODE_ID.CONTROL_PARAMETER!VALUE
+            CONTROL_PARAMETER@NODE_ID=VALUE
+            CONTROL_PARAMETER@NODE_ID!VALUE
+            NODE_ID.?
+            NODE_ID.=?
+            NODE_ID=?
+            NODE_ID.!?
+            NODE_ID!?
+            @NODE_ID=?
+            @NODE_ID?
+            NODE_ID.CONTROL_PARAMETER=?
+            NODE_ID.CONTROL_PARAMETER!?
+            CONTROL_PARAMETER@NODE_ID=?
+            CONTROL_PARAMETER@NODE_ID!?
+            :?
+            PARAMETER:?
+            PARAMETER:VALUE
+            NODE_ID:?
+            NODE_ID.PARAMETER:?
+            PARAMETER@NODE_ID:?
+            NODE_ID.PARAMETER:VALUE
+            PARAMETER@NODE_ID:VALUE
+            >?
+            >COMMAND_ID
+            >COMMAND_NAME
+            COMMAND_PARAMETER:VALUE
+            !
+            NODE_ID>?
+            NODE_ID>COMMAND_ID
+            NODE_ID>COMMAND_NAME
+            /
+            //
+            #
+            ##
+            0
+            
+            On devices not having a concentrator architecutre, the chat syntax is reduced to:
+            
+            ?
+            ??
+            FIELD?
+            FIELD??
+            CONTROL_PARAMETER=VALUE
+            CONTROL_PARAMETER!VALUE
+            =?
+            !?
+            CONTROL_PARAMETER=?
+            CONTROL_PARAMETER!?
+            :?
+            PARAMETER:?
+            PARAMETER:VALUE
+            >?
+            >COMMAND_ID
+            >COMMAND_NAME
+            COMMAND_PARAMETER:VALUE
+            !
+            #
+            ##
+            0
+      
+      -->
 	</section1>
 	<section1 topic='Output format' anchor='output'>
-		<!-- TODO
-		How fields (readout results) are formatted/presented
-		how control values are formatted/presented
-		how parameters are formatted/presented
-		Menu Items: ...) ..., where ") " signifies a menu item, the ... before is the menu selection and the ... is the description of the item in the menu.
-		how readout errors are presented
-		how configuration errors are presented
-		how configuration results are presented
-		how command execution results are presented (commands/queries)
-		how command execution errors are presented.
-		-->
+		<!-- TODO: Write descriptive text
+      How fields (readout results) are formatted/presented
+      how control values are formatted/presented
+      how parameters are formatted/presented
+      Menu Items: ...[.] ..., where "[.] " signifies a menu item, the ... before is the menu selection and the ... is the description of the item in the menu.
+      how readout errors are presented. Error messages begin with "! " (!+space).
+      how configuration errors are presented
+      how configuration results are presented
+      how command execution results are presented (commands/queries)
+      how command execution errors are presented.
+      -->
 	</section1>
 	<section1 topic='Determining Support' anchor='support'>
 		<p>If an entity supports the chat interface specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:chat" in response to &xep0030; information requests.</p>
@@ -756,14 +1611,14 @@
 	</section1>
 	<section1 topic='Implementation Notes' anchor='impl'>
 		<section2 topic='Chat sessions'>
-			<!-- TODO:
-			* no activivity for 15 minutes: Session timeout. Reset position, etc.
-			* Implementing on device not supporting concentrator: Implementations do not need to implement support for concentrator command syntax.
-			* Node identification schemes: 1) Node ID, 2) Local Node ID, 3) implementation specific indices, for instance serial number, meter number, etc.
-			* Field identification schemes: 1) Field ID, 2) Unlocalized field name, 3) Localized field name, with current client locale.
-			* Parameter identification schemes: 1) Parameter ID, 2) Unlocalized parameter name, 3) Localized parameter name, with current client locale.
-			* Command identification schemes: 1) Command ID, 2) Unlocalized command name, 3) Localized command name, with current client locale.
-			-->
+			<!-- TODO: Write descriptive text:
+         * no activivity for 15 minutes: Session timeout. Reset position, etc.
+         * Implementing on device not supporting concentrator: Implementations do not need to implement support for concentrator command syntax.
+         * Node identification schemes: 1) Node ID, 2) Local Node ID, 3) implementation specific indices, for instance serial number, meter number, etc.
+         * Field identification schemes: 1) Field ID, 2) Unlocalized field name, 3) Localized field name, with current client locale.
+         * Parameter identification schemes: 1) Parameter ID, 2) Unlocalized parameter name, 3) Localized parameter name, with current client locale.
+         * Command identification schemes: 1) Command ID, 2) Unlocalized command name, 3) Localized command name, with current client locale.
+         -->
 		</section2>
 	</section1>
 	<section1 topic='Internationalization Considerations' anchor='i18n'>
@@ -782,11 +1637,37 @@
 			XEP-0326 <link url='http://xmpp.org/extensions/xep-0326.html'>Internet of Things - Concentrators</link> for more information on how to restrict access
 			to parts of the device or contents on the device.
 		</p>
+		<!-- TODO: Write descriptive text: 
+      Write about the security issue of writing passwords in clear text in a chat client:
+      * Chat logs are often stored in clear text on the computer
+      * Easy to read by others if screen is visible
+      sensor should send a login data form to the client in a message, where password is masked. If client does not support forms, the normal
+      chat method of login can be used.
+      -->
 	</section1>
 	<section1 topic='IANA Considerations' anchor='iana'>
-		<p>This document requires no interaction with &IANA;.</p>
+			<p>This document requires no interaction with &IANA;.</p>
 	</section1>
 	<section1 topic='XMPP Registrar Considerations' anchor='registrar'>
-		<p>This document does not specify any XMPP registrar considerations.</p>
+		<p>
+			As per <link url='http://xmpp.org/extensions/xep-0068.html'>Field Standardization for Data Forms</link>, following is a registration of fields used in the
+			login form specified in this document.
+		</p>
+		<code caption='Registry Submission'>
+			<![CDATA[
+   <form_type>
+      <name>urn:xmpp:login</name>
+      <doc>xep-0000-IoT-Chat.xml</doc>
+      <desc>Form for end user authentication, or login into subsystem, where JID authentication is not sufficient.</desc>
+      <field
+         var='userName'
+         type='text-single'
+         label='User name'/>
+      <field
+         var='password'
+         type='text-private'
+         label='Password'/>
+   </form_type>]]>
+		</code>
 	</section1>
 </xep>
