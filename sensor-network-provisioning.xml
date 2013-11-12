@@ -32,7 +32,7 @@
         </dependencies>
         <supersedes/>
         <supersededby/>
-        <shortname>NOT_YET_ASSIGNED</shortname>
+        <shortname>sensor-network-provisioning</shortname>
         <author>
             <firstname>Peter</firstname>
             <surname>Waher</surname>
