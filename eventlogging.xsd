@@ -7,16 +7,17 @@
 
 	<xs:element name='log'>
 		<xs:complexType>
-			<xs:choice minOccurs='0' maxOccurs='unbounded'>
-				<xs:element name='tag'>
+			<xs:sequence>
+				<xs:element name='message' type='xs:string' minOccurs='1' maxOccurs='1'/>
+				<xs:element name='tag' minOccurs='0' maxOccurs='unbounded'>
 					<xs:complexType>
 						<xs:attribute name='name' type='xs:string' use='required'/>
 						<xs:attribute name='value' type='xs:string' use='required'/>
 						<xs:attribute name='type' type='xs:QName' use='optional' default='xs:string'/>
 					</xs:complexType>
 				</xs:element>
-			</xs:choice>
-			<xs:attribute name='message' type='xs:string' use='required'/>
+				<xs:element name='stackTrace' type='xs:string' minOccurs='0' maxOccurs='1'/>
+			</xs:sequence>
 			<xs:attribute name='timestamp' type='xs:dateTime' use='required'/>
 			<xs:attribute name='id' type='xs:string' use='optional'/>
 			<xs:attribute name='type' type='EventType' use='optional' default='Informational'/>
@@ -25,7 +26,6 @@
 			<xs:attribute name='subject' type='xs:string' use='optional'/>
 			<xs:attribute name='facility' type='xs:string' use='optional'/>
 			<xs:attribute name='module' type='xs:string' use='optional'/>
-			<xs:attribute name='stackTrace' type='xs:string' use='optional'/>
 		</xs:complexType>
 	</xs:element>
 

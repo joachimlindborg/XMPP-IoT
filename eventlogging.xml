@@ -60,8 +60,13 @@
             such an XML format. This format is able to store <link url='https://tools.ietf.org/html/rfc5424'>Syslog</link> <note>
                 RFC-5424: The Syslog Protocol &lt;<link url='https://tools.ietf.org/html/rfc5424'>https://tools.ietf.org/html/rfc5424</link>&gt;
             </note> compliant event information, even though the <link url='https://tools.ietf.org/html/rfc5424'>Syslog</link> event model has been somewhat extended. 
-			Also, in the use of the facility attribute, this XEP does not have the same restrictions compared to the <link url='https://tools.ietf.org/html/rfc5424'>Syslog</link> specification.
-		</p>
+            Also, in the use of the facility attribute, this XEP does not have the same restrictions compared to the <link url='https://tools.ietf.org/html/rfc5424'>Syslog</link> specification.
+        </p>
+        <p>
+            This document does not restrict the use of event messages to directed message stanzas alone. It may be envisioned that some would like to publish event information through
+            &xep0060; or other mechanisms. It is not in the scope of this document to specify such transports however, as it only deals with direct messages, but a brief list is provided
+            in the <link url='#transportoptions'>Security Considerations</link> section.
+        </p>
     </section1>
     <section1 topic='Glossary' anchor='glossary'>
         <p>The following table lists common terms and corresponding descriptions.</p>
@@ -126,15 +131,31 @@
         <section2 topic='Sending a simple event message'>
             <p>
                 The following example shows how to send a simple event using a normal message to an event log. Only two parameters are required:
-                <strong>message</strong> and <strong>timestamp</strong>. This message will be treated as a <strong>Minor Informational</strong> message by the
-                recipient.
+                The timestamp of the message goes into the <strong>timestamp</strong> attribute, and the actual messages goes into a child element
+                named <strong>message</strong>. This event will be treated as a <strong>Minor Informational</strong> event by the recipient.
             </p>
             <example caption='Simple event message'>
                 <![CDATA[
    <message from='device@clayster.com/device' to='eventlog@clayster.com' type='normal' xml:lang='en'>
-      <log xmlns='urn:xmpp:eventlog'
-           message='Something happened.'
-           timestamp='2013-11-10T15:52:23Z'/>
+      <log xmlns='urn:xmpp:eventlog' timestamp='2013-11-10T15:52:23Z'>
+         <message>Something happened.</message>
+      </log>
+   </message>]]>
+            </example>
+        </section2>
+        <section2 topic='Sending a multi-line event message'>
+            <p>
+                The following example shows how to send a multi-line event.
+            </p>
+            <example caption='Multi-line event message'>
+                <![CDATA[
+   <message from='device@clayster.com/device' to='eventlog@clayster.com' type='normal' xml:lang='en'>
+      <log xmlns='urn:xmpp:eventlog' timestamp='2013-11-12T11:47:12Z'>
+         <message>10 objects deleted:
+Object 1
+...
+Object 10</message>
+      </log>
    </message>]]>
             </example>
         </section2>
@@ -145,11 +166,9 @@
             <example caption='Specifying type and level'>
                 <![CDATA[
    <message from='device@clayster.com/device' to='eventlog@clayster.com' type='normal' xml:lang='en'>
-      <log xmlns='urn:xmpp:eventlog'
-           message='Low on memory.'
-           timestamp='2013-11-10T15:54:55Z'
-           type='Warning'
-           level='Major'/>
+      <log xmlns='urn:xmpp:eventlog' timestamp='2013-11-10T15:54:55Z' type='Warning' level='Major'>
+         <message>Low on memory.</message>
+      </log>
    </message>]]>
             </example>
         </section2>
@@ -160,13 +179,9 @@
             <example caption='Specifying object and subject'>
                 <![CDATA[
    <message from='device@clayster.com/device' to='eventlog@clayster.com' type='normal' xml:lang='en'>
-      <log xmlns='urn:xmpp:eventlog'
-           message='Object deleted'
-           timestamp='2013-11-10T15:58:12Z'
-           type='Informational'
-           level='Major'
-           object='Towel'
-           subject='Arthur Dent'/>
+      <log xmlns='urn:xmpp:eventlog' timestamp='2013-11-10T15:58:12Z' type='Informational' level='Major' object='Towel' subject='Arthur Dent'>
+         <message>Object deleted.</message>
+      </log>
    </message>]]>
             </example>
         </section2>
@@ -177,14 +192,9 @@
             <example caption='Specifying an event ID'>
                 <![CDATA[
    <message from='device@clayster.com/device' to='eventlog@clayster.com' type='normal' xml:lang='en'>
-      <log xmlns='urn:xmpp:eventlog'
-           id='LoginFailed'
-           message='User attempted to login but provided incorrect password.'
-           timestamp='2013-11-10T16:04:45Z'
-           type='Warning'
-           level='Minor'
-           object='user1'
-           subject='10.0.0.1'/>
+      <log xmlns='urn:xmpp:eventlog' id='LoginFailed' timestamp='2013-11-10T16:04:45Z' type='Warning' level='Minor' object='user1' subject='10.0.0.1'>
+         <message>User attempted to login but provided incorrect password.</message>
+      </log>
    </message>]]>
             </example>
         </section2>
@@ -195,17 +205,15 @@
             <example caption='Tagging events with custom information'>
                 <![CDATA[
    <message from='device@clayster.com/device' to='eventlog@clayster.com' type='normal' xml:lang='en'>
-      <log xmlns='urn:xmpp:eventlog'
-           message='Current resources.'
-           timestamp='2013-11-10T16:07:01Z'
-           type='Informational'
-           level='Minor'>
-          <tag name='RAM' value='1655709892' type='xs:long'/>
-          <tag name='CPU' value='75.45' type='xs:double'/>
-          <tag name='HardDrive' value='163208757248' type='xs:long'/>
+      <log xmlns='urn:xmpp:eventlog' timestamp='2013-11-10T16:07:01Z' type='Informational' level='Minor'>
+         <message>Current resources.</message>
+         <tag name='RAM' value='1655709892' type='xs:long'/>
+         <tag name='CPU' value='75.45' type='xs:double'/>
+         <tag name='HardDrive' value='163208757248' type='xs:long'/>
       </log>
    </message>]]>
             </example>
+            <strong>Note:</strong> Any <strong>tag</strong> elements must come after the <strong>message</strong> element.
         </section2>
         <section2 topic='Specifying program module'>
             <p>
@@ -215,14 +223,9 @@
             <example caption='Specifying program module'>
                 <![CDATA[
    <message from='device@clayster.com/device' to='eventlog@clayster.com' type='normal' xml:lang='en'>
-      <log xmlns='urn:xmpp:eventlog'
-           message='Something horrible happened.'
-           timestamp='2013-11-10T16:17:56Z'
-           type='Error'
-           level='Major'
-           object='object1'
-           subject='user1'
-           module='application1'/>
+      <log xmlns='urn:xmpp:eventlog' timestamp='2013-11-10T16:17:56Z' type='Error' level='Major' object='object1' subject='user1' module='application1'>
+         <message>Something horrible happened.</message>
+      </log>
    </message>]]>
             </example>
         </section2>
@@ -233,16 +236,31 @@
             <example caption='Sending debug information'>
                 <![CDATA[
    <message from='device@clayster.com/device' to='eventlog@clayster.com' type='normal' xml:lang='en'>
-      <log xmlns='urn:xmpp:eventlog'
-           message='Something is rotten in the state of Denmark.'
-           timestamp='2013-11-10T16:12:25Z'
-           type='Debug'
-           level='Major'
-           module='My new application'
-           stackTrace='file1, line 1, ...'>
-          <tag name='a' value='1' type='xs:int'/>
-          <tag name='b' value='10' type='xs:int'/>
-          <tag name='s' value='Hello World!' type='xs:string'/>
+      <log xmlns='urn:xmpp:eventlog' timestamp='2013-11-10T16:12:25Z' type='Debug' level='Major' module='My new application' stackTrace='file1, line 1, ...'>
+         <message>Something is rotten in the state of Denmark.</message>
+         <tag name='a' value='1' type='xs:int'/>
+         <tag name='b' value='10' type='xs:int'/>
+         <tag name='s' value='Hello World!' type='xs:string'/>
+         <stackTrace>File1, Line1, ...
+File2, Line2, ...
+...</stackTrace>
+      </log>
+   </message>]]>
+            </example>
+            <strong>Note:</strong> Any <strong>stackTrace</strong> element must come after the <strong>message</strong> element and any <strong>tag</strong> elements.
+        </section2>
+        <section2 topic='Sending multiple events'>
+            <p>
+                The following example shows how multiple events can be sent in a single message. The receiver should interpret this as two different events having been received.
+            </p>
+            <example caption='Sending multiple events'>
+                <![CDATA[
+   <message from='device@clayster.com/device' to='eventlog@clayster.com' type='normal' xml:lang='en'>
+      <log  xmlns='urn:xmpp:eventlog' timestamp='2013-11-10T15:52:23Z'>
+         <message>Something happened.</message>
+      </log>
+      <log  xmlns='urn:xmpp:eventlog' timestamp='2013-11-10T15:54:23Z''>
+         <message>Something else happened.</message>
       </log>
    </message>]]>
             </example>
@@ -351,10 +369,10 @@
                 It is easier to group, parse or interpret events and their tags if you know what type of event it is. Event IDs are manufacturer specific, and only provide a means
                 to more easily extract subsets of events for processing without having to parse message texts (which should be allowed to be localizable).
             </p>
-			<p>
-				<strong>Note:</strong> To avoid problems when running applications using different locales, event IDs should never be localized.
-			</p>
-		</section2>
+            <p>
+                <strong>Note:</strong> To avoid problems when running applications using different locales, event IDs should never be localized.
+            </p>
+        </section2>
         <section2 topic='Object'>
             <p>
                 An event is often linked to an object, e.g. on which object an action was performed, or which object is reporting a condition. The object field permits
@@ -371,7 +389,7 @@
             <p>
                 Facility can be either a facility in the network sense or in the system sense. This document does not restrict its use to the possible choices defined by
                 other protocols such as <link url='https://tools.ietf.org/html/rfc5424'>Syslog</link>, and leaves it open. However, it is left as a special attribute since 
-				it is important in monitoring applications.
+                it is important in monitoring applications.
             </p>
         </section2>
         <section2 topic='Module'>
@@ -385,10 +403,6 @@
                 Stack Traces can be important information to developers and correlate events to actual locations in the code that generated the event. This document
                 does not specify any particular format for stack traces.
             </p>
-            <p>
-                Note that stack traces can be divided into multiple lines separated by CRLF. It is important to encode such strings correctly to avoid problems in
-                XML parsers.
-            </p>
         </section2>
         <section2 topic='Tag'>
             <p>
@@ -398,9 +412,9 @@
                     Data Forms Validation Datatypes &lt;<link url='http://xmpp.org/registrar/xdv-datatypes.html'>http://xmpp.org/registrar/xdv-datatypes.html</link>&gt;
                 </note> that is maintained by the XMPP Registrar.
             </p>
-			<p>
-				<strong>Note:</strong> To avoid problems when running applications using different locales, tag names should never be localized.
-			</p>
+            <p>
+                <strong>Note:</strong> To avoid problems when running applications using different locales, tag names should never be localized.
+            </p>
         </section2>
         <section2 topic='Normalized tables'>
             <p>
@@ -411,7 +425,14 @@
             </p>
             <p>
                 It is still valid to send information like sequence numbers, unique GUIDs, measurements, resource names in JIDs etc. in tag names and values, but such information
-				should be avoided in event IDs, objects, subjects, facilities and modules, as they can cause problems further down the line.
+                should be avoided in event IDs, objects, subjects, facilities and modules, as they can cause problems further down the line.
+            </p>
+        </section2>
+        <section2 topic='Multi-line messages and stack traces'>
+            <p>
+                The messag text and stack trace parts of an event message lie as simple type valued child elements (xs:string). This allows for simple encoding of multi-line text
+                information into these two parameters. However, do not indent new lines when serializing multi-line text to these parameters to make the XML look nicer. The recipient
+                cannot know what whitespace is indenting and what is part of the actual information.
             </p>
         </section2>
     </section1>
@@ -437,13 +458,35 @@
         </section2>
     </section1>
     <section1 topic='Security Considerations' anchor='security'>
-        <p>
-            Even though this document permits zero-configuration of devices to event logs, this might not always be the best option. Event information might be sensitive
-            and should not be sent to anybody just because they support the event log feature as defined in this document.
-        </p>
-        <p>
-            <strong>Never</strong> log information that should be handled securely or encrypted, such as passwords.
-        </p>
+        <section2 topic='Zero configuration'>
+            <p>
+                Even though this document permits zero-configuration of devices to event logs, this might not always be the best option. Event information might be sensitive
+                and should not be sent to anybody just because they support the event log feature as defined in this document.
+            </p>
+        </section2>
+        <section2 topic='Sensitive information'>
+            <p>
+                <strong>Never</strong> log information that should be handled securely or encrypted, such as passwords.
+            </p>
+        </section2>
+        <section2 topic='Transport options' anchor='transportoptions'>
+            <p>
+                The following subsections lists different transport options together with security considerations for each one.
+            </p>
+            <section3 topic='Direct messages'>
+                <p>
+                    This document explicitly describes how to send event messages in direct messages. If sensitive information is being sent,
+                    end-to-end encryption should be considered.
+                </p>
+            </section3>
+            <section3 topic='Publish/Subscribe'>
+                <p>
+                    Event messages could be published using <link url='http://xmpp.org/extensions/xep-0060.html'>Publish-Subscribe</link>. But, even more care should
+                    be taken to log only information that can be published openly. If there's risk for sensitive information to be logged, the publish/subscribe pattern
+                    should be avoided.
+                </p>
+            </section3>
+        </section2>
     </section1>
     <section1 topic='IANA Considerations' anchor='iana'>
         <p>This document requires no interaction with &IANA;.</p>
@@ -465,16 +508,17 @@
  
         <xs:element name='log'>
             <xs:complexType>
-                <xs:choice minOccurs='0' maxOccurs='unbounded'>
-                    <xs:element name='tag'>
+                <xs:sequence>
+                    <xs:element name='message' type='xs:string' minOccurs='1' maxOccurs='1'/>
+                    <xs:element name='tag' minOccurs='0' maxOccurs='unbounded'>
                         <xs:complexType>
                             <xs:attribute name='name' type='xs:string' use='required'/>
                             <xs:attribute name='value' type='xs:string' use='required'/>
                             <xs:attribute name='type' type='xs:QName' use='optional' default='xs:string'/>
                         </xs:complexType>
                     </xs:element>
-                </xs:choice>
-                <xs:attribute name='message' type='xs:string' use='required'/>
+                    <xs:element name='stackTrace' type='xs:string' minOccurs='0' maxOccurs='1'/>
+                </xs:sequence>
                 <xs:attribute name='timestamp' type='xs:dateTime' use='required'/>
                 <xs:attribute name='id' type='xs:string' use='optional'/>
                 <xs:attribute name='type' type='EventType' use='optional' default='Informational'/>
@@ -483,7 +527,6 @@
                 <xs:attribute name='subject' type='xs:string' use='optional'/>
                 <xs:attribute name='facility' type='xs:string' use='optional'/>
                 <xs:attribute name='module' type='xs:string' use='optional'/>
-                <xs:attribute name='stackTrace' type='xs:string' use='optional'/>
             </xs:complexType>
         </xs:element>
  
@@ -511,7 +554,7 @@
     </xs:schema>]]>
         </code>
     </section1>
-	<section1 topic='Acknowledgements' anchor='ack'>
-		<p>Thanks in alphabetical order to Joachim Lindborg, Karin Forsell, Markus Kohlhase, Matthew Wild, Mike Taylor, Robert Kosten, Steffen Larsen, and Yusuke DOI for all valuable feedback.</p>
-	</section1>
+    <section1 topic='Acknowledgements' anchor='ack'>
+        <p>Thanks in alphabetical order to Dave Cridland, Joachim Lindborg, Karin Forsell, Markus Kohlhase, Matthew Wild, Mike Taylor, Robert Kosten, Steffen Larsen, and Yusuke DOI for all valuable feedback.</p>
+    </section1>
 </xep>
