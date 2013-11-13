@@ -259,7 +259,7 @@ File2, Line2, ...
       <log  xmlns='urn:xmpp:eventlog' timestamp='2013-11-10T15:52:23Z'>
          <message>Something happened.</message>
       </log>
-      <log  xmlns='urn:xmpp:eventlog' timestamp='2013-11-10T15:54:23Z''>
+      <log  xmlns='urn:xmpp:eventlog' timestamp='2013-11-10T15:54:23Z'>
          <message>Something else happened.</message>
       </log>
    </message>]]>
@@ -555,6 +555,6 @@ File2, Line2, ...
         </code>
     </section1>
     <section1 topic='Acknowledgements' anchor='ack'>
-        <p>Thanks in alphabetical order to Dave Cridland, Joachim Lindborg, Karin Forsell, Markus Kohlhase, Matthew Wild, Mike Taylor, Robert Kosten, Steffen Larsen, and Yusuke DOI for all valuable feedback.</p>
+        <p>Thanks in alphabetical order to Dave Cridland, Joachim Lindborg, Karin Forsell, Ludovic Bocquet, Markus Kohlhase, Matthew Wild, Mike Taylor, Robert Kosten, Steffen Larsen, and Yusuke DOI for all valuable feedback.</p>
     </section1>
 </xep>
