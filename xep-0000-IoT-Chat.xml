@@ -69,16 +69,17 @@
 	</header>
 	<section1 topic='Introduction' anchor='intro'>
 		<p>
-			There may be many reasons to create a human-to-machine interface using chat messages for Internet of Thing devices. Reasons may include creating a simple interface that
-			can be accessed from mobile phones without special software and that can be used during installation of devices. The goal of this extension is to create rules for
-			how such an interface is constructed, including chat syntax, to make the interface:
+			Internet of Things (IoT) is often believed to be just an extension of machine-to-machine communication over internet but the human interface to devices are one of the biggest advantage in IoT.
+			There are numerous interfaces, mobile applications,html and html5 pages in here we create a human-to-machine interface using plain chat messages. One reason for this is to create a simple
+			interface that can be accessed from mobile phones without special software and that can be used during installation of devices. This extension create rules for
+			how such an interface is constructed, including chat syntax. The goal is to make the interface:
 		</p>
 		<ul>
 			<li>
 				simple and user-friendly for human users.
 			</li>
 			<li>
-				possible to automate by macines.
+				possible to automate by machines.
 			</li>
 			<li>
 				is consistent between manufacturers.
@@ -87,7 +88,10 @@
 				is consistent with other Internet-of-Things extensions and possible underlying architecture.
 			</li>
 			<li>
-				include both reading of sensors and control of actuators.
+				include both reading of sensors and control of actuators and configuration.
+			</li>
+			<li>
+				possibile to extend
 			</li>
 		</ul>
 	</section1>
@@ -240,39 +244,53 @@
 			</di>
 			<di>
 				<dt>XMPP Client</dt>
-				<dd>Application connected to an XMPP network, having a JID. Note that sensors, as well as applications requesting sensor data can be XMPP clients.</dd>
+				<dd>Application connected to an XMPP network, having a JID. Note that sensors, as well as applications and services requesting sensor data can be XMPP clients.</dd>
 			</di>
 		</dl>
 	</section1>
 	<section1 topic='Use Cases' anchor='usecases'>
 		<p>
-			All communication between user (human or machine) and device is done using normal text messages. Therefore, all examples in this document will only specify
-			the actual text messages being sent, not the underlying XMPP XML stanzas. IoT devices can choose to use &xep0071; to enhance text output, but automatons
+			All communication between two peers (human or machine) is done using normal text messages. Therefore, all examples in this document will only specify
+			the actual text messages being sent, not the underlying XMPP XML stanzas. IoT devices can choose to use forms &xep0071; to enhance text output, but automatons
 			interpreting received messages should use the normal text message as source for their interpretation. This document does not specify any HTML formats used.
 		</p>
 		<p>
-			Together with examples, example regular expressions will be provided to facilitate machine extraction of information from the text. This document does not
+			For each usecase there are two specific views one when communicating with a single device and the other when comunicating with devices behind a concentrator.
+			Commands are just the same but the graphical structure behind the concentrator can be big.
+			
+		</p>
+		<p>
+			Together with the examples, suggested regular expressions will be provided to facilitate machine extraction of information from the text. This document does not
 			require the use of regular expressions in any implementation. These expressions act as a documentation of the exact syntax or format of the corresponding text messages.
 		</p>
 		<p>
-			<strong>Note:</strong> The client sending commands should not expect messages to be sent for each row, nor expect all rows in a response to be sent in one message.
-			The sender is free to send any number of messages, with any number of rows in each message. Each row should be separated by a CRLF character sequence.
+			<strong>Note 1:</strong> The client sending commands should not expect messages to be sent for each row, nor expect all rows in a response to be sent in one message.
+			The sender is free to send any number of messages, with any number of rows in each message. Each row SHOULD be separated by a CRLF character sequence.
 		</p>
 		<p>
 			<strong>Note 2:</strong> In examples where messages are sent in both directions, messages from the requesting party (client) will be prefixed by C:
 			and messages from the answering party (server) will be prefixed by S: This is for readability purposes only, and do not represent actual characters
 			send in messages.
 		</p>
+		<p>
+			<strong>Note 3:</strong> When the client sends a column based respons it MUST use \t TAB between them.
+		</p>
 		<section2 topic='Readout of devices'>
 			<section3 topic='Readout of standalone devices'>
 				<section4 topic='Reading momentary values from single device or currently selected device'>
-					<!-- TODO: Write descriptive text -->
+					<p>
+					This is the first and most basic usage after the client has logged in. The single ? asks for a momentary readout of values
+					from the fields at the device. If the device has a structure each node in the graph kan be traversed and momentary read out
+					This is not a recursive command
+					</p>
 					<example caption='Requesting a readout of momentary values from single device or currently selected device'>
 						<![CDATA[
    ?]]>
 					</example>
-					<!-- TODO: Write descriptive text 
-               Note: The readout is performed asynchronously, which may imply a delay before the response is returned. -->
+					<p>
+					If no locale is present in the message from the client or the device cannot support locale the output comes as fieldnames with values and units
+					Note: The readout is performed asynchronously, which may imply a delay before the response is returned.
+					</p>
 					<example caption='Momentary value response without localized field names'>
 						<![CDATA[
    Readout of Vina del Mar started...
@@ -287,7 +305,12 @@
    Pressure   1015,92 mbar
    Pressure Trend   Steady]]>
 					</example>
-					<!-- TODO: Write descriptive text -->
+					<p>
+					If locale is present in the message and the client can support the provided locale. The output is extended with the localized fieldnames
+					NOTE When doing automation it is recomended not to use locale 
+					<!-- TODO: should we write out that no localization of units are done on the device that needs to be done by any parser alternativt upp till device tillverkaren -->
+					<!-- TODO: i exemplet nedan skall väl inte original fält namn vara med utan localiserade fält skall ligga först  -->
+					</p>
 					<example caption='Momentary value response with localized field names'>
 						<![CDATA[
    Urläsning av Vina del Mar påbörjad...
@@ -300,16 +323,22 @@
    Humidity   46 %   (Luftfuktighet)
    Visibility   9,99 km   (Visibilitet)
    Pressure   1015,92 mbar   (Tryck)
-   Pressure Trend   Falling   (Lufttryckstrend)]]>
+   Pressure Trend   Steady   (Lufttryckstrend)]]>
 					</example>
-					<!-- TODO: Write descriptive text -->
+					<p>
+					When creation automation with this as basis the result can be parsed with this suggested regular expression. 
+					The device MUST use \t as the dividor between parts and CRLF pair as end row
+					</p>
 					<example caption='Multi-line regular expression for parsing readout results'>
 						<![CDATA[
    ^(?'FieldName'[^\t]+)\t(?'Value'[^\t\n]+)(\t[(](?'Localized'[^)]+)[)])?]]>
 					</example>
 				</section4>
 				<section4 topic='Reading all values from single device or currently selected device'>
-					<!-- TODO: Write descriptive text -->
+					<p>
+					Using a double ?? makes a deeper introspection and gives a more thorough value set in return
+					<!-- TODO: should precision be part of the result?  -->
+					</p>
 					<example caption='Requesting a readout of momentary values from single device or currently selected device'>
 						<![CDATA[
    ??]]>
@@ -336,6 +365,7 @@
    Pressure Trend   Pressure Trend   Falling   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout]]>
 					</example>
 					<!-- TODO: Write descriptive text -->
+					<!-- TODO: i exemplet nedan skall väl inte fält namnen vara med vi vill ju göra ett gränssnitt för människor varför skall engelska namnen vara med vill man vara maskin får man väl skicka utan locale ?  -->
 					<example caption='Full readout response with localized field names'>
 						<![CDATA[
    Urläsning av Vina del Mar påbörjad...
@@ -362,7 +392,10 @@
 					</example>
 				</section4>
 				<section4 topic='Reading specific momentary field value from single device or currently selected device'>
-					<!-- TODO: Write descriptive text -->
+					<p>
+					Instead of doing full readouts a specific field value can be requested from the device.
+					Note the caption is important when sending field names
+					</p>
 					<example caption='Requesting a readout of a specific momentary value from single device or currently selected device'>
 						<![CDATA[
    Temperature?]]>
@@ -441,7 +474,10 @@
 			</section3>
 			<section3 topic='Readout of device behind concentrator'>
 				<section4 topic='Reading momentary values from device behind concentrator'>
-					<!-- TODO: Write descriptive text -->
+					<p>
+					To request data from devices behind a concentrator you do the same as for single devices but you need to traverse the graph through the concentrator to extract values
+					the traversal is done with the menu numbers returned at each junction in the graph of nodes see the menu command below   
+					</p>
 					<example caption='Requesting a readout of momentary values from a device behind a concentrator'>
 						<![CDATA[
    Vina del Mar?]]>
@@ -463,6 +499,7 @@
                
                If list of objects was last displayed (with positive index values N), the following is synonymous:
                N??-->
+					<!-- TODO: Should we have recursion?  -->
 				</section4>
 				<section4 topic='Reading specific momentary field value from device behind concentrator'>
 					<!-- TODO: Write descriptive text -->
@@ -506,7 +543,11 @@
 		<section2 topic='Control of devices'>
 			<section3 topic='Control of standalone devices'>
 				<section4 topic='Setting control parameter on single device or currently selected device'>
-					<!-- TODO: Write descriptive text -->
+					<p>
+					When setting a value on a field we use the = or !. The notion for ! is that the value i applied onto the node object. which will
+					analog with the applying commands and cofigurations later.
+					The caption is important when specifying the the fieldname
+					</p>
 					<example caption='Requesting a control parameter to be set to a new value on a single device or currently selected device'>
 						<![CDATA[
    Output=75]]>
@@ -1161,7 +1202,8 @@
    !?   Same as =?.
    :?   Lists available configurable parameters on the currently selected object.
    >?   Lists available commands on the currently selected object.
-   !   Executes the current command.]]>
+   !   Executes the current selected command.
+   c   break dignal stop the last sent command.]]>
 				</example>
 				<!-- TODO: Write descriptive text-->
 				<example caption='Showing extended list of options'>
@@ -1183,6 +1225,7 @@
    :?   Lists available configurable parameters on the currently selected object.
    >?   Lists available commands on the currently selected object.
    !   Executes the current command.
+   c   Stops the execution of the latest command.
  
    If an object is currently selected, the following commands are also available.
  
@@ -1618,6 +1661,8 @@
          * Field identification schemes: 1) Field ID, 2) Unlocalized field name, 3) Localized field name, with current client locale.
          * Parameter identification schemes: 1) Parameter ID, 2) Unlocalized parameter name, 3) Localized parameter name, with current client locale.
          * Command identification schemes: 1) Command ID, 2) Unlocalized command name, 3) Localized command name, with current client locale.
+	 * Describe the MUST use \t between coloumns
+	 * Describe how decimal symbol is to be used separator for 1000 etc 
          -->
 		</section2>
 	</section1>
