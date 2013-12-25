@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE xep SYSTEM 'xep.dtd' [
+  <!ENTITY % ents SYSTEM 'xep.ent'>
+%ents;
+]>
+<?xml-stylesheet type='text/xsl' href='xep.xsl'?>
+<xep>
+	<header>
+		<title>Tables in Instant Messaging</title>
+		<abstract>This specification provides a means to send tables between instant messaging clients, or between robots and instant messaging clients.</abstract>
+		&LEGALNOTICE;
+		<number>xxxx</number>
+		<status>ProtoXEP</status>
+		<type>Standards Track</type>
+		<sig>Standards</sig>
+		<approver>Council</approver>
+		<dependencies>
+			<spec>XMPP Core</spec>
+			<spec>XEP-0001</spec>
+		</dependencies>
+		<supersedes/>
+		<supersededby/>
+		<shortname>NOT_YET_ASSIGNED</shortname>
+		<author>
+			<firstname>Peter</firstname>
+			<surname>Waher</surname>
+			<email>peter.waher@clayster.com</email>
+			<jid>peter.waher@jabber.org</jid>
+			<uri>http://www.linkedin.com/in/peterwaher</uri>
+		</author>
+		<revision>
+			<version>0.0.1</version>
+			<date>2013-12-11</date>
+			<initials>pw</initials>
+			<remark>
+				<p>First draft.</p>
+			</remark>
+		</revision>
+	</header>
+	<section1 topic='Introduction' anchor='intro'>
+		<p>
+			There are cases where an interchange of tables between internet messaging clients and/or chat robots is desired. Examples include pasting
+			tabulated data from the clipboard (perhaps kopied from a spread sheet) or a chat robot presenting data in tabular form.
+		</p>
+		<p>
+			Prior to this extension sending tabulated data could be achieved in various ways:
+		</p>
+		<ul>
+			<li>
+				The tabulated data could be sent using a normal text message without formatting, where cells where separated by a tab character (\t). 
+				The problem with this approach is that it only works if contents are more or less uniformly spaced. When cell contents cross by the receiver
+				preset tabs, the columns are offset a corresponding amount of columns. And since the sender cannot control which font is used to present the
+				data, there's no way for the sender to know if data is tabulated correctly on the receiving end or not.
+			</li>
+			<li>
+				The tabulated data could be encoded using HTML and sent according to &xep0071; This works in some clients, but is actually prohibited in §5 of
+				the same extension. Since support for this is prohibited and extension of the corresponding XEP is not desired, using XHTML-IM to convey
+				tabular data is not a recommended option.
+			</li>
+			<li>
+				The tabulated data could be rendered as an image on the sender side, and the image transmitted to the client either using XHTML-IM itself, or
+				some other means. The problem with this approach is that the tabular data cannot be used by the received more than to view it. It cannot be 
+				edited, saved or used in a spread sheet application, which might have been the original idea.
+			</li>
+		</ul>
+		<p>
+			So this extension specifies a means to encode and send tabulated data between XMPP clients. Apart from being easy to single out and render, the
+			receiver would also have the benefit of knowing the data is of tabular format, which allows the client to encode it as such when copying the data
+			to a clipboard, making it easy to paste it into spread sheets. Using this extension it would be easy to interchange tabular data without having to
+			go through the process of saving it in files, transmitting files and separately opening them, which includes trusting file content, scanning them
+			with antivirus software, etc.
+		</p>
+	</section1>
+	<section1 topic='Requirements' anchor='reqs'>
+		<p>STRONGLY RECOMMENDED.</p>
+	</section1>
+	<section1 topic='Glossary' anchor='glossary'>
+		<p>OPTIONAL.</p>
+	</section1>
+	<section1 topic='Use Cases' anchor='usecases'>
+		<p>STRONGLY RECOMMENDED.</p>
+	</section1>
+	<section1 topic='Business Rules' anchor='rules'>
+		<p>OPTIONAL.</p>
+	</section1>
+	<section1 topic='Implementation Notes' anchor='impl'>
+		<p>OPTIONAL.</p>
+	</section1>
+	<section1 topic='Accessibility Considerations' anchor='access'>
+		<p>OPTIONAL.</p>
+	</section1>
+	<section1 topic='Internationalization Considerations' anchor='i18n'>
+		<p>OPTIONAL.</p>
+	</section1>
+	<section1 topic='Security Considerations' anchor='security'>
+		<p>REQUIRED.</p>
+	</section1>
+	<section1 topic='IANA Considerations' anchor='iana'>
+		<p>REQUIRED.</p>
+	</section1>
+	<section1 topic='XMPP Registrar Considerations' anchor='registrar'>
+		<p>REQUIRED.</p>
+	</section1>
+	<section1 topic='XML Schema' anchor='schema'>
+		<p>REQUIRED for protocol specifications.</p>
+	</section1>
+</xep>
