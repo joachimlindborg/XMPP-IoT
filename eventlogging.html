@@ -16,7 +16,7 @@
     <meta name="DC.Format" content="XHTML">
     <meta name="DC.Identifier" content="XEP-xxxx">
     <meta name="DC.Language" content="en">
-    <meta name="DC.Rights" content="This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).">
+    <meta name="DC.Rights" content="This XMPP Extension Protocol is copyright © 1999 - 2013 by the XMPP Standards Foundation (XSF).">
   </head>
   <body onload="prettyPrint()">
     <h1>XEP-xxxx: Event Logging over XMPP</h1>
@@ -56,33 +56,33 @@
     <h2>Table of Contents</h2>
     <div class="indent">
       <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
-      3.1.  <a href="#sect-ID0ENH">Sending a simple event message</a><br>   
-      3.2.  <a href="#sect-ID0EBAAC">Sending a multi-line event message</a><br>   
-      3.3.  <a href="#sect-ID0ENAAC">Specifying type and level</a><br>   
-      3.4.  <a href="#sect-ID0EZAAC">Specifying object and subject</a><br>   
-      3.5.  <a href="#sect-ID0EFBAC">Specifying an event ID</a><br>   
-      3.6.  <a href="#sect-ID0ERBAC">Tagging events with custom information</a><br>   
-      3.7.  <a href="#sect-ID0EDCAC">Specifying program module</a><br>   
-      3.8.  <a href="#sect-ID0EPCAC">Sending debug information</a><br>   
-      3.9.  <a href="#sect-ID0EDDAC">Sending multiple events</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
-      5.1.  <a href="#sect-ID0EBFAC">Event Type</a><br>   
-      5.2.  <a href="#sect-ID0EXIAC">Event Level</a><br>   
-      5.3.  <a href="#sect-ID0EQKAC">Event ID</a><br>   
-      5.4.  <a href="#sect-ID0EALAC">Object</a><br>   
-      5.5.  <a href="#sect-ID0EJLAC">Subject</a><br>   
-      5.6.  <a href="#sect-ID0ESLAC">Facility</a><br>   
-      5.7.  <a href="#sect-ID0E6LAC">Module</a><br>   
-      5.8.  <a href="#sect-ID0EIMAC">Stack Trace</a><br>   
-      5.9.  <a href="#sect-ID0ERMAC">Tag</a><br>   
-      5.10.  <a href="#sect-ID0ELNAC">Normalized tables</a><br>   
-      5.11.  <a href="#sect-ID0EYNAC">Multi-line messages and stack traces</a><br>6.  <a href="#i18n">Internationalization Considerations</a><br>   
-      6.1.  <a href="#sect-ID0EGOAC">Time Zones</a><br>   
-      6.2.  <a href="#sect-ID0E1OAC">xml:lang</a><br>7.  <a href="#security">Security Considerations</a><br>   
-      7.1.  <a href="#sect-ID0ENPAC">Zero configuration</a><br>   
-      7.2.  <a href="#sect-ID0EWPAC">Sensitive information</a><br>   
+      3.1.  <a href="#simpleevent">Sending a simple event message</a><br>   
+      3.2.  <a href="#multilinemessage">Sending a multi-line event message</a><br>   
+      3.3.  <a href="#typelevel">Specifying type and level</a><br>   
+      3.4.  <a href="#objectsubject">Specifying object and subject</a><br>   
+      3.5.  <a href="#eventids">Specifying an event ID</a><br>   
+      3.6.  <a href="#tags">Tagging events with custom information</a><br>   
+      3.7.  <a href="#modules">Specifying program module</a><br>   
+      3.8.  <a href="#debug">Sending debug information</a><br>   
+      3.9.  <a href="#multipleevents">Sending multiple events</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
+      5.1.  <a href="#eventtype">Event Type</a><br>   
+      5.2.  <a href="#eventlevel">Event Level</a><br>   
+      5.3.  <a href="#eventid">Event ID</a><br>   
+      5.4.  <a href="#object">Object</a><br>   
+      5.5.  <a href="#subject">Subject</a><br>   
+      5.6.  <a href="#facility">Facility</a><br>   
+      5.7.  <a href="#module">Module</a><br>   
+      5.8.  <a href="#stacktrace">Stack Trace</a><br>   
+      5.9.  <a href="#tag">Tag</a><br>   
+      5.10.  <a href="#normalizedtables">Normalized tables</a><br>   
+      5.11.  <a href="#multilinemessagesstacktraces">Multi-line messages and stack traces</a><br>6.  <a href="#i18n">Internationalization Considerations</a><br>   
+      6.1.  <a href="#timezones">Time Zones</a><br>   
+      6.2.  <a href="#lang">xml:lang</a><br>7.  <a href="#security">Security Considerations</a><br>   
+      7.1.  <a href="#zeroconf">Zero configuration</a><br>   
+      7.2.  <a href="#sensitiveinfo">Sensitive information</a><br>   
       7.3.  <a href="#transportoptions">Transport options</a><br>      
-      7.3.1.  <a href="#sect-ID0ELAAE">Direct messages</a><br>      
-      7.3.2.  <a href="#sect-ID0EUAAE">Publish/Subscribe</a><br>8.  <a href="#iana">IANA Considerations</a><br>9.  <a href="#registrar">XMPP Registrar Considerations</a><br>10.  <a href="#schema">XML Schema</a><br>11.  <a href="#ack">Acknowledgements</a></p>
+      7.3.1.  <a href="#sect-ID0EPAAE">Direct messages</a><br>      
+      7.3.2.  <a href="#sect-ID0EYAAE">Publish/Subscribe</a><br>8.  <a href="#iana">IANA Considerations</a><br>9.  <a href="#registrar">XMPP Registrar Considerations</a><br>10.  <a href="#schema">XML Schema</a><br>11.  <a href="#ack">Acknowledgements</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
     </div>
     <hr>
@@ -99,12 +99,12 @@
         </p>
         <p class="" style="">
             There are various event log packages available, but none yet defined for XMPP or using a well-defined and known XML format. Therefore, this document defines
-            such an XML format. This format is able to store <a href="https://tools.ietf.org/html/rfc5424">Syslog</a>  [<a href="#nt-ID0EHD">1</a>] compliant event information, even though the <a href="https://tools.ietf.org/html/rfc5424">Syslog</a> event model has been somewhat extended. 
+            such an XML format. This format is able to store <a href="https://tools.ietf.org/html/rfc5424">Syslog</a>  [<a href="#nt-ID0ELD">1</a>] compliant event information, even though the <a href="https://tools.ietf.org/html/rfc5424">Syslog</a> event model has been somewhat extended. 
             Also, in the use of the facility attribute, this XEP does not have the same restrictions compared to the <a href="https://tools.ietf.org/html/rfc5424">Syslog</a> specification.
         </p>
         <p class="" style="">
             This document does not restrict the use of event messages to directed message stanzas alone. It may be envisioned that some would like to publish event information through
-            <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0060.html">Publish-Subscribe</a></span>  [<a href="#nt-ID0E5D">2</a>] or other mechanisms. It is not in the scope of this document to specify such transports however, as it only deals with direct messages, but a brief list is provided
+            <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0060.html">Publish-Subscribe</a></span>  [<a href="#nt-ID0ECE">2</a>] or other mechanisms. It is not in the scope of this document to specify such transports however, as it only deals with direct messages, but a brief list is provided
             in the <a href="#transportoptions">Security Considerations</a> section.
         </p>
     <h2>2.
@@ -171,7 +171,7 @@
     <h2>3.
        <a name="usecases">Use Cases</a></h2>
         <div class="indent">
-      <h3>3.1 <a name="sect-ID0ENH">Sending a simple event message</a></h3>
+      <h3>3.1 <a name="simpleevent">Sending a simple event message</a></h3>
             <p class="" style="">
                 The following example shows how to send a simple event using a normal message to an event log. Only two parameters are required:
                 The timestamp of the message goes into the <span class="strong">timestamp</span> attribute, and the actual messages goes into a child element
@@ -190,7 +190,7 @@
       </div>
         </div>
         <div class="indent">
-      <h3>3.2 <a name="sect-ID0EBAAC">Sending a multi-line event message</a></h3>
+      <h3>3.2 <a name="multilinemessage">Sending a multi-line event message</a></h3>
             <p class="" style="">
                 The following example shows how to send a multi-line event.
             </p>
@@ -210,7 +210,7 @@ Object 10&lt;/message&gt;
       </div>
         </div>
         <div class="indent">
-      <h3>3.3 <a name="sect-ID0ENAAC">Specifying type and level</a></h3>
+      <h3>3.3 <a name="typelevel">Specifying type and level</a></h3>
             <p class="" style="">
                 The following example shows how an event message can be categorized with an event type and level.
             </p>
@@ -227,7 +227,7 @@ Object 10&lt;/message&gt;
       </div>
         </div>
         <div class="indent">
-      <h3>3.4 <a name="sect-ID0EZAAC">Specifying object and subject</a></h3>
+      <h3>3.4 <a name="objectsubject">Specifying object and subject</a></h3>
             <p class="" style="">
                 The following example shows how an event message can be further enhanced by providing object and subject information.
             </p>
@@ -244,7 +244,7 @@ Object 10&lt;/message&gt;
       </div>
         </div>
         <div class="indent">
-      <h3>3.5 <a name="sect-ID0EFBAC">Specifying an event ID</a></h3>
+      <h3>3.5 <a name="eventids">Specifying an event ID</a></h3>
             <p class="" style="">
                 The following example shows how to send an event message with an event ID that can be singled out later to be analyzed by administrators, for instance.
             </p>
@@ -261,7 +261,7 @@ Object 10&lt;/message&gt;
       </div>
         </div>
         <div class="indent">
-      <h3>3.6 <a name="sect-ID0ERBAC">Tagging events with custom information</a></h3>
+      <h3>3.6 <a name="tags">Tagging events with custom information</a></h3>
             <p class="" style="">
                 The following example shows how to tag an event using custom information in a way that is easy to interpret and process.
             </p>
@@ -270,7 +270,8 @@ Object 10&lt;/message&gt;
         <pre class="prettyprint">
                 
    &lt;message from='device@clayster.com/device' to='eventlog@clayster.com' type='normal' xml:lang='en'&gt;
-      &lt;log xmlns='urn:xmpp:eventlog' timestamp='2013-11-10T16:07:01Z' type='Informational' level='Minor'&gt;
+      &lt;log xmlns='urn:xmpp:eventlog' xmlns:xs='http://www.w3.org/2001/XMLSchema'
+         timestamp='2013-11-10T16:07:01Z' type='Informational' level='Minor'&gt;
          &lt;message&gt;Current resources.&lt;/message&gt;
          &lt;tag name='RAM' value='1655709892' type='xs:long'/&gt;
          &lt;tag name='CPU' value='75.45' type='xs:double'/&gt;
@@ -282,7 +283,7 @@ Object 10&lt;/message&gt;
             <span class="strong">Note:</span> Any <span class="strong">tag</span> elements must come after the <span class="strong">message</span> element.
         </div>
         <div class="indent">
-      <h3>3.7 <a name="sect-ID0EDCAC">Specifying program module</a></h3>
+      <h3>3.7 <a name="modules">Specifying program module</a></h3>
             <p class="" style="">
                 The following example shows how module information can be provided in events to more easily be able to single out information 
                 relating to the same application running on different machines.
@@ -300,7 +301,7 @@ Object 10&lt;/message&gt;
       </div>
         </div>
         <div class="indent">
-      <h3>3.8 <a name="sect-ID0EPCAC">Sending debug information</a></h3>
+      <h3>3.8 <a name="debug">Sending debug information</a></h3>
             <p class="" style="">
                 The following example shows how to send a debug message with a stack trace, module and custom information.
             </p>
@@ -309,7 +310,8 @@ Object 10&lt;/message&gt;
         <pre class="prettyprint">
                 
    &lt;message from='device@clayster.com/device' to='eventlog@clayster.com' type='normal' xml:lang='en'&gt;
-      &lt;log xmlns='urn:xmpp:eventlog' timestamp='2013-11-10T16:12:25Z' type='Debug' level='Major' module='My new application' stackTrace='file1, line 1, ...'&gt;
+      &lt;log xmlns='urn:xmpp:eventlog' xmlns:xs='http://www.w3.org/2001/XMLSchema' 
+         timestamp='2013-11-10T16:12:25Z' type='Debug' level='Major' module='My new application' stackTrace='file1, line 1, ...'&gt;
          &lt;message&gt;Something is rotten in the state of Denmark.&lt;/message&gt;
          &lt;tag name='a' value='1' type='xs:int'/&gt;
          &lt;tag name='b' value='10' type='xs:int'/&gt;
@@ -324,7 +326,7 @@ File2, Line2, ...
             <span class="strong">Note:</span> Any <span class="strong">stackTrace</span> element must come after the <span class="strong">message</span> element and any <span class="strong">tag</span> elements.
         </div>
         <div class="indent">
-      <h3>3.9 <a name="sect-ID0EDDAC">Sending multiple events</a></h3>
+      <h3>3.9 <a name="multipleevents">Sending multiple events</a></h3>
             <p class="" style="">
                 The following example shows how multiple events can be sent in a single message. The receiver should interpret this as two different events having been received.
             </p>
@@ -345,7 +347,7 @@ File2, Line2, ...
         </div>
     <h2>4.
        <a name="support">Determining Support</a></h2>
-        <p class="" style="">If an entity supports the reception of events as specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:eventlog" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0E5DAC">3</a>] information requests.</p>
+        <p class="" style="">If an entity supports the reception of events as specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:eventlog" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0ECEAC">3</a>] information requests.</p>
         <p class="caption"><a name="example-10"></a>Example 10. Service discovery information request</p>
     <div class="indent">
       <pre class="prettyprint">
@@ -376,12 +378,12 @@ File2, Line2, ...
     </div>
         <p class="" style="">
             In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
-            in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EVEAC">4</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
+            in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EZEAC">4</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
         </p>
     <h2>5.
        <a name="impl">Implementation Notes</a></h2>
         <div class="indent">
-      <h3>5.1 <a name="sect-ID0EBFAC">Event Type</a></h3>
+      <h3>5.1 <a name="eventtype">Event Type</a></h3>
             <p class="" style="">
                 The following table lists possible event types that can be used. If none is specified for an event, it is assumed that the event is <span class="strong">Informational</span>.
                 It is largely based on the severity levels of <a href="https://tools.ietf.org/html/rfc5424">Syslog</a>.
@@ -429,7 +431,7 @@ File2, Line2, ...
       </div>
         </div>
         <div class="indent">
-      <h3>5.2 <a name="sect-ID0EXIAC">Event Level</a></h3>
+      <h3>5.2 <a name="eventlevel">Event Level</a></h3>
             <p class="" style="">
                 Given an Event Type, an event level can provide additional information about the extent or importance of the event (a second dimension).
             </p>
@@ -456,7 +458,7 @@ File2, Line2, ...
       </div>
         </div>
         <div class="indent">
-      <h3>5.3 <a name="sect-ID0EQKAC">Event ID</a></h3>
+      <h3>5.3 <a name="eventid">Event ID</a></h3>
             <p class="" style="">
                 Using Event IDs, the application can provide a machine understandable classification of the event. Examples could be "Login"-events, "ConnectionProblem"-events, etc.
                 It is easier to group, parse or interpret events and their tags if you know what type of event it is. Event IDs are manufacturer specific, and only provide a means
@@ -467,21 +469,21 @@ File2, Line2, ...
             </p>
         </div>
         <div class="indent">
-      <h3>5.4 <a name="sect-ID0EALAC">Object</a></h3>
+      <h3>5.4 <a name="object">Object</a></h3>
             <p class="" style="">
                 An event is often linked to an object, e.g. on which object an action was performed, or which object is reporting a condition. The object field permits
                 the tagging of objects in a common way. It is later easy to extract all events relating to a specific object by using this attribute.
             </p>
         </div>
         <div class="indent">
-      <h3>5.5 <a name="sect-ID0EJLAC">Subject</a></h3>
+      <h3>5.5 <a name="subject">Subject</a></h3>
             <p class="" style="">
                 An event is often also linked to a subject, i.e. who or what performed a given action resulting in the event or condition. The subject field permits
                 the tagging of subjects in a common way. It is later easy to extract all events relating to a specific subject by using this attribute.
             </p>
         </div>
         <div class="indent">
-      <h3>5.6 <a name="sect-ID0ESLAC">Facility</a></h3>
+      <h3>5.6 <a name="facility">Facility</a></h3>
             <p class="" style="">
                 Facility can be either a facility in the network sense or in the system sense. This document does not restrict its use to the possible choices defined by
                 other protocols such as <a href="https://tools.ietf.org/html/rfc5424">Syslog</a>, and leaves it open. However, it is left as a special attribute since 
@@ -489,32 +491,32 @@ File2, Line2, ...
             </p>
         </div>
         <div class="indent">
-      <h3>5.7 <a name="sect-ID0E6LAC">Module</a></h3>
+      <h3>5.7 <a name="module">Module</a></h3>
             <p class="" style="">
                 A module is part of a larger software package. Using the module attribute makes it easier to attribute events to specific parts of a distributed
                 application and analyze them separately.
             </p>
         </div>
         <div class="indent">
-      <h3>5.8 <a name="sect-ID0EIMAC">Stack Trace</a></h3>
+      <h3>5.8 <a name="stacktrace">Stack Trace</a></h3>
             <p class="" style="">
                 Stack Traces can be important information to developers and correlate events to actual locations in the code that generated the event. This document
                 does not specify any particular format for stack traces.
             </p>
         </div>
         <div class="indent">
-      <h3>5.9 <a name="sect-ID0ERMAC">Tag</a></h3>
+      <h3>5.9 <a name="tag">Tag</a></h3>
             <p class="" style="">
                 Any event can have a custom set of tags attached to it. A tag is required to have a name and a value. It can also optionally specify a data type.
                 Data types are specified using Qualified Names (QNames). If possible, they should adhere to the list of
-                <a href="http://xmpp.org/registrar/xdv-datatypes.html">Data Forms Validation Datatypes</a>  [<a href="#nt-ID0E3MAC">5</a>] that is maintained by the XMPP Registrar.
+                <a href="http://xmpp.org/registrar/xdv-datatypes.html">Data Forms Validation Datatypes</a>  [<a href="#nt-ID0EANAC">5</a>] that is maintained by the XMPP Registrar.
             </p>
             <p class="" style="">
                 <span class="strong">Note:</span> To avoid problems when running applications using different locales, tag names should never be localized.
             </p>
         </div>
         <div class="indent">
-      <h3>5.10 <a name="sect-ID0ELNAC">Normalized tables</a></h3>
+      <h3>5.10 <a name="normalizedtables">Normalized tables</a></h3>
             <p class="" style="">
                 If persisting received events in a database, care should be taken if normalized tables are used for storage of tags names and values, event IDs, objects, subjects, 
                 facilities and modules. If this is the case, the receiver should look for types of values that can be incompatible with normalized tables (such as floating point values or numbers
@@ -527,7 +529,7 @@ File2, Line2, ...
             </p>
         </div>
         <div class="indent">
-      <h3>5.11 <a name="sect-ID0EYNAC">Multi-line messages and stack traces</a></h3>
+      <h3>5.11 <a name="multilinemessagesstacktraces">Multi-line messages and stack traces</a></h3>
             <p class="" style="">
                 The messag text and stack trace parts of an event message lie as simple type valued child elements (xs:string). This allows for simple encoding of multi-line text
                 information into these two parameters. However, do not indent new lines when serializing multi-line text to these parameters to make the XML look nicer. The recipient
@@ -537,7 +539,7 @@ File2, Line2, ...
     <h2>6.
        <a name="i18n">Internationalization Considerations</a></h2>
         <div class="indent">
-      <h3>6.1 <a name="sect-ID0EGOAC">Time Zones</a></h3>
+      <h3>6.1 <a name="timezones">Time Zones</a></h3>
             <p class="" style="">
                 All timestamps and dateTime values use the XML data type xs:dateTime to specify values. These values include a date, an optional time and an optional time zone.
             </p>
@@ -550,7 +552,7 @@ File2, Line2, ...
             </p>
         </div>
         <div class="indent">
-      <h3>6.2 <a name="sect-ID0E1OAC">xml:lang</a></h3>
+      <h3>6.2 <a name="lang">xml:lang</a></h3>
             <p class="" style="">
                 Event messages SHOULD contain an <span class="strong">xml:lang</span> attribute on the message stanza to specify the language
                 used in message texts, etc. If language information is not available, e.g. if relaying messages are not created by the device itself,
@@ -560,14 +562,14 @@ File2, Line2, ...
     <h2>7.
        <a name="security">Security Considerations</a></h2>
         <div class="indent">
-      <h3>7.1 <a name="sect-ID0ENPAC">Zero configuration</a></h3>
+      <h3>7.1 <a name="zeroconf">Zero configuration</a></h3>
             <p class="" style="">
                 Even though this document permits zero-configuration of devices to event logs, this might not always be the best option. Event information might be sensitive
                 and should not be sent to anybody just because they support the event log feature as defined in this document.
             </p>
         </div>
         <div class="indent">
-      <h3>7.2 <a name="sect-ID0EWPAC">Sensitive information</a></h3>
+      <h3>7.2 <a name="sensitiveinfo">Sensitive information</a></h3>
             <p class="" style="">
                 <span class="strong">Never</span> log information that should be handled securely or encrypted, such as passwords.
             </p>
@@ -578,24 +580,26 @@ File2, Line2, ...
                 The following subsections lists different transport options together with security considerations for each one.
             </p>
             <div class="indent">
-        <h3>7.3.1 <a name="sect-ID0ELAAE">Direct messages</a></h3>
+        <h3>7.3.1 <a name="sect-ID0EPAAE">Direct messages</a></h3>
                 <p class="" style="">
                     This document explicitly describes how to send event messages in direct messages. If sensitive information is being sent,
                     end-to-end encryption should be considered.
                 </p>
             </div>
             <div class="indent">
-        <h3>7.3.2 <a name="sect-ID0EUAAE">Publish/Subscribe</a></h3>
+        <h3>7.3.2 <a name="sect-ID0EYAAE">Publish/Subscribe</a></h3>
                 <p class="" style="">
-                    Event messages could be published using <a href="http://xmpp.org/extensions/xep-0060.html">Publish-Subscribe</a>. But, even more care should
-                    be taken to log only information that can be published openly. If there's risk for sensitive information to be logged, the publish/subscribe pattern
-                    should be avoided.
+                    Event messages could be published using <a href="http://xmpp.org/extensions/xep-0060.html">Publish-Subscribe</a>. Unless there's absolute control
+					of who can subscribe to the information published in this manner, the information should be considered open and freely available. In such cases extra 
+					care should be taken to not publish information of a sensitive nature, or information that can be mined for information, behavior patterns, trends, etc., 
+					that can be viewed as being of a sensitive nature. If there's a risk that either absolute control cannot be achieved and information is of a sensitive
+					nature, this pattern should be avoided.
                 </p>
             </div>
         </div>
     <h2>8.
        <a name="iana">IANA Considerations</a></h2>
-        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0ERBAE">6</a>].</p>
+        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EVBAE">6</a>].</p>
     <h2>9.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
         <p class="" style="">
@@ -665,7 +669,10 @@ File2, Line2, ...
     </div>
     <h2>11.
        <a name="ack">Acknowledgements</a></h2>
-        <p class="" style="">Thanks in alphabetical order to Dave Cridland, Joachim Lindborg, Karin Forsell, Ludovic Bocquet, Markus Kohlhase, Matthew Wild, Mike Taylor, Robert Kosten, Steffen Larsen, and Yusuke DOI for all valuable feedback.</p>
+		<p class="" style="">
+			Thanks in alphabetical order to Dave Cridland, Joachim Lindborg, Karin Forsell, Lance Stout, Ludovic Bocquet, Markus Kohlhase, Matthew Wild, Mike Taylor, Philipp Hancke, Robert Kosten,
+			Steffen Larsen, Teemu Väisänen, Waqas Hussain and Yusuke DOI for all valuable feedback.
+		</p>
     <hr><a name="appendices"></a><h2>Appendices</h2>
     <hr><a name="appendix-docinfo"></a><h3>Appendix A: Document Information</h3>
     <p class="indent">
@@ -698,9 +705,7 @@ File2, Line2, ...
     </div>
     <hr><a name="appendix-legal"></a><h3>Appendix C: Legal Notices</h3>
     <div class="indent">
-      <h4>Copyright</h4>This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).<h4>Permissions</h4>Permission is hereby granted, free of charge, to any person obtaining a copy of this specification (the "Specification"), to make use of the Specification without restriction, including without limitation the rights to implement the Specification in a software program, deploy the Specification in a network service, and copy, modify, merge, publish, translate, distribute, sublicense, or sell copies of the Specification, and to permit persons to whom the Specification is furnished to do so, subject to the condition that the foregoing copyright notice and this permission notice shall be included in all copies or substantial portions of the Specification. Unless separate permission is granted, modified works that are redistributed shall not contain misleading information regarding the authors, title, number, or publisher of the Specification, and shall not claim endorsement of the modified works by the authors, any organization or project to which the authors belong, or the XMPP Standards Foundation.<h4>Disclaimer of Warranty</h4><span style="font-weight: bold">## NOTE WELL: This Specification is provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. In no event shall the XMPP Standards Foundation or the authors of this Specification be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Specification or the implementation, deployment, or other use of the Specification. ##</span><h4>Limitation of Liability</h4>In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall the XMPP Standards Foundation or any author of this Specification be liable for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising out of the use or inability to use the Specification (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if the XMPP Standards Foundation or such author has been advised of the possibility of such damages.<h4>IPR Conformance</h4>
-                This XMPP Extension Protocol has been contributed in full conformance with the XSF's Intellectual Property Rights Policy (a copy of which may be found at &lt;<a href="http://www.xmpp.org/extensions/ipr-policy.shtml">http://www.xmpp.org/extensions/ipr-policy.shtml</a>&gt; or obtained by writing to XSF, P.O. Box 1641, Denver, CO 80201 USA).
-            </div>
+      <h4>Copyright</h4>This XMPP Extension Protocol is copyright © 1999 - 2013 by the <a href="http://xmpp.org/">XMPP Standards Foundation</a> (XSF).<h4>Permissions</h4>Permission is hereby granted, free of charge, to any person obtaining a copy of this specification (the "Specification"), to make use of the Specification without restriction, including without limitation the rights to implement the Specification in a software program, deploy the Specification in a network service, and copy, modify, merge, publish, translate, distribute, sublicense, or sell copies of the Specification, and to permit persons to whom the Specification is furnished to do so, subject to the condition that the foregoing copyright notice and this permission notice shall be included in all copies or substantial portions of the Specification. Unless separate permission is granted, modified works that are redistributed shall not contain misleading information regarding the authors, title, number, or publisher of the Specification, and shall not claim endorsement of the modified works by the authors, any organization or project to which the authors belong, or the XMPP Standards Foundation.<h4>Disclaimer of Warranty</h4><span style="font-weight: bold">## NOTE WELL: This Specification is provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. ##</span><h4>Limitation of Liability</h4>In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall the XMPP Standards Foundation or any author of this Specification be liable for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising from, out of, or in connection with the Specification or the implementation, deployment, or other use of the Specification (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if the XMPP Standards Foundation or such author has been advised of the possibility of such damages.<h4>IPR Conformance</h4>This XMPP Extension Protocol has been contributed in full conformance with the XSF's Intellectual Property Rights Policy (a copy of which can be found at &lt;<a href="http://xmpp.org/about-xmpp/xsf/xsf-ipr-policy/">http://xmpp.org/about-xmpp/xsf/xsf-ipr-policy/</a>&gt; or obtained by writing to XMPP Standards Foundation, 1899 Wynkoop Street, Suite 600, Denver, CO 80202 USA).</div>
     <hr><a name="appendix-xmpp"></a><h3>Appendix D: Relation to XMPP</h3>
     <p class="indent">The Extensible Messaging and Presence Protocol (XMPP) is defined in the XMPP Core (RFC 6120) and XMPP IM (RFC 6121) specifications contributed by the XMPP Standards Foundation to the Internet Standards Process, which is managed by the Internet Engineering Task Force in accordance with RFC 2026. Any protocol defined in this document has been developed outside the Internet Standards Process and is to be understood as an extension to XMPP rather than as an evolution, development, or modification of XMPP itself.</p>
     <hr><a name="appendix-discuss"></a><h3>Appendix E: Discussion Venue</h3>
@@ -711,16 +716,16 @@ File2, Line2, ...
     <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
     <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
     <div class="indent">
-      <p><a name="nt-ID0EHD">1</a>. 
+      <p><a name="nt-ID0ELD">1</a>. 
                 RFC-5424: The Syslog Protocol &lt;<a href="https://tools.ietf.org/html/rfc5424">https://tools.ietf.org/html/rfc5424</a>&gt;
             </p>
-      <p><a name="nt-ID0E5D">2</a>. XEP-0060: Publish-Subscribe &lt;<a href="http://xmpp.org/extensions/xep-0060.html">http://xmpp.org/extensions/xep-0060.html</a>&gt;.</p>
-      <p><a name="nt-ID0E5DAC">3</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
-      <p><a name="nt-ID0EVEAC">4</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
-      <p><a name="nt-ID0E3MAC">5</a>. 
+      <p><a name="nt-ID0ECE">2</a>. XEP-0060: Publish-Subscribe &lt;<a href="http://xmpp.org/extensions/xep-0060.html">http://xmpp.org/extensions/xep-0060.html</a>&gt;.</p>
+      <p><a name="nt-ID0ECEAC">3</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0EZEAC">4</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0EANAC">5</a>. 
                     Data Forms Validation Datatypes &lt;<a href="http://xmpp.org/registrar/xdv-datatypes.html">http://xmpp.org/registrar/xdv-datatypes.html</a>&gt;
                 </p>
-      <p><a name="nt-ID0ERBAE">6</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+      <p><a name="nt-ID0EVBAE">6</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>

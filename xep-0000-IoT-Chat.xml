@@ -13,15 +13,7 @@
 			both user friendly for human users and at the same time can be automated by machines and is consistent between manufacturers, in case other IoT-related extensions
 			cannot be implemented.
 		</abstract>
-		<legal>
-			<copyright>This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).</copyright>
-			<permissions>Permission is hereby granted, free of charge, to any person obtaining a copy of this specification (the &quot;Specification&quot;), to make use of the Specification without restriction, including without limitation the rights to implement the Specification in a software program, deploy the Specification in a network service, and copy, modify, merge, publish, translate, distribute, sublicense, or sell copies of the Specification, and to permit persons to whom the Specification is furnished to do so, subject to the condition that the foregoing copyright notice and this permission notice shall be included in all copies or substantial portions of the Specification. Unless separate permission is granted, modified works that are redistributed shall not contain misleading information regarding the authors, title, number, or publisher of the Specification, and shall not claim endorsement of the modified works by the authors, any organization or project to which the authors belong, or the XMPP Standards Foundation.</permissions>
-			<warranty>## NOTE WELL: This Specification is provided on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. In no event shall the XMPP Standards Foundation or the authors of this Specification be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Specification or the implementation, deployment, or other use of the Specification. ##</warranty>
-			<liability>In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall the XMPP Standards Foundation or any author of this Specification be liable for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising out of the use or inability to use the Specification (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if the XMPP Standards Foundation or such author has been advised of the possibility of such damages.</liability>
-			<conformance>
-				This XMPP Extension Protocol has been contributed in full conformance with the XSF's Intellectual Property Rights Policy (a copy of which may be found at &lt;<link url='http://www.xmpp.org/extensions/ipr-policy.shtml'>http://www.xmpp.org/extensions/ipr-policy.shtml</link>&gt; or obtained by writing to XSF, P.O. Box 1641, Denver, CO 80201 USA).
-			</conformance>
-		</legal>
+		&LEGALNOTICE;
 		<number>xxxx</number>
 		<status>ProtoXEP</status>
 		<type>Standards Track</type>
@@ -257,7 +249,7 @@
 		<p>
 			For each usecase there are two specific views one when communicating with a single device and the other when comunicating with devices behind a concentrator.
 			Commands are just the same but the graphical structure behind the concentrator can be big.
-			
+
 		</p>
 		<p>
 			Together with the examples, suggested regular expressions will be provided to facilitate machine extraction of information from the text. This document does not
@@ -279,17 +271,17 @@
 			<section3 topic='Readout of standalone devices'>
 				<section4 topic='Reading momentary values from single device or currently selected device'>
 					<p>
-					This is the first and most basic usage after the client has logged in. The single ? asks for a momentary readout of values
-					from the fields at the device. If the device has a structure each node in the graph kan be traversed and momentary read out
-					This is not a recursive command
+						This is the first and most basic usage after the client has logged in. The single ? asks for a momentary readout of values
+						from the fields at the device. If the device has a structure each node in the graph kan be traversed and momentary read out
+						This is not a recursive command
 					</p>
 					<example caption='Requesting a readout of momentary values from single device or currently selected device'>
 						<![CDATA[
    ?]]>
 					</example>
 					<p>
-					If no locale is present in the message from the client or the device cannot support locale the output comes as fieldnames with values and units
-					Note: The readout is performed asynchronously, which may imply a delay before the response is returned.
+						If no locale is present in the message from the client or the device cannot support locale the output comes as fieldnames with values and units
+						Note: The readout is performed asynchronously, which may imply a delay before the response is returned.
 					</p>
 					<example caption='Momentary value response without localized field names'>
 						<![CDATA[
@@ -306,10 +298,10 @@
    Pressure Trend   Steady]]>
 					</example>
 					<p>
-					If locale is present in the message and the client can support the provided locale. The output is extended with the localized fieldnames
-					NOTE When doing automation it is recomended not to use locale 
-					<!-- TODO: should we write out that no localization of units are done on the device that needs to be done by any parser alternativt upp till device tillverkaren -->
-					<!-- TODO: i exemplet nedan skall väl inte original fält namn vara med utan localiserade fält skall ligga först  -->
+						If locale is present in the message and the client can support the provided locale. The output is extended with the localized fieldnames
+						NOTE When doing automation it is recomended not to use locale
+						<!-- TODO: should we write out that no localization of units are done on the device that needs to be done by any parser alternativt upp till device tillverkaren -->
+						<!-- TODO: i exemplet nedan skall väl inte original fält namn vara med utan localiserade fält skall ligga först  -->
 					</p>
 					<example caption='Momentary value response with localized field names'>
 						<![CDATA[
@@ -323,11 +315,11 @@
    Humidity   46 %   (Luftfuktighet)
    Visibility   9,99 km   (Visibilitet)
    Pressure   1015,92 mbar   (Tryck)
-   Pressure Trend   Steady   (Lufttryckstrend)]]>
+   Pressure Trend   Falling   (Lufttryckstrend)]]>
 					</example>
 					<p>
-					When creation automation with this as basis the result can be parsed with this suggested regular expression. 
-					The device MUST use \t as the dividor between parts and CRLF pair as end row
+						When creation automation with this as basis the result can be parsed with this suggested regular expression.
+						The device MUST use \t as the dividor between parts and CRLF pair as end row
 					</p>
 					<example caption='Multi-line regular expression for parsing readout results'>
 						<![CDATA[
@@ -336,8 +328,8 @@
 				</section4>
 				<section4 topic='Reading all values from single device or currently selected device'>
 					<p>
-					Using a double ?? makes a deeper introspection and gives a more thorough value set in return
-					<!-- TODO: should precision be part of the result?  -->
+						Using a double ?? makes a deeper introspection and gives a more thorough value set in return
+						<!-- TODO: should precision be part of the result?  -->
 					</p>
 					<example caption='Requesting a readout of momentary values from single device or currently selected device'>
 						<![CDATA[
@@ -365,7 +357,6 @@
    Pressure Trend   Pressure Trend   Falling   2013-11-06 16:49:56   MomentaryValues   AutomaticReadout]]>
 					</example>
 					<!-- TODO: Write descriptive text -->
-					<!-- TODO: i exemplet nedan skall väl inte fält namnen vara med vi vill ju göra ett gränssnitt för människor varför skall engelska namnen vara med vill man vara maskin får man väl skicka utan locale ?  -->
 					<example caption='Full readout response with localized field names'>
 						<![CDATA[
    Urläsning av Vina del Mar påbörjad...
@@ -393,8 +384,8 @@
 				</section4>
 				<section4 topic='Reading specific momentary field value from single device or currently selected device'>
 					<p>
-					Instead of doing full readouts a specific field value can be requested from the device.
-					Note the caption is important when sending field names
+						Instead of doing full readouts a specific field value can be requested from the device.
+						Note the caption is important when sending field names
 					</p>
 					<example caption='Requesting a readout of a specific momentary value from single device or currently selected device'>
 						<![CDATA[
@@ -475,8 +466,8 @@
 			<section3 topic='Readout of device behind concentrator'>
 				<section4 topic='Reading momentary values from device behind concentrator'>
 					<p>
-					To request data from devices behind a concentrator you do the same as for single devices but you need to traverse the graph through the concentrator to extract values
-					the traversal is done with the menu numbers returned at each junction in the graph of nodes see the menu command below   
+						To request data from devices behind a concentrator you do the same as for single devices but you need to traverse the graph through the concentrator to extract values
+						the traversal is done with the menu numbers returned at each junction in the graph of nodes see the menu command below
 					</p>
 					<example caption='Requesting a readout of momentary values from a device behind a concentrator'>
 						<![CDATA[
@@ -544,9 +535,9 @@
 			<section3 topic='Control of standalone devices'>
 				<section4 topic='Setting control parameter on single device or currently selected device'>
 					<p>
-					When setting a value on a field we use the = or !. The notion for ! is that the value i applied onto the node object. which will
-					analog with the applying commands and cofigurations later.
-					The caption is important when specifying the the fieldname
+						When setting a value on a field we use the = or !. The notion for ! is that the value i applied onto the node object. which will
+						analog with the applying commands and cofigurations later.
+						The caption is important when specifying the the fieldname
 					</p>
 					<example caption='Requesting a control parameter to be set to a new value on a single device or currently selected device'>
 						<![CDATA[
@@ -1192,17 +1183,19 @@
 				<example caption='Example response with brief list of options'>
 					<![CDATA[
    /   Selects the root node of the current data source (Topology).
-   //   Selects the root data source.
+   //  Selects the root data source.
    #   Displays the short version of the menu.
-   ##   Displays the extended version of the menu.
+   ##  Displays the extended version of the menu.
    0   Goes back to the previous menu.
    ?   Reads momentary values of the currently selected object.
-   ??   Performs a full readout of the currently selected object.
-   =?   Lists available controllable parameters on the currently selected object.
-   !?   Same as =?.
-   :?   Lists available configurable parameters on the currently selected object.
-   >?   Lists available commands on the currently selected object.
-   !   Executes the current selected command.
+   ??  Performs a full readout of the currently selected object.
+   =?  Lists available controllable parameters on the currently selected object.
+   !?  Same as =?.
+   :?  Lists available configurable parameters on the currently selected object.
+   >?  Lists available commands on the currently selected object.
+   !   Executes the currently selected command.
+   
+   TODO:
    c   break dignal stop the last sent command.]]>
 				</example>
 				<!-- TODO: Write descriptive text-->
@@ -1214,18 +1207,20 @@
 				<example caption='Example response with extended list of options'>
 					<![CDATA[
    /   Selects the root node of the current data source (Topology).
-   //   Selects the root data source.
+   //  Selects the root data source.
    #   Displays the short version of the menu.
-   ##   Displays the extended version of the menu.
+   ##  Displays the extended version of the menu.
    0   Goes back to the previous menu.
    ?   Reads momentary values of the currently selected object.
-   ??   Performs a full readout of the currently selected object.
-   =?   Lists available controllable parameters on the currently selected object.
-   !?   Same as =?.
-   :?   Lists available configurable parameters on the currently selected object.
-   >?   Lists available commands on the currently selected object.
-   !   Executes the current command.
-   c   Stops the execution of the latest command.
+   ??  Performs a full readout of the currently selected object.
+   =?  Lists available controllable parameters on the currently selected object.
+   !?  Same as =?.
+   :?  Lists available configurable parameters on the currently selected object.
+   >?  Lists available commands on the currently selected object.
+   !   Executes the currently selected command.
+   
+   TODO:
+   c   break dignal stop the last sent command.
  
    If an object is currently selected, the following commands are also available.
  
@@ -1661,9 +1656,12 @@
          * Field identification schemes: 1) Field ID, 2) Unlocalized field name, 3) Localized field name, with current client locale.
          * Parameter identification schemes: 1) Parameter ID, 2) Unlocalized parameter name, 3) Localized parameter name, with current client locale.
          * Command identification schemes: 1) Command ID, 2) Unlocalized command name, 3) Localized command name, with current client locale.
-	 * Describe the MUST use \t between coloumns
-	 * Describe how decimal symbol is to be used separator for 1000 etc 
-         -->
+
+		 * Describe the MUST use \t between coloumns
+		 Note: XHTML-IM can (probably - we're discussing to extend it to support tables) be used to provide better output. However the text-only message must use \t for parsing.
+		 * Describe how decimal symbol is to be used separator for 1000 etc 
+		 Note: No thousand separators allowed.
+		-->
 		</section2>
 	</section1>
 	<section1 topic='Internationalization Considerations' anchor='i18n'>

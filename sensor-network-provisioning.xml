@@ -9,15 +9,7 @@
         <title>Internet of Things - Provisioning</title>
         <abstract>This specification describes an architecture for efficient provisioning of services, access rights and user privileges in for the Internet of Things, where
 		communication between Things is done using the XMPP protocol.</abstract>
-        <legal>
-            <copyright>This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).</copyright>
-            <permissions>Permission is hereby granted, free of charge, to any person obtaining a copy of this specification (the &quot;Specification&quot;), to make use of the Specification without restriction, including without limitation the rights to implement the Specification in a software program, deploy the Specification in a network service, and copy, modify, merge, publish, translate, distribute, sublicense, or sell copies of the Specification, and to permit persons to whom the Specification is furnished to do so, subject to the condition that the foregoing copyright notice and this permission notice shall be included in all copies or substantial portions of the Specification. Unless separate permission is granted, modified works that are redistributed shall not contain misleading information regarding the authors, title, number, or publisher of the Specification, and shall not claim endorsement of the modified works by the authors, any organization or project to which the authors belong, or the XMPP Standards Foundation.</permissions>
-            <warranty>## NOTE WELL: This Specification is provided on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. In no event shall the XMPP Standards Foundation or the authors of this Specification be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Specification or the implementation, deployment, or other use of the Specification. ##</warranty>
-            <liability>In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall the XMPP Standards Foundation or any author of this Specification be liable for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising out of the use or inability to use the Specification (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if the XMPP Standards Foundation or such author has been advised of the possibility of such damages.</liability>
-            <conformance>
-                This XMPP Extension Protocol has been contributed in full conformance with the XSF's Intellectual Property Rights Policy (a copy of which may be found at &lt;<link url='http://www.xmpp.org/extensions/ipr-policy.shtml'>http://www.xmpp.org/extensions/ipr-policy.shtml</link>&gt; or obtained by writing to XSF, P.O. Box 1641, Denver, CO 80201 USA).
-            </conformance>
-        </legal>
+		&LEGALNOTICE;
         <number>0324</number>
         <status>Experimental</status>
         <type>Standards Track</type>
@@ -135,7 +127,7 @@
 			<li>Control generic boolean User Privileges in the network.</li>
 		</ul>
         <p>
-            This XEP relies heavily on &xep0323; and &xep0325;.
+            This XEP relies on &xep0323; and &xep0325; for sensor data readout and control interfaces.
             Internet of Things contain many different architectures and use cases. For this reason, the IoT standards have been divided into multiple XEPs according to the following table:
         </p>
         <table caption='Internet of Things XEPs'>
@@ -1746,6 +1738,6 @@
 		</ul>
 	</section1>
 	<section1 topic='Acknowledgements' anchor='ack'>
-        <p>Thanks to Joachim Lindborg, Karin Forsell and Tina Beckman for all valuable feedback.</p>
-    </section1>
+		<p>Thanks to Joachim Lindborg, Karin Forsell, Tina Beckman and Teemu Väisänen for all valuable feedback.</p>
+	</section1>
 </xep>

@@ -17,7 +17,7 @@
     <meta name="DC.Format" content="XHTML">
     <meta name="DC.Identifier" content="XEP-xxxx">
     <meta name="DC.Language" content="en">
-    <meta name="DC.Rights" content="This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).">
+    <meta name="DC.Rights" content="This XMPP Extension Protocol is copyright © 1999 - 2013 by the XMPP Standards Foundation (XSF).">
   </head>
   <body onload="prettyPrint()">
     <h1>XEP-xxxx: Chat Interface for Internet of Things Devices</h1>
@@ -62,70 +62,71 @@
     <h2>Table of Contents</h2>
     <div class="indent">
       <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#reqs">Requirements</a><br>3.  <a href="#glossary">Glossary</a><br>4.  <a href="#usecases">Use Cases</a><br>   
-      4.1.  <a href="#sect-ID0EJFAC">Readout of devices</a><br>      
-      4.1.1.  <a href="#sect-ID0ENFAC">Readout of standalone devices</a><br>        
-      4.1.1.1.  <a href="#sect-ID0ERFAC">Reading momentary values from single device or currently selected device</a><br>        
-      4.1.1.2.  <a href="#sect-ID0EKGAC">Reading all values from single device or currently selected device</a><br>        
-      4.1.1.3.  <a href="#sect-ID0EDHAC">Reading specific momentary field value from single device or currently selected device</a><br>        
-      4.1.1.4.  <a href="#sect-ID0EZHAC">Reading specific field values from single device or currently selected device</a><br>      
-      4.1.2.  <a href="#sect-ID0EQIAC">Readout of device behind concentrator</a><br>        
-      4.1.2.1.  <a href="#sect-ID0EUIAC">Reading momentary values from device behind concentrator</a><br>        
-      4.1.2.2.  <a href="#sect-ID0EAJAC">Reading all values from device behind concentrator</a><br>        
-      4.1.2.3.  <a href="#sect-ID0EMJAC">Reading specific momentary field value from device behind concentrator</a><br>        
-      4.1.2.4.  <a href="#sect-ID0E4JAC">Reading specific field values from device behind concentrator</a><br>   
-      4.2.  <a href="#sect-ID0EQKAC">Control of devices</a><br>      
-      4.2.1.  <a href="#sect-ID0EUKAC">Control of standalone devices</a><br>        
-      4.2.1.1.  <a href="#sect-ID0EYKAC">Setting control parameter on single device or currently selected device</a><br>        
-      4.2.1.2.  <a href="#sect-ID0EOLAC">Listing control parameters on single device or currently selected device</a><br>        
-      4.2.1.3.  <a href="#sect-ID0EPMAC">Displaying current value of control parameter on single device or currently selected device</a><br>      
-      4.2.2.  <a href="#sect-ID0EJNAC">Control of device behind concentrator</a><br>        
-      4.2.2.1.  <a href="#sect-ID0ENNAC">Setting control parameter on single device behind concentrator</a><br>        
-      4.2.2.2.  <a href="#sect-ID0ENOAC">Listing control parameters on single device behind concentrator</a><br>        
-      4.2.2.3.  <a href="#sect-ID0E1PAC">Displaying current value of control parameter on single device behind concentrator</a><br>   
-      4.3.  <a href="#sect-ID0EYAAE">Configuring devices</a><br>      
-      4.3.1.  <a href="#sect-ID0E3AAE">Configuring standalone devices</a><br>        
-      4.3.1.1.  <a href="#sect-ID0EABAE">Listing configuration parameters on currently selected device</a><br>        
-      4.3.1.2.  <a href="#sect-ID0EXBAE">Displaying current value of configuration parameter on currently selected device</a><br>        
-      4.3.1.3.  <a href="#sect-ID0EICAE">Editing configuration parameter on currently selected device</a><br>      
-      4.3.2.  <a href="#sect-ID0E6CAE">Configuration of device behind concentrator</a><br>        
-      4.3.2.1.  <a href="#sect-ID0EDDAE">Listing configuration parameters on single device behind concentrator</a><br>        
-      4.3.2.2.  <a href="#sect-ID0E1DAE">Displaying current value of configuration parameter on single device behind concentrator</a><br>        
-      4.3.2.3.  <a href="#sect-ID0EOEAE">Editing configuration parameter on single device behind concentrator</a><br>   
-      4.4.  <a href="#sect-ID0ELFAE">Node Commands on devices</a><br>      
-      4.4.1.  <a href="#sect-ID0EPFAE">Node Commands on standalone devices</a><br>        
-      4.4.1.1.  <a href="#sect-ID0ETFAE">Displaying commands available on currently selected device</a><br>        
-      4.4.1.2.  <a href="#sect-ID0EEGAE">Selecting command on currently selected device</a><br>        
-      4.4.1.3.  <a href="#sect-ID0EKHAE">Editing command parameter in currently selected node command</a><br>        
-      4.4.1.4.  <a href="#sect-ID0EFIAE">Executing currently selected node command</a><br>      
-      4.4.2.  <a href="#sect-ID0EXIAE">Node Commands on device behind concentrator</a><br>        
-      4.4.2.1.  <a href="#sect-ID0E2IAE">Displaying commands available on single device behind concentrator</a><br>        
-      4.4.2.2.  <a href="#sect-ID0EMJAE">Selecting command on single device behind concentrator</a><br>   
-      4.5.  <a href="#sect-ID0EUKAE">Browsing Data Sources and Nodes on a concentrator</a><br>      
-      4.5.1.  <a href="#sect-ID0EYKAE">Selecting Root Node in current data source</a><br>      
-      4.5.2.  <a href="#sect-ID0EJLAE">Selecting Root Data Source</a><br>      
-      4.5.3.  <a href="#sect-ID0E1LAE">Selecting Item</a><br>   
-      4.6.  <a href="#sect-ID0EDNAE">Menu Commands</a><br>      
+      4.1.  <a href="#sect-ID0E3FAC">Readout of devices</a><br>      
+      4.1.1.  <a href="#sect-ID0EAGAC">Readout of standalone devices</a><br>        
+      4.1.1.1.  <a href="#sect-ID0EEGAC">Reading momentary values from single device or currently selected device</a><br>        
+      4.1.1.2.  <a href="#sect-ID0EKHAC">Reading all values from single device or currently selected device</a><br>        
+      4.1.1.3.  <a href="#sect-ID0EIIAC">Reading specific momentary field value from single device or currently selected device</a><br>        
+      4.1.1.4.  <a href="#sect-ID0EAJAC">Reading specific field values from single device or currently selected device</a><br>      
+      4.1.2.  <a href="#sect-ID0EXJAC">Readout of device behind concentrator</a><br>        
+      4.1.2.1.  <a href="#sect-ID0E2JAC">Reading momentary values from device behind concentrator</a><br>        
+      4.1.2.2.  <a href="#sect-ID0EJKAC">Reading all values from device behind concentrator</a><br>        
+      4.1.2.3.  <a href="#sect-ID0EXKAC">Reading specific momentary field value from device behind concentrator</a><br>        
+      4.1.2.4.  <a href="#sect-ID0EILAC">Reading specific field values from device behind concentrator</a><br>   
+      4.2.  <a href="#sect-ID0E2LAC">Control of devices</a><br>      
+      4.2.1.  <a href="#sect-ID0E6LAC">Control of standalone devices</a><br>        
+      4.2.1.1.  <a href="#sect-ID0EDMAC">Setting control parameter on single device or currently selected device</a><br>        
+      4.2.1.2.  <a href="#sect-ID0E2MAC">Listing control parameters on single device or currently selected device</a><br>        
+      4.2.1.3.  <a href="#sect-ID0E3NAC">Displaying current value of control parameter on single device or currently selected device</a><br>      
+      4.2.2.  <a href="#sect-ID0EWOAC">Control of device behind concentrator</a><br>        
+      4.2.2.1.  <a href="#sect-ID0E1OAC">Setting control parameter on single device behind concentrator</a><br>        
+      4.2.2.2.  <a href="#sect-ID0E1PAC">Listing control parameters on single device behind concentrator</a><br>        
+      4.2.2.3.  <a href="#sect-ID0EIBAE">Displaying current value of control parameter on single device behind concentrator</a><br>   
+      4.3.  <a href="#sect-ID0EFCAE">Configuring devices</a><br>      
+      4.3.1.  <a href="#sect-ID0EJCAE">Configuring standalone devices</a><br>        
+      4.3.1.1.  <a href="#sect-ID0ENCAE">Listing configuration parameters on currently selected device</a><br>        
+      4.3.1.2.  <a href="#sect-ID0EEDAE">Displaying current value of configuration parameter on currently selected device</a><br>        
+      4.3.1.3.  <a href="#sect-ID0EVDAE">Editing configuration parameter on currently selected device</a><br>      
+      4.3.2.  <a href="#sect-ID0EMEAE">Configuration of device behind concentrator</a><br>        
+      4.3.2.1.  <a href="#sect-ID0EQEAE">Listing configuration parameters on single device behind concentrator</a><br>        
+      4.3.2.2.  <a href="#sect-ID0EHFAE">Displaying current value of configuration parameter on single device behind concentrator</a><br>        
+      4.3.2.3.  <a href="#sect-ID0E2FAE">Editing configuration parameter on single device behind concentrator</a><br>   
+      4.4.  <a href="#sect-ID0EYGAE">Node Commands on devices</a><br>      
+      4.4.1.  <a href="#sect-ID0E3GAE">Node Commands on standalone devices</a><br>        
+      4.4.1.1.  <a href="#sect-ID0EAHAE">Displaying commands available on currently selected device</a><br>        
+      4.4.1.2.  <a href="#sect-ID0ERHAE">Selecting command on currently selected device</a><br>        
+      4.4.1.3.  <a href="#sect-ID0EXIAE">Editing command parameter in currently selected node command</a><br>        
+      4.4.1.4.  <a href="#sect-ID0ESJAE">Executing currently selected node command</a><br>      
+      4.4.2.  <a href="#sect-ID0EEKAE">Node Commands on device behind concentrator</a><br>        
+      4.4.2.1.  <a href="#sect-ID0EIKAE">Displaying commands available on single device behind concentrator</a><br>        
+      4.4.2.2.  <a href="#sect-ID0EZKAE">Selecting command on single device behind concentrator</a><br>   
+      4.5.  <a href="#sect-ID0EBMAE">Browsing Data Sources and Nodes on a concentrator</a><br>      
+      4.5.1.  <a href="#sect-ID0EFMAE">Selecting Root Node in current data source</a><br>      
+      4.5.2.  <a href="#sect-ID0EWMAE">Selecting Root Data Source</a><br>      
+      4.5.3.  <a href="#sect-ID0EHNAE">Selecting Item</a><br>   
+      4.6.  <a href="#sect-ID0EQOAE">Menu Commands</a><br>      
       4.6.1.  <a href="#currentoptions">List current options</a><br>      
-      4.6.2.  <a href="#sect-ID0ECOAE">Go to previous menu</a><br>   
-      4.7.  <a href="#sect-ID0EPOAE">User authentication</a><br>5.  <a href="#dataforms">Data Forms</a><br>6.  <a href="#syntax">Syntax</a><br>7.  <a href="#output">Output format</a><br>8.  <a href="#support">Determining Support</a><br>9.  <a href="#impl">Implementation Notes</a><br>   
-      9.1.  <a href="#sect-ID0EO3AE">Chat sessions</a><br>10.  <a href="#i18n">Internationalization Considerations</a><br>   
-      10.1.  <a href="#sect-ID0E13AE">Localization</a><br>11.  <a href="#security">Security Considerations</a><br>12.  <a href="#iana">IANA Considerations</a><br>13.  <a href="#registrar">XMPP Registrar Considerations</a></p>
+      4.6.2.  <a href="#sect-ID0EPPAE">Go to previous menu</a><br>   
+      4.7.  <a href="#sect-ID0E3PAE">User authentication</a><br>5.  <a href="#dataforms">Data Forms</a><br>6.  <a href="#syntax">Syntax</a><br>7.  <a href="#output">Output format</a><br>8.  <a href="#support">Determining Support</a><br>9.  <a href="#impl">Implementation Notes</a><br>   
+      9.1.  <a href="#sect-ID0E24AE">Chat sessions</a><br>10.  <a href="#i18n">Internationalization Considerations</a><br>   
+      10.1.  <a href="#sect-ID0EH5AE">Localization</a><br>11.  <a href="#security">Security Considerations</a><br>12.  <a href="#iana">IANA Considerations</a><br>13.  <a href="#registrar">XMPP Registrar Considerations</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
     </div>
     <hr>
     <h2>1.
        <a name="intro">Introduction</a></h2>
 		<p class="" style="">
-			There may be many reasons to create a human-to-machine interface using chat messages for Internet of Thing devices. Reasons may include creating a simple interface that
-			can be accessed from mobile phones without special software and that can be used during installation of devices. The goal of this extension is to create rules for
-			how such an interface is constructed, including chat syntax, to make the interface:
+			Internet of Things (IoT) is often believed to be just an extension of machine-to-machine communication over internet but the human interface to devices are one of the biggest advantage in IoT.
+			There are numerous interfaces, mobile applications,html and html5 pages in here we create a human-to-machine interface using plain chat messages. One reason for this is to create a simple
+			interface that can be accessed from mobile phones without special software and that can be used during installation of devices. This extension create rules for
+			how such an interface is constructed, including chat syntax. The goal is to make the interface:
 		</p>
 		<ul class="" style="">
 			<li class="" style="">
 				simple and user-friendly for human users.
 			</li>
 			<li class="" style="">
-				possible to automate by macines.
+				possible to automate by machines.
 			</li>
 			<li class="" style="">
 				is consistent between manufacturers.
@@ -134,7 +135,10 @@
 				is consistent with other Internet-of-Things extensions and possible underlying architecture.
 			</li>
 			<li class="" style="">
-				include both reading of sensors and control of actuators.
+				include both reading of sensors and control of actuators and configuration.
+			</li>
+			<li class="" style="">
+				possibile to extend
 			</li>
 		</ul>
 	<h2>2.
@@ -224,7 +228,7 @@
 			<di>
 				<dt><strong>Parameter</strong></dt>
 				<dd>
-					Readable and/or writable property on a node/device. The XEP-0326 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0E4AAC">1</a>] deals with reading and writing parameters
+					Readable and/or writable property on a node/device. The XEP-0326 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0EFBAC">1</a>] deals with reading and writing parameters
 					on nodes/devices. Fields are not parameters, and parameters are not fields.
 				</dd>
 			</di>
@@ -288,37 +292,49 @@
 			</di>
 			<di>
 				<dt><strong>XMPP Client</strong></dt>
-				<dd>Application connected to an XMPP network, having a JID. Note that sensors, as well as applications requesting sensor data can be XMPP clients.</dd>
+				<dd>Application connected to an XMPP network, having a JID. Note that sensors, as well as applications and services requesting sensor data can be XMPP clients.</dd>
 			</di>
 		</dl>
     </div>
 	<h2>4.
        <a name="usecases">Use Cases</a></h2>
 		<p class="" style="">
-			All communication between user (human or machine) and device is done using normal text messages. Therefore, all examples in this document will only specify
-			the actual text messages being sent, not the underlying XMPP XML stanzas. IoT devices can choose to use <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0071.html">XHTML-IM</a></span>  [<a href="#nt-ID0EQEAC">2</a>] to enhance text output, but automatons
+			All communication between two peers (human or machine) is done using normal text messages. Therefore, all examples in this document will only specify
+			the actual text messages being sent, not the underlying XMPP XML stanzas. IoT devices can choose to use forms <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0071.html">XHTML-IM</a></span>  [<a href="#nt-ID0EYEAC">2</a>] to enhance text output, but automatons
 			interpreting received messages should use the normal text message as source for their interpretation. This document does not specify any HTML formats used.
 		</p>
 		<p class="" style="">
-			Together with examples, example regular expressions will be provided to facilitate machine extraction of information from the text. This document does not
+			For each usecase there are two specific views one when communicating with a single device and the other when comunicating with devices behind a concentrator.
+			Commands are just the same but the graphical structure behind the concentrator can be big.
+
+		</p>
+		<p class="" style="">
+			Together with the examples, suggested regular expressions will be provided to facilitate machine extraction of information from the text. This document does not
 			require the use of regular expressions in any implementation. These expressions act as a documentation of the exact syntax or format of the corresponding text messages.
 		</p>
 		<p class="" style="">
-			<span class="strong">Note:</span> The client sending commands should not expect messages to be sent for each row, nor expect all rows in a response to be sent in one message.
-			The sender is free to send any number of messages, with any number of rows in each message. Each row should be separated by a CRLF character sequence.
+			<span class="strong">Note 1:</span> The client sending commands should not expect messages to be sent for each row, nor expect all rows in a response to be sent in one message.
+			The sender is free to send any number of messages, with any number of rows in each message. Each row SHOULD be separated by a CRLF character sequence.
 		</p>
 		<p class="" style="">
 			<span class="strong">Note 2:</span> In examples where messages are sent in both directions, messages from the requesting party (client) will be prefixed by C:
 			and messages from the answering party (server) will be prefixed by S: This is for readability purposes only, and do not represent actual characters
 			send in messages.
 		</p>
+		<p class="" style="">
+			<span class="strong">Note 3:</span> When the client sends a column based respons it MUST use \t TAB between them.
+		</p>
 		<div class="indent">
-      <h3>4.1 <a name="sect-ID0EJFAC">Readout of devices</a></h3>
+      <h3>4.1 <a name="sect-ID0E3FAC">Readout of devices</a></h3>
 			<div class="indent">
-        <h3>4.1.1 <a name="sect-ID0ENFAC">Readout of standalone devices</a></h3>
+        <h3>4.1.1 <a name="sect-ID0EAGAC">Readout of standalone devices</a></h3>
 				<div class="indent">
-          <h3>4.1.1.1 <a name="sect-ID0ERFAC">Reading momentary values from single device or currently selected device</a></h3>
-					
+          <h3>4.1.1.1 <a name="sect-ID0EEGAC">Reading momentary values from single device or currently selected device</a></h3>
+					<p class="" style="">
+						This is the first and most basic usage after the client has logged in. The single ? asks for a momentary readout of values
+						from the fields at the device. If the device has a structure each node in the graph kan be traversed and momentary read out
+						This is not a recursive command
+					</p>
 					<p class="caption"><a name="example-1"></a>Example 1. Requesting a readout of momentary values from single device or currently selected device</p>
           <div class="indent">
             <pre class="prettyprint">
@@ -326,7 +342,10 @@
    ?
 					</pre>
           </div>
-					
+					<p class="" style="">
+						If no locale is present in the message from the client or the device cannot support locale the output comes as fieldnames with values and units
+						Note: The readout is performed asynchronously, which may imply a delay before the response is returned.
+					</p>
 					<p class="caption"><a name="example-2"></a>Example 2. Momentary value response without localized field names</p>
           <div class="indent">
             <pre class="prettyprint">
@@ -344,7 +363,12 @@
    Pressure Trend   Steady
 					</pre>
           </div>
-					
+					<p class="" style="">
+						If locale is present in the message and the client can support the provided locale. The output is extended with the localized fieldnames
+						NOTE When doing automation it is recomended not to use locale
+						
+						
+					</p>
 					<p class="caption"><a name="example-3"></a>Example 3. Momentary value response with localized field names</p>
           <div class="indent">
             <pre class="prettyprint">
@@ -362,7 +386,10 @@
    Pressure Trend   Falling   (Lufttryckstrend)
 					</pre>
           </div>
-					
+					<p class="" style="">
+						When creation automation with this as basis the result can be parsed with this suggested regular expression.
+						The device MUST use \t as the dividor between parts and CRLF pair as end row
+					</p>
 					<p class="caption"><a name="example-4"></a>Example 4. Multi-line regular expression for parsing readout results</p>
           <div class="indent">
             <pre class="prettyprint">
@@ -372,8 +399,11 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>4.1.1.2 <a name="sect-ID0EKGAC">Reading all values from single device or currently selected device</a></h3>
-					
+          <h3>4.1.1.2 <a name="sect-ID0EKHAC">Reading all values from single device or currently selected device</a></h3>
+					<p class="" style="">
+						Using a double ?? makes a deeper introspection and gives a more thorough value set in return
+						
+					</p>
 					<p class="caption"><a name="example-5"></a>Example 5. Requesting a readout of momentary values from single device or currently selected device</p>
           <div class="indent">
             <pre class="prettyprint">
@@ -437,8 +467,11 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>4.1.1.3 <a name="sect-ID0EDHAC">Reading specific momentary field value from single device or currently selected device</a></h3>
-					
+          <h3>4.1.1.3 <a name="sect-ID0EIIAC">Reading specific momentary field value from single device or currently selected device</a></h3>
+					<p class="" style="">
+						Instead of doing full readouts a specific field value can be requested from the device.
+						Note the caption is important when sending field names
+					</p>
 					<p class="caption"><a name="example-9"></a>Example 9. Requesting a readout of a specific momentary value from single device or currently selected device</p>
           <div class="indent">
             <pre class="prettyprint">
@@ -468,7 +501,7 @@
 					
 				</div>
 				<div class="indent">
-          <h3>4.1.1.4 <a name="sect-ID0EZHAC">Reading specific field values from single device or currently selected device</a></h3>
+          <h3>4.1.1.4 <a name="sect-ID0EAJAC">Reading specific field values from single device or currently selected device</a></h3>
 					
 					<p class="caption"><a name="example-12"></a>Example 12. Requesting a readout of specific field values from single device or currently selected device</p>
           <div class="indent">
@@ -529,10 +562,13 @@
 				</div>
 			</div>
 			<div class="indent">
-        <h3>4.1.2 <a name="sect-ID0EQIAC">Readout of device behind concentrator</a></h3>
+        <h3>4.1.2 <a name="sect-ID0EXJAC">Readout of device behind concentrator</a></h3>
 				<div class="indent">
-          <h3>4.1.2.1 <a name="sect-ID0EUIAC">Reading momentary values from device behind concentrator</a></h3>
-					
+          <h3>4.1.2.1 <a name="sect-ID0E2JAC">Reading momentary values from device behind concentrator</a></h3>
+					<p class="" style="">
+						To request data from devices behind a concentrator you do the same as for single devices but you need to traverse the graph through the concentrator to extract values
+						the traversal is done with the menu numbers returned at each junction in the graph of nodes see the menu command below
+					</p>
 					<p class="caption"><a name="example-15"></a>Example 15. Requesting a readout of momentary values from a device behind a concentrator</p>
           <div class="indent">
             <pre class="prettyprint">
@@ -543,7 +579,7 @@
 					
 				</div>
 				<div class="indent">
-          <h3>4.1.2.2 <a name="sect-ID0EAJAC">Reading all values from device behind concentrator</a></h3>
+          <h3>4.1.2.2 <a name="sect-ID0EJKAC">Reading all values from device behind concentrator</a></h3>
 					
 					<p class="caption"><a name="example-16"></a>Example 16. Requesting a readout of all values from a device behind a concentrator</p>
           <div class="indent">
@@ -553,9 +589,10 @@
 					</pre>
           </div>
 					
+					
 				</div>
 				<div class="indent">
-          <h3>4.1.2.3 <a name="sect-ID0EMJAC">Reading specific momentary field value from device behind concentrator</a></h3>
+          <h3>4.1.2.3 <a name="sect-ID0EXKAC">Reading specific momentary field value from device behind concentrator</a></h3>
 					
 					<p class="caption"><a name="example-17"></a>Example 17. Requesting a readout of a specific momentary value from a device behind a concentrator</p>
           <div class="indent">
@@ -575,7 +612,7 @@
 					
 				</div>
 				<div class="indent">
-          <h3>4.1.2.4 <a name="sect-ID0E4JAC">Reading specific field values from device behind concentrator</a></h3>
+          <h3>4.1.2.4 <a name="sect-ID0EILAC">Reading specific field values from device behind concentrator</a></h3>
 					
 					<p class="caption"><a name="example-19"></a>Example 19. Requesting a readout of specific field values from a device behind a concentrator</p>
           <div class="indent">
@@ -597,12 +634,16 @@
 			</div>
 		</div>
 		<div class="indent">
-      <h3>4.2 <a name="sect-ID0EQKAC">Control of devices</a></h3>
+      <h3>4.2 <a name="sect-ID0E2LAC">Control of devices</a></h3>
 			<div class="indent">
-        <h3>4.2.1 <a name="sect-ID0EUKAC">Control of standalone devices</a></h3>
+        <h3>4.2.1 <a name="sect-ID0E6LAC">Control of standalone devices</a></h3>
 				<div class="indent">
-          <h3>4.2.1.1 <a name="sect-ID0EYKAC">Setting control parameter on single device or currently selected device</a></h3>
-					
+          <h3>4.2.1.1 <a name="sect-ID0EDMAC">Setting control parameter on single device or currently selected device</a></h3>
+					<p class="" style="">
+						When setting a value on a field we use the = or !. The notion for ! is that the value i applied onto the node object. which will
+						analog with the applying commands and cofigurations later.
+						The caption is important when specifying the the fieldname
+					</p>
 					<p class="caption"><a name="example-21"></a>Example 21. Requesting a control parameter to be set to a new value on a single device or currently selected device</p>
           <div class="indent">
             <pre class="prettyprint">
@@ -629,7 +670,7 @@
 					
 				</div>
 				<div class="indent">
-          <h3>4.2.1.2 <a name="sect-ID0EOLAC">Listing control parameters on single device or currently selected device</a></h3>
+          <h3>4.2.1.2 <a name="sect-ID0E2MAC">Listing control parameters on single device or currently selected device</a></h3>
 					
 					<p class="caption"><a name="example-24"></a>Example 24. Listing control parameters on single device or currently selected device</p>
           <div class="indent">
@@ -674,7 +715,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>4.2.1.3 <a name="sect-ID0EPMAC">Displaying current value of control parameter on single device or currently selected device</a></h3>
+          <h3>4.2.1.3 <a name="sect-ID0E3NAC">Displaying current value of control parameter on single device or currently selected device</a></h3>
 					
 					<p class="caption"><a name="example-28"></a>Example 28. Displaying current value of control parameter on single device or currently selected device</p>
           <div class="indent">
@@ -714,9 +755,9 @@
 				</div>
 			</div>
 			<div class="indent">
-        <h3>4.2.2 <a name="sect-ID0EJNAC">Control of device behind concentrator</a></h3>
+        <h3>4.2.2 <a name="sect-ID0EWOAC">Control of device behind concentrator</a></h3>
 				<div class="indent">
-          <h3>4.2.2.1 <a name="sect-ID0ENNAC">Setting control parameter on single device behind concentrator</a></h3>
+          <h3>4.2.2.1 <a name="sect-ID0E1OAC">Setting control parameter on single device behind concentrator</a></h3>
 					
 					<p class="caption"><a name="example-32"></a>Example 32. Requesting a control parameter to be set to a new value on a single device behind concentrator</p>
           <div class="indent">
@@ -760,7 +801,7 @@
 					
 				</div>
 				<div class="indent">
-          <h3>4.2.2.2 <a name="sect-ID0ENOAC">Listing control parameters on single device behind concentrator</a></h3>
+          <h3>4.2.2.2 <a name="sect-ID0E1PAC">Listing control parameters on single device behind concentrator</a></h3>
 					
 					<p class="caption"><a name="example-37"></a>Example 37. Listing control parameters on single device behind concentrator</p>
           <div class="indent">
@@ -817,7 +858,7 @@
 					</p>
 				</div>
 				<div class="indent">
-          <h3>4.2.2.3 <a name="sect-ID0E1PAC">Displaying current value of control parameter on single device behind concentrator</a></h3>
+          <h3>4.2.2.3 <a name="sect-ID0EIBAE">Displaying current value of control parameter on single device behind concentrator</a></h3>
 					
 					<p class="caption"><a name="example-43"></a>Example 43. Displaying current value of control parameter on single device behind concentrator</p>
           <div class="indent">
@@ -855,11 +896,11 @@
 			</div>
 		</div>
 		<div class="indent">
-      <h3>4.3 <a name="sect-ID0EYAAE">Configuring devices</a></h3>
+      <h3>4.3 <a name="sect-ID0EFCAE">Configuring devices</a></h3>
 			<div class="indent">
-        <h3>4.3.1 <a name="sect-ID0E3AAE">Configuring standalone devices</a></h3>
+        <h3>4.3.1 <a name="sect-ID0EJCAE">Configuring standalone devices</a></h3>
 				<div class="indent">
-          <h3>4.3.1.1 <a name="sect-ID0EABAE">Listing configuration parameters on currently selected device</a></h3>
+          <h3>4.3.1.1 <a name="sect-ID0ENCAE">Listing configuration parameters on currently selected device</a></h3>
 					
 					<p class="caption"><a name="example-47"></a>Example 47. Listing configuration parameters on currently selected device</p>
           <div class="indent">
@@ -892,7 +933,7 @@
 					</p>
 				</div>
 				<div class="indent">
-          <h3>4.3.1.2 <a name="sect-ID0EXBAE">Displaying current value of configuration parameter on currently selected device</a></h3>
+          <h3>4.3.1.2 <a name="sect-ID0EEDAE">Displaying current value of configuration parameter on currently selected device</a></h3>
 					
 					<p class="caption"><a name="example-49"></a>Example 49. Displaying current value of configuration parameter on currently selected device</p>
           <div class="indent">
@@ -912,7 +953,7 @@
 					
 				</div>
 				<div class="indent">
-          <h3>4.3.1.3 <a name="sect-ID0EICAE">Editing configuration parameter on currently selected device</a></h3>
+          <h3>4.3.1.3 <a name="sect-ID0EVDAE">Editing configuration parameter on currently selected device</a></h3>
 					
 					<p class="caption"><a name="example-51"></a>Example 51. Editing configuration parameter on currently selected device</p>
           <div class="indent">
@@ -942,9 +983,9 @@
 				</div>
 			</div>
 			<div class="indent">
-        <h3>4.3.2 <a name="sect-ID0E6CAE">Configuration of device behind concentrator</a></h3>
+        <h3>4.3.2 <a name="sect-ID0EMEAE">Configuration of device behind concentrator</a></h3>
 				<div class="indent">
-          <h3>4.3.2.1 <a name="sect-ID0EDDAE">Listing configuration parameters on single device behind concentrator</a></h3>
+          <h3>4.3.2.1 <a name="sect-ID0EQEAE">Listing configuration parameters on single device behind concentrator</a></h3>
 					
 					<p class="caption"><a name="example-54"></a>Example 54. Listing configuration parameters on single device behind concentrator</p>
           <div class="indent">
@@ -977,7 +1018,7 @@
 					</p>
 				</div>
 				<div class="indent">
-          <h3>4.3.2.2 <a name="sect-ID0E1DAE">Displaying current value of configuration parameter on single device behind concentrator</a></h3>
+          <h3>4.3.2.2 <a name="sect-ID0EHFAE">Displaying current value of configuration parameter on single device behind concentrator</a></h3>
 					
 					<p class="caption"><a name="example-56"></a>Example 56. Displaying current value of configuration parameter on single device behind concentrator</p>
           <div class="indent">
@@ -1004,7 +1045,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>4.3.2.3 <a name="sect-ID0EOEAE">Editing configuration parameter on single device behind concentrator</a></h3>
+          <h3>4.3.2.3 <a name="sect-ID0E2FAE">Editing configuration parameter on single device behind concentrator</a></h3>
 					
 					<p class="caption"><a name="example-59"></a>Example 59. Editing configuration parameter on single device behind concentrator</p>
           <div class="indent">
@@ -1043,11 +1084,11 @@
 			</div>
 		</div>
 		<div class="indent">
-      <h3>4.4 <a name="sect-ID0ELFAE">Node Commands on devices</a></h3>
+      <h3>4.4 <a name="sect-ID0EYGAE">Node Commands on devices</a></h3>
 			<div class="indent">
-        <h3>4.4.1 <a name="sect-ID0EPFAE">Node Commands on standalone devices</a></h3>
+        <h3>4.4.1 <a name="sect-ID0E3GAE">Node Commands on standalone devices</a></h3>
 				<div class="indent">
-          <h3>4.4.1.1 <a name="sect-ID0ETFAE">Displaying commands available on currently selected device</a></h3>
+          <h3>4.4.1.1 <a name="sect-ID0EAHAE">Displaying commands available on currently selected device</a></h3>
 					
 					<p class="caption"><a name="example-63"></a>Example 63. Displaying commands available on currently selected device</p>
           <div class="indent">
@@ -1072,7 +1113,7 @@
 					
 				</div>
 				<div class="indent">
-          <h3>4.4.1.2 <a name="sect-ID0EEGAE">Selecting command on currently selected device</a></h3>
+          <h3>4.4.1.2 <a name="sect-ID0ERHAE">Selecting command on currently selected device</a></h3>
 					
 					<p class="caption"><a name="example-65"></a>Example 65. Selecting command on currently selected device using Command ID</p>
           <div class="indent">
@@ -1126,7 +1167,7 @@
           </div>
 				</div>
 				<div class="indent">
-          <h3>4.4.1.3 <a name="sect-ID0EKHAE">Editing command parameter in currently selected node command</a></h3>
+          <h3>4.4.1.3 <a name="sect-ID0EXIAE">Editing command parameter in currently selected node command</a></h3>
 					
 					<p class="caption"><a name="example-70"></a>Example 70. Editing command parameter in currently selected node command</p>
           <div class="indent">
@@ -1163,7 +1204,7 @@
 					
 				</div>
 				<div class="indent">
-          <h3>4.4.1.4 <a name="sect-ID0EFIAE">Executing currently selected node command</a></h3>
+          <h3>4.4.1.4 <a name="sect-ID0ESJAE">Executing currently selected node command</a></h3>
 					
 					<p class="caption"><a name="example-74"></a>Example 74. Executing currently selected node command</p>
           <div class="indent">
@@ -1193,9 +1234,9 @@
 				</div>
 			</div>
 			<div class="indent">
-        <h3>4.4.2 <a name="sect-ID0EXIAE">Node Commands on device behind concentrator</a></h3>
+        <h3>4.4.2 <a name="sect-ID0EEKAE">Node Commands on device behind concentrator</a></h3>
 				<div class="indent">
-          <h3>4.4.2.1 <a name="sect-ID0E2IAE">Displaying commands available on single device behind concentrator</a></h3>
+          <h3>4.4.2.1 <a name="sect-ID0EIKAE">Displaying commands available on single device behind concentrator</a></h3>
 					
 					<p class="caption"><a name="example-76"></a>Example 76. Displaying commands available on single device behind concentrator</p>
           <div class="indent">
@@ -1220,7 +1261,7 @@
 					
 				</div>
 				<div class="indent">
-          <h3>4.4.2.2 <a name="sect-ID0EMJAE">Selecting command on single device behind concentrator</a></h3>
+          <h3>4.4.2.2 <a name="sect-ID0EZKAE">Selecting command on single device behind concentrator</a></h3>
 					
 					<p class="caption"><a name="example-78"></a>Example 78. Selecting command on single device behind concentrator using Command ID</p>
           <div class="indent">
@@ -1276,9 +1317,9 @@
 			</div>
 		</div>
 		<div class="indent">
-      <h3>4.5 <a name="sect-ID0EUKAE">Browsing Data Sources and Nodes on a concentrator</a></h3>
+      <h3>4.5 <a name="sect-ID0EBMAE">Browsing Data Sources and Nodes on a concentrator</a></h3>
 			<div class="indent">
-        <h3>4.5.1 <a name="sect-ID0EYKAE">Selecting Root Node in current data source</a></h3>
+        <h3>4.5.1 <a name="sect-ID0EFMAE">Selecting Root Node in current data source</a></h3>
 				
 				<p class="caption"><a name="example-83"></a>Example 83. Selecting Root Node in current data source</p>
         <div class="indent">
@@ -1303,7 +1344,7 @@
 				
 			</div>
 			<div class="indent">
-        <h3>4.5.2 <a name="sect-ID0EJLAE">Selecting Root Data Source</a></h3>
+        <h3>4.5.2 <a name="sect-ID0EWMAE">Selecting Root Data Source</a></h3>
 				
 				<p class="caption"><a name="example-85"></a>Example 85. Selecting Root Data Source</p>
         <div class="indent">
@@ -1328,7 +1369,7 @@
 				
 			</div>
 			<div class="indent">
-        <h3>4.5.3 <a name="sect-ID0E1LAE">Selecting Item</a></h3>
+        <h3>4.5.3 <a name="sect-ID0EHNAE">Selecting Item</a></h3>
 				
 				<p class="caption"><a name="example-87"></a>Example 87. Selecting item in current menu</p>
         <div class="indent">
@@ -1395,7 +1436,7 @@
 			</div>
 		</div>
 		<div class="indent">
-      <h3>4.6 <a name="sect-ID0EDNAE">Menu Commands</a></h3>
+      <h3>4.6 <a name="sect-ID0EQOAE">Menu Commands</a></h3>
 			<div class="indent">
         <h3>4.6.1 <a name="currentoptions">List current options</a></h3>
 				
@@ -1412,17 +1453,20 @@
           <pre class="prettyprint">
 					
    /   Selects the root node of the current data source (Topology).
-   //   Selects the root data source.
+   //  Selects the root data source.
    #   Displays the short version of the menu.
-   ##   Displays the extended version of the menu.
+   ##  Displays the extended version of the menu.
    0   Goes back to the previous menu.
    ?   Reads momentary values of the currently selected object.
-   ??   Performs a full readout of the currently selected object.
-   =?   Lists available controllable parameters on the currently selected object.
-   !?   Same as =?.
-   :?   Lists available configurable parameters on the currently selected object.
-   &gt;?   Lists available commands on the currently selected object.
-   !   Executes the current command.
+   ??  Performs a full readout of the currently selected object.
+   =?  Lists available controllable parameters on the currently selected object.
+   !?  Same as =?.
+   :?  Lists available configurable parameters on the currently selected object.
+   &gt;?  Lists available commands on the currently selected object.
+   !   Executes the currently selected command.
+   
+   TODO:
+   c   break dignal stop the last sent command.
 				</pre>
         </div>
 				
@@ -1439,17 +1483,20 @@
           <pre class="prettyprint">
 					
    /   Selects the root node of the current data source (Topology).
-   //   Selects the root data source.
+   //  Selects the root data source.
    #   Displays the short version of the menu.
-   ##   Displays the extended version of the menu.
+   ##  Displays the extended version of the menu.
    0   Goes back to the previous menu.
    ?   Reads momentary values of the currently selected object.
-   ??   Performs a full readout of the currently selected object.
-   =?   Lists available controllable parameters on the currently selected object.
-   !?   Same as =?.
-   :?   Lists available configurable parameters on the currently selected object.
-   &gt;?   Lists available commands on the currently selected object.
-   !   Executes the current command.
+   ??  Performs a full readout of the currently selected object.
+   =?  Lists available controllable parameters on the currently selected object.
+   !?  Same as =?.
+   :?  Lists available configurable parameters on the currently selected object.
+   &gt;?  Lists available commands on the currently selected object.
+   !   Executes the currently selected command.
+   
+   TODO:
+   c   break dignal stop the last sent command.
  
    If an object is currently selected, the following commands are also available.
  
@@ -1522,7 +1569,7 @@
 				
 			</div>
 			<div class="indent">
-        <h3>4.6.2 <a name="sect-ID0ECOAE">Go to previous menu</a></h3>
+        <h3>4.6.2 <a name="sect-ID0EPPAE">Go to previous menu</a></h3>
 				
 				<p class="caption"><a name="example-98"></a>Example 98. Showing brief list of options</p>
         <div class="indent">
@@ -1535,7 +1582,7 @@
 			</div>
 		</div>
 		<div class="indent">
-      <h3>4.7 <a name="sect-ID0EPOAE">User authentication</a></h3>
+      <h3>4.7 <a name="sect-ID0E3PAE">User authentication</a></h3>
 			<p class="" style="">
 				Sometimes a device or subsystem might want to require a client to authenticate itself before giving the user access to the chat interface described in this
 				document. If this is the case, the following guidelines should be adhered to, to make sure both a human chat interface can be used as well as an automatable one.
@@ -1593,7 +1640,7 @@
 			<p class="" style="">
 				The login form sent thus MUST have two fields, and called <span class="strong">userName</span> of type <span class="strong">text-single</span> and the other
 				<span class="strong">password</span> of type <span class="strong">text-private</span>. It must also have the hidden <span class="strong">FORM_TYPE</span> parameter set to
-				value <span class="strong">urn:xmpp:login</span>, as defined in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0068.html">Field Standardization for Data Forms</a></span>  [<a href="#nt-ID0ECQAE">3</a>] so that automatons can automate the user login if necessary.
+				value <span class="strong">urn:xmpp:login</span>, as defined in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0068.html">Field Standardization for Data Forms</a></span>  [<a href="#nt-ID0EPRAE">3</a>] so that automatons can automate the user login if necessary.
 			</p>
 			<p class="" style="">
 				When the client has filled in the form, it submits it back to the server:
@@ -1666,7 +1713,7 @@
 			<a href="dynamic-forms.html">dynamic-forms.html</a> XEP, since it defines how undefined values are reported and asynchronous updates of the form. These
 			are very useful for displaying parameters in control forms since all parameters should be marked as uncertain (greyed) so that only edited parameters are
 			sent and result in control actions. Furthermore, since current values might be uncertain and take time to retrieve, asynchronous updates of the form
-			are permitted when values are received. For a more detailed discussion, see <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0EZRAE">4</a>].
+			are permitted when values are received. For a more detailed discussion, see <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0EGTAE">4</a>].
 		</p>
 		<p class="" style="">
 			XMPP data forms are defined and enhanced in many different XEPs, as is shown in the following list:
@@ -1674,40 +1721,40 @@
 		<ul class="" style="">
 			<li class="" style="">
 				<p class="" style="">
-					<span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EWSAE">5</a>] defines the basics of data forms: How forms are defined, sent to the recipient, how the recipient submits forms (or cancels them)
+					<span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EDUAE">5</a>] defines the basics of data forms: How forms are defined, sent to the recipient, how the recipient submits forms (or cancels them)
 					and how results can be returned. It defines the concepts of field, field type and field value.
 				</p>
 			</li>
 			<li class="" style="">
 				<p class="" style="">
-					<span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EMTAE">6</a>] enhances the data forms architecture permitting rules for client-side validation of fields in the form.
+					<span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EZUAE">6</a>] enhances the data forms architecture permitting rules for client-side validation of fields in the form.
 				</p>
 			</li>
 			<li class="" style="">
 				<p class="" style="">
-					<span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0ECUAE">7</a>] defines a new data type that can be used to publish file upload controls.
+					<span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0EPVAE">7</a>] defines a new data type that can be used to publish file upload controls.
 				</p>
 			</li>
 			<li class="" style="">
 				<p class="" style="">
-					<span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EYUAE">8</a>] enhances the data forms architecture permitting the form to have pages or tabs with sections containing grouped controls.
+					<span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EFWAE">8</a>] enhances the data forms architecture permitting the form to have pages or tabs with sections containing grouped controls.
 				</p>
 			</li>
 			<li class="" style="">
 				<p class="" style="">
-					<span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0221.html">Data Forms Media Element</a></span>  [<a href="#nt-ID0EOVAE">9</a>] defines a means to include content such as images, video or audio in forms.
+					<span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0221.html">Data Forms Media Element</a></span>  [<a href="#nt-ID0E2WAE">9</a>] defines a means to include content such as images, video or audio in forms.
 				</p>
 			</li>
 			<li class="" style="">
 				<p class="" style="">
-					<span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0331.html">Data Forms - Color Field Types</a></span>  [<a href="#nt-ID0EEWAE">10</a>] permits the publication of color fields, where the end user can be presented with a color picker dialog instead of having to
+					<span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0331.html">Data Forms - Color Field Types</a></span>  [<a href="#nt-ID0ERXAE">10</a>] permits the publication of color fields, where the end user can be presented with a color picker dialog instead of having to
 					enter a color value manually or select one from a limited list of colors.
 				</p>
 			</li>
 			<li class="" style="">
 				<p class="" style="">
 					<span class="ref" style=""><a href="dynamic-forms.html">dynamic-forms</a></span>
-					 [<a href="#nt-ID0E1WAE">11</a>] handles server-side validation, asynchronous updates, editing of multiple objects,
+					 [<a href="#nt-ID0EHYAE">11</a>] handles server-side validation, asynchronous updates, editing of multiple objects,
 					undefined values, readonly values, etc.
 				</p>
 			</li>
@@ -1764,7 +1811,7 @@
 		
 	<h2>8.
        <a name="support">Determining Support</a></h2>
-		<p class="" style="">If an entity supports the chat interface specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:chat" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EL2AE">12</a>] information requests.</p>
+		<p class="" style="">If an entity supports the chat interface specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:chat" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EY3AE">12</a>] information requests.</p>
 		<p class="caption"><a name="example-105"></a>Example 105. Service discovery information request</p>
     <div class="indent">
       <pre class="prettyprint">
@@ -1795,18 +1842,18 @@
     </div>
 		<p class="" style="">
 			In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
-			in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EC3AE">13</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
+			in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EP4AE">13</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
 		</p>
 	<h2>9.
        <a name="impl">Implementation Notes</a></h2>
 		<div class="indent">
-      <h3>9.1 <a name="sect-ID0EO3AE">Chat sessions</a></h3>
+      <h3>9.1 <a name="sect-ID0E24AE">Chat sessions</a></h3>
 			
 		</div>
 	<h2>10.
        <a name="i18n">Internationalization Considerations</a></h2>
 		<div class="indent">
-      <h3>10.1 <a name="sect-ID0E13AE">Localization</a></h3>
+      <h3>10.1 <a name="sect-ID0EH5AE">Localization</a></h3>
 			<p class="" style="">
 				Localization of content can be performed if clients provide <span class="strong">xml:lang</span> attributes in messages made to the device. If omitted, the
 				<span class="strong">default language</span> will be used in responses. If provided, but the concentrator does not support localization, or the requested language,
@@ -1817,14 +1864,14 @@
        <a name="security">Security Considerations</a></h2>
 		<p class="" style="">
 			This document publishes a lot of commands with which to interact with a device. If security and access rights is an issue, it might not be sufficient
-			to allow all friends access to the system. There are many ways in which to restrict access to the contents of the device. See <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0EZ4AE">14</a>] and
+			to allow all friends access to the system. There are many ways in which to restrict access to the contents of the device. See <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0EG6AE">14</a>] and
 			XEP-0326 <a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a> for more information on how to restrict access
 			to parts of the device or contents on the device.
 		</p>
 		
 	<h2>12.
        <a name="iana">IANA Considerations</a></h2>
-		<p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EU5AE">15</a>].</p>
+			<p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0ECAAG">15</a>].</p>
 	<h2>13.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
 		<p class="" style="">
@@ -1890,9 +1937,7 @@
     </div>
     <hr><a name="appendix-legal"></a><h3>Appendix C: Legal Notices</h3>
     <div class="indent">
-      <h4>Copyright</h4>This XMPP Extension Protocol is copyright (c) 1999 - 2013 by the XMPP Standards Foundation (XSF).<h4>Permissions</h4>Permission is hereby granted, free of charge, to any person obtaining a copy of this specification (the "Specification"), to make use of the Specification without restriction, including without limitation the rights to implement the Specification in a software program, deploy the Specification in a network service, and copy, modify, merge, publish, translate, distribute, sublicense, or sell copies of the Specification, and to permit persons to whom the Specification is furnished to do so, subject to the condition that the foregoing copyright notice and this permission notice shall be included in all copies or substantial portions of the Specification. Unless separate permission is granted, modified works that are redistributed shall not contain misleading information regarding the authors, title, number, or publisher of the Specification, and shall not claim endorsement of the modified works by the authors, any organization or project to which the authors belong, or the XMPP Standards Foundation.<h4>Disclaimer of Warranty</h4><span style="font-weight: bold">## NOTE WELL: This Specification is provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. In no event shall the XMPP Standards Foundation or the authors of this Specification be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Specification or the implementation, deployment, or other use of the Specification. ##</span><h4>Limitation of Liability</h4>In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall the XMPP Standards Foundation or any author of this Specification be liable for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising out of the use or inability to use the Specification (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if the XMPP Standards Foundation or such author has been advised of the possibility of such damages.<h4>IPR Conformance</h4>
-				This XMPP Extension Protocol has been contributed in full conformance with the XSF's Intellectual Property Rights Policy (a copy of which may be found at &lt;<a href="http://www.xmpp.org/extensions/ipr-policy.shtml">http://www.xmpp.org/extensions/ipr-policy.shtml</a>&gt; or obtained by writing to XSF, P.O. Box 1641, Denver, CO 80201 USA).
-			</div>
+      <h4>Copyright</h4>This XMPP Extension Protocol is copyright © 1999 - 2013 by the <a href="http://xmpp.org/">XMPP Standards Foundation</a> (XSF).<h4>Permissions</h4>Permission is hereby granted, free of charge, to any person obtaining a copy of this specification (the "Specification"), to make use of the Specification without restriction, including without limitation the rights to implement the Specification in a software program, deploy the Specification in a network service, and copy, modify, merge, publish, translate, distribute, sublicense, or sell copies of the Specification, and to permit persons to whom the Specification is furnished to do so, subject to the condition that the foregoing copyright notice and this permission notice shall be included in all copies or substantial portions of the Specification. Unless separate permission is granted, modified works that are redistributed shall not contain misleading information regarding the authors, title, number, or publisher of the Specification, and shall not claim endorsement of the modified works by the authors, any organization or project to which the authors belong, or the XMPP Standards Foundation.<h4>Disclaimer of Warranty</h4><span style="font-weight: bold">## NOTE WELL: This Specification is provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. ##</span><h4>Limitation of Liability</h4>In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall the XMPP Standards Foundation or any author of this Specification be liable for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising from, out of, or in connection with the Specification or the implementation, deployment, or other use of the Specification (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if the XMPP Standards Foundation or such author has been advised of the possibility of such damages.<h4>IPR Conformance</h4>This XMPP Extension Protocol has been contributed in full conformance with the XSF's Intellectual Property Rights Policy (a copy of which can be found at &lt;<a href="http://xmpp.org/about-xmpp/xsf/xsf-ipr-policy/">http://xmpp.org/about-xmpp/xsf/xsf-ipr-policy/</a>&gt; or obtained by writing to XMPP Standards Foundation, 1899 Wynkoop Street, Suite 600, Denver, CO 80202 USA).</div>
     <hr><a name="appendix-xmpp"></a><h3>Appendix D: Relation to XMPP</h3>
     <p class="indent">The Extensible Messaging and Presence Protocol (XMPP) is defined in the XMPP Core (RFC 6120) and XMPP IM (RFC 6121) specifications contributed by the XMPP Standards Foundation to the Internet Standards Process, which is managed by the Internet Engineering Task Force in accordance with RFC 2026. Any protocol defined in this document has been developed outside the Internet Standards Process and is to be understood as an extension to XMPP rather than as an evolution, development, or modification of XMPP itself.</p>
     <hr><a name="appendix-discuss"></a><h3>Appendix E: Discussion Venue</h3>
@@ -1903,23 +1948,23 @@
     <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
     <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
     <div class="indent">
-      <p><a name="nt-ID0E4AAC">1</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
-      <p><a name="nt-ID0EQEAC">2</a>. XEP-0071: XHTML-IM &lt;<a href="http://xmpp.org/extensions/xep-0071.html">http://xmpp.org/extensions/xep-0071.html</a>&gt;.</p>
-      <p><a name="nt-ID0ECQAE">3</a>. XEP-0068: Field Data Standardization for Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0068.html">http://xmpp.org/extensions/xep-0068.html</a>&gt;.</p>
-      <p><a name="nt-ID0EZRAE">4</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
-      <p><a name="nt-ID0EWSAE">5</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0EMTAE">6</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
-      <p><a name="nt-ID0ECUAE">7</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
-      <p><a name="nt-ID0EYUAE">8</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
-      <p><a name="nt-ID0EOVAE">9</a>. XEP-0221: Data Forms Media Element &lt;<a href="http://xmpp.org/extensions/xep-0221.html">http://xmpp.org/extensions/xep-0221.html</a>&gt;.</p>
-      <p><a name="nt-ID0EEWAE">10</a>. XEP-0331: Data Forms - Color Field Types &lt;<a href="http://xmpp.org/extensions/xep-0331.html">http://xmpp.org/extensions/xep-0331.html</a>&gt;.</p>
-      <p><a name="nt-ID0E1WAE">11</a>. 
+      <p><a name="nt-ID0EFBAC">1</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
+      <p><a name="nt-ID0EYEAC">2</a>. XEP-0071: XHTML-IM &lt;<a href="http://xmpp.org/extensions/xep-0071.html">http://xmpp.org/extensions/xep-0071.html</a>&gt;.</p>
+      <p><a name="nt-ID0EPRAE">3</a>. XEP-0068: Field Data Standardization for Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0068.html">http://xmpp.org/extensions/xep-0068.html</a>&gt;.</p>
+      <p><a name="nt-ID0EGTAE">4</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
+      <p><a name="nt-ID0EDUAE">5</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0EZUAE">6</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
+      <p><a name="nt-ID0EPVAE">7</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
+      <p><a name="nt-ID0EFWAE">8</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+      <p><a name="nt-ID0E2WAE">9</a>. XEP-0221: Data Forms Media Element &lt;<a href="http://xmpp.org/extensions/xep-0221.html">http://xmpp.org/extensions/xep-0221.html</a>&gt;.</p>
+      <p><a name="nt-ID0ERXAE">10</a>. XEP-0331: Data Forms - Color Field Types &lt;<a href="http://xmpp.org/extensions/xep-0331.html">http://xmpp.org/extensions/xep-0331.html</a>&gt;.</p>
+      <p><a name="nt-ID0EHYAE">11</a>. 
 						XEP-xxxx: Dynamic Data Forms &lt;<a href="dynamic-forms.html">dynamic-forms.html</a>&gt;
 					</p>
-      <p><a name="nt-ID0EL2AE">12</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
-      <p><a name="nt-ID0EC3AE">13</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
-      <p><a name="nt-ID0EZ4AE">14</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
-      <p><a name="nt-ID0EU5AE">15</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+      <p><a name="nt-ID0EY3AE">12</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0EP4AE">13</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0EG6AE">14</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
+      <p><a name="nt-ID0ECAAG">15</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
