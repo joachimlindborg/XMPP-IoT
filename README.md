@@ -48,7 +48,7 @@ More information will be published through the [XMPP tech wiki](http://wiki.xmpp
 		a easy extendable syntax for interacting with devices, reading values
 		and setting parameters and control values
 		
-[xep-0000-EventLog](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/xep-0000-EventLog.html)
+[eventlogging](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/eventlogging.html)
 		Being able to monitor and maintain advanced network of devices it is
 		important to be able to support logging of events such as user logins
 		upgrades errors. This extension is compatible with syslog but more advanced
