@@ -3,7 +3,81 @@
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
     targetNamespace='urn:xmpp:tables'
     xmlns='urn:xmpp:tables'
+    xmlns:xdc='urn:xmpp:xdata:color'
+    xmlns:xhtml-im='http://jabber.org/protocol/xhtml-im'
     elementFormDefault='qualified'>
  
+    <xs:import namespace='urn:xmpp:xdata:color'/>
+    <xs:import namespace='http://jabber.org/protocol/xhtml-im'/>
+ 
+    <xs:element name='table'>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name='columnFormat' minOccurs='0' maxOccurs='unbounded'>
+                    <xs:complexType>
+                        <xs:attributeGroup ref='contentAttributes'/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name='row' minOccurs='1' maxOccurs='unbounded'>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name='cell' minOccurs='1' maxOccurs='unbounded'>
+                                <xs:complexType mixed='true'>
+                                    <xs:choice>
+                                        <xs:element ref='xhtml-im:html' minOccurs='0' maxOccurs='1'/>
+                                    </xs:choice>
+                                    <xs:attributeGroup ref='contentAttributes'/>
+                                    <xs:attribute name='colSpan' type='xs:positiveInteger' use='optional' default='1'/>
+                                    <xs:attribute name='rowSpan' type='xs:positiveInteger' use='optional' default='1'/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attributeGroup ref='contentAttributes'/>
+                    </xs:complexType>
+                </xs:element>
+				<xs:element name='toBeContinued' minOccurs='0' maxOccurs='1'>
+					<xs:complexType/>
+				</xs:element>
+            </xs:sequence>
+			<xs:attributeGroup ref='contentAttributes'/>
+			<xs:attribute name='hSpacing' type='xs:nonNegativeInteger' use='optional' default='0'/>
+			<xs:attribute name='vSpacing' type='xs:nonNegativeInteger' use='optional' default='0'/>
+        </xs:complexType>
+	</xs:element>
+ 
+    <xs:attributeGroup name='contentAttributes'>
+        <xs:attribute name='halign' type='HorizontalAlignment' use='optional' default='Left'/>
+        <xs:attribute name='valign' type='VerticalAlignment' use='optional' default='Top'/>
+        <xs:attribute name='fgColor' type='xdc:Color' use='optional'/>
+        <xs:attribute name='bgColor' type='xdc:Color' use='optional'/>
+        <xs:attribute name='fontName' type='xs:string' use='optional'/>
+        <xs:attribute name='fontSizeMultiplier' type='PositiveDouble' use='optional' default='1.0'/>
+		<xs:attribute name='bold' type='xs:boolean' use='optional'/>
+		<xs:attribute name='italics' type='xs:boolean' use='optional'/>
+		<xs:attribute name='underline' type='xs:boolean' use='optional'/>
+		<xs:attribute name='strikeThrough' type='xs:boolean' use='optional'/>
+	</xs:attributeGroup>
+ 
+    <xs:simpleType name='HorizontalAlignment'>
+        <xs:restriction base='xs:string'>
+            <xs:enumeration value='Left'/>
+            <xs:enumeration value='Center'/>
+            <xs:enumeration value='Right'/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
+    <xs:simpleType name='VerticalAlignment'>
+        <xs:restriction base='xs:string'>
+            <xs:enumeration value='Top'/>
+            <xs:enumeration value='Center'/>
+            <xs:enumeration value='Bottom'/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
+    <xs:simpleType name='PositiveDouble'>
+        <xs:restriction base='xs:double'>
+            <xs:minExclusive value='0'/>
+        </xs:restriction>
+    </xs:simpleType>
  
 </xs:schema>

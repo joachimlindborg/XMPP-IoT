@@ -5,103 +5,1191 @@
 ]>
 <?xml-stylesheet type='text/xsl' href='xep.xsl'?>
 <xep>
-	<header>
-		<title>Tables in Instant Messaging</title>
-		<abstract>This specification provides a means to send tables between instant messaging clients, or between robots and instant messaging clients.</abstract>
-		&LEGALNOTICE;
-		<number>xxxx</number>
-		<status>ProtoXEP</status>
-		<type>Standards Track</type>
-		<sig>Standards</sig>
-		<approver>Council</approver>
-		<dependencies>
-			<spec>XMPP Core</spec>
-			<spec>XEP-0001</spec>
-		</dependencies>
-		<supersedes/>
-		<supersededby/>
-		<shortname>NOT_YET_ASSIGNED</shortname>
-		<author>
-			<firstname>Peter</firstname>
-			<surname>Waher</surname>
-			<email>peter.waher@clayster.com</email>
-			<jid>peter.waher@jabber.org</jid>
-			<uri>http://www.linkedin.com/in/peterwaher</uri>
-		</author>
-		<revision>
-			<version>0.0.1</version>
-			<date>2013-12-11</date>
-			<initials>pw</initials>
-			<remark>
-				<p>First draft.</p>
-			</remark>
-		</revision>
-	</header>
-	<section1 topic='Introduction' anchor='intro'>
-		<p>
-			There are cases where an interchange of tables between internet messaging clients and/or chat robots is desired. Examples include pasting
-			tabulated data from the clipboard (perhaps kopied from a spread sheet) or a chat robot presenting data in tabular form.
-		</p>
-		<p>
-			Prior to this extension sending tabulated data could be achieved in various ways:
-		</p>
-		<ul>
-			<li>
-				The tabulated data could be sent using a normal text message without formatting, where cells where separated by a tab character (\t). 
-				The problem with this approach is that it only works if contents are more or less uniformly spaced. When cell contents cross by the receiver
-				preset tabs, the columns are offset a corresponding amount of columns. And since the sender cannot control which font is used to present the
-				data, there's no way for the sender to know if data is tabulated correctly on the receiving end or not.
+    <header>
+        <title>Tables in Instant Messaging</title>
+        <abstract>This specification provides a means to send tables between instant messaging clients, or between robots and instant messaging clients.</abstract>
+        &LEGALNOTICE;
+        <number>xxxx</number>
+        <status>ProtoXEP</status>
+        <type>Standards Track</type>
+        <sig>Standards</sig>
+        <approver>Council</approver>
+        <dependencies>
+            <spec>XMPP Core</spec>
+            <spec>XEP-0001</spec>
+            <spec>XEP-0071</spec>
+            <spec>XEP-0331</spec>
+        </dependencies>
+        <supersedes/>
+        <supersededby/>
+        <shortname>NOT_YET_ASSIGNED</shortname>
+        <author>
+            <firstname>Peter</firstname>
+            <surname>Waher</surname>
+            <email>peter.waher@clayster.com</email>
+            <jid>peter.waher@jabber.org</jid>
+            <uri>http://www.linkedin.com/in/peterwaher</uri>
+        </author>
+        <revision>
+            <version>0.0.1</version>
+            <date>2013-12-11</date>
+            <initials>pw</initials>
+            <remark>
+                <p>First draft.</p>
+            </remark>
+        </revision>
+    </header>
+    <section1 topic='Introduction' anchor='intro'>
+        <p>
+            There are cases where an interchange of tables between internet messaging clients and/or chat robots is desired. Examples include pasting
+            tabulated data from the clipboard (perhaps copied from a spread sheet) or a chat robot presenting data in tabular form.
+        </p>
+        <p>
+            Prior to this extension sending tabulated data could be achieved in various ways:
+        </p>
+        <ul>
+            <li>
+				<p>
+					The tabulated data could be sent using a normal text message without formatting, where cells where separated by a tab character (\t).
+					The problem with this approach is that it only works if contents are more or less uniformly spaced. When cell contents cross by the receiver
+					preset tabs, the columns are offset a corresponding amount of columns. And since the sender cannot control which font is used to present the
+					data, there's no way for the sender to know if data is tabulated correctly on the receiving end or not.
+				</p>
 			</li>
-			<li>
-				The tabulated data could be encoded using HTML and sent according to &xep0071; This works in some clients, but is actually prohibited in §5 of
-				the same extension. Since support for this is prohibited and extension of the corresponding XEP is not desired, using XHTML-IM to convey
-				tabular data is not a recommended option.
+            <li>
+				<p>
+					The tabulated data could be encoded using HTML and sent according to &xep0071; This works in some clients, but is actually prohibited in §5 of
+					the same extension. Since support for this is prohibited and extension of the corresponding XEP is not desired, using XHTML-IM to convey
+					tabular data is not a recommended option.
+				</p>
 			</li>
-			<li>
-				The tabulated data could be rendered as an image on the sender side, and the image transmitted to the client either using XHTML-IM itself, or
-				some other means. The problem with this approach is that the tabular data cannot be used by the received more than to view it. It cannot be 
-				edited, saved or used in a spread sheet application, which might have been the original idea.
+            <li>
+				<p>
+					The tabulated data could be rendered as an image on the sender side, and the image transmitted to the client either using XHTML-IM itself, or
+					some other means. The problem with this approach is that the tabular data cannot be used by the received more than to view it. It cannot be
+					edited, saved or used in a spread sheet application, which might have been the original idea.
+				</p>
 			</li>
-		</ul>
+        </ul>
+        <p>
+            So this extension specifies a means to encode and send simple tabulated data between XMPP clients. Apart from being easy to single out and render, the
+            receiver would also have the benefit of knowing the data is of tabular format, which allows the client to encode it as such when copying the data
+            to a clipboard, making it easy to paste it into spread sheets. Using this extension it would be easy to interchange tabular data without having to
+            go through the process of saving it in files, transmitting files and separately opening them, which includes trusting file content, scanning them
+            with antivirus software, etc.
+        </p>
+    </section1>
+    <section1 topic='Glossary' anchor='glossary'>
+        <p>The following table lists common terms and corresponding descriptions.</p>
+        <dl>
+            <di>
+                <dt>Table</dt>
+                <dd>A table consists of cells arranged along columns and rows.</dd>
+            </di>
+            <di>
+                <dt>Row</dt>
+                <dd>
+                    A horizontal set of cells in a table. All cells in a row are aligned vertically, and each cell in the row has the same height, which corresponds
+                    to the highest height of all the cells in the row.
+                </dd>
+            </di>
+            <di>
+                <dt>Column</dt>
+                <dd>
+                    A vertical set of cells in a table. All cells in a column are aligned horizontally, and each cell in the column has the same width, which corresponds
+                    to the widest width of all the cells in the column.
+                </dd>
+            </di>
+            <di>
+                <dt>Cell</dt>
+                <dd>A cell is a rectangular region in a table. It contains content to be rendered in the corresponding region. The size of the cell depends on its contents.</dd>
+            </di>
+            <di>
+                <dt>Alignment</dt>
+                <dd>
+                    There are two types of alignments: Horizontal alignment and vertical alignment. They define how content is displayed in a region that is either
+                    wider or higher than the content itself.
+                </dd>
+            </di>
+        </dl>
+    </section1>
+    <section1 topic='Use Cases' anchor='usecases'>
+		<section2 topic='Sending a simple table' anchor='simpletable'>
+			<p>
+				The following example shows how to send a simple table in a chat message. The horizontal and vertical spacing defined in the table element
+				specifies a hint to the renderer how many pixels should be used to space cells apart in the table.
+			</p>
+			<example caption='Simple table'>
+				<![CDATA[
+<message from='device@clayster.com/device' to='user@clayster.com/client' type='chat' xml:lang='en'>
+    <table xmlns="urn:xmpp:tables" hspacing='5' vspacing='2'>
+        <row>
+            <cell>Field</cell>
+            <cell>Value</cell>
+            <cell>Unit</cell>
+        </row>
+        <row>
+            <cell>Location</cell>
+            <cell>Viña del Mar</cell>
+            <cell/>
+        </row>
+        <row>
+            <cell>Condition</cell>
+            <cell>Fair</cell>
+            <cell/>
+        </row>
+        <row>
+            <cell>Condition Code</cell>
+            <cell>34</cell>
+            <cell/>
+        </row>
+        <row>
+            <cell>Temperature</cell>
+            <cell>18</cell>
+            <cell>°C</cell>
+        </row>
+        <row>
+            <cell>Chill</cell>
+            <cell>18</cell>
+            <cell>°C</cell>
+        </row>
+        <row>
+            <cell>Wind Direction</cell>
+            <cell>330</cell>
+            <cell>°</cell>
+        </row>
+        <row>
+            <cell>Wind Speed</cell>
+            <cell>14,48</cell>
+            <cell>km/h</cell>
+        </row>
+        <row>
+            <cell>Humidity</cell>
+            <cell>52</cell>
+            <cell>%</cell>
+        </row>
+        <row>
+            <cell>Visibility</cell>
+            <cell>9,99</cell>
+            <cell>km</cell>
+        </row>
+        <row>
+            <cell>Pressure</cell>
+            <cell>1015,92</cell>
+            <cell>mbar</cell>
+        </row>
+        <row>
+            <cell>Pressure Trend</cell>
+            <cell>Steady</cell>
+            <cell/>
+        </row>
+    </table>
+</message>]]>
+			</example>
+		</section2>
+		<section2 topic='Text version fallback mechanism' anchor='textfallback'>
+			<p>
+				The following example shows how to add a text version of the table in the message that can be displayed in clients not supporting this extension.
+			</p>
+			<example caption='Table with text version fallback'>
+				<![CDATA[
+<message from='device@clayster.com/device' to='user@clayster.com/client' type='chat' xml:lang='en'>
+    <body>Field	Value	Unit
+Location	Viña del Mar
+Condition	Fair
+Condition Code	34
+Temperature	18	°C
+Chill	18	°C
+Wind Direction	330	°
+Wind Speed	14,48	km/h
+Humidity	52	%
+Visibility	9,99	km
+Pressure	1015,92	mbar
+Pressure Trend	Steady</body>
+    <table xmlns="urn:xmpp:tables" hspacing='5' vspacing='2'>
+        <row>
+            <cell>Field</cell>
+            <cell>Value</cell>
+            <cell>Unit</cell>
+        </row>
+        <row>
+            <cell>Location</cell>
+            <cell>Viña del Mar</cell>
+            <cell/>
+        </row>
+        <row>
+            <cell>Condition</cell>
+            <cell>Fair</cell>
+            <cell/>
+        </row>
+        <row>
+            <cell>Condition Code</cell>
+            <cell>34</cell>
+            <cell/>
+        </row>
+        <row>
+            <cell>Temperature</cell>
+            <cell>18</cell>
+            <cell>°C</cell>
+        </row>
+        <row>
+            <cell>Chill</cell>
+            <cell>18</cell>
+            <cell>°C</cell>
+        </row>
+        <row>
+            <cell>Wind Direction</cell>
+            <cell>330</cell>
+            <cell>°</cell>
+        </row>
+        <row>
+            <cell>Wind Speed</cell>
+            <cell>14,48</cell>
+            <cell>km/h</cell>
+        </row>
+        <row>
+            <cell>Humidity</cell>
+            <cell>52</cell>
+            <cell>%</cell>
+        </row>
+        <row>
+            <cell>Visibility</cell>
+            <cell>9,99</cell>
+            <cell>km</cell>
+        </row>
+        <row>
+            <cell>Pressure</cell>
+            <cell>1015,92</cell>
+            <cell>mbar</cell>
+        </row>
+        <row>
+            <cell>Pressure Trend</cell>
+            <cell>Steady</cell>
+            <cell/>
+        </row>
+    </table>
+</message>]]>
+			</example>
+		</section2>
+		<section2 topic='Adding cell alignments' anchor='alignments'>
+			<p>
+				The following example adds content alignment to individual cells to control how the content is laid out inside the corresponding cells.
+			</p>
+			<p>
+				<strong>Note:</strong> Default horizontal alignment is <strong>Left</strong>, and default vertical alignment is <strong>Top</strong>. Cell attributes
+				override any corresponding row or column attributes.
+			</p>
+			<example caption='Cell alignments'>
+				<![CDATA[
+<message from='device@clayster.com/device' to='user@clayster.com/client' type='chat' xml:lang='en'>
+    <body>Field	Value	Unit
+Location	Viña del Mar
+Condition	Fair
+Condition Code	34
+Temperature	18	°C
+Chill	18	°C
+Wind Direction	330	°
+Wind Speed	14,48	km/h
+Humidity	52	%
+Visibility	9,99	km
+Pressure	1015,92	mbar
+Pressure Trend	Steady</body>
+    <table xmlns="urn:xmpp:tables" hspacing='5' vspacing='2'>
+        <row>
+            <cell>Field</cell>
+            <cell>Value</cell>
+            <cell>Unit</cell>
+        </row>
+        <row>
+            <cell>Location</cell>
+            <cell>Viña del Mar</cell>
+            <cell/>
+        </row>
+        <row>
+            <cell>Condition</cell>
+            <cell>Fair</cell>
+            <cell/>
+        </row>
+        <row>
+            <cell>Condition Code</cell>
+            <cell halign='Right'>34</cell>
+            <cell/>
+        </row>
+        <row>
+            <cell>Temperature</cell>
+            <cell halign='Right'>18</cell>
+            <cell>°C</cell>
+        </row>
+        <row>
+            <cell>Chill</cell>
+            <cell halign='Right'>18</cell>
+            <cell>°C</cell>
+        </row>
+        <row>
+            <cell>Wind Direction</cell>
+            <cell halign='Right'>330</cell>
+            <cell>°</cell>
+        </row>
+        <row>
+            <cell>Wind Speed</cell>
+            <cell halign='Right'>14,48</cell>
+            <cell>km/h</cell>
+        </row>
+        <row>
+            <cell>Humidity</cell>
+            <cell halign='Right'>52</cell>
+            <cell>%</cell>
+        </row>
+        <row>
+            <cell>Visibility</cell>
+            <cell halign='Right'>9,99</cell>
+            <cell>km</cell>
+        </row>
+        <row>
+            <cell>Pressure</cell>
+            <cell halign='Right'>1015,92</cell>
+            <cell>mbar</cell>
+        </row>
+        <row>
+            <cell>Pressure Trend</cell>
+            <cell>Steady</cell>
+            <cell/>
+        </row>
+    </table>
+</message>]]>
+			</example>
+		</section2>
+		<section2 topic='Column and Row Formats' anchor='columnrowformats'>
+			<p>
+				The following example uses column and row formats to format all cells in specific columns and rows in a certain way. Using column and row 
+				formats avoids the use of repeated attributes for each cell in the corresponding column or row.
+			</p>
+			<p>
+				<strong>Note:</strong> Column formats override any conflicting table formats, row formats override any conflicting column or table formats, 
+				and cell formats override any conflicting row, column or table formats.
+			</p>
+			<example caption='Column and Row Formats'>
+				<![CDATA[
+<message from='device@clayster.com/device' to='user@clayster.com/client' type='chat' xml:lang='en'>
+    <body>Field	Value	Unit
+Location	Viña del Mar
+Condition	Fair
+Condition Code	34
+Temperature	18	°C
+Chill	18	°C
+Wind Direction	330	°
+Wind Speed	14,48	km/h
+Humidity	52	%
+Visibility	9,99	km
+Pressure	1015,92	mbar
+Pressure Trend	Steady</body>
+    <table xmlns="urn:xmpp:tables" hspacing='5' vspacing='2'>
+        <columnFormat bold='true'/>
+        <columnFormat italic='true'/>
+        <columnFormat italic='true'/>
+        <row bold='true' italic='false'>
+            <cell>Field</cell>
+            <cell>Value</cell>
+            <cell>Unit</cell>
+        </row>
+        <row>
+            <cell>Location</cell>
+            <cell>Viña del Mar</cell>
+            <cell/>
+        </row>
+        <row>
+            <cell>Condition</cell>
+            <cell>Fair</cell>
+            <cell/>
+        </row>
+        <row>
+            <cell>Condition Code</cell>
+            <cell halign='Right'>34</cell>
+            <cell/>
+        </row>
+        <row>
+            <cell>Temperature</cell>
+            <cell halign='Right'>18</cell>
+            <cell>°C</cell>
+        </row>
+        <row>
+            <cell>Chill</cell>
+            <cell halign='Right'>18</cell>
+            <cell>°C</cell>
+        </row>
+        <row>
+            <cell>Wind Direction</cell>
+            <cell halign='Right'>330</cell>
+            <cell>°</cell>
+        </row>
+        <row>
+            <cell>Wind Speed</cell>
+            <cell halign='Right'>14,48</cell>
+            <cell>km/h</cell>
+        </row>
+        <row>
+            <cell>Humidity</cell>
+            <cell halign='Right'>52</cell>
+            <cell>%</cell>
+        </row>
+        <row>
+            <cell>Visibility</cell>
+            <cell halign='Right'>9,99</cell>
+            <cell>km</cell>
+        </row>
+        <row>
+            <cell>Pressure</cell>
+            <cell halign='Right'>1015,92</cell>
+            <cell>mbar</cell>
+        </row>
+        <row>
+            <cell>Pressure Trend</cell>
+            <cell>Steady</cell>
+            <cell/>
+        </row>
+    </table>
+</message>]]>
+			</example>
+		</section2>
+		<section2 topic='Colors and fonts' anchor='colorsandfonts'>
+			<p>
+				The following example shows how to explicitly define colors and fonts for the table or its parts. When specified, they override any default settings used
+				by the IM client.
+			</p>
+			<p>
+				<strong>Note:</strong> Font sizes are never set explicitly. Instead, a font size multiplier is used to define the font size. It is multiplied by the font size
+				currently being used in the IM client to get the actual font size desired.
+			</p>
+			<p>
+				<strong>Note 2:</strong> If a font with the given name is not found, the current font should be used, i.e. the font being used if no font name was specified.
+			</p>
+			<example caption='Colors and fonts'>
+				<![CDATA[
+<message from='device@clayster.com/device' to='user@clayster.com/client' type='chat' xml:lang='en'>
+    <body>Field	Value	Unit
+Location	Viña del Mar
+Condition	Fair
+Condition Code	34
+Temperature	18	°C
+Chill	18	°C
+Wind Direction	330	°
+Wind Speed	14,48	km/h
+Humidity	52	%
+Visibility	9,99	km
+Pressure	1015,92	mbar
+Pressure Trend	Steady</body>
+    <table xmlns="urn:xmpp:tables" hspacing='5' vspacing='2' bgColor='FFFFFF' fgColor='000000' fontSizeMultiplier='1.125' fontName='Arial'>
+        <columnFormat bold='true'/>
+        <columnFormat italic='true' fontName='Courier New'/>
+        <columnFormat italic='true' fontName='Courier New'/>
+        <row bold='true' italic='false' fontName='Arial'>
+            <cell>Field</cell>
+            <cell>Value</cell>
+            <cell>Unit</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Location</cell>
+            <cell>Viña del Mar</cell>
+            <cell/>
+        </row>
+        <row>
+            <cell>Condition</cell>
+            <cell>Fair</cell>
+            <cell/>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Condition Code</cell>
+            <cell halign='Right'>34</cell>
+            <cell/>
+        </row>
+        <row>
+            <cell>Temperature</cell>
+            <cell halign='Right'>18</cell>
+            <cell>°C</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Chill</cell>
+            <cell halign='Right'>18</cell>
+            <cell>°C</cell>
+        </row>
+        <row>
+            <cell>Wind Direction</cell>
+            <cell halign='Right'>330</cell>
+            <cell>°</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Wind Speed</cell>
+            <cell halign='Right'>14,48</cell>
+            <cell>km/h</cell>
+        </row>
+        <row>
+            <cell>Humidity</cell>
+            <cell halign='Right'>52</cell>
+            <cell>%</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Visibility</cell>
+            <cell halign='Right'>9,99</cell>
+            <cell>km</cell>
+        </row>
+        <row>
+            <cell>Pressure</cell>
+            <cell halign='Right'>1015,92</cell>
+            <cell>mbar</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Pressure Trend</cell>
+            <cell>Steady</cell>
+            <cell/>
+        </row>
+    </table>
+</message>]]>
+			</example>
+		</section2>
+		<section2 topic='Cell span' anchor='cellspan'>
+			<p>
+				Normally, each cell in a table occupies exactly one cell in the internal grid generated by the table. However, sometimes you want the contents
+				of a cell to span multiple columns and/or rows in the table. You can do this by using the attributes <strong>colSpan</strong> and <strong>rowSpan</strong>.
+				Any cell using these attributes will be formatted according to the formatting of the top left cell in the invisible grid generated by the table. Alignment
+				however is computed over the entire span of the cell.
+			</p>
+			<example caption='Cell span'>
+				<![CDATA[
+<message from='device@clayster.com/device' to='user@clayster.com/client' type='chat' xml:lang='en'>
+    <body>Field	Value	Unit
+Location	Viña del Mar
+Condition	Fair
+Condition Code	34
+Temperature	18	°C
+Chill	18	°C
+Wind Direction	330	°
+Wind Speed	14,48	km/h
+Humidity	52	%
+Visibility	9,99	km
+Pressure	1015,92	mbar
+Pressure Trend	Steady</body>
+    <table xmlns="urn:xmpp:tables" hspacing='5' vspacing='2' bgColor='FFFFFF' fgColor='000000' fontSizeMultiplier='1.125' fontName='Arial'>
+        <columnFormat bold='true'/>
+        <columnFormat italic='true' fontName='Courier New'/>
+        <columnFormat italic='true' fontName='Courier New'/>
+        <row bold='true' italic='false' fontName='Arial'>
+            <cell>Field</cell>
+            <cell>Value</cell>
+            <cell>Unit</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Location</cell>
+            <cell colSpan='2' halign='Center'>Viña del Mar</cell>
+        </row>
+        <row>
+            <cell>Condition</cell>
+            <cell colSpan='2' halign='Center'>Fair</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Condition Code</cell>
+            <cell halign='Right'>34</cell>
+            <cell/>
+        </row>
+        <row>
+            <cell>Temperature</cell>
+            <cell halign='Right'>18</cell>
+            <cell>°C</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Chill</cell>
+            <cell halign='Right'>18</cell>
+            <cell>°C</cell>
+        </row>
+        <row>
+            <cell>Wind Direction</cell>
+            <cell halign='Right'>330</cell>
+            <cell>°</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Wind Speed</cell>
+            <cell halign='Right'>14,48</cell>
+            <cell>km/h</cell>
+        </row>
+        <row>
+            <cell>Humidity</cell>
+            <cell halign='Right'>52</cell>
+            <cell>%</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Visibility</cell>
+            <cell halign='Right'>9,99</cell>
+            <cell>km</cell>
+        </row>
+        <row>
+            <cell>Pressure</cell>
+            <cell halign='Right'>1015,92</cell>
+            <cell>mbar</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Pressure Trend</cell>
+            <cell colSpan='2' halign='Center'>Steady</cell>
+        </row>
+    </table>
+</message>]]>
+			</example>
+		</section2>
+		<section2 topic='XHTML-IM content with text fallback' anchor='xhtmlimcontent'>
+			<p>
+				Sometimes you might want to insert content in a table that is not pure text. Examples can be images, links or text formatted more in detail.
+				<link url='http://xmpp.org/extensions/xep-0071.html'>XEP-0071: XHTML-IM</link> defines a mechanism whereby this can be achieved. However, since
+				not all clients support XHTML-IM, a text fallback mechanism should always be provided.
+			</p>
+			<p>
+				The following example builds on the previous examples and shows how XHTML-IM can be embedded into a cell in a table together with a text fallback 
+				that can be used by the table renderer in the client, if support for XHTML-IM is not available.
+			</p>
+			<p>
+				<strong>Note:</strong> Since the <strong>cell</strong> element is of a mixed type you can mix both text and child elements. Note however, that any
+				whitespace around the child elements are considered part of the text fallback.
+			</p>
+			<example caption='XHTML-IM content with text fallback'>
+				<![CDATA[
+<message from='device@clayster.com/device' to='user@clayster.com/client' type='chat' xml:lang='en'>
+    <body>Field	Value	Unit
+Location	Viña del Mar
+Condition	Fair
+Condition Code	34
+Temperature	18	°C
+Chill	18	°C
+Wind Direction	330	°
+Wind Speed	14,48	km/h
+Humidity	52	%
+Visibility	9,99	km
+Pressure	1015,92	mbar
+Pressure Trend	Steady</body>
+    <table xmlns="urn:xmpp:tables" hspacing='5' vspacing='2' bgColor='FFFFFF' fgColor='000000' fontSizeMultiplier='1.125' fontName='Arial'>
+        <columnFormat bold='true'/>
+        <columnFormat italic='true' fontName='Courier New'/>
+        <columnFormat italic='true' fontName='Courier New'/>
+        <row bold='true' italic='false' fontName='Arial'>
+            <cell>Field</cell>
+            <cell>Value</cell>
+            <cell>Unit</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Location</cell>
+            <cell colSpan='2' halign='Center'>Viña del Mar<html xmlns='http://jabber.org/protocol/xhtml-im'>
+                <a href='http://weather.yahoo.com/chile/valparaiso/vina-del-mar-349873/'>Viña del Mar</a>
+            </html></cell>
+        </row>
+        <row>
+            <cell>Condition</cell>
+            <cell colSpan='2' halign='Center'>Fair</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Condition Code</cell>
+            <cell halign='Right'>34</cell>
+            <cell/>
+        </row>
+        <row>
+            <cell>Temperature</cell>
+            <cell halign='Right'>18</cell>
+            <cell>°C</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Chill</cell>
+            <cell halign='Right'>18</cell>
+            <cell>°C</cell>
+        </row>
+        <row>
+            <cell>Wind Direction</cell>
+            <cell halign='Right'>330</cell>
+            <cell>°</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Wind Speed</cell>
+            <cell halign='Right'>14,48</cell>
+            <cell>km/h</cell>
+        </row>
+        <row>
+            <cell>Humidity</cell>
+            <cell halign='Right'>52</cell>
+            <cell>%</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Visibility</cell>
+            <cell halign='Right'>9,99</cell>
+            <cell>km</cell>
+        </row>
+        <row>
+            <cell>Pressure</cell>
+            <cell halign='Right'>1015,92</cell>
+            <cell>mbar</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Pressure Trend</cell>
+            <cell colSpan='2' halign='Center'>Steady</cell>
+        </row>
+    </table>
+</message>]]>
+			</example>
+		</section2>
+		<section2 topic='Splitting a table into multiple messages' anchor='splittingtable'>
+			<p>
+				Since messages have a size limit, the &xmppcore; defines a minimal maximal stanza size of 10000 bytes, it might be necessary to split larger
+				tables into multiple messages. This is done using the <strong>toBeContinued</strong> element before closing the <strong>table</strong> element,
+				as is shown in the following example.
+			</p>
+			<p>
+				<strong>Note:</strong> The <strong>toBeContinued</strong> element is placed last, since it might be difficult to know the final stanza size before
+				doing the actual XML serialization. Since any text fallback might be rendered at the top, the entire table might or might not be available in the
+				text fallback part. The IM client, when receiving the continuation of the table, must not assume any fallback versions of the table are at the same
+				position as the table part. The fallback version might be equally streamed, more advanced, or less advanced as the table version. If continuation
+				messages contain fallbacks they should be presented using the same logic as the previous message.
+			</p>
+			<p>
+				<strong>Note 2:</strong> Any table and column formatting provided in previous parts will be automatically applied to the continuation of the table.
+				It is not necessary to repeat these. Any conflicting table or column formats provided in continuations will simply be ignored.
+			</p>
+			<example caption='Splitting a table into multiple messages'>
+				<![CDATA[
+<message from='device@clayster.com/device' to='user@clayster.com/client' type='chat' xml:lang='en'>
+    <body>Field	Value	Unit
+Location	Viña del Mar
+Condition	Fair
+Condition Code	34
+Temperature	18	°C
+Chill	18	°C</body>
+    <table xmlns="urn:xmpp:tables" hspacing='5' vspacing='2' bgColor='FFFFFF' fgColor='000000' fontSizeMultiplier='1.125' fontName='Arial'>
+        <columnFormat bold='true'/>
+        <columnFormat italic='true' fontName='Courier New'/>
+        <columnFormat italic='true' fontName='Courier New'/>
+        <row bold='true' italic='false' fontName='Arial'>
+            <cell>Field</cell>
+            <cell>Value</cell>
+            <cell>Unit</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Location</cell>
+            <cell colSpan='2' halign='Center'>Viña del Mar<html xmlns='http://jabber.org/protocol/xhtml-im'>
+                <a href='http://weather.yahoo.com/chile/valparaiso/vina-del-mar-349873/'>Viña del Mar</a>
+            </html></cell>
+        </row>
+        <row>
+            <cell>Condition</cell>
+            <cell colSpan='2' halign='Center'>Fair</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Condition Code</cell>
+            <cell halign='Right'>34</cell>
+            <cell/>
+        </row>
+        <row>
+            <cell>Temperature</cell>
+            <cell halign='Right'>18</cell>
+            <cell>°C</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Chill</cell>
+            <cell halign='Right'>18</cell>
+            <cell>°C</cell>
+        </row>
+        <toBeContinued/>
+    </table>
+</message>
+ 
+<message from='device@clayster.com/device' to='user@clayster.com/client' type='chat' xml:lang='en'>
+    <body>Wind Direction	330	°
+Wind Speed	14,48	km/h
+Humidity	52	%
+Visibility	9,99	km
+Pressure	1015,92	mbar
+Pressure Trend	Steady</body>
+    <table xmlns="urn:xmpp:tables">
+        <row>
+            <cell>Wind Direction</cell>
+            <cell halign='Right'>330</cell>
+            <cell>°</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Wind Speed</cell>
+            <cell halign='Right'>14,48</cell>
+            <cell>km/h</cell>
+        </row>
+        <row>
+            <cell>Humidity</cell>
+            <cell halign='Right'>52</cell>
+            <cell>%</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Visibility</cell>
+            <cell halign='Right'>9,99</cell>
+            <cell>km</cell>
+        </row>
+        <row>
+            <cell>Pressure</cell>
+            <cell halign='Right'>1015,92</cell>
+            <cell>mbar</cell>
+        </row>
+        <row bgColor='E0E0E0'>
+            <cell>Pressure Trend</cell>
+            <cell colSpan='2' halign='Center'>Steady</cell>
+        </row>
+    </table>
+</message>]]>
+			</example>
+		</section2>
+	</section1>
+	<section1 topic='Determining Support' anchor='support'>
+		<p>If an entity supports the reception of events as specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:tables" in response to &xep0030; information requests.</p>
+		<example caption="Service discovery information request">
+			<![CDATA[
+<iq type='get'
+    from='user1@clayster.com/client'
+    to='user2@clayster.com/client'
+    id='disco1'>
+  <query xmlns='http://jabber.org/protocol/disco#info'/>
+</iq>]]>
+		</example>
+		<example caption="Service discovery information response">
+			<![CDATA[
+<iq type='result'
+    from='user2@clayster.com/client'
+    to='user1@clayster.com/client'
+    id='disco1'>
+  <query xmlns='http://jabber.org/protocol/disco#info'>
+    ...
+    <feature var='urn:xmpp:tables'/>
+    ...
+  </query>
+</iq>]]>
+		</example>
 		<p>
-			So this extension specifies a means to encode and send tabulated data between XMPP clients. Apart from being easy to single out and render, the
-			receiver would also have the benefit of knowing the data is of tabular format, which allows the client to encode it as such when copying the data
-			to a clipboard, making it easy to paste it into spread sheets. Using this extension it would be easy to interchange tabular data without having to
-			go through the process of saving it in files, transmitting files and separately opening them, which includes trusting file content, scanning them
-			with antivirus software, etc.
+			In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
+			in &xep0115;. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
 		</p>
-	</section1>
-	<section1 topic='Requirements' anchor='reqs'>
-		<p>STRONGLY RECOMMENDED.</p>
-	</section1>
-	<section1 topic='Glossary' anchor='glossary'>
-		<p>OPTIONAL.</p>
-	</section1>
-	<section1 topic='Use Cases' anchor='usecases'>
-		<p>STRONGLY RECOMMENDED.</p>
 	</section1>
 	<section1 topic='Business Rules' anchor='rules'>
-		<p>OPTIONAL.</p>
+		<p>
+			The following subsections define rules how to interpret data in case of perceived inconsistencies.
+		</p>
+		<section2 topic='Column number mismatch'>
+			<p>
+				It is allowed to have table with different number of columns. The table is considered to have the number of columns necessary to display
+				the row with the maximum number of columns, or the number of column formats if that number is greater. All rows with a smaller number of 
+				columns will be considered to have empty cells to the right, to fill up the table.
+			</p>
+		</section2>
+		<section2 topic='XHTML-IM fallback' anchor='xhtmlfallback'>
+			<p>
+				The examples in the <link url='#usecases'>Use Cases</link> section only contain a text fallback mechanism when sending chat messages.
+				It is possible to have multiple kinds of fallback mechanisms, for instance a text fallback and an XHTML-IM fallback. The IM client
+				is supposed to select the version that it knows how to render best. Following are some guidelines:
+			</p>
+			<ul>
+				<li>
+					<p>
+						If the IM client does not support either XHTML-IM or tables, the text fallback is used to display the content.
+					</p>
+				</li>
+				<li>
+					<p>
+						If the IM client only supports the XHTML-IM extension, but not the table extension, it will select the XHTML-IM fallback if such is available, 
+						otherwise the text fallback will be displayed.
+					</p>
+				</li>
+				<li>
+					<p>
+						If the IM client only supports the table extension but not the XHTML-IM extension, it will select the table content and display it.
+					</p>
+				</li>
+				<li>
+					<p>
+						If the IM client supports both the XHTML-IM extension and the table extension, the table content should be chosen in favor of the XHTML-IM
+						fallback, if the XHTML-IM engine in the IM client does not support the XHTML Tables Module <note>
+							XHTML Tables Module:
+							<link url='http://www.w3.org/TR/2004/WD-xhtml2-20040722/mod-tables.html'>http://www.w3.org/TR/2004/WD-xhtml2-20040722/mod-tables.html</link>.
+						</note>. If the XHTML Tables Module is supported by the XHTML-IM engine, the XHTML-IM content should be selected in favor of the table content
+						as described in this extension.
+					</p>
+				</li>
+			</ul>
+		</section2>
+		<section2 topic='Table Formats' anchor='tableformats'>
+			<p>
+				The <strong>table</strong> element itself can contain format settings. Any formatting provided in <strong>table</strong> elements override any default settings
+				provided by the IM client.
+			</p>
+			<p>
+				The <strong>hSpacing</strong> and <strong>vSpacing</strong> attributes, which are unique to the <strong>table</strong> element,
+				provide information on how much space should be inserted between cells in the table. The unit used is pixels.
+			</p>
+		</section2>
+		<section2 topic='Column Formats' anchor='columnformats'>
+			<p>
+				Column formats are defined before any rows and cells, as shown in the <link url='#usecases'>Use Cases</link> section. Any formatting provided in 
+				<strong>columnFormat</strong> elements override any corresponding table settings, or default settings provided by the IM client. The <strong>columnFormat</strong>
+				elements do not contain cell definitions themselves. Cells are defined in <strong>row</strong> elements.
+			</p>
+		</section2>
+		<section2 topic='Row Formats' anchor='rowformats'>
+			<p>
+				Row formats are provided in <strong>row</strong> elements. Any formatting provided in <strong>row</strong> elements override any corresponding table settings, row settings
+				or default settings provided by the IM client.
+			</p>
+		</section2>
+		<section2 topic='Cel spans' anchor='cellspans'>
+			<p>
+				Cells can span multiple regions in the invisible grid defined by the table. By default, each cell in the table only spans one such
+				grid element. By using the attributes <strong>colSpan</strong> and <strong>rowSpan</strong> respectively, the cell can define the number of
+				grid elements it will span both horizontally (<strong>colSpan</strong>) and vertically (<strong>rowSpan</strong>).
+			</p>
+			<p>
+				A cell spanning multiple grid elements will obtain the formatting defined for the top left grid element in the invisible grid defined by the table.
+				Alignment and formatting will be applied to the entire cell however, not only the top left grid element from which the formatting was taken.
+			</p>
+			<p>
+				When computing grid element widths in the table, it is the width of the rightmost grid element that will be adjusted to fit the contents of a cell
+				that spans multiple grid elements horizontally.
+			</p>
+			<p>
+				In the same manner, it is the height of the bottommost grid element that will be adjusted to fit the contents of the cell that spans multiple grid 
+				elements vertically.
+			</p>
+		</section2>
+		<section2 topic='Splitting Tables' anchor='splittingtables'>
+			<p>
+				Since messages have a size limit, the &xmppcore; defines a minimal maximal stanza size of 10000 bytes, it might be necessary to split larger
+				tables into multiple messages. This is done using the <strong>toBeContinued</strong> element before closing the <strong>table</strong> element,
+				as is shown in the following example.
+			</p>
+			<p>
+				The <strong>toBeContinued</strong> element is placed last, since it might be difficult to know the final stanza size before
+				doing the actual XML serialization. Since any text fallback might be rendered at the top, the entire table might or might not be available in the
+				text fallback part. The IM client, when receiving the continuation of the table, must not assume any fallback versions of the table are at the same
+				position as the table part. The fallback version might be equally streamed, more advanced, or less advanced as the table version. If continuation
+				messages contain fallbacks they should be presented using the same logic as the previous message.
+			</p>
+			<p>
+				Any table and column formatting provided in previous parts will be automatically applied to the continuation of the table.
+				It is not necessary to repeat these. Any conflicting table or column formats provided in continuations will simply be ignored.
+			</p>
+			<p>
+				If the sender goes offline before the continuation message is received, or if it takes more than <strong>one minute</strong> to receive the continuation,
+				the client should consider the continuation message to be lost and the current message not to be a continuation but a new table message.
+			</p>
+		</section2>
+    </section1>
+    <section1 topic='Implementation Notes' anchor='impl'>
+		<section2 topic='Feature support'>
+			<p>
+				The following tables list features defined by this extension and if they MUST be supported, SHOULD be supported or MAY be supported by the table renderer,
+				if this extension is supported by the IM-client.
+			</p>
+			<table caption='Elements'>
+				<tr>
+					<th>Element</th>
+					<th>Support</th>
+				</tr>
+				<tr>
+					<td>cell</td>
+					<td>MUST</td>
+				</tr>
+				<tr>
+					<td>html</td>
+					<td>MAY</td>
+				</tr>
+				<tr>
+					<td>columnFormat</td>
+					<td>MUST</td>
+				</tr>
+				<tr>
+					<td>row</td>
+					<td>MUST</td>
+				</tr>
+				<tr>
+					<td>table</td>
+					<td>MUST</td>
+				</tr>
+				<tr>
+					<td>toBeContinued</td>
+					<td>SHOULD</td>
+				</tr>
+			</table>
+			<table caption='Attributes'>
+				<tr>
+					<th>Attribute</th>
+					<th>Support</th>
+				</tr>
+				<tr>
+					<td>bgColor</td>
+					<td>SHOULD</td>
+				</tr>
+				<tr>
+					<td>bold</td>
+					<td>SHOULD</td>
+				</tr>
+				<tr>
+					<td>colSpan</td>
+					<td>SHOULD</td>
+				</tr>
+				<tr>
+					<td>fgColor</td>
+					<td>SHOULD</td>
+				</tr>
+				<tr>
+					<td>fontName</td>
+					<td>SHOULD</td>
+				</tr>
+				<tr>
+					<td>fontSizeMultiplier</td>
+					<td>SHOULD</td>
+				</tr>
+				<tr>
+					<td>hAlign</td>
+					<td>MUST</td>
+				</tr>
+				<tr>
+					<td>hSpacing</td>
+					<td>MUST</td>
+				</tr>
+				<tr>
+					<td>italics</td>
+					<td>SHOULD</td>
+				</tr>
+				<tr>
+					<td>rowSpan</td>
+					<td>SHOULD</td>
+				</tr>
+				<tr>
+					<td>strikeThrough</td>
+					<td>SHOULD</td>
+				</tr>
+				<tr>
+					<td>underline</td>
+					<td>SHOULD</td>
+				</tr>
+				<tr>
+					<td>vAlign</td>
+					<td>MUST</td>
+				</tr>
+				<tr>
+					<td>vSpacing</td>
+					<td>MUST</td>
+				</tr>
+			</table>
+		</section2>
 	</section1>
-	<section1 topic='Implementation Notes' anchor='impl'>
-		<p>OPTIONAL.</p>
+    <section1 topic='Accessibility Considerations' anchor='access'>
+		<p>
+			When receiving a table in an IM-client it should be treated as tabular data as far as possible. It means that the user might probably want to select the table,
+			or a rectangular part of the table, save it in some file format that is compatible with spread sheets, or copied to the clipboard in a format compatible with
+			spread sheets. the user might also want to copy spread sheet data back to the IM-client which should send it according to this extension back to the original 
+			sender.
+		</p>
+    </section1>
+    <section1 topic='Internationalization Considerations' anchor='i18n'>
+		<section2 topic='xml:lang' anchor='lang'>
+			<p>
+				Table messages SHOULD contain an <strong>xml:lang</strong> attribute on the message stanza to specify the language
+				used in message texts, including table content. If language information is not available, the <strong>xml:lang</strong> attribute can be omitted.
+			</p>
+		</section2>
 	</section1>
-	<section1 topic='Accessibility Considerations' anchor='access'>
-		<p>OPTIONAL.</p>
+    <section1 topic='Security Considerations' anchor='security'>
+		<p>
+			If integrating with XHTML-IM, consider any security considerations provided in <link url='http://xmpp.org/extensions/xep-0071.html#security'>XEP-0071</link>.
+		</p>
+    </section1>
+    <section1 topic='IANA Considerations' anchor='iana'>
+		<p>This document requires no interaction with &IANA;.</p>
 	</section1>
-	<section1 topic='Internationalization Considerations' anchor='i18n'>
-		<p>OPTIONAL.</p>
+    <section1 topic='XMPP Registrar Considerations' anchor='registrar'>
+		<p>
+			The <link url="#schema">protocol schema</link> needs to be added to the list of <link url="http://xmpp.org/resources/schemas/">XMPP protocol schemas</link>.
+		</p>
 	</section1>
-	<section1 topic='Security Considerations' anchor='security'>
-		<p>REQUIRED.</p>
-	</section1>
-	<section1 topic='IANA Considerations' anchor='iana'>
-		<p>REQUIRED.</p>
-	</section1>
-	<section1 topic='XMPP Registrar Considerations' anchor='registrar'>
-		<p>REQUIRED.</p>
-	</section1>
-	<section1 topic='XML Schema' anchor='schema'>
-		<p>REQUIRED for protocol specifications.</p>
-	</section1>
+    <section1 topic='XML Schema' anchor='schema'>
+        <code>
+            <![CDATA[
+    <?xml version='1.0' encoding='UTF-8'?>
+    <xs:schema
+        xmlns:xs='http://www.w3.org/2001/XMLSchema'
+        targetNamespace='urn:xmpp:tables'
+        xmlns='urn:xmpp:tables'
+        xmlns:xdc='urn:xmpp:xdata:color'
+        xmlns:xhtml-im='http://jabber.org/protocol/xhtml-im'
+        elementFormDefault='qualified'>
+ 
+        <xs:import namespace='urn:xmpp:xdata:color'/>
+        <xs:import namespace='http://jabber.org/protocol/xhtml-im'/>
+ 
+        <xs:element name='table'>
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name='columnFormat' minOccurs='0' maxOccurs='unbounded'>
+                        <xs:complexType>
+                            <xs:attributeGroup ref='contentAttributes'/>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name='row' minOccurs='1' maxOccurs='unbounded'>
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name='cell' minOccurs='1' maxOccurs='unbounded'>
+                                    <xs:complexType mixed='true'>
+                                        <xs:choice>
+                                            <xs:element ref='xhtml-im:html' minOccurs='0' maxOccurs='1'/>
+                                        </xs:choice>
+                                        <xs:attributeGroup ref='contentAttributes'/>
+                                        <xs:attribute name='colSpan' type='xs:positiveInteger' use='optional' default='1'/>
+                                        <xs:attribute name='rowSpan' type='xs:positiveInteger' use='optional' default='1'/>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                            <xs:attributeGroup ref='contentAttributes'/>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name='toBeContinued' minOccurs='0' maxOccurs='1'>
+                        <xs:complexType/>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attributeGroup ref='contentAttributes'/>
+                <xs:attribute name='hSpacing' type='xs:nonNegativeInteger' use='optional' default='0'/>
+                <xs:attribute name='vSpacing' type='xs:nonNegativeInteger' use='optional' default='0'/>
+            </xs:complexType>
+        </xs:element>
+ 
+        <xs:attributeGroup name='contentAttributes'>
+            <xs:attribute name='halign' type='HorizontalAlignment' use='optional' default='Left'/>
+            <xs:attribute name='valign' type='VerticalAlignment' use='optional' default='Top'/>
+            <xs:attribute name='fgColor' type='xdc:Color' use='optional'/>
+            <xs:attribute name='bgColor' type='xdc:Color' use='optional'/>
+            <xs:attribute name='fontName' type='xs:string' use='optional'/>
+            <xs:attribute name='fontSizeMultiplier' type='PositiveDouble' use='optional' default='1.0'/>
+            <xs:attribute name='bold' type='xs:boolean' use='optional'/>
+            <xs:attribute name='italics' type='xs:boolean' use='optional'/>
+            <xs:attribute name='underline' type='xs:boolean' use='optional'/>
+            <xs:attribute name='strikeThrough' type='xs:boolean' use='optional'/>
+        </xs:attributeGroup>
+ 
+        <xs:simpleType name='HorizontalAlignment'>
+            <xs:restriction base='xs:string'>
+                <xs:enumeration value='Left'/>
+                <xs:enumeration value='Center'/>
+                <xs:enumeration value='Right'/>
+            </xs:restriction>
+        </xs:simpleType>
+ 
+        <xs:simpleType name='VerticalAlignment'>
+            <xs:restriction base='xs:string'>
+                <xs:enumeration value='Top'/>
+                <xs:enumeration value='Center'/>
+                <xs:enumeration value='Bottom'/>
+            </xs:restriction>
+        </xs:simpleType>
+ 
+        <xs:simpleType name='PositiveDouble'>
+            <xs:restriction base='xs:double'>
+                <xs:minExclusive value='0'/>
+            </xs:restriction>
+        </xs:simpleType>
+ 
+    </xs:schema>]]>
+        </code>
+    </section1>
 </xep>

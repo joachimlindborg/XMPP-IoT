@@ -2,7 +2,7 @@
 <html>
   <head>
     <META http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>XEP-xxxx: Event Logging over XMPP</title>
+    <title>XEP-0337: Event Logging over XMPP</title>
     <link rel="stylesheet" type="text/css" href="xmpp.css">
     <link href="prettify.css" type="text/css" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"><script type="text/javascript" src="prettify.js"></script><meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=2.0">
@@ -11,15 +11,15 @@
     <meta name="DC.Description" content="This specification provides a common framework for sending events to event logs over XMPP networks.">
     <meta name="DC.Publisher" content="XMPP Standards Foundation">
     <meta name="DC.Contributor" content="XMPP Extensions Editor">
-    <meta name="DC.Date" content="2013-11-10">
+    <meta name="DC.Date" content="2014-01-08">
     <meta name="DC.Type" content="XMPP Extension Protocol">
     <meta name="DC.Format" content="XHTML">
-    <meta name="DC.Identifier" content="XEP-xxxx">
+    <meta name="DC.Identifier" content="XEP-0337">
     <meta name="DC.Language" content="en">
     <meta name="DC.Rights" content="This XMPP Extension Protocol is copyright © 1999 - 2013 by the XMPP Standards Foundation (XSF).">
   </head>
   <body onload="prettyPrint()">
-    <h1>XEP-xxxx: Event Logging over XMPP</h1>
+    <h1>XEP-0337: Event Logging over XMPP</h1>
     <table>
       <tr valign="top">
         <td><strong>Abstract:</strong></td>
@@ -35,7 +35,7 @@
       </tr>
       <tr valign="top">
         <td><strong>Status:</strong></td>
-        <td>ProtoXEP</td>
+        <td>Experimental</td>
       </tr>
       <tr valign="top">
         <td><strong>Type:</strong></td>
@@ -43,15 +43,15 @@
       </tr>
       <tr valign="top">
         <td><strong>Version:</strong></td>
-        <td>0.0.1</td>
+        <td>0.1</td>
       </tr>
       <tr valign="top">
         <td><strong>Last Updated:</strong></td>
-        <td>2013-11-10</td>
+        <td>2014-01-08</td>
       </tr>
     </table>
     <hr>
-    <p style="color:red">WARNING: This document has not yet been accepted for consideration or approved in any official manner by the XMPP Standards Foundation, and this document is not yet an XMPP Extension Protocol (XEP). If this document is accepted as a XEP by the XMPP Council, it will be published at &lt;<a href="http://xmpp.org/extensions/">http://xmpp.org/extensions/</a>&gt; and announced on the &lt;standards@xmpp.org&gt; mailing list.</p>
+    <p style="color:red">WARNING: This Standards-Track document is Experimental. Publication as an XMPP Extension Protocol does not imply approval of this proposal by the XMPP Standards Foundation. Implementation of the protocol described herein is encouraged in exploratory implementations, but production systems are advised to carefully consider whether it is appropriate to deploy implementations of this protocol before it advances to a status of Draft.</p>
     <hr>
     <h2>Table of Contents</h2>
     <div class="indent">
@@ -81,8 +81,8 @@
       7.1.  <a href="#zeroconf">Zero configuration</a><br>   
       7.2.  <a href="#sensitiveinfo">Sensitive information</a><br>   
       7.3.  <a href="#transportoptions">Transport options</a><br>      
-      7.3.1.  <a href="#sect-ID0EPAAE">Direct messages</a><br>      
-      7.3.2.  <a href="#sect-ID0EYAAE">Publish/Subscribe</a><br>8.  <a href="#iana">IANA Considerations</a><br>9.  <a href="#registrar">XMPP Registrar Considerations</a><br>10.  <a href="#schema">XML Schema</a><br>11.  <a href="#ack">Acknowledgements</a></p>
+      7.3.1.  <a href="#sect-ID0EPBAE">Direct messages</a><br>      
+      7.3.2.  <a href="#sect-ID0EYBAE">Publish/Subscribe</a><br>8.  <a href="#iana">IANA Considerations</a><br>9.  <a href="#registrar">XMPP Registrar Considerations</a><br>10.  <a href="#schema">XML Schema</a><br>11.  <a href="#ack">Acknowledgements</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
     </div>
     <hr>
@@ -99,12 +99,12 @@
         </p>
         <p class="" style="">
             There are various event log packages available, but none yet defined for XMPP or using a well-defined and known XML format. Therefore, this document defines
-            such an XML format. This format is able to store <a href="https://tools.ietf.org/html/rfc5424">Syslog</a>  [<a href="#nt-ID0ELD">1</a>] compliant event information, even though the <a href="https://tools.ietf.org/html/rfc5424">Syslog</a> event model has been somewhat extended. 
+            such an XML format. This format is able to store <a href="https://tools.ietf.org/html/rfc5424">Syslog</a>  [<a href="#nt-ID0ELE">1</a>] compliant event information, even though the <a href="https://tools.ietf.org/html/rfc5424">Syslog</a> event model has been somewhat extended. 
             Also, in the use of the facility attribute, this XEP does not have the same restrictions compared to the <a href="https://tools.ietf.org/html/rfc5424">Syslog</a> specification.
         </p>
         <p class="" style="">
             This document does not restrict the use of event messages to directed message stanzas alone. It may be envisioned that some would like to publish event information through
-            <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0060.html">Publish-Subscribe</a></span>  [<a href="#nt-ID0ECE">2</a>] or other mechanisms. It is not in the scope of this document to specify such transports however, as it only deals with direct messages, but a brief list is provided
+            <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0060.html">Publish-Subscribe</a></span>  [<a href="#nt-ID0ECF">2</a>] or other mechanisms. It is not in the scope of this document to specify such transports however, as it only deals with direct messages, but a brief list is provided
             in the <a href="#transportoptions">Security Considerations</a> section.
         </p>
     <h2>2.
@@ -347,7 +347,7 @@ File2, Line2, ...
         </div>
     <h2>4.
        <a name="support">Determining Support</a></h2>
-        <p class="" style="">If an entity supports the reception of events as specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:eventlog" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0ECEAC">3</a>] information requests.</p>
+        <p class="" style="">If an entity supports the reception of events as specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:eventlog" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0ECFAC">3</a>] information requests.</p>
         <p class="caption"><a name="example-10"></a>Example 10. Service discovery information request</p>
     <div class="indent">
       <pre class="prettyprint">
@@ -378,7 +378,7 @@ File2, Line2, ...
     </div>
         <p class="" style="">
             In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
-            in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EZEAC">4</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
+            in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EZFAC">4</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
         </p>
     <h2>5.
        <a name="impl">Implementation Notes</a></h2>
@@ -509,7 +509,7 @@ File2, Line2, ...
             <p class="" style="">
                 Any event can have a custom set of tags attached to it. A tag is required to have a name and a value. It can also optionally specify a data type.
                 Data types are specified using Qualified Names (QNames). If possible, they should adhere to the list of
-                <a href="http://xmpp.org/registrar/xdv-datatypes.html">Data Forms Validation Datatypes</a>  [<a href="#nt-ID0EANAC">5</a>] that is maintained by the XMPP Registrar.
+                <a href="http://xmpp.org/registrar/xdv-datatypes.html">Data Forms Validation Datatypes</a>  [<a href="#nt-ID0EAOAC">5</a>] that is maintained by the XMPP Registrar.
             </p>
             <p class="" style="">
                 <span class="strong">Note:</span> To avoid problems when running applications using different locales, tag names should never be localized.
@@ -580,14 +580,14 @@ File2, Line2, ...
                 The following subsections lists different transport options together with security considerations for each one.
             </p>
             <div class="indent">
-        <h3>7.3.1 <a name="sect-ID0EPAAE">Direct messages</a></h3>
+        <h3>7.3.1 <a name="sect-ID0EPBAE">Direct messages</a></h3>
                 <p class="" style="">
                     This document explicitly describes how to send event messages in direct messages. If sensitive information is being sent,
                     end-to-end encryption should be considered.
                 </p>
             </div>
             <div class="indent">
-        <h3>7.3.2 <a name="sect-ID0EYAAE">Publish/Subscribe</a></h3>
+        <h3>7.3.2 <a name="sect-ID0EYBAE">Publish/Subscribe</a></h3>
                 <p class="" style="">
                     Event messages could be published using <a href="http://xmpp.org/extensions/xep-0060.html">Publish-Subscribe</a>. Unless there's absolute control
 					of who can subscribe to the information published in this manner, the information should be considered open and freely available. In such cases extra 
@@ -599,7 +599,7 @@ File2, Line2, ...
         </div>
     <h2>8.
        <a name="iana">IANA Considerations</a></h2>
-        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EVBAE">6</a>].</p>
+        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EVCAE">6</a>].</p>
     <h2>9.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
         <p class="" style="">
@@ -677,21 +677,23 @@ File2, Line2, ...
     <hr><a name="appendix-docinfo"></a><h3>Appendix A: Document Information</h3>
     <p class="indent">
             Series: <a href="http://xmpp.org/extensions/">XEP</a><br>
-            Number: xxxx<br>
+            Number: 0337<br>
             Publisher: <a href="/xsf/">XMPP Standards Foundation</a><br>
             Status: 
-            <a href="http://xmpp.org/extensions/xep-0001.html#states-ProtoXEP">ProtoXEP</a><br>
+            <a href="http://xmpp.org/extensions/xep-0001.html#states-Experimental">Experimental</a><br>
             Type:
             <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
-            Version: 0.0.1<br>
-            Last Updated: 2013-11-10<br>
+            Version: 0.1<br>
+            Last Updated: 2014-01-08<br>
                 Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001<br>
                 Supersedes: None<br>
                 Superseded By: None<br>
             Short Name: eventlogging<br>
+              Source Control: 
+                <a class="standardsButton" href="http://gitorious.org/xmpp/xmpp/blobs/master/extensions/xep-0337.xml">HTML</a><br>
             This document in other formats: 
-                <a class="standardsButton" href="http://xmpp.org/extensions/xep-xxxx.xml">XML</a> 
-                <a class="standardsButton" href="http://xmpp.org/extensions/xep-xxxx.pdf">PDF</a></p>
+                <a class="standardsButton" href="http://xmpp.org/extensions/xep-0337.xml">XML</a> 
+                <a class="standardsButton" href="http://xmpp.org/extensions/xep-0337.pdf">PDF</a></p>
     <hr><a name="appendix-authorinfo"></a><h3>Appendix B: Author Information</h3>
     <div class="indent">
       <h3>Peter Waher</h3>
@@ -716,20 +718,32 @@ File2, Line2, ...
     <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
     <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
     <div class="indent">
-      <p><a name="nt-ID0ELD">1</a>. 
+      <p><a name="nt-ID0ELE">1</a>. 
                 RFC-5424: The Syslog Protocol &lt;<a href="https://tools.ietf.org/html/rfc5424">https://tools.ietf.org/html/rfc5424</a>&gt;
             </p>
-      <p><a name="nt-ID0ECE">2</a>. XEP-0060: Publish-Subscribe &lt;<a href="http://xmpp.org/extensions/xep-0060.html">http://xmpp.org/extensions/xep-0060.html</a>&gt;.</p>
-      <p><a name="nt-ID0ECEAC">3</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
-      <p><a name="nt-ID0EZEAC">4</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
-      <p><a name="nt-ID0EANAC">5</a>. 
+      <p><a name="nt-ID0ECF">2</a>. XEP-0060: Publish-Subscribe &lt;<a href="http://xmpp.org/extensions/xep-0060.html">http://xmpp.org/extensions/xep-0060.html</a>&gt;.</p>
+      <p><a name="nt-ID0ECFAC">3</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0EZFAC">4</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0EAOAC">5</a>. 
                     Data Forms Validation Datatypes &lt;<a href="http://xmpp.org/registrar/xdv-datatypes.html">http://xmpp.org/registrar/xdv-datatypes.html</a>&gt;
                 </p>
-      <p><a name="nt-ID0EVBAE">6</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+      <p><a name="nt-ID0EVCAE">6</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
     <div class="indent">
+      <h4>Version 0.1 (2014-01-08)</h4>
+      <div class="indent">
+				<p class="" style="">
+					Initial published version approved by the XMPP Council.
+				</p>
+			 (psa)
+    </div>
+      <h4>Version 0.0.2 (2013-12-02)</h4>
+      <div class="indent">
+				<p class="" style="">Addressed pre-publication feedback from the XMPP Council.</p>
+			 (pw)
+    </div>
       <h4>Version 0.0.1 (2013-11-10)</h4>
       <div class="indent">
                 <p class="" style="">First draft.</p>

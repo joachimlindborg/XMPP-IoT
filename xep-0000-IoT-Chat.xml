@@ -31,7 +31,7 @@
 			<spec>XEP-0325</spec>
 			<spec>XEP-0326</spec>
 			<spec>XEP-0331</spec>
-			<spec>dynamic-forms</spec>
+			<spec>XEP-0336</spec>
 		</dependencies>
 		<supersedes/>
 		<supersededby/>
@@ -1414,7 +1414,7 @@
 		<p>
 			The following list details the different extensions available detailing how data forms work. For a richer user experience, it is recommended that as many
 			of these be supported by the client as possible. However, the most important, apart from XEP-0004, for Internet of Things devices is the
-			<link url='dynamic-forms.html'>dynamic-forms.html</link> XEP, since it defines how undefined values are reported and asynchronous updates of the form. These
+			<link url='http://xmpp.org/extensions/xep-0336.html'>XEP-0336</link>, since it defines how undefined values are reported and asynchronous updates of the form. These
 			are very useful for displaying parameters in control forms since all parameters should be marked as uncertain (greyed) so that only edited parameters are
 			sent and result in control actions. Furthermore, since current values might be uncertain and take time to retrieve, asynchronous updates of the form
 			are permitted when values are received. For a more detailed discussion, see &xep0326;.
@@ -1457,11 +1457,10 @@
 			</li>
 			<li>
 				<p>
-					<span class='ref'><link url='dynamic-forms.html'>dynamic-forms</link></span>
+					<span class='ref'><link url='http://xmpp.org/extensions/xep-0336.html'>XEP-0336</link></span>
 					<note>
-						XEP-xxxx: Dynamic Data Forms &lt;<link url='dynamic-forms.html'>dynamic-forms.html</link>&gt;
-					</note> handles server-side validation, asynchronous updates, editing of multiple objects,
-					undefined values, readonly values, etc.
+						XEP-0336: Dynamic Data Forms &lt;<link url='http://xmpp.org/extensions/xep-0336.html'>http://xmpp.org/extensions/xep-0336.html</link>&gt;
+					</note> handles server-side validation, asynchronous updates, editing of multiple objects, undefined values, readonly values, etc.
 				</p>
 			</li>
 		</ul>

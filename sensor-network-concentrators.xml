@@ -29,7 +29,7 @@
             <spec>XEP-0323</spec>
             <spec>XEP-0324</spec>
             <spec>XEP-0331</spec>
-            <spec>dynamic-forms</spec>
+            <spec>XEP-0336</spec>
         </dependencies>
         <supersedes/>
         <supersededby/>
@@ -135,10 +135,6 @@
 				<th>Description</th>
 			</tr>
 			<tr>
-				<td>dynamic-forms</td>
-				<td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
-			</tr>
-			<tr>
 				<td>xep-0000-IoT-BatteryPoweredSensors</td>
 				<td>Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
 			</tr>
@@ -195,6 +191,10 @@
 			<tr>
 				<td>XEP-0331</td>
 				<td>Defines extensions for how color parameters can be handled, based on &xep0004;</td>
+			</tr>
+			<tr>
+				<td>XEP-0336</td>
+				<td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
 			</tr>
 		</table>
 
@@ -283,7 +283,7 @@
                     </li>
                     <li>
                         Dialog types used for Ad-Hoc-commands are not sufficient. First, dynamic dialogs are required in the general case.
-                        (XEP <link url='dynamic-forms.html'>dynamic-forms.html</link> define how to create dynamic forms.) Furthermore, the
+                        (<link url='http://xmpp.org/extensions/xep-0336.html'>XEP-0326</link> define how to create dynamic forms.) Furthermore, the
                         wizard style type of dialogs used for more complex dialogs in ad-hoc commands, are difficult to automate.
                     </li>
                 </ul>
@@ -1950,12 +1950,12 @@
                         <td>Defines extensions for how color parameters can be handled.</td>
                     </tr>
                     <tr>
-                        <td>dynamic-forms</td>
+                        <td>XEP-0336</td>
                         <td>Makes it possible to create dynamic forms, with server-side validation and forms that change dynamically depending on input.</td>
                     </tr>
                 </table>
                 <p>
-                    Read-only parameters will be returned with the <strong>readOnly</strong> element, as defined in <link url='dynamic-forms.html'>dynamic-forms</link>.
+                    Read-only parameters will be returned with the <strong>readOnly</strong> element, as defined in <link url='http://xmpp.org/extensions/xep-0336.html'>XEP-0336</link>.
                     Clients SHOULD support this extension if using this command. However, the server MUST NOT change parameters in a node that are read-only, even if clients happen
                     to try to set them.
                 </p>
@@ -2081,9 +2081,9 @@
                 <p>
                     As the <strong>result</strong> attribute is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                    explicitly cancelled or a form session time-out has occurred. See <link url='dynamic-forms.html'>dynamic-forms</link>
+                    explicitly cancelled or a form session time-out has occurred. See <link url='http://xmpp.org/extensions/xep-0336.html'>XEP-0336</link>
                     <note>
-                        XEP-xxxx: Dynamic Data Forms &lt;<link url='dynamic-forms.html'>dynamic-forms.html</link>&gt;
+                        XEP-0336: Dynamic Data Forms &lt;<link url='http://xmpp.org/extensions/xep-0336.html'>http://xmpp.org/extensions/xep-0336.html</link>&gt;
                     </note> for more information.
                 </p>
             </section3>
@@ -2096,8 +2096,8 @@
                 </p>
                 <p>
                     <strong>Important:</strong> A parameter that exists in multiple nodes, but has different parameter values among the nodes, will be marked with the 
-                    <strong>notSame</strong> element, according to <link url='dynamic-forms.html'>dynamic-forms</link>. Clients using this command MUST 
-                    support the extensions defined in <link url='dynamic-forms.html'>dynamic-forms</link>.
+                    <strong>notSame</strong> element, according to <link url='http://xmpp.org/extensions/xep-0336.html'>XEP-0336</link>. Clients using this command MUST 
+                    support the extensions defined in <link url='http://xmpp.org/extensions/xep-0336.html'>XEP-0336</link>.
                 </p>
                 <example caption='Get Common Node Parameters for editing'>
                     <![CDATA[
@@ -2277,7 +2277,7 @@
                 </p>
                 <p>
                     <strong>Important:</strong> A parameter that exists in multiple nodes, but has different parameter values among the nodes, will be marked with the
-                    <strong>notSame</strong> element, according to <link url='dynamic-forms.html'>dynamic-forms</link>. Such parameters MUST NOT be sent back to the server 
+                    <strong>notSame</strong> element, according to <link url='http://xmpp.org/extensions/xep-0336.html'>XEP-0336</link>. Such parameters MUST NOT be sent back to the server 
                     unless they have explicitly been edited or signed by the end-user. The value sent back to the server will be set in all nodes.
                 </p>
             </section3>
@@ -2322,8 +2322,7 @@
                 <p>
                     As the <strong>result</strong> attribute is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                    explicitly cancelled or a form session time-out has occurred. See <link url='dynamic-forms.html'>dynamic-forms</link>
-                    <link url='dynamic-forms.html'>dynamic-forms.html</link> for more information.
+                    explicitly cancelled or a form session time-out has occurred. See <link url='http://xmpp.org/extensions/xep-0336.html'>XEP-0336</link> for more information.
                 </p>
             </section3>
             <section3 topic='Get Node Messages'>
@@ -2611,8 +2610,7 @@
                 <p>
                     As the <strong>result</strong> attribute is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                    explicitly cancelled or a form session time-out has occurred. See <link url='dynamic-forms.html'>dynamic-forms</link>
-                    <link url='dynamic-forms.html'>dynamic-forms.html</link> for more information.
+                    explicitly cancelled or a form session time-out has occurred. See <link url='http://xmpp.org/extensions/xep-0336.html'>XEP-0336</link> for more information.
                 </p>
             </section3>
             <section3 topic='Destroy Node'>
@@ -2817,8 +2815,7 @@
                     If an error occurs during the execution of a command or if the server rejects the execution of a command, the server returns a response code different from
                     <strong>OK</strong>. If the response code is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                    explicitly cancelled or a form session time-out has occurred. See <link url='dynamic-forms.html'>dynamic-forms</link>
-                    <link url='dynamic-forms.html'>dynamic-forms.html</link> for more information.
+                    explicitly cancelled or a form session time-out has occurred. See <link url='http://xmpp.org/extensions/xep-0336.html'>XEP-0336</link> for more information.
                 </p>
                 <example caption='Execute Node Command, Failure'>
                     <![CDATA[
@@ -2956,8 +2953,7 @@
                     If an error occurs during the reception of a query or if the server rejects the execution of a query, the server returns a response code different from
                     <strong>OK</strong>. If the response code is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                    explicitly cancelled or a form session time-out has occurred. See <link url='dynamic-forms.html'>dynamic-forms</link>
-                    <link url='dynamic-forms.html'>dynamic-forms.html</link> for more information.
+                    explicitly cancelled or a form session time-out has occurred. See <link url='http://xmpp.org/extensions/xep-0336.html'>XEP-0336</link> for more information.
                 </p>
                 <example caption='Execute Node Query, Failure'>
                     <![CDATA[
@@ -3199,8 +3195,7 @@
                     If an error occurs during the execution of a common command or if the server rejects the execution of a common command, the server returns a response code different from
                     <strong>OK</strong>. If the response code is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                    explicitly cancelled or a form session time-out has occurred. See <link url='dynamic-forms.html'>dynamic-forms</link>
-                    <link url='dynamic-forms.html'>dynamic-forms.html</link> for more information.
+                    explicitly cancelled or a form session time-out has occurred. See <link url='http://xmpp.org/extensions/xep-0336.html'>XEP-0336</link> for more information.
                 </p>
                 <example caption='Execute Parameterized Command on Multiple Nodes, Failure'>
                     <![CDATA[
@@ -3408,8 +3403,7 @@
                     If an error occurs during the execution of a common query or if the server rejects the execution of a common query, the server returns a response code different from
                     <strong>OK</strong>. If the response code is <strong>FormError</strong>, the server maintains any parameter form resources related to the form, and features such as
                     dynamic validation of the contents of the form will still be available until the parameters have been successfully set, the operation has been
-                    explicitly cancelled or a form session time-out has occurred. See <link url='dynamic-forms.html'>dynamic-forms</link>
-                    <link url='dynamic-forms.html'>dynamic-forms.html</link> for more information.
+                    explicitly cancelled or a form session time-out has occurred. See <link url='http://xmpp.org/extensions/xep-0336.html'>XEP-0336</link> for more information.
                 </p>
                 <example caption='Execute Parameterized Query on multiple nodes, Failure'>
                     <![CDATA[

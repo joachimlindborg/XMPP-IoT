@@ -30,6 +30,14 @@
 			<uri>http://www.linkedin.com/in/peterwaher</uri>
 		</author>
 		<revision>
+			<version>0.3</version>
+			<date>2014-02-17</date>
+			<initials>pw</initials>
+			<remark>
+				<p>Changed the id attrobutes of IQ stanzas, to highlight they are different from sequence numbers used in requests.</p>
+			</remark>
+		</revision>
+		<revision>
 			<version>0.2</version>
 			<date>2013-05-07</date>
 			<initials>pw</initials>
@@ -114,10 +122,6 @@
 				<th>Description</th>
 			</tr>
 			<tr>
-				<td>dynamic-forms</td>
-				<td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
-			</tr>
-			<tr>
 				<td>xep-0000-IoT-BatteryPoweredSensors</td>
 				<td>Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
 			</tr>
@@ -172,6 +176,10 @@
 			<tr>
 				<td>XEP-0331</td>
 				<td>Defines extensions for how color parameters can be handled, based on &xep0004;</td>
+			</tr>
+			<tr>
+				<td>XEP-0336</td>
+				<td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
 			</tr>
 		</table>
 	</section1>
@@ -405,7 +413,7 @@
    <iq type='get'
        from='client@clayster.com/amr'
        to='device@clayster.com'
-       id='1'>
+       id='S0001'>
       <req xmlns='urn:xmpp:iot:sensordata' seqnr='1' momentary='true'/>
    </iq>]]>
 			</example>
@@ -419,7 +427,7 @@
    <iq type='result'
        from='device@clayster.com'
        to='client@clayster.com/amr'
-       id='1'>
+       id='S0001'>
       <accepted xmlns='urn:xmpp:iot:sensordata' seqnr='1'/>
    </iq>]]>
 			</example>
@@ -453,14 +461,14 @@
    <iq type='get'
        from='client@clayster.com/amr'
        to='device@clayster.com'
-       id='2'>
+       id='S0002'>
       <req xmlns='urn:xmpp:iot:sensordata' seqnr='2' momentary='true'/>
    </iq>
    
    <iq type='result'
        from='device@clayster.com'
        to='client@clayster.com/amr'
-       id='2'>
+       id='S0002'>
       <accepted xmlns='urn:xmpp:iot:sensordata' seqnr='2'/>
    </iq>
    
@@ -482,14 +490,14 @@
    <iq type='get'
        from='client@clayster.com/amr'
        to='device@clayster.com'
-       id='3'>
+       id='S0003'>
       <req xmlns='urn:xmpp:iot:sensordata' seqnr='3' momentary='true'/>
    </iq>
    
    <iq type='error'
        from='device@clayster.com'
        to='client@clayster.com/amr'
-       id='3'>
+       id='S0003'>
       <rejected xmlns='urn:xmpp:iot:sensordata' seqnr='3'>
 	     <error>Access denied.</error>
       </rejected>
@@ -509,14 +517,14 @@
    <iq type='get'
        from='client@clayster.com/amr'
        to='device@clayster.com'
-       id='4'>
+       id='S0004'>
       <req xmlns='urn:xmpp:iot:sensordata' seqnr='4' all='true' when='2013-03-07T19:00:00'/>
    </iq>
    
    <iq type='result'
        from='device@clayster.com'
        to='client@clayster.com/amr'
-       id='4'>
+       id='S0004'>
       <accepted xmlns='urn:xmpp:iot:sensordata' seqnr='4' queued='true'/>
    </iq>
    
@@ -588,7 +596,7 @@
    <iq type='get'
        from='client@clayster.com/amr'
        to='device@clayster.com'
-       id='5'>
+       id='S0005'>
       <req xmlns='urn:xmpp:iot:sensordata' seqnr='5' momentary='true'>
          <node nodeId='Device02'/>
          <node nodeId='Device03'/>
@@ -598,7 +606,7 @@
    <iq type='result'
        from='device@clayster.com'
        to='client@clayster.com/amr'
-       id='5'>
+       id='S0005'>
       <accepted xmlns='urn:xmpp:iot:sensordata' seqnr='5'/>
    </iq>
    
@@ -644,7 +652,7 @@
    <iq type='get'
        from='client@clayster.com/amr'
        to='device@clayster.com'
-       id='6'>
+       id='S0006'>
       <req xmlns='urn:xmpp:iot:sensordata' seqnr='6' momentary='true'>
          <node nodeId='Device04'/>
          <field name='Energy'/>
@@ -655,7 +663,7 @@
    <iq type='result'
        from='device@clayster.com'
        to='client@clayster.com/amr'
-       id='6'>
+       id='S0006'>
       <accepted xmlns='urn:xmpp:iot:sensordata' seqnr='6'/>
    </iq>
    
@@ -681,28 +689,28 @@
    <iq type='get'
        from='client@clayster.com/amr'
        to='device@clayster.com'
-       id='8'>
+       id='S0007'>
       <req xmlns='urn:xmpp:iot:sensordata' seqnr='8' all='true' when='2013-03-09T23:30:00'/>
    </iq>
    
    <iq type='result'
        from='device@clayster.com'
        to='client@clayster.com/amr'
-       id='8'>
+       id='S0007'>
       <accepted xmlns='urn:xmpp:iot:sensordata' seqnr='8' queued='true'/>
    </iq>
    
    <iq type='get'
        from='client@clayster.com/amr'
        to='device@clayster.com'
-       id='8'>
+       id='S0008'>
       <cancel xmlns='urn:xmpp:iot:sensordata' seqnr='8'/>
    </iq>
    
    <iq type='result'
        from='device@clayster.com'
        to='client@clayster.com/amr'
-       id='8'>
+       id='S0008'>
       <cancelled xmlns='urn:xmpp:iot:sensordata' seqnr='8'/>
    </iq>]]>
 			</example>
@@ -1065,14 +1073,14 @@
    <iq type='get'
        from='client@clayster.com/amr'
        to='device@clayster.com'
-       id='7'>
+       id='S0009'>
       <req xmlns='urn:xmpp:iot:sensordata' seqnr='7' all='true'/>
    </iq>
    
    <iq type='result'
        from='device@clayster.com'
        to='client@clayster.com/amr'
-       id='7'>
+       id='S0009'>
       <accepted xmlns='urn:xmpp:iot:sensordata' seqnr='7'/>
    </iq>
    

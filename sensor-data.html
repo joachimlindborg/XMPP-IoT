@@ -11,7 +11,7 @@
     <meta name="DC.Description" content="This specification provides the common framework for sensor data interchange over XMPP networks.">
     <meta name="DC.Publisher" content="XMPP Standards Foundation">
     <meta name="DC.Contributor" content="XMPP Extensions Editor">
-    <meta name="DC.Date" content="2013-05-07">
+    <meta name="DC.Date" content="2014-02-17">
     <meta name="DC.Type" content="XMPP Extension Protocol">
     <meta name="DC.Format" content="XHTML">
     <meta name="DC.Identifier" content="XEP-0323">
@@ -43,11 +43,11 @@
       </tr>
       <tr valign="top">
         <td><strong>Version:</strong></td>
-        <td>0.2</td>
+        <td>0.3</td>
       </tr>
       <tr valign="top">
         <td><strong>Last Updated:</strong></td>
-        <td>2013-05-07</td>
+        <td>2014-02-17</td>
       </tr>
     </table>
     <hr>
@@ -56,23 +56,23 @@
     <h2>Table of Contents</h2>
     <div class="indent">
       <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
-      3.1.  <a href="#sect-ID0EZEAE">Request Read-out of momentary values</a><br>   
-      3.2.  <a href="#sect-ID0EWFAE">Read-out failure</a><br>   
-      3.3.  <a href="#sect-ID0ECGAE">Read-out rejected</a><br>   
-      3.4.  <a href="#sect-ID0EVGAE">Read-out all</a><br>   
-      3.5.  <a href="#sect-ID0EBHAE">Read-out of multiple devices</a><br>   
-      3.6.  <a href="#sect-ID0ENHAE">Read-out of specific fields</a><br>   
+      3.1.  <a href="#sect-ID0EJFAE">Request Read-out of momentary values</a><br>   
+      3.2.  <a href="#sect-ID0EGGAE">Read-out failure</a><br>   
+      3.3.  <a href="#sect-ID0ESGAE">Read-out rejected</a><br>   
+      3.4.  <a href="#sect-ID0EFHAE">Read-out all</a><br>   
+      3.5.  <a href="#sect-ID0ERHAE">Read-out of multiple devices</a><br>   
+      3.6.  <a href="#sect-ID0E4HAE">Read-out of specific fields</a><br>   
       3.7.  <a href="#cancelreadout">Cancelling a scheduled read-out request</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
-      5.1.  <a href="#sect-ID0ELKAE">String lengths</a><br>   
-      5.2.  <a href="#sect-ID0EOLAE">Enumerations vs. Strings</a><br>   
-      5.3.  <a href="#sect-ID0EFNAE">Asynchronous feedback</a><br>   
-      5.4.  <a href="#sect-ID0EVNAE">Field Value Types</a><br>   
+      5.1.  <a href="#sect-ID0E2KAE">String lengths</a><br>   
+      5.2.  <a href="#sect-ID0E5LAE">Enumerations vs. Strings</a><br>   
+      5.3.  <a href="#sect-ID0EVNAE">Asynchronous feedback</a><br>   
+      5.4.  <a href="#sect-ID0EFOAE">Field Value Types</a><br>   
       5.5.  <a href="#fieldtypes">Field Types</a><br>   
-      5.6.  <a href="#sect-ID0EMYAE">Field Status Values</a><br>   
-      5.7.  <a href="#sect-ID0E54AE">Subnodes and supernodes</a><br>   
-      5.8.  <a href="#sect-ID0ET5AE">Reading devices from large subsystems</a><br>6.  <a href="#i18n">Internationalization Considerations</a><br>   
-      6.1.  <a href="#sect-ID0EZ6AE">Time Zones</a><br>   
-      6.2.  <a href="#sect-ID0EOAAG">Localized strings</a><br>7.  <a href="#security">Security Considerations</a><br>8.  <a href="#iana">IANA Considerations</a><br>9.  <a href="#registrar">XMPP Registrar Considerations</a><br>10.  <a href="#schema">XML Schema</a><br>11.  <a href="#moreinfo">For more information</a><br>12.  <a href="#ack">Acknowledgements</a></p>
+      5.6.  <a href="#sect-ID0E3YAE">Field Status Values</a><br>   
+      5.7.  <a href="#sect-ID0EO5AE">Subnodes and supernodes</a><br>   
+      5.8.  <a href="#sect-ID0ED6AE">Reading devices from large subsystems</a><br>6.  <a href="#i18n">Internationalization Considerations</a><br>   
+      6.1.  <a href="#sect-ID0EKAAG">Time Zones</a><br>   
+      6.2.  <a href="#sect-ID0E5AAG">Localized strings</a><br>7.  <a href="#security">Security Considerations</a><br>8.  <a href="#iana">IANA Considerations</a><br>9.  <a href="#registrar">XMPP Registrar Considerations</a><br>10.  <a href="#schema">XML Schema</a><br>11.  <a href="#moreinfo">For more information</a><br>12.  <a href="#ack">Acknowledgements</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
     </div>
     <hr>
@@ -95,10 +95,6 @@
 			<tr class="body">
 				<th colspan="" rowspan="">XEP</th>
 				<th colspan="" rowspan="">Description</th>
-			</tr>
-			<tr class="body">
-				<td colspan="" rowspan="">dynamic-forms</td>
-				<td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EYAAC">1</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EEBAC">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0EQBAC">3</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0E3BAC">4</a>].</td>
 			</tr>
 			<tr class="body">
 				<td colspan="" rowspan="">xep-0000-IoT-BatteryPoweredSensors</td>
@@ -154,7 +150,11 @@
 			</tr>
 			<tr class="body">
 				<td colspan="" rowspan="">XEP-0331</td>
-				<td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EYGAC">5</a>]</td>
+				<td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EMFAC">1</a>]</td>
+			</tr>
+			<tr class="body">
+				<td colspan="" rowspan="">XEP-0336</td>
+				<td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EDGAC">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EPGAC">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0E2GAC">4</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EHHAC">5</a>].</td>
 			</tr>
 		</table>
     </div>
@@ -222,7 +222,7 @@
 			</di>
 			<di>
 				<dt><strong>Parameter</strong></dt>
-				<dd>Readable and/or writable property on a node/device. The XEP-0326 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0ESKAC">6</a>] deals with reading and writing parameters
+				<dd>Readable and/or writable property on a node/device. The XEP-0326 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0ECLAC">6</a>] deals with reading and writing parameters
 				on nodes/devices. Fields are not parameters, and parameters are not fields.</dd>
 			</di>
 			<di>
@@ -362,7 +362,7 @@
 		</p>
 		<p class="" style="">
 			The device can also reject a read-out request. Reasons for rejecting a request may be missing privileges defined by provisioning rules, etc. It's not part of this XEP
-			to define such rules. A separate XEP (<span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0EIDAE">7</a>]) defines an architecture for how such provisioning can be easily implemented.
+			to define such rules. A separate XEP (<span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0EYDAE">7</a>]) defines an architecture for how such provisioning can be easily implemented.
 		</p>
 		<p class="" style="">
 			A rejection response is shown in the following diagram.
@@ -383,7 +383,7 @@
 			<img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZ0AAAEiCAIAAACtIZhVAAAUDklEQVR4nO3d267cVh3H8fVMjYgSPwkQiZBC1ksgpFwUGiFa+QGAil4VlAsgki9LoVcg0Q2l0ICbpjuBnpMmAXpKpeHCXl5HH2aPPTP+r+9Hudjjba+D1/x/s8ZpFbUBAFnUoQcAADMj1wBIY3NNAcDKJXJt36GKo8HqQwByDR5WHwKQa/Cw+hCAXIOH1YcA5Bo8rD4E2DHX6rJQRVnbA5X2/1JCV1sPKWpz7GyvjxkGsJ1wAM2hhfqvtGruTffDyNC2uJMbQg1SLJFr3YGt62rrq+qyCKJjhgFsIx7AptL2yKT42cKSuUaoQYwpuWa3H6ZIzJFC66Fc6150LYQNDLdp9172dZMYTctV14pNlokDcI4UTXdh48NXBSfYAaSzJJ5vpZXSWntXd/M1rUUDSORa/yDj1elHqEGSCbkWbQ3sHqUuCxXnWvgt0Ja6u5Xx2060aU82DcTRk96vjQ9gsLu28cSw411SNIDhPZJtoNIqaNTrxQyybwDuDRid2hhCDcJst18LY2Lge2ilvW2WFewynFzz23Sbbmt2aq6NDyAxhajxkWHbyJ2Sa9GGbSBG3akEA4hybdLUpr0DADGm5JoxZUfg7Gi6X6Yr1t9/9GygbJp4R7yme5+vDQzAjiDuzhwZSgX/cm8A3j1xIjLY8MUZ7bU5MOye/ZrX/9T9GqEGkSbk2rRnYa3o8ZaNH7cFs80oisLb+fht2s1ImxzdOUXh1Ldyk2XiABLdxY1HVyVuRTQA/zQnu/z5Jh7n2fnGjyGd+9b3fG3C6vSsPSDMNvs1mZb/O9NjldlCIyPkWqa5ltkqIy/kWo5YYshGrmWH9YV45FpeWFzkgFzLCCuLTKRzDSId6D0G7JtivwZAGHINgDTkGgBpyDUA0pBrAKQh1wBIQ64BkIZcAyANuQZAGnINgDTkGgBpyDUA0iySa/v6/7jXYcebiRwc+k16XGa5n+0P8aFdGn33rT+9+9af3rv92nu3X3v/7ZP33z754M6fP7jz5w/f+cuH7/zlo9PXPzp9/eO7f71/743799548K+/PfjX3z75998/+fffH7775sN333z03q1H7916/P4/mj//+eCf//ngn//9sP7vh/X/Pnrrfx+99enHtz/9+PZn99/+7P7bnz+48/mDO1988s6XD0+/fHj65NHdJ4/ufvX43jH8mWWRIB4lM2/JkGsrWCSIR8mQaytbpFd++0rzZ8e7CsEomXlLhlxbwSJBPEqGXMtukSAeJUOuNYv006e7vz65/MLnD+588ctvXnz2d18+PH1y49LFZ38/+T6++vz1F498kSDeUiXzh++dd/6e8cIzL0/KtRuXLl5/lVzb1yLZXPvp0+qpH/2x/fD59WV14Yev2Fzb6sPn5NrFK+QaDmzBXPvWT8xW4OUffU195xfs145tkbpce+nrF555OdxUJ/Zrrz7fflqde/7EfBCdP9ccunj91e6E5T6dyDVMsZdcu/3pS99Ql3/22f3f/vhrTRE89dxrp18+PL357XPPndxtP+bPX7tl92tBBUUFdawls8pce/2Zp55+KXpYEOXarevnzPK8eFVduvn43lc3Lqnz12516/eY/RqOwp5y7Y/fv3D5Z2/84KkLP3zl8wd3vvjkhe+qb/7m4emTG5fUt3/elMzVG/Z76K3r51RTHSfXLl55MVFQx1oyq8y1aL/2wq9/mci1m1fc/4b53PMn7oODF6+Sazga+9yv/eqyVxfPvXb65NHvnzt/6abz8d+Uyc0r6uoN+2ZOFNSxlsw6cy16vqYuvzC4XzN/yDUcpX0+X3P2a/b52pvPnrt6xVSHs19rj5xcu3j+2s24oI61ZFaaaxP/PrR7HKCU/0Hk5ZpSarFoI9cwxX7+PvTpl5qtQPd8Tanme+iju09Orl10H0OPPF8zBXWsJbPeXMvoP8aBeJQMuZbdIkE8SoZcy26RIB4lQ65lt0gQj5Ih17JbJIhHyZBr2S0SxKNkyLXsFgniUTLkWnaLBPEoGXItu0WCeJQMuZbdIkE8SoZcy26RIB4lQ65lt0gQj5Ih17JbJIhHyZBr2S0SxKNkyLXsFgniUTLkWnaLBPEoGXItu0WCeJQMuZbdIkE8SoZcy26RIB4lQ65lt0gQj5Ih17JbJIhHyZBr2S0SxKNkyLXsFgniUTLkWnaLBPEoGXItu0WCeJQMuZbdIkE8SoZcy26RIB4lQ65lt0gQj5Ih17JbJIhHyZBr2S0SxKNkyLXsFgniUTLkWnaLBPEoGXItu0WCeJQMuZbdIkE8SoZcy26RIB4lQ65lt0gQj5JZR66hQ65h1KHfpMflSHOt043vIH/cG3QMf+a6qxCMkpmlZMi1FSwS8kHJzFIy5NoKFgn5oGRmKZllc+2wxEwE2A8xJUOuAWiJKRlyDUBLTMmQawBaYkpGcq4ByBO5BkAacg2ANOQaAGkk55qYiQD7IaZkyDUALTElQ64BaIkpGXINQEtMyZBrAFpiSoZcA9ASUzLkGoCWmJKRnGsA8kSuAZCGXAMgDbkGQBrJuSZmIsB+iCkZcg1AS0zJkGs7q3RR1nM0VJdlNUc7E8027n4LzaguC6XUjKPfeZxz3ctEO9MOzURe7ZNr26rLQukZy7YuC1217fa+b8/SabLBPaRaN6O5zT323ce54N1MNl2XepH+5NU+uTZZpZVy9gv2jdfsI5TSOnovxr8yR9p22pf+L51W4k6LQimlq6CdnmGEDZpBd1eroqwnNGX6tSfZkQS3yXZZafPbuiyKsq50oXXh9eR37Y0q3WzTbnQTTEe2i6Z/lRphfGuidhInN7+ptF04XY3OKHnrYgPvJf+eLPSRIa/2ybVJEvslJyK6Ug/eufGv7JGNqfrEW7XtLdlpd1HQzsAw7PCdMXcNT2rKLefuSF+Fda07W9GmdxuKQUebSitdjhRtpf2unftjDrkD7o6MjTPRTt+5lS6KwgZMdFsS6xvfuv6ZJd8w3oCW2SHKq31ybbLg4z+ssk38pnNetz+2bbi7kiBj0vu1RKdBO+lhBA3a33QNdJuJwabcC8MjETuj5ifzOrod0SzsqFJth107d84EQtdFN4eBHU4Qu247PSfXpS6r5gcTc/5tSaxvfOuGZhYvon9PBmJ6B/JqX2CuLczsBOLP2KgoBvdrzknjz9f6O437cvYOYYNxZVU6TpHEjM6Ya5u6LNoNjnMTUvu1aLqJ6k3kWrxfO1uuje7XzFSamG5+SNyWxIy2ybWB91I7tH08H10xcm1n3u7DbH22eL5mdmHNgYkfwvGDGGc31z+M8HrnYvf5Wn9TA7mWjFivJedS8zTKyT3bdemOqupPiNRNsM/X+nJtaJxRO6nE7eLP5mAis6KbGZ+TyqxwRubO+yu12F/JSEGuLSH8MPX2a/t7Pw59pm/5eT/l9EoPTS3+Lj6565nv2FYNzt77LI1PuoNNCp6p/dUj15bQ8zWv94HR3oYx/be7nJy42tuJ8h1qNxM/HJVv+XEdEcm5JmYiwBmoHsOX7G14iyLXAJn6cm0g4MSUjKhcG11IANMduqDPTgnLta8e30v+We+kgLOZEltSS4ZcA2SasguTWjLkGiDTlC+VUkuGXANkmvKMTGrJkGtAvqSWDLkG5EtqyZBrQL6klgy5BuRLasmQa0C+pJYMuQbkS2rJkGtAvqSWDLkG5EtqyZBrQL6klgy5BuRLasmQa0C+pJYMuQbkS2rJkGtAvqSWDLkG5EtqyZBrQL6klgy5BuRLasmQa0C+pJYMuQbkS2rJkGtAvqSWDLl2HCpdlPXyjddlWS3VyySjAxi+EYvepr1pZ3EMk1lxyQwi1w6rLgull46aroDqstBV22tvTS05JDOAfu1YkyM8hiCYg7Me+sATWmHJTEKuHUillVKqq113S1UopZTSOqziShdFoZTSlTlHhRcpVZSlDht1ssJe479KDKk7oLqYC/odfrnZVLrQurCH3C57rnVnHY7QTMedbB11Gjdl7ps9yd7JeGFSl4eLlJrp6DmpOY7n/MLWVDLbINcOILEjcmq2q71ww1JpZXZbtoqUroLyiGss2q/FY0kOqT1i+rPn1GXRhKv/MhiVMwVn6KkplAOz7rp1blE30uStCJvqfuh+100ttTTx5cH9TM509Jz0yh56C7qWktkWuXYg7V7IlJeNoOiQc0l3jiM4NrBfiyIhvV9zE9LrJEiD+GU4KmcGttxN4rknF0Vq1sEI3exwLgw6TdzAgaBPLcvo5YMz7T0nvbL9CbsfayqZbZBrh1VpFW5GbAb15Fr8G789Feyztny+1g7JZqCzX3PHVvW9dFsa36/5c3X3hj3TDyYbHEzcwG1yLXl5vG9NjGTsnPTKsl9bBrl2HPyP8HYv0lvY9gmTMt9xnK2B2St0LQTPfCZuEOyuSOuiq1p3k9j30vThPF+zERkP2XwPTs86mr8/2ajT+AYOfzGPuovuf3Q/45lOOicxR56vLYRc622qsdBQJzj0R/nu5p7Blu1NOb3Svbmyh/t/+CUm11Zgx0VSKXsYdo/Dv+l3Nf8Mtmpxx+4Xv/+Hfra22ZBrq3CGRUpm2XHkGrA4cm0FgkUazSwA5NqxU1Guja7Z6KofdkbAosi1FThDrrnXkmvIDbm2ArvkmtsIuYZMkGsrMEuuua2t91YAU5BrKzBvrgHiSa0Rcg3Il9QaIdeAfEmtEXINyJfUGiHXgHxJrRFyDciX1BoRnmsDDj1Y4PDItRWQukjAQqSWDLkG5EtqyZBrQL6kPqsh1wBIQ64BkIZcAyANuQagJaZMyDUALTFlQq4BaIkpE3INQEtMmZBrAFpiyoRcA9ASUybkmnSz/bPldVke7l8nH5nFzP82++L/1PuxElMm5JpUdVkoPWMQ1WWhq7bd3qqfu9OOSZpk7wvEUF3qPJNNCHJNnEorpVRX/bbo67JQSimldZQD8a/MEWXzxDbqv0p0Gl5ufq9M6lW6KPwzvEvCy73oCnt3M6+/hXiO8RjMEV11MY5VItdESeyXnKq3GePnWvwre2RTaWX2aWGht73FndojzVWmDdtuNwZzxL3Ey7PmaGJLZq5wJtiNIh5/YvrRGOw40z1iNcg1cdqtkSnQSkc1G5as87r9sdte2d1MEBvp/Vq3G4vT1WvM6dL26ERK1PvAfs1tylxi9mG2hcT0ozF4vcRzwHqQa1JVWoXbGfstcov9mnPS+PO1ttOgr6qLRGdnFGSKe4kfme5Zqd7jjVWl4xYS0x/LtQz3a2LKhFyTztuMmd3MFs/XzC6sOTB1C+M/3rIbKa2L4HtllXqiF/U+lDI2GZ0NWtRCPP3BXMvz+ZqYMiHXMhSGhLdfW2E1b7m1mnK6hN1aE+rbXrLQYPaMXMtQzze34JHZmmwVQ+MnrzPeQ8o38ZKlR7Uf5Bogk+oxfMnehrcocg2QqS/XBgJOTJlklGsAtnLogj47lU+uHXp0wF5NiS2pJUOuATJN2YVJLRlyDZBpypdKqSVDrgEyTXlGJrVkyDUgX1JLhlwD8iW1ZMg1IF9SS4ZcA/IltWTINSBfUkuGXAPyJbVkyDUgX1JLhlwD8iW1ZMg1IF9SS4ZcA/IltWTINSBfUkuGXAPyJbVkyDUgX1JLhlwD8iW1ZMg1IF9SS4ZcA/IltWTINSBfUkuGXAPyJbVkyDUgX1JLhlyTotJFWS/WZl2W1cyNn2EYk+Y4fNLMt2mJu75PUkuGXFu7uiyUXihzuqqty0JXbWe9hbzYSM6Ua8mhLhBDdalXnGxSS4ZcW61KK6VUV7tu8ReFUk7E2CN1WSjvqu6AKspSh205EWGv8V8lRrIJe2l/3w3JjMecEZwfDTKRa9E53RGtdXise22ud2ddT2gqHLB3k03mr5LUkiHXVimxNXKKP/6VMrstGxVKVxu/Jqu+XNukarcdQjwSe6S5qhtP132lbYIVZeWfHw8yzrXkROz0wz2ZGZFzeTfkSU35A66Dm7zm76JSS4ZcW612F2TKa+DLmo0p5QiODezXoiRI79e63VgiV4M+3Y5K//zEIKOpxec4nVa9+zW3X3Ot2YcNNjWQ+MkJr4fUkiHX1q7SytuMDOSaszdJNqPijdU2z9fakdhezHasrfq42U2li7KKzu8b/8BEgk7Tz9dSd8ZP6HRTo7nGfu3YkGtSTMg198GSMt+5nK2K2cUURSLXlJq8K/GfWNm9kdaF/72y/anv+Zrpcuj5mhvG/uD775E/67ip7oFhdB9SucbztSNErg21tt5bgaQtt1ZTTl/zbo1cW4VZFkn5Fh0w9m6rGBo/ec3P1jYbcm0Vdlkk1WM/IwcOglxbgTMsUl+ckWvIAbm2AsEijWYWAHLt2Kko10bXbHTVDzsjYFHk2gqcIdfca8k15IZcW4Fdcs1thFxDJsi1FZgl19zW1nsrgCnItRWYN9cA8aTWCLkG5EtqjZBrQL6k1gi5BuRLao2Qa0C+pNYIuQbkS2qNCM+1AYceLHB45NoKSF0kYCFSS4ZcA/IltWSk5RpfPIHppJaMqFwLiJkIsB9iSoZcA9ASUzLkGoCWmJIh1wC0xJQMuQagJaZkyDUALTElIznXAOSJXAMgDbkGQBpyDYA0knNNzESA/RBTMuQagJaYkiHXALTElAy5BqAlpmTINQAtMSVDrgFoiSkZcg1AS0zJSM41AHki1wBIQ64BkIZcAyCN5FwTMxFgP8SUDLkGoCWmZMg1AC0xJUOuAWiJKRlyDUBLTMlIzjUAeSLXAEhDrgGQhlwDIA25BkAacg2ANOQaAGnINQDSkGsApCHXAEhDrgGQhlwDIA25BkAacg2ANOQaAGnINQDSkGsApCHXAEhDrgGQhlwDIA25BkAacg2ANOlcA4BVC3MNAGQg1wBI838U0F7fe3WaXgAAAABJRU5ErkJggg==">
 		</p>
 		<div class="indent">
-      <h3>3.1 <a name="sect-ID0EZEAE">Request Read-out of momentary values</a></h3>
+      <h3>3.1 <a name="sect-ID0EJFAE">Request Read-out of momentary values</a></h3>
 			<p class="" style="">
 				The client that wishes to receive momentary values from the sensor initiates the request using the <span class="strong">req</span> request sent to the device.
 			</p>
@@ -394,7 +394,7 @@
    &lt;iq type='get'
        from='client@clayster.com/amr'
        to='device@clayster.com'
-       id='1'&gt;
+       id='S0001'&gt;
       &lt;req xmlns='urn:xmpp:iot:sensordata' seqnr='1' momentary='true'/&gt;
    &lt;/iq&gt;
 			</pre>
@@ -411,7 +411,7 @@
    &lt;iq type='result'
        from='device@clayster.com'
        to='client@clayster.com/amr'
-       id='1'&gt;
+       id='S0001'&gt;
       &lt;accepted xmlns='urn:xmpp:iot:sensordata' seqnr='1'/&gt;
    &lt;/iq&gt;
 			</pre>
@@ -440,7 +440,7 @@
 		</div>
 		
 		<div class="indent">
-      <h3>3.2 <a name="sect-ID0EWFAE">Read-out failure</a></h3>
+      <h3>3.2 <a name="sect-ID0EGGAE">Read-out failure</a></h3>
 			<p class="" style="">
 				If instead a read-out could not be performed, the communication sequence might look as follows:
 			</p>
@@ -452,14 +452,14 @@
    &lt;iq type='get'
        from='client@clayster.com/amr'
        to='device@clayster.com'
-       id='2'&gt;
+       id='S0002'&gt;
       &lt;req xmlns='urn:xmpp:iot:sensordata' seqnr='2' momentary='true'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='device@clayster.com'
        to='client@clayster.com/amr'
-       id='2'&gt;
+       id='S0002'&gt;
       &lt;accepted xmlns='urn:xmpp:iot:sensordata' seqnr='2'/&gt;
    &lt;/iq&gt;
    
@@ -473,7 +473,7 @@
       </div>
 		</div>
 		<div class="indent">
-      <h3>3.3 <a name="sect-ID0ECGAE">Read-out rejected</a></h3>
+      <h3>3.3 <a name="sect-ID0ESGAE">Read-out rejected</a></h3>
 			<p class="" style="">
 				If for some reason, the device rejects the read-out request, the communication sequence might look as follows:
 			</p>
@@ -485,14 +485,14 @@
    &lt;iq type='get'
        from='client@clayster.com/amr'
        to='device@clayster.com'
-       id='3'&gt;
+       id='S0003'&gt;
       &lt;req xmlns='urn:xmpp:iot:sensordata' seqnr='3' momentary='true'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='error'
        from='device@clayster.com'
        to='client@clayster.com/amr'
-       id='3'&gt;
+       id='S0003'&gt;
       &lt;rejected xmlns='urn:xmpp:iot:sensordata' seqnr='3'&gt;
 	     &lt;error&gt;Access denied.&lt;/error&gt;
       &lt;/rejected&gt;
@@ -504,7 +504,7 @@
 			</p>
 		</div>
 		<div class="indent">
-      <h3>3.4 <a name="sect-ID0EVGAE">Read-out all</a></h3>
+      <h3>3.4 <a name="sect-ID0EFHAE">Read-out all</a></h3>
 			<p class="" style="">
 				The following example shows a communication sequence when a client reads out all available information from a sensor at a given point in time:
 			</p>
@@ -516,14 +516,14 @@
    &lt;iq type='get'
        from='client@clayster.com/amr'
        to='device@clayster.com'
-       id='4'&gt;
+       id='S0004'&gt;
       &lt;req xmlns='urn:xmpp:iot:sensordata' seqnr='4' all='true' when='2013-03-07T19:00:00'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='device@clayster.com'
        to='client@clayster.com/amr'
-       id='4'&gt;
+       id='S0004'&gt;
       &lt;accepted xmlns='urn:xmpp:iot:sensordata' seqnr='4' queued='true'/&gt;
    &lt;/iq&gt;
    
@@ -587,7 +587,7 @@
       </div>
 		</div>
 		<div class="indent">
-      <h3>3.5 <a name="sect-ID0EBHAE">Read-out of multiple devices</a></h3>
+      <h3>3.5 <a name="sect-ID0ERHAE">Read-out of multiple devices</a></h3>
 			<p class="" style="">
 				The following example shows how a client reads a subset of multiple sensors behind a device with a single JID.
 			</p>
@@ -599,7 +599,7 @@
    &lt;iq type='get'
        from='client@clayster.com/amr'
        to='device@clayster.com'
-       id='5'&gt;
+       id='S0005'&gt;
       &lt;req xmlns='urn:xmpp:iot:sensordata' seqnr='5' momentary='true'&gt;
          &lt;node nodeId='Device02'/&gt;
          &lt;node nodeId='Device03'/&gt;
@@ -609,7 +609,7 @@
    &lt;iq type='result'
        from='device@clayster.com'
        to='client@clayster.com/amr'
-       id='5'&gt;
+       id='S0005'&gt;
       &lt;accepted xmlns='urn:xmpp:iot:sensordata' seqnr='5'/&gt;
    &lt;/iq&gt;
    
@@ -638,7 +638,7 @@
       </div>
 		</div>
 		<div class="indent">
-      <h3>3.6 <a name="sect-ID0ENHAE">Read-out of specific fields</a></h3>
+      <h3>3.6 <a name="sect-ID0E4HAE">Read-out of specific fields</a></h3>
 			<p class="" style="">
 				The <span class="strong">req</span> element can take <span class="strong">field</span> sub elements, with which the client can specify which fields it is interested in.
 				If not provided, the client is assumed to return all matching fields, regardless of field name. However, the <span class="strong">field</span> elements in the
@@ -659,7 +659,7 @@
    &lt;iq type='get'
        from='client@clayster.com/amr'
        to='device@clayster.com'
-       id='6'&gt;
+       id='S0006'&gt;
       &lt;req xmlns='urn:xmpp:iot:sensordata' seqnr='6' momentary='true'&gt;
          &lt;node nodeId='Device04'/&gt;
          &lt;field name='Energy'/&gt;
@@ -670,7 +670,7 @@
    &lt;iq type='result'
        from='device@clayster.com'
        to='client@clayster.com/amr'
-       id='6'&gt;
+       id='S0006'&gt;
       &lt;accepted xmlns='urn:xmpp:iot:sensordata' seqnr='6'/&gt;
    &lt;/iq&gt;
    
@@ -700,28 +700,28 @@
    &lt;iq type='get'
        from='client@clayster.com/amr'
        to='device@clayster.com'
-       id='8'&gt;
+       id='S0007'&gt;
       &lt;req xmlns='urn:xmpp:iot:sensordata' seqnr='8' all='true' when='2013-03-09T23:30:00'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='device@clayster.com'
        to='client@clayster.com/amr'
-       id='8'&gt;
+       id='S0007'&gt;
       &lt;accepted xmlns='urn:xmpp:iot:sensordata' seqnr='8' queued='true'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='get'
        from='client@clayster.com/amr'
        to='device@clayster.com'
-       id='8'&gt;
+       id='S0008'&gt;
       &lt;cancel xmlns='urn:xmpp:iot:sensordata' seqnr='8'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='device@clayster.com'
        to='client@clayster.com/amr'
-       id='8'&gt;
+       id='S0008'&gt;
       &lt;cancelled xmlns='urn:xmpp:iot:sensordata' seqnr='8'/&gt;
    &lt;/iq&gt;
 			</pre>
@@ -729,7 +729,7 @@
 		</div>
 	<h2>4.
        <a name="support">Determining Support</a></h2>
-		<p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:sensordata" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EIJAE">8</a>] information requests.</p>
+		<p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:sensordata" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EYJAE">8</a>] information requests.</p>
 		<p class="caption"><a name="example-10"></a>Example 10. Service discovery information request</p>
     <div class="indent">
       <pre class="prettyprint">
@@ -759,24 +759,24 @@
 		</pre>
     </div>
 		<p class="" style="">In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined 
-		in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0E6JAE">9</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.</p>
+		in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EPKAE">9</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.</p>
 	<h2>5.
        <a name="impl">Implementation Notes</a></h2>
 		<div class="indent">
-      <h3>5.1 <a name="sect-ID0ELKAE">String lengths</a></h3>
+      <h3>5.1 <a name="sect-ID0E2KAE">String lengths</a></h3>
 			<p class="" style="">
 				As noticed, a conscious effort has been made not to shorten element and attribute names. This is to make sure, XML is maintained readable. Packet size is not deemed to be
 				affected negatively by this for two reasons:
 			</p>
 			<ul class="" style="">
-				<li class="" style="">For sensors with limited memory, or where package size is important, <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0322.html">Efficient XML Interchange (EXI) Format</a></span>  [<a href="#nt-ID0EBLAE">10</a>] is supposed to be used. 
+				<li class="" style="">For sensors with limited memory, or where package size is important, <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0322.html">Efficient XML Interchange (EXI) Format</a></span>  [<a href="#nt-ID0ERLAE">10</a>] is supposed to be used. 
 				EXI compresses strings as normalized index values, making the string appear only once in the packet. Therefore, shortening string length doesn't affect packet 
 				size much. Element and attribute names in known namespaces are furthermore only encoded by index in schema, not by name.</li>
 				<li class="" style="">If limited memory or package size is not a consideration, readability and ease of implementation is preferred to short messages.</li>
 			</ul>
 		</div>
 		<div class="indent">
-      <h3>5.2 <a name="sect-ID0EOLAE">Enumerations vs. Strings</a></h3>
+      <h3>5.2 <a name="sect-ID0E5LAE">Enumerations vs. Strings</a></h3>
 			<p class="" style="">
 				This protocol has avoided the use of enumerations for data types such as units, field names, etc., and instead use strings. The reasons for this are:
 			</p>
@@ -797,7 +797,7 @@
 			</ul>
 		</div>
 		<div class="indent">
-      <h3>5.3 <a name="sect-ID0EFNAE">Asynchronous feedback</a></h3>
+      <h3>5.3 <a name="sect-ID0EVNAE">Asynchronous feedback</a></h3>
 			<p class="" style="">
 				Since some applications require real-time feedback (or as real-time as possible), and read-out might in certain cases take a long time, the device has the option
 				to send multiple <span class="strong">fields</span> messages during read-out. The client is responsible for collecting all such messages until either a <span class="strong">done</span> message
@@ -806,7 +806,7 @@
 			</p>
 		</div>
 		<div class="indent">
-      <h3>5.4 <a name="sect-ID0EVNAE">Field Value Types</a></h3>
+      <h3>5.4 <a name="sect-ID0EFOAE">Field Value Types</a></h3>
 			<p class="" style="">
 				There are different types of values that can be reported from a device. The following table lists the various types:
 			</p>
@@ -972,7 +972,7 @@
 			</p>
 		</div>
 		<div class="indent">
-      <h3>5.6 <a name="sect-ID0EMYAE">Field Status Values</a></h3>
+      <h3>5.6 <a name="sect-ID0E3YAE">Field Status Values</a></h3>
 			<p class="" style="">
 				In metering applications where quality of service is important, a field must always be accompanied with a corresponding status flag. Devices should
 				set these accordingly. If no status flag is set on a field, the client can assume <span class="strong">automaticReadout</span> is true.
@@ -1049,7 +1049,7 @@
       </div>
 		</div>
 		<div class="indent">
-      <h3>5.7 <a name="sect-ID0E54AE">Subnodes and supernodes</a></h3>
+      <h3>5.7 <a name="sect-ID0EO5AE">Subnodes and supernodes</a></h3>
 			<p class="" style="">
 				This document does not go into detail on how devices are ordered behind a JID. Some of the examples have assumed a single device lies behind a JID, others
 				that multiple devices exist behind a JID. Also, no order or structure of devices has been assumed.
@@ -1065,7 +1065,7 @@
 			</p>
 		</div>
 		<div class="indent">
-      <h3>5.8 <a name="sect-ID0ET5AE">Reading devices from large subsystems</a></h3>
+      <h3>5.8 <a name="sect-ID0ED6AE">Reading devices from large subsystems</a></h3>
 			<p class="" style="">
 				All examples in this document have been simplified examples where a few devices containing a few fields have been read. However, in many cases large subsystems with
 				very many sensors containing many fields have to be read, as is documented in <a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a>. 
@@ -1081,7 +1081,7 @@
 	<h2>6.
        <a name="i18n">Internationalization Considerations</a></h2>
 		<div class="indent">
-      <h3>6.1 <a name="sect-ID0EZ6AE">Time Zones</a></h3>
+      <h3>6.1 <a name="sect-ID0EKAAG">Time Zones</a></h3>
 			<p class="" style="">
 				All timestamps and dateTime values use the XML data type xs:dateTime to specify values. These values include a date, an optional time and an optional time zone.
 			</p>
@@ -1094,7 +1094,7 @@
 			</p>
 		</div>
 		<div class="indent">
-      <h3>6.2 <a name="sect-ID0EOAAG">Localized strings</a></h3>
+      <h3>6.2 <a name="sect-ID0E5AAG">Localized strings</a></h3>
 			<p class="" style="">
 				This specification allows for localization of field names in meter data read-out. This is performed by assigning each localizable string a <span class="strong">String ID</span>
 				which should be unique within a given <span class="strong">Language Module</span>. A <span class="strong">Language Module</span> can be any string, including URI's or namespace names.
@@ -1115,14 +1115,14 @@
    &lt;iq type='get'
        from='client@clayster.com/amr'
        to='device@clayster.com'
-       id='7'&gt;
+       id='S0009'&gt;
       &lt;req xmlns='urn:xmpp:iot:sensordata' seqnr='7' all='true'/&gt;
    &lt;/iq&gt;
    
    &lt;iq type='result'
        from='device@clayster.com'
        to='client@clayster.com/amr'
-       id='7'&gt;
+       id='S0009'&gt;
       &lt;accepted xmlns='urn:xmpp:iot:sensordata' seqnr='7'/&gt;
    &lt;/iq&gt;
    
@@ -1275,7 +1275,7 @@
 		</ul>
 	<h2>8.
        <a name="iana">IANA Considerations</a></h2>
-		<p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EXKAG">11</a>].</p>
+		<p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EHLAG">11</a>].</p>
 	<h2>9.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
 		<p class="" style="">
@@ -1536,8 +1536,8 @@
             <a href="http://xmpp.org/extensions/xep-0001.html#states-Experimental">Experimental</a><br>
             Type:
             <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
-            Version: 0.2<br>
-            Last Updated: 2013-05-07<br>
+            Version: 0.3<br>
+            Last Updated: 2014-02-17<br>
                 Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001, XEP-0030<br>
                 Supersedes: None<br>
                 Superseded By: None<br>
@@ -1571,21 +1571,26 @@
     <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
     <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
     <div class="indent">
-      <p><a name="nt-ID0EYAAC">1</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0EEBAC">2</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
-      <p><a name="nt-ID0EQBAC">3</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
-      <p><a name="nt-ID0E3BAC">4</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
-      <p><a name="nt-ID0EYGAC">5</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0ESKAC">6</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
-      <p><a name="nt-ID0EIDAE">7</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
-      <p><a name="nt-ID0EIJAE">8</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
-      <p><a name="nt-ID0E6JAE">9</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
-      <p><a name="nt-ID0EBLAE">10</a>. XEP-0322: Efficient XML Interchange (EXI) Format &lt;<a href="http://xmpp.org/extensions/xep-0322.html">http://xmpp.org/extensions/xep-0322.html</a>&gt;.</p>
-      <p><a name="nt-ID0EXKAG">11</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+      <p><a name="nt-ID0EMFAC">1</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0EDGAC">2</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0EPGAC">3</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
+      <p><a name="nt-ID0E2GAC">4</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
+      <p><a name="nt-ID0EHHAC">5</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+      <p><a name="nt-ID0ECLAC">6</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
+      <p><a name="nt-ID0EYDAE">7</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
+      <p><a name="nt-ID0EYJAE">8</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0EPKAE">9</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0ERLAE">10</a>. XEP-0322: Efficient XML Interchange (EXI) Format &lt;<a href="http://xmpp.org/extensions/xep-0322.html">http://xmpp.org/extensions/xep-0322.html</a>&gt;.</p>
+      <p><a name="nt-ID0EHLAG">11</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
     <div class="indent">
+      <h4>Version 0.3 (2014-02-17)</h4>
+      <div class="indent">
+				<p class="" style="">Changed the id attrobutes of IQ stanzas, to highlight they are different from sequence numbers used in requests.</p>
+			 (pw)
+    </div>
       <h4>Version 0.2 (2013-05-07)</h4>
       <div class="indent">
 				<p class="" style="">Fixed links to documents with new numbers.</p>

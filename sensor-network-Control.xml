@@ -24,7 +24,7 @@
             <spec>XEP-0323</spec>
             <spec>XEP-0324</spec>
 			<spec>XEP-0331</spec>
-			<spec>dynamic-forms</spec>
+			<spec>XEP-0336</spec>
 		</dependencies>
         <supersedes/>
         <supersededby/>
@@ -101,10 +101,6 @@
                 <th>Description</th>
             </tr>
             <tr>
-                <td>dynamic-forms</td>
-                <td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
-            </tr>
-            <tr>
                 <td>xep-0000-IoT-BatteryPoweredSensors</td>
                 <td>Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
             </tr>
@@ -161,6 +157,10 @@
 			<tr>
 				<td>XEP-0331</td>
 				<td>Defines extensions for how color parameters can be handled, based on &xep0004;</td>
+			</tr>
+			<tr>
+				<td>XEP-0336</td>
+				<td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
 			</tr>
 		</table>
     </section1>
@@ -657,7 +657,7 @@
                 <p>
                     <strong>IMPORTANT:</strong> The device MUST mark all control parameters in the form as <strong>notSame</strong>, as defined in
                     <note>
-                        XEP-xxxx: Dynamic Data Forms &lt;<link url='dynamic-forms.html'>dynamic-forms.html</link>&gt;
+                        XEP-0336: Dynamic Data Forms &lt;<link url='http://xmpp.org/extensions/xep-0336.html'>http://xmpp.org/extensions/xep-0336.html</link>&gt;
                     </note>. If an end user would open the control form and press OK (submitting the form) without having entered a value, no value
                     would be written, and no action taken. If only a few parameter would be edited, only those parameters would be sent to the device
                     and only the corresponding actions taken.
