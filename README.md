@@ -1,13 +1,17 @@
 XMPP-IoT
 =======
 
-Repository for the work with xep-0000-IoT-xx for using XMPP in Internet of Things systems
+Repository for the work using XMPP in Internet of Things systems everything is published through the XSF foundation
 
-The final result will be published through the XSF foundation, Standardisation work is in progress 
+More information is also available on the [XMPP tech wiki](http://wiki.xmpp.org/web/Tech_pages/IoT_systems)
 
-More information will be published through the [XMPP tech wiki](http://wiki.xmpp.org/web/Tech_pages/IoT_systems)
+Easy view links of latest work
 
-Easy view links
+[xep-0000-IoT-Discovery](https://github.com/joachimlindborg/XMPP-IoT/blob/master/xep-0000-IoT-Discovery.html)
+		Defines the peculiars of sensor discovery in sensor networks. 
+		Apart from discovering sensors by JID, it also defines how to 
+		discover sensors based on location, etc.
+		Covering production and creation to deploy and removal of a thing
 
 [xep-0322-exi](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-EXI/blob/master/exi.html)
 		Defines how to EXI can be used in XMPP to achieve efficient 
@@ -53,11 +57,6 @@ Easy view links
 		important to be able to support logging of events such as user logins
 		upgrades errors. This extension is compatible with syslog but more advanced
 
-[xep-0000-IoT-Discovery](https://github.com/joachimlindborg/XMPP-IoT/blob/master/xep-0000-IoT-Discovery.html)
-		Defines the peculiars of sensor discovery in sensor networks. 
-		Apart from discovering sensors by JID, it also defines how to 
-		discover sensors based on location, etc.
-		Covering production and creation to deploy and removal of a thing
 
 xep-0000-IoT-Events
 		Defines how sensors send events, how event subscription, 
