@@ -9,8 +9,8 @@ More information will be published through the [XMPP tech wiki](http://wiki.xmpp
 
 # working XEP's follow the links for latest working material
 
-[xep-0000-Discovery](https://github.com/joachimlindborg/XMPP-IoT/blob/master/xep-0000-IoT-Discovery.html)
-		Defines a way of discovery for devices covering production and creation to deploy and removal of a thing
+
+		
 
 [xep-0322-exi](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-EXI/blob/master/exi.html)
 		Defines how to EXI can be used in XMPP to achieve efficient 
@@ -56,10 +56,11 @@ More information will be published through the [XMPP tech wiki](http://wiki.xmpp
 		important to be able to support logging of events such as user logins
 		upgrades errors. This extension is compatible with syslog but more advanced
 
-xep-0000-IoT-Discovery
+[xep-0000-IoT-Discovery](https://github.com/joachimlindborg/XMPP-IoT/blob/master/xep-0000-IoT-Discovery.html)
 		Defines the peculiars of sensor discovery in sensor networks. 
 		Apart from discovering sensors by JID, it also defines how to 
 		discover sensors based on location, etc.
+		Covering production and creation to deploy and removal of a thing
 
 xep-0000-IoT-Events
 		Defines how sensors send events, how event subscription, 
