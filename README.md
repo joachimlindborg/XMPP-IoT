@@ -1,9 +1,7 @@
 XMPP-IoT
 =======
 
-Repository for the work using XMPP in Internet of Things systems everything is published through the XSF foundation
-
-More information is also available on the [XMPP tech wiki](http://wiki.xmpp.org/web/Tech_pages/IoT_systems)
+Repository for the work using XMPP in Internet of Things systems everything is published through the XSF foundation More information is also available on the [XMPP tech wiki](http://wiki.xmpp.org/web/Tech_pages/IoT_systems)
 
 Easy view links of latest work
 
