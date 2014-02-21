@@ -7,7 +7,10 @@ The final result will be published through the XSF foundation, Standardisation w
 
 More information will be published through the [XMPP tech wiki](http://wiki.xmpp.org/web/Tech_pages/IoT_systems)
 
-# working XEP's follow the links planned XEP will be provided during spring 2013
+# working XEP's follow the links for latest working material
+
+[xep-0000-Discovery](https://github.com/joachimlindborg/XMPP-IoT/blob/master/xep-0000-IoT-Discovery.html)
+		Defines a way of discovery for devices covering production and creation to deploy and removal of a thing
 
 [xep-0322-exi](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-EXI/blob/master/exi.html)
 		Defines how to EXI can be used in XMPP to achieve efficient 
