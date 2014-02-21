@@ -1,16 +1,13 @@
 XMPP-IoT
 =======
 
-Repository for the work with xep-0000-IoT-xx for using XMPP in wireless sensor networks or Internet of Things systems
+Repository for the work with xep-0000-IoT-xx for using XMPP in Internet of Things systems
 
 The final result will be published through the XSF foundation, Standardisation work is in progress 
 
 More information will be published through the [XMPP tech wiki](http://wiki.xmpp.org/web/Tech_pages/IoT_systems)
 
-# working XEP's follow the links for latest working material
-
-
-		
+Easy view links
 
 [xep-0322-exi](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-EXI/blob/master/exi.html)
 		Defines how to EXI can be used in XMPP to achieve efficient 
