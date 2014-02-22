@@ -160,7 +160,7 @@
 			</tr>
 			<tr>
 				<td>xep-0000-IoT-Chat</td>
-				<td>Defines how human-to-machine interfaces should be contructed using chat messages to be user friendly, automatable and consisten with other IoT extensions and possible underlying architecture.</td>
+				<td>Defines how human-to-machine interfaces should be constructed using chat messages to be user friendly, automatable and consistent with other IoT extensions and possible underlying architecture.</td>
 			</tr>
 			<tr>
 				<td>XEP-0322</td>
@@ -6237,6 +6237,12 @@
                     The XEP's and related projects are also available on <link url='https://github.com/joachimlindborg/'>github</link>, thanks to Joachim Lindborg.
                 </p>
             </li>
+			<li>
+				<p>
+					A presentation giving an overview of all extensions related to Internet of Things can be found here: 
+					<link url='http://prezi.com/esosntqhewhs/iot-xmpp/'>http://prezi.com/esosntqhewhs/iot-xmpp/</link>.
+				</p>
+			</li>
         </ul>
     </section1>
     <section1 topic='Acknowledgements' anchor='ack'>

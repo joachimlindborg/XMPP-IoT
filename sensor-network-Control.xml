@@ -1,4 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
+<!-- TODO: SImple readout: Only control form - no XEP-0323 -->
 <!DOCTYPE xep SYSTEM 'xep.dtd' [
     <!ENTITY % ents SYSTEM 'xep.ent'>
     %ents;
@@ -126,7 +127,7 @@
             </tr>
 			<tr>
 				<td>xep-0000-IoT-Chat</td>
-				<td>Defines how human-to-machine interfaces should be contructed using chat messages to be user friendly, automatable and consisten with other IoT extensions and possible underlying architecture.</td>
+				<td>Defines how human-to-machine interfaces should be constructed using chat messages to be user friendly, automatable and consistent with other IoT extensions and possible underlying architecture.</td>
 			</tr>
 			<tr>
 				<td>XEP-0322</td>
@@ -1304,8 +1305,8 @@
         </section2>
         <section2 topic='Grouping control parameters' anchor='parametergroups'>
             <p>
-                Many control actions avilable in a device can be controlled using only one control parameter. If a device only publishes such control parameters, the order
-                of control paramters is not that important.
+                Many control actions available in a device can be controlled using only one control parameter. If a device only publishes such control parameters, the order
+                of control parameters is not that important.
             </p>
             <p>
                 However, there are many control actions that require the client to set multiple control parameters at the same time, for the device to have a complete understanding
@@ -1787,6 +1788,12 @@
 			<li>
 				<p>
 					The XEP's and related projects are also available on <link url='https://github.com/joachimlindborg/'>github</link>, thanks to Joachim Lindborg.
+				</p>
+			</li>
+			<li>
+				<p>
+					A presentation giving an overview of all extensions related to Internet of Things can be found here:
+					<link url='http://prezi.com/esosntqhewhs/iot-xmpp/'>http://prezi.com/esosntqhewhs/iot-xmpp/</link>.
 				</p>
 			</li>
 		</ul>

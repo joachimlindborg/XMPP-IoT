@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema
+    xmlns:xs='http://www.w3.org/2001/XMLSchema'
+    targetNamespace='urn:xmpp:iot:discovery'
+    xmlns='urn:xmpp:iot:discovery'
+    elementFormDefault='qualified'>
+
+	<xs:element name='register' type='Register'/>
+	<xs:element name='mine' type='MetaData'/>
+	<xs:element name='update' type='MetaData'/>
+
+	<xs:element name='claimed' type='Jid'/>
+	<xs:element name='remove' type='Jid'/>
+	<xs:element name='removed' type='NodeInfo'/>
+	<xs:element name='unregister' type='NodeInfo'/>
+
+	<xs:element name='search'>
+		<xs:complexType>
+			<xs:choice minOccurs='1' maxOccurs='unbounded'>
+				<xs:element name='strEq' type='StrTag'/>
+				<xs:element name='strNEq' type='StrTag'/>
+				<xs:element name='strGt' type='StrTag'/>
+				<xs:element name='strGtEq' type='StrTag'/>
+				<xs:element name='strLt' type='StrTag'/>
+				<xs:element name='strLtEq' type='StrTag'/>
+				<xs:element name='strRange' type='StrRange'/>
+				<xs:element name='strNRange' type='StrRange'/>
+				<xs:element name='strMask'>
+					<xs:complexType>
+						<xs:attribute name='name' type='xs:string' use='required'/>
+						<xs:attribute name='value' type='xs:string' use='required'/>
+						<xs:attribute name='wildcard' type='xs:string' use='required'/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='numEq' type='NumTag'/>
+				<xs:element name='numNEq' type='NumTag'/>
+				<xs:element name='numGt' type='NumTag'/>
+				<xs:element name='numGtEq' type='NumTag'/>
+				<xs:element name='numLt' type='NumTag'/>
+				<xs:element name='numLtEq' type='NumTag'/>
+				<xs:element name='numRange' type='NumRange'/>
+				<xs:element name='numNRange' type='NumRange'/>
+			</xs:choice>
+			<xs:attribute name='offset' type='xs:nonNegativeInteger' use='optional' default='0'/>
+			<xs:attribute name='maxCount' type='xs:positiveInteger' use='optional'/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='found'>
+		<xs:complexType>
+			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+				<xs:element name='thing'>
+					<xs:complexType>
+						<xs:choice minOccurs='0' maxOccurs='unbounded'>
+							<xs:element name='str' type='StrTag'/>
+							<xs:element name='num' type='NumTag'/>
+						</xs:choice>
+						<xs:attribute name='owner' type='xs:string' use='required'/>
+						<xs:attribute name='jid' type='xs:string' use='required'/>
+						<xs:attributeGroup ref='nodeInfo'/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name='more' type='xs:boolean' use='optional' default='false'/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:attributeGroup name='nodeInfo'>
+		<xs:attribute name='nodeId' type='xs:string' use='optional'/>
+		<xs:attribute name='sourceId' type='xs:string' use='optional'/>
+		<xs:attribute name='cacheType' type='xs:string' use='optional'/>
+	</xs:attributeGroup>
+	
+	<xs:complexType name='MetaData'>
+		<xs:choice minOccurs='0' maxOccurs='unbounded'>
+			<xs:element name='str' type='StrTag'/>
+			<xs:element name='num' type='NumTag'/>
+		</xs:choice>
+		<xs:attributeGroup ref='nodeInfo'/>
+	</xs:complexType>
+
+	<xs:complexType name='Register'>
+		<xs:complexContent>
+			<xs:extension base='MetaData'>
+				<xs:attribute name='selfOwned' type='xs:boolean' use='optional' default='false'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name='Jid'>
+		<xs:attribute name='jid' type='xs:string' use='required'/>
+		<xs:attributeGroup ref='nodeInfo'/>
+	</xs:complexType>
+
+	<xs:complexType name='NodeInfo'>
+		<xs:attributeGroup ref='nodeInfo'/>
+	</xs:complexType>
+
+	<xs:complexType name='StrTag'>
+		<xs:attribute name='name' type='xs:string' use='required'/>
+		<xs:attribute name='value' type='xs:string' use='required'/>
+	</xs:complexType>
+
+	<xs:complexType name='NumTag'>
+		<xs:attribute name='name' type='xs:string' use='required'/>
+		<xs:attribute name='value' type='xs:double' use='required'/>
+	</xs:complexType>
+
+	<xs:complexType name='StrRange'>
+		<xs:attribute name='name' type='xs:string' use='required'/>
+		<xs:attribute name='min' type='xs:string' use='required'/>
+		<xs:attribute name='minIncluded' type='xs:boolean' use='optional' default='true'/>
+		<xs:attribute name='max' type='xs:string' use='required'/>
+		<xs:attribute name='maxIncluded' type='xs:boolean' use='optional' default='true'/>
+	</xs:complexType>
+
+	<xs:complexType name='NumRange'>
+		<xs:attribute name='name' type='xs:string' use='required'/>
+		<xs:attribute name='min' type='xs:double' use='required'/>
+		<xs:attribute name='minIncluded' type='xs:boolean' use='optional' default='true'/>
+		<xs:attribute name='max' type='xs:double' use='required'/>
+		<xs:attribute name='maxIncluded' type='xs:boolean' use='optional' default='true'/>
+	</xs:complexType>
+
+</xs:schema>
