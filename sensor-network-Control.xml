@@ -523,21 +523,6 @@
    </message>]]>
                 </example>
             </section3>
-            <section3 topic='Setting a single time-valued control parameter'>
-                <p>
-                    Setting time-valued control parameters might be necessary when timing is an issue. Often it forms part of a larger context.
-                    The following example shows how a time value can be set in a device.
-                </p>
-                <example caption='Setting a single time-valued control parameter'>
-                    <![CDATA[
-   <message from='master@clayster.com/amr'
-            to='alarm@clayster.com'>
-      <set xmlns='urn:xmpp:iot:control'>
-         <time name='Alarm Time' value='08:00:00'/>
-      </set>
-   </message>]]>
-                </example>
-            </section3>
             <section3 topic='Setting a single duration-valued control parameter'>
                 <p>
                     Setting duration-valued control parameters might be necessary when timing is an issue. Often it forms part of a larger context.

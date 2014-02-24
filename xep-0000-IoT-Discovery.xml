@@ -45,18 +45,18 @@
         </revision>
     </header>
     <section1 topic='Introduction' anchor='intro'>
-		<p>
-			When installing massive amounts of Things into public networks care has to be taken to make installation simple, but at the same time secure so that the Things cannot be
-			hijacked or hacked, making sure access to the Thing is controlled by the physical owner of the Thing. One of the main problems is how
-			to match the characteristics of a Thing, like serial number, manufacturer, model, etc., with information automatically created by the Thing itself, like perhaps its JID, in
-			an environment with massive amount of Things without rich user interfaces. Care has also to be taken when specifying rules for access rights and user privileges.
-		</p>
         <p>
-			This document provides a network architecture based on the XMPP protocol that provides a means to safely install, configure, find and connect massive amounts of Things together, and
-			at the same time minimizing the risk that Things get hijacked. It also provides information how each individual step in the process can be performed with as little manual intervention
-			as possible, aiming where possible at zero-configuration networking. Furthermore, this document specifies how to create a registry that allows simple access to public Things
-			without risking their integrity uneccessarily.
-		</p>
+            When installing massive amounts of Things into public networks care has to be taken to make installation simple, but at the same time secure so that the Things cannot be
+            hijacked or hacked, making sure access to the Thing is controlled by the physical owner of the Thing. One of the main problems is how
+            to match the characteristics of a Thing, like serial number, manufacturer, model, etc., with information automatically created by the Thing itself, like perhaps its JID, in
+            an environment with massive amount of Things without rich user interfaces. Care has also to be taken when specifying rules for access rights and user privileges.
+        </p>
+        <p>
+            This document provides a network architecture based on the XMPP protocol that provides a means to safely install, configure, find and connect massive amounts of Things together, and
+            at the same time minimizing the risk that Things get hijacked. It also provides information how each individual step in the process can be performed with as little manual intervention
+            as possible, aiming where possible at zero-configuration networking. Furthermore, this document specifies how to create a registry that allows simple access to public Things
+            without risking their integrity uneccessarily.
+        </p>
         <p>
             Internet of Things contains many different architectures and use cases. For this reason, the IoT standards have been divided into multiple XEPs according to the following table:
         </p>
@@ -437,6 +437,19 @@
                 registration overrides any previous information, including meta tags previously reported but not available in the new registration. Once a Thing has been 
                 claimed by an owner, it should not register itself again, unless it is reset and the installation process restarted.
             </p>
+            <p>
+                If the Thing tries to register itself even though the Thing has already been claimed in the registry, the registry must not update any meta data in the registry, and instead
+                respond with the following response. When the thing receives this, it can safely extract the JID of the owner and switch its internal state to claimed.
+            </p>
+            <example caption='Registration response when alrady claimed'>
+                <![CDATA[
+   <iq type='result'
+       from='discovery@clayster.com'
+       to='thing@clayster.com/imc'
+       id='1'>
+      <claimed xmlns='urn:xmpp:iot:discovery' jid='owner@clayster.com'/>
+   </iq>]]>
+            </example>
         </section2>
         <section2 topic='Register self-owned Thing'>
             <p>
@@ -675,7 +688,7 @@
             <p>
                 However, if such a thing is not found, or if the thing is owned by another, an <strong>item-not-found</strong> error is returned, as follows:
             </p>
-            <example caption='Ownership claim failure'>
+            <example caption='Removal failure'>
                 <![CDATA[
    <iq type='error'
        from='discovery@clayster.com'
@@ -822,6 +835,10 @@
       </error>
    </iq>]]>
             </example>
+			<p>
+				<strong>Note:</strong> If the Thing is found in the registry, but has not been claimed by an owner yet, the update call must just be ignored, and an acknowledgement
+				response returned. If the meta-data is changed, the Thing might become impossible to claim.
+			</p>
         </section2>
         <section2 topic='Search for Public Things in Registry'>
             <p>
@@ -1024,10 +1041,10 @@
       </found>
    </iq>]]>
             </example>
-			<p>
-				If more results are available in the search (accessible by using the <strong>offset</strong> attribute in a new search), the <strong>more</strong> attribute is
-				present with value <strong>true</strong>.
-			</p>
+            <p>
+                If more results are available in the search (accessible by using the <strong>offset</strong> attribute in a new search), the <strong>more</strong> attribute is
+                present with value <strong>true</strong>.
+            </p>
         </section2>
         <section2 topic='Unregistering Thing from Registry'>
             <p>
@@ -1330,7 +1347,7 @@
  
     <xs:element name='register' type='Register'/>
     <xs:element name='mine' type='MetaData'/>
-    <xs:element name='update' type='MetaData'/>
+    <xs:element name='update' type='MetaDataNodeInfo'/>
  
     <xs:element name='claimed' type='Jid'/>
     <xs:element name='remove' type='Jid'/>
@@ -1402,9 +1419,17 @@
         <xs:attributeGroup ref='nodeInfo'/>
     </xs:complexType>
  
-    <xs:complexType name='Register'>
+    <xs:complexType name='MetaDataNodeInfo'>
         <xs:complexContent>
             <xs:extension base='MetaData'>
+                <xs:attributeGroup ref='nodeInfo'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    <xs:complexType name='Register'>
+        <xs:complexContent>
+            <xs:extension base='MetaDataNodeInfo'>
                 <xs:attribute name='selfOwned' type='xs:boolean' use='optional' default='false'/>
             </xs:extension>
         </xs:complexContent>

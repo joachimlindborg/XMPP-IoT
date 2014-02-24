@@ -4,16 +4,16 @@
     targetNamespace='urn:xmpp:iot:discovery'
     xmlns='urn:xmpp:iot:discovery'
     elementFormDefault='qualified'>
-
+ 
 	<xs:element name='register' type='Register'/>
 	<xs:element name='mine' type='MetaData'/>
-	<xs:element name='update' type='MetaData'/>
-
+	<xs:element name='update' type='MetaDataNodeInfo'/>
+ 
 	<xs:element name='claimed' type='Jid'/>
 	<xs:element name='remove' type='Jid'/>
 	<xs:element name='removed' type='NodeInfo'/>
 	<xs:element name='unregister' type='NodeInfo'/>
-
+ 
 	<xs:element name='search'>
 		<xs:complexType>
 			<xs:choice minOccurs='1' maxOccurs='unbounded'>
@@ -45,7 +45,7 @@
 			<xs:attribute name='maxCount' type='xs:positiveInteger' use='optional'/>
 		</xs:complexType>
 	</xs:element>
-
+ 
 	<xs:element name='found'>
 		<xs:complexType>
 			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
@@ -64,13 +64,13 @@
 			<xs:attribute name='more' type='xs:boolean' use='optional' default='false'/>
 		</xs:complexType>
 	</xs:element>
-
+ 
 	<xs:attributeGroup name='nodeInfo'>
 		<xs:attribute name='nodeId' type='xs:string' use='optional'/>
 		<xs:attribute name='sourceId' type='xs:string' use='optional'/>
 		<xs:attribute name='cacheType' type='xs:string' use='optional'/>
 	</xs:attributeGroup>
-	
+ 	
 	<xs:complexType name='MetaData'>
 		<xs:choice minOccurs='0' maxOccurs='unbounded'>
 			<xs:element name='str' type='StrTag'/>
@@ -78,34 +78,42 @@
 		</xs:choice>
 		<xs:attributeGroup ref='nodeInfo'/>
 	</xs:complexType>
-
-	<xs:complexType name='Register'>
+ 
+	<xs:complexType name='MetaDataNodeInfo'>
 		<xs:complexContent>
 			<xs:extension base='MetaData'>
+				<xs:attributeGroup ref='nodeInfo'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+ 
+	<xs:complexType name='Register'>
+		<xs:complexContent>
+			<xs:extension base='MetaDataNodeInfo'>
 				<xs:attribute name='selfOwned' type='xs:boolean' use='optional' default='false'/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-
+ 
 	<xs:complexType name='Jid'>
 		<xs:attribute name='jid' type='xs:string' use='required'/>
 		<xs:attributeGroup ref='nodeInfo'/>
 	</xs:complexType>
-
+ 
 	<xs:complexType name='NodeInfo'>
 		<xs:attributeGroup ref='nodeInfo'/>
 	</xs:complexType>
-
+ 
 	<xs:complexType name='StrTag'>
 		<xs:attribute name='name' type='xs:string' use='required'/>
 		<xs:attribute name='value' type='xs:string' use='required'/>
 	</xs:complexType>
-
+ 
 	<xs:complexType name='NumTag'>
 		<xs:attribute name='name' type='xs:string' use='required'/>
 		<xs:attribute name='value' type='xs:double' use='required'/>
 	</xs:complexType>
-
+ 
 	<xs:complexType name='StrRange'>
 		<xs:attribute name='name' type='xs:string' use='required'/>
 		<xs:attribute name='min' type='xs:string' use='required'/>
@@ -113,7 +121,7 @@
 		<xs:attribute name='max' type='xs:string' use='required'/>
 		<xs:attribute name='maxIncluded' type='xs:boolean' use='optional' default='true'/>
 	</xs:complexType>
-
+ 
 	<xs:complexType name='NumRange'>
 		<xs:attribute name='name' type='xs:string' use='required'/>
 		<xs:attribute name='min' type='xs:double' use='required'/>
@@ -121,5 +129,5 @@
 		<xs:attribute name='max' type='xs:double' use='required'/>
 		<xs:attribute name='maxIncluded' type='xs:boolean' use='optional' default='true'/>
 	</xs:complexType>
-
+ 
 </xs:schema>
