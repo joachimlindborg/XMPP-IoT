@@ -5,7 +5,7 @@ Repository for the work using XMPP in Internet of Things systems everything is p
 
 Easy view links of latest work
 
-[xep-0000-IoT-Discovery](https://github.com/joachimlindborg/XMPP-IoT/blob/master/xep-0000-IoT-Discovery.html)
+[xep-0000-IoT-Discovery](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/xep-0000-IoT-Discovery.html)
 		Defines the peculiars of sensor discovery in sensor networks. 
 		Apart from discovering sensors by JID, it also defines how to 
 		discover sensors based on location, etc.
