@@ -35,7 +35,14 @@
             <jid>peter.waher@jabber.org</jid>
             <uri>http://www.linkedin.com/in/peterwaher</uri>
         </author>
-        <revision>
+		<author>
+			<firstname>Ronny</firstname>
+			<surname>Klauck</surname>
+			<email>rklauck@informatik.tu-cottbus.de</email>
+			<jid>TBD</jid>
+			<uri>http://www-rnks.informatik.tu-cottbus.de/~rklauck</uri>
+		</author>
+		<revision>
             <version>0.0.1</version>
             <date>2014-02-18</date>
             <initials>pw</initials>
@@ -330,36 +337,130 @@
                 resources where such cannot be found nor set in a production environment.
             </p>
         </section2>
-        <section2 topic='Finding XMPP Server'>
-            <p>
-                If the address of an XMPP Server is not preconfigured, the Thing must attempt to find one in its local surroundings. This can be done using one of several methods:
-            </p>
-            <ul>
-                <li>DHCP</li>
-                <li>Multicast DNS</li>
-                <li>SSDP/UPnP</li>
-            </ul>
-            <p>
-                The following sections describe them in more detail.
-            </p>
-            <section3 topic='DHCP'>
-                <p>TBD</p>
-                <!-- TODO -->
-            </section3>
-            <section3 topic='DNS Service Discovery and Multicast DNS'>
-                <p>TBD</p>
-                <!-- TODO -->
-                <!-- Ref: XEP-0174 -->
-            </section3>
-            <section3 topic='SSDP/UPnP'>
-                <p>TBD</p>
-                <!-- TODO -->
-            </section3>
-            <p>
-                <strong>Note:</strong> If server-less messaging is to be used, as described in &xep0174; this step can be used to find the Thing Registry and optionally the 
-                Provisioning Server and other peers it want to connect to. The next section can thus be skipped.
-            </p>
-        </section2>
+		<section2 topic='Finding XMPP Server'>
+			<p>
+				If the address of an XMPP Server is not preconfigured, the Thing must attempt to find one in its local surroundings. This can be done using one of several methods:
+			</p>
+			<ul>
+				<li>DHCP</li>
+				<li>Multicast DNS</li>
+				<li>SSDP/UPnP</li>
+			</ul>
+			<p>
+				The following sections describe them in more detail.
+			</p>
+			<section3 topic='DHCP'>
+				<p>TBD</p>
+				<!-- TODO -->
+			</section3>
+			<section3 topic='Multicast DNS (mDNS) and DNS Service Discovery (DNS-SD)'>
+				<p>
+					An introduction of mDNS/DNS-SD (e.g., how it works and terminology) is described in &xep0174; (i.e., sections [1.2] and [2]).
+					For the purpose of serverless messaging we are interested only in the "xmpp-client" service. An XMPP chat client (actually its mDNS daemon) can send out multicast DNS queries for services of type "xmpp-client".
+				</p>
+				<section4 topic='DNS Records'>
+					<p>In order to advertise its availability, a server MUST publish four different kinds of DNS records:</p>
+					<ol>
+						<li>
+							<p>A PTR record of the following form:</p>
+							<example caption='PTR record'>
+								<![CDATA[
+   _xmpp-client._tcp.local. PTR machine._xmpp-client._tcp.local.]]>
+							</example>
+						</li>
+						<li>
+							<p>An address ("A" or "AAAA") record of the following form (where the IP address can be either an IPv4 address or an IPv6 address):</p>
+							<example caption='A record'>
+								<![CDATA[
+   machine.local. A ip-address]]>
+							</example>
+						</li>
+						<li>
+							<p>A SRV record of the following form:</p>
+							<example caption='SRV record'>
+								<![CDATA[
+   machine._xmpp-client._tcp.local <ttl> SRV <priority> <weight> port-number machine.local.]]>
+							</example>
+						</li>
+						<li>
+							<p>
+								A TXT record whose name is the same as the SRV record and whose value follows the format described in the <link url='#txt'>TXT Record</link> section of this document, consisting of a set of strings that typically represent a series of key-value pairs such as the following:
+							</p>
+							<example caption='TXT record'>
+								<![CDATA[
+   txtvers=1
+   ordom=example.com
+   regis=registry
+   provis=provisioning]]>
+							</example>
+							<p>Note: The DNS-SD specification stipulates that the TXT record MUST be published, but that it MAY contain no more than a single zero byte (e.g., if the server does not wish to publish any personal information).</p>
+						</li>
+					</ol>
+					<p>
+						The "machine" is the name of the computer, the "port" has to be the assigned port number "5222" for the DNS service name "xmpp-client" (<strong>Note:</strong> reservered name for client-to-server connections by IANA, as described in &rfc6120;, and the "ip-address" is the physical address of the computer on the local network.
+					</p>
+					<p>So, for example, if the machine name is "pronto", the IP address is "10.2.1.188", and the personal information, the DNS records would be as follows:</p>
+					<example caption='IoT Discovery DNS Records Example'>
+						<![CDATA[
+   _xmpp-client._tcp.local. PTR pronto._xmpp-client._tcp.local.
+	
+   pronto._xmpp-client._tcp.local. SRV 5222 pronto.local. 
+				
+   pronto.local. A 10.2.1.188
+				
+   pronto._xmpp-client._tcp.local. IN TXT 
+   "txtvers=1"
+   "ordom=example.com"
+   "regis=registry"
+   "provis=provisioning"]]>
+					</example>
+					<p>The IPv4 and IPv6 addresses associated with a machine might vary depending on the local network to which the machine is connected. For example, on an Ethernet connection the physical address might be "192.168.0.100" but when the machine is connected to a wireless network the physical address might change to "10.10.1.188". See &rfc3927; for details.</p>
+					<p>If the machine name asserted by a client is already taken by another machine on the network, the client MUST assert a different machine name, which SHOULD be formed by adding the character "-" and digit "1" to the end of the machine name string (e.g., "pronto-1"), adding the character "-" and digit "2" if the resulting machine name is already taken (e.g., "pronto-2"), and similarly incrementing the digit until a unique machine name is constructed.</p>
+					<p>
+						<strong>Note:</strong> DNS-SD enables service definitions to include a TXT record that specifies parameters to be used in the context of the relevant service type. For detailed information refer to &xep0174; (Link-Local Messaging - TXT Record).
+					</p>
+				</section4>
+				<section4 topic='IoT Discovery TXT Record Parameters Registry' anchor='txt'>
+					<p>The registration process is described in &xep0174; (Link-Local Messaging - Registration Process).</p>
+					<p>The following submission registers parameters in use as of MONTH 201x. Refer to the registry itself for a complete and current list of parameters (this specification might or might not be revised when new parameters are registered).</p>
+					<example caption='IoT Discovery TXT Record Parameters Registry'>
+						<![CDATA[
+   <param>
+      <name>ordom</name>
+      <desc>The "origin domain" of the XMPP service.</desc>
+      <status>recommended</status>
+   </param>
+
+   <param>
+      <name>regis</name>
+      <desc>
+         The username portion of the JID to Thing Registry;
+         can contain a space-separated list of more than one JID.
+      </desc>
+      <status>optional</status>
+   </param>
+
+   <param>
+      <name>provis</name>
+      <desc>
+         The username portion of the JID to provisioning server;
+         can contain a space-separated list of more than one JID.
+      </desc>
+      <status>optional</status>
+   </param>]]>
+					</example>
+				</section4>
+				<!-- Ref: XEP-0174 -->
+			</section3>
+			<section3 topic='SSDP/UPnP'>
+				<p>TBD</p>
+				<!-- TODO -->
+			</section3>
+			<p>
+				<strong>Note:</strong> If server-less messaging is to be used, as described in &xep0174; this step can be used to find the Thing Registry and optionally the
+				Provisioning Server and other peers it want to connect to. The next section can thus be skipped.
+			</p>
+		</section2>
         <section2 topic='Connection to XMPP Server'>
             <p>
                 Once an XMPP Server has been found a connection can be made. If multiple XMPP Servers are found, the client is free to choose the one that best suits its purposes.
@@ -450,7 +551,10 @@
       <claimed xmlns='urn:xmpp:iot:discovery' jid='owner@clayster.com'/>
    </iq>]]>
             </example>
-        </section2>
+			<p>
+				<strong>Note:</strong> Meta Tag names are case insensitive. In this document, all tag names have been written using upper case letters.
+			</p>
+		</section2>
         <section2 topic='Register self-owned Thing'>
             <p>
                 If a thing is self-owned, it can register itself with the Registry as normal, with the addition of setting the attribute <strong>selfOwned</strong> to <strong>true</strong>,
@@ -645,7 +749,10 @@
             <p>
                 After receiving this, the thing knows it can accept friendship requests from the corresponding owner. It can also safely send a friendship request to the owner.
             </p>
-        </section2>
+			<p>
+				<strong>Note:</strong> Meta Tag names are case insensitive. In this document, all tag names have been written using upper case letters.
+			</p>
+		</section2>
         <section2 topic='Removing Thing from Registry'>
             <p>
                 After a Thing has been claimed, it is registered as a PUBLIC CLAIMED Thing in the Registry. This makes the Thing available in searches. The owner can choose to remove
@@ -839,7 +946,10 @@
 				<strong>Note:</strong> If the Thing is found in the registry, but has not been claimed by an owner yet, the update call must just be ignored, and an acknowledgement
 				response returned. If the meta-data is changed, the Thing might become impossible to claim.
 			</p>
-        </section2>
+			<p>
+				<strong>Note 2:</strong> Meta Tag names are case insensitive. In this document, all tag names have been written using upper case letters.
+			</p>
+		</section2>
         <section2 topic='Search for Public Things in Registry'>
             <p>
                 It is possible for anyone with access to the Thing Registry to search for public things that have been claimed, including self-owned Things. Such searches 
@@ -974,13 +1084,13 @@
        from='curious@clayster.com/client'
        to='discovery@clayster.com'
        id='9'>
-      <search xmlns='urn:xmpp:iot:discovery' offset='0' maxCount='100'>
+      <search xmlns='urn:xmpp:iot:discovery' offset='0' maxCount='20'>
           <strEq name='MAN' value='www.ktc.se'/>
           <strEq name='MODEL' value='IMC'/>
           <strMask name='SN' value='39487*' wildcard='*'/>
           <numRange name='V' min='1' minIncluded='true' max='2' maxIncluded='false'/>
           <numRange name='LON' min='-72' minIncluded='true' max='-70' maxIncluded='true'/>
-          <numRange name='LAT' min='-33' minIncluded='true' max='-34' maxIncluded='true'/>
+          <numRange name='LAT' min='-34' minIncluded='true' max='-33' maxIncluded='true'/>
       </update>
    </iq>]]>
             </example>
@@ -1004,7 +1114,7 @@
        to='curious@clayster.com/client'
        id='9'>
       <found xmlns='urn:xmpp:iot:discovery' more='false'>
-          <thing owner='owner@clayster.com/phone' jid='thing@clayster.com/imc'>
+          <thing owner='owner@clayster.com' jid='thing@clayster.com'>
              <str name='SN' value='394872348732948723'/>
              <str name='MAN' value='www.ktc.se'/>
              <str name='MODEL' value='IMC'/>
@@ -1028,7 +1138,7 @@
        to='curious@clayster.com/client'
        id='9'>
       <found xmlns='urn:xmpp:iot:discovery' more='false'>
-          <thing owner='owner@clayster.com/phone' jid='rack@clayster.com/plcs' nodeId='imc1' sourceId='MeteringTopology'>
+          <thing owner='owner@clayster.com' jid='rack@clayster.com' nodeId='imc1' sourceId='MeteringTopology'>
              <str name='SN' value='394872348732948723'/>
              <str name='MAN' value='www.ktc.se'/>
              <str name='MODEL' value='IMC'/>
@@ -1045,7 +1155,10 @@
                 If more results are available in the search (accessible by using the <strong>offset</strong> attribute in a new search), the <strong>more</strong> attribute is
                 present with value <strong>true</strong>.
             </p>
-        </section2>
+			<p>
+				<strong>Note:</strong> Meta Tag names are case insensitive. In this document, all tag names have been written using upper case letters.
+			</p>
+		</section2>
         <section2 topic='Unregistering Thing from Registry'>
             <p>
                 A thing can unregister itself from the Registry. This can be done in an uninstallation procedure for instance. To unregister from the registry, it simply sends
@@ -1243,6 +1356,9 @@
                 It is up to the Thing Registry to choose which tags it persists and which tags it doesn't. To avoid the possibility of malicious reporting of tags, some limit should be
                 imposed on what tags are supported. As a minimum, a Thing Registry must support all predefined tags, as listed above.
             </p>
+			<p>
+				<strong>Note:</strong> Meta Tag names are case insensitive. In this document, all tag names have been written using upper case letters.
+			</p>
         </section2>
         <section2 topic='Friendships between Things and Registry'>
             <p>

@@ -2368,14 +2368,14 @@
 							<td>Required</td>
 							<td>identity</td>
 							<td>numeric</td>
-							<td>Latitude of the device, in degrees. Unit must be "°".</td>
+							<td>Latitude of the device, in degrees, using WGS-84 as a reference datum. Unit must be "°".</td>
 						</tr>
 						<tr>
 							<td>Location, Longitude</td>
 							<td>Required</td>
 							<td>identity</td>
 							<td>numeric</td>
-							<td>Longitude of the device, in degrees. Unit must be "°".</td>
+							<td>Longitude of the device, in degrees, using WGS-84 as a reference datum. Unit must be "°".</td>
 						</tr>
 						<tr>
 							<td>Location, Altitude</td>
