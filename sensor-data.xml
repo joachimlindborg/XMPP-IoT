@@ -1,4 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
+<!-- TODO: unsure eller inProgress statusfält mellan missing och automaticEstimate. -->
+<!-- TODO: Ändra §5.6. Field Status Values to Field Quality of Service levels. 
+
+Det skall också stå att dessa flaggor är "summan av" många års erfarenhet från många olika system
+nu står det bara just mätarsystem i första meningen.
+
+Även exempel:
+
+ta exemplet vattenmätaren:
+[8:58:12 PM] Peter Waher: finns ett klassiskt problem
+[8:58:18 PM] Peter Waher: vad händer när det inte kommer in pulser?
+[8:58:23 PM] Peter Waher: har vattnet slutat flöda?
+[8:58:27 PM] Peter Waher: eller flödar det långsamt?
+[8:58:50 PM] Peter Waher: så mätare, istället för att rapportera 0, har någon form av invers funktion 1/t, där flödet långsamt avtar
+[8:58:58 PM] Peter Waher: men det är ett estimat, för mätaren kan inte göra mer
+[8:59:10 PM] Peter Waher: där kan således den lilla sensor rapportera automaticEstimate istf. automaticReadout
+[8:59:18 PM] Peter Waher: för mätaren erkänner att den inte vet, och att den gissar
+[8:59:31 PM] Peter Waher: den QoS-nivån är väldigt värdefull i sammanhanget
+[8:59:42 PM] Peter Waher: eftersom man slipper göra felet att tro att det är läckage
+[8:59:49 PM] Joachim Lindborg: Bra exempel att ha i den texten
+[8:59:56 PM] Peter Waher: även om man ser ett "flöde" på mätaren
+-->
+<!-- Optional writable-attribute (utan default-värde) på fält, för att enklare kunna synkronisera med XEP-0325. -->
 <!DOCTYPE xep SYSTEM 'xep.dtd' [
 	<!ENTITY % ents SYSTEM 'xep.ent'>
 	%ents;
