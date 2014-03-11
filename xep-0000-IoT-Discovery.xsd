@@ -6,10 +6,10 @@
     elementFormDefault='qualified'>
  
 	<xs:element name='register' type='Register'/>
-	<xs:element name='mine' type='MetaData'/>
+	<xs:element name='mine' type='Mine'/>
 	<xs:element name='update' type='MetaDataNodeInfo'/>
  
-	<xs:element name='claimed' type='Jid'/>
+	<xs:element name='claimed' type='Claimed'/>
 	<xs:element name='remove' type='Jid'/>
 	<xs:element name='removed' type='NodeInfo'/>
 	<xs:element name='unregister' type='NodeInfo'/>
@@ -91,6 +91,22 @@
 		<xs:complexContent>
 			<xs:extension base='MetaDataNodeInfo'>
 				<xs:attribute name='selfOwned' type='xs:boolean' use='optional' default='false'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+ 
+	<xs:complexType name='Mine'>
+		<xs:complexContent>
+			<xs:extension base='MetaData'>
+				<xs:attribute name='public' type='xs:boolean' use='optional' default='true'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+ 
+	<xs:complexType name='Claimed'>
+		<xs:complexContent>
+			<xs:extension base='Jid'>
+				<xs:attribute name='public' type='xs:boolean' use='optional' default='false'/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

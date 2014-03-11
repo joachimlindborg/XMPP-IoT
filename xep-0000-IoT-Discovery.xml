@@ -350,13 +350,67 @@
 				The following sections describe them in more detail.
 			</p>
 			<section3 topic='DHCP'>
-				<p>TBD</p>
-				<!-- TODO -->
+				<p>
+					DHCP offers an internal structure for advertising configuration information to clients in a network.
+					This includes configuration parameters and other control elements, which are transmitted in special marked data elements, called 'options', as described in
+					<span class='ref'>
+						<link url='http://tools.ietf.org/html/rfc3942'>RFC 3942</link>
+					</span> <note>
+						RFC 3942: Reclassifying Dynamic Host Configuration Protocol version 4 (DHCPv4) Options &lt;<link url='http://tools.ietf.org/html/rfc3942'>http://tools.ietf.org/html/rfc3942</link>&gt;.
+					</note>.
+				</p>
+				<p>
+					<link url='http://www.iana.org/assignments/bootp-dhcp-parameters/bootp-dhcp-parameters.txt'>Dynamic Host Configuration Protocol (DHCP) and Bootstrap Protocol (BOOTP) Parameters</link> lists currently assigned 'options' by IANA.
+					<strong>Note:</strong> There does exist no 'option' for XMPP at the moment.
+					Options 224 to 254 are marked as 'site-specific option range' to support local (to a site) configuration options (i.e., reserved as 'Private Use').
+				</p>
+				<p>
+					Possible codes for the XMPP server option:
+				</p>
+				<ul>
+					<li>Use 'site-specific option range'. Use of 'option-code' 224.</li>
+					<li>
+						<strong>TBD:</strong> Define and register DHCP and BOOTP option as described in <link url='#option'>Parameters for IoT Discovery</link>. Use of 'option-code' 84.
+					</li>
+				</ul>
+				<section4 topic='XMPP Server Option'>
+					<p>
+						This option specifies the name of the XMPP server.
+						The name may or may not be qualified with the local domain name.
+						See &rfc1035; for character set restrictions.
+					</p>
+					<p>
+						The code for this option is 224 (for 'site-specific option range') or 84 (for <link url='#option'>DHCP and BOOTP Parameters for IoT Discovery</link>), and its minimum length is 1.
+					</p>
+					<example caption='IoT Discovery DHCP Option'>
+						<![CDATA[
+   <option code> <data length> machine]]>
+					</example>
+					<p>So, for example, if the machine name is "pronto", the code for the option is 224, the XMPP server option would be as follows:</p>
+					<example caption='IoT Discovery DHCP Option Example'>
+						<![CDATA[
+   224 12 pronto.local]]>
+					</example>
+				</section4>
+				<section4 topic='Dynamic Host Configuration Protocol (DHCP) and Bootstrap Protocol (BOOTP) Parameters for IoT Discovery' anchor='option'>
+					<p>The following parameters in use as of MONTH 201x. Refer to the DHCP and BOOTP parameters itself for a complete and current list of parameters (this specification might or might not be revised when new parameters are registered).</p>
+					<example caption='IoT Discovery DHCP and BOOTP Parameters Registry'>
+						<![CDATA[
+   <tag>84</tag>
+   <name>XMPP server</name>
+   <data length>N</data length>
+   <meaning>XMPP Servers DHCP Option</meaning>
+   <reference>[RFC6120]</reference>]]>
+					</example>
+				</section4>
 			</section3>
 			<section3 topic='Multicast DNS (mDNS) and DNS Service Discovery (DNS-SD)'>
 				<p>
 					An introduction of mDNS/DNS-SD (e.g., how it works and terminology) is described in &xep0174; (i.e., sections [1.2] and [2]).
-					For the purpose of serverless messaging we are interested only in the "xmpp-client" service. An XMPP chat client (actually its mDNS daemon) can send out multicast DNS queries for services of type "xmpp-client".
+					For the purpose of IoT Discovery we are interested only in the "xmpp-client" service.
+					An XMPP server MUST publish four different kinds of DNS records to advertise its availability using the services of type "xmpp-client".
+					An XMPP chat client (actually its mDNS daemon) can send out multicast DNS queries for services of type "xmpp-client".
+					<strong>Note:</strong> the service of type "xmpp-client" is the reservered name for client-to-server connections by IANA, as described in &rfc6120;.
 				</p>
 				<section4 topic='DNS Records'>
 					<p>In order to advertise its availability, a server MUST publish four different kinds of DNS records:</p>
@@ -397,7 +451,10 @@
 						</li>
 					</ol>
 					<p>
-						The "machine" is the name of the computer, the "port" has to be the assigned port number "5222" for the DNS service name "xmpp-client" (<strong>Note:</strong> reservered name for client-to-server connections by IANA, as described in &rfc6120;, and the "ip-address" is the physical address of the computer on the local network.
+						For the purpose of IoT Discovery we are interested only in the "xmpp-client" service.
+						An XMPP server MUST publish four different kinds of DNS records to advertise its availability using the services of type "xmpp-client".
+						An XMPP chat client (actually its mDNS daemon) can send out multicast DNS queries for services of type "xmpp-client".
+						<strong>Note:</strong> the service of type "xmpp-client" is the reservered name for client-to-server connections by IANA, as described in &rfc6120;.
 					</p>
 					<p>So, for example, if the machine name is "pronto", the IP address is "10.2.1.188", and the personal information, the DNS records would be as follows:</p>
 					<example caption='IoT Discovery DNS Records Example'>
@@ -652,7 +709,7 @@
             <p>
                 Once the client has the required meta information about the Thing to claim ownership, it sends itself the following request to the Think Registry:
             </p>
-            <example caption='Claim Ownership'>
+            <example caption='Claim Ownership of public Thing'>
                 <![CDATA[
    <iq type='set'
        from='owner@clayster.com/phone'
@@ -667,10 +724,33 @@
       </mine>
    </iq>]]>
             </example>
-            <p>
-                If the claim is successful, i.e. there's a Thing that has not been claimed with EXACTLY the same meta data (however, the order is not important), the Thing is marked in the
-                Registry as CLAIMED, and an empty result is returned as follows. If there's a claimed Thing with exactly the same meta data, and the JID of the claimant (without resource)
-                matches the JID of the claimer (without resource), a success response is also returned, containing the resource-less JID of the Thing, as follows:
+			<p>
+				If this claim is successful, the Thing is marked as a public claimed Thing. The thing can always be removed later, but after the claim, the Thing is public. If you want to claim
+				a private Thing, you can add the <strong>public</strong> attribute with value <strong>false</strong> to the claim, as follows:
+			</p>
+			<example caption='Claim Ownership of private Thing'>
+				<![CDATA[
+   <iq type='set'
+       from='owner@clayster.com/phone'
+       to='discovery@clayster.com'
+       id='4'>
+      <mine xmlns='urn:xmpp:iot:discovery' public='false'>
+          <str name='SN' value='394872348732948723'/>
+          <str name='MAN' value='www.ktc.se'/>
+          <str name='MODEL' value='IMC'/>
+          <num name='V' value='1.2'/>
+          <str name='KEY' value='4857402340298342'/>
+      </mine>
+   </iq>]]>
+			</example>
+			<p>
+				In this case, if the claim is successful, the Thing will not be made public in the Thing Registry, after the claim.
+			</p>
+			<p>
+                If a claim is successful, i.e. there's a Thing that has not been claimed with EXACTLY the same meta data (however, the order is not important), the Thing is marked in the
+                Registry as CLAIMED, and as public or private depending on the <strong>public</strong> attribute, and an empty result is returned as follows. If there's a claimed Thing with 
+				exactly the same meta data, and the JID of the claimant (without resource) matches the JID of the claimer (without resource), a success response is also returned, containing 
+				the resource-less JID of the Thing, as follows:
             </p>
             <example caption='Ownership claim successful'>
                 <![CDATA[
@@ -681,7 +761,7 @@
       <claimed xmlns='urn:xmpp:iot:discovery' jid='thing@clayster.com'/>
    </iq>]]>
             </example>
-            <p>
+			<p>
                 If the Thing that has been claimed resides behind a concentrator, the result will contain those of the attributes <strong>nodeId</strong>, <strong>sourceId</strong>
                 and <strong>cacheType</strong> that are required to access the Thing in calls made using &xep0323;, &xep0324;, &xep0325; and &xep0326;. The following example illustrates
                 a response where a Thing behind a Concentrator has been claimed:
@@ -723,7 +803,23 @@
       <claimed xmlns='urn:xmpp:iot:discovery' jid='owner@clayster.com'/>
    </iq>]]>
             </example>
-            <p>
+			<p>
+				If the Thing was claimed as a private Thing, this is shown using the <strong>public</strong> attribute in the response, as follows:
+			</p>
+			<example caption='Ownership claim of private Thing successful'>
+				<![CDATA[
+   <iq type='set'
+       from='discovery@clayster.com'
+       to='thing@clayster.com/imc'
+       id='5'>
+      <claimed xmlns='urn:xmpp:iot:discovery' jid='owner@clayster.com' public='false'/>
+   </iq>]]>
+			</example>
+			<p>
+				If the <strong>public</strong> attribute is present and has value <strong>false</strong>, it means no further meta data updates are necessary, since
+				the device is not searchable through the Thing Registry.
+			</p>
+			<p>
                 If the Thing resides behind a concentrator, the request must contain those of the attributes <strong>nodeId</strong>, <strong>sourceId</strong>
                 and <strong>cacheType</strong> that are required to access the Thing, as follows:
             </p>
@@ -755,7 +851,7 @@
 		</section2>
         <section2 topic='Removing Thing from Registry'>
             <p>
-                After a Thing has been claimed, it is registered as a PUBLIC CLAIMED Thing in the Registry. This makes the Thing available in searches. The owner can choose to remove
+                After a Thing has been claimed and is registed as a PUBLIC CLAIMED Thing in the Registry, it implies the Thing is available in searches. The owner can choose to remove
                 the Thing from the Registry, to avoid that the Thing appears in searches. To remove a Thing from the Registry the owner simply sends a removal request to the Registry
                 with the resource-less JID of the Thing to remove, as follows:
             </p>
@@ -824,7 +920,29 @@
        to='discovery@clayster.com'
        id='7'/>]]>
             </example>
-        </section2>
+			<p>
+				If the Thing lies behind a concentrator, the removal request would look as follows:
+			</p>
+			<example caption='Thing behind concentrator removed from registry by owner'>
+				<![CDATA[
+   <iq type='set'
+       from='discovery@clayster.com'
+       to='rack@clayster.com/plcs'
+       id='7'>
+      <removed xmlns='urn:xmpp:iot:discovery' nodeId='imc1' sourceId='MeteringTopology'/>
+   </iq>]]>
+			</example>
+			<p>
+				The Thing acknowledges the removal request by returning an empty response, as follows:
+			</p>
+			<example caption='Removal acknowledgement'>
+				<![CDATA[
+   <iq type='result'
+       from='thing@clayster.com/imc'
+       to='discovery@clayster.com'
+       id='7'/>]]>
+			</example>
+		</section2>
         <section2 topic='Finding Provisioning Server'>
             <p>
                 Up to this point only basic configuration and ownership and visibility of a Thing has been covered. For more advanced operations, a Thing might be required to
@@ -1442,7 +1560,25 @@
                 tag names defined in this document. If it has a configurable list of approved tags that can be stored, or if it allows any tags is an implementation decision.
             </p>
         </section2>
-    </section1>
+		<section2 topic='External services for creating QR-codes'>
+			<p>
+				If using external services when creating QR-codes, like the Google Charts API used in this document, make sure HTTPS is used and certificates validated. If HTTP is used,
+				meta-data tags used in Thing Registry registrations can be found out by sniffing the network, making it possible to hijack the corresponding devices.
+			</p>
+		</section2>
+		<section3 topic='DHCP Security Considerations'>
+			<p>TBD</p>
+			<!-- TODO -->
+		</section3>
+		<section3 topic='DNS Security Considerations'>
+			<p>TBD</p>
+			<!-- TODO -->
+		</section3>
+		<section3 topic='UPnP Security Considerations'>
+			<p>TBD</p>
+			<!-- TODO -->
+		</section3>
+	</section1>
     <section1 topic='IANA Considerations' anchor='iana'>
         <p>This document requires no interaction with &IANA;.</p>
     </section1>
@@ -1462,10 +1598,10 @@
     elementFormDefault='qualified'>
  
     <xs:element name='register' type='Register'/>
-    <xs:element name='mine' type='MetaData'/>
+    <xs:element name='mine' type='Mine'/>
     <xs:element name='update' type='MetaDataNodeInfo'/>
  
-    <xs:element name='claimed' type='Jid'/>
+    <xs:element name='claimed' type='Claimed'/>
     <xs:element name='remove' type='Jid'/>
     <xs:element name='removed' type='NodeInfo'/>
     <xs:element name='unregister' type='NodeInfo'/>
@@ -1547,6 +1683,22 @@
         <xs:complexContent>
             <xs:extension base='MetaDataNodeInfo'>
                 <xs:attribute name='selfOwned' type='xs:boolean' use='optional' default='false'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+  
+    <xs:complexType name='Mine'>
+        <xs:complexContent>
+            <xs:extension base='MetaData'>
+                <xs:attribute name='public' type='xs:boolean' use='optional' default='true'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    <xs:complexType name='Claimed'>
+        <xs:complexContent>
+            <xs:extension base='Jid'>
+                <xs:attribute name='public' type='xs:boolean' use='optional' default='false'/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
