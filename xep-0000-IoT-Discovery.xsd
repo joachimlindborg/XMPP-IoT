@@ -13,7 +13,9 @@
 	<xs:element name='remove' type='Jid'/>
 	<xs:element name='removed' type='NodeInfo'/>
 	<xs:element name='unregister' type='NodeInfo'/>
- 
+	<xs:element name='disown' type='Jid'/>
+	<xs:element name='disowned' type='NodeInfo'/>
+
 	<xs:element name='search'>
 		<xs:complexType>
 			<xs:choice minOccurs='1' maxOccurs='unbounded'>
