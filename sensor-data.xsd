@@ -134,9 +134,10 @@
 	<xs:complexType name='field' abstract='true'>
 		<xs:attribute name="name" type="xs:string" use="required"/>
 		<xs:attributeGroup ref='fieldTypes'/>
-		<xs:attributeGroup ref='fieldStatus'/>
+		<xs:attributeGroup ref='fieldQoS'/>
 		<xs:attribute name="module" type="xs:string" use="optional"/>
 		<xs:attribute name="stringIds" type="StringIds" use="optional"/>
+		<xs:attribute name="writable" type="xs:boolean" use="optional"/>
 	</xs:complexType>
 
 	<xs:simpleType name="StringIds">
@@ -145,8 +146,9 @@
 		</xs:restriction>
 	</xs:simpleType>
 
-	<xs:attributeGroup name='fieldStatus'>
+	<xs:attributeGroup name='fieldQoS'>
 		<xs:attribute name='missing' type='xs:boolean' use='optional' default='false'/>
+		<xs:attribute name='inProgress' type='xs:boolean' use='optional' default='false'/>
 		<xs:attribute name='automaticEstimate' type='xs:boolean' use='optional' default='false'/>
 		<xs:attribute name='manualEstimate' type='xs:boolean' use='optional' default='false'/>
 		<xs:attribute name='manualReadout' type='xs:boolean' use='optional' default='false'/>
