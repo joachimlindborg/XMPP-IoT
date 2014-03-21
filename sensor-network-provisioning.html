@@ -158,7 +158,7 @@
 			<tr class="body">
 				<td colspan="" rowspan="">XEP-0322</td>
 				<td colspan="" rowspan="">
-					Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not a Internet of Things specific XEP, this XEP should be considered
+					Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not an Internet of Things specific XEP, this XEP should be considered
 					in all Internet of Things implementations where memory and packet size is an issue.
 				</td>
 			</tr>
@@ -1397,7 +1397,10 @@
         </div>
     <h2>4.
        <a name="support">Determining Support</a></h2>
-        <p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:provisioning" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EUAAG">10</a>] information requests.</p>
+		<p class="" style="">
+			If an entity is a Provisioning Server and supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:provisioning"
+			in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EUAAG">10</a>] information requests.
+		</p>
         <p class="caption"><a name="example-18"></a>Example 18. Service discovery information request</p>
     <div class="indent">
       <pre class="prettyprint">
