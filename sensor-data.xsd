@@ -116,15 +116,6 @@
 		</xs:complexType>
 	</xs:element>
 
-	<xs:element name='rejected'>
-		<xs:complexType>
-			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
-				<xs:element name='error' type='xs:string'/>
-			</xs:sequence>
-			<xs:attribute name='seqnr' type='xs:int' use='required'/>
-		</xs:complexType>
-	</xs:element>
-
 	<xs:element name='done'>
 		<xs:complexType>
 			<xs:attribute name='seqnr' type='xs:int' use='required'/>

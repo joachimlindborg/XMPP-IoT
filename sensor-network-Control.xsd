@@ -38,12 +38,13 @@
 		<xs:complexType>
 			<xs:choice minOccurs='0' maxOccurs='unbounded'>
 				<xs:element name='node' type='NodeReference'/>
-				<xs:element name='error' type='ParameterError'/>
+				<xs:element name='parameter' type='Parameter'/>
 			</xs:choice>
-			<xs:attributeGroup ref='responseCode'/>
 		</xs:complexType>
 	</xs:element>
- 
+
+	<xs:element name='paramError' type='ParameterError'/>
+
 	<xs:element name='getForm'>
 		<xs:complexType>
 			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
@@ -52,16 +53,7 @@
 			<xs:attributeGroup ref='tokens'/>
 		</xs:complexType>
 	</xs:element>
- 
-	<xs:element name='getFormResponse'>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref='xd:x' minOccurs="0" maxOccurs="1"/>
-			</xs:sequence>
-			<xs:attributeGroup ref='responseCode'/>
-		</xs:complexType>
-	</xs:element>
- 
+  
 	<xs:element name='parameterGroup'>
 		<xs:complexType>
 			<xs:attribute name='name' type='xs:string' use='required'/>
@@ -80,11 +72,7 @@
 		<xs:attribute name='userToken' type='xs:string' use='optional'/>
 	</xs:attributeGroup>
  
-	<xs:attributeGroup name='responseCode'>
-		<xs:attribute name='result' type='ResponseCode' use='required'/>
-	</xs:attributeGroup>
- 
-	<xs:complexType name='Parameter' abstract='true'>
+	<xs:complexType name='Parameter'>
 		<xs:attribute name='name' type='xs:string' use='required'/>
 	</xs:complexType>
  
@@ -183,18 +171,6 @@
 	<xs:simpleType name='Color'>
 		<xs:restriction base='xs:string'>
 			<xs:pattern value='^([0-9a-fA-F]{6})|([0-9a-fA-F]{8})$'/>
-		</xs:restriction>
-	</xs:simpleType>
- 
-	<xs:simpleType name='ResponseCode'>
-		<xs:restriction base='xs:string'>
-			<xs:enumeration value='OK'/>
-			<xs:enumeration value='NotFound'/>
-			<xs:enumeration value='InsufficientPrivileges'/>
-			<xs:enumeration value='Locked'/>
-			<xs:enumeration value='NotImplemented'/>
-			<xs:enumeration value='FormError'/>
-			<xs:enumeration value='OtherError'/>
 		</xs:restriction>
 	</xs:simpleType>
  

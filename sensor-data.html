@@ -152,11 +152,11 @@
 			</tr>
 			<tr class="body">
 				<td colspan="" rowspan="">XEP-0331</td>
-				<td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EFHAC">1</a>]</td>
+				<td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0ELHAC">1</a>]</td>
 			</tr>
 			<tr class="body">
 				<td colspan="" rowspan="">XEP-0336</td>
-				<td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0E3HAC">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EIIAC">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0EUIAC">4</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EAJAC">5</a>].</td>
+				<td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0ECIAC">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EOIAC">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0E1IAC">4</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EGJAC">5</a>].</td>
 			</tr>
 		</table>
     </div>
@@ -224,7 +224,7 @@
 			</di>
 			<di>
 				<dt><strong>Parameter</strong></dt>
-				<dd>Readable and/or writable property on a node/device. The XEP-0326 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0E2MAC">6</a>] deals with reading and writing parameters
+				<dd>Readable and/or writable property on a node/device. The XEP-0326 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0EBNAC">6</a>] deals with reading and writing parameters
 				on nodes/devices. Fields are not parameters, and parameters are not fields.</dd>
 			</di>
 			<di>
@@ -364,7 +364,7 @@
 		</p>
 		<p class="" style="">
 			The device can also reject a read-out request. Reasons for rejecting a request may be missing privileges defined by provisioning rules, etc. It's not part of this XEP
-			to define such rules. A separate XEP (<span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0ERFAE">7</a>]) defines an architecture for how such provisioning can be easily implemented.
+			to define such rules. A separate XEP (<span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0EXFAE">7</a>]) defines an architecture for how such provisioning can be easily implemented.
 		</p>
 		<p class="" style="">
 			A rejection response is shown in the following diagram.
@@ -498,18 +498,16 @@
       &lt;error type='cancel'&gt;
          &lt;forbidden xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'/&gt;
          &lt;text xmlns='urn:ietf:params:xml:ns:xmpp-stanzas' xml:lang='en'&gt;Access denied.&lt;/text&gt;
-         &lt;rejected xmlns='urn:xmpp:iot:sensordata' seqnr='3'/&gt;
       &lt;/error&gt;
    &lt;/iq&gt;
 			</pre>
       </div>
 			<p class="" style="">
 				Depending on the reason for rejecting the request, different XMPP errors can be returned, according to the description in the following table. The table also
-				lists recommended error type for each error. But common for all is that the <span class="strong">rejected</span> element must be included in the response. Any custom 
-				error message is returned in a <span class="strong">text</span> element, as in the example above.
+				lists recommended error type for each error. Any custom error message is returned in a <span class="strong">text</span> element, as in the example above.
 			</p>
 			<div class="indent">
-        <p class="caption"><a name="table-2"></a>Table 2: Field Value Types</p>
+        <p class="caption"><a name="table-2"></a>Table 2: XMPP Errors when rejecting a readout request</p>
         <table border="1" cellpadding="3" cellspacing="0">
 				<tr class="body">
 					<th colspan="" rowspan="">Error Type</th>
@@ -764,7 +762,7 @@
 		</div>
 	<h2>4.
        <a name="support">Determining Support</a></h2>
-		<p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:sensordata" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EDOAE">8</a>] information requests.</p>
+		<p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:sensordata" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EHOAE">8</a>] information requests.</p>
 		<p class="caption"><a name="example-10"></a>Example 10. Service discovery information request</p>
     <div class="indent">
       <pre class="prettyprint">
@@ -794,7 +792,7 @@
 		</pre>
     </div>
 		<p class="" style="">In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined 
-		in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0E1OAE">9</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.</p>
+		in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0E5OAE">9</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.</p>
 	<h2>5.
        <a name="impl">Implementation Notes</a></h2>
 		<div class="indent">
@@ -804,7 +802,7 @@
 				affected negatively by this for two reasons:
 			</p>
 			<ul class="" style="">
-				<li class="" style="">For sensors with limited memory, or where package size is important, <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0322.html">Efficient XML Interchange (EXI) Format</a></span>  [<a href="#nt-ID0E3PAE">10</a>] is supposed to be used. 
+				<li class="" style="">For sensors with limited memory, or where package size is important, <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0322.html">Efficient XML Interchange (EXI) Format</a></span>  [<a href="#nt-ID0EAQAE">10</a>] is supposed to be used. 
 				EXI compresses strings as normalized index values, making the string appear only once in the packet. Therefore, shortening string length doesn't affect packet 
 				size much. Element and attribute names in known namespaces are furthermore only encoded by index in schema, not by name.</li>
 				<li class="" style="">If limited memory or package size is not a consideration, readability and ease of implementation is preferred to short messages.</li>
@@ -1143,7 +1141,7 @@
 		<div class="indent">
       <h3>5.9 <a name="control">Reading controllable parameter values</a></h3>
 			<p class="" style="">
-				If reading field values from a device that also supports control through <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0325.html">Internet of Things - Control</a></span>  [<a href="#nt-ID0E2FAG">11</a>], the device can report current control parameter values as momentary or status field values,
+				If reading field values from a device that also supports control through <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0325.html">Internet of Things - Control</a></span>  [<a href="#nt-ID0E6FAG">11</a>], the device can report current control parameter values as momentary or status field values,
 				using field names corresponding to its control parameter names. However, such values would probably only correspond to a subset of all data read out. To help the reader
 				to know what fields correspond to controllable parameters, the optional <span class="strong">writable</span> attribute can be used in responsens. If this attribute is available, it
 				tells the client if the field corresponds to a control parameter with the same name on the device. If the attribute is not available, no deduction can be made if a control
@@ -1347,7 +1345,7 @@
 		</ul>
 	<h2>8.
        <a name="iana">IANA Considerations</a></h2>
-		<p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EHRAG">12</a>].</p>
+		<p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0ELRAG">12</a>].</p>
 	<h2>9.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
 		<p class="" style="">
@@ -1477,16 +1475,7 @@
             &lt;xs:attribute name='done' type='xs:boolean' use='optional' default='false'/&gt;
         &lt;/xs:complexType&gt;
     &lt;/xs:element&gt;
-
-    &lt;xs:element name='rejected'&gt;
-        &lt;xs:complexType&gt;
-            &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
-                &lt;xs:element name='error' type='xs:string'/&gt;
-            &lt;/xs:sequence&gt;
-            &lt;xs:attribute name='seqnr' type='xs:int' use='required'/&gt;
-        &lt;/xs:complexType&gt;
-    &lt;/xs:element&gt;
-
+ 
     &lt;xs:element name='done'&gt;
         &lt;xs:complexType&gt;
             &lt;xs:attribute name='seqnr' type='xs:int' use='required'/&gt;
@@ -1651,18 +1640,18 @@
     <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
     <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
     <div class="indent">
-      <p><a name="nt-ID0EFHAC">1</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0E3HAC">2</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0EIIAC">3</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
-      <p><a name="nt-ID0EUIAC">4</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
-      <p><a name="nt-ID0EAJAC">5</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
-      <p><a name="nt-ID0E2MAC">6</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
-      <p><a name="nt-ID0ERFAE">7</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
-      <p><a name="nt-ID0EDOAE">8</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
-      <p><a name="nt-ID0E1OAE">9</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
-      <p><a name="nt-ID0E3PAE">10</a>. XEP-0322: Efficient XML Interchange (EXI) Format &lt;<a href="http://xmpp.org/extensions/xep-0322.html">http://xmpp.org/extensions/xep-0322.html</a>&gt;.</p>
-      <p><a name="nt-ID0E2FAG">11</a>. XEP-0325: Internet of Things - Control &lt;<a href="http://xmpp.org/extensions/xep-0325.html">http://xmpp.org/extensions/xep-0325.html</a>&gt;.</p>
-      <p><a name="nt-ID0EHRAG">12</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+      <p><a name="nt-ID0ELHAC">1</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0ECIAC">2</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0EOIAC">3</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
+      <p><a name="nt-ID0E1IAC">4</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
+      <p><a name="nt-ID0EGJAC">5</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+      <p><a name="nt-ID0EBNAC">6</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
+      <p><a name="nt-ID0EXFAE">7</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
+      <p><a name="nt-ID0EHOAE">8</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0E5OAE">9</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0EAQAE">10</a>. XEP-0322: Efficient XML Interchange (EXI) Format &lt;<a href="http://xmpp.org/extensions/xep-0322.html">http://xmpp.org/extensions/xep-0322.html</a>&gt;.</p>
+      <p><a name="nt-ID0E6FAG">11</a>. XEP-0325: Internet of Things - Control &lt;<a href="http://xmpp.org/extensions/xep-0325.html">http://xmpp.org/extensions/xep-0325.html</a>&gt;.</p>
+      <p><a name="nt-ID0ELRAG">12</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
@@ -1670,6 +1659,7 @@
       <h4>Version 0.4 (2014-03-20)</h4>
       <div class="indent">
 				<p class="" style="">Updated IQ-error stanzas for <a href="#readoutrejected">readout rejections</a> to make them compliant with RFC-6120.</p>
+				<p class="" style="">The element <span class="strong">rejected</span> is no longer used and has been removed.</p>
 				<p class="" style="">The term Field Status Value has been renamed <a href="#fieldqosvalues">Field Quality of Service Value</a>, to make it clearer.</p>
 				<p class="" style="">Added a <a href="#fieldqosvalues">inProgress</a> field quality of service value.</p>
 				<p class="" style="">Added a section giving an example of the <a href="#estimatesvsreadouts">difference between estimates and normally read values</a>.</p>

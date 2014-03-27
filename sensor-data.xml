@@ -1,5 +1,4 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- Optional writable-attribute (utan default-värde) på fält, för att enklare kunna synkronisera med XEP-0325. -->
 <!DOCTYPE xep SYSTEM 'xep.dtd' [
 	<!ENTITY % ents SYSTEM 'xep.ent'>
 	%ents;
@@ -36,6 +35,7 @@
 			<initials>pw</initials>
 			<remark>
 				<p>Updated IQ-error stanzas for <link url='#readoutrejected'>readout rejections</link> to make them compliant with RFC-6120.</p>
+				<p>The element <strong>rejected</strong> is no longer used and has been removed.</p>
 				<p>The term Field Status Value has been renamed <link url='#fieldqosvalues'>Field Quality of Service Value</link>, to make it clearer.</p>
 				<p>Added a <link url='#fieldqosvalues'>inProgress</link> field quality of service value.</p>
 				<p>Added a section giving an example of the <link url='#estimatesvsreadouts'>difference between estimates and normally read values</link>.</p>
@@ -518,16 +518,14 @@
       <error type='cancel'>
          <forbidden xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'/>
          <text xmlns='urn:ietf:params:xml:ns:xmpp-stanzas' xml:lang='en'>Access denied.</text>
-         <rejected xmlns='urn:xmpp:iot:sensordata' seqnr='3'/>
       </error>
    </iq>]]>
 			</example>
 			<p>
 				Depending on the reason for rejecting the request, different XMPP errors can be returned, according to the description in the following table. The table also
-				lists recommended error type for each error. But common for all is that the <strong>rejected</strong> element must be included in the response. Any custom 
-				error message is returned in a <strong>text</strong> element, as in the example above.
+				lists recommended error type for each error. Any custom error message is returned in a <strong>text</strong> element, as in the example above.
 			</p>
-			<table caption='Field Value Types'>
+			<table caption='XMPP Errors when rejecting a readout request'>
 				<tr>
 					<th>Error Type</th>
 					<th>Error Element</th>
@@ -1431,16 +1429,7 @@
             <xs:attribute name='done' type='xs:boolean' use='optional' default='false'/>
         </xs:complexType>
     </xs:element>
-
-    <xs:element name='rejected'>
-        <xs:complexType>
-            <xs:sequence minOccurs='0' maxOccurs='unbounded'>
-                <xs:element name='error' type='xs:string'/>
-            </xs:sequence>
-            <xs:attribute name='seqnr' type='xs:int' use='required'/>
-        </xs:complexType>
-    </xs:element>
-
+ 
     <xs:element name='done'>
         <xs:complexType>
             <xs:attribute name='seqnr' type='xs:int' use='required'/>
