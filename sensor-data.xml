@@ -31,11 +31,15 @@
 		</author>
 		<revision>
 			<version>0.4</version>
-			<date>2014-03-20</date>
+			<date>2014-03-31</date>
 			<initials>pw</initials>
 			<remark>
 				<p>Updated IQ-error stanzas for <link url='#readoutrejected'>readout rejections</link> to make them compliant with RFC-6120.</p>
 				<p>The element <strong>rejected</strong> is no longer used and has been removed.</p>
+				<p>
+					Harmonization of data types between XEP-0323 and XEP-0325. This has resulted in the addition of the following new field types: <strong>date</strong>,
+					<strong>int</strong>, <strong>long</strong> and <strong>time</strong>. The <strong>timeSpan</strong> type has been renamed <strong>duration</strong>.
+				</p>
 				<p>The term Field Status Value has been renamed <link url='#fieldqosvalues'>Field Quality of Service Value</link>, to make it clearer.</p>
 				<p>Added a <link url='#fieldqosvalues'>inProgress</link> field quality of service value.</p>
 				<p>Added a section giving an example of the <link url='#estimatesvsreadouts'>difference between estimates and normally read values</link>.</p>
@@ -829,14 +833,59 @@
 				response to a read-out request.
 			</p>
 		</section2>
-		<section2 topic='Field Value Types' anchor='fieldvaluetypes'>
+		<section2 topic='Field Value Data Types' anchor='fieldvaluetypes'>
 			<p>
 				There are different types of values that can be reported from a device. The following table lists the various types:
 			</p>
-			<table caption='Field Value Types'>
+			<table caption='Field Value Data Types'>
 				<tr>
 					<th>Element</th>
 					<th>Description</th>
+				</tr>
+				<tr>
+					<td>boolean</td>
+					<td>Represents a boolean value that can be either true or false.</td>
+				</tr>
+				<tr>
+					<td>date</td>
+					<td>
+						Represents a date value. The value must be encoded using the xs:date data type.
+					</td>
+				</tr>
+				<tr>
+					<td>dateTime</td>
+					<td>
+						Represents a date and optional time value. The value must be encoded using the xs:dateTime data type. This includes date, an optional time and optional time zone information.
+						If time zone is not available, it is supposed to be undefined.
+					</td>
+				</tr>
+				<tr>
+					<td>duration</td>
+					<td>Represents a duration value. The value must be encoded using the xs:duration data type.</td>
+				</tr>
+				<tr>
+					<td>enum</td>
+					<td>
+						Represents an enumeration value. What differs this value from a string value, is that it apart from the enumeration value (which is a string value),
+						also contains a data type, which consumers can use to interpret its value. This specification does not assume knowledge of any particular enumeration
+						data types.
+					</td>
+				</tr>
+				<tr>
+					<td>int</td>
+					<td>
+						Represents a 32-bit integer value. It contains an arbitrary 32-bit integer value. This field value data type can be seen as a subtype of the more generic numeric 
+						field value data type. It has its own element, to make it harmonous to 32-bit integer control parameters, as defined in XEP-0325. It is also simpler to report and 
+						compress, since it does not use floating point precision and a unit.
+					</td>
+				</tr>
+				<tr>
+					<td>long</td>
+					<td>
+						Represents a 64-bit integer value. It contains an arbitrary 64-bit integer value. This field value data type can be seen as a subtype of the more generic numeric 
+						field value data type. It has its own element, to make it harmonous to 64-bit integer control parameters, as defined in XEP-0325. It is also simpler to report and 
+						compress, since it does not use floating point precision and a unit.
+					</td>
 				</tr>
 				<tr>
 					<td>numeric</td>
@@ -852,25 +901,34 @@
 					<td>Represents a string value. It contains an arbitrary string value.</td>
 				</tr>
 				<tr>
-					<td>boolean</td>
-					<td>Represents a boolean value that can be either true or false.</td>
-				</tr>
-				<tr>
-					<td>dateTime</td>
-					<td>Represents a date and optional time value. The value must be encoded using the xs:dateTime data type. This includes date, an optional time and optional time zone information.
-					If time zone is not available, it is supposed to be undefined.</td>
-				</tr>
-				<tr>
-					<td>timeSpan</td>
-					<td>Represents a time span value. This can be either a time of day value, if nonnegative and less than 24 hours, or a duration value.</td>
-				</tr>
-				<tr>
-					<td>enum</td>
-					<td>Represents an enumeration value. What differs this value from a string value, is that it apart from the enumeration value (which is a string value),
-					also contains a data type, which consumers can use to interpret its value. This specification does not assume knowledge of any particular enumeration
-					data types.</td>
+					<td>time</td>
+					<td>Represents a time value. The value must be encoded using the xs:time data type.</td>
 				</tr>
 			</table>
+		</section2>
+		<section2 topic='Harmonization with XEP-0325 (Control)' anchor='harmonization'>
+			<p>
+				When representing control parameters as momentary field values, it is important to note the similarities and differences between XEP-0323 (this document) and XEP-0325 (Control):
+			</p>
+			<p>
+				The <strong>enum</strong> field value data type is not available in XEP-0325 (Control). Instead enumeration valued parameters are represented as <strong>string</strong> control 
+				parameters, while the control form explicitly lists available options for the parameter. Options are not available in XEP-0323, since it would not be practical to list all options 
+				every time the corresponding parameter was read out. Instead, the <strong>enum</strong> element contains a data type attribute, that can be used to identify the type of the enumeration.
+			</p>
+			<p>
+				The <strong>numeric</strong> field value data type is not available in XEP-0325 (Control). The reason is that a controller is not assumed to understand unit conversion. Any
+				floating-point valued control parameters are represented by <strong>double</strong> control parameters, which lack a unit attribute. They are assumed to have the same unit as 
+				the corresponding <strong>numeric</strong> field value. On the other hand, floating point valued control parameters without units, are reported using the <strong>numeric</strong>
+				field element, but leaving the unit blank.
+			</p>
+			<p>
+				Control pameters of type <strong>color</strong> have no corresponding field value data type. The color value must be represented in another way, and is implementation specific.
+				Possibilities include representing the color as a string, using a specific pattern (for instance RRGGBBAA), or report it using multiple fields, one for each component for instance.
+			</p>
+			<p>
+				The <strong>boolean</strong>, <strong>date</strong>, <strong>dateTime</strong>, <strong>duration</strong>, <strong>int</strong>, <strong>long</strong>, <strong>string</strong>
+				and <strong>time</strong> field value data types correspond to control parameters having the same types and same element names.
+			</p>
 		</section2>
 		<section2 topic='Field Types' anchor='fieldtypes'>
 			<p>
@@ -1318,7 +1376,7 @@
     targetNamespace='urn:xmpp:iot:sensordata'
     xmlns='urn:xmpp:iot:sensordata'
     elementFormDefault='qualified'>
-   
+ 
     <xs:element name='req'>
         <xs:complexType>
             <xs:choice minOccurs='0' maxOccurs='unbounded'>
@@ -1347,7 +1405,7 @@
             <xs:attribute name='userToken' type='xs:string' use='optional'/>
         </xs:complexType>
     </xs:element>
-
+ 
     <xs:attributeGroup name='fieldTypes'>
         <xs:attribute name='momentary' type='xs:boolean' use='optional' default='false'/>
         <xs:attribute name='peak' type='xs:boolean' use='optional' default='false'/>
@@ -1364,20 +1422,20 @@
         <xs:attribute name='historicalYear' type='xs:boolean' use='optional' default='false'/>
         <xs:attribute name='historicalOther' type='xs:boolean' use='optional' default='false'/>
     </xs:attributeGroup>
-
+ 
     <xs:element name='accepted'>
         <xs:complexType>
             <xs:attribute name='seqnr' type='xs:int' use='required'/>
             <xs:attribute name='queued' type='xs:boolean' use='optional' default='false'/>
         </xs:complexType>
     </xs:element>
-
+ 
     <xs:element name='started'>
         <xs:complexType>
             <xs:attribute name='seqnr' type='xs:int' use='required'/>
         </xs:complexType>
     </xs:element>
-
+ 
     <xs:element name='fields'>
         <xs:complexType>
             <xs:sequence minOccurs='0' maxOccurs='unbounded'>
@@ -1387,12 +1445,16 @@
                             <xs:element name='timestamp'>
                                 <xs:complexType>
                                     <xs:choice minOccurs='0' maxOccurs='unbounded'>
+                                        <xs:element name='boolean' type='boolean'/>
+                                        <xs:element name='date' type='date'/>
+                                        <xs:element name='dateTime' type='dateTime'/>
+                                        <xs:element name='duration' type='duration'/>
+                                        <xs:element name='enum' type='enum'/>
+                                        <xs:element name='int' type='int'/>
+                                        <xs:element name='long' type='long'/>
                                         <xs:element name='numeric' type='numeric'/>
                                         <xs:element name='string' type='string'/>
-                                        <xs:element name='boolean' type='boolean'/>
-                                        <xs:element name='dateTime' type='dateTime'/>
-                                        <xs:element name='timeSpan' type='timeSpan'/>
-                                        <xs:element name='enum' type='enum'/>
+                                        <xs:element name='time' type='time'/>
                                     </xs:choice>
                                     <xs:attribute name='value' type='xs:dateTime' use='required'/>
                                 </xs:complexType>
@@ -1408,7 +1470,7 @@
             <xs:attribute name='done' type='xs:boolean' use='optional' default='false'/>
         </xs:complexType>
     </xs:element>
-
+ 
     <xs:element name='failure'>
         <xs:complexType>
             <xs:sequence minOccurs='0' maxOccurs='unbounded'>
@@ -1435,7 +1497,7 @@
             <xs:attribute name='seqnr' type='xs:int' use='required'/>
         </xs:complexType>
     </xs:element>
-
+ 
     <xs:complexType name='field' abstract='true'>
         <xs:attribute name="name" type="xs:string" use="required"/>
         <xs:attributeGroup ref='fieldTypes'/>
@@ -1444,13 +1506,13 @@
         <xs:attribute name="stringIds" type="StringIds" use="optional"/>
         <xs:attribute name="writable" type="xs:boolean" use="optional"/>
     </xs:complexType>
-
+ 
     <xs:simpleType name="StringIds">
         <xs:restriction base="xs:string">
             <xs:pattern value="^\d+([|]\w+([.]\w+)*([|][^,]*)?)?(,\d+([|]\w+([.]\w+)*([|][^,]*)?)?)*$"/>
         </xs:restriction>
     </xs:simpleType>
-
+ 
     <xs:attributeGroup name='fieldQoS'>
         <xs:attribute name='missing' type='xs:boolean' use='optional' default='false'/>
         <xs:attribute name='inProgress' type='xs:boolean' use='optional' default='false'/>
@@ -1467,7 +1529,7 @@
         <xs:attribute name='powerFailure' type='xs:boolean' use='optional' default='false'/>
         <xs:attribute name='invoiceConfirmed' type='xs:boolean' use='optional' default='false'/>
     </xs:attributeGroup>
-
+ 
     <xs:complexType name='numeric'>
         <xs:complexContent>
             <xs:extension base='field'>
@@ -1476,7 +1538,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
+ 
     <xs:complexType name='string'>
         <xs:complexContent>
             <xs:extension base='field'>
@@ -1484,7 +1546,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
+ 
     <xs:complexType name='boolean'>
         <xs:complexContent>
             <xs:extension base='field'>
@@ -1492,7 +1554,15 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
+ 
+    <xs:complexType name='date'>
+        <xs:complexContent>
+            <xs:extension base='field'>
+                <xs:attribute name="value" type="xs:date" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
     <xs:complexType name='dateTime'>
         <xs:complexContent>
             <xs:extension base='field'>
@@ -1500,15 +1570,15 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <xs:complexType name='timeSpan'>
+ 
+    <xs:complexType name='duration'>
         <xs:complexContent>
             <xs:extension base='field'>
                 <xs:attribute name="value" type="xs:duration" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
+ 
     <xs:complexType name='enum'>
         <xs:complexContent>
             <xs:extension base='field'>
@@ -1517,9 +1587,32 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-</xs:schema>
-]]>
+ 
+    <xs:complexType name='int'>
+        <xs:complexContent>
+            <xs:extension base='field'>
+                <xs:attribute name="value" type="xs:int" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    <xs:complexType name='long'>
+        <xs:complexContent>
+            <xs:extension base='field'>
+                <xs:attribute name="value" type="xs:long" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    <xs:complexType name='time'>
+        <xs:complexContent>
+            <xs:extension base='field'>
+                <xs:attribute name="value" type="xs:time" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+</xs:schema>]]>
 		</code>
 	</section1>
 	<section1 topic='For more information' anchor='moreinfo'>

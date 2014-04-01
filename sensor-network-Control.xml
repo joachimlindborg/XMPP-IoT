@@ -38,7 +38,7 @@
         </author>
 		<revision>
 			<version>0.3</version>
-			<date>2013-03-25</date>
+			<date>2013-03-31</date>
 			<initials>pw</initials>
 			<remark>
 				<p>Response codes have been removed and replaced by XMPP compliant IQ error stanzas. The table below shows how old status codes map to XMPP IQ error elements.</p>
@@ -48,6 +48,7 @@
 				<p>The element <strong>paramError</strong> has been introduced, and can be used to provide error information that are linked to control parameters.</p>
 				<p>Added anchors to all second level subsections.</p>
 				<p>The section 'Reading current control states' has been updated to include two methods: One simple method only using control forms, and a second, using Sensor Data (XEP-0323).</p>
+				<p>Harmonization of data types between XEP-0323 and XEP-0325.</p>
 				<p>The attribute <strong>writable</strong> used to correlate fields in XEP-0323 with control parameters is described.</p>
 				<table caption='XMPP Errors when rejecting a readout request'>
 					<tr>
@@ -1141,7 +1142,7 @@
 					contains all current states readily accessible, there's no need of asynchronous updates making readout simple and straightforward.
 				</p>
 			</section3>
-			<section3 topic='Using Sensor Data'>
+			<section3 topic='Using XEP-0323 (Sensor Data)'>
 				<p>
 					A second option is to use &xep0323; to deliver current control states. Since this XEP contains mechanisms allowing for asynchronous readout of control parameter
 					states. This makes readout of such parameters simpler. However, there's a need to map values between the two XEPs.
@@ -1178,107 +1179,151 @@
 				</p>
 				<p>
 					The following table shows how corresponding field values should be converted to the corresponding control parameter value based on field type (x-axis) and
-					control parameter type (y-axis). N/A means conversion has no meaning and types are not compatible.
+					control parameter type (y-axis). An empty cell means conversion has no meaning and types are not compatible.
 				</p>
 				<table caption='Conversion of Field Value to Control Parameter Value based on types'>
 					<tr>
-						<th></th>
+						<th>325 \ 323</th>
+						<th>boolean</th>
+						<th>date</th>
+						<th>dateTime</th>
+						<th>duration</th>
+						<th>enum</th>
+						<th>int</th>
+						<th>long</th>
 						<th>numeric</th>
 						<th>string</th>
-						<th>boolean</th>
-						<th>dateTime</th>
-						<th>timeSpan</th>
-						<th>enum</th>
+						<th>time</th>
 					</tr>
 					<tr>
 						<th>boolean</th>
-						<td>!=0</td>
-						<td>N/A</td>
 						<td>x</td>
-						<td>N/A</td>
-						<td>N/A</td>
-						<td>N/A</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>!=0</td>
+						<td>!=0</td>
+						<td>!=0</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
 					</tr>
 					<tr>
 						<th>color</th>
-						<td>N/A</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
 						<td>RRGGBB or RRGGBBAA</td>
-						<td>N/A</td>
-						<td>N/A</td>
-						<td>N/A</td>
-						<td>N/A</td>
+						<td>&nbsp;</td>
 					</tr>
 					<tr>
 						<th>date</th>
-						<td>N/A</td>
-						<td>(1)</td>
-						<td>N/A</td>
+						<td>&nbsp;</td>
+						<td>x</td>
 						<td>Date part</td>
-						<td>N/A</td>
-						<td>N/A</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>(1)</td>
+						<td>&nbsp;</td>
 					</tr>
 					<tr>
 						<th>dateTime</th>
-						<td>N/A</td>
-						<td>(2)</td>
-						<td>N/A</td>
+						<td>&nbsp;</td>
 						<td>x</td>
-						<td>N/A</td>
-						<td>N/A</td>
+						<td>x</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>(2)</td>
+						<td>&nbsp;</td>
 					</tr>
 					<tr>
 						<th>double</th>
+						<td>Z2</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>x</td>
+						<td>x</td>
 						<td>x</td>
 						<td>(3)</td>
-						<td>Z2</td>
-						<td>N/A</td>
-						<td>N/A</td>
-						<td>N/A</td>
+						<td>&nbsp;</td>
 					</tr>
 					<tr>
 						<th>duration</th>
-						<td>N/A</td>
-						<td>(4)</td>
-						<td>N/A</td>
-						<td>N/A</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
 						<td>x</td>
-						<td>N/A</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>(4)</td>
+						<td>x</td>
 					</tr>
 					<tr>
 						<th>int</th>
-						<td>x</td>
-						<td>(5)</td>
 						<td>Z2</td>
-						<td>N/A</td>
-						<td>N/A</td>
-						<td>N/A</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>Ordinal</td>
+						<td>x</td>
+						<td>Thunk</td>
+						<td>Thunk</td>
+						<td>(5)</td>
+						<td>&nbsp;</td>
 					</tr>
 					<tr>
 						<th>long</th>
-						<td>x</td>
-						<td>(5)</td>
 						<td>Z2</td>
-						<td>N/A</td>
-						<td>N/A</td>
-						<td>N/A</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>Ordinal</td>
+						<td>x</td>
+						<td>x</td>
+						<td>Thunk</td>
+						<td>(5)</td>
+						<td>&nbsp;</td>
 					</tr>
 					<tr>
 						<th>string</th>
-						<td>(6)</td>
-						<td>x</td>
 						<td>xs:boolean</td>
+						<td>xs:date</td>
 						<td>xs:dateTime</td>
 						<td>xs:duration</td>
 						<td>x</td>
+						<td>xs:int</td>
+						<td>xs:long</td>
+						<td>(6)</td>
+						<td>x</td>
+						<td>xs:time</td>
 					</tr>
 					<tr>
 						<th>time</th>
-						<td>N/A</td>
-						<td>(7)</td>
-						<td>N/A</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
 						<td>Time part</td>
+						<td>(7)</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
 						<td>(8)</td>
-						<td>N/A</td>
+						<td>x</td>
 					</tr>
 				</table>
 				<p>
@@ -1333,15 +1378,15 @@
 					<tr>
 						<td>(7)</td>
 						<td>
-							The client should try to convert the string to a time value  according to the format specified by the XML data type xs:time.
+							A duration field value contains a xs:duration value. The xs:duration has a larger domain than xs:time, and contains all xs:time values, but xs:time does
+							not contain all possible xs:duration values. So, conversion of an xs:duration value to an xs:time value should be performed only if a duration lies
+							between 00:00:00 and 23:59:59.
 						</td>
 					</tr>
 					<tr>
 						<td>(8)</td>
 						<td>
-							A timeSpan field value contains a xs:duration value. The xs:duration has a larger domain than xs:time, and contains all xs:time values, but xs:time does
-							not contain all possible xs:duration values. So, conversion of an xs:duration value to an xs:time value should be performed only if a duration lies
-							between 00:00:00 and 23:59:59.
+							The client should try to convert the string to a time value  according to the format specified by the XML data type xs:time.
 						</td>
 					</tr>
 					<tr>
@@ -1351,10 +1396,6 @@
 					<tr>
 						<td>Z2</td>
 						<td>true = 1, false = 0.</td>
-					</tr>
-					<tr>
-						<td>N/A</td>
-						<td>Not applicable. Conversion has no meaning. Value types are not compatible.</td>
 					</tr>
 					<tr>
 						<td>!=0</td>
@@ -1377,6 +1418,14 @@
 						<td>Only the time part of the xs:dateTime value should be used.</td>
 					</tr>
 					<tr>
+						<td>Ordinal</td>
+						<td>Each enumeration value may in the implementation correspond to an ordinal number.</td>
+					</tr>
+					<tr>
+						<td>Thunk</td>
+						<td>The value is thunked down to lower precision in the canonical way.</td>
+					</tr>
+					<tr>
 						<td>xs:boolean</td>
 						<td>Conversion to a string should follow the rules specified for the XML datatype xs:boolean.</td>
 					</tr>
@@ -1392,6 +1441,30 @@
 				<p>
 					<strong>Note:</strong> the namespace prefix <strong>xs</strong> is here supposed to be linked with the XML Schema namespace
 					<link url="http://www.w3.org/2001/XMLSchema">http://www.w3.org/2001/XMLSchema</link>.
+				</p>
+			</section3>
+			<section3 topic='Harmonization with XEP-0323 (Sensor Data)' anchor='harmonization'>
+				<p>
+					When representing control parameters as momentary field values, it is important to note the similarities and differences between XEP-0323 (Sensor Data) and XEP-0325 (this document):
+				</p>
+				<p>
+					The <strong>enum</strong> field value data type is not available in XEP-0325 (this document). Instead enumeration valued parameters are represented as <strong>string</strong> control
+					parameters, while the control form explicitly lists available options for the parameter. Options are not available in XEP-0323, since it would not be practical to list all options
+					every time the corresponding parameter was read out. Instead, the <strong>enum</strong> element contains a data type attribute, that can be used to identify the type of the enumeration.
+				</p>
+				<p>
+					The <strong>numeric</strong> field value data type is not available in XEP-0325 (this document). The reason is that a controller is not assumed to understand unit conversion. Any
+					floating-point valued control parameters are represented by <strong>double</strong> control parameters, which lack a unit attribute. They are assumed to have the same unit as
+					the corresponding <strong>numeric</strong> field value. On the other hand, floating point valued control parameters without units, are reported using the <strong>numeric</strong>
+					field element, but leaving the unit blank.
+				</p>
+				<p>
+					Control pameters of type <strong>color</strong> have no corresponding field value data type. The color value must be represented in another way, and is implementation specific.
+					Possibilities include representing the color as a string, using a specific pattern (for instance RRGGBBAA), or report it using multiple fields, one for each component for instance.
+				</p>
+				<p>
+					The <strong>boolean</strong>, <strong>date</strong>, <strong>dateTime</strong>, <strong>duration</strong>, <strong>int</strong>, <strong>long</strong>, <strong>string</strong>
+					and <strong>time</strong> field value data types correspond to control parameters having the same types and same element names.
 				</p>
 			</section3>
 		</section2>

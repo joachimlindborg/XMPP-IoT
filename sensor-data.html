@@ -11,7 +11,7 @@
     <meta name="DC.Description" content="This specification provides the common framework for sensor data interchange over XMPP networks.">
     <meta name="DC.Publisher" content="XMPP Standards Foundation">
     <meta name="DC.Contributor" content="XMPP Extensions Editor">
-    <meta name="DC.Date" content="2014-03-20">
+    <meta name="DC.Date" content="2014-03-31">
     <meta name="DC.Type" content="XMPP Extension Protocol">
     <meta name="DC.Format" content="XHTML">
     <meta name="DC.Identifier" content="XEP-0323">
@@ -47,7 +47,7 @@
       </tr>
       <tr valign="top">
         <td><strong>Last Updated:</strong></td>
-        <td>2014-03-20</td>
+        <td>2014-03-31</td>
       </tr>
     </table>
     <hr>
@@ -66,13 +66,14 @@
       5.1.  <a href="#stringlengths">String lengths</a><br>   
       5.2.  <a href="#enumsvsstrings">Enumerations vs. Strings</a><br>   
       5.3.  <a href="#asynchfeedback">Asynchronous feedback</a><br>   
-      5.4.  <a href="#fieldvaluetypes">Field Value Types</a><br>   
-      5.5.  <a href="#fieldtypes">Field Types</a><br>   
-      5.6.  <a href="#fieldqosvalues">Field Quality of Service Values</a><br>      
-      5.6.1.  <a href="#estimatesvsreadouts">Estimates vs. Readouts</a><br>   
-      5.7.  <a href="#subsupernodes">Subnodes and supernodes</a><br>   
-      5.8.  <a href="#largesubsystems">Reading devices from large subsystems</a><br>   
-      5.9.  <a href="#control">Reading controllable parameter values</a><br>6.  <a href="#i18n">Internationalization Considerations</a><br>   
+      5.4.  <a href="#fieldvaluetypes">Field Value Data Types</a><br>   
+      5.5.  <a href="#harmonization">Harmonization with XEP-0325 (Control)</a><br>   
+      5.6.  <a href="#fieldtypes">Field Types</a><br>   
+      5.7.  <a href="#fieldqosvalues">Field Quality of Service Values</a><br>      
+      5.7.1.  <a href="#estimatesvsreadouts">Estimates vs. Readouts</a><br>   
+      5.8.  <a href="#subsupernodes">Subnodes and supernodes</a><br>   
+      5.9.  <a href="#largesubsystems">Reading devices from large subsystems</a><br>   
+      5.10.  <a href="#control">Reading controllable parameter values</a><br>6.  <a href="#i18n">Internationalization Considerations</a><br>   
       6.1.  <a href="#timezones">Time Zones</a><br>   
       6.2.  <a href="#localization">Localized strings</a><br>7.  <a href="#security">Security Considerations</a><br>8.  <a href="#iana">IANA Considerations</a><br>9.  <a href="#registrar">XMPP Registrar Considerations</a><br>10.  <a href="#schema">XML Schema</a><br>11.  <a href="#moreinfo">For more information</a><br>12.  <a href="#ack">Acknowledgements</a></p>
       <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
@@ -152,11 +153,11 @@
 			</tr>
 			<tr class="body">
 				<td colspan="" rowspan="">XEP-0331</td>
-				<td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0ELHAC">1</a>]</td>
+				<td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0E3HAC">1</a>]</td>
 			</tr>
 			<tr class="body">
 				<td colspan="" rowspan="">XEP-0336</td>
-				<td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0ECIAC">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EOIAC">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0E1IAC">4</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EGJAC">5</a>].</td>
+				<td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0ETIAC">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0E6IAC">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0ELJAC">4</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EXJAC">5</a>].</td>
 			</tr>
 		</table>
     </div>
@@ -224,7 +225,7 @@
 			</di>
 			<di>
 				<dt><strong>Parameter</strong></dt>
-				<dd>Readable and/or writable property on a node/device. The XEP-0326 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0EBNAC">6</a>] deals with reading and writing parameters
+				<dd>Readable and/or writable property on a node/device. The XEP-0326 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0ESNAC">6</a>] deals with reading and writing parameters
 				on nodes/devices. Fields are not parameters, and parameters are not fields.</dd>
 			</di>
 			<di>
@@ -364,7 +365,7 @@
 		</p>
 		<p class="" style="">
 			The device can also reject a read-out request. Reasons for rejecting a request may be missing privileges defined by provisioning rules, etc. It's not part of this XEP
-			to define such rules. A separate XEP (<span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0EXFAE">7</a>]) defines an architecture for how such provisioning can be easily implemented.
+			to define such rules. A separate XEP (<span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0EIGAE">7</a>]) defines an architecture for how such provisioning can be easily implemented.
 		</p>
 		<p class="" style="">
 			A rejection response is shown in the following diagram.
@@ -762,7 +763,7 @@
 		</div>
 	<h2>4.
        <a name="support">Determining Support</a></h2>
-		<p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:sensordata" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EHOAE">8</a>] information requests.</p>
+		<p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:sensordata" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EYOAE">8</a>] information requests.</p>
 		<p class="caption"><a name="example-10"></a>Example 10. Service discovery information request</p>
     <div class="indent">
       <pre class="prettyprint">
@@ -792,7 +793,7 @@
 		</pre>
     </div>
 		<p class="" style="">In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined 
-		in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0E5OAE">9</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.</p>
+		in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EPPAE">9</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.</p>
 	<h2>5.
        <a name="impl">Implementation Notes</a></h2>
 		<div class="indent">
@@ -802,7 +803,7 @@
 				affected negatively by this for two reasons:
 			</p>
 			<ul class="" style="">
-				<li class="" style="">For sensors with limited memory, or where package size is important, <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0322.html">Efficient XML Interchange (EXI) Format</a></span>  [<a href="#nt-ID0EAQAE">10</a>] is supposed to be used. 
+				<li class="" style="">For sensors with limited memory, or where package size is important, <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0322.html">Efficient XML Interchange (EXI) Format</a></span>  [<a href="#nt-ID0ERQAE">10</a>] is supposed to be used. 
 				EXI compresses strings as normalized index values, making the string appear only once in the packet. Therefore, shortening string length doesn't affect packet 
 				size much. Element and attribute names in known namespaces are furthermore only encoded by index in schema, not by name.</li>
 				<li class="" style="">If limited memory or package size is not a consideration, readability and ease of implementation is preferred to short messages.</li>
@@ -839,16 +840,61 @@
 			</p>
 		</div>
 		<div class="indent">
-      <h3>5.4 <a name="fieldvaluetypes">Field Value Types</a></h3>
+      <h3>5.4 <a name="fieldvaluetypes">Field Value Data Types</a></h3>
 			<p class="" style="">
 				There are different types of values that can be reported from a device. The following table lists the various types:
 			</p>
 			<div class="indent">
-        <p class="caption"><a name="table-3"></a>Table 3: Field Value Types</p>
+        <p class="caption"><a name="table-3"></a>Table 3: Field Value Data Types</p>
         <table border="1" cellpadding="3" cellspacing="0">
 				<tr class="body">
 					<th colspan="" rowspan="">Element</th>
 					<th colspan="" rowspan="">Description</th>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">boolean</td>
+					<td colspan="" rowspan="">Represents a boolean value that can be either true or false.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">date</td>
+					<td colspan="" rowspan="">
+						Represents a date value. The value must be encoded using the xs:date data type.
+					</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">dateTime</td>
+					<td colspan="" rowspan="">
+						Represents a date and optional time value. The value must be encoded using the xs:dateTime data type. This includes date, an optional time and optional time zone information.
+						If time zone is not available, it is supposed to be undefined.
+					</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">duration</td>
+					<td colspan="" rowspan="">Represents a duration value. The value must be encoded using the xs:duration data type.</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">enum</td>
+					<td colspan="" rowspan="">
+						Represents an enumeration value. What differs this value from a string value, is that it apart from the enumeration value (which is a string value),
+						also contains a data type, which consumers can use to interpret its value. This specification does not assume knowledge of any particular enumeration
+						data types.
+					</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">int</td>
+					<td colspan="" rowspan="">
+						Represents a 32-bit integer value. It contains an arbitrary 32-bit integer value. This field value data type can be seen as a subtype of the more generic numeric 
+						field value data type. It has its own element, to make it harmonous to 32-bit integer control parameters, as defined in XEP-0325. It is also simpler to report and 
+						compress, since it does not use floating point precision and a unit.
+					</td>
+				</tr>
+				<tr class="body">
+					<td colspan="" rowspan="">long</td>
+					<td colspan="" rowspan="">
+						Represents a 64-bit integer value. It contains an arbitrary 64-bit integer value. This field value data type can be seen as a subtype of the more generic numeric 
+						field value data type. It has its own element, to make it harmonous to 64-bit integer control parameters, as defined in XEP-0325. It is also simpler to report and 
+						compress, since it does not use floating point precision and a unit.
+					</td>
 				</tr>
 				<tr class="body">
 					<td colspan="" rowspan="">numeric</td>
@@ -864,29 +910,39 @@
 					<td colspan="" rowspan="">Represents a string value. It contains an arbitrary string value.</td>
 				</tr>
 				<tr class="body">
-					<td colspan="" rowspan="">boolean</td>
-					<td colspan="" rowspan="">Represents a boolean value that can be either true or false.</td>
-				</tr>
-				<tr class="body">
-					<td colspan="" rowspan="">dateTime</td>
-					<td colspan="" rowspan="">Represents a date and optional time value. The value must be encoded using the xs:dateTime data type. This includes date, an optional time and optional time zone information.
-					If time zone is not available, it is supposed to be undefined.</td>
-				</tr>
-				<tr class="body">
-					<td colspan="" rowspan="">timeSpan</td>
-					<td colspan="" rowspan="">Represents a time span value. This can be either a time of day value, if nonnegative and less than 24 hours, or a duration value.</td>
-				</tr>
-				<tr class="body">
-					<td colspan="" rowspan="">enum</td>
-					<td colspan="" rowspan="">Represents an enumeration value. What differs this value from a string value, is that it apart from the enumeration value (which is a string value),
-					also contains a data type, which consumers can use to interpret its value. This specification does not assume knowledge of any particular enumeration
-					data types.</td>
+					<td colspan="" rowspan="">time</td>
+					<td colspan="" rowspan="">Represents a time value. The value must be encoded using the xs:time data type.</td>
 				</tr>
 			</table>
       </div>
 		</div>
 		<div class="indent">
-      <h3>5.5 <a name="fieldtypes">Field Types</a></h3>
+      <h3>5.5 <a name="harmonization">Harmonization with XEP-0325 (Control)</a></h3>
+			<p class="" style="">
+				When representing control parameters as momentary field values, it is important to note the similarities and differences between XEP-0323 (this document) and XEP-0325 (Control):
+			</p>
+			<p class="" style="">
+				The <span class="strong">enum</span> field value data type is not available in XEP-0325 (Control). Instead enumeration valued parameters are represented as <span class="strong">string</span> control 
+				parameters, while the control form explicitly lists available options for the parameter. Options are not available in XEP-0323, since it would not be practical to list all options 
+				every time the corresponding parameter was read out. Instead, the <span class="strong">enum</span> element contains a data type attribute, that can be used to identify the type of the enumeration.
+			</p>
+			<p class="" style="">
+				The <span class="strong">numeric</span> field value data type is not available in XEP-0325 (Control). The reason is that a controller is not assumed to understand unit conversion. Any
+				floating-point valued control parameters are represented by <span class="strong">double</span> control parameters, which lack a unit attribute. They are assumed to have the same unit as 
+				the corresponding <span class="strong">numeric</span> field value. On the other hand, floating point valued control parameters without units, are reported using the <span class="strong">numeric</span>
+				field element, but leaving the unit blank.
+			</p>
+			<p class="" style="">
+				Control pameters of type <span class="strong">color</span> have no corresponding field value data type. The color value must be represented in another way, and is implementation specific.
+				Possibilities include representing the color as a string, using a specific pattern (for instance RRGGBBAA), or report it using multiple fields, one for each component for instance.
+			</p>
+			<p class="" style="">
+				The <span class="strong">boolean</span>, <span class="strong">date</span>, <span class="strong">dateTime</span>, <span class="strong">duration</span>, <span class="strong">int</span>, <span class="strong">long</span>, <span class="strong">string</span>
+				and <span class="strong">time</span> field value data types correspond to control parameters having the same types and same element names.
+			</p>
+		</div>
+		<div class="indent">
+      <h3>5.6 <a name="fieldtypes">Field Types</a></h3>
 			<p class="" style="">
 				There are different types of fields, apart from types of values a field can have. These types are conceptual types, similar to categories. They are not exclusive,
 				and can be combined.
@@ -1005,7 +1061,7 @@
 			</p>
 		</div>
 		<div class="indent">
-      <h3>5.6 <a name="fieldqosvalues">Field Quality of Service Values</a></h3>
+      <h3>5.7 <a name="fieldqosvalues">Field Quality of Service Values</a></h3>
 			<p class="" style="">
 				In applications where quality of service is important, a field must always be accompanied with a corresponding quality of service flag. Devices should
 				set these accordingly. If no quality of service flag is set on a field, the client can assume <span class="strong">automaticReadout</span> is true.
@@ -1087,7 +1143,7 @@
 			</table>
       </div>
 			<div class="indent">
-        <h3>5.6.1 <a name="estimatesvsreadouts">Estimates vs. Readouts</a></h3>
+        <h3>5.7.1 <a name="estimatesvsreadouts">Estimates vs. Readouts</a></h3>
 				<p class="" style="">
 					A note on the difference between estimates and readouts. There are many cases where a proper value in a sensor or meter cannot be sensed correctly, and
 					only estimated. As an example: Consider a water meter calculating the flow of water passing vane generating pulses as the wheel turns. The frequency of pulses
@@ -1109,7 +1165,7 @@
 			</div>
 		</div>
 		<div class="indent">
-      <h3>5.7 <a name="subsupernodes">Subnodes and supernodes</a></h3>
+      <h3>5.8 <a name="subsupernodes">Subnodes and supernodes</a></h3>
 			<p class="" style="">
 				This document does not go into detail on how devices are ordered behind a JID. Some of the examples have assumed a single device lies behind a JID, others
 				that multiple devices exist behind a JID. Also, no order or structure of devices has been assumed.
@@ -1125,7 +1181,7 @@
 			</p>
 		</div>
 		<div class="indent">
-      <h3>5.8 <a name="largesubsystems">Reading devices from large subsystems</a></h3>
+      <h3>5.9 <a name="largesubsystems">Reading devices from large subsystems</a></h3>
 			<p class="" style="">
 				All examples in this document have been simplified examples where a few devices containing a few fields have been read. However, in many cases large subsystems with
 				very many sensors containing many fields have to be read, as is documented in <a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a>. 
@@ -1139,9 +1195,9 @@
 			</p>
 		</div>
 		<div class="indent">
-      <h3>5.9 <a name="control">Reading controllable parameter values</a></h3>
+      <h3>5.10 <a name="control">Reading controllable parameter values</a></h3>
 			<p class="" style="">
-				If reading field values from a device that also supports control through <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0325.html">Internet of Things - Control</a></span>  [<a href="#nt-ID0E6FAG">11</a>], the device can report current control parameter values as momentary or status field values,
+				If reading field values from a device that also supports control through <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0325.html">Internet of Things - Control</a></span>  [<a href="#nt-ID0EZJAG">11</a>], the device can report current control parameter values as momentary or status field values,
 				using field names corresponding to its control parameter names. However, such values would probably only correspond to a subset of all data read out. To help the reader
 				to know what fields correspond to controllable parameters, the optional <span class="strong">writable</span> attribute can be used in responsens. If this attribute is available, it
 				tells the client if the field corresponds to a control parameter with the same name on the device. If the attribute is not available, no deduction can be made if a control
@@ -1345,7 +1401,7 @@
 		</ul>
 	<h2>8.
        <a name="iana">IANA Considerations</a></h2>
-		<p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0ELRAG">12</a>].</p>
+		<p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EFVAG">12</a>].</p>
 	<h2>9.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
 		<p class="" style="">
@@ -1364,7 +1420,7 @@
     targetNamespace='urn:xmpp:iot:sensordata'
     xmlns='urn:xmpp:iot:sensordata'
     elementFormDefault='qualified'&gt;
-   
+ 
     &lt;xs:element name='req'&gt;
         &lt;xs:complexType&gt;
             &lt;xs:choice minOccurs='0' maxOccurs='unbounded'&gt;
@@ -1393,7 +1449,7 @@
             &lt;xs:attribute name='userToken' type='xs:string' use='optional'/&gt;
         &lt;/xs:complexType&gt;
     &lt;/xs:element&gt;
-
+ 
     &lt;xs:attributeGroup name='fieldTypes'&gt;
         &lt;xs:attribute name='momentary' type='xs:boolean' use='optional' default='false'/&gt;
         &lt;xs:attribute name='peak' type='xs:boolean' use='optional' default='false'/&gt;
@@ -1410,20 +1466,20 @@
         &lt;xs:attribute name='historicalYear' type='xs:boolean' use='optional' default='false'/&gt;
         &lt;xs:attribute name='historicalOther' type='xs:boolean' use='optional' default='false'/&gt;
     &lt;/xs:attributeGroup&gt;
-
+ 
     &lt;xs:element name='accepted'&gt;
         &lt;xs:complexType&gt;
             &lt;xs:attribute name='seqnr' type='xs:int' use='required'/&gt;
             &lt;xs:attribute name='queued' type='xs:boolean' use='optional' default='false'/&gt;
         &lt;/xs:complexType&gt;
     &lt;/xs:element&gt;
-
+ 
     &lt;xs:element name='started'&gt;
         &lt;xs:complexType&gt;
             &lt;xs:attribute name='seqnr' type='xs:int' use='required'/&gt;
         &lt;/xs:complexType&gt;
     &lt;/xs:element&gt;
-
+ 
     &lt;xs:element name='fields'&gt;
         &lt;xs:complexType&gt;
             &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
@@ -1433,12 +1489,16 @@
                             &lt;xs:element name='timestamp'&gt;
                                 &lt;xs:complexType&gt;
                                     &lt;xs:choice minOccurs='0' maxOccurs='unbounded'&gt;
+                                        &lt;xs:element name='boolean' type='boolean'/&gt;
+                                        &lt;xs:element name='date' type='date'/&gt;
+                                        &lt;xs:element name='dateTime' type='dateTime'/&gt;
+                                        &lt;xs:element name='duration' type='duration'/&gt;
+                                        &lt;xs:element name='enum' type='enum'/&gt;
+                                        &lt;xs:element name='int' type='int'/&gt;
+                                        &lt;xs:element name='long' type='long'/&gt;
                                         &lt;xs:element name='numeric' type='numeric'/&gt;
                                         &lt;xs:element name='string' type='string'/&gt;
-                                        &lt;xs:element name='boolean' type='boolean'/&gt;
-                                        &lt;xs:element name='dateTime' type='dateTime'/&gt;
-                                        &lt;xs:element name='timeSpan' type='timeSpan'/&gt;
-                                        &lt;xs:element name='enum' type='enum'/&gt;
+                                        &lt;xs:element name='time' type='time'/&gt;
                                     &lt;/xs:choice&gt;
                                     &lt;xs:attribute name='value' type='xs:dateTime' use='required'/&gt;
                                 &lt;/xs:complexType&gt;
@@ -1454,7 +1514,7 @@
             &lt;xs:attribute name='done' type='xs:boolean' use='optional' default='false'/&gt;
         &lt;/xs:complexType&gt;
     &lt;/xs:element&gt;
-
+ 
     &lt;xs:element name='failure'&gt;
         &lt;xs:complexType&gt;
             &lt;xs:sequence minOccurs='0' maxOccurs='unbounded'&gt;
@@ -1481,7 +1541,7 @@
             &lt;xs:attribute name='seqnr' type='xs:int' use='required'/&gt;
         &lt;/xs:complexType&gt;
     &lt;/xs:element&gt;
-
+ 
     &lt;xs:complexType name='field' abstract='true'&gt;
         &lt;xs:attribute name="name" type="xs:string" use="required"/&gt;
         &lt;xs:attributeGroup ref='fieldTypes'/&gt;
@@ -1490,13 +1550,13 @@
         &lt;xs:attribute name="stringIds" type="StringIds" use="optional"/&gt;
         &lt;xs:attribute name="writable" type="xs:boolean" use="optional"/&gt;
     &lt;/xs:complexType&gt;
-
+ 
     &lt;xs:simpleType name="StringIds"&gt;
         &lt;xs:restriction base="xs:string"&gt;
             &lt;xs:pattern value="^\d+([|]\w+([.]\w+)*([|][^,]*)?)?(,\d+([|]\w+([.]\w+)*([|][^,]*)?)?)*$"/&gt;
         &lt;/xs:restriction&gt;
     &lt;/xs:simpleType&gt;
-
+ 
     &lt;xs:attributeGroup name='fieldQoS'&gt;
         &lt;xs:attribute name='missing' type='xs:boolean' use='optional' default='false'/&gt;
         &lt;xs:attribute name='inProgress' type='xs:boolean' use='optional' default='false'/&gt;
@@ -1513,7 +1573,7 @@
         &lt;xs:attribute name='powerFailure' type='xs:boolean' use='optional' default='false'/&gt;
         &lt;xs:attribute name='invoiceConfirmed' type='xs:boolean' use='optional' default='false'/&gt;
     &lt;/xs:attributeGroup&gt;
-
+ 
     &lt;xs:complexType name='numeric'&gt;
         &lt;xs:complexContent&gt;
             &lt;xs:extension base='field'&gt;
@@ -1522,7 +1582,7 @@
             &lt;/xs:extension&gt;
         &lt;/xs:complexContent&gt;
     &lt;/xs:complexType&gt;
-
+ 
     &lt;xs:complexType name='string'&gt;
         &lt;xs:complexContent&gt;
             &lt;xs:extension base='field'&gt;
@@ -1530,7 +1590,7 @@
             &lt;/xs:extension&gt;
         &lt;/xs:complexContent&gt;
     &lt;/xs:complexType&gt;
-
+ 
     &lt;xs:complexType name='boolean'&gt;
         &lt;xs:complexContent&gt;
             &lt;xs:extension base='field'&gt;
@@ -1538,7 +1598,15 @@
             &lt;/xs:extension&gt;
         &lt;/xs:complexContent&gt;
     &lt;/xs:complexType&gt;
-
+ 
+    &lt;xs:complexType name='date'&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base='field'&gt;
+                &lt;xs:attribute name="value" type="xs:date" use="required"/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+ 
     &lt;xs:complexType name='dateTime'&gt;
         &lt;xs:complexContent&gt;
             &lt;xs:extension base='field'&gt;
@@ -1546,15 +1614,15 @@
             &lt;/xs:extension&gt;
         &lt;/xs:complexContent&gt;
     &lt;/xs:complexType&gt;
-
-    &lt;xs:complexType name='timeSpan'&gt;
+ 
+    &lt;xs:complexType name='duration'&gt;
         &lt;xs:complexContent&gt;
             &lt;xs:extension base='field'&gt;
                 &lt;xs:attribute name="value" type="xs:duration" use="required"/&gt;
             &lt;/xs:extension&gt;
         &lt;/xs:complexContent&gt;
     &lt;/xs:complexType&gt;
-
+ 
     &lt;xs:complexType name='enum'&gt;
         &lt;xs:complexContent&gt;
             &lt;xs:extension base='field'&gt;
@@ -1563,9 +1631,32 @@
             &lt;/xs:extension&gt;
         &lt;/xs:complexContent&gt;
     &lt;/xs:complexType&gt;
-
+ 
+    &lt;xs:complexType name='int'&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base='field'&gt;
+                &lt;xs:attribute name="value" type="xs:int" use="required"/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:complexType name='long'&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base='field'&gt;
+                &lt;xs:attribute name="value" type="xs:long" use="required"/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+ 
+    &lt;xs:complexType name='time'&gt;
+        &lt;xs:complexContent&gt;
+            &lt;xs:extension base='field'&gt;
+                &lt;xs:attribute name="value" type="xs:time" use="required"/&gt;
+            &lt;/xs:extension&gt;
+        &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+ 
 &lt;/xs:schema&gt;
-
 		</pre>
     </div>
 	<h2>11.
@@ -1606,7 +1697,7 @@
             Type:
             <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
             Version: 0.4<br>
-            Last Updated: 2014-03-20<br>
+            Last Updated: 2014-03-31<br>
                 Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001, XEP-0030<br>
                 Supersedes: None<br>
                 Superseded By: None<br>
@@ -1640,26 +1731,30 @@
     <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
     <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
     <div class="indent">
-      <p><a name="nt-ID0ELHAC">1</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0ECIAC">2</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0EOIAC">3</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
-      <p><a name="nt-ID0E1IAC">4</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
-      <p><a name="nt-ID0EGJAC">5</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
-      <p><a name="nt-ID0EBNAC">6</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
-      <p><a name="nt-ID0EXFAE">7</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
-      <p><a name="nt-ID0EHOAE">8</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
-      <p><a name="nt-ID0E5OAE">9</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
-      <p><a name="nt-ID0EAQAE">10</a>. XEP-0322: Efficient XML Interchange (EXI) Format &lt;<a href="http://xmpp.org/extensions/xep-0322.html">http://xmpp.org/extensions/xep-0322.html</a>&gt;.</p>
-      <p><a name="nt-ID0E6FAG">11</a>. XEP-0325: Internet of Things - Control &lt;<a href="http://xmpp.org/extensions/xep-0325.html">http://xmpp.org/extensions/xep-0325.html</a>&gt;.</p>
-      <p><a name="nt-ID0ELRAG">12</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+      <p><a name="nt-ID0E3HAC">1</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0ETIAC">2</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0E6IAC">3</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
+      <p><a name="nt-ID0ELJAC">4</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
+      <p><a name="nt-ID0EXJAC">5</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+      <p><a name="nt-ID0ESNAC">6</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
+      <p><a name="nt-ID0EIGAE">7</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
+      <p><a name="nt-ID0EYOAE">8</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0EPPAE">9</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0ERQAE">10</a>. XEP-0322: Efficient XML Interchange (EXI) Format &lt;<a href="http://xmpp.org/extensions/xep-0322.html">http://xmpp.org/extensions/xep-0322.html</a>&gt;.</p>
+      <p><a name="nt-ID0EZJAG">11</a>. XEP-0325: Internet of Things - Control &lt;<a href="http://xmpp.org/extensions/xep-0325.html">http://xmpp.org/extensions/xep-0325.html</a>&gt;.</p>
+      <p><a name="nt-ID0EFVAG">12</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
     <div class="indent">
-      <h4>Version 0.4 (2014-03-20)</h4>
+      <h4>Version 0.4 (2014-03-31)</h4>
       <div class="indent">
 				<p class="" style="">Updated IQ-error stanzas for <a href="#readoutrejected">readout rejections</a> to make them compliant with RFC-6120.</p>
 				<p class="" style="">The element <span class="strong">rejected</span> is no longer used and has been removed.</p>
+				<p class="" style="">
+					Harmonization of data types between XEP-0323 and XEP-0325. This has resulted in the addition of the following new field types: <span class="strong">date</span>,
+					<span class="strong">int</span>, <span class="strong">long</span> and <span class="strong">time</span>. The <span class="strong">timeSpan</span> type has been renamed <span class="strong">duration</span>.
+				</p>
 				<p class="" style="">The term Field Status Value has been renamed <a href="#fieldqosvalues">Field Quality of Service Value</a>, to make it clearer.</p>
 				<p class="" style="">Added a <a href="#fieldqosvalues">inProgress</a> field quality of service value.</p>
 				<p class="" style="">Added a section giving an example of the <a href="#estimatesvsreadouts">difference between estimates and normally read values</a>.</p>

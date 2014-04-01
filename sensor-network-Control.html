@@ -11,7 +11,7 @@
     <meta name="DC.Description" content="This specification describes how to control devices or actuators in an XMPP-based sensor network.">
     <meta name="DC.Publisher" content="XMPP Standards Foundation">
     <meta name="DC.Contributor" content="XMPP Extensions Editor">
-    <meta name="DC.Date" content="2013-03-25">
+    <meta name="DC.Date" content="2013-03-31">
     <meta name="DC.Type" content="XMPP Extension Protocol">
     <meta name="DC.Format" content="XHTML">
     <meta name="DC.Identifier" content="XEP-0325">
@@ -47,7 +47,7 @@
       </tr>
       <tr valign="top">
         <td><strong>Last Updated:</strong></td>
-        <td>2013-03-25</td>
+        <td>2013-03-31</td>
       </tr>
     </table>
     <hr>
@@ -57,38 +57,39 @@
     <div class="indent">
       <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
       3.1.  <a href="#controlcommands">Control commands</a><br>      
-      3.1.1.  <a href="#sect-ID0ESDAE">Sending a control command using a message stanza</a><br>      
-      3.1.2.  <a href="#sect-ID0ECEAE">Sending a control command using an IQ stanza</a><br>      
-      3.1.3.  <a href="#sect-ID0EJFAE">Control failure response</a><br>   
+      3.1.1.  <a href="#sect-ID0EWDAE">Sending a control command using a message stanza</a><br>      
+      3.1.2.  <a href="#sect-ID0EGEAE">Sending a control command using an IQ stanza</a><br>      
+      3.1.3.  <a href="#sect-ID0ENFAE">Control failure response</a><br>   
       3.2.  <a href="#set">Setting control parameters</a><br>      
-      3.2.1.  <a href="#sect-ID0EFGAE">Setting a single boolean-valued control parameter</a><br>      
-      3.2.2.  <a href="#sect-ID0ERGAE">Setting a single 32-bit integer-valued control parameter</a><br>      
-      3.2.3.  <a href="#sect-ID0E4GAE">Setting a single 64-bit integer-valued control parameter</a><br>      
-      3.2.4.  <a href="#sect-ID0EJHAE">Setting a single string-valued control parameter</a><br>      
-      3.2.5.  <a href="#sect-ID0EVHAE">Setting a single double-valued control parameter</a><br>      
-      3.2.6.  <a href="#sect-ID0EBIAE">Setting a single date-valued control parameter</a><br>      
-      3.2.7.  <a href="#sect-ID0ENIAE">Setting a single time-valued control parameter</a><br>      
-      3.2.8.  <a href="#sect-ID0EZIAE">Setting a single date &amp; time-valued control parameter</a><br>      
-      3.2.9.  <a href="#sect-ID0EFJAE">Setting a single duration-valued control parameter</a><br>      
-      3.2.10.  <a href="#sect-ID0ERJAE">Setting a single color-valued control parameter</a><br>      
-      3.2.11.  <a href="#sect-ID0E4JAE">Setting multiple control parameters at once</a><br>   
+      3.2.1.  <a href="#sect-ID0EJGAE">Setting a single boolean-valued control parameter</a><br>      
+      3.2.2.  <a href="#sect-ID0EVGAE">Setting a single 32-bit integer-valued control parameter</a><br>      
+      3.2.3.  <a href="#sect-ID0EBHAE">Setting a single 64-bit integer-valued control parameter</a><br>      
+      3.2.4.  <a href="#sect-ID0ENHAE">Setting a single string-valued control parameter</a><br>      
+      3.2.5.  <a href="#sect-ID0EZHAE">Setting a single double-valued control parameter</a><br>      
+      3.2.6.  <a href="#sect-ID0EFIAE">Setting a single date-valued control parameter</a><br>      
+      3.2.7.  <a href="#sect-ID0ERIAE">Setting a single time-valued control parameter</a><br>      
+      3.2.8.  <a href="#sect-ID0E4IAE">Setting a single date &amp; time-valued control parameter</a><br>      
+      3.2.9.  <a href="#sect-ID0EJJAE">Setting a single duration-valued control parameter</a><br>      
+      3.2.10.  <a href="#sect-ID0EVJAE">Setting a single color-valued control parameter</a><br>      
+      3.2.11.  <a href="#sect-ID0EBKAE">Setting multiple control parameters at once</a><br>   
       3.3.  <a href="#forms">Control forms</a><br>      
       3.3.1.  <a href="#controlform">Getting a control form</a><br>      
-      3.3.2.  <a href="#sect-ID0E2MAE">Getting a control form, Failure</a><br>      
-      3.3.3.  <a href="#sect-ID0EKNAE">Setting a (partial) control form</a><br>      
-      3.3.4.  <a href="#sect-ID0E5NAE">Setting a (partial) control form, Failure</a><br>   
+      3.3.2.  <a href="#sect-ID0E6MAE">Getting a control form, Failure</a><br>      
+      3.3.3.  <a href="#sect-ID0EONAE">Setting a (partial) control form</a><br>      
+      3.3.4.  <a href="#sect-ID0ECOAE">Setting a (partial) control form, Failure</a><br>   
       3.4.  <a href="#concentrator">Controlling devices behind a concentrator</a><br>      
-      3.4.1.  <a href="#sect-ID0E2OAE">Sending a control command to a node behind a concentrator</a><br>      
-      3.4.2.  <a href="#sect-ID0EKPAE">Sending a control command to multiple nodes</a><br>      
-      3.4.3.  <a href="#sect-ID0EZPAE">Sending a control command to multiple nodes, Failure</a><br>      
-      3.4.4.  <a href="#sect-ID0EFQAE">Getting a control form from multiple nodes</a><br>      
-      3.4.5.  <a href="#sect-ID0E4QAE">Getting a control form from multiple nodes, Failure</a><br>      
-      3.4.6.  <a href="#sect-ID0EMRAE">Setting a (partial) control form to multiple nodes</a><br>      
-      3.4.7.  <a href="#sect-ID0E4RAE">Setting a (partial) control form to multiple nodes, Failure</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
+      3.4.1.  <a href="#sect-ID0E6OAE">Sending a control command to a node behind a concentrator</a><br>      
+      3.4.2.  <a href="#sect-ID0EOPAE">Sending a control command to multiple nodes</a><br>      
+      3.4.3.  <a href="#sect-ID0E4PAE">Sending a control command to multiple nodes, Failure</a><br>      
+      3.4.4.  <a href="#sect-ID0EJQAE">Getting a control form from multiple nodes</a><br>      
+      3.4.5.  <a href="#sect-ID0EBRAE">Getting a control form from multiple nodes, Failure</a><br>      
+      3.4.6.  <a href="#sect-ID0EQRAE">Setting a (partial) control form to multiple nodes</a><br>      
+      3.4.7.  <a href="#sect-ID0EBSAE">Setting a (partial) control form to multiple nodes, Failure</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
       5.1.  <a href="#errors">IQ Error Stanzas</a><br>   
       5.2.  <a href="#currentstates">Reading current control states</a><br>      
-      5.2.1.  <a href="#sect-ID0EHYAE">Using Control Forms</a><br>      
-      5.2.2.  <a href="#sect-ID0EBZAE">Using Sensor Data</a><br>   
+      5.2.1.  <a href="#sect-ID0ELYAE">Using Control Forms</a><br>      
+      5.2.2.  <a href="#sect-ID0EFZAE">Using XEP-0323 (Sensor Data)</a><br>      
+      5.2.3.  <a href="#harmonization">Harmonization with XEP-0323 (Sensor Data)</a><br>   
       5.3.  <a href="#nodeparamsvscontrolparams">Difference between node parameters and node control parameters</a><br>   
       5.4.  <a href="#parametergroups">Grouping control parameters</a><br>   
       5.5.  <a href="#commandsvsparameters">Node commands vs. control parameters</a><br>   
@@ -178,11 +179,11 @@
 			</tr>
 			<tr class="body">
 				<td colspan="" rowspan="">XEP-0331</td>
-				<td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0E6IAC">1</a>]</td>
+				<td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EDJAC">1</a>]</td>
 			</tr>
 			<tr class="body">
 				<td colspan="" rowspan="">XEP-0336</td>
-				<td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EWJAC">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0ECKAC">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0EOKAC">4</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0E1KAC">5</a>].</td>
+				<td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0E1JAC">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EGKAC">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0ESKAC">4</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0E5KAC">5</a>].</td>
 			</tr>
 		</table>
     </div>
@@ -256,7 +257,7 @@
             <di>
                 <dt><strong>Parameter</strong></dt>
                 <dd>
-                    Readable and/or writable property on a node/device. The XEP-0326 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0EVOAC">6</a>] deals with reading and writing parameters
+                    Readable and/or writable property on a node/device. The XEP-0326 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0EZOAC">6</a>] deals with reading and writing parameters
                     on nodes/devices. Fields are not parameters, and parameters are not fields.
                 </dd>
             </di>
@@ -341,7 +342,7 @@
         </ul>
         <p class="" style="">
             What type of control parameters there are available in different types of devices is described in
-             [<a href="#nt-ID0E2CAE">7</a>].
+             [<a href="#nt-ID0E6CAE">7</a>].
         </p>
         <p class="" style="">
             If the device is a concentrator, as defined in <a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a>, 
@@ -351,7 +352,7 @@
         <div class="indent">
       <h3>3.1 <a name="controlcommands">Control commands</a></h3>
             <div class="indent">
-        <h3>3.1.1 <a name="sect-ID0ESDAE">Sending a control command using a message stanza</a></h3>
+        <h3>3.1.1 <a name="sect-ID0EWDAE">Sending a control command using a message stanza</a></h3>
                 <p class="" style="">
                     Following is an example of a control command sent using a message stanza:
                 </p>
@@ -373,7 +374,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.1.2 <a name="sect-ID0ECEAE">Sending a control command using an IQ stanza</a></h3>
+        <h3>3.1.2 <a name="sect-ID0EGEAE">Sending a control command using an IQ stanza</a></h3>
                 <p class="" style="">
                     Following is an example of a control command sent using an iq stanza:
                 </p>
@@ -401,14 +402,14 @@
 				<p class="" style="">
 					<span class="strong">Note:</span> An empty <span class="strong">setResponse</span> element means that the control command was executed as provided in the request. Sometimes, the device
 					can restrict the command to a subset of nodes and/or parameters. In such cases, the <span class="strong">setResponse</span> element will contain what nodes and/or parameters 
-					were finally used to perform the command. For examples of this, see <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0E4EAE">8</a>].
+					were finally used to perform the command. For examples of this, see <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0EBFAE">8</a>].
 				</p>
                 <p class="" style="">
                     In the following use cases, often a message stanza will be used to illustrate the point. However, the same operation could equally well be used using an iq stanza instead.
                 </p>
             </div>
             <div class="indent">
-        <h3>3.1.3 <a name="sect-ID0EJFAE">Control failure response</a></h3>
+        <h3>3.1.3 <a name="sect-ID0ENFAE">Control failure response</a></h3>
                 <p class="" style="">
                     By using an IQ stanza, the caller can receive an acknowledgement of the reception of the command, or error information if the command could not be processed.
                     Following is an example of a control command sent using an iq stanza, where the receiver reports an error back to the caller:
@@ -448,7 +449,7 @@
                 The following sub-sections illustrate how to set parameters of different types in a device.
             </p>
             <div class="indent">
-        <h3>3.2.1 <a name="sect-ID0EFGAE">Setting a single boolean-valued control parameter</a></h3>
+        <h3>3.2.1 <a name="sect-ID0EJGAE">Setting a single boolean-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting single boolean-valued control parameters is a common use case, for instance when controlling digital outputs. The following example shows how a boolean value
                     can be set in a device.
@@ -467,7 +468,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.2 <a name="sect-ID0ERGAE">Setting a single 32-bit integer-valued control parameter</a></h3>
+        <h3>3.2.2 <a name="sect-ID0EVGAE">Setting a single 32-bit integer-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting single integer-valued control parameters is a common use case, for instance when controlling analog outputs. The following example shows how a 32-bit integer value
                     can be set in a device.
@@ -486,7 +487,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.3 <a name="sect-ID0E4GAE">Setting a single 64-bit integer-valued control parameter</a></h3>
+        <h3>3.2.3 <a name="sect-ID0EBHAE">Setting a single 64-bit integer-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting single integer-valued control parameters is a common use case, for instance when controlling analog outputs. Even though 32-bit integers may cover most control needs,
                     it might in some cases be limiting. Therefore, a 64-bit control parameters can be created. The following example shows how a 64-bit integer value
@@ -506,7 +507,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.4 <a name="sect-ID0EJHAE">Setting a single string-valued control parameter</a></h3>
+        <h3>3.2.4 <a name="sect-ID0ENHAE">Setting a single string-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting single string-valued control parameters is a common use case, for instance when controlling text displays. The following example shows how a string value
                     can be set in a device.
@@ -525,7 +526,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.5 <a name="sect-ID0EVHAE">Setting a single double-valued control parameter</a></h3>
+        <h3>3.2.5 <a name="sect-ID0EZHAE">Setting a single double-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting single double-valued control parameters can be an alternative form of controlling analog outputs for instance. The following example shows how a double value
                     can be set in a device.
@@ -544,7 +545,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.6 <a name="sect-ID0EBIAE">Setting a single date-valued control parameter</a></h3>
+        <h3>3.2.6 <a name="sect-ID0EFIAE">Setting a single date-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting date-valued control parameters might be necessary when timing is an issue. Often it forms part of a larger context.
                     The following example shows how a date value can be set in a device.
@@ -563,7 +564,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.7 <a name="sect-ID0ENIAE">Setting a single time-valued control parameter</a></h3>
+        <h3>3.2.7 <a name="sect-ID0ERIAE">Setting a single time-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting time-valued control parameters might be necessary when timing is an issue. Often it forms part of a larger context.
                     The following example shows how a time value can be set in a device.
@@ -582,7 +583,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.8 <a name="sect-ID0EZIAE">Setting a single date &amp; time-valued control parameter</a></h3>
+        <h3>3.2.8 <a name="sect-ID0E4IAE">Setting a single date &amp; time-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting date &amp; time-valued control parameters might be necessary when timing is an issue. Often it forms part of a larger context.
                     The following example shows how a date &amp; time value can be set in a device.
@@ -601,7 +602,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.9 <a name="sect-ID0EFJAE">Setting a single duration-valued control parameter</a></h3>
+        <h3>3.2.9 <a name="sect-ID0EJJAE">Setting a single duration-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting duration-valued control parameters might be necessary when timing is an issue. Often it forms part of a larger context.
                     The following example shows how a duration value can be set in a device.
@@ -620,7 +621,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.10 <a name="sect-ID0ERJAE">Setting a single color-valued control parameter</a></h3>
+        <h3>3.2.10 <a name="sect-ID0EVJAE">Setting a single color-valued control parameter</a></h3>
                 <p class="" style="">
                     Setting single color values in a device can occur in instances where color or lighting is important. Sometimes color is set using enumerations (string-valued
                     or integer-valued parameters), and sometimes as a color property. The following example shows how a color value can be set in a device.
@@ -639,7 +640,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.2.11 <a name="sect-ID0E4JAE">Setting multiple control parameters at once</a></h3>
+        <h3>3.2.11 <a name="sect-ID0EBKAE">Setting multiple control parameters at once</a></h3>
                 <p class="" style="">
                     Often, setting a single control parameter is not sufficient for a control action. In these cases, setting multiple control parameters at once is necessary.
                     The <span class="strong">set</span> command makes this easy however, since it allows for any number of control parameters to be set at once, as the following example shows:
@@ -734,7 +735,7 @@
         </div>
                 <p class="" style="">
                     <span class="strong">IMPORTANT:</span> The device MUST mark all control parameters in the form as <span class="strong">notSame</span>, as defined in
-                     [<a href="#nt-ID0EWLAE">9</a>]. If an end user would open the control form and press OK (submitting the form) without having entered a value, no value
+                     [<a href="#nt-ID0E1LAE">9</a>]. If an end user would open the control form and press OK (submitting the form) without having entered a value, no value
                     would be written, and no action taken. If only a few parameter would be edited, only those parameters would be sent to the device
                     and only the corresponding actions taken.
                 </p>
@@ -756,7 +757,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.2 <a name="sect-ID0E2MAE">Getting a control form, Failure</a></h3>
+        <h3>3.3.2 <a name="sect-ID0E6MAE">Getting a control form, Failure</a></h3>
                 <p class="" style="">
                     A device can reject a control form request. It does this returning an <span class="strong">error</span> iq stanza, as is shown in the following example:
                 </p>
@@ -784,7 +785,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.3.3 <a name="sect-ID0EKNAE">Setting a (partial) control form</a></h3>
+        <h3>3.3.3 <a name="sect-ID0EONAE">Setting a (partial) control form</a></h3>
                 <p class="" style="">
                     Control actions can be requested by submitting a full or partial control form back to the device. Control parameters not edited MUST not be included
                     in the form, and the device in turn MUST ONLY invoke control actions corresponding to the parameters returned in the form.
@@ -829,7 +830,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.3.4 <a name="sect-ID0E5NAE">Setting a (partial) control form, Failure</a></h3>
+        <h3>3.3.4 <a name="sect-ID0ECOAE">Setting a (partial) control form, Failure</a></h3>
                 <p class="" style="">
                     A device can reject a control form submission. It does this returning an <span class="strong">error</span> iq stanza. If there are errors in the form, details are listed 
 					using <span class="strong">paramError</span> elements in the response, as is shown in the following example:
@@ -877,7 +878,7 @@
                 command elements sent to the concentrator. The following sub-sections show examples of how this is done.
             </p>
             <div class="indent">
-        <h3>3.4.1 <a name="sect-ID0E2OAE">Sending a control command to a node behind a concentrator</a></h3>
+        <h3>3.4.1 <a name="sect-ID0E6OAE">Sending a control command to a node behind a concentrator</a></h3>
                 <p class="" style="">
                     To send a control message to a specific node behind a concentrator, the <span class="strong">node</span> element can be used to identify the node,
                     as is shown in the following example:
@@ -897,7 +898,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.4.2 <a name="sect-ID0EKPAE">Sending a control command to multiple nodes</a></h3>
+        <h3>3.4.2 <a name="sect-ID0EOPAE">Sending a control command to multiple nodes</a></h3>
                 <p class="" style="">
                     The client can send the same control command to multiple nodes behind a concentrator by simply adding more <span class="strong">node</span> elements in the request,
                     as is shown in the following example:
@@ -920,7 +921,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.4.3 <a name="sect-ID0EZPAE">Sending a control command to multiple nodes, Failure</a></h3>
+        <h3>3.4.3 <a name="sect-ID0E4PAE">Sending a control command to multiple nodes, Failure</a></h3>
                 <p class="" style="">
                     By using an IQ stanza, the caller can receive an acknowledgement of the reception of the command, or error information if the command could not be processed.
                     When sending a control command to multiple nodes at a time the device must validate all parameters against all nodes before taking any control action. If
@@ -961,7 +962,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.4.4 <a name="sect-ID0EFQAE">Getting a control form from multiple nodes</a></h3>
+        <h3>3.4.4 <a name="sect-ID0EJQAE">Getting a control form from multiple nodes</a></h3>
                 <p class="" style="">
                     A client can get a control form containing available control parameters common between a set of nodes controlled by the concentrator. This is done 
                     adding a sequence of <span class="strong">node</span> elements to a <span class="strong">getForm</span> command sent to the concentrator, as is shown in the following example:
@@ -1013,7 +1014,7 @@
                 </p>
             </div>
             <div class="indent">
-        <h3>3.4.5 <a name="sect-ID0E4QAE">Getting a control form from multiple nodes, Failure</a></h3>
+        <h3>3.4.5 <a name="sect-ID0EBRAE">Getting a control form from multiple nodes, Failure</a></h3>
                 <p class="" style="">
                     A device can reject a control form request. It does this returning an <span class="strong">error</span> iq stanza. The following example shows the device rejecting 
 					a control form request, because it does not support the handling of common parameters between multiple nodes:
@@ -1047,7 +1048,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.4.6 <a name="sect-ID0EMRAE">Setting a (partial) control form to multiple nodes</a></h3>
+        <h3>3.4.6 <a name="sect-ID0EQRAE">Setting a (partial) control form to multiple nodes</a></h3>
                 <p class="" style="">
                     You set a control form to multiple nodes controlled by a concentrator by adding <span class="strong">node</span> elements to the set
                     command sent to the concentrator, as is shown in the following example:
@@ -1086,7 +1087,7 @@
         </div>
             </div>
             <div class="indent">
-        <h3>3.4.7 <a name="sect-ID0E4RAE">Setting a (partial) control form to multiple nodes, Failure</a></h3>
+        <h3>3.4.7 <a name="sect-ID0EBSAE">Setting a (partial) control form to multiple nodes, Failure</a></h3>
                 <p class="" style="">
                     A device can reject a control form submission. It does this returning an <span class="strong">error</span> iq stanza. The following example shows the device rejecting a 
 					control form submission because one of the control parameters, even though it exists on all nodes, is not of the same type on all nodes.
@@ -1134,7 +1135,7 @@
         </div>
     <h2>4.
        <a name="support">Determining Support</a></h2>
-		<p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:control" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0E3SAE">10</a>] information requests.</p>
+		<p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:control" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EATAE">10</a>] information requests.</p>
 		<p class="caption"><a name="example-26"></a>Example 26. Service discovery information request</p>
     <div class="indent">
       <pre class="prettyprint">
@@ -1165,7 +1166,7 @@
     </div>
 		<p class="" style="">
 			In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
-			in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0ETTAE">11</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
+			in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EXTAE">11</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
 		</p>
 	<h2>5.
        <a name="impl">Implementation Notes</a></h2>
@@ -1222,11 +1223,11 @@
         <div class="indent">
       <h3>5.2 <a name="currentstates">Reading current control states</a></h3>
 			<div class="indent">
-        <h3>5.2.1 <a name="sect-ID0EHYAE">Using Control Forms</a></h3>
+        <h3>5.2.1 <a name="sect-ID0ELYAE">Using Control Forms</a></h3>
 				<p class="" style="">
 					The simplest way to read the current control states of a device, is to request the control form of the device. The control form should contain the current
 					values for all avilable control parameters. However, since current states might not be available at the time of the request, the states might be delivered
-					asynchronously, using messages defined in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0336.html">Data Forms - Dynamic Forms</a></span>  [<a href="#nt-ID0EVYAE">12</a>].
+					asynchronously, using messages defined in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0336.html">Data Forms - Dynamic Forms</a></span>  [<a href="#nt-ID0EZYAE">12</a>].
 				</p>
 				<p class="" style="">
 					Using this method has the advantage that a small actuator device does not need to implement other XEPs to support readout of current control states. If the device
@@ -1234,9 +1235,9 @@
 				</p>
 			</div>
 			<div class="indent">
-        <h3>5.2.2 <a name="sect-ID0EBZAE">Using Sensor Data</a></h3>
+        <h3>5.2.2 <a name="sect-ID0EFZAE">Using XEP-0323 (Sensor Data)</a></h3>
 				<p class="" style="">
-					A second option is to use <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0323.html">Internet of Things - Sensor Data</a></span>  [<a href="#nt-ID0EPZAE">13</a>] to deliver current control states. Since this XEP contains mechanisms allowing for asynchronous readout of control parameter
+					A second option is to use <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0323.html">Internet of Things - Sensor Data</a></span>  [<a href="#nt-ID0ETZAE">13</a>] to deliver current control states. Since this XEP contains mechanisms allowing for asynchronous readout of control parameter
 					states. This makes readout of such parameters simpler. However, there's a need to map values between the two XEPs.
 				</p>
 				<p class="" style="">
@@ -1271,109 +1272,153 @@
 				</p>
 				<p class="" style="">
 					The following table shows how corresponding field values should be converted to the corresponding control parameter value based on field type (x-axis) and
-					control parameter type (y-axis). N/A means conversion has no meaning and types are not compatible.
+					control parameter type (y-axis). An empty cell means conversion has no meaning and types are not compatible.
 				</p>
 				<div class="indent">
           <p class="caption"><a name="table-4"></a>Table 4: Conversion of Field Value to Control Parameter Value based on types</p>
           <table border="1" cellpadding="3" cellspacing="0">
 					<tr class="body">
-						<th colspan="" rowspan=""></th>
+						<th colspan="" rowspan="">325 \ 323</th>
+						<th colspan="" rowspan="">boolean</th>
+						<th colspan="" rowspan="">date</th>
+						<th colspan="" rowspan="">dateTime</th>
+						<th colspan="" rowspan="">duration</th>
+						<th colspan="" rowspan="">enum</th>
+						<th colspan="" rowspan="">int</th>
+						<th colspan="" rowspan="">long</th>
 						<th colspan="" rowspan="">numeric</th>
 						<th colspan="" rowspan="">string</th>
-						<th colspan="" rowspan="">boolean</th>
-						<th colspan="" rowspan="">dateTime</th>
-						<th colspan="" rowspan="">timeSpan</th>
-						<th colspan="" rowspan="">enum</th>
+						<th colspan="" rowspan="">time</th>
 					</tr>
 					<tr class="body">
 						<th colspan="" rowspan="">boolean</th>
-						<td colspan="" rowspan="">!=0</td>
-						<td colspan="" rowspan="">N/A</td>
 						<td colspan="" rowspan="">x</td>
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">N/A</td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan="">!=0</td>
+						<td colspan="" rowspan="">!=0</td>
+						<td colspan="" rowspan="">!=0</td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
 					</tr>
 					<tr class="body">
 						<th colspan="" rowspan="">color</th>
-						<td colspan="" rowspan="">N/A</td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
 						<td colspan="" rowspan="">RRGGBB or RRGGBBAA</td>
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">N/A</td>
+						<td colspan="" rowspan=""> </td>
 					</tr>
 					<tr class="body">
 						<th colspan="" rowspan="">date</th>
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">(1)</td>
-						<td colspan="" rowspan="">N/A</td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan="">x</td>
 						<td colspan="" rowspan="">Date part</td>
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">N/A</td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan="">(1)</td>
+						<td colspan="" rowspan=""> </td>
 					</tr>
 					<tr class="body">
 						<th colspan="" rowspan="">dateTime</th>
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">(2)</td>
-						<td colspan="" rowspan="">N/A</td>
+						<td colspan="" rowspan=""> </td>
 						<td colspan="" rowspan="">x</td>
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">N/A</td>
+						<td colspan="" rowspan="">x</td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan="">(2)</td>
+						<td colspan="" rowspan=""> </td>
 					</tr>
 					<tr class="body">
 						<th colspan="" rowspan="">double</th>
+						<td colspan="" rowspan="">Z2</td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan="">x</td>
+						<td colspan="" rowspan="">x</td>
 						<td colspan="" rowspan="">x</td>
 						<td colspan="" rowspan="">(3)</td>
-						<td colspan="" rowspan="">Z2</td>
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">N/A</td>
+						<td colspan="" rowspan=""> </td>
 					</tr>
 					<tr class="body">
 						<th colspan="" rowspan="">duration</th>
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">(4)</td>
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">N/A</td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
 						<td colspan="" rowspan="">x</td>
-						<td colspan="" rowspan="">N/A</td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan="">(4)</td>
+						<td colspan="" rowspan="">x</td>
 					</tr>
 					<tr class="body">
 						<th colspan="" rowspan="">int</th>
-						<td colspan="" rowspan="">x</td>
-						<td colspan="" rowspan="">(5)</td>
 						<td colspan="" rowspan="">Z2</td>
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">N/A</td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan="">Ordinal</td>
+						<td colspan="" rowspan="">x</td>
+						<td colspan="" rowspan="">Thunk</td>
+						<td colspan="" rowspan="">Thunk</td>
+						<td colspan="" rowspan="">(5)</td>
+						<td colspan="" rowspan=""> </td>
 					</tr>
 					<tr class="body">
 						<th colspan="" rowspan="">long</th>
-						<td colspan="" rowspan="">x</td>
-						<td colspan="" rowspan="">(5)</td>
 						<td colspan="" rowspan="">Z2</td>
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">N/A</td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan="">Ordinal</td>
+						<td colspan="" rowspan="">x</td>
+						<td colspan="" rowspan="">x</td>
+						<td colspan="" rowspan="">Thunk</td>
+						<td colspan="" rowspan="">(5)</td>
+						<td colspan="" rowspan=""> </td>
 					</tr>
 					<tr class="body">
 						<th colspan="" rowspan="">string</th>
-						<td colspan="" rowspan="">(6)</td>
-						<td colspan="" rowspan="">x</td>
 						<td colspan="" rowspan="">xs:boolean</td>
+						<td colspan="" rowspan="">xs:date</td>
 						<td colspan="" rowspan="">xs:dateTime</td>
 						<td colspan="" rowspan="">xs:duration</td>
 						<td colspan="" rowspan="">x</td>
+						<td colspan="" rowspan="">xs:int</td>
+						<td colspan="" rowspan="">xs:long</td>
+						<td colspan="" rowspan="">(6)</td>
+						<td colspan="" rowspan="">x</td>
+						<td colspan="" rowspan="">xs:time</td>
 					</tr>
 					<tr class="body">
 						<th colspan="" rowspan="">time</th>
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">(7)</td>
-						<td colspan="" rowspan="">N/A</td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
 						<td colspan="" rowspan="">Time part</td>
+						<td colspan="" rowspan="">(7)</td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
+						<td colspan="" rowspan=""> </td>
 						<td colspan="" rowspan="">(8)</td>
-						<td colspan="" rowspan="">N/A</td>
+						<td colspan="" rowspan="">x</td>
 					</tr>
 				</table>
         </div>
@@ -1431,15 +1476,15 @@
 					<tr class="body">
 						<td colspan="" rowspan="">(7)</td>
 						<td colspan="" rowspan="">
-							The client should try to convert the string to a time value  according to the format specified by the XML data type xs:time.
+							A duration field value contains a xs:duration value. The xs:duration has a larger domain than xs:time, and contains all xs:time values, but xs:time does
+							not contain all possible xs:duration values. So, conversion of an xs:duration value to an xs:time value should be performed only if a duration lies
+							between 00:00:00 and 23:59:59.
 						</td>
 					</tr>
 					<tr class="body">
 						<td colspan="" rowspan="">(8)</td>
 						<td colspan="" rowspan="">
-							A timeSpan field value contains a xs:duration value. The xs:duration has a larger domain than xs:time, and contains all xs:time values, but xs:time does
-							not contain all possible xs:duration values. So, conversion of an xs:duration value to an xs:time value should be performed only if a duration lies
-							between 00:00:00 and 23:59:59.
+							The client should try to convert the string to a time value  according to the format specified by the XML data type xs:time.
 						</td>
 					</tr>
 					<tr class="body">
@@ -1449,10 +1494,6 @@
 					<tr class="body">
 						<td colspan="" rowspan="">Z2</td>
 						<td colspan="" rowspan="">true = 1, false = 0.</td>
-					</tr>
-					<tr class="body">
-						<td colspan="" rowspan="">N/A</td>
-						<td colspan="" rowspan="">Not applicable. Conversion has no meaning. Value types are not compatible.</td>
 					</tr>
 					<tr class="body">
 						<td colspan="" rowspan="">!=0</td>
@@ -1475,6 +1516,14 @@
 						<td colspan="" rowspan="">Only the time part of the xs:dateTime value should be used.</td>
 					</tr>
 					<tr class="body">
+						<td colspan="" rowspan="">Ordinal</td>
+						<td colspan="" rowspan="">Each enumeration value may in the implementation correspond to an ordinal number.</td>
+					</tr>
+					<tr class="body">
+						<td colspan="" rowspan="">Thunk</td>
+						<td colspan="" rowspan="">The value is thunked down to lower precision in the canonical way.</td>
+					</tr>
+					<tr class="body">
 						<td colspan="" rowspan="">xs:boolean</td>
 						<td colspan="" rowspan="">Conversion to a string should follow the rules specified for the XML datatype xs:boolean.</td>
 					</tr>
@@ -1491,6 +1540,31 @@
 				<p class="" style="">
 					<span class="strong">Note:</span> the namespace prefix <span class="strong">xs</span> is here supposed to be linked with the XML Schema namespace
 					<a href="http://www.w3.org/2001/XMLSchema">http://www.w3.org/2001/XMLSchema</a>.
+				</p>
+			</div>
+			<div class="indent">
+        <h3>5.2.3 <a name="harmonization">Harmonization with XEP-0323 (Sensor Data)</a></h3>
+				<p class="" style="">
+					When representing control parameters as momentary field values, it is important to note the similarities and differences between XEP-0323 (Sensor Data) and XEP-0325 (this document):
+				</p>
+				<p class="" style="">
+					The <span class="strong">enum</span> field value data type is not available in XEP-0325 (this document). Instead enumeration valued parameters are represented as <span class="strong">string</span> control
+					parameters, while the control form explicitly lists available options for the parameter. Options are not available in XEP-0323, since it would not be practical to list all options
+					every time the corresponding parameter was read out. Instead, the <span class="strong">enum</span> element contains a data type attribute, that can be used to identify the type of the enumeration.
+				</p>
+				<p class="" style="">
+					The <span class="strong">numeric</span> field value data type is not available in XEP-0325 (this document). The reason is that a controller is not assumed to understand unit conversion. Any
+					floating-point valued control parameters are represented by <span class="strong">double</span> control parameters, which lack a unit attribute. They are assumed to have the same unit as
+					the corresponding <span class="strong">numeric</span> field value. On the other hand, floating point valued control parameters without units, are reported using the <span class="strong">numeric</span>
+					field element, but leaving the unit blank.
+				</p>
+				<p class="" style="">
+					Control pameters of type <span class="strong">color</span> have no corresponding field value data type. The color value must be represented in another way, and is implementation specific.
+					Possibilities include representing the color as a string, using a specific pattern (for instance RRGGBBAA), or report it using multiple fields, one for each component for instance.
+				</p>
+				<p class="" style="">
+					The <span class="strong">boolean</span>, <span class="strong">date</span>, <span class="strong">dateTime</span>, <span class="strong">duration</span>, <span class="strong">int</span>, <span class="strong">long</span>, <span class="strong">string</span>
+					and <span class="strong">time</span> field value data types correspond to control parameters having the same types and same element names.
 				</p>
 			</div>
 		</div>
@@ -1687,7 +1761,7 @@
         <div class="indent">
       <h3>5.6 <a name="tokens">Tokens</a></h3>
             <p class="" style="">
-                If control interaction is performed in a context of delegated trust, as defined in the Sensor Network Provisioning XEP-0324 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0E2UAG">14</a>], 
+                If control interaction is performed in a context of delegated trust, as defined in the Sensor Network Provisioning XEP-0324 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0EX3AG">14</a>], 
 				tokens should always be included in all calls. This to allow devices to check privileges with provisioning servers.
             </p>
             <p class="" style="">
@@ -1777,7 +1851,7 @@
         </div>
     <h2>8.
        <a name="iana">IANA Considerations</a></h2>
-        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EO1AG">15</a>].</p>
+        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EKCBG">15</a>].</p>
     <h2>9.
        <a name="registrar">XMPP Registrar Considerations</a></h2>
 		<p class="" style="">
@@ -2007,7 +2081,7 @@
             Type:
             <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
             Version: 0.3<br>
-            Last Updated: 2013-03-25<br>
+            Last Updated: 2013-03-31<br>
                 Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XEP-0001, XEP-0004, XEP-0030, XEP-0122, XEP-0137, XEP-0141, XEP-0323, XEP-0324, XEP-0331, XEP-0336<br>
                 Supersedes: None<br>
                 Superseded By: None<br>
@@ -2041,30 +2115,30 @@
     <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
     <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
     <div class="indent">
-      <p><a name="nt-ID0E6IAC">1</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0EWJAC">2</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0ECKAC">3</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
-      <p><a name="nt-ID0EOKAC">4</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
-      <p><a name="nt-ID0E1KAC">5</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
-      <p><a name="nt-ID0EVOAC">6</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
-      <p><a name="nt-ID0E2CAE">7</a>. 
+      <p><a name="nt-ID0EDJAC">1</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0E1JAC">2</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0EGKAC">3</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
+      <p><a name="nt-ID0ESKAC">4</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
+      <p><a name="nt-ID0E5KAC">5</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+      <p><a name="nt-ID0EZOAC">6</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
+      <p><a name="nt-ID0E6CAE">7</a>. 
 				XEP-xxxx: Internet of Things - Interoperability &lt;<a href="xep-0000-IoT-Interoperability.html">xep-0000-IoT-Interoperability.html</a>&gt;
             </p>
-      <p><a name="nt-ID0E4EAE">8</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
-      <p><a name="nt-ID0EWLAE">9</a>. 
+      <p><a name="nt-ID0EBFAE">8</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
+      <p><a name="nt-ID0E1LAE">9</a>. 
                         XEP-0336: Dynamic Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0336.html">http://xmpp.org/extensions/xep-0336.html</a>&gt;
                     </p>
-      <p><a name="nt-ID0E3SAE">10</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
-      <p><a name="nt-ID0ETTAE">11</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
-      <p><a name="nt-ID0EVYAE">12</a>. XEP-0336: Data Forms - Dynamic Forms&lt;<a href="http://xmpp.org/extensions/xep-0336.html">http://xmpp.org/extensions/xep-0336.html</a>&gt;.</p>
-      <p><a name="nt-ID0EPZAE">13</a>. XEP-0323: Internet of Things - Sensor Data &lt;<a href="http://xmpp.org/extensions/xep-0323.html">http://xmpp.org/extensions/xep-0323.html</a>&gt;.</p>
-      <p><a name="nt-ID0E2UAG">14</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
-      <p><a name="nt-ID0EO1AG">15</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+      <p><a name="nt-ID0EATAE">10</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0EXTAE">11</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0EZYAE">12</a>. XEP-0336: Data Forms - Dynamic Forms&lt;<a href="http://xmpp.org/extensions/xep-0336.html">http://xmpp.org/extensions/xep-0336.html</a>&gt;.</p>
+      <p><a name="nt-ID0ETZAE">13</a>. XEP-0323: Internet of Things - Sensor Data &lt;<a href="http://xmpp.org/extensions/xep-0323.html">http://xmpp.org/extensions/xep-0323.html</a>&gt;.</p>
+      <p><a name="nt-ID0EX3AG">14</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
+      <p><a name="nt-ID0EKCBG">15</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
     </div>
     <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
     <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
     <div class="indent">
-      <h4>Version 0.3 (2013-03-25)</h4>
+      <h4>Version 0.3 (2013-03-31)</h4>
       <div class="indent">
 				<p class="" style="">Response codes have been removed and replaced by XMPP compliant IQ error stanzas. The table below shows how old status codes map to XMPP IQ error elements.</p>
 				<p class="" style="">The <span class="strong">getFormResponse</span> element has been removed.</p>
@@ -2073,6 +2147,7 @@
 				<p class="" style="">The element <span class="strong">paramError</span> has been introduced, and can be used to provide error information that are linked to control parameters.</p>
 				<p class="" style="">Added anchors to all second level subsections.</p>
 				<p class="" style="">The section 'Reading current control states' has been updated to include two methods: One simple method only using control forms, and a second, using Sensor Data (XEP-0323).</p>
+				<p class="" style="">Harmonization of data types between XEP-0323 and XEP-0325.</p>
 				<p class="" style="">The attribute <span class="strong">writable</span> used to correlate fields in XEP-0323 with control parameters is described.</p>
 				<div class="indent">
           <p class="caption"><a name="table-1"></a>Table 1: XMPP Errors when rejecting a readout request</p>

@@ -4,7 +4,7 @@
     targetNamespace='urn:xmpp:iot:sensordata'
     xmlns='urn:xmpp:iot:sensordata'
     elementFormDefault='qualified'>
-   
+ 
 	<xs:element name='req'>
 		<xs:complexType>
 			<xs:choice minOccurs='0' maxOccurs='unbounded'>
@@ -33,7 +33,7 @@
 			<xs:attribute name='userToken' type='xs:string' use='optional'/>
 		</xs:complexType>
 	</xs:element>
-
+ 
 	<xs:attributeGroup name='fieldTypes'>
 		<xs:attribute name='momentary' type='xs:boolean' use='optional' default='false'/>
 		<xs:attribute name='peak' type='xs:boolean' use='optional' default='false'/>
@@ -50,20 +50,20 @@
 		<xs:attribute name='historicalYear' type='xs:boolean' use='optional' default='false'/>
 		<xs:attribute name='historicalOther' type='xs:boolean' use='optional' default='false'/>
 	</xs:attributeGroup>
-
+ 
 	<xs:element name='accepted'>
 		<xs:complexType>
 			<xs:attribute name='seqnr' type='xs:int' use='required'/>
 			<xs:attribute name='queued' type='xs:boolean' use='optional' default='false'/>
 		</xs:complexType>
 	</xs:element>
-
+ 
 	<xs:element name='started'>
 		<xs:complexType>
 			<xs:attribute name='seqnr' type='xs:int' use='required'/>
 		</xs:complexType>
 	</xs:element>
-
+ 
 	<xs:element name='fields'>
 		<xs:complexType>
 			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
@@ -73,12 +73,16 @@
 							<xs:element name='timestamp'>
 								<xs:complexType>
 									<xs:choice minOccurs='0' maxOccurs='unbounded'>
+										<xs:element name='boolean' type='boolean'/>
+										<xs:element name='date' type='date'/>
+										<xs:element name='dateTime' type='dateTime'/>
+										<xs:element name='duration' type='duration'/>
+										<xs:element name='enum' type='enum'/>
+										<xs:element name='int' type='int'/>
+										<xs:element name='long' type='long'/>
 										<xs:element name='numeric' type='numeric'/>
 										<xs:element name='string' type='string'/>
-										<xs:element name='boolean' type='boolean'/>
-										<xs:element name='dateTime' type='dateTime'/>
-										<xs:element name='timeSpan' type='timeSpan'/>
-										<xs:element name='enum' type='enum'/>
+										<xs:element name='time' type='time'/>
 									</xs:choice>
 									<xs:attribute name='value' type='xs:dateTime' use='required'/>
 								</xs:complexType>
@@ -94,7 +98,7 @@
 			<xs:attribute name='done' type='xs:boolean' use='optional' default='false'/>
 		</xs:complexType>
 	</xs:element>
-
+ 
 	<xs:element name='failure'>
 		<xs:complexType>
 			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
@@ -115,13 +119,13 @@
 			<xs:attribute name='done' type='xs:boolean' use='optional' default='false'/>
 		</xs:complexType>
 	</xs:element>
-
+ 
 	<xs:element name='done'>
 		<xs:complexType>
 			<xs:attribute name='seqnr' type='xs:int' use='required'/>
 		</xs:complexType>
 	</xs:element>
-
+ 
 	<xs:complexType name='field' abstract='true'>
 		<xs:attribute name="name" type="xs:string" use="required"/>
 		<xs:attributeGroup ref='fieldTypes'/>
@@ -130,13 +134,13 @@
 		<xs:attribute name="stringIds" type="StringIds" use="optional"/>
 		<xs:attribute name="writable" type="xs:boolean" use="optional"/>
 	</xs:complexType>
-
+ 
 	<xs:simpleType name="StringIds">
 		<xs:restriction base="xs:string">
 			<xs:pattern value="^\d+([|]\w+([.]\w+)*([|][^,]*)?)?(,\d+([|]\w+([.]\w+)*([|][^,]*)?)?)*$"/>
 		</xs:restriction>
 	</xs:simpleType>
-
+ 
 	<xs:attributeGroup name='fieldQoS'>
 		<xs:attribute name='missing' type='xs:boolean' use='optional' default='false'/>
 		<xs:attribute name='inProgress' type='xs:boolean' use='optional' default='false'/>
@@ -153,7 +157,7 @@
 		<xs:attribute name='powerFailure' type='xs:boolean' use='optional' default='false'/>
 		<xs:attribute name='invoiceConfirmed' type='xs:boolean' use='optional' default='false'/>
 	</xs:attributeGroup>
-
+ 
 	<xs:complexType name='numeric'>
 		<xs:complexContent>
 			<xs:extension base='field'>
@@ -162,7 +166,7 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-
+ 
 	<xs:complexType name='string'>
 		<xs:complexContent>
 			<xs:extension base='field'>
@@ -170,7 +174,7 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-
+ 
 	<xs:complexType name='boolean'>
 		<xs:complexContent>
 			<xs:extension base='field'>
@@ -178,7 +182,15 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-
+ 
+	<xs:complexType name='date'>
+		<xs:complexContent>
+			<xs:extension base='field'>
+				<xs:attribute name="value" type="xs:date" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+ 
 	<xs:complexType name='dateTime'>
 		<xs:complexContent>
 			<xs:extension base='field'>
@@ -186,15 +198,15 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-
-	<xs:complexType name='timeSpan'>
+ 
+	<xs:complexType name='duration'>
 		<xs:complexContent>
 			<xs:extension base='field'>
 				<xs:attribute name="value" type="xs:duration" use="required"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-
+ 
 	<xs:complexType name='enum'>
 		<xs:complexContent>
 			<xs:extension base='field'>
@@ -203,5 +215,29 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-
+ 
+	<xs:complexType name='int'>
+		<xs:complexContent>
+			<xs:extension base='field'>
+				<xs:attribute name="value" type="xs:int" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+ 
+	<xs:complexType name='long'>
+		<xs:complexContent>
+			<xs:extension base='field'>
+				<xs:attribute name="value" type="xs:long" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+ 
+	<xs:complexType name='time'>
+		<xs:complexContent>
+			<xs:extension base='field'>
+				<xs:attribute name="value" type="xs:time" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+ 
 </xs:schema>
