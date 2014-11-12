@@ -1,99 +1,39 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-  <head>
-    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>XEP-xxxx: Internet of Things - Discovery</title>
-    <link rel="stylesheet" type="text/css" href="xmpp.css">
-    <link href="prettify.css" type="text/css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"><script type="text/javascript" src="prettify.js"></script><meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=2.0">
-    <meta name="DC.Title" content="Internet of Things - Discovery">
-    <meta name="DC.Creator" content="Peter Waher">
-    <meta name="DC.Creator" content="Ronny Klauck">
-    <meta name="DC.Description" content="This specification describes an architecture based on the XMPP protocol whereby Things can be installed and safely discovered by their owners and connected into networks of Things.">
-    <meta name="DC.Publisher" content="XMPP Standards Foundation">
-    <meta name="DC.Contributor" content="XMPP Extensions Editor">
-    <meta name="DC.Date" content="2014-03-11">
-    <meta name="DC.Type" content="XMPP Extension Protocol">
-    <meta name="DC.Format" content="XHTML">
-    <meta name="DC.Identifier" content="XEP-xxxx">
-    <meta name="DC.Language" content="en">
-    <meta name="DC.Rights" content="This XMPP Extension Protocol is copyright © 1999 - 2013 by the XMPP Standards Foundation (XSF).">
-  </head>
-  <body onload="prettyPrint()">
-    <h1>XEP-xxxx: Internet of Things - Discovery</h1>
-    <table>
-      <tr valign="top">
-        <td><strong>Abstract:</strong></td>
-        <td>This specification describes an architecture based on the XMPP protocol whereby Things can be installed and safely discovered by their owners and connected into networks of Things.</td>
-      </tr>
-      <tr valign="top">
-        <td><strong>Authors:</strong></td>
-        <td>Peter Waher, Ronny Klauck</td>
-      </tr>
-      <tr valign="top">
-        <td><strong>Copyright:</strong></td>
-        <td>© 1999 - 2013 XMPP Standards Foundation. <a href="#appendix-legal">SEE LEGAL NOTICES</a>.</td>
-      </tr>
-      <tr valign="top">
-        <td><strong>Status:</strong></td>
-        <td>ProtoXEP</td>
-      </tr>
-      <tr valign="top">
-        <td><strong>Type:</strong></td>
-        <td>Standards Track</td>
-      </tr>
-      <tr valign="top">
-        <td><strong>Version:</strong></td>
-        <td>0.0.1</td>
-      </tr>
-      <tr valign="top">
-        <td><strong>Last Updated:</strong></td>
-        <td>2014-03-11</td>
-      </tr>
-    </table>
-    <hr>
-    <p style="color:red">WARNING: This document has not yet been accepted for consideration or approved in any official manner by the XMPP Standards Foundation, and this document is not yet an XMPP Extension Protocol (XEP). If this document is accepted as a XEP by the XMPP Council, it will be published at &lt;<a href="http://xmpp.org/extensions/">http://xmpp.org/extensions/</a>&gt; and announced on the &lt;standards@xmpp.org&gt; mailing list.</p>
-    <hr>
-    <h2>Table of Contents</h2>
-    <div class="indent">
-      <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
-      3.1.  <a href="#sect-ID0ECLAC">Production</a><br>   
-      3.2.  <a href="#sect-ID0EEMAC">Installation</a><br>   
-      3.3.  <a href="#sect-ID0ENMAC">Finding XMPP Server</a><br>      
-      3.3.1.  <a href="#sect-ID0EKNAC">DHCP</a><br>        
-      3.3.1.1.  <a href="#sect-ID0ECPAC">XMPP Server Option</a><br>        
-      3.3.1.2.  <a href="#option">Dynamic Host Configuration Protocol (DHCP) and Bootstrap Protocol (BOOTP) Parameters for IoT Discovery</a><br>      
-      3.3.2.  <a href="#sect-ID0EYAAE">Multicast DNS (mDNS) and DNS Service Discovery (DNS-SD)</a><br>        
-      3.3.2.1.  <a href="#sect-ID0E2BAE">DNS Records</a><br>        
-      3.3.2.2.  <a href="#txt">IoT Discovery TXT Record Parameters Registry</a><br>      
-      3.3.3.  <a href="#sect-ID0EEHAE">SSDP/UPnP</a><br>   
-      3.4.  <a href="#sect-ID0EDIAE">Connection to XMPP Server</a><br>   
-      3.5.  <a href="#sect-ID0E4IAE">Finding Thing Registry</a><br>   
-      3.6.  <a href="#sect-ID0ECLAE">Registering Thing</a><br>   
-      3.7.  <a href="#sect-ID0EMMAE">Register self-owned Thing</a><br>   
-      3.8.  <a href="#sect-ID0E4MAE">Register Thing behind Concentrator</a><br>   
-      3.9.  <a href="#sect-ID0EWOAE">Claiming Ownership of a Thing</a><br>   
-      3.10.  <a href="#sect-ID0E5UAE">Removing Thing from Registry</a><br>   
-      3.11.  <a href="#sect-ID0E5WAE">Finding Provisioning Server</a><br>   
-      3.12.  <a href="#sect-ID0E6ZAE">Delegating Trust</a><br>   
-      3.13.  <a href="#sect-ID0EV1AE">Update Meta Information about Thing in Registry</a><br>   
-      3.14.  <a href="#sect-ID0ET3AE">Search for Public Things in Registry</a><br>   
-      3.15.  <a href="#sect-ID0EBKAG">Unregistering Thing from Registry</a><br>   
-      3.16.  <a href="#sect-ID0ECLAG">Disowning Thing</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
-      5.1.  <a href="#tags">Meta Tags</a><br>   
-      5.2.  <a href="#sect-ID0EM1AG">Friendships between Things and Registry</a><br>6.  <a href="#security">Security Considerations</a><br>   
-      6.1.  <a href="#sect-ID0E11AG">Hijacking predefined JIDs</a><br>   
-      6.2.  <a href="#sect-ID0ED2AG">Hijacking nicknames</a><br>   
-      6.3.  <a href="#sect-ID0EM2AG">Hijacking things in public areas</a><br>   
-      6.4.  <a href="#sect-ID0EZ2AG">Key meta information in searches</a><br>   
-      6.5.  <a href="#sect-ID0E33AG">KEY tag</a><br>   
-      6.6.  <a href="#sect-ID0EP4AG">Tag name spam</a><br>   
-      6.7.  <a href="#sect-ID0E34AG">External services for creating QR-codes</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a><br>10.  <a href="#moreinfo">For more information</a><br>11.  <a href="#ack">Acknowledgements</a></p>
-      <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
-    </div>
-    <hr>
-    <h2>1.
-       <a name="intro">Introduction</a></h2>
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>XEP-xxxx: Internet of Things - Discovery</title><link rel="stylesheet" type="text/css" href="../xmpp.css" /><link href="../prettify.css" type="text/css" rel="stylesheet" /><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" /><script type="text/javascript" src="../prettify.js"></script><meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=2.0" /><meta name="DC.Title" content="Internet of Things - Discovery" /><meta name="DC.Creator" content="Peter Waher" /><meta name="DC.Creator" content="Ronny Klauck" /><meta name="DC.Description" content="This specification describes an architecture based on the XMPP protocol whereby Things can be installed and safely discovered by their owners and connected into networks of Things." /><meta name="DC.Publisher" content="XMPP Standards Foundation" /><meta name="DC.Contributor" content="XMPP Extensions Editor" /><meta name="DC.Date" content="2014-03-11" /><meta name="DC.Type" content="XMPP Extension Protocol" /><meta name="DC.Format" content="XHTML" /><meta name="DC.Identifier" content="XEP-xxxx" /><meta name="DC.Language" content="en" /><meta name="DC.Rights" content="This XMPP Extension Protocol is copyright &#xA9; 1999 - 2012 by the XMPP Standards Foundation (XSF)." /></head><body onload="prettyPrint()"><h1>XEP-xxxx: Internet of Things - Discovery</h1><table><tr valign="top"><td><strong>Abstract:</strong></td><td>This specification describes an architecture based on the XMPP protocol whereby Things can be installed and safely discovered by their owners and connected into networks of Things.</td></tr><tr valign="top"><td><strong>Authors:</strong></td><td>Peter Waher, Ronny Klauck</td></tr><tr valign="top"><td><strong>Copyright:</strong></td><td>© 1999 - 2013 XMPP Standards Foundation. <a href="#appendix-legal">SEE LEGAL NOTICES</a>.</td></tr><tr valign="top"><td><strong>Status:</strong></td><td>ProtoXEP</td></tr><tr valign="top"><td><strong>Type:</strong></td><td>Standards Track</td></tr><tr valign="top"><td><strong>Version:</strong></td><td>0.0.1</td></tr><tr valign="top"><td><strong>Last Updated:</strong></td><td>2014-03-11</td></tr></table><hr /><p style="color:red">WARNING: This document has not yet been accepted for consideration or approved in any official manner by the XMPP Standards Foundation, and this document is not yet an XMPP Extension Protocol (XEP). If this document is accepted as a XEP by the XMPP Council, it will be published at &lt;<a href="http://xmpp.org/extensions/">http://xmpp.org/extensions/</a>&gt; and announced on the &lt;standards@xmpp.org&gt; mailing list.</p><hr /><h2>Table of Contents</h2><div class="indent"><p><br />1.  <a href="#intro">Introduction</a><br />2.  <a href="#glossary">Glossary</a><br />3.  <a href="#usecases">Use Cases</a><br />   
+      3.1.  <a href="#sect-idm63792554896">Production</a><br />   
+      3.2.  <a href="#sect-idm63792547168">Installation</a><br />   
+      3.3.  <a href="#sect-idm63792544880">Finding XMPP Server</a><br />      
+      3.3.1.  <a href="#sect-idm63792538944">DHCP</a><br />        
+      3.3.1.1.  <a href="#sect-idm63792527504">XMPP Server Option</a><br />        
+      3.3.1.2.  <a href="#option">Dynamic Host Configuration Protocol (DHCP) and Bootstrap Protocol (BOOTP) Parameters for IoT Discovery</a><br />      
+      3.3.2.  <a href="#sect-idm63792513440">Multicast DNS (mDNS) and DNS Service Discovery (DNS-SD)</a><br />        
+      3.3.2.1.  <a href="#sect-idm63792501616">DNS Records</a><br />        
+      3.3.2.2.  <a href="#txt">IoT Discovery TXT Record Parameters Registry</a><br />      
+      3.3.3.  <a href="#sect-idm63792463088">SSDP/UPnP</a><br />   
+      3.4.  <a href="#sect-idm63792457312">Connection to XMPP Server</a><br />   
+      3.5.  <a href="#sect-idm63792449664">Finding Thing Registry</a><br />   
+      3.6.  <a href="#sect-idm63792433568">Registering Thing</a><br />   
+      3.7.  <a href="#sect-idm63792422656">Register self-owned Thing</a><br />   
+      3.8.  <a href="#sect-idm63792419392">Register Thing behind Concentrator</a><br />   
+      3.9.  <a href="#sect-idm63792409664">Claiming Ownership of a Thing</a><br />   
+      3.10.  <a href="#sect-idm63792369344">Removing Thing from Registry</a><br />   
+      3.11.  <a href="#sect-idm63792352160">Finding Provisioning Server</a><br />   
+      3.12.  <a href="#sect-idm63792334576">Delegating Trust</a><br />   
+      3.13.  <a href="#sect-idm63792332224">Update Meta Information about Thing in Registry</a><br />   
+      3.14.  <a href="#sect-idm63792311888">Search for Public Things in Registry</a><br />   
+      3.15.  <a href="#sect-idm63792220368">Unregistering Thing from Registry</a><br />   
+      3.16.  <a href="#sect-idm63792211760">Disowning Thing</a><br />4.  <a href="#support">Determining Support</a><br />5.  <a href="#impl">Implementation Notes</a><br />   
+      5.1.  <a href="#tags">Meta Tags</a><br />   
+      5.2.  <a href="#sect-idm63792085376">Friendships between Things and Registry</a><br />6.  <a href="#security">Security Considerations</a><br />   
+      6.1.  <a href="#sect-idm63792082096">Hijacking predefined JIDs</a><br />   
+      6.2.  <a href="#sect-idm63792080272">Hijacking nicknames</a><br />   
+      6.3.  <a href="#sect-idm63792078032">Hijacking things in public areas</a><br />   
+      6.4.  <a href="#sect-idm63792074240">Key meta information in searches</a><br />   
+      6.5.  <a href="#sect-idm63792066464">KEY tag</a><br />   
+      6.6.  <a href="#sect-idm63792062384">Tag name spam</a><br />   
+      6.7.  <a href="#sect-idm63792059168">External services for creating QR-codes</a><br />7.  <a href="#iana">IANA Considerations</a><br />8.  <a href="#registrar">XMPP Registrar Considerations</a><br />9.  <a href="#schema">XML Schema</a><br />10.  <a href="#moreinfo">For more information</a><br />11.  <a href="#ack">Acknowledgements</a></p><p><a href="#appendices">Appendices</a><br />    <a href="#appendix-docinfo">A: Document Information</a><br />    <a href="#appendix-authorinfo">B: Author Information</a><br />    <a href="#appendix-legal">C: Legal Notices</a><br />    <a href="#appendix-xmpp">D: Relation to XMPP</a><br />    <a href="#appendix-discuss">E: Discussion Venue</a><br />    <a href="#appendix-conformance">F: Requirements Conformance</a><br />    <a href="#appendix-notes">G: Notes</a><br />    <a href="#appendix-revs">H: Revision History</a></p></div><hr /><h2>1.
+       <a name="intro" id="intro">Introduction</a></h2>
 		<p class="" style="">
 			When installing massive amounts of Things into public networks care has to be taken to make installation simple, but at the same time secure so that the Things cannot be
 			hijacked or hacked, making sure access to the Thing is controlled by the physical owner of the Thing. One of the main problems is how
@@ -109,9 +49,7 @@
 		<p class="" style="">
 			Internet of Things contains many different architectures and use cases. For this reason, the IoT standards have been divided into multiple XEPs according to the following table:
 		</p>
-		<div class="indent">
-      <p class="caption"><a name="table-1"></a>Table 1: Internet of Things XEPs</p>
-      <table border="1" cellpadding="3" cellspacing="0">
+		<div class="indent"><p class="caption"><a name="table-1" id="table-1"></a>Table 1: Internet of Things XEPs</p><table border="1" cellpadding="3" cellspacing="0">
 			<tr class="body">
 				<th colspan="" rowspan="">XEP</th>
 				<th colspan="" rowspan="">Description</th>
@@ -173,19 +111,17 @@
 			</tr>
 			<tr class="body">
 				<td colspan="" rowspan="">XEP-0331</td>
-				<td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EDBAC">1</a>]</td>
+				<td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-idm63792619184">1</a>]</td>
 			</tr>
 			<tr class="body">
 				<td colspan="" rowspan="">XEP-0336</td>
-				<td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0E1BAC">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EGCAC">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0ESCAC">4</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0E5CAC">5</a>].</td>
+				<td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-idm63792621248">2</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-idm63792610768">3</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-idm63792606144">4</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-idm63792601376">5</a>].</td>
 			</tr>
-		</table>
-    </div>
+		</table></div>
 	<h2>2.
-       <a name="glossary">Glossary</a></h2>
+       <a name="glossary" id="glossary">Glossary</a></h2>
 		<p class="" style="">The following table lists common terms and corresponding descriptions.</p>
-		<div class="indent">
-      <dl>
+		<div class="indent"><dl>
 			<di>
 				<dt><strong>Actuator</strong></dt>
 				<dd>Device containing at least one configurable property or output that can and should be controlled by some other entity or device.</dd>
@@ -255,7 +191,7 @@
 			<di>
 				<dt><strong>Parameter</strong></dt>
 				<dd>
-					Readable and/or writable property on a node/device. The XEP-0326 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0EAHAC">6</a>] deals with reading and writing parameters
+					Readable and/or writable property on a node/device. The XEP-0326  deals with reading and writing parameters
 					on nodes/devices. Fields are not parameters, and parameters are not fields.
 				</dd>
 			</di>
@@ -342,16 +278,14 @@
 				<dt><strong>XMPP Client</strong></dt>
 				<dd>Application connected to an XMPP network, having a JID. Note that sensors, as well as applications requesting sensor data can be XMPP clients.</dd>
 			</di>
-		</dl>
-    </div>
+		</dl></div>
 	<h2>3.
-       <a name="usecases">Use Cases</a></h2>
+       <a name="usecases" id="usecases">Use Cases</a></h2>
 		<p class="" style="">
 			The life cycle of a Thing can be divided into multiple steps. The following sections will list many of these steps in possible order of occurrence during the
 			life cycle of the Thing.
 		</p>
-		<div class="indent">
-      <h3>3.1 <a name="sect-ID0ECLAC">Production</a></h3>
+		<div class="indent"><h3>3.1 <a name="sect-idm63792554896" id="sect-idm63792554896">Production</a></h3>
 			<p class="" style="">
 				During production of a Thing, decisions have to be made whether the following parameters should be pre-configured, manually entered after installation or
 				automatically found and/or created by the device if possible (zero-configuration networking):
@@ -377,8 +311,7 @@
 				decentralized network architecture. A detailed discussion of the two alternatives goes beyond the scope of this specification, and will not be presented here.
 			</p>
 		</div>
-		<div class="indent">
-      <h3>3.2 <a name="sect-ID0EEMAC">Installation</a></h3>
+		<div class="indent"><h3>3.2 <a name="sect-idm63792547168" id="sect-idm63792547168">Installation</a></h3>
 			<p class="" style="">
 				Apart from physical installation, and connection to power and communication infrastructure, the installation phase of a Thing might also require manual entry of values that
 				could not be set in the production environment. Since Things might have very limited human user interfaces, external tools might be required to provide this information. Due
@@ -386,8 +319,7 @@
 				resources where such cannot be found nor set in a production environment.
 			</p>
 		</div>
-		<div class="indent">
-      <h3>3.3 <a name="sect-ID0ENMAC">Finding XMPP Server</a></h3>
+		<div class="indent"><h3>3.3 <a name="sect-idm63792544880" id="sect-idm63792544880">Finding XMPP Server</a></h3>
 			<p class="" style="">
 				If the address of an XMPP Server is not preconfigured, the Thing must attempt to find one in its local surroundings. This can be done using one of several methods:
 			</p>
@@ -399,14 +331,13 @@
 			<p class="" style="">
 				The following sections describe them in more detail.
 			</p>
-			<div class="indent">
-        <h3>3.3.1 <a name="sect-ID0EKNAC">DHCP</a></h3>
+			<div class="indent"><h3>3.3.1 <a name="sect-idm63792538944" id="sect-idm63792538944">DHCP</a></h3>
 				<p class="" style="">
 					DHCP offers an internal structure for advertising configuration information to clients in a network.
 					This includes configuration parameters and other control elements, which are transmitted in special marked data elements, called 'options', as described in
 					<span class="ref" style="">
 						<a href="http://tools.ietf.org/html/rfc3942">RFC 3942</a>
-					</span>  [<a href="#nt-ID0E1NAC">7</a>].
+					</span>  [<a href="#nt-idm63792535760">6</a>].
 				</p>
 				<p class="" style="">
 					<a href="http://www.iana.org/assignments/bootp-dhcp-parameters/bootp-dhcp-parameters.txt">Dynamic Host Configuration Protocol (DHCP) and Bootstrap Protocol (BOOTP) Parameters</a> lists currently assigned 'options' by IANA.
@@ -422,105 +353,80 @@
 						<span class="strong">TBD:</span> Define and register DHCP and BOOTP option as described in <a href="#option">Parameters for IoT Discovery</a>. Use of 'option-code' 84.
 					</li>
 				</ul>
-				<div class="indent">
-          <h3>3.3.1.1 <a name="sect-ID0ECPAC">XMPP Server Option</a></h3>
+				<div class="indent"><h3>3.3.1.1 <a name="sect-idm63792527504" id="sect-idm63792527504">XMPP Server Option</a></h3>
 					<p class="" style="">
 						This option specifies the name of the XMPP server.
 						The name may or may not be qualified with the local domain name.
-						See <span class="ref" style=""><a href="http://tools.ietf.org/html/rfc1035">RFC 1035</a></span>  [<a href="#nt-ID0EQPAC">8</a>] for character set restrictions.
+						See <span class="ref" style=""><a href="http://tools.ietf.org/html/rfc1035">RFC 1035</a></span>  [<a href="#nt-idm63792522448">7</a>] for character set restrictions.
 					</p>
 					<p class="" style="">
 						The code for this option is 224 (for 'site-specific option range') or 84 (for <a href="#option">DHCP and BOOTP Parameters for IoT Discovery</a>), and its minimum length is 1.
 					</p>
-					<p class="caption"><a name="example-1"></a>Example 1. IoT Discovery DHCP Option</p>
-          <div class="indent">
-            <pre class="prettyprint">
+					<p class="caption"><a name="example-1" id="example-1"></a>Example 1. IoT Discovery DHCP Option</p><div class="indent"><pre class="prettyprint">
 						
    &lt;option code&gt; &lt;data length&gt; machine
-					</pre>
-          </div>
+					</pre></div>
 					<p class="" style="">So, for example, if the machine name is "pronto", the code for the option is 224, the XMPP server option would be as follows:</p>
-					<p class="caption"><a name="example-2"></a>Example 2. IoT Discovery DHCP Option Example</p>
-          <div class="indent">
-            <pre class="prettyprint">
+					<p class="caption"><a name="example-2" id="example-2"></a>Example 2. IoT Discovery DHCP Option Example</p><div class="indent"><pre class="prettyprint">
 						
    224 12 pronto.local
-					</pre>
-          </div>
+					</pre></div>
 				</div>
-				<div class="indent">
-          <h3>3.3.1.2 <a name="option">Dynamic Host Configuration Protocol (DHCP) and Bootstrap Protocol (BOOTP) Parameters for IoT Discovery</a></h3>
+				<div class="indent"><h3>3.3.1.2 <a name="option" id="option">Dynamic Host Configuration Protocol (DHCP) and Bootstrap Protocol (BOOTP) Parameters for IoT Discovery</a></h3>
 					<p class="" style="">The following parameters in use as of MONTH 201x. Refer to the DHCP and BOOTP parameters itself for a complete and current list of parameters (this specification might or might not be revised when new parameters are registered).</p>
-					<p class="caption"><a name="example-3"></a>Example 3. IoT Discovery DHCP and BOOTP Parameters Registry</p>
-          <div class="indent">
-            <pre class="prettyprint">
+					<p class="caption"><a name="example-3" id="example-3"></a>Example 3. IoT Discovery DHCP and BOOTP Parameters Registry</p><div class="indent"><pre class="prettyprint">
 						
    &lt;tag&gt;84&lt;/tag&gt;
    &lt;name&gt;XMPP server&lt;/name&gt;
    &lt;data length&gt;N&lt;/data length&gt;
    &lt;meaning&gt;XMPP Servers DHCP Option&lt;/meaning&gt;
    &lt;reference&gt;[RFC6120]&lt;/reference&gt;
-					</pre>
-          </div>
+					</pre></div>
 				</div>
 			</div>
-			<div class="indent">
-        <h3>3.3.2 <a name="sect-ID0EYAAE">Multicast DNS (mDNS) and DNS Service Discovery (DNS-SD)</a></h3>
+			<div class="indent"><h3>3.3.2 <a name="sect-idm63792513440" id="sect-idm63792513440">Multicast DNS (mDNS) and DNS Service Discovery (DNS-SD)</a></h3>
 				<p class="" style="">
-					An introduction of mDNS/DNS-SD (e.g., how it works and terminology) is described in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0174.html">Link-Local Messaging</a></span>  [<a href="#nt-ID0EGBAE">9</a>] (i.e., sections [1.2] and [2]).
+					An introduction of mDNS/DNS-SD (e.g., how it works and terminology) is described in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0174.html">Link-Local Messaging</a></span>  [<a href="#nt-idm63792508672">8</a>] (i.e., sections [1.2] and [2]).
 					For the purpose of IoT Discovery we are interested only in the "xmpp-client" service.
 					An XMPP server MUST publish four different kinds of DNS records to advertise its availability using the services of type "xmpp-client".
 					An XMPP chat client (actually its mDNS daemon) can send out multicast DNS queries for services of type "xmpp-client".
-					<span class="strong">Note:</span> the service of type "xmpp-client" is the reservered name for client-to-server connections by IANA, as described in <span class="ref" style=""><a href="http://tools.ietf.org/html/rfc6120">RFC 6120</a></span>  [<a href="#nt-ID0EUBAE">10</a>].
+					<span class="strong">Note:</span> the service of type "xmpp-client" is the reservered name for client-to-server connections by IANA, as described in <span class="ref" style=""><a href="http://tools.ietf.org/html/rfc6120">RFC 6120</a></span>  [<a href="#nt-idm63792503008">9</a>].
 				</p>
-				<div class="indent">
-          <h3>3.3.2.1 <a name="sect-ID0E2BAE">DNS Records</a></h3>
+				<div class="indent"><h3>3.3.2.1 <a name="sect-idm63792501616" id="sect-idm63792501616">DNS Records</a></h3>
 					<p class="" style="">In order to advertise its availability, a server MUST publish four different kinds of DNS records:</p>
 					<ol start="" class="" style="">
 						<li class="" style="">
 							<p class="" style="">A PTR record of the following form:</p>
-							<p class="caption"><a name="example-4"></a>Example 4. PTR record</p>
-              <div class="indent">
-                <pre class="prettyprint">
+							<p class="caption"><a name="example-4" id="example-4"></a>Example 4. PTR record</p><div class="indent"><pre class="prettyprint">
 								
    _xmpp-client._tcp.local. PTR machine._xmpp-client._tcp.local.
-							</pre>
-              </div>
+							</pre></div>
 						</li>
 						<li class="" style="">
 							<p class="" style="">An address ("A" or "AAAA") record of the following form (where the IP address can be either an IPv4 address or an IPv6 address):</p>
-							<p class="caption"><a name="example-5"></a>Example 5. A record</p>
-              <div class="indent">
-                <pre class="prettyprint">
+							<p class="caption"><a name="example-5" id="example-5"></a>Example 5. A record</p><div class="indent"><pre class="prettyprint">
 								
    machine.local. A ip-address
-							</pre>
-              </div>
+							</pre></div>
 						</li>
 						<li class="" style="">
 							<p class="" style="">A SRV record of the following form:</p>
-							<p class="caption"><a name="example-6"></a>Example 6. SRV record</p>
-              <div class="indent">
-                <pre class="prettyprint">
+							<p class="caption"><a name="example-6" id="example-6"></a>Example 6. SRV record</p><div class="indent"><pre class="prettyprint">
 								
    machine._xmpp-client._tcp.local &lt;ttl&gt; SRV &lt;priority&gt; &lt;weight&gt; port-number machine.local.
-							</pre>
-              </div>
+							</pre></div>
 						</li>
 						<li class="" style="">
 							<p class="" style="">
 								A TXT record whose name is the same as the SRV record and whose value follows the format described in the <a href="#txt">TXT Record</a> section of this document, consisting of a set of strings that typically represent a series of key-value pairs such as the following:
 							</p>
-							<p class="caption"><a name="example-7"></a>Example 7. TXT record</p>
-              <div class="indent">
-                <pre class="prettyprint">
+							<p class="caption"><a name="example-7" id="example-7"></a>Example 7. TXT record</p><div class="indent"><pre class="prettyprint">
 								
    txtvers=1
    ordom=example.com
    regis=registry
    provis=provisioning
-							</pre>
-              </div>
+							</pre></div>
 							<p class="" style="">Note: The DNS-SD specification stipulates that the TXT record MUST be published, but that it MAY contain no more than a single zero byte (e.g., if the server does not wish to publish any personal information).</p>
 						</li>
 					</ol>
@@ -528,12 +434,10 @@
 						For the purpose of IoT Discovery we are interested only in the "xmpp-client" service.
 						An XMPP server MUST publish four different kinds of DNS records to advertise its availability using the services of type "xmpp-client".
 						An XMPP chat client (actually its mDNS daemon) can send out multicast DNS queries for services of type "xmpp-client".
-						<span class="strong">Note:</span> the service of type "xmpp-client" is the reservered name for client-to-server connections by IANA, as described in <span class="ref" style=""><a href="http://tools.ietf.org/html/rfc6120">RFC 6120</a></span>  [<a href="#nt-ID0ENEAE">11</a>].
+						<span class="strong">Note:</span> the service of type "xmpp-client" is the reservered name for client-to-server connections by IANA, as described in <span class="ref" style=""><a href="http://tools.ietf.org/html/rfc6120">RFC 6120</a></span>  [<a href="#nt-idm63792505216">10</a>].
 					</p>
 					<p class="" style="">So, for example, if the machine name is "pronto", the IP address is "10.2.1.188", and the personal information, the DNS records would be as follows:</p>
-					<p class="caption"><a name="example-8"></a>Example 8. IoT Discovery DNS Records Example</p>
-          <div class="indent">
-            <pre class="prettyprint">
+					<p class="caption"><a name="example-8" id="example-8"></a>Example 8. IoT Discovery DNS Records Example</p><div class="indent"><pre class="prettyprint">
 						
    _xmpp-client._tcp.local. PTR pronto._xmpp-client._tcp.local.
 	
@@ -546,21 +450,17 @@
    "ordom=example.com"
    "regis=registry"
    "provis=provisioning"
-					</pre>
-          </div>
-					<p class="" style="">The IPv4 and IPv6 addresses associated with a machine might vary depending on the local network to which the machine is connected. For example, on an Ethernet connection the physical address might be "192.168.0.100" but when the machine is connected to a wireless network the physical address might change to "10.10.1.188". See <span class="ref" style=""><a href="http://tools.ietf.org/html/rfc3927">RFC 3927</a></span>  [<a href="#nt-ID0EFFAE">12</a>] for details.</p>
+					</pre></div>
+					<p class="" style="">The IPv4 and IPv6 addresses associated with a machine might vary depending on the local network to which the machine is connected. For example, on an Ethernet connection the physical address might be "192.168.0.100" but when the machine is connected to a wireless network the physical address might change to "10.10.1.188". See <span class="ref" style=""><a href="http://tools.ietf.org/html/rfc3927">RFC 3927</a></span>  [<a href="#nt-idm63792476080">11</a>] for details.</p>
 					<p class="" style="">If the machine name asserted by a client is already taken by another machine on the network, the client MUST assert a different machine name, which SHOULD be formed by adding the character "-" and digit "1" to the end of the machine name string (e.g., "pronto-1"), adding the character "-" and digit "2" if the resulting machine name is already taken (e.g., "pronto-2"), and similarly incrementing the digit until a unique machine name is constructed.</p>
 					<p class="" style="">
-						<span class="strong">Note:</span> DNS-SD enables service definitions to include a TXT record that specifies parameters to be used in the context of the relevant service type. For detailed information refer to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0174.html">Link-Local Messaging</a></span>  [<a href="#nt-ID0E3FAE">13</a>] (Link-Local Messaging - TXT Record).
+						<span class="strong">Note:</span> DNS-SD enables service definitions to include a TXT record that specifies parameters to be used in the context of the relevant service type. For detailed information refer to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0174.html">Link-Local Messaging</a></span>  [<a href="#nt-idm63792510768">12</a>] (Link-Local Messaging - TXT Record).
 					</p>
 				</div>
-				<div class="indent">
-          <h3>3.3.2.2 <a name="txt">IoT Discovery TXT Record Parameters Registry</a></h3>
-					<p class="" style="">The registration process is described in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0174.html">Link-Local Messaging</a></span>  [<a href="#nt-ID0ESGAE">14</a>] (Link-Local Messaging - Registration Process).</p>
+				<div class="indent"><h3>3.3.2.2 <a name="txt" id="txt">IoT Discovery TXT Record Parameters Registry</a></h3>
+					<p class="" style="">The registration process is described in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0174.html">Link-Local Messaging</a></span>  [<a href="#nt-idm63792470928">13</a>] (Link-Local Messaging - Registration Process).</p>
 					<p class="" style="">The following submission registers parameters in use as of MONTH 201x. Refer to the registry itself for a complete and current list of parameters (this specification might or might not be revised when new parameters are registered).</p>
-					<p class="caption"><a name="example-9"></a>Example 9. IoT Discovery TXT Record Parameters Registry</p>
-          <div class="indent">
-            <pre class="prettyprint">
+					<p class="caption"><a name="example-9" id="example-9"></a>Example 9. IoT Discovery TXT Record Parameters Registry</p><div class="indent"><pre class="prettyprint">
 						
    &lt;param&gt;
       &lt;name&gt;ordom&lt;/name&gt;
@@ -585,33 +485,29 @@
       &lt;/desc&gt;
       &lt;status&gt;optional&lt;/status&gt;
    &lt;/param&gt;
-					</pre>
-          </div>
+					</pre></div>
 				</div>
 				
 			</div>
-			<div class="indent">
-        <h3>3.3.3 <a name="sect-ID0EEHAE">SSDP/UPnP</a></h3>
+			<div class="indent"><h3>3.3.3 <a name="sect-idm63792463088" id="sect-idm63792463088">SSDP/UPnP</a></h3>
 				<p class="" style="">TBD</p>
 				
 			</div>
 			<p class="" style="">
-				<span class="strong">Note:</span> If server-less messaging is to be used, as described in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0174.html">Link-Local Messaging</a></span>  [<a href="#nt-ID0E2HAE">15</a>] this step can be used to find the Thing Registry and optionally the
+				<span class="strong">Note:</span> If server-less messaging is to be used, as described in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0174.html">Link-Local Messaging</a></span>  [<a href="#nt-idm63792466752">14</a>] this step can be used to find the Thing Registry and optionally the
 				Provisioning Server and other peers it want to connect to. The next section can thus be skipped.
 			</p>
 		</div>
-		<div class="indent">
-      <h3>3.4 <a name="sect-ID0EDIAE">Connection to XMPP Server</a></h3>
+		<div class="indent"><h3>3.4 <a name="sect-idm63792457312" id="sect-idm63792457312">Connection to XMPP Server</a></h3>
 			<p class="" style="">
 				Once an XMPP Server has been found, a connection can be made. If multiple XMPP Servers are found, the client is free to choose the one that best suits its purposes.
 			</p>
 			<p class="" style="">
-				If the Thing does not have an account already, an account can be registered along what is specified in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0077.html">In-Band Registration</a></span>  [<a href="#nt-ID0EVIAE">16</a>]. If multiple servers are available, the first XMPP server that
+				If the Thing does not have an account already, an account can be registered along what is specified in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0077.html">In-Band Registration</a></span>  [<a href="#nt-idm63792451280">15</a>]. If multiple servers are available, the first XMPP server that
 				allows account creation can be used.
 			</p>
 		</div>
-		<div class="indent">
-      <h3>3.5 <a name="sect-ID0E4IAE">Finding Thing Registry</a></h3>
+		<div class="indent"><h3>3.5 <a name="sect-idm63792449664" id="sect-idm63792449664">Finding Thing Registry</a></h3>
 			<p class="" style="">
 				If a Thing Registry is not preconfigured, one must be found. The following lists methods to obtaining the JID for the Thing Registry. Note that the last two
 				have <a href="#security">security considerations</a> that need to be taken into account.
@@ -631,7 +527,7 @@
 					The account 'discovery' on the same domain. (For example: discovery@jabber.org)
 				</li>
 				<li class="" style="">
-					Search for accounts on the XMPP server with nick-name "discovery". Search is performed using <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0055.html">Jabber Search</a></span>  [<a href="#nt-ID0EMKAE">17</a>]
+					Search for accounts on the XMPP server with nick-name "discovery". Search is performed using <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0055.html">Jabber Search</a></span>  [<a href="#nt-idm63792437824">16</a>]
 				</li>
 			</ol>
 			<p class="" style="">
@@ -640,14 +536,11 @@
 				skipped, to avoid the possibility that an external user pretends to be a thing registry to hijack new Things installed into the network.
 			</p>
 		</div>
-		<div class="indent">
-      <h3>3.6 <a name="sect-ID0ECLAE">Registering Thing</a></h3>
+		<div class="indent"><h3>3.6 <a name="sect-idm63792433568" id="sect-idm63792433568">Registering Thing</a></h3>
 			<p class="" style="">
 				Once a Thing Registry has been found and been befriended, the Thing can register itself with the registry, as follows:
 			</p>
-			<p class="caption"><a name="example-10"></a>Example 10. Register Thing</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-10" id="example-10"></a>Example 10. Register Thing</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='thing@clayster.com/imc'
@@ -666,8 +559,7 @@
        from='discovery@clayster.com'
        to='thing@clayster.com/imc'
        id='1'/&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				There are two types of tags: Tags with string values and tags with numerical values. The distinction is important, since the type of value affects how
 				comparisons are made later when performing searches in the registry.
@@ -687,9 +579,7 @@
 				If the Thing tries to register itself even though the Thing has already been claimed in the registry, the registry must not update any meta data in the registry, and instead
 				respond with the following response. When the thing receives this, it can safely extract the JID of the owner and switch its internal state to claimed.
 			</p>
-			<p class="caption"><a name="example-11"></a>Example 11. Registration response when alrady claimed</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-11" id="example-11"></a>Example 11. Registration response when alrady claimed</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='result'
        from='discovery@clayster.com'
@@ -697,22 +587,18 @@
        id='1'&gt;
       &lt;claimed xmlns='urn:xmpp:iot:discovery' jid='owner@clayster.com'/&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				<span class="strong">Note:</span> Meta Tag names are case insensitive. In this document, all tag names have been written using upper case letters.
 			</p>
 		</div>
-		<div class="indent">
-      <h3>3.7 <a name="sect-ID0EMMAE">Register self-owned Thing</a></h3>
+		<div class="indent"><h3>3.7 <a name="sect-idm63792422656" id="sect-idm63792422656">Register self-owned Thing</a></h3>
 			<p class="" style="">
 				If a thing is self-owned, it can register itself with the Registry as normal, with the addition of setting the attribute <span class="strong">selfOwned</span> to <span class="strong">true</span>,
 				as is shown below. This registers the Thing directly as PUBLIC CLAIMED, with no need for an owner to claim ownership of the device. This can be useful if
 				installing Things that should be publically available.
 			</p>
-			<p class="caption"><a name="example-12"></a>Example 12. Register self-owned Thing</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-12" id="example-12"></a>Example 12. Register self-owned Thing</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='thing@clayster.com/imc'
@@ -731,13 +617,11 @@
        from='discovery@clayster.com'
        to='thing@clayster.com/imc'
        id='2'/&gt;
-			</pre>
-      </div>
+			</pre></div>
 		</div>
-		<div class="indent">
-      <h3>3.8 <a name="sect-ID0E4MAE">Register Thing behind Concentrator</a></h3>
+		<div class="indent"><h3>3.8 <a name="sect-idm63792419392" id="sect-idm63792419392">Register Thing behind Concentrator</a></h3>
 			<p class="" style="">
-				A Thing might reside behind a gateway or concentrator and might not be directly connected to the XMPP network itself, as is described in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0ELNAE">18</a>]. In these cases, there are three optional
+				A Thing might reside behind a gateway or concentrator and might not be directly connected to the XMPP network itself, as is described in . In these cases, there are three optional
 				attributes that can be used to identify the Thing behind the JID: The <span class="strong">nodeId</span> attribute gives the ID of the Thing (a.k.a. "Node"). The Node might reside in
 				specific Data Source (large systems might have multiple sources of nodes). In this case, the data source is specified in the <span class="strong">sourceId</span> attribute. Normally, the Node ID
 				is considered to be unique within the concentrator. If multiple data sources are available, the Node ID is unique within the data source. However, a third attribute allows the uniqueness
@@ -748,9 +632,7 @@
 				For a Thing controlled by a concentrator to register itself in the Thing Registry, it simply adds the optional attributes <span class="strong">nodeId</span>, <span class="strong">sourceId</span>
 				and <span class="strong">cacheType</span> as appropriate to the registration request, as follows:
 			</p>
-			<p class="caption"><a name="example-13"></a>Example 13. Register Thing behind Concentrator</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-13" id="example-13"></a>Example 13. Register Thing behind Concentrator</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='rack@clayster.com/plcs'
@@ -769,14 +651,12 @@
        from='discovery@clayster.com'
        to='rack@clayster.com/plcs'
        id='3'/&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				If the Thing behind the concentrator is self-owned, it simply adds the <span class="strong">selfOwned</span> attribute to the request and sets it to <span class="strong">true</span>.
 			</p>
 		</div>
-		<div class="indent">
-      <h3>3.9 <a name="sect-ID0EWOAE">Claiming Ownership of a Thing</a></h3>
+		<div class="indent"><h3>3.9 <a name="sect-idm63792409664" id="sect-idm63792409664">Claiming Ownership of a Thing</a></h3>
 			<p class="" style="">
 				As mentioned above, the owner of the Thing must provide the information provided by the Thing to the Registry, in order to claim ownership over it. To avoid the
 				possibility that somebody can guess the information, the information must necessarily be long. This creates the problem of transfer of information. One method to solve this
@@ -792,18 +672,15 @@
 			<p class="" style="">
 				The above meta data would therefore generate the string:
 			</p>
-			<p class="caption"><a name="example-14"></a>Example 14. String to encode as a QR-code</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-14" id="example-14"></a>Example 14. String to encode as a QR-code</p><div class="indent"><pre class="prettyprint">
 				
    IoTDisco;SN:394872348732948723;MAN:www.ktc.se;MODEL:IMC;#V:1.2;KEY:4857402340298342
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				Using UTF-8 encoding when generating the QR-code, this string returns the following QR-code:
 			</p>
 			<p class="" style="">
-				<img alt="" src="https://chart.googleapis.com/chart?cht=qr&amp;chs=200x200&amp;chl=IoTDisco;SN:394872348732948723;MAN:www.ktc.se;MODEL:IMC;#V:1.2;KEY:4857402340298342">
+				<img alt="" height="" src="https://chart.googleapis.com/chart?cht=qr&amp;chs=200x200&amp;chl=IoTDisco;SN:394872348732948723;MAN:www.ktc.se;MODEL:IMC;#V:1.2;KEY:4857402340298342" width="" />
 			</p>
 			<p class="" style="">
 				To generate a QR-code, Google Chart API can be used:
@@ -812,9 +689,7 @@
 			<p class="" style="">
 				Once the client has the required meta information about the Thing to claim ownership, it sends itself the following request to the Thing Registry:
 			</p>
-			<p class="caption"><a name="example-15"></a>Example 15. Claim Ownership of public Thing</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-15" id="example-15"></a>Example 15. Claim Ownership of public Thing</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='owner@clayster.com/phone'
@@ -828,15 +703,12 @@
           &lt;str name='KEY' value='4857402340298342'/&gt;
       &lt;/mine&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				If this claim is successful, the Thing is marked as a public claimed Thing. The thing can always be removed later, but after the claim, the Thing is public. If you want to claim
 				a private Thing, you can add the <span class="strong">public</span> attribute with value <span class="strong">false</span> to the claim, as follows:
 			</p>
-			<p class="caption"><a name="example-16"></a>Example 16. Claim Ownership of private Thing</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-16" id="example-16"></a>Example 16. Claim Ownership of private Thing</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='owner@clayster.com/phone'
@@ -850,8 +722,7 @@
           &lt;str name='KEY' value='4857402340298342'/&gt;
       &lt;/mine&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				In this case, if the claim is successful, the Thing will not be made public in the Thing Registry, after the claim.
 			</p>
@@ -861,9 +732,7 @@
 				exactly the same meta data, and the JID of the claimant (without resource) matches the JID of the claimer (without resource), a success response is also returned, containing
 				the resource-less JID of the Thing, as follows:
 			</p>
-			<p class="caption"><a name="example-17"></a>Example 17. Ownership claim successful</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-17" id="example-17"></a>Example 17. Ownership claim successful</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='result'
        from='discovery@clayster.com'
@@ -871,16 +740,13 @@
        id='4'&gt;
       &lt;claimed xmlns='urn:xmpp:iot:discovery' jid='thing@clayster.com'/&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				If the Thing that has been claimed resides behind a concentrator, the result will contain those of the attributes <span class="strong">nodeId</span>, <span class="strong">sourceId</span>
-				and <span class="strong">cacheType</span> that are required to access the Thing in calls made using <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0323.html">Internet of Things - Sensor Data</a></span>  [<a href="#nt-ID0EORAE">19</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0E1RAE">20</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0325.html">Internet of Things - Control</a></span>  [<a href="#nt-ID0EGSAE">21</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0ESSAE">22</a>]. The following example illustrates
+				and <span class="strong">cacheType</span> that are required to access the Thing in calls made using , ,  and . The following example illustrates
 				a response where a Thing behind a Concentrator has been claimed:
 			</p>
-			<p class="caption"><a name="example-18"></a>Example 18. Ownership claim of a Thing behind a concentrator successful</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-18" id="example-18"></a>Example 18. Ownership claim of a Thing behind a concentrator successful</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='result'
        from='discovery@clayster.com'
@@ -888,15 +754,12 @@
        id='4'&gt;
       &lt;claimed xmlns='urn:xmpp:iot:discovery' jid='rack@clayster.com/plcs' nodeId='imc1' sourceId='MeteringTopology'/&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				If, on the other hand, no such Thing was found, or if such a Thing was found, but it is already claimed by somebody else, a failure response is returned. This response
 				should avoid to inform the client in detail why the claim failed, as follows:
 			</p>
-			<p class="caption"><a name="example-19"></a>Example 19. Ownership claim failure</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-19" id="example-19"></a>Example 19. Ownership claim failure</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='error'
        from='discovery@clayster.com'
@@ -906,15 +769,12 @@
          &lt;item-not-found xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'/&gt;
       &lt;/error&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				When the Thing has been successfully claimed, the Registry sends information about this to the Thing, to inform it that it has been claimed and the resource-less JID of owner.
 				After receiving this information, it doesn't need to register itself with the Registry anymore.
 			</p>
-			<p class="caption"><a name="example-20"></a>Example 20. Ownership claimed</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-20" id="example-20"></a>Example 20. Ownership claimed</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='discovery@clayster.com'
@@ -922,14 +782,11 @@
        id='5'&gt;
       &lt;claimed xmlns='urn:xmpp:iot:discovery' jid='owner@clayster.com'/&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				If the Thing was claimed as a private Thing, this is shown using the <span class="strong">public</span> attribute in the response, as follows:
 			</p>
-			<p class="caption"><a name="example-21"></a>Example 21. Ownership claim of private Thing successful</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-21" id="example-21"></a>Example 21. Ownership claim of private Thing successful</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='discovery@clayster.com'
@@ -937,8 +794,7 @@
        id='5'&gt;
       &lt;claimed xmlns='urn:xmpp:iot:discovery' jid='owner@clayster.com' public='false'/&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				If the <span class="strong">public</span> attribute is present and has value <span class="strong">false</span>, it means no further meta data updates are necessary, since
 				the device is not searchable through the Thing Registry.
@@ -947,9 +803,7 @@
 				If the Thing resides behind a concentrator, the request must contain those of the attributes <span class="strong">nodeId</span>, <span class="strong">sourceId</span>
 				and <span class="strong">cacheType</span> that are required to access the Thing, as follows:
 			</p>
-			<p class="caption"><a name="example-22"></a>Example 22. Ownership of Thing behind concentrator claimed</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-22" id="example-22"></a>Example 22. Ownership of Thing behind concentrator claimed</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='discovery@clayster.com'
@@ -957,21 +811,17 @@
        id='5'&gt;
       &lt;claimed xmlns='urn:xmpp:iot:discovery' jid='owner@clayster.com' nodeId='imc1' sourceId='MeteringTopology'/&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				The Thing simply returns an empty response to acknowledge the receipt of the information, as follows:
 			</p>
-			<p class="caption"><a name="example-23"></a>Example 23. Ownership claimed acknowledged</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-23" id="example-23"></a>Example 23. Ownership claimed acknowledged</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='result'
        from='thing@clayster.com/imc'
        to='discovery@clayster.com'
        id='5'/&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				After receiving this, the thing knows it can accept friendship requests from the corresponding owner. It can also safely send a friendship request to the owner.
 			</p>
@@ -979,16 +829,13 @@
 				<span class="strong">Note:</span> Meta Tag names are case insensitive. In this document, all tag names have been written using upper case letters.
 			</p>
 		</div>
-		<div class="indent">
-      <h3>3.10 <a name="sect-ID0E5UAE">Removing Thing from Registry</a></h3>
+		<div class="indent"><h3>3.10 <a name="sect-idm63792369344" id="sect-idm63792369344">Removing Thing from Registry</a></h3>
 			<p class="" style="">
 				After a Thing has been claimed and is registed as a PUBLIC CLAIMED Thing in the Registry, it implies the Thing is available in searches. The owner can choose to remove
 				the Thing from the Registry, to avoid that the Thing appears in searches. To remove a Thing from the Registry the owner simply sends a removal request to the Registry
 				with the resource-less JID of the Thing to remove, as follows:
 			</p>
-			<p class="caption"><a name="example-24"></a>Example 24. Remove Thing</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-24" id="example-24"></a>Example 24. Remove Thing</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='owner@clayster.com/phone'
@@ -996,15 +843,12 @@
        id='6'&gt;
       &lt;remove xmlns='urn:xmpp:iot:discovery' jid='thing@clayster.com'/&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				If the Thing resides behind a concentrator, the request must contain those of the attributes <span class="strong">nodeId</span>, <span class="strong">sourceId</span>
 				and <span class="strong">cacheType</span> that are required to access the Thing, as follows:
 			</p>
-			<p class="caption"><a name="example-25"></a>Example 25. Remove Thing behind concentrator</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-25" id="example-25"></a>Example 25. Remove Thing behind concentrator</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='owner@clayster.com/phone'
@@ -1012,28 +856,22 @@
        id='6'&gt;
       &lt;remove xmlns='urn:xmpp:iot:discovery' jid='rack@clayster.com/plcs' nodeId='imc1' sourceId='MeteringTopology'/&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				If such a Thing is found and is owned by the caller, it is removed from the Registry, and an empty response is returned, to acknowledge the removal of the Thing
 				from the registry, as follows:
 			</p>
-			<p class="caption"><a name="example-26"></a>Example 26. Thing removed</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-26" id="example-26"></a>Example 26. Thing removed</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='result'
        from='discovery@clayster.com'
        to='owner@clayster.com/phone'
        id='6'/&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				However, if such a thing is not found, or if the thing is owned by another, an <span class="strong">item-not-found</span> error is returned, as follows:
 			</p>
-			<p class="caption"><a name="example-27"></a>Example 27. Removal failure</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-27" id="example-27"></a>Example 27. Removal failure</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='error'
        from='discovery@clayster.com'
@@ -1043,15 +881,12 @@
          &lt;item-not-found xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'/&gt;
       &lt;/error&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				After successfully removing a Thing from the Registry, and if the Thing is friend to the Registry, the Registry informs the Thing it has been removed from the Registry.
 				It does this, so the Thing can remove the friendship and stop any meta data updates to the Registry.
 			</p>
-			<p class="caption"><a name="example-28"></a>Example 28. Thing removed from registry by owner</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-28" id="example-28"></a>Example 28. Thing removed from registry by owner</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='discovery@clayster.com'
@@ -1064,14 +899,11 @@
        from='thing@clayster.com/imc'
        to='discovery@clayster.com'
        id='7'/&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				If the Thing lies behind a concentrator, the removal request would look as follows:
 			</p>
-			<p class="caption"><a name="example-29"></a>Example 29. Thing behind concentrator removed from registry by owner</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-29" id="example-29"></a>Example 29. Thing behind concentrator removed from registry by owner</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='discovery@clayster.com'
@@ -1079,27 +911,22 @@
        id='7'&gt;
       &lt;removed xmlns='urn:xmpp:iot:discovery' nodeId='imc1' sourceId='MeteringTopology'/&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				The Thing acknowledges the removal request by returning an empty response, as follows:
 			</p>
-			<p class="caption"><a name="example-30"></a>Example 30. Removal acknowledgement</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-30" id="example-30"></a>Example 30. Removal acknowledgement</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='result'
        from='thing@clayster.com/imc'
        to='discovery@clayster.com'
        id='7'/&gt;
-			</pre>
-      </div>
+			</pre></div>
 		</div>
-		<div class="indent">
-      <h3>3.11 <a name="sect-ID0E5WAE">Finding Provisioning Server</a></h3>
+		<div class="indent"><h3>3.11 <a name="sect-idm63792352160" id="sect-idm63792352160">Finding Provisioning Server</a></h3>
 			<p class="" style="">
 				Up to this point only basic configuration and ownership and visibility of a Thing has been covered. For more advanced operations, a Thing might be required to
-				use a Provisioning Server to whom it can delegate trust and allow making decisions, controlling access rights and privileges for the Thing, as described in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0EMXAE">23</a>].
+				use a Provisioning Server to whom it can delegate trust and allow making decisions, controlling access rights and privileges for the Thing, as described in .
 				If a Provisioning Server is not preconfigured, one must be found. The following lists methods to obtaining the JID for the Provisioning Server. Note that the last two
 				have <a href="#security">security considerations</a> that need to be taken into account.
 			</p>
@@ -1126,7 +953,7 @@
 					The account 'provisioning' on the same domain. (For example: provisioning@jabber.org)
 				</li>
 				<li class="" style="">
-					Search for accounts on the XMPP server with nick-name "provisioning". Search is performed using <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0055.html">Jabber Search</a></span>  [<a href="#nt-ID0EJZAE">24</a>]
+					Search for accounts on the XMPP server with nick-name "provisioning". Search is performed using <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0055.html">Jabber Search</a></span>  [<a href="#nt-idm63792440032">17</a>]
 				</li>
 			</ol>
 			<p class="" style="">
@@ -1135,16 +962,14 @@
 				skipped, to avoid the possibility that an external user pretends to be a thing registry to hijack new Things installed into the network.
 			</p>
 		</div>
-		<div class="indent">
-      <h3>3.12 <a name="sect-ID0E6ZAE">Delegating Trust</a></h3>
+		<div class="indent"><h3>3.12 <a name="sect-idm63792334576" id="sect-idm63792334576">Delegating Trust</a></h3>
 			<p class="" style="">
-				Once a Provisioning Server has been found and been befriended, the Thing can delegate its trust to it, according to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0EN1AE">25</a>].
+				Once a Provisioning Server has been found and been befriended, the Thing can delegate its trust to it, according to .
 			</p>
 		</div>
-		<div class="indent">
-      <h3>3.13 <a name="sect-ID0EV1AE">Update Meta Information about Thing in Registry</a></h3>
+		<div class="indent"><h3>3.13 <a name="sect-idm63792332224" id="sect-idm63792332224">Update Meta Information about Thing in Registry</a></h3>
 			<p class="" style="">
-				Once a Thing has been claimed and chooses to reside as a public Thing in the registry, it can update its meta information at any time. This meta information
+				Once a Thing has been claimed and chooses to reside as a public Thing in the registry, The Thing, or its owner, can update its meta information at any time. This meta information
 				will be available in searches made to the registry by third parties and is considered public. However, the Thing should be connected to a provisioning server
 				at this point, so that correct decisions can be made regarding to friendship, readout and control requests made by parties other than the owner.
 			</p>
@@ -1155,67 +980,65 @@
 				for it, extracting its meta information from the registry, then resetting it and then claiming ownership of it.
 			</p>
 			<p class="" style="">
-				To update meta data about itself, a Thing simply sends a request to the Thing Registry, as follows:
+				To update meta data about itself, a Thing (or its owner) simply sends a request to the Thing Registry, as follows:
 			</p>
-			<p class="caption"><a name="example-31"></a>Example 31. Update Meta Data request</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-31" id="example-31"></a>Example 31. Update Meta Data request</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='thing@clayster.com/imc'
        to='discovery@clayster.com'
        id='8'&gt;
-      &lt;update xmlns='urn:xmpp:iot:discovery'&gt;
+      &lt;update xmlns='urn:xmpp:iot:discovery' jid='thing@clayster.com'&gt;
           &lt;str name='KEY' value=''/&gt;
           &lt;str name='CLASS' value='PLC'/&gt;
           &lt;num name='LON' value='-71.519722'/&gt;
           &lt;num name='LAT' value='-33.008055'/&gt;
       &lt;/update&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
+            <p class="" style="">
+				The optional <span class="strong">jid</span> attribute holds the JID of the Thing to be updated. If omitted it can be assumed that the JID of the Thing is the bare JID of the sender.
+			</p>
 			<p class="" style="">
 				If the Thing resides behind a concentrator, the request must contain those of the attributes <span class="strong">nodeId</span>, <span class="strong">sourceId</span>
 				and <span class="strong">cacheType</span> that are required to access the Thing, as follows:
 			</p>
-			<p class="caption"><a name="example-32"></a>Example 32. Update Meta Data of Thing behind concentrator</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-32" id="example-32"></a>Example 32. Update Meta Data of Thing behind concentrator</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='rack@clayster.com/plcs'
        to='discovery@clayster.com'
        id='8'&gt;
-      &lt;update xmlns='urn:xmpp:iot:discovery' nodeId='imc1' sourceId='MeteringTopology'&gt;
+      &lt;update xmlns='urn:xmpp:iot:discovery'
+             jid='rack@clayster.com'
+             nodeId='imc1'
+             sourceId='MeteringTopology'&gt;
           &lt;str name='KEY' value=''/&gt;
           &lt;str name='CLASS' value='PLC'/&gt;
           &lt;num name='LON' value='-71.519722'/&gt;
           &lt;num name='LAT' value='-33.008055'/&gt;
       &lt;/update&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
+			<p class="" style="">
+				The optional <span class="strong">jid</span> attribute holds the JID of the concentrator where the Thing resides. If omitted it can be assumed that the JID of the concentrator is the bare JID of the sender.
+			</p>
 			<p class="" style="">
 				If the Thing is found in the registry and it is claimed, the registry simply acknowledges the update as follows:
 			</p>
-			<p class="caption"><a name="example-33"></a>Example 33. Update Meta Data request acknowledgement</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-33" id="example-33"></a>Example 33. Update Meta Data request acknowledgement</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='result'
        from='discovery@clayster.com'
        to='thing@clayster.com/imc'
        id='8'/&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				However, if the Thing is not found in the registry, probably because the owner has removed it from the registry, an error response is returned. When receiving
 				such a response, the Thing should assume it is the owner who has removed it from the registry, and that further meta data updates are not desired. The Thing
 				can then unfriend the registry and stop further meta data updates. The error response from the registry would look as follows:
 			</p>
-			<p class="caption"><a name="example-34"></a>Example 34. Update Meta Data request failure</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-34" id="example-34"></a>Example 34. Update Meta Data request failure</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='error'
        from='discovery@clayster.com'
@@ -1225,16 +1048,13 @@
          &lt;item-not-found xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'/&gt;
       &lt;/error&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				If the Thing on the other hand is found in the Registry, but is not claimed, the registry must not update any meta data in the registry, and instead
 				respond with the following response. When the thing receives this, the Thing can assume it has been disowned, and perform a new registration in the Registry so
 				that it can be re-claimed.
 			</p>
-			<p class="caption"><a name="example-35"></a>Example 35. Update Meta Data response to request from disowned Thing</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-35" id="example-35"></a>Example 35. Update Meta Data response to request from disowned Thing</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='result'
        from='discovery@clayster.com'
@@ -1242,14 +1062,12 @@
        id='8'&gt;
       &lt;disowned xmlns='urn:xmpp:iot:discovery'/&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				<span class="strong">Note:</span> Meta Tag names are case insensitive. In this document, all tag names have been written using upper case letters.
 			</p>
 		</div>
-		<div class="indent">
-      <h3>3.14 <a name="sect-ID0ET3AE">Search for Public Things in Registry</a></h3>
+		<div class="indent"><h3>3.14 <a name="sect-idm63792311888" id="sect-idm63792311888">Search for Public Things in Registry</a></h3>
 			<p class="" style="">
 				It is possible for anyone with access to the Thing Registry to search for public Things that have been claimed, including self-owned Things. Such searches
 				will never return things that have not been claimed or have been removed from the registry.
@@ -1262,9 +1080,7 @@
 			<p class="" style="">
 				The following table lists available search operators, their element names and meanings:
 			</p>
-			<div class="indent">
-        <p class="caption"><a name="table-2"></a>Table 2: Search operators</p>
-        <table border="1" cellpadding="3" cellspacing="0">
+			<div class="indent"><p class="caption"><a name="table-2" id="table-2"></a>Table 2: Search operators</p><table border="1" cellpadding="3" cellspacing="0">
 				<tr class="body">
 					<th colspan="" rowspan="">Element</th>
 					<th colspan="" rowspan="">Type</th>
@@ -1373,16 +1189,13 @@
 					<td colspan="" rowspan="">tag &lt;(=) min OR tag &gt;(=) max</td>
 					<td colspan="" rowspan="">Searches for numerical values tags with values outside of a specified range of values. The endpoints can be included or excluded in the range (and therefore correspondingly excluded or included in the search).</td>
 				</tr>
-			</table>
-      </div>
+			</table></div>
 			<p class="" style="">
 				The following example shows how a search for specific devices within a specific geographic area can be found. More precisely, it searches for a certain kind of PLC
 				produced by a certain manufacturer, but only versions 1.0 &lt;= v &lt; 2.0 and with serial numbers beginning with 39487. The PLCs must also lie within latitude 33 ad 34
 				degrees south and between longitude 70 and 72 west.
 			</p>
-			<p class="caption"><a name="example-36"></a>Example 36. Searching for Things</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-36" id="example-36"></a>Example 36. Searching for Things</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='get'
        from='curious@clayster.com/client'
@@ -1397,8 +1210,7 @@
           &lt;numRange name='LAT' min='-34' minIncluded='true' max='-33' maxIncluded='true'/&gt;
       &lt;/update&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				The <span class="strong">offset</span> attribute tells the registry the number of responses to skip before returning found things. It provides a mechanism to page result sets
 				that are too large to return in one response. the <span class="strong">maxCount</span> attribute contains the desired maximum number of things to return in the response. The
@@ -1412,9 +1224,7 @@
 			<p class="" style="">
 				The registry returns any things found in a response similar to the following:
 			</p>
-			<p class="caption"><a name="example-37"></a>Example 37. Search result</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-37" id="example-37"></a>Example 37. Search result</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='result'
        from='discovery@clayster.com'
@@ -1433,15 +1243,12 @@
           ...
       &lt;/found&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				If a Thing resides behind a concentrator, the response must contain those of the attributes <span class="strong">nodeId</span>, <span class="strong">sourceId</span>
 				and <span class="strong">cacheType</span> that are required to access the Thing, as follows:
 			</p>
-			<p class="caption"><a name="example-38"></a>Example 38. Search result containing Thing behind a concentrator</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-38" id="example-38"></a>Example 38. Search result containing Thing behind a concentrator</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='result'
        from='discovery@clayster.com'
@@ -1460,8 +1267,7 @@
           ...
       &lt;/found&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				If more results are available in the search (accessible by using the <span class="strong">offset</span> attribute in a new search), the <span class="strong">more</span> attribute is
 				present with value <span class="strong">true</span>.
@@ -1470,15 +1276,12 @@
 				<span class="strong">Note:</span> Meta Tag names are case insensitive. In this document, all tag names have been written using upper case letters.
 			</p>
 		</div>
-		<div class="indent">
-      <h3>3.15 <a name="sect-ID0EBKAG">Unregistering Thing from Registry</a></h3>
+		<div class="indent"><h3>3.15 <a name="sect-idm63792220368" id="sect-idm63792220368">Unregistering Thing from Registry</a></h3>
 			<p class="" style="">
 				A thing can unregister itself from the Registry. This can be done in an uninstallation procedure for instance. To unregister from the registry, it simply sends
 				an un-registration request to the registry as follows.
 			</p>
-			<p class="caption"><a name="example-39"></a>Example 39. Unregister Thing</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-39" id="example-39"></a>Example 39. Unregister Thing</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='thing@clayster.com/imc'
@@ -1486,15 +1289,12 @@
        id='10'&gt;
       &lt;unregister xmlns='urn:xmpp:iot:discovery'/&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				If the Thing resides behind a concentrator, the request must contain those of the attributes <span class="strong">nodeId</span>, <span class="strong">sourceId</span>
 				and <span class="strong">cacheType</span> that are required to access the Thing, as follows:
 			</p>
-			<p class="caption"><a name="example-40"></a>Example 40. Unregistring Thing behind concentrator</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-40" id="example-40"></a>Example 40. Unregistring Thing behind concentrator</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='rack@clayster.com/plcs'
@@ -1502,30 +1302,23 @@
        id='10'&gt;
       &lt;unregister xmlns='urn:xmpp:iot:discovery' nodeId='imc1' sourceId='MeteringTopology'/&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				The registry always returns an empty response, simply to acknowledge the receipt of the request.
 			</p>
-			<p class="caption"><a name="example-41"></a>Example 41. Unregister Thing acknowledgement</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-41" id="example-41"></a>Example 41. Unregister Thing acknowledgement</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='result'
        from='discovery@clayster.com'
        to='thing@clayster.com/imc'
        id='10'/&gt;
-			</pre>
-      </div>
+			</pre></div>
 		</div>
-		<div class="indent">
-      <h3>3.16 <a name="sect-ID0ECLAG">Disowning Thing</a></h3>
+		<div class="indent"><h3>3.16 <a name="sect-idm63792211760" id="sect-idm63792211760">Disowning Thing</a></h3>
 			<p class="" style="">
 				The owner of a Thing can disown the Thing, returning it to a state without owner. This is done by sending the following request to the Thing Registry:
 			</p>
-			<p class="caption"><a name="example-42"></a>Example 42. Disowning Thing</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-42" id="example-42"></a>Example 42. Disowning Thing</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='owner@clayster.com/phone'
@@ -1533,15 +1326,12 @@
        id='11'&gt;
       &lt;disown xmlns='urn:xmpp:iot:discovery' jid='thing@clayster.com'/&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				If the Thing resides behind a concentrator, the request must contain those of the attributes <span class="strong">nodeId</span>, <span class="strong">sourceId</span>
 				and <span class="strong">cacheType</span> that are required to access the Thing, as follows:
 			</p>
-			<p class="caption"><a name="example-43"></a>Example 43. Disowning Thing behind concentrator</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-43" id="example-43"></a>Example 43. Disowning Thing behind concentrator</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='owner@clayster.com/phone'
@@ -1549,14 +1339,11 @@
        id='11'&gt;
       &lt;disown xmlns='urn:xmpp:iot:discovery' jid='rack@clayster.com/plcs' nodeId='imc1' sourceId='MeteringTopology'/&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				If such a Thing is not found, or if the thing is not owned by the caller, an <span class="strong">item-not-found</span> error is returned, as follows:
 			</p>
-			<p class="caption"><a name="example-44"></a>Example 44. Failure to disown Thing - Not Found</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-44" id="example-44"></a>Example 44. Failure to disown Thing - Not Found</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='error'
        from='discovery@clayster.com'
@@ -1566,15 +1353,12 @@
          &lt;item-not-found xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'/&gt;
       &lt;/error&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				If such a Thing is found, and it is owned by the caller, but not online as a friend, the Thing cannot be disowned, since it would put the Thing in a state from which
 				it cannot be re-claimed. Therefore, the Thing Registry must respond in the following manner:
 			</p>
-			<p class="caption"><a name="example-45"></a>Example 45. Failure to disown Thing - Offline</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-45" id="example-45"></a>Example 45. Failure to disown Thing - Offline</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='error'
        from='discovery@clayster.com'
@@ -1584,15 +1368,12 @@
          &lt;not-allowed xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'/&gt;
       &lt;/error&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				Before returning a response to the caller, the Thing Registry informs the Thing it has been disowned.
 				It does this, so the Thing can remove the friendship to the owner, and perform a new registration.
 			</p>
-			<p class="caption"><a name="example-46"></a>Example 46. Thing disowned in registry by owner</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-46" id="example-46"></a>Example 46. Thing disowned in registry by owner</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='discovery@clayster.com'
@@ -1600,14 +1381,11 @@
        id='12'&gt;
       &lt;disowned xmlns='urn:xmpp:iot:discovery'/&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				If the Thing lies behind a concentrator, the disowned request would look as follows:
 			</p>
-			<p class="caption"><a name="example-47"></a>Example 47. Thing behind concentrator disowned in registry by owner</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-47" id="example-47"></a>Example 47. Thing behind concentrator disowned in registry by owner</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='set'
        from='discovery@clayster.com'
@@ -1615,49 +1393,40 @@
        id='12'&gt;
       &lt;disowned xmlns='urn:xmpp:iot:discovery' nodeId='imc1' sourceId='MeteringTopology'/&gt;
    &lt;/iq&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				The Thing acknowledges that it has been disowned by returning an empty response, as follows:
 			</p>
-			<p class="caption"><a name="example-48"></a>Example 48. Acknowledging disownment</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-48" id="example-48"></a>Example 48. Acknowledging disownment</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='result'
        from='thing@clayster.com/imc'
        to='discovery@clayster.com'
        id='12'/&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				When receiving the acknowledgement from the Thing, the Thing is set as an unclaimed Thing in the Registry. Furthermore, all tags corresponding to the Thing are removed from the
 				registry, and a random KEY tag is added of sufficient complexity to make sure other clients cannot claim the Thing by guessing. Finally, an empty response is returned, to 
 				acknowledge that the Thing has been disowned, as follows:
 			</p>
-			<p class="caption"><a name="example-49"></a>Example 49. Thing disowned</p>
-      <div class="indent">
-        <pre class="prettyprint">
+			<p class="caption"><a name="example-49" id="example-49"></a>Example 49. Thing disowned</p><div class="indent"><pre class="prettyprint">
 				
    &lt;iq type='result'
        from='discovery@clayster.com'
        to='owner@clayster.com/phone'
        id='11'/&gt;
-			</pre>
-      </div>
+			</pre></div>
 			<p class="" style="">
 				If for any reason, the Thing does not acknowledge the disowned request, or an error occurs, the Registry returns the same error as if the Thing would have been offline.
 			</p>
 		</div>
 	<h2>4.
-       <a name="support">Determining Support</a></h2>
+       <a name="support" id="support">Determining Support</a></h2>
 		<p class="" style="">
 			If an entity is a Thing Registry and supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:discovery" in response
-			to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0E3NAG">26</a>] information requests.
+			to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-idm63792186432">18</a>] information requests.
 		</p>
-		<p class="caption"><a name="example-50"></a>Example 50. Service discovery information request</p>
-    <div class="indent">
-      <pre class="prettyprint">
+		<p class="caption"><a name="example-50" id="example-50"></a>Example 50. Service discovery information request</p><div class="indent"><pre class="prettyprint">
 			
 &lt;iq type='get'
     from='device@clayster.com/device'
@@ -1665,11 +1434,8 @@
     id='disco1'&gt;
   &lt;query xmlns='http://jabber.org/protocol/disco#info'/&gt;
 &lt;/iq&gt;
-		</pre>
-    </div>
-		<p class="caption"><a name="example-51"></a>Example 51. Service discovery information response</p>
-    <div class="indent">
-      <pre class="prettyprint">
+		</pre></div>
+		<p class="caption"><a name="example-51" id="example-51"></a>Example 51. Service discovery information response</p><div class="indent"><pre class="prettyprint">
 			
 &lt;iq type='result'
     from='provisioning@clayster.com'
@@ -1681,16 +1447,14 @@
     ...
   &lt;/query&gt;
 &lt;/iq&gt;
-		</pre>
-    </div>
+		</pre></div>
 		<p class="" style="">
 			In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
-			in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0ETOAG">27</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
+			in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-idm63792162144">19</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
 		</p>
 	<h2>5.
-       <a name="impl">Implementation Notes</a></h2>
-		<div class="indent">
-      <h3>5.1 <a name="tags">Meta Tags</a></h3>
+       <a name="impl" id="impl">Implementation Notes</a></h2>
+		<div class="indent"><h3>5.1 <a name="tags" id="tags">Meta Tags</a></h3>
 			<p class="" style="">
 				This document does not limit the number or names of tags used by Things to register meta information about themselves. However, it provides some general limits and defines
 				the meaning of a few tags that must have the meanings specified herein.
@@ -1702,9 +1466,7 @@
 			<p class="" style="">
 				The following table lists predefined tag names and their corresponding meanings.
 			</p>
-			<div class="indent">
-        <p class="caption"><a name="table-3"></a>Table 3: Predefined tags</p>
-        <table border="1" cellpadding="3" cellspacing="0">
+			<div class="indent"><p class="caption"><a name="table-3" id="table-3"></a>Table 3: Predefined tags</p><table border="1" cellpadding="3" cellspacing="0">
 				<tr class="body">
 					<th colspan="" rowspan="">Tag Name</th>
 					<th colspan="" rowspan="">Type</th>
@@ -1815,8 +1577,7 @@
 					<td colspan="" rowspan="">Numeric</td>
 					<td colspan="" rowspan="">Version Number</td>
 				</tr>
-			</table>
-      </div>
+			</table></div>
 			<p class="" style="">
 				It is up to the Thing Registry to choose which tags it persists and which tags it doesn't. To avoid the possibility of malicious reporting of tags, some limit should be
 				imposed on what tags are supported. As a minimum, a Thing Registry must support all predefined tags, as listed above.
@@ -1825,8 +1586,7 @@
 				<span class="strong">Note:</span> Meta Tag names are case insensitive. In this document, all tag names have been written using upper case letters.
 			</p>
 		</div>
-		<div class="indent">
-      <h3>5.2 <a name="sect-ID0EM1AG">Friendships between Things and Registry</a></h3>
+		<div class="indent"><h3>5.2 <a name="sect-idm63792085376" id="sect-idm63792085376">Friendships between Things and Registry</a></h3>
 			<p class="" style="">
 				In the case the Thing Registry is not the XMPP Server to which the Thing is connected, a friendship relationship between the Thing and the Thing Registry needs to be handled.
 				To minimize the number of concurrent friends the Thing Registry needs to maintain, a Thing must only maintain an active friendship with the registry if it needs to
@@ -1835,9 +1595,8 @@
 			</p>
 		</div>
 	<h2>6.
-       <a name="security">Security Considerations</a></h2>
-		<div class="indent">
-      <h3>6.1 <a name="sect-ID0E11AG">Hijacking predefined JIDs</a></h3>
+       <a name="security" id="security">Security Considerations</a></h2>
+		<div class="indent"><h3>6.1 <a name="sect-idm63792082096" id="sect-idm63792082096">Hijacking predefined JIDs</a></h3>
 			<p class="" style="">
 				If using predefined user names when searching for a Thing Registry or Provisioning Server, care must be taken to which XMPP Server things connect.
 				It might be possible for third parties to register these predefined account names (for example discovery@jabber.org or provisioning@jabber.org), and
@@ -1845,8 +1604,7 @@
 				a Thing Registry or Provisioning Server, these accounts must be registered beforehand, to make sure the things cannot be hijacked.
 			</p>
 		</div>
-		<div class="indent">
-      <h3>6.2 <a name="sect-ID0ED2AG">Hijacking nicknames</a></h3>
+		<div class="indent"><h3>6.2 <a name="sect-idm63792080272" id="sect-idm63792080272">Hijacking nicknames</a></h3>
 			<p class="" style="">
 				If searching for accounts with predefined nick names when searching for a Thing Registry or Provisioning Server, care must be taken to which XMPP Server things connect.
 				It might be possible for third parties to register accounts with similar nicknames and pretend to be a Thing Registry or Provisioning Server and in this way hijack unsuspecting Things.
@@ -1854,8 +1612,7 @@
 				on the server.
 			</p>
 		</div>
-		<div class="indent">
-      <h3>6.3 <a name="sect-ID0EM2AG">Hijacking things in public areas</a></h3>
+		<div class="indent"><h3>6.3 <a name="sect-idm63792078032" id="sect-idm63792078032">Hijacking things in public areas</a></h3>
 			<p class="" style="">
 				The combination of visible key meta information (perhaps in a visible QR-code) and a factory default reset button on a Thing, opens up the possibility to hijack the Thing.
 				To avoid this, at least one of the two should be removed after successful installation. Either the key meta information (QR-code) should be placed on the package or separate
@@ -1869,8 +1626,7 @@
 				thing hijacked.
 			</p>
 		</div>
-		<div class="indent">
-      <h3>6.4 <a name="sect-ID0EZ2AG">Key meta information in searches</a></h3>
+		<div class="indent"><h3>6.4 <a name="sect-idm63792074240" id="sect-idm63792074240">Key meta information in searches</a></h3>
 			<p class="" style="">
 				Care should be taken what key meta information is used to accept an ownership claim. After a successful claim, this meta information is still available in the registry,
 				at least until the Thing is removed from the registry. While public in the registry, the meta information can be searched and presented to third parties. Access to this
@@ -1891,8 +1647,7 @@
 				</li>
 			</ul>
 		</div>
-		<div class="indent">
-      <h3>6.5 <a name="sect-ID0E33AG">KEY tag</a></h3>
+		<div class="indent"><h3>6.5 <a name="sect-idm63792066464" id="sect-idm63792066464">KEY tag</a></h3>
 			<p class="" style="">
 				The <span class="strong">KEY</span> tag is unique in that it is not searchable nor available is search results. For this reason it is ideal for providing secrets shared only
 				between the Thing and the owner. By providing a sufficiently long KEY value in the key meta information required to claim the Thing, guessing the information even though
@@ -1903,8 +1658,7 @@
 				the key cannot be learned by looking into the database of the registry, or by some other means.
 			</p>
 		</div>
-		<div class="indent">
-      <h3>6.6 <a name="sect-ID0EP4AG">Tag name spam</a></h3>
+		<div class="indent"><h3>6.6 <a name="sect-idm63792062384" id="sect-idm63792062384">Tag name spam</a></h3>
 			<p class="" style="">
 				This document does not limit tag names or the number of tags that can be used by Things. This opens up the possibility of tag spam. Malicious things could fill the database
 				of the registry by reporting random tag names until the database is full.
@@ -1914,42 +1668,35 @@
 				tag names defined in this document. If it has a configurable list of approved tags that can be stored, or if it allows any tags is an implementation decision.
 			</p>
 		</div>
-		<div class="indent">
-      <h3>6.7 <a name="sect-ID0E34AG">External services for creating QR-codes</a></h3>
+		<div class="indent"><h3>6.7 <a name="sect-idm63792059168" id="sect-idm63792059168">External services for creating QR-codes</a></h3>
 			<p class="" style="">
 				If using external services when creating QR-codes, like the Google Charts API used in this document, make sure HTTPS is used and certificates validated. If HTTP is used,
 				meta-data tags used in Thing Registry registrations can be found out by sniffing the network, making it possible to hijack the corresponding devices.
 			</p>
 		</div>
-		<div class="indent">
-      <h3>6..1 <a name="sect-ID0EF5AG">DHCP Security Considerations</a></h3>
+		<div class="indent"><h3>6..1 <a name="sect-idm63792057072" id="sect-idm63792057072">DHCP Security Considerations</a></h3>
 			<p class="" style="">TBD</p>
 			
 		</div>
-		<div class="indent">
-      <h3>6..2 <a name="sect-ID0EQ5AG">DNS Security Considerations</a></h3>
+		<div class="indent"><h3>6..2 <a name="sect-idm63792055024" id="sect-idm63792055024">DNS Security Considerations</a></h3>
 			<p class="" style="">TBD</p>
 			
 		</div>
-		<div class="indent">
-      <h3>6..3 <a name="sect-ID0E25AG">UPnP Security Considerations</a></h3>
+		<div class="indent"><h3>6..3 <a name="sect-idm63792052992" id="sect-idm63792052992">UPnP Security Considerations</a></h3>
 			<p class="" style="">TBD</p>
 			
 		</div>
 	<h2>7.
-       <a name="iana">IANA Considerations</a></h2>
-		<p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EV6AG">28</a>].</p>
+       <a name="iana" id="iana">IANA Considerations</a></h2>
+		<p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-idm63792045616">20</a>].</p>
 	<h2>8.
-       <a name="registrar">XMPP Registrar Considerations</a></h2>
+       <a name="registrar" id="registrar">XMPP Registrar Considerations</a></h2>
 		<p class="" style="">
 			The <a href="#schema">protocol schema</a> needs to be added to the list of <a href="http://xmpp.org/resources/schemas/">XMPP protocol schemas</a>.
 		</p>
 	<h2>9.
-       <a name="schema">XML Schema</a></h2>
-		<p class="caption">
-    </p>
-    <div class="indent">
-      <pre class="prettyprint">
+       <a name="schema" id="schema">XML Schema</a></h2>
+		<p class="caption"></p><div class="indent"><pre class="prettyprint">
 			
 &lt;?xml version='1.0' encoding='UTF-8'?&gt;
 &lt;xs:schema
@@ -2102,10 +1849,9 @@
     &lt;/xs:complexType&gt;
  
 &lt;/xs:schema&gt;
-		</pre>
-    </div>
+		</pre></div>
 	<h2>10.
-       <a name="moreinfo">For more information</a></h2>
+       <a name="moreinfo" id="moreinfo">For more information</a></h2>
 		<p class="" style="">
 			For more information, please see the following resources:
 		</p>
@@ -2129,103 +1875,42 @@
 			</li>
 		</ul>
 	<h2>11.
-       <a name="ack">Acknowledgements</a></h2>
+       <a name="ack" id="ack">Acknowledgements</a></h2>
 		<p class="" style="">
 			Thanks to Henrik Svedlund, Joachim Lindborg, Joakim Eriksson, Joakim Ramberg, Johannes Hund, Karin Forsell, Lars Åkerskog, Olof Zandrén, Steffen Larsen Teemu Väisänen and
 			Yusuke Doi for all valuable feedback.
 		</p>
-	<hr><a name="appendices"></a><h2>Appendices</h2>
-    <hr><a name="appendix-docinfo"></a><h3>Appendix A: Document Information</h3>
-    <p class="indent">
-            Series: <a href="http://xmpp.org/extensions/">XEP</a><br>
-            Number: xxxx<br>
-            Publisher: <a href="/xsf/">XMPP Standards Foundation</a><br>
+	<hr /><a name="appendices" id="appendices"></a><h2>Appendices</h2><hr /><a name="appendix-docinfo" id="appendix-docinfo"></a><h3>Appendix A: Document Information</h3><p class="indent">
+            Series: <a href="http://xmpp.org/extensions/">XEP</a><br />
+            Number: xxxx<br />
+            Publisher: <a href="/xsf/">XMPP Standards Foundation</a><br />
             Status: 
-            <a href="http://xmpp.org/extensions/xep-0001.html#states-ProtoXEP">ProtoXEP</a><br>
+            <a href="http://xmpp.org/extensions/xep-0001.html#states-ProtoXEP">ProtoXEP</a><br />
             Type:
-            <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
-            Version: 0.0.1<br>
-            Last Updated: 2014-03-11<br>
-                Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001, XEP-0030, XEP-0077, XEP-0174, XEP-0323, XEP-0324, XEP-0325, XEP-0326<br>
-                Supersedes: None<br>
-                Superseded By: None<br>
-            Short Name: NOT_YET_ASSIGNED<br>
+            <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br />
+            Version: 0.0.1<br />
+            Last Updated: 2014-03-11<br />
+                Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br />Dependencies: XMPP Core, XEP-0001, XEP-0030, XEP-0077, XEP-0174, XEP-0323, XEP-0324, XEP-0325, XEP-0326<br />
+                Supersedes: None<br />
+                Superseded By: None<br />
+            Short Name: NOT_YET_ASSIGNED<br />
             This document in other formats: 
                 <a class="standardsButton" href="http://xmpp.org/extensions/xep-xxxx.xml">XML</a> 
-                <a class="standardsButton" href="http://xmpp.org/extensions/xep-xxxx.pdf">PDF</a></p>
-    <hr><a name="appendix-authorinfo"></a><h3>Appendix B: Author Information</h3>
-    <div class="indent">
-      <h3>Peter Waher</h3>
-      <p class="indent">
+                <a class="standardsButton" href="http://xmpp.org/extensions/xep-xxxx.pdf">PDF</a></p><hr /><a name="appendix-authorinfo" id="appendix-authorinfo"></a><h3>Appendix B: Author Information</h3><div class="indent"><h3>Peter Waher</h3><p class="indent">
         Email:
-        <a href="mailto:peter.waher@clayster.com">peter.waher@clayster.com</a><br>
+        <a href="mailto:peter.waher@clayster.com">peter.waher@clayster.com</a><br />
         JabberID: 
-        <a href="xmpp:peter.waher@jabber.org">peter.waher@jabber.org</a><br>
+        <a href="xmpp:peter.waher@jabber.org">peter.waher@jabber.org</a><br />
         URI: 
-        <a href="http://www.linkedin.com/in/peterwaher">http://www.linkedin.com/in/peterwaher</a><br></p>
-      <h3>Ronny Klauck</h3>
-      <p class="indent">
+        <a href="http://www.linkedin.com/in/peterwaher">http://www.linkedin.com/in/peterwaher</a><br /></p><h3>Ronny Klauck</h3><p class="indent">
         Email:
-        <a href="mailto:rklauck@informatik.tu-cottbus.de">rklauck@informatik.tu-cottbus.de</a><br>
+        <a href="mailto:rklauck@informatik.tu-cottbus.de">rklauck@informatik.tu-cottbus.de</a><br />
         JabberID: 
-        <a href="xmpp:TBD">TBD</a><br>
+        <a href="xmpp:TBD">TBD</a><br />
         URI: 
-        <a href="http://www-rnks.informatik.tu-cottbus.de/~rklauck">http://www-rnks.informatik.tu-cottbus.de/~rklauck</a><br></p>
-    </div>
-    <hr><a name="appendix-legal"></a><h3>Appendix C: Legal Notices</h3>
-    <div class="indent">
-      <h4>Copyright</h4>This XMPP Extension Protocol is copyright © 1999 - 2013 by the <a href="http://xmpp.org/">XMPP Standards Foundation</a> (XSF).<h4>Permissions</h4>Permission is hereby granted, free of charge, to any person obtaining a copy of this specification (the "Specification"), to make use of the Specification without restriction, including without limitation the rights to implement the Specification in a software program, deploy the Specification in a network service, and copy, modify, merge, publish, translate, distribute, sublicense, or sell copies of the Specification, and to permit persons to whom the Specification is furnished to do so, subject to the condition that the foregoing copyright notice and this permission notice shall be included in all copies or substantial portions of the Specification. Unless separate permission is granted, modified works that are redistributed shall not contain misleading information regarding the authors, title, number, or publisher of the Specification, and shall not claim endorsement of the modified works by the authors, any organization or project to which the authors belong, or the XMPP Standards Foundation.<h4>Disclaimer of Warranty</h4><span style="font-weight: bold">## NOTE WELL: This Specification is provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. ##</span><h4>Limitation of Liability</h4>In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall the XMPP Standards Foundation or any author of this Specification be liable for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising from, out of, or in connection with the Specification or the implementation, deployment, or other use of the Specification (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if the XMPP Standards Foundation or such author has been advised of the possibility of such damages.<h4>IPR Conformance</h4>This XMPP Extension Protocol has been contributed in full conformance with the XSF's Intellectual Property Rights Policy (a copy of which can be found at &lt;<a href="http://xmpp.org/about-xmpp/xsf/xsf-ipr-policy/">http://xmpp.org/about-xmpp/xsf/xsf-ipr-policy/</a>&gt; or obtained by writing to XMPP Standards Foundation, 1899 Wynkoop Street, Suite 600, Denver, CO 80202 USA).</div>
-    <hr><a name="appendix-xmpp"></a><h3>Appendix D: Relation to XMPP</h3>
-    <p class="indent">The Extensible Messaging and Presence Protocol (XMPP) is defined in the XMPP Core (RFC 6120) and XMPP IM (RFC 6121) specifications contributed by the XMPP Standards Foundation to the Internet Standards Process, which is managed by the Internet Engineering Task Force in accordance with RFC 2026. Any protocol defined in this document has been developed outside the Internet Standards Process and is to be understood as an extension to XMPP rather than as an evolution, development, or modification of XMPP itself.</p>
-    <hr><a name="appendix-discuss"></a><h3>Appendix E: Discussion Venue</h3>
-    <p class="indent">The primary venue for discussion of XMPP Extension Protocols is the &lt;<a href="http://mail.jabber.org/mailman/listinfo/standards">standards@xmpp.org</a>&gt; discussion list.</p>
-    <p class="indent">Discussion on other xmpp.org discussion lists might also be appropriate; see &lt;<a href="http://xmpp.org/about/discuss.shtml">http://xmpp.org/about/discuss.shtml</a>&gt; for a complete list.</p>
-    <p class="indent">Errata can be sent to &lt;<a href="mailto:editor@xmpp.org">editor@xmpp.org</a>&gt;.</p>
-    <hr><a name="appendix-conformance"></a><h3>Appendix F: Requirements Conformance</h3>
-    <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
-    <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
-    <div class="indent">
-      <p><a name="nt-ID0EDBAC">1</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0E1BAC">2</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
-      <p><a name="nt-ID0EGCAC">3</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
-      <p><a name="nt-ID0ESCAC">4</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
-      <p><a name="nt-ID0E5CAC">5</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
-      <p><a name="nt-ID0EAHAC">6</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
-      <p><a name="nt-ID0E1NAC">7</a>. 
+        <a href="http://www-rnks.informatik.tu-cottbus.de/~rklauck">http://www-rnks.informatik.tu-cottbus.de/~rklauck</a><br /></p></div><hr /><a name="appendix-legal" id="appendix-legal"></a><h3>Appendix C: Legal Notices</h3><div class="indent"><h4>Copyright</h4>This XMPP Extension Protocol is copyright © 1999 - 2012 by the <a href="http://xmpp.org/">XMPP Standards Foundation</a> (XSF).<h4>Permissions</h4>Permission is hereby granted, free of charge, to any person obtaining a copy of this specification (the "Specification"), to make use of the Specification without restriction, including without limitation the rights to implement the Specification in a software program, deploy the Specification in a network service, and copy, modify, merge, publish, translate, distribute, sublicense, or sell copies of the Specification, and to permit persons to whom the Specification is furnished to do so, subject to the condition that the foregoing copyright notice and this permission notice shall be included in all copies or substantial portions of the Specification. Unless separate permission is granted, modified works that are redistributed shall not contain misleading information regarding the authors, title, number, or publisher of the Specification, and shall not claim endorsement of the modified works by the authors, any organization or project to which the authors belong, or the XMPP Standards Foundation.<h4>Disclaimer of Warranty</h4><span style="font-weight: bold">## NOTE WELL: This Specification is provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. ##</span><h4>Limitation of Liability</h4>In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall the XMPP Standards Foundation or any author of this Specification be liable for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising from, out of, or in connection with the Specification or the implementation, deployment, or other use of the Specification (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if the XMPP Standards Foundation or such author has been advised of the possibility of such damages.<h4>IPR Conformance</h4>This XMPP Extension Protocol has been contributed in full conformance with the XSF's Intellectual Property Rights Policy (a copy of which can be found at &lt;<a href="http://xmpp.org/about-xmpp/xsf/xsf-ipr-policy/">http://xmpp.org/about-xmpp/xsf/xsf-ipr-policy/</a>&gt; or obtained by writing to XMPP Standards Foundation, 1899 Wynkoop Street, Suite 600, Denver, CO 80202 USA).</div><hr /><a name="appendix-xmpp" id="appendix-xmpp"></a><h3>Appendix D: Relation to XMPP</h3><p class="indent">The Extensible Messaging and Presence Protocol (XMPP) is defined in the XMPP Core (RFC 6120) and XMPP IM (RFC 6121) specifications contributed by the XMPP Standards Foundation to the Internet Standards Process, which is managed by the Internet Engineering Task Force in accordance with RFC 2026. Any protocol defined in this document has been developed outside the Internet Standards Process and is to be understood as an extension to XMPP rather than as an evolution, development, or modification of XMPP itself.</p><hr /><a name="appendix-discuss" id="appendix-discuss"></a><h3>Appendix E: Discussion Venue</h3><p class="indent">The primary venue for discussion of XMPP Extension Protocols is the &lt;<a href="http://mail.jabber.org/mailman/listinfo/standards">standards@xmpp.org</a>&gt; discussion list.</p><p class="indent">Discussion on other xmpp.org discussion lists might also be appropriate; see &lt;<a href="http://xmpp.org/about/discuss.shtml">http://xmpp.org/about/discuss.shtml</a>&gt; for a complete list.</p><p class="indent">Errata can be sent to &lt;<a href="mailto:editor@xmpp.org">editor@xmpp.org</a>&gt;.</p><hr /><a name="appendix-conformance" id="appendix-conformance"></a><h3>Appendix F: Requirements Conformance</h3><p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p><hr /><a name="appendix-notes" id="appendix-notes"></a><h3>Appendix G: Notes</h3><div class="indent"><p><a name="nt-idm63792619184" id="nt-idm63792619184">1</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p><p><a name="nt-idm63792621248" id="nt-idm63792621248">2</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p><p><a name="nt-idm63792610768" id="nt-idm63792610768">3</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p><p><a name="nt-idm63792606144" id="nt-idm63792606144">4</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p><p><a name="nt-idm63792601376" id="nt-idm63792601376">5</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p><p><a name="nt-idm63792535760" id="nt-idm63792535760">6</a>. 
 						RFC 3942: Reclassifying Dynamic Host Configuration Protocol version 4 (DHCPv4) Options &lt;<a href="http://tools.ietf.org/html/rfc3942">http://tools.ietf.org/html/rfc3942</a>&gt;.
-					</p>
-      <p><a name="nt-ID0EQPAC">8</a>. RFC 1035: Domain Names - Implementation and Specification &lt;<a href="http://tools.ietf.org/html/rfc1035">http://tools.ietf.org/html/rfc1035</a>&gt;.</p>
-      <p><a name="nt-ID0EGBAE">9</a>. XEP-0174: Link-Local Messaging &lt;<a href="http://xmpp.org/extensions/xep-0174.html">http://xmpp.org/extensions/xep-0174.html</a>&gt;.</p>
-      <p><a name="nt-ID0EUBAE">10</a>. RFC 6120: Extensible Messaging and Presence Protocol (XMPP): Core &lt;<a href="http://tools.ietf.org/html/rfc6120">http://tools.ietf.org/html/rfc6120</a>&gt;.</p>
-      <p><a name="nt-ID0ENEAE">11</a>. RFC 6120: Extensible Messaging and Presence Protocol (XMPP): Core &lt;<a href="http://tools.ietf.org/html/rfc6120">http://tools.ietf.org/html/rfc6120</a>&gt;.</p>
-      <p><a name="nt-ID0EFFAE">12</a>. RFC 3927: Dynamic Configuration of IPv4 Link-Local Addresses &lt;<a href="http://tools.ietf.org/html/rfc3927">http://tools.ietf.org/html/rfc3927</a>&gt;.</p>
-      <p><a name="nt-ID0E3FAE">13</a>. XEP-0174: Link-Local Messaging &lt;<a href="http://xmpp.org/extensions/xep-0174.html">http://xmpp.org/extensions/xep-0174.html</a>&gt;.</p>
-      <p><a name="nt-ID0ESGAE">14</a>. XEP-0174: Link-Local Messaging &lt;<a href="http://xmpp.org/extensions/xep-0174.html">http://xmpp.org/extensions/xep-0174.html</a>&gt;.</p>
-      <p><a name="nt-ID0E2HAE">15</a>. XEP-0174: Link-Local Messaging &lt;<a href="http://xmpp.org/extensions/xep-0174.html">http://xmpp.org/extensions/xep-0174.html</a>&gt;.</p>
-      <p><a name="nt-ID0EVIAE">16</a>. XEP-0077: In-Band Registration &lt;<a href="http://xmpp.org/extensions/xep-0077.html">http://xmpp.org/extensions/xep-0077.html</a>&gt;.</p>
-      <p><a name="nt-ID0EMKAE">17</a>. XEP-0055: Jabber Search &lt;<a href="http://xmpp.org/extensions/xep-0055.html">http://xmpp.org/extensions/xep-0055.html</a>&gt;.</p>
-      <p><a name="nt-ID0ELNAE">18</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
-      <p><a name="nt-ID0EORAE">19</a>. XEP-0323: Internet of Things - Sensor Data &lt;<a href="http://xmpp.org/extensions/xep-0323.html">http://xmpp.org/extensions/xep-0323.html</a>&gt;.</p>
-      <p><a name="nt-ID0E1RAE">20</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
-      <p><a name="nt-ID0EGSAE">21</a>. XEP-0325: Internet of Things - Control &lt;<a href="http://xmpp.org/extensions/xep-0325.html">http://xmpp.org/extensions/xep-0325.html</a>&gt;.</p>
-      <p><a name="nt-ID0ESSAE">22</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
-      <p><a name="nt-ID0EMXAE">23</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
-      <p><a name="nt-ID0EJZAE">24</a>. XEP-0055: Jabber Search &lt;<a href="http://xmpp.org/extensions/xep-0055.html">http://xmpp.org/extensions/xep-0055.html</a>&gt;.</p>
-      <p><a name="nt-ID0EN1AE">25</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
-      <p><a name="nt-ID0E3NAG">26</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
-      <p><a name="nt-ID0ETOAG">27</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
-      <p><a name="nt-ID0EV6AG">28</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
-    </div>
-    <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
-    <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
-    <div class="indent">
-      <h4>Version 0.0.1 (2014-03-11)</h4>
-      <div class="indent">
+					</p><p><a name="nt-idm63792522448" id="nt-idm63792522448">7</a>. RFC 1035: Domain Names - Implementation and Specification &lt;<a href="http://tools.ietf.org/html/rfc1035">http://tools.ietf.org/html/rfc1035</a>&gt;.</p><p><a name="nt-idm63792508672" id="nt-idm63792508672">8</a>. XEP-0174: Link-Local Messaging &lt;<a href="http://xmpp.org/extensions/xep-0174.html">http://xmpp.org/extensions/xep-0174.html</a>&gt;.</p><p><a name="nt-idm63792503008" id="nt-idm63792503008">9</a>. RFC 6120: Extensible Messaging and Presence Protocol (XMPP): Core &lt;<a href="http://tools.ietf.org/html/rfc6120">http://tools.ietf.org/html/rfc6120</a>&gt;.</p><p><a name="nt-idm63792505216" id="nt-idm63792505216">10</a>. RFC 6120: Extensible Messaging and Presence Protocol (XMPP): Core &lt;<a href="http://tools.ietf.org/html/rfc6120">http://tools.ietf.org/html/rfc6120</a>&gt;.</p><p><a name="nt-idm63792476080" id="nt-idm63792476080">11</a>. RFC 3927: Dynamic Configuration of IPv4 Link-Local Addresses &lt;<a href="http://tools.ietf.org/html/rfc3927">http://tools.ietf.org/html/rfc3927</a>&gt;.</p><p><a name="nt-idm63792510768" id="nt-idm63792510768">12</a>. XEP-0174: Link-Local Messaging &lt;<a href="http://xmpp.org/extensions/xep-0174.html">http://xmpp.org/extensions/xep-0174.html</a>&gt;.</p><p><a name="nt-idm63792470928" id="nt-idm63792470928">13</a>. XEP-0174: Link-Local Messaging &lt;<a href="http://xmpp.org/extensions/xep-0174.html">http://xmpp.org/extensions/xep-0174.html</a>&gt;.</p><p><a name="nt-idm63792466752" id="nt-idm63792466752">14</a>. XEP-0174: Link-Local Messaging &lt;<a href="http://xmpp.org/extensions/xep-0174.html">http://xmpp.org/extensions/xep-0174.html</a>&gt;.</p><p><a name="nt-idm63792451280" id="nt-idm63792451280">15</a>. XEP-0077: In-Band Registration &lt;<a href="http://xmpp.org/extensions/xep-0077.html">http://xmpp.org/extensions/xep-0077.html</a>&gt;.</p><p><a name="nt-idm63792437824" id="nt-idm63792437824">16</a>. XEP-0055: Jabber Search &lt;<a href="http://xmpp.org/extensions/xep-0055.html">http://xmpp.org/extensions/xep-0055.html</a>&gt;.</p><p><a name="nt-idm63792440032" id="nt-idm63792440032">17</a>. XEP-0055: Jabber Search &lt;<a href="http://xmpp.org/extensions/xep-0055.html">http://xmpp.org/extensions/xep-0055.html</a>&gt;.</p><p><a name="nt-idm63792186432" id="nt-idm63792186432">18</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p><p><a name="nt-idm63792162144" id="nt-idm63792162144">19</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p><p><a name="nt-idm63792045616" id="nt-idm63792045616">20</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p></div><hr /><a name="appendix-revs" id="appendix-revs"></a><h3>Appendix H: Revision History</h3><p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p><div class="indent"><h4>Version 0.0.1 (2014-03-11)</h4><div class="indent">
 				<p class="" style="">First draft.</p>
 			 (pw)
-    </div>
-    </div>
-    <hr>
-    <p>END</p>
-  </body>
-</html>
+    </div></div><hr /><p>END</p></body></html>

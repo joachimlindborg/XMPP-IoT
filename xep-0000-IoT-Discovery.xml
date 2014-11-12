@@ -993,7 +993,7 @@
 		</section2>
 		<section2 topic='Update Meta Information about Thing in Registry'>
 			<p>
-				Once a Thing has been claimed and chooses to reside as a public Thing in the registry, it can update its meta information at any time. This meta information
+				Once a Thing has been claimed and chooses to reside as a public Thing in the registry, The Thing, or its owner, can update its meta information at any time. This meta information
 				will be available in searches made to the registry by third parties and is considered public. However, the Thing should be connected to a provisioning server
 				at this point, so that correct decisions can be made regarding to friendship, readout and control requests made by parties other than the owner.
 			</p>
@@ -1004,7 +1004,7 @@
 				for it, extracting its meta information from the registry, then resetting it and then claiming ownership of it.
 			</p>
 			<p>
-				To update meta data about itself, a Thing simply sends a request to the Thing Registry, as follows:
+				To update meta data about itself, a Thing (or its owner) simply sends a request to the Thing Registry, as follows:
 			</p>
 			<example caption='Update Meta Data request'>
 				<![CDATA[
@@ -1012,7 +1012,7 @@
        from='thing@clayster.com/imc'
        to='discovery@clayster.com'
        id='8'>
-      <update xmlns='urn:xmpp:iot:discovery'>
+      <update xmlns='urn:xmpp:iot:discovery' jid='thing@clayster.com'>
           <str name='KEY' value=''/>
           <str name='CLASS' value='PLC'/>
           <num name='LON' value='-71.519722'/>
@@ -1020,6 +1020,9 @@
       </update>
    </iq>]]>
 			</example>
+            <p>
+				The optional <strong>jid</strong> attribute holds the JID of the Thing to be updated. If omitted it can be assumed that the JID of the Thing is the bare JID of the sender.
+			</p>
 			<p>
 				If the Thing resides behind a concentrator, the request must contain those of the attributes <strong>nodeId</strong>, <strong>sourceId</strong>
 				and <strong>cacheType</strong> that are required to access the Thing, as follows:
@@ -1030,7 +1033,10 @@
        from='rack@clayster.com/plcs'
        to='discovery@clayster.com'
        id='8'>
-      <update xmlns='urn:xmpp:iot:discovery' nodeId='imc1' sourceId='MeteringTopology'>
+      <update xmlns='urn:xmpp:iot:discovery'
+             jid='rack@clayster.com'
+             nodeId='imc1'
+             sourceId='MeteringTopology'>
           <str name='KEY' value=''/>
           <str name='CLASS' value='PLC'/>
           <num name='LON' value='-71.519722'/>
@@ -1038,6 +1044,9 @@
       </update>
    </iq>]]>
 			</example>
+			<p>
+				The optional <strong>jid</strong> attribute holds the JID of the concentrator where the Thing resides. If omitted it can be assumed that the JID of the concentrator is the bare JID of the sender.
+			</p>
 			<p>
 				If the Thing is found in the registry and it is claimed, the registry simply acknowledges the update as follows:
 			</p>
