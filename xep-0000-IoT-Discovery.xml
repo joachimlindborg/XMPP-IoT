@@ -1033,7 +1033,10 @@
        from='rack@clayster.com/plcs'
        to='discovery@clayster.com'
        id='8'>
-      <update xmlns='urn:xmpp:iot:discovery' jid='rack@clayster.com' nodeId='imc1' sourceId='MeteringTopology'>
+      <update xmlns='urn:xmpp:iot:discovery'
+             jid='rack@clayster.com'
+             nodeId='imc1'
+             sourceId='MeteringTopology'>
           <str name='KEY' value=''/>
           <str name='CLASS' value='PLC'/>
           <num name='LON' value='-71.519722'/>
