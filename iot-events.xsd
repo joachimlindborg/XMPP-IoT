@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- 
+© Clayster, 2014
+Author: Peter Waher 
+-->
+<xs:schema
+    xmlns:xs='http://www.w3.org/2001/XMLSchema'
+    targetNamespace='urn:xmpp:iot:events'
+    xmlns='urn:xmpp:iot:events'
+    xmlns:sd='urn:xmpp:iot:sensordata'
+    elementFormDefault='qualified'>
+
+	<xs:import namespace='urn:xmpp:iot:sensordata'/>
+	
+	<xs:element name='subscribe'>
+		<xs:complexType>
+			<xs:choice minOccurs='0' maxOccurs='unbounded'>
+				<xs:element name='node'>
+					<xs:complexType>
+						<xs:attribute name='nodeId' type='xs:string' use='required'/>
+						<xs:attribute name='sourceId' type='xs:string' use='optional'/>
+						<xs:attribute name='cacheType' type='xs:string' use='optional'/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='field'>
+					<xs:complexType>
+						<xs:attribute name='name' type='xs:string' use='required'/>
+						<xs:attribute name='currentValue' type='xs:double' use='optional'/>
+						<xs:attribute name='changedBy' type='PositiveDouble' use='optional'/>
+						<xs:attribute name='changedUp' type='PositiveDouble' use='optional'/>
+						<xs:attribute name='changedDown' type='PositiveDouble' use='optional'/>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+			<xs:attribute name='seqnr' type='xs:int' use='required'/>
+			<xs:attributeGroup ref='sd:fieldTypes'/>
+			<xs:attribute name='all' type='xs:boolean' use='optional' default='false'/>
+			<xs:attribute name='historical' type='xs:boolean' use='optional' default='false'/>
+			<xs:attribute name='maxAge' type='xs:duration' use='optional'/>
+			<xs:attribute name='minInterval' type='xs:duration' use='optional'/>
+			<xs:attribute name='maxInterval' type='xs:duration' use='optional'/>
+			<xs:attribute name='serviceToken' type='xs:string' use='optional'/>
+			<xs:attribute name='deviceToken' type='xs:string' use='optional'/>
+			<xs:attribute name='userToken' type='xs:string' use='optional'/>
+			<xs:attribute name='req' type='xs:boolean' use='optional' default='false'/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='unsubscribe'>
+		<xs:complexType>
+			<xs:attribute name='seqnr' type='xs:int' use='required'/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name='PositiveDouble'>
+		<xs:restriction base='xs:double'>
+			<xs:minExclusive value='0'/>
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

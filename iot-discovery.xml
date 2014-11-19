@@ -8,13 +8,17 @@
 %ents;
 ]>
 <?xml-stylesheet type='text/xsl' href='xep.xsl'?>
+<!-- 
+© Clayster, 2014
+Author: Peter Waher 
+-->
 <xep>
 	<header>
 		<title>Internet of Things - Discovery</title>
 		<abstract>This specification describes an architecture based on the XMPP protocol whereby Things can be installed and safely discovered by their owners and connected into networks of Things.</abstract>
 		&LEGALNOTICE;
-		<number>xxxx</number>
-		<status>ProtoXEP</status>
+		<number>0347</number>
+		<status>Experimental</status>
 		<type>Standards Track</type>
 		<sig>Standards</sig>
 		<approver>Council</approver>
@@ -23,6 +27,7 @@
 			<spec>XEP-0001</spec>
 			<spec>XEP-0030</spec>
 			<spec>XEP-0077</spec>
+			<spec>XEP-0114</spec>
 			<spec>XEP-0174</spec>
 			<spec>XEP-0323</spec>
 			<spec>XEP-0324</spec>
@@ -31,7 +36,7 @@
 		</dependencies>
 		<supersedes/>
 		<supersededby/>
-		<shortname>NOT_YET_ASSIGNED</shortname>
+		<shortname>iot-discovery</shortname>
 		<author>
 			<firstname>Peter</firstname>
 			<surname>Waher</surname>
@@ -47,9 +52,59 @@
 			<uri>http://www-rnks.informatik.tu-cottbus.de/~rklauck</uri>
 		</author>
 		<revision>
+			<version>0.3</version>
+			<date>2014-11-11</date>
+			<initials>pw</initials>
+			<remark>
+				<p>
+					Added the possibility for <link url='#ownerupdate'>owners to update meta-data about its things</link>.
+					This is done through the optional attribute <strong>jid</strong> on the <strong>update</strong> element.
+				</p>
+				<p>Added <strong>ROOM</strong> to the <link url='#tags'>list of predefined tag names</link>.</p>
+				<p>Added anchors to section headers.</p>
+			</remark>
+		</revision>
+		<revision>
+			<version>0.2</version>
+			<date>2014-09-07</date>
+			<initials>pw</initials>
+			<remark>
+				<p>Added a small note regarding URL encoding of hash signs, and corrected the Google Chart URL example.</p>
+			</remark>
+		</revision>
+		<revision>
+			<version>0.1</version>
+			<date>2014-04-10</date>
+			<initials>editor (mam)</initials>
+			<remark>
+				<p>Initial published version approved by XMPP Council.</p>
+			</remark>
+		</revision>
+		<revision>
+			<version>0.0.3</version>
+			<date>2014-04-09</date>
+			<initials>pw</initials>
+			<remark>
+				<p>Introduced possibility for hosting Thing Registry as a Jabber Server Component, using XEP-0114.</p>
+				<p>
+					Expanded de section <link url='#support'>Determining Support</link>, explaining how to search through server components.
+				</p>
+				<p>Removed the possibility to search for nick names, as a way of finding Thing Registries.</p>
+				<p>Added Security and Implementation Notes describing the pros and cons of hosting a Thing Registry as a Server Component vs. as a Client.</p>
+			</remark>
+		</revision>
+		<revision>
+			<version>0.0.2</version>
+			<date>2014-04-07</date>
+			<initials>pw</initials>
+			<remark>
+				<p>Removed any hard-coded account names.</p>
+			</remark>
+		</revision>
+		<revision>
 			<version>0.0.1</version>
 			<date>2014-03-11</date>
-			<initials>pw</initials>
+			<initials>pw,rk</initials>
 			<remark>
 				<p>First draft.</p>
 			</remark>
@@ -79,10 +134,6 @@
 			<tr>
 				<td>xep-0000-IoT-BatteryPoweredSensors</td>
 				<td>Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
-			</tr>
-			<tr>
-				<td>xep-0000-IoT-Discovery</td>
-				<td>This specification. Defines the peculiars of Thing discovery in Internet of Things. Apart from discovering Things by JID, it also defines how to discover Things based on location, etc.</td>
 			</tr>
 			<tr>
 				<td>xep-0000-IoT-Events</td>
@@ -138,6 +189,10 @@
 			<tr>
 				<td>XEP-0336</td>
 				<td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
+			</tr>
+			<tr>
+				<td>XEP-0347</td>
+				<td>This specification. Defines the peculiars of Thing discovery in Internet of Things. Apart from discovering Things by JID, it also defines how to discover Things based on location, etc.</td>
 			</tr>
 		</table>
 	</section1>
@@ -307,7 +362,7 @@
 			The life cycle of a Thing can be divided into multiple steps. The following sections will list many of these steps in possible order of occurrence during the
 			life cycle of the Thing.
 		</p>
-		<section2 topic='Production'>
+		<section2 topic='Production' anchor='production'>
 			<p>
 				During production of a Thing, decisions have to be made whether the following parameters should be pre-configured, manually entered after installation or
 				automatically found and/or created by the device if possible (zero-configuration networking):
@@ -333,7 +388,7 @@
 				decentralized network architecture. A detailed discussion of the two alternatives goes beyond the scope of this specification, and will not be presented here.
 			</p>
 		</section2>
-		<section2 topic='Installation'>
+		<section2 topic='Installation' anchor='installation'>
 			<p>
 				Apart from physical installation, and connection to power and communication infrastructure, the installation phase of a Thing might also require manual entry of values that
 				could not be set in the production environment. Since Things might have very limited human user interfaces, external tools might be required to provide this information. Due
@@ -341,7 +396,7 @@
 				resources where such cannot be found nor set in a production environment.
 			</p>
 		</section2>
-		<section2 topic='Finding XMPP Server'>
+		<section2 topic='Finding XMPP Server' anchor='findingserver'>
 			<p>
 				If the address of an XMPP Server is not preconfigured, the Thing must attempt to find one in its local surroundings. This can be done using one of several methods:
 			</p>
@@ -353,7 +408,7 @@
 			<p>
 				The following sections describe them in more detail.
 			</p>
-			<section3 topic='DHCP'>
+			<section3 topic='DHCP' anchor='dhcp'>
 				<p>
 					DHCP offers an internal structure for advertising configuration information to clients in a network.
 					This includes configuration parameters and other control elements, which are transmitted in special marked data elements, called 'options', as described in
@@ -377,7 +432,7 @@
 						<strong>TBD:</strong> Define and register DHCP and BOOTP option as described in <link url='#option'>Parameters for IoT Discovery</link>. Use of 'option-code' 84.
 					</li>
 				</ul>
-				<section4 topic='XMPP Server Option'>
+				<section4 topic='XMPP Server Option' anchor='serveroption'>
 					<p>
 						This option specifies the name of the XMPP server.
 						The name may or may not be qualified with the local domain name.
@@ -396,7 +451,7 @@
    224 12 pronto.local]]>
 					</example>
 				</section4>
-				<section4 topic='Dynamic Host Configuration Protocol (DHCP) and Bootstrap Protocol (BOOTP) Parameters for IoT Discovery' anchor='option'>
+				<section4 topic='Dynamic Host Configuration Protocol (DHCP) and Bootstrap Protocol (BOOTP) Parameters for IoT Discovery' anchor='dhcpoption'>
 					<p>The following parameters in use as of MONTH 201x. Refer to the DHCP and BOOTP parameters itself for a complete and current list of parameters (this specification might or might not be revised when new parameters are registered).</p>
 					<example caption='IoT Discovery DHCP and BOOTP Parameters Registry'>
 						<![CDATA[
@@ -408,7 +463,7 @@
 					</example>
 				</section4>
 			</section3>
-			<section3 topic='Multicast DNS (mDNS) and DNS Service Discovery (DNS-SD)'>
+			<section3 topic='Multicast DNS (mDNS) and DNS Service Discovery (DNS-SD)' anchor='dns'>
 				<p>
 					An introduction of mDNS/DNS-SD (e.g., how it works and terminology) is described in &xep0174; (i.e., sections [1.2] and [2]).
 					For the purpose of IoT Discovery we are interested only in the "xmpp-client" service.
@@ -416,7 +471,7 @@
 					An XMPP chat client (actually its mDNS daemon) can send out multicast DNS queries for services of type "xmpp-client".
 					<strong>Note:</strong> the service of type "xmpp-client" is the reservered name for client-to-server connections by IANA, as described in &rfc6120;.
 				</p>
-				<section4 topic='DNS Records'>
+				<section4 topic='DNS Records' anchor='dnsrecords'>
 					<p>In order to advertise its availability, a server MUST publish four different kinds of DNS records:</p>
 					<ol>
 						<li>
@@ -513,7 +568,7 @@
 				</section4>
 				<!-- Ref: XEP-0174 -->
 			</section3>
-			<section3 topic='SSDP/UPnP'>
+			<section3 topic='SSDP/UPnP' anchor='upnp'>
 				<p>TBD</p>
 				<!-- TODO -->
 			</section3>
@@ -522,7 +577,7 @@
 				Provisioning Server and other peers it want to connect to. The next section can thus be skipped.
 			</p>
 		</section2>
-		<section2 topic='Connection to XMPP Server'>
+		<section2 topic='Connection to XMPP Server' anchor='connection'>
 			<p>
 				Once an XMPP Server has been found, a connection can be made. If multiple XMPP Servers are found, the client is free to choose the one that best suits its purposes.
 			</p>
@@ -531,36 +586,31 @@
 				allows account creation can be used.
 			</p>
 		</section2>
-		<section2 topic='Finding Thing Registry'>
+		<section2 topic='Finding Thing Registry' anchor='findingregistry'>
 			<p>
-				If a Thing Registry is not preconfigured, one must be found. The following lists methods to obtaining the JID for the Thing Registry. Note that the last two
-				have <link url='#security'>security considerations</link> that need to be taken into account.
+				If a Thing Registry is not preconfigured, one must be found. A Thing Registry can be hosted either as a server component using &xep0114; or as an XMPP Client accessible through
+				a JID. The following lists methods to obtaining the Component Address or JID for the Thing Registry. Note that the last one has <link url='#security'>security considerations</link> 
+				that need to be taken into account, if implemented.
 			</p>
 			<ol>
 				<li>
-					Preconfigured JID to Thing Registry.
+					Preconfigured Component Address of Thing Registry. A Component address is normally a subdomain to the domain of the XMPP Server that hosts the component.
 				</li>
 				<li>
-					Preconfigured user name only, on the same XMPP domain as the XMPP Server connected to.
+					Preconfigured bare JID of Thing Registry.
 				</li>
 				<li>
-					XMPP Server itself. This can be found out by sending a discovery request to the server,
-					as described in <link url='#support'>Determining Support</link>.
+					Preconfigured subdomain part of Component Address. This will be added to the domain of the XMPP Server used to connet to.
 				</li>
 				<li>
-					The account 'discovery' on the same domain. (For example: discovery@jabber.org)
+					Preconfigured user name of JID. This will be added to the domain of the XMPP Server used to connected to.
 				</li>
 				<li>
-					Search for accounts on the XMPP server with nick-name "discovery". Search is performed using &xep0055;
+					Searching through Server Components on the XMPP Server currently connected to, as described in <link url='#support'>Determining Support</link>.
 				</li>
 			</ol>
-			<p>
-				<strong>Note:</strong> The above methods might yield multiple JIDs. Each should in turn be checked if the <link url='#support'>support the discovery extension</link>.
-				Note also that the last two have <link url='#security'>security considerations</link> that need to be taken into account. These methods might be
-				skipped, to avoid the possibility that an external user pretends to be a thing registry to hijack new Things installed into the network.
-			</p>
 		</section2>
-		<section2 topic='Registering Thing'>
+		<section2 topic='Registering Thing' anchor='register'>
 			<p>
 				Once a Thing Registry has been found and been befriended, the Thing can register itself with the registry, as follows:
 			</p>
@@ -568,7 +618,7 @@
 				<![CDATA[
    <iq type='set'
        from='thing@clayster.com/imc'
-       to='discovery@clayster.com'
+       to='discovery.clayster.com'
        id='1'>
       <register xmlns='urn:xmpp:iot:discovery'>
           <str name='SN' value='394872348732948723'/>
@@ -580,7 +630,7 @@
    </iq>
    
    <iq type='result'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='thing@clayster.com/imc'
        id='1'/>]]>
 			</example>
@@ -606,7 +656,7 @@
 			<example caption='Registration response when alrady claimed'>
 				<![CDATA[
    <iq type='result'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='thing@clayster.com/imc'
        id='1'>
       <claimed xmlns='urn:xmpp:iot:discovery' jid='owner@clayster.com'/>
@@ -616,7 +666,7 @@
 				<strong>Note:</strong> Meta Tag names are case insensitive. In this document, all tag names have been written using upper case letters.
 			</p>
 		</section2>
-		<section2 topic='Register self-owned Thing'>
+		<section2 topic='Register self-owned Thing' anchor='registerselfowner'>
 			<p>
 				If a thing is self-owned, it can register itself with the Registry as normal, with the addition of setting the attribute <strong>selfOwned</strong> to <strong>true</strong>,
 				as is shown below. This registers the Thing directly as PUBLIC CLAIMED, with no need for an owner to claim ownership of the device. This can be useful if
@@ -626,7 +676,7 @@
 				<![CDATA[
    <iq type='set'
        from='thing@clayster.com/imc'
-       to='discovery@clayster.com'
+       to='discovery.clayster.com'
        id='2'>
       <register xmlns='urn:xmpp:iot:discovery' selfOwned='true'>
           <str name='SN' value='394872348732948723'/>
@@ -638,12 +688,12 @@
    </iq>
    
    <iq type='result'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='thing@clayster.com/imc'
        id='2'/>]]>
 			</example>
 		</section2>
-		<section2 topic='Register Thing behind Concentrator'>
+		<section2 topic='Register Thing behind Concentrator' anchor='registerconcentrator'>
 			<p>
 				A Thing might reside behind a gateway or concentrator and might not be directly connected to the XMPP network itself, as is described in &xep0326;. In these cases, there are three optional
 				attributes that can be used to identify the Thing behind the JID: The <strong>nodeId</strong> attribute gives the ID of the Thing (a.k.a. "Node"). The Node might reside in
@@ -660,7 +710,7 @@
 				<![CDATA[
    <iq type='set'
        from='rack@clayster.com/plcs'
-       to='discovery@clayster.com'
+       to='discovery.clayster.com'
        id='3'>
       <register xmlns='urn:xmpp:iot:discovery' nodeId='imc1' sourceId='MeteringTopology'>
           <str name='SN' value='394872348732948723'/>
@@ -672,7 +722,7 @@
    </iq>
    
    <iq type='result'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='rack@clayster.com/plcs'
        id='3'/>]]>
 			</example>
@@ -680,7 +730,7 @@
 				If the Thing behind the concentrator is self-owned, it simply adds the <strong>selfOwned</strong> attribute to the request and sets it to <strong>true</strong>.
 			</p>
 		</section2>
-		<section2 topic='Claiming Ownership of a Thing'>
+		<section2 topic='Claiming Ownership of a Thing' anchor='claim'>
 			<p>
 				As mentioned above, the owner of the Thing must provide the information provided by the Thing to the Registry, in order to claim ownership over it. To avoid the
 				possibility that somebody can guess the information, the information must necessarily be long. This creates the problem of transfer of information. One method to solve this
@@ -704,11 +754,14 @@
 				Using UTF-8 encoding when generating the QR-code, this string returns the following QR-code:
 			</p>
 			<p>
-				<img src='https://chart.googleapis.com/chart?cht=qr&amp;chs=200x200&amp;chl=IoTDisco;SN:394872348732948723;MAN:www.ktc.se;MODEL:IMC;#V:1.2;KEY:4857402340298342'/>
+				<img src='https://chart.googleapis.com/chart?cht=qr&amp;chs=200x200&amp;chl=IoTDisco;SN:394872348732948723;MAN:www.ktc.se;MODEL:IMC;%23V:1.2;KEY:4857402340298342'/>
 			</p>
 			<p>
 				To generate a QR-code, Google Chart API can be used:
-				<link url='https://chart.googleapis.com/chart?cht=qr&amp;chs=200x200&amp;chl=IoTDisco;SN:394872348732948723;MAN:www.ktc.se;MODEL:IMC;#V:1.2;KEY:4857402340298342'>https://chart.googleapis.com/chart?cht=qr&amp;chs=200x200&amp;chl=IoTDisco;SN:394872348732948723;MAN:www.ktc.se;MODEL:IMC;#V:1.2;KEY:4857402340298342</link>
+				<link url='https://chart.googleapis.com/chart?cht=qr&amp;chs=200x200&amp;chl=IoTDisco;SN:394872348732948723;MAN:www.ktc.se;MODEL:IMC;%23V:1.2;KEY:4857402340298342'>https://chart.googleapis.com/chart?cht=qr&amp;chs=200x200&amp;chl=IoTDisco;SN:394872348732948723;MAN:www.ktc.se;MODEL:IMC;%23V:1.2;KEY:4857402340298342</link>
+			</p>
+			<p>
+				<strong>Note:</strong> The hash sign (#) has been URL encoded to <strong>%23</strong> in the URL.
 			</p>
 			<p>
 				Once the client has the required meta information about the Thing to claim ownership, it sends itself the following request to the Thing Registry:
@@ -717,7 +770,7 @@
 				<![CDATA[
    <iq type='set'
        from='owner@clayster.com/phone'
-       to='discovery@clayster.com'
+       to='discovery.clayster.com'
        id='4'>
       <mine xmlns='urn:xmpp:iot:discovery'>
           <str name='SN' value='394872348732948723'/>
@@ -736,7 +789,7 @@
 				<![CDATA[
    <iq type='set'
        from='owner@clayster.com/phone'
-       to='discovery@clayster.com'
+       to='discovery.clayster.com'
        id='4'>
       <mine xmlns='urn:xmpp:iot:discovery' public='false'>
           <str name='SN' value='394872348732948723'/>
@@ -759,7 +812,7 @@
 			<example caption='Ownership claim successful'>
 				<![CDATA[
    <iq type='result'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='owner@clayster.com/phone'
        id='4'>
       <claimed xmlns='urn:xmpp:iot:discovery' jid='thing@clayster.com'/>
@@ -773,7 +826,7 @@
 			<example caption='Ownership claim of a Thing behind a concentrator successful'>
 				<![CDATA[
    <iq type='result'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='owner@clayster.com/phone'
        id='4'>
       <claimed xmlns='urn:xmpp:iot:discovery' jid='rack@clayster.com/plcs' nodeId='imc1' sourceId='MeteringTopology'/>
@@ -786,7 +839,7 @@
 			<example caption='Ownership claim failure'>
 				<![CDATA[
    <iq type='error'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='owner@clayster.com/phone'
        id='4'>
       <error type='cancel'>
@@ -801,7 +854,7 @@
 			<example caption='Ownership claimed'>
 				<![CDATA[
    <iq type='set'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='thing@clayster.com/imc'
        id='5'>
       <claimed xmlns='urn:xmpp:iot:discovery' jid='owner@clayster.com'/>
@@ -813,7 +866,7 @@
 			<example caption='Ownership claim of private Thing successful'>
 				<![CDATA[
    <iq type='set'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='thing@clayster.com/imc'
        id='5'>
       <claimed xmlns='urn:xmpp:iot:discovery' jid='owner@clayster.com' public='false'/>
@@ -830,7 +883,7 @@
 			<example caption='Ownership of Thing behind concentrator claimed'>
 				<![CDATA[
    <iq type='set'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='rack@clayster.com/plcs'
        id='5'>
       <claimed xmlns='urn:xmpp:iot:discovery' jid='owner@clayster.com' nodeId='imc1' sourceId='MeteringTopology'/>
@@ -843,7 +896,7 @@
 				<![CDATA[
    <iq type='result'
        from='thing@clayster.com/imc'
-       to='discovery@clayster.com'
+       to='discovery.clayster.com'
        id='5'/>]]>
 			</example>
 			<p>
@@ -853,7 +906,7 @@
 				<strong>Note:</strong> Meta Tag names are case insensitive. In this document, all tag names have been written using upper case letters.
 			</p>
 		</section2>
-		<section2 topic='Removing Thing from Registry'>
+		<section2 topic='Removing Thing from Registry' anchor='remove'>
 			<p>
 				After a Thing has been claimed and is registed as a PUBLIC CLAIMED Thing in the Registry, it implies the Thing is available in searches. The owner can choose to remove
 				the Thing from the Registry, to avoid that the Thing appears in searches. To remove a Thing from the Registry the owner simply sends a removal request to the Registry
@@ -863,7 +916,7 @@
 				<![CDATA[
    <iq type='set'
        from='owner@clayster.com/phone'
-       to='discovery@clayster.com'
+       to='discovery.clayster.com'
        id='6'>
       <remove xmlns='urn:xmpp:iot:discovery' jid='thing@clayster.com'/>
    </iq>]]>
@@ -876,7 +929,7 @@
 				<![CDATA[
    <iq type='set'
        from='owner@clayster.com/phone'
-       to='discovery@clayster.com'
+       to='discovery.clayster.com'
        id='6'>
       <remove xmlns='urn:xmpp:iot:discovery' jid='rack@clayster.com/plcs' nodeId='imc1' sourceId='MeteringTopology'/>
    </iq>]]>
@@ -888,7 +941,7 @@
 			<example caption='Thing removed'>
 				<![CDATA[
    <iq type='result'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='owner@clayster.com/phone'
        id='6'/>]]>
 			</example>
@@ -898,7 +951,7 @@
 			<example caption='Removal failure'>
 				<![CDATA[
    <iq type='error'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='owner@clayster.com/phone'
        id='6'>
       <error type='cancel'>
@@ -913,7 +966,7 @@
 			<example caption='Thing removed from registry by owner'>
 				<![CDATA[
    <iq type='set'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='thing@clayster.com/imc'
        id='7'>
       <removed xmlns='urn:xmpp:iot:discovery'/>
@@ -921,7 +974,7 @@
    
    <iq type='result'
        from='thing@clayster.com/imc'
-       to='discovery@clayster.com'
+       to='discovery.clayster.com'
        id='7'/>]]>
 			</example>
 			<p>
@@ -930,7 +983,7 @@
 			<example caption='Thing behind concentrator removed from registry by owner'>
 				<![CDATA[
    <iq type='set'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='rack@clayster.com/plcs'
        id='7'>
       <removed xmlns='urn:xmpp:iot:discovery' nodeId='imc1' sourceId='MeteringTopology'/>
@@ -943,55 +996,48 @@
 				<![CDATA[
    <iq type='result'
        from='thing@clayster.com/imc'
-       to='discovery@clayster.com'
+       to='discovery.clayster.com'
        id='7'/>]]>
 			</example>
 		</section2>
-		<section2 topic='Finding Provisioning Server'>
+		<section2 topic='Finding Provisioning Server' anchor='findingprovisioning'>
 			<p>
 				Up to this point only basic configuration and ownership and visibility of a Thing has been covered. For more advanced operations, a Thing might be required to
 				use a Provisioning Server to whom it can delegate trust and allow making decisions, controlling access rights and privileges for the Thing, as described in &xep0324;.
-				If a Provisioning Server is not preconfigured, one must be found. The following lists methods to obtaining the JID for the Provisioning Server. Note that the last two
-				have <link url='#security'>security considerations</link> that need to be taken into account.
+				If a Provisioning Server is not preconfigured, one must be found. The following lists methods to obtaining the JID for the Provisioning Server.
 			</p>
 			<ol>
 				<li>
-					Preconfigured JID to Provisioning Server.
+					Preconfigured Component Address of Provisioning Server. A Component address is normally a subdomain to the domain of the XMPP Server that hosts the component.
 				</li>
 				<li>
-					Preconfigured user name only, on the same XMPP domain as the XMPP Server connected to.
+					Preconfigured bare JID of Provisioning Server.
 				</li>
 				<li>
-					The XMPP Server itself can be a Provisioning Server. This can be found out by sending a discovery request to the server,
-					as described in <link url='#support'>Determining Support</link>.
+					Preconfigured subdomain part of Component Address. This will be added to the domain of the XMPP Server used to connet to.
+				</li>
+				<li>
+					Preconfigured user name of JID. This will be added to the domain of the XMPP Server used to connected to.
 				</li>
 				<li>
 					The Thing Registry itself can be a Provisioning Server. This can be found out by sending a discovery request to the Thing Registry,
 					as described in <link url='#support'>Determining Support</link>.
 				</li>
 				<li>
-					The Owner itself can be a Provisioning Server. This can be found out by sending a discovery request to the Thing Registry,
+					The Owner itself can be a Provisioning Server. This can be found out by sending a discovery request to the Owner,
 					as described in <link url='#support'>Determining Support</link>.
 				</li>
 				<li>
-					The account 'provisioning' on the same domain. (For example: provisioning@jabber.org)
-				</li>
-				<li>
-					Search for accounts on the XMPP server with nick-name "provisioning". Search is performed using &xep0055;
+					Searching through Server Components on the XMPP Server currently connected to, as described in <link url='#support'>Determining Support</link>.
 				</li>
 			</ol>
-			<p>
-				<strong>Note:</strong> The above methods might yield multiple JIDs. Each should in turn be checked if the <link url='#support'>support the discovery extension</link>.
-				Note also that the last two have <link url='#security'>security considerations</link> that need to be taken into account. These methods might be
-				skipped, to avoid the possibility that an external user pretends to be a thing registry to hijack new Things installed into the network.
-			</p>
 		</section2>
-		<section2 topic='Delegating Trust'>
+		<section2 topic='Delegating Trust' anchor='delegate'>
 			<p>
 				Once a Provisioning Server has been found and been befriended, the Thing can delegate its trust to it, according to &xep0324;.
 			</p>
 		</section2>
-		<section2 topic='Update Meta Information about Thing in Registry'>
+		<section2 topic='Update Meta Information about Thing in Registry' anchor='update'>
 			<p>
 				Once a Thing has been claimed and chooses to reside as a public Thing in the registry, it can update its meta information at any time. This meta information
 				will be available in searches made to the registry by third parties and is considered public. However, the Thing should be connected to a provisioning server
@@ -1010,7 +1056,7 @@
 				<![CDATA[
    <iq type='set'
        from='thing@clayster.com/imc'
-       to='discovery@clayster.com'
+       to='discovery.clayster.com'
        id='8'>
       <update xmlns='urn:xmpp:iot:discovery'>
           <str name='KEY' value=''/>
@@ -1028,7 +1074,7 @@
 				<![CDATA[
    <iq type='set'
        from='rack@clayster.com/plcs'
-       to='discovery@clayster.com'
+       to='discovery.clayster.com'
        id='8'>
       <update xmlns='urn:xmpp:iot:discovery' nodeId='imc1' sourceId='MeteringTopology'>
           <str name='KEY' value=''/>
@@ -1044,7 +1090,7 @@
 			<example caption='Update Meta Data request acknowledgement'>
 				<![CDATA[
    <iq type='result'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='thing@clayster.com/imc'
        id='8'/>]]>
 			</example>
@@ -1056,7 +1102,7 @@
 			<example caption='Update Meta Data request failure'>
 				<![CDATA[
    <iq type='error'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='thing@clayster.com/imc'
        id='8'>
       <error type='cancel'>
@@ -1072,7 +1118,7 @@
 			<example caption='Update Meta Data response to request from disowned Thing'>
 				<![CDATA[
    <iq type='result'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='thing@clayster.com/imc'
        id='8'>
       <disowned xmlns='urn:xmpp:iot:discovery'/>
@@ -1082,7 +1128,80 @@
 				<strong>Note:</strong> Meta Tag names are case insensitive. In this document, all tag names have been written using upper case letters.
 			</p>
 		</section2>
-		<section2 topic='Search for Public Things in Registry'>
+		<section2 topic='Owner updating Meta Information about Thing in Registry' anchor='ownerupdate'>
+			<p>
+				An owner of a thing can also update the meta-data of a thing it has claimed. To do this, you simply add a <strong>jid</strong> attribute containing the JID of the thing to the
+				<strong>update</strong> element. (If this attribute is not present, the JID is assumed to be that of the sender of the message.)
+			</p>
+			<example caption='Owner requests an update of Meta Data of Thing'>
+				<![CDATA[
+   <iq type='set'
+       from='owner@clayster.com/1234'
+       to='discovery.clayster.com'
+       id='8'>
+      <update xmlns='urn:xmpp:iot:discovery' jid='thing@clayster.com'>
+          <str name='ROOM' value='...'/>
+          <str name='APT' value='...'/>
+          <str name='BLD' value='...'/>
+          <str name='STREET' value='...'/>
+          <str name='STREETNR' value='...'/>
+          <str name='AREA' value='...'/>
+          <str name='CITY' value='...'/>
+          <str name='REGION' value='...'/>
+          <str name='COUNTRY' value='...'/>
+      </update>
+   </iq>]]>
+			</example>
+			<p>
+				The owner can update meta-data of things behind concentrators also. To do this, the corresponding attributes <strong>nodeId</strong>, <strong>sourceId</strong>
+				and <strong>cacheType</strong> must be used to identify the thing, as follows:
+			</p>
+			<example caption='Owner requests an update of Meta Data of Thing behind concentrator'>
+				<![CDATA[
+   <iq type='set'
+       from='owner@clayster.com/1234'
+       to='discovery.clayster.com'
+       id='8'>
+      <update xmlns='urn:xmpp:iot:discovery' jid='rack@clayster.com' nodeId='imc1' sourceId='MeteringTopology'>
+          <str name='ROOM' value='...'/>
+          <str name='APT' value='...'/>
+          <str name='BLD' value='...'/>
+          <str name='STREET' value='...'/>
+          <str name='STREETNR' value='...'/>
+          <str name='AREA' value='...'/>
+          <str name='CITY' value='...'/>
+          <str name='REGION' value='...'/>
+          <str name='COUNTRY' value='...'/>
+      </update>
+   </iq>]]>
+			</example>
+			<p>
+				If the Thing is found in the registry and it is claimed by the sender of the current message (i.e. owner is the sender), the registry simply acknowledges the update as follows:
+			</p>
+			<example caption='Owner updating thing Meta Data request acknowledgement'>
+				<![CDATA[
+   <iq type='result'
+       from='discovery.clayster.com'
+       to='owner@clayster.com/1234'
+       id='8'/>]]>
+			</example>
+			<p>
+				But if the owner is not the sender of the current message (i.e. owner is somebody else), or if the thing is not found at all, the server must report the node as 
+				<strong>not existing</strong> (i.e. not existing among the set of things claimed by the owner).
+			</p>
+			<example caption='Owner updating thing Meta Data request failure'>
+				<![CDATA[
+   <iq type='error'
+       from='discovery.clayster.com'
+       to='owner@clayster.com/1234'
+       id='8'>
+      <error type='cancel'>
+         <item-not-found xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'/>
+      </error>
+   </iq>]]>
+			</example>
+		</section2>
+		<section2 topic='Search for Public Things in Registry' anchor='search'>
 			<p>
 				It is possible for anyone with access to the Thing Registry to search for public Things that have been claimed, including self-owned Things. Such searches
 				will never return things that have not been claimed or have been removed from the registry.
@@ -1214,7 +1333,7 @@
 				<![CDATA[
    <iq type='get'
        from='curious@clayster.com/client'
-       to='discovery@clayster.com'
+       to='discovery.clayster.com'
        id='9'>
       <search xmlns='urn:xmpp:iot:discovery' offset='0' maxCount='20'>
           <strEq name='MAN' value='www.ktc.se'/>
@@ -1223,7 +1342,7 @@
           <numRange name='V' min='1' minIncluded='true' max='2' maxIncluded='false'/>
           <numRange name='LON' min='-72' minIncluded='true' max='-70' maxIncluded='true'/>
           <numRange name='LAT' min='-34' minIncluded='true' max='-33' maxIncluded='true'/>
-      </update>
+      </search>
    </iq>]]>
 			</example>
 			<p>
@@ -1242,7 +1361,7 @@
 			<example caption='Search result'>
 				<![CDATA[
    <iq type='result'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='curious@clayster.com/client'
        id='9'>
       <found xmlns='urn:xmpp:iot:discovery' more='false'>
@@ -1266,7 +1385,7 @@
 			<example caption='Search result containing Thing behind a concentrator'>
 				<![CDATA[
    <iq type='result'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='curious@clayster.com/client'
        id='9'>
       <found xmlns='urn:xmpp:iot:discovery' more='false'>
@@ -1291,7 +1410,7 @@
 				<strong>Note:</strong> Meta Tag names are case insensitive. In this document, all tag names have been written using upper case letters.
 			</p>
 		</section2>
-		<section2 topic='Unregistering Thing from Registry'>
+		<section2 topic='Unregistering Thing from Registry' anchor='unregister'>
 			<p>
 				A thing can unregister itself from the Registry. This can be done in an uninstallation procedure for instance. To unregister from the registry, it simply sends
 				an un-registration request to the registry as follows.
@@ -1300,7 +1419,7 @@
 				<![CDATA[
    <iq type='set'
        from='thing@clayster.com/imc'
-       to='discovery@clayster.com'
+       to='discovery.clayster.com'
        id='10'>
       <unregister xmlns='urn:xmpp:iot:discovery'/>
    </iq>]]>
@@ -1313,7 +1432,7 @@
 				<![CDATA[
    <iq type='set'
        from='rack@clayster.com/plcs'
-       to='discovery@clayster.com'
+       to='discovery.clayster.com'
        id='10'>
       <unregister xmlns='urn:xmpp:iot:discovery' nodeId='imc1' sourceId='MeteringTopology'/>
    </iq>]]>
@@ -1324,12 +1443,12 @@
 			<example caption='Unregister Thing acknowledgement'>
 				<![CDATA[
    <iq type='result'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='thing@clayster.com/imc'
        id='10'/>]]>
 			</example>
 		</section2>
-		<section2 topic='Disowning Thing'>
+		<section2 topic='Disowning Thing' anchor='disown'>
 			<p>
 				The owner of a Thing can disown the Thing, returning it to a state without owner. This is done by sending the following request to the Thing Registry:
 			</p>
@@ -1337,7 +1456,7 @@
 				<![CDATA[
    <iq type='set'
        from='owner@clayster.com/phone'
-       to='discovery@clayster.com'
+       to='discovery.clayster.com'
        id='11'>
       <disown xmlns='urn:xmpp:iot:discovery' jid='thing@clayster.com'/>
    </iq>]]>
@@ -1350,7 +1469,7 @@
 				<![CDATA[
    <iq type='set'
        from='owner@clayster.com/phone'
-       to='discovery@clayster.com'
+       to='discovery.clayster.com'
        id='11'>
       <disown xmlns='urn:xmpp:iot:discovery' jid='rack@clayster.com/plcs' nodeId='imc1' sourceId='MeteringTopology'/>
    </iq>]]>
@@ -1361,7 +1480,7 @@
 			<example caption='Failure to disown Thing - Not Found'>
 				<![CDATA[
    <iq type='error'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='owner@clayster.com/phone'
        id='11'>
       <error type='cancel'>
@@ -1376,7 +1495,7 @@
 			<example caption='Failure to disown Thing - Offline'>
 				<![CDATA[
    <iq type='error'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='owner@clayster.com/phone'
        id='11'>
       <error type='cancel'>
@@ -1391,7 +1510,7 @@
 			<example caption='Thing disowned in registry by owner'>
 				<![CDATA[
    <iq type='set'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='thing@clayster.com/imc'
        id='12'>
       <disowned xmlns='urn:xmpp:iot:discovery'/>
@@ -1403,7 +1522,7 @@
 			<example caption='Thing behind concentrator disowned in registry by owner'>
 				<![CDATA[
    <iq type='set'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='rack@clayster.com/plcs'
        id='12'>
       <disowned xmlns='urn:xmpp:iot:discovery' nodeId='imc1' sourceId='MeteringTopology'/>
@@ -1416,7 +1535,7 @@
 				<![CDATA[
    <iq type='result'
        from='thing@clayster.com/imc'
-       to='discovery@clayster.com'
+       to='discovery.clayster.com'
        id='12'/>]]>
 			</example>
 			<p>
@@ -1427,7 +1546,7 @@
 			<example caption='Thing disowned'>
 				<![CDATA[
    <iq type='result'
-       from='discovery@clayster.com'
+       from='discovery.clayster.com'
        to='owner@clayster.com/phone'
        id='11'/>]]>
 			</example>
@@ -1443,32 +1562,99 @@
 		</p>
 		<example caption="Service discovery information request">
 			<![CDATA[
-<iq type='get'
-    from='device@clayster.com/device'
-    to='provisioning@clayster.com'
-    id='disco1'>
-  <query xmlns='http://jabber.org/protocol/disco#info'/>
-</iq>]]>
+   <iq type='get'
+       from='device@clayster.com/device'
+       to='provisioning@clayster.com'
+       id='13'>
+      <query xmlns='http://jabber.org/protocol/disco#info'/>
+   </iq>]]>
 		</example>
 		<example caption="Service discovery information response">
 			<![CDATA[
-<iq type='result'
-    from='provisioning@clayster.com'
-    to='device@clayster.com/device'
-    id='disco1'>
-  <query xmlns='http://jabber.org/protocol/disco#info'>
-    ...
-    <feature var='urn:xmpp:iot:discovery'/>
-    ...
-  </query>
-</iq>]]>
+   <iq type='result'
+       from='provisioning@clayster.com'
+       to='device@clayster.com/device'
+       id='13'>
+     <query xmlns='http://jabber.org/protocol/disco#info'>
+        ...
+        <feature var='urn:xmpp:iot:discovery'/>
+        ...
+     </query>
+   </iq>]]>
 		</example>
 		<p>
-			In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
-			in &xep0115;. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
+			To search for a Thing Registry hosted as a component on an XMPP Server, you first request a list of available components, as follows: 
 		</p>
+		<example caption="Checking if server supports components">
+			<![CDATA[
+   <iq from='device@clayster.com/device' to='clayster.com' type='get' id='14'>
+      <query xmlns="http://jabber.org/protocol/disco#info"/>
+   </iq>]]>
+		</example>
+		<example caption="Response confirming support for components">
+			<![CDATA[
+   <iq type="result" id="14" from="clayster.com" to="device@clayster.com/device">
+      <query xmlns="http://jabber.org/protocol/disco#info">
+         ...
+         <feature var="http://jabber.org/protocol/disco#items"/>
+         ...
+      </query>
+   </iq>]]>
+		</example>
+		<p>
+			If components (items) are supported, a request for available components is made:
+		</p>
+		<example caption="Requesting list of server components">
+			<![CDATA[
+   <iq from='device@clayster.com/device' to='clayster.com' type='get' id='15'>
+      <query xmlns="http://jabber.org/protocol/disco#items"/>
+   </iq>]]>
+		</example>
+		<example caption="Response containing list of server components">
+			<![CDATA[
+   <iq type="result" id="15" from="clayster.com" to="995fab3dd759452ca9c370647323af0c@clayster.com/ebe2348e">
+      <query xmlns="http://jabber.org/protocol/disco#items">
+       ...
+         <item jid="discovery.clayster.com" name="Registro de cosas"/>
+       ...
+      </query>
+   </iq>]]>
+		</example>
+		<p>
+			The client then loops through all components (items) and checks what features they support, until a Thing Registry is found:
+		</p>
+		<example caption="Service discovery information request made to each component">
+			<![CDATA[
+   <iq type='get'
+       from='device@clayster.com/device'
+       to='discovery.clayster.com'
+       id='16'>
+      <query xmlns='http://jabber.org/protocol/disco#info'/>
+   </iq>]]>
+		</example>
+		<example caption="Service discovery information response from each component">
+			<![CDATA[
+   <iq type='result'
+       from='discovery.clayster.com'
+       to='device@clayster.com/device'
+       id='16'>
+      <query xmlns='http://jabber.org/protocol/disco#info'>
+         ...
+         <feature var='urn:xmpp:iot:discovery'/>
+         ...
+      </query>
+   </iq>]]>
+		</example>
 	</section1>
 	<section1 topic='Implementation Notes' anchor='impl'>
+		<section2 topic='JID vs Component Thing Registries' anchor='jidvscomponent'>
+			<p>
+				A client must treat the connection between a Thing Registry differently if it is hosted as a client, having a JID, or if it is hosted as a Jabber Server Component.
+				If it is hosted as a server component, there's no need for the thing to become friends with the Thing Registry. Messages and requests can be made directly to the
+				server component without having to add it to the roster or request presence subscriptions. If the Thing Registry is hosted as a client, having a JID (@ in the address),
+				the Thing Registry must be added to the roster of the client before the client can communicate with the Thing Registry.
+			</p>
+		</section2>
 		<section2 topic='Meta Tags' anchor='tags'>
 			<p>
 				This document does not limit the number or names of tags used by Things to register meta information about themselves. However, it provides some general limits and defines
@@ -1573,6 +1759,11 @@
 					<td>Region associated with the Thing</td>
 				</tr>
 				<tr>
+					<td>ROOM</td>
+					<td>String</td>
+					<td>Room associated with the Thing</td>
+				</tr>
+				<tr>
 					<td>SN</td>
 					<td>String</td>
 					<td>Serial Number</td>
@@ -1601,7 +1792,7 @@
 				<strong>Note:</strong> Meta Tag names are case insensitive. In this document, all tag names have been written using upper case letters.
 			</p>
 		</section2>
-		<section2 topic='Friendships between Things and Registry'>
+		<section2 topic='Friendships between Things and Registry' anchor='friendships'>
 			<p>
 				In the case the Thing Registry is not the XMPP Server to which the Thing is connected, a friendship relationship between the Thing and the Thing Registry needs to be handled.
 				To minimize the number of concurrent friends the Thing Registry needs to maintain, a Thing must only maintain an active friendship with the registry if it needs to
@@ -1611,23 +1802,37 @@
 		</section2>
 	</section1>
 	<section1 topic='Security Considerations' anchor='security'>
-		<section2 topic='Hijacking predefined JIDs'>
+		<section2 topic='Jabber Components Protocol' anchor='jcp'>
+			<p>
+				The &xep0114; provides an elegant way to introduce external services as server components using a third port into the server (the first two being the client-to-server port
+				and the server-to-server port). But since XEP-0114 is historical, meaning it is not guaranteed to conform to v1.0 of the XMPP specification, it has some serious security
+				issues:
+			</p>
+			<ol>
+				<li>It lacks SSL/TLS support, or the starttls element to switch to TLS after connecting. This makes it possible to sniff traffic in this port.</li>
+				<li>It lacks SASL authentication. Instead a simple handshake is performed</li>
+				<li>There is no way to actually verify that the server is the server. This makes it possible to create a simple Man-in-the-middle attack.</li>
+			</ol>
+			<p>
+				For these reasons, it is not recommended that a Thing Registry service, publishing itself as a Jabber Server Component, does so from outside of the network. Instead, 
+				the Thing Registry should be installed on the same server or on a server in the same local area network, so that the Jabber Component protocol port is closed to the
+				Internet.
+			</p>
+			<p>
+				Since it is not guaranteed that an XMPP Server operator allows installation of third party products (such as a Thing Registry), the option to host a Thing Registry using
+				a normal JID is still available. It can be used in proof of concepts, etc. For scalability issues it is recommended that the Thing Registry be hosted as a Jabber Server
+				Component when the population of Things grows.
+			</p>
+		</section2>
+		<section2 topic='Hijacking predefined JIDs' anchor='hijackingjids'>
 			<p>
 				If using predefined user names when searching for a Thing Registry or Provisioning Server, care must be taken to which XMPP Server things connect.
-				It might be possible for third parties to register these predefined account names (for example discovery@jabber.org or provisioning@jabber.org), and
-				pretend to be a Thing Registry or Provisioning Server and in this way hijack unsuspecting Things. If installing things using this method of finding
-				a Thing Registry or Provisioning Server, these accounts must be registered beforehand, to make sure the things cannot be hijacked.
+				It might be possible for third parties to register these predefined account names, and pretend to be a Thing Registry or Provisioning Server and in this way hijack 
+				unsuspecting Things. If installing things using this method of finding a Thing Registry or Provisioning Server, these accounts must be registered beforehand, to make 
+				sure the things cannot be hijacked.
 			</p>
 		</section2>
-		<section2 topic='Hijacking nicknames'>
-			<p>
-				If searching for accounts with predefined nick names when searching for a Thing Registry or Provisioning Server, care must be taken to which XMPP Server things connect.
-				It might be possible for third parties to register accounts with similar nicknames and pretend to be a Thing Registry or Provisioning Server and in this way hijack unsuspecting Things.
-				If installing things using this method of finding a Thing Registry or Provisioning Server, care must be taken so that undesired third parties are not allowed to create accounts
-				on the server.
-			</p>
-		</section2>
-		<section2 topic='Hijacking things in public areas'>
+		<section2 topic='Hijacking things in public areas' anchor='hijackingthings'>
 			<p>
 				The combination of visible key meta information (perhaps in a visible QR-code) and a factory default reset button on a Thing, opens up the possibility to hijack the Thing.
 				To avoid this, at least one of the two should be removed after successful installation. Either the key meta information (QR-code) should be placed on the package or separate
@@ -1641,7 +1846,7 @@
 				thing hijacked.
 			</p>
 		</section2>
-		<section2 topic='Key meta information in searches'>
+		<section2 topic='Key meta information in searches' anchor='keysearch'>
 			<p>
 				Care should be taken what key meta information is used to accept an ownership claim. After a successful claim, this meta information is still available in the registry,
 				at least until the Thing is removed from the registry. While public in the registry, the meta information can be searched and presented to third parties. Access to this
@@ -1662,7 +1867,7 @@
 				</li>
 			</ul>
 		</section2>
-		<section2 topic='KEY tag'>
+		<section2 topic='KEY tag' anchor='key'>
 			<p>
 				The <strong>KEY</strong> tag is unique in that it is not searchable nor available is search results. For this reason it is ideal for providing secrets shared only
 				between the Thing and the owner. By providing a sufficiently long KEY value in the key meta information required to claim the Thing, guessing the information even though
@@ -1673,7 +1878,7 @@
 				the key cannot be learned by looking into the database of the registry, or by some other means.
 			</p>
 		</section2>
-		<section2 topic='Tag name spam'>
+		<section2 topic='Tag name spam' anchor='tagspam'>
 			<p>
 				This document does not limit tag names or the number of tags that can be used by Things. This opens up the possibility of tag spam. Malicious things could fill the database
 				of the registry by reporting random tag names until the database is full.
@@ -1683,24 +1888,24 @@
 				tag names defined in this document. If it has a configurable list of approved tags that can be stored, or if it allows any tags is an implementation decision.
 			</p>
 		</section2>
-		<section2 topic='External services for creating QR-codes'>
+		<section2 topic='External services for creating QR-codes' anchor='externalqr'>
 			<p>
 				If using external services when creating QR-codes, like the Google Charts API used in this document, make sure HTTPS is used and certificates validated. If HTTP is used,
 				meta-data tags used in Thing Registry registrations can be found out by sniffing the network, making it possible to hijack the corresponding devices.
 			</p>
 		</section2>
-		<section3 topic='DHCP Security Considerations'>
+		<section2 topic='DHCP Security Considerations' anchor='dhcpsec'>
 			<p>TBD</p>
 			<!-- TODO -->
-		</section3>
-		<section3 topic='DNS Security Considerations'>
+		</section2>
+		<section2 topic='DNS Security Considerations' anchor='dnssec'>
 			<p>TBD</p>
 			<!-- TODO -->
-		</section3>
-		<section3 topic='UPnP Security Considerations'>
+		</section2>
+		<section2 topic='UPnP Security Considerations' anchor='upnpsec'>
 			<p>TBD</p>
 			<!-- TODO -->
-		</section3>
+		</section2>
 	</section1>
 	<section1 topic='IANA Considerations' anchor='iana'>
 		<p>This document requires no interaction with &IANA;.</p>
@@ -1722,7 +1927,7 @@
  
     <xs:element name='register' type='Register'/>
     <xs:element name='mine' type='Mine'/>
-    <xs:element name='update' type='MetaDataNodeInfo'/>
+    <xs:element name='update' type='Update'/>
  
     <xs:element name='claimed' type='Claimed'/>
     <xs:element name='remove' type='Jid'/>
@@ -1787,13 +1992,12 @@
         <xs:attribute name='sourceId' type='xs:string' use='optional'/>
         <xs:attribute name='cacheType' type='xs:string' use='optional'/>
     </xs:attributeGroup>
-    
+     
     <xs:complexType name='MetaData'>
         <xs:choice minOccurs='0' maxOccurs='unbounded'>
             <xs:element name='str' type='StrTag'/>
             <xs:element name='num' type='NumTag'/>
         </xs:choice>
-        <xs:attributeGroup ref='nodeInfo'/>
     </xs:complexType>
  
     <xs:complexType name='MetaDataNodeInfo'>
@@ -1811,11 +2015,19 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-  
+ 
     <xs:complexType name='Mine'>
         <xs:complexContent>
-            <xs:extension base='MetaData'>
+            <xs:extension base='MetaDataNodeInfo'>
                 <xs:attribute name='public' type='xs:boolean' use='optional' default='true'/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+ 
+    <xs:complexType name='Update'>
+        <xs:complexContent>
+            <xs:extension base='MetaDataNodeInfo'>
+                <xs:attribute name='jid' type='xs:string' use='optional'/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -1892,8 +2104,8 @@
 	</section1>
 	<section1 topic='Acknowledgements' anchor='ack'>
 		<p>
-			Thanks to Henrik Svedlund, Joachim Lindborg, Joakim Eriksson, Joakim Ramberg, Johannes Hund, Karin Forsell, Lars Åkerskog, Olof Zandrén, Steffen Larsen Teemu Väisänen and
-			Yusuke Doi for all valuable feedback.
+			Thanks to Eelco Cramer, Henrik Svedlund, Ivan Vučica, Joachim Lindborg, Joakim Eriksson, Joakim Ramberg, Johannes Hund, Karin Forsell, Kevin Smith, Lance Stout, Lars Åkerskog, 
+			Olof Zandrén, Philipp Hancke, Steffen Larsen, Teemu Väisänen and Yusuke Doi for all valuable feedback.
 		</p>
 	</section1>
 </xep>

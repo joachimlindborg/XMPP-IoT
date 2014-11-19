@@ -15,6 +15,10 @@ http://xmpp.org/extensions/xep-0286.html (Mobile devices)
 	%ents;
 ]>
 <?xml-stylesheet type='text/xsl' href='xep.xsl'?>
+<!-- 
+© Clayster 2014
+Author: Peter Waher 
+-->
 <xep>
 	<header>
 		<title>XEP Template</title>

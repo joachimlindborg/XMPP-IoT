@@ -22,6 +22,10 @@ this implies that there is little or no point in sending traversal commands to r
 %ents;
 ]>
 <?xml-stylesheet type='text/xsl' href='xep.xsl'?>
+<!-- 
+© Clayster 2014
+Author: Peter Waher 
+-->
 <xep>
 	<header>
 		<title>XEP Template</title>

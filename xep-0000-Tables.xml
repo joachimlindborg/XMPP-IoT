@@ -4,6 +4,10 @@
 %ents;
 ]>
 <?xml-stylesheet type='text/xsl' href='xep.xsl'?>
+<!-- 
+© Clayster, 2013-2014
+Author: Peter Waher 
+-->
 <xep>
     <header>
         <title>Tables in Instant Messaging</title>

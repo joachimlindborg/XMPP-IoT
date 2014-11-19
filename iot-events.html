@@ -1,0 +1,886 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>XEP-xxxx: Internet of Things - Events</title>
+    <link rel="stylesheet" type="text/css" href="xmpp.css">
+    <link href="prettify.css" type="text/css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"><script type="text/javascript" src="prettify.js"></script><meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=2.0">
+    <meta name="DC.Title" content="Internet of Things - Events">
+    <meta name="DC.Creator" content="Peter Waher">
+    <meta name="DC.Description" content="This specification describes an architecture based on the XMPP protocol whereby Things can subscribe to events from other Things based on sensor data available.">
+    <meta name="DC.Publisher" content="XMPP Standards Foundation">
+    <meta name="DC.Contributor" content="XMPP Extensions Editor">
+    <meta name="DC.Date" content="2014-08-13">
+    <meta name="DC.Type" content="XMPP Extension Protocol">
+    <meta name="DC.Format" content="XHTML">
+    <meta name="DC.Identifier" content="XEP-xxxx">
+    <meta name="DC.Language" content="en">
+    <meta name="DC.Rights" content="This XMPP Extension Protocol is copyright © 1999 - 2014 by the XMPP Standards Foundation (XSF).">
+  </head>
+  <body onload="prettyPrint()">
+    <h1>XEP-xxxx: Internet of Things - Events</h1>
+    <table>
+      <tr valign="top">
+        <td><strong>Abstract:</strong></td>
+        <td>This specification describes an architecture based on the XMPP protocol whereby Things can subscribe to events from other Things based on sensor data available.</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Author:</strong></td>
+        <td>Peter Waher</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Copyright:</strong></td>
+        <td>© 1999 - 2014 XMPP Standards Foundation. <a href="#appendix-legal">SEE LEGAL NOTICES</a>.</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Status:</strong></td>
+        <td>ProtoXEP</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Type:</strong></td>
+        <td>Standards Track</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Version:</strong></td>
+        <td>0.0.1</td>
+      </tr>
+      <tr valign="top">
+        <td><strong>Last Updated:</strong></td>
+        <td>2014-08-13</td>
+      </tr>
+    </table>
+    <hr>
+    <p style="color:red">WARNING: This document has not yet been accepted for consideration or approved in any official manner by the XMPP Standards Foundation, and this document is not yet an XMPP Extension Protocol (XEP). If this document is accepted as a XEP by the XMPP Council, it will be published at &lt;<a href="http://xmpp.org/extensions/">http://xmpp.org/extensions/</a>&gt; and announced on the &lt;standards@xmpp.org&gt; mailing list.</p>
+    <hr>
+    <h2>Table of Contents</h2>
+    <div class="indent">
+      <p><br>1.  <a href="#intro">Introduction</a><br>2.  <a href="#glossary">Glossary</a><br>3.  <a href="#usecases">Use Cases</a><br>   
+      3.1.  <a href="#subscribemomentary">Request Subscription of momentary values</a><br>   
+      3.2.  <a href="#subscriptionrejected">Subscription rejected</a><br>   
+      3.3.  <a href="#sect-ID0E5PAC">Unsubscribing a subscription</a><br>   
+      3.4.  <a href="#subscribechanges">Requesting subscription of changes to fields values</a><br>   
+      3.5.  <a href="#subscribehistory">Requesting subscription of historical data correlated to events</a><br>   
+      3.6.  <a href="#subscribehistory">Requesting subscription of historical data correlated to events</a><br>   
+      3.7.  <a href="#subscribenodes">Requesting subscription of nodes behind a concentrator</a><br>4.  <a href="#support">Determining Support</a><br>5.  <a href="#impl">Implementation Notes</a><br>   
+      5.1.  <a href="#changeconditions">Change conditions</a><br>   
+      5.2.  <a href="#whentocheck">When to check event conditions</a><br>   
+      5.3.  <a href="#friendships">Removal of friendships</a><br>   
+      5.4.  <a href="#persistence">Power-down and persistence of subscriptions</a><br>   
+      5.5.  <a href="#overriding">Overriding subscriptions</a><br>6.  <a href="#security">Security Considerations</a><br>   
+      6.1.  <a href="#reevaluation">Re-evaluation of subscription contents</a><br>7.  <a href="#iana">IANA Considerations</a><br>8.  <a href="#registrar">XMPP Registrar Considerations</a><br>9.  <a href="#schema">XML Schema</a><br>10.  <a href="#moreinfo">For more information</a></p>
+      <p><a href="#appendices">Appendices</a><br>    <a href="#appendix-docinfo">A: Document Information</a><br>    <a href="#appendix-authorinfo">B: Author Information</a><br>    <a href="#appendix-legal">C: Legal Notices</a><br>    <a href="#appendix-xmpp">D: Relation to XMPP</a><br>    <a href="#appendix-discuss">E: Discussion Venue</a><br>    <a href="#appendix-conformance">F: Requirements Conformance</a><br>    <a href="#appendix-notes">G: Notes</a><br>    <a href="#appendix-revs">H: Revision History</a></p>
+    </div>
+    <hr>
+    <h2>1.
+       <a name="intro">Introduction</a></h2>
+        <p class="" style="">
+            This document specifies a method whereby devices or applications can subscribe to events from a Thing, based on sensor data, as defined in XEP-0323: <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0323.html">Internet of Things - Sensor Data</a></span>  [<a href="#nt-ID0EMD">1</a>]. While XEP-0323 defines a method
+            whereby the device or application can request sensor data information from a Thing when the device or application requires it, this document specifies a method whereby the Thing itself
+            informs the device or application of desired sensor data, when certain conditions have been met, defined by the device or application.
+        </p>
+        <p class="" style="">
+            The architecture defined in this document, permits the specification of conditions individually, something that would not be possible, or very difficult to achieve, if a centralized 
+            publish/subscribe or multi-cast pattern would have been used. By allowing individual conditions to be specified, devices or applications can be informed of information that best suit them, 
+            and when it suits them, instead of having to figure out, from the Thing perspective, a common denominator, sufficiently good for all intended devices or applications. Furthermore, 
+            by aligning itself with XEP-0323 and the request/response pattern, the Thing can easily integrate with a provisioning server, as defined in XEP-0324: <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0324.html">Internet of Things - Provisioning</a></span>  [<a href="#nt-ID0E4D">2</a>], to allow for delegation 
+            of trust and allowing detailed provisioning of who is allowed to receive what information. Through the use of attributes defined in XEP-0326: <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0EJE">3</a>] subscriptions can be extended
+            to underlying nodes controlled by the Thing as well.
+        </p>
+        <p class="" style="">
+            Internet of Things contains many different architectures and use cases. For this reason, the IoT standards have been divided into multiple XEPs according to the following table:
+        </p>
+        <div class="indent">
+      <p class="caption"><a name="table-1"></a>Table 1: Internet of Things XEPs</p>
+      <table border="1" cellpadding="3" cellspacing="0">
+            <tr class="body">
+                <th colspan="" rowspan="">XEP</th>
+                <th colspan="" rowspan="">Description</th>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">xep-0000-IoT-BatteryPoweredSensors</td>
+                <td colspan="" rowspan="">Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">xep-0000-IoT-Events</td>
+                <td colspan="" rowspan="">This specification. Defines how Things send events, how event subscription, hysteresis levels, etc., are configured.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">xep-0000-IoT-Interoperability</td>
+                <td colspan="" rowspan="">Defines guidelines for how to achieve interoperability in Internet of Things, publishing interoperability interfaces for different types of devices.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">xep-0000-IoT-Multicast</td>
+                <td colspan="" rowspan="">Defines how sensor data can be multicast in efficient ways.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">xep-0000-IoT-PubSub</td>
+                <td colspan="" rowspan="">Defines how efficient publication of sensor data can be made in Internet of Things.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">xep-0000-IoT-Chat</td>
+                <td colspan="" rowspan="">Defines how human-to-machine interfaces should be constructed using chat messages to be user friendly, automatable and consistent with other IoT extensions and possible underlying architecture.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">XEP-0322</td>
+                <td colspan="" rowspan="">
+                    Defines how to EXI can be used in XMPP to achieve efficient compression of data. Albeit not an Internet of Things specific XEP, this XEP should be considered
+                    in all Internet of Things implementations where memory and packet size is an issue.
+                </td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">XEP-0323</td>
+                <td colspan="" rowspan="">
+                    Provides the underlying architecture, basic operations and data structures for sensor data communication over XMPP networks.
+                    It includes a hardware abstraction model, removing any technical detail implemented in underlying technologies. This XEP is used by all other
+                    Internet of Things XEPs.
+                </td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">XEP-0324</td>
+                <td colspan="" rowspan="">Defines how provisioning, the management of access privileges, etc., can be efficiently and easily implemented.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">XEP-0325</td>
+                <td colspan="" rowspan="">Defines how to control actuators and other devices in Internet of Things.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">XEP-0326</td>
+                <td colspan="" rowspan="">Defines how to handle architectures containing concentrators or servers handling multiple Things.</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">XEP-0331</td>
+                <td colspan="" rowspan="">Defines extensions for how color parameters can be handled, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EMBAC">4</a>]</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">XEP-0336</td>
+                <td colspan="" rowspan="">Defines extensions for how dynamic forms can be created, based on <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0004.html">Data Forms</a></span>  [<a href="#nt-ID0EDCAC">5</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0122.html">Data Forms Validation</a></span>  [<a href="#nt-ID0EPCAC">6</a>], <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0137.html">Publishing Stream Initiation Requests</a></span>  [<a href="#nt-ID0E2CAC">7</a>] and <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0141.html">Data Forms Layout</a></span>  [<a href="#nt-ID0EHDAC">8</a>].</td>
+            </tr>
+            <tr class="body">
+                <td colspan="" rowspan="">XEP-0347</td>
+                <td colspan="" rowspan="">Defines the peculiars of Thing discovery in Internet of Things. Apart from discovering Things by JID, it also defines how to discover Things based on location, etc.</td>
+            </tr>
+        </table>
+    </div>
+    <h2>2.
+       <a name="glossary">Glossary</a></h2>
+        <p class="" style="">The following table lists common terms and corresponding descriptions.</p>
+        <div class="indent">
+      <dl>
+            <di>
+                <dt><strong>Actuator</strong></dt>
+                <dd>Device containing at least one configurable property or output that can and should be controlled by some other entity or device.</dd>
+            </di>
+            <di>
+                <dt><strong>Computed Value</strong></dt>
+                <dd>A value that is computed instead of measured.</dd>
+            </di>
+            <di>
+                <dt><strong>Concentrator</strong></dt>
+                <dd>Device managing a set of devices which it publishes on the XMPP network.</dd>
+            </di>
+            <di>
+                <dt><strong>Field</strong></dt>
+                <dd>
+                    One item of sensor data. Contains information about: Node, Field Name, Value, Precision, Unit, Value Type, Status, Timestamp, Localization information, etc.
+                    Fields should be unique within the triple (Node ID, Field Name, Timestamp).
+                </dd>
+            </di>
+            <di>
+                <dt><strong>Field Name</strong></dt>
+                <dd>Name of a field of sensor data. Examples: Energy, Volume, Flow, Power, etc.</dd>
+            </di>
+            <di>
+                <dt><strong>Field Type</strong></dt>
+                <dd>What type of value the field represents. Examples: Momentary Value, Status Value, Identification Value, Calculated Value, Peak Value, Historical Value, etc.</dd>
+            </di>
+            <di>
+                <dt><strong>Historical Value</strong></dt>
+                <dd>A value stored in memory from a previous timestamp.</dd>
+            </di>
+            <di>
+                <dt><strong>Identification Value</strong></dt>
+                <dd>A value that can be used for identification. (Serial numbers, meter IDs, locations, names, etc.)</dd>
+            </di>
+            <di>
+                <dt><strong>Localization information</strong></dt>
+                <dd>Optional information for a field, allowing the sensor to control how the information should be presented to human viewers.</dd>
+            </di>
+            <di>
+                <dt><strong>Meter</strong></dt>
+                <dd>A device possible containing multiple sensors, used in metering applications. Examples: Electricity meter, Water Meter, Heat Meter, Cooling Meter, etc.</dd>
+            </di>
+            <di>
+                <dt><strong>Momentary Value</strong></dt>
+                <dd>A momentary value represents a value measured at the time of the read-out.</dd>
+            </di>
+            <di>
+                <dt><strong>Node</strong></dt>
+                <dd>
+                    Graphs contain nodes and edges between nodes. In Internet of Things, sensors, actuators, meters, devices, gateways, etc., are often depicted as nodes whereas links between sensors (friendships)
+                    are depicted as edges. In abstract terms, it's easier to talk about a Node, rather than list different possible node types (sensors, actuators, meters, devices, gateways, etc.).
+                    Each Node has a Node ID.
+                </dd>
+            </di>
+            <di>
+                <dt><strong>Node ID</strong></dt>
+                <dd>
+                    An ID uniquely identifying a node within its corresponding context. If a globally unique ID is desired, an architecture should be used using a universally accepted
+                    ID scheme.
+                </dd>
+            </di>
+            <di>
+                <dt><strong>Parameter</strong></dt>
+                <dd>
+                    Readable and/or writable property on a node/device. The XEP-0326 <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0326.html">Internet of Things - Concentrators</a></span>  [<a href="#nt-ID0ENHAC">9</a>] deals with reading and writing parameters
+                    on nodes/devices. Fields are not parameters, and parameters are not fields.
+                </dd>
+            </di>
+            <di>
+                <dt><strong>Peak Value</strong></dt>
+                <dd>A maximum or minimum value during a given period.</dd>
+            </di>
+            <di>
+                <dt><strong>Precision</strong></dt>
+                <dd>
+                    In physics, precision determines the number of digits of precision. In sensor networks however, this definition is not easily applicable. Instead, precision
+                    determines, for example, the number of decimals of precision, or power of precision. Example: 123.200 MWh contains 3 decimals of precision. All entities parsing and
+                    delivering field information in sensor networks should always retain the number of decimals in a message.
+                </dd>
+            </di>
+            <di>
+                <dt><strong>Sensor</strong></dt>
+                <dd>
+                    Device measuring at least one digital value (0 or 1) or analog value (value with precision and physical unit). Examples: Temperature sensor, pressure sensor, etc.
+                    Sensor values are reported as fields during read-out. Each sensor has a unique Node ID.
+                </dd>
+            </di>
+            <di>
+                <dt><strong>SN</strong></dt>
+                <dd>Sensor Network. A network consisting, but not limited to sensors, where transport and use of sensor data is of primary concern. A sensor network may contain actuators, network applications, monitors, services, etc.</dd>
+            </di>
+            <di>
+                <dt><strong>Status Value</strong></dt>
+                <dd>A value displaying status information about something.</dd>
+            </di>
+            <di>
+                <dt><strong>Timestamp</strong></dt>
+                <dd>Timestamp of value, when the value was sampled or recorded.</dd>
+            </di>
+            <di>
+                <dt><strong>Token</strong></dt>
+                <dd>
+                    A client, device or user can get a token from a provisioning server. These tokens can be included in requests to other entities in the network, so these entities can validate
+                    access rights with the provisioning server.
+                </dd>
+            </di>
+            <di>
+                <dt><strong>Unit</strong></dt>
+                <dd>Physical unit of value. Example: MWh, l/s, etc.</dd>
+            </di>
+            <di>
+                <dt><strong>Value</strong></dt>
+                <dd>A field value.</dd>
+            </di>
+            <di>
+                <dt><strong>Value Status</strong></dt>
+                <dd>Status of field value. Contains important status information for Quality of Service purposes. Examples: Ok, Error, Warning, Time Shifted, Missing, Signed, etc.</dd>
+            </di>
+            <di>
+                <dt><strong>Value Type</strong></dt>
+                <dd>Can be numeric, string, boolean, Date &amp; Time, Time Span or Enumeration.</dd>
+            </di>
+            <di>
+                <dt><strong>WSN</strong></dt>
+                <dd>Wireless Sensor Network, a sensor network including wireless devices.</dd>
+            </di>
+            <di>
+                <dt><strong>XMPP Client</strong></dt>
+                <dd>Application connected to an XMPP network, having a JID. Note that sensors, as well as applications requesting sensor data can be XMPP clients.</dd>
+            </di>
+        </dl>
+    </div>
+    <h2>3.
+       <a name="usecases">Use Cases</a></h2>
+        <p class="" style="">
+            Subscribing to events is performed much the same way as requesting sensor data from a device, as defined in <a href="http://xmpp.org/extensions/xep-0323.html#usecases">XEP-0323</a>.
+            Instead of requesting the data using the <span class="strong">req</span> element of the <span class="strong">urn:xmpp:iot:sensordata</span> namespace, it is done using the <span class="strong">subscribe</span> element 
+            of the <span class="strong">urn:xmpp:iot:events</span> namespace. Much of the syntax of this <span class="strong">subscribe</span> element coincides with that of the <span class="strong">req</span> element,
+            with some differences, as will be described in this document.
+        </p>
+        <p class="" style="">
+            Responses and sensor data is then sent from the device to the subscriber, in the same way as defined in XEP-0323, with one notable difference: The sequence number <span class="strong">seqnr</span>
+            provided in the request, is not forgotten once a readout has been completed, but will be reused every time the Thing reports data to the subscriber. The subscriber must use this sequence
+            number to correlate incoming sensor data with original request. Furthermore, the subscriber must not reuse the sequence number in other sensor data requests to the Thing, while the subscription
+            is alive.
+        </p>
+        <p class="" style="">
+            A subscription is cancelled by the subscriber sending a request with an <span class="strong">unsubscribe</span> element in it to the Thing. The Thing can also automatically remove subscriptions
+            if the corresponding friendship ends. Furthermore, event conditions should only be evaluated if the corresponding subscriber is online. This, to avoid offline messages to pile up.
+            Once a friend comes online, any subscription conditions corresponding to that friend should be evaluated to inform it of the current state of the Thing.
+        </p>
+        <div class="indent">
+      <h3>3.1 <a name="subscribemomentary">Request Subscription of momentary values</a></h3>
+            <p class="" style="">
+                The client that wishes to receive momentary values regularly from the sensor initiates the request using the <span class="strong">subscribe</span> element sent to the device.
+                In the following example, a subscription is made to receive momentary values every five minutes (specified by the <span class="strong">maxInterval</span> attribute), with no 
+                field-specific conditions attached.
+            </p>
+            <p class="caption"><a name="example-1"></a>Example 1. Subscription request of momentary values from a device</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com/amr'
+       to='device@clayster.com'
+       id='S0001'&gt;
+      &lt;subscribe xmlns='urn:xmpp:iot:events' seqnr='1' momentary='true' maxInterval='PT5M' req='true'/&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+            <p class="" style="">
+                When the device has received and accepted the request, it responds as follows, using the <span class="strong">accepted</span> element defined in XEP-0323. Sensor data is later reported
+                in a way similar to XEP-0323, with the exception that the <span class="strong">seqnr</span> will be reused every time the event occurs. If the event causes multiple messages to be sent,
+                the receiver knows which one is the last message, by looking at the <span class="strong">done</span> attribute. Since the <span class="strong">req</span> attribute is set to <span class="strong">true</span>,
+                an event will be sent back immediately (i.e. emulating a parallel readout request operation).
+            </p>
+            <p class="caption"><a name="example-2"></a>Example 2. Subscription request accepted by device</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='result'
+       from='device@clayster.com'
+       to='client@clayster.com/amr'
+       id='S0001'&gt;
+      &lt;accepted xmlns='urn:xmpp:iot:sensordata' seqnr='1'/&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.2 <a name="subscriptionrejected">Subscription rejected</a></h3>
+            <p class="" style="">
+                If for some reason, the device rejects the subscription request, the communication sequence might look as follows:
+            </p>
+            <p class="caption"><a name="example-3"></a>Example 3. Momentary read-out rejected</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com/amr'
+       to='device@clayster.com'
+       id='S0002'&gt;
+      &lt;subscribe xmlns='urn:xmpp:iot:events' seqnr='1' momentary='true' maxInterval='PT5M'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='error'
+       from='device@clayster.com'
+       to='client@clayster.com/amr'
+       id='S0002'&gt;
+      &lt;error type='cancel'&gt;
+         &lt;forbidden xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'/&gt;
+         &lt;text xmlns='urn:ietf:params:xml:ns:xmpp-stanzas' xml:lang='en'&gt;Access denied.&lt;/text&gt;
+      &lt;/error&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+            <p class="" style="">
+                Depending on the reason for rejecting the request, different XMPP errors can be returned, according to the description in the following table. The table also
+                lists recommended error type for each error. Any custom error message is returned in a <span class="strong">text</span> element, as in the example above.
+            </p>
+            <div class="indent">
+        <p class="caption"><a name="table-2"></a>Table 2: XMPP Errors when rejecting a subscription request</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+                <tr class="body">
+                    <th colspan="" rowspan="">Error Type</th>
+                    <th colspan="" rowspan="">Error Element</th>
+                    <th colspan="" rowspan="">Namespace</th>
+                    <th colspan="" rowspan="">Description</th>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">cancel</td>
+                    <td colspan="" rowspan="">forbidden</td>
+                    <td colspan="" rowspan="">urn:ietf:params:xml:ns:xmpp-stanzas</td>
+                    <td colspan="" rowspan="">If the caller lacks privileges to perform the action.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">cancel</td>
+                    <td colspan="" rowspan="">item-not-found</td>
+                    <td colspan="" rowspan="">urn:ietf:params:xml:ns:xmpp-stanzas</td>
+                    <td colspan="" rowspan="">If an item or data source could not be found.</td>
+                </tr>
+                <tr class="body">
+                    <td colspan="" rowspan="">modify</td>
+                    <td colspan="" rowspan="">bad-request</td>
+                    <td colspan="" rowspan="">urn:ietf:params:xml:ns:xmpp-stanzas</td>
+                    <td colspan="" rowspan="">If the request was malformed. Examples can include trying to subscribe to information from a device behind a concentrator, without including node information.</td>
+                </tr>
+            </table>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.3 <a name="sect-ID0E5PAC">Unsubscribing a subscription</a></h3>
+            <p class="" style="">
+                To unsubscribe a subscription, send the <span class="strong">unsubscribe</span> element in a request to the Thing with the <span class="strong">seqnr</span> sequence number corresponding to the
+                subscription. The Thing responds with an empty response to acknowledge the un-subscription, regardless if the subscription existed or not.
+            </p>
+            <p class="caption"><a name="example-4"></a>Example 4. Unsubscribing a subscription</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com/amr'
+       to='device@clayster.com'
+       id='S0003'&gt;
+      &lt;unsubscribe xmlns='urn:xmpp:iot:events' seqnr='1'/&gt;
+   &lt;/iq&gt;
+   
+   &lt;iq type='result'
+       from='device@clayster.com'
+       to='client@clayster.com/amr'
+       id='S0003'/&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.4 <a name="subscribechanges">Requesting subscription of changes to fields values</a></h3>
+            <p class="" style="">
+                The client that wishes to receive information when a field or a set fields change, can do so by specifying amount of change allowed in the corresponding
+                <span class="strong">field</span> elements in the subscription. It can also provide optional current values from which the change is measured. If current values are not
+                provided, the Thing uses its corresponding set of current values at the time it receives the request. Current values use the corresponding unit held by the field.
+                To find out, if unsure, you need to make a sensor data readout first.
+            </p>
+            <p class="" style="">
+                In the following example, events are sent when light changes by more than 5 units (of a percent), or if a motion detector changes value. Temperature information at the
+                time of the event is also requested. If the conditions are not met within fifteen minutes, an event is raised anyway (as defined using the <span class="strong">maxInterval</span>
+                attribute). The <span class="strong">minInterval</span> attribute makes sure events are not sent more often than every five seconds.
+            </p>
+            <p class="caption"><a name="example-5"></a>Example 5. Requesting subscription of changes to fields values</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com/amr'
+       to='device@clayster.com'
+       id='S0004'&gt;
+      &lt;subscribe xmlns='urn:xmpp:iot:events' seqnr='1' momentary='true' maxInterval='PT15M' minInterval='PT5S'&gt;
+          &lt;field name='Light' changedBy='5'/&gt;
+          &lt;field name='Motion' changedBy='1' currentValue='0'/&gt;
+          &lt;field name='Temperature'/&gt;
+      &lt;/subscribe&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.5 <a name="subscribehistory">Requesting subscription of historical data correlated to events</a></h3>
+            <p class="" style="">
+                Any type of sensor data can be included in an event subscription, including historical data. To limit the amount of historical data to return in an event,
+                the <span class="strong">maxAge</span> attribute can be used, instead of the absolute <span class="strong">from</span> and <span class="strong">to</span> attributes available in the
+                corresponding <span class="strong">req</span> element. The following example requests the last five minutes of historical temperature and light data as soon as the motion detector
+                detects motion (change upwards of 1).
+            </p>
+            <p class="caption"><a name="example-6"></a>Example 6. Requesting subscription of historical data correlated to events</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com/amr'
+       to='device@clayster.com'
+       id='S0005'&gt;
+      &lt;subscribe xmlns='urn:xmpp:iot:events' seqnr='1' all='true' minInterval='PT1M' maxAge='PT5M'&gt;
+          &lt;field name='Temperature'/&gt;
+          &lt;field name='Light'/&gt;
+          &lt;field name='Motion' changedUp='1'/&gt;
+      &lt;/subscribe&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.6 <a name="subscribehistory">Requesting subscription of historical data correlated to events</a></h3>
+            <p class="" style="">
+                Any type of sensor data can be included in an event subscription, including historical data. To limit the amount of historical data to return in an event,
+                the <span class="strong">maxAge</span> attribute can be used, instead of the absolute <span class="strong">from</span> and <span class="strong">to</span> attributes available in the
+                corresponding <span class="strong">req</span> element. The following example requests the last five minutes of historical temperature and light data as soon as the motion detector
+                detects motion (change upwards of 1).
+            </p>
+            <p class="caption"><a name="example-7"></a>Example 7. Requesting subscription of historical data correlated to events</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com/amr'
+       to='device@clayster.com'
+       id='S0006'&gt;
+      &lt;subscribe xmlns='urn:xmpp:iot:events' seqnr='1' all='true' minInterval='PT1M' maxAge='PT5M'&gt;
+          &lt;field name='Temperature'/&gt;
+          &lt;field name='Light'/&gt;
+          &lt;field name='Motion' changedUp='1'/&gt;
+      &lt;/subscribe&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>3.7 <a name="subscribenodes">Requesting subscription of nodes behind a concentrator</a></h3>
+            <p class="" style="">
+                To subscribe to events from one or more nodes behind a concentrator, the nodes have to be specified using <span class="strong">node</span> elements in the subscription request.
+                If more than one node is present, the subscription request is assumed to be made to each node individually. When the subscription conditions are met, the corresponding
+                node sends its sensor data back to the subscriber. Note that only the node where the conditions are met include data in the message sent to the subscriber. Event subscriptions
+                are handled individually for each node.
+            </p>
+            <p class="" style="">
+                In the following example, a subscription of any changes to a sequence of digital inputs handled by a PLC is made.
+            </p>
+            <p class="caption"><a name="example-8"></a>Example 8. Requesting subscription of nodes behind a concentrator</p>
+      <div class="indent">
+        <pre class="prettyprint">
+                
+   &lt;iq type='get'
+       from='client@clayster.com/amr'
+       to='plc@clayster.com'
+       id='S0007'&gt;
+      &lt;subscribe xmlns='urn:xmpp:iot:events' seqnr='1' momentary='true' minInterval='PT5S' maxInternval='PT1H'&gt;
+          &lt;node nodeId='DI1'/&gt;
+          &lt;node nodeId='DI2'/&gt;
+          &lt;node nodeId='DI3'/&gt;
+          &lt;node nodeId='DI4'/&gt;
+          &lt;field name='State' changeBy='1' currentValue='0'/&gt;
+      &lt;/subscribe&gt;
+   &lt;/iq&gt;
+            </pre>
+      </div>
+        </div>
+    <h2>4.
+       <a name="support">Determining Support</a></h2>
+        <p class="" style="">If an entity supports the protocol specified herein, it MUST advertise that fact by returning a feature of "urn:xmpp:iot:events" in response to <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0030.html">Service Discovery</a></span>  [<a href="#nt-ID0EVDAE">10</a>] information requests.</p>
+        <p class="caption"><a name="example-9"></a>Example 9. Service discovery information request</p>
+    <div class="indent">
+      <pre class="prettyprint">
+            
+&lt;iq type='get'
+    from='client@clayster.com/amr'
+    to='device@clayster.com'
+    id='disco1'&gt;
+  &lt;query xmlns='http://jabber.org/protocol/disco#info'/&gt;
+&lt;/iq&gt;
+        </pre>
+    </div>
+        <p class="caption"><a name="example-10"></a>Example 10. Service discovery information response</p>
+    <div class="indent">
+      <pre class="prettyprint">
+            
+&lt;iq type='result'
+    from='device@clayster.com'
+    to='client@clayster.com/amr'
+    id='disco1'&gt;
+  &lt;query xmlns='http://jabber.org/protocol/disco#info'&gt;
+    ...
+    &lt;feature var='urn:xmpp:iot:events'/&gt;
+    ...
+  &lt;/query&gt;
+&lt;/iq&gt;
+        </pre>
+    </div>
+        <p class="" style="">
+            In order for an application to determine whether an entity supports this protocol, where possible it SHOULD use the dynamic, presence-based profile of service discovery defined
+            in <span class="ref" style=""><a href="http://xmpp.org/extensions/xep-0115.html">Entity Capabilities</a></span>  [<a href="#nt-ID0EMEAE">11</a>]. However, if an application has not received entity capabilities information from an entity, it SHOULD use explicit service discovery instead.
+        </p>
+    <h2>5.
+       <a name="impl">Implementation Notes</a></h2>
+        <div class="indent">
+      <h3>5.1 <a name="changeconditions">Change conditions</a></h3>
+            <p class="" style="">
+                An integral part of conditions, is the measurement of changes of magnitudes of field values. Three attributes available on the <span class="strong">field</span> element, can be used to define
+                how to measure changes. The <span class="strong">changedUp</span> attribute provides a numerical value limiting the amount of upwards change in the field before an event is triggered.
+                The <span class="strong">changedDown</span> attributes provides a similar means to control the amount of downwards change in the field, before an event is triggered. If only one of these
+                are provided, only changes in that direction trigger events. If the <span class="strong">changedBy</span> attribute is provided, the other two attributes are ignored, and assumed to
+                be of the same value as the <span class="strong">changedBy</span> attribute value. All changes are specified using positive numbers.
+            </p>
+            <p class="" style="">
+                The following table shows how magnitudes are calculated for field values of different types:
+            </p>
+            <div class="indent">
+        <p class="caption"><a name="table-3"></a>Table 3: Magnitude of change per field type</p>
+        <table border="1" cellpadding="3" cellspacing="0">
+                <tr class="body">
+                    <th colspan="" rowspan="">Type</th>
+                    <th colspan="" rowspan="">Magnitude</th>
+                </tr>
+                <tr class="body">
+                    <th colspan="" rowspan="">boolean</th>
+                    <td colspan="" rowspan="">Magnitude is 0 if false, and 1 if true.</td>
+                </tr>
+                <tr class="body">
+                    <th colspan="" rowspan="">date</th>
+                    <td colspan="" rowspan="">Number of seconds since an implementation specific point in time. Since only changes are measured, actual point in time is not important.</td>
+                </tr>
+                <tr class="body">
+                    <th colspan="" rowspan="">dateTime</th>
+                    <td colspan="" rowspan="">Number of seconds since an implementation specific point in time. Since only changes are measured, actual point in time is not important.</td>
+                </tr>
+                <tr class="body">
+                    <th colspan="" rowspan="">duration</th>
+                    <td colspan="" rowspan="">Corresponding number of seconds.</td>
+                </tr>
+                <tr class="body">
+                    <th colspan="" rowspan="">enum</th>
+                    <td colspan="" rowspan="">Any change to this value, corresponds to a change by 1. If direction of change is important, values are ordered by lexical order.</td>
+                </tr>
+                <tr class="body">
+                    <th colspan="" rowspan="">int</th>
+                    <td colspan="" rowspan="">The value itself.</td>
+                </tr>
+                <tr class="body">
+                    <th colspan="" rowspan="">long</th>
+                    <td colspan="" rowspan="">The value itself.</td>
+                </tr>
+                <tr class="body">
+                    <th colspan="" rowspan="">numeric</th>
+                    <td colspan="" rowspan="">The value itself, without unit. The magnitude specified in any change attributes is assumed to be specified using the same unit as the corresponding field.</td>
+                </tr>
+                <tr class="body">
+                    <th colspan="" rowspan="">string</th>
+                    <td colspan="" rowspan="">Any change to this value, corresponds to a change by 1. If direction of change is important, values are ordered by lexical order.</td>
+                </tr>
+                <tr class="body">
+                    <th colspan="" rowspan="">time</th>
+                    <td colspan="" rowspan="">Corresponding number of seconds.</td>
+                </tr>
+            </table>
+      </div>
+        </div>
+        <div class="indent">
+      <h3>5.2 <a name="whentocheck">When to check event conditions</a></h3>
+            <p class="" style="">
+                Event conditions should be checked, if the following conditions are true for the corresponding event:
+            </p>
+            <ul class="" style="">
+                <li class="" style="">
+                    One of the following conditions are true:
+                    <ul class="" style="">
+                        <li class="" style="">A new value is available.</li>
+                        <li class="" style="">A subscriber comes online.</li>
+                        <li class="" style="">The minimum interval timer expires, if specified.</li>
+                        <li class="" style="">The maximum interval timer expires, if specified.</li>
+                    </ul>
+                </li>
+                <li class="" style="">The corresponding subscriber is online.</li>
+                <li class="" style="">
+                    The corresponding event has not been triggered within <span class="strong">minInterval</span> seconds, if specified.
+                </li>
+            </ul>
+        </div>
+        <div class="indent">
+      <h3>5.3 <a name="friendships">Removal of friendships</a></h3>
+            <p class="" style="">
+                If a friendship is lost, i.e. presence information from the corresponding contact is unsubscribed, the Thing has to automatically remove any
+                event subscriptions available for that contact. If a new friendship is created with the same contact at a later stage, the contact has to request
+                new subscriptions.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>5.4 <a name="persistence">Power-down and persistence of subscriptions</a></h3>
+            <p class="" style="">
+                It is up to the thing, if it wants to persist event subscriptions or not. If not persisting event subscriptions, they will automatically be lost if the
+                Thing rests or restarts for some reason.
+            </p>
+            <p class="" style="">
+                If the subscriber considers an event subscription important, and wants to make sure a subscription survives any resets of the thing, the <span class="strong">maxInterval</span>
+                attribute should be used when requesting the subscription. If an event is not delivered within this time and a margin, the subscriber can assume the subscription
+                has been lost, and a new subscription can be made.
+            </p>
+        </div>
+        <div class="indent">
+      <h3>5.5 <a name="overriding">Overriding subscriptions</a></h3>
+            <p class="" style="">
+                A subscriber can only have one active subscription per node on a Thing. If a Thing does not support nodes, each subscriber can only have one active subscription 
+                per corresponding Thing. This means, that a new event subscription automatically overrides (or unsubscribes) any existing subscription on the corresponding node or Thing.
+                This in turn makes it easier for subscribers to handle restarts and avoids multiplicity problems due to lack of synchronization between subscriber and Thing.
+            </p>
+        </div>
+    <h2>6.
+       <a name="security">Security Considerations</a></h2>
+        <div class="indent">
+      <h3>6.1 <a name="reevaluation">Re-evaluation of subscription contents</a></h3>
+            <p class="" style="">
+                If a Thing is connected to a provisioning server, as defined in <span class="ref" style="">
+                    <a href="http://xmpp.org/extensions/xep-0324.html">XEP-324: Internet of Things - Provisioning</a>
+                </span>, it should re-evaluate event subscriptions contents if a <span class="strong">clearCache</span> command is received from the provisioning server.
+                To be able to do this properly, the contents of the original event subscription should be remembered. Re-evaluating active event subscriptions
+                after a <span class="strong">clearCache</span> command enables the owner of the Thing to modify current access rights in the Thing in real-time, including
+                contents send in events.
+            </p>
+            <p class="" style="">
+                Existing event subscriptions that are no longer permitted by the new set of rules in the provisioning server, can be removed from memory, without
+                informing the subscriber about the fact. The subscriber will be informed when re-subscribing, that access rights have been lost.
+            </p>
+        </div>
+    <h2>7.
+       <a name="iana">IANA Considerations</a></h2>
+        <p class="" style="">This document requires no interaction with the <span class="ref" style=""><a href="http://www.iana.org/">Internet Assigned Numbers Authority (IANA)</a></span>  [<a href="#nt-ID0EQNAE">12</a>].</p>
+    <h2>8.
+       <a name="registrar">XMPP Registrar Considerations</a></h2>
+        <p class="" style="">
+            The <a href="#schema">protocol schema</a> needs to be added to the list of <a href="http://xmpp.org/resources/schemas/">XMPP protocol schemas</a>.
+        </p>
+    <h2>9.
+       <a name="schema">XML Schema</a></h2>
+        <p class="caption">
+    </p>
+    <div class="indent">
+      <pre class="prettyprint">
+            
+&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;xs:schema
+    xmlns:xs='http://www.w3.org/2001/XMLSchema'
+    targetNamespace='urn:xmpp:iot:events'
+    xmlns='urn:xmpp:iot:events'
+    xmlns:sd='urn:xmpp:iot:sensordata'
+    elementFormDefault='qualified'&gt;
+
+    &lt;xs:import namespace='urn:xmpp:iot:sensordata'/&gt;
+    
+    &lt;xs:element name='subscribe'&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:choice minOccurs='0' maxOccurs='unbounded'&gt;
+                &lt;xs:element name='node'&gt;
+                    &lt;xs:complexType&gt;
+                        &lt;xs:attribute name='nodeId' type='xs:string' use='required'/&gt;
+                        &lt;xs:attribute name='sourceId' type='xs:string' use='optional'/&gt;
+                        &lt;xs:attribute name='cacheType' type='xs:string' use='optional'/&gt;
+                    &lt;/xs:complexType&gt;
+                &lt;/xs:element&gt;
+                &lt;xs:element name='field'&gt;
+                    &lt;xs:complexType&gt;
+                        &lt;xs:attribute name='name' type='xs:string' use='required'/&gt;
+                        &lt;xs:attribute name='currentValue' type='xs:double' use='optional'/&gt;
+                        &lt;xs:attribute name='changedBy' type='PositiveDouble' use='optional'/&gt;
+                        &lt;xs:attribute name='changedUp' type='PositiveDouble' use='optional'/&gt;
+                        &lt;xs:attribute name='changedDown' type='PositiveDouble' use='optional'/&gt;
+                    &lt;/xs:complexType&gt;
+                &lt;/xs:element&gt;
+            &lt;/xs:choice&gt;
+            &lt;xs:attribute name='seqnr' type='xs:int' use='required'/&gt;
+            &lt;xs:attributeGroup ref='sd:fieldTypes'/&gt;
+            &lt;xs:attribute name='all' type='xs:boolean' use='optional' default='false'/&gt;
+            &lt;xs:attribute name='historical' type='xs:boolean' use='optional' default='false'/&gt;
+            &lt;xs:attribute name='maxAge' type='xs:duration' use='optional'/&gt;
+            &lt;xs:attribute name='minInterval' type='xs:duration' use='optional'/&gt;
+            &lt;xs:attribute name='maxInterval' type='xs:duration' use='optional'/&gt;
+            &lt;xs:attribute name='serviceToken' type='xs:string' use='optional'/&gt;
+            &lt;xs:attribute name='deviceToken' type='xs:string' use='optional'/&gt;
+            &lt;xs:attribute name='userToken' type='xs:string' use='optional'/&gt;
+            &lt;xs:attribute name='req' type='xs:boolean' use='optional' default='false'/&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+
+    &lt;xs:element name='unsubscribe'&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:attribute name='seqnr' type='xs:int' use='required'/&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+
+    &lt;xs:simpleType name='PositiveDouble'&gt;
+        &lt;xs:restriction base='xs:double'&gt;
+            &lt;xs:minExclusive value='0'/&gt;
+        &lt;/xs:restriction&gt;
+    &lt;/xs:simpleType&gt;
+
+&lt;/xs:schema&gt;
+        </pre>
+    </div>
+    <h2>10.
+       <a name="moreinfo">For more information</a></h2>
+        <p class="" style="">
+            For more information, please see the following resources:
+        </p>
+        <ul class="" style="">
+            <li class="" style="">
+                <p class="" style="">
+                    The <a href="http://wiki.xmpp.org/web/Tech_pages/SensorNetworks">Sensor Network section of the XMPP Wiki</a> contains further information about the
+                    use of the sensor network XEPs, links to implementations, discussions, etc.
+                </p>
+            </li>
+            <li class="" style="">
+                <p class="" style="">
+                    The XEP's and related projects are also available on <a href="https://github.com/joachimlindborg/">github</a>, thanks to Joachim Lindborg.
+                </p>
+            </li>
+            <li class="" style="">
+                <p class="" style="">
+                    A presentation giving an overview of all extensions related to Internet of Things can be found here:
+                    <a href="http://prezi.com/esosntqhewhs/iot-xmpp/">http://prezi.com/esosntqhewhs/iot-xmpp/</a>.
+                </p>
+            </li>
+        </ul>
+    <hr><a name="appendices"></a><h2>Appendices</h2>
+    <hr><a name="appendix-docinfo"></a><h3>Appendix A: Document Information</h3>
+    <p class="indent">
+            Series: <a href="http://xmpp.org/extensions/">XEP</a><br>
+            Number: xxxx<br>
+            Publisher: <a href="/xsf/">XMPP Standards Foundation</a><br>
+            Status: 
+            <a href="http://xmpp.org/extensions/xep-0001.html#states-ProtoXEP">ProtoXEP</a><br>
+            Type:
+            <a href="http://xmpp.org/extensions/xep-0001.html#types-Standards Track">Standards Track</a><br>
+            Version: 0.0.1<br>
+            Last Updated: 2014-08-13<br>
+                Approving Body: <a href="http://xmpp.org/council/">XMPP Council</a><br>Dependencies: XMPP Core, XEP-0001, XEP-0030, XEP-0323, XEP-0324, XEP-0326<br>
+                Supersedes: None<br>
+                Superseded By: None<br>
+            Short Name: iot-events<br>
+            This document in other formats: 
+                <a class="standardsButton" href="http://xmpp.org/extensions/xep-xxxx.xml">XML</a> 
+                <a class="standardsButton" href="http://xmpp.org/extensions/xep-xxxx.pdf">PDF</a></p>
+    <hr><a name="appendix-authorinfo"></a><h3>Appendix B: Author Information</h3>
+    <div class="indent">
+      <h3>Peter Waher</h3>
+      <p class="indent">
+        Email:
+        <a href="mailto:peter.waher@clayster.com">peter.waher@clayster.com</a><br>
+        JabberID: 
+        <a href="xmpp:peter.waher@jabber.org">peter.waher@jabber.org</a><br>
+        URI: 
+        <a href="http://www.linkedin.com/in/peterwaher">http://www.linkedin.com/in/peterwaher</a><br></p>
+    </div>
+    <hr><a name="appendix-legal"></a><h3>Appendix C: Legal Notices</h3>
+    <div class="indent">
+      <h4>Copyright</h4>This XMPP Extension Protocol is copyright © 1999 - 2014 by the <a href="http://xmpp.org/">XMPP Standards Foundation</a> (XSF).<h4>Permissions</h4>Permission is hereby granted, free of charge, to any person obtaining a copy of this specification (the "Specification"), to make use of the Specification without restriction, including without limitation the rights to implement the Specification in a software program, deploy the Specification in a network service, and copy, modify, merge, publish, translate, distribute, sublicense, or sell copies of the Specification, and to permit persons to whom the Specification is furnished to do so, subject to the condition that the foregoing copyright notice and this permission notice shall be included in all copies or substantial portions of the Specification. Unless separate permission is granted, modified works that are redistributed shall not contain misleading information regarding the authors, title, number, or publisher of the Specification, and shall not claim endorsement of the modified works by the authors, any organization or project to which the authors belong, or the XMPP Standards Foundation.<h4>Disclaimer of Warranty</h4><span style="font-weight: bold">## NOTE WELL: This Specification is provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. ##</span><h4>Limitation of Liability</h4>In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall the XMPP Standards Foundation or any author of this Specification be liable for damages, including any direct, indirect, special, incidental, or consequential damages of any character arising from, out of, or in connection with the Specification or the implementation, deployment, or other use of the Specification (including but not limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses), even if the XMPP Standards Foundation or such author has been advised of the possibility of such damages.<h4>IPR Conformance</h4>This XMPP Extension Protocol has been contributed in full conformance with the XSF's Intellectual Property Rights Policy (a copy of which can be found at &lt;<a href="http://xmpp.org/about-xmpp/xsf/xsf-ipr-policy/">http://xmpp.org/about-xmpp/xsf/xsf-ipr-policy/</a>&gt; or obtained by writing to XMPP Standards Foundation, 1899 Wynkoop Street, Suite 600, Denver, CO 80202 USA).</div>
+    <hr><a name="appendix-xmpp"></a><h3>Appendix D: Relation to XMPP</h3>
+    <p class="indent">The Extensible Messaging and Presence Protocol (XMPP) is defined in the XMPP Core (RFC 6120) and XMPP IM (RFC 6121) specifications contributed by the XMPP Standards Foundation to the Internet Standards Process, which is managed by the Internet Engineering Task Force in accordance with RFC 2026. Any protocol defined in this document has been developed outside the Internet Standards Process and is to be understood as an extension to XMPP rather than as an evolution, development, or modification of XMPP itself.</p>
+    <hr><a name="appendix-discuss"></a><h3>Appendix E: Discussion Venue</h3>
+    <p class="indent">The primary venue for discussion of XMPP Extension Protocols is the &lt;<a href="http://mail.jabber.org/mailman/listinfo/standards">standards@xmpp.org</a>&gt; discussion list.</p>
+    <p class="indent">Discussion on other xmpp.org discussion lists might also be appropriate; see &lt;<a href="http://xmpp.org/about/discuss.shtml">http://xmpp.org/about/discuss.shtml</a>&gt; for a complete list.</p>
+    <p class="indent">Errata can be sent to &lt;<a href="mailto:editor@xmpp.org">editor@xmpp.org</a>&gt;.</p>
+    <hr><a name="appendix-conformance"></a><h3>Appendix F: Requirements Conformance</h3>
+    <p class="indent">The following requirements keywords as used in this document are to be interpreted as described in <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a>: "MUST", "SHALL", "REQUIRED"; "MUST NOT", "SHALL NOT"; "SHOULD", "RECOMMENDED"; "SHOULD NOT", "NOT RECOMMENDED"; "MAY", "OPTIONAL".</p>
+    <hr><a name="appendix-notes"></a><h3>Appendix G: Notes</h3>
+    <div class="indent">
+      <p><a name="nt-ID0EMD">1</a>. XEP-0323: Internet of Things - Sensor Data &lt;<a href="http://xmpp.org/extensions/xep-0323.html">http://xmpp.org/extensions/xep-0323.html</a>&gt;.</p>
+      <p><a name="nt-ID0E4D">2</a>. XEP-0324: Internet of Things - Provisioning &lt;<a href="http://xmpp.org/extensions/xep-0324.html">http://xmpp.org/extensions/xep-0324.html</a>&gt;.</p>
+      <p><a name="nt-ID0EJE">3</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
+      <p><a name="nt-ID0EMBAC">4</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0EDCAC">5</a>. XEP-0004: Data Forms &lt;<a href="http://xmpp.org/extensions/xep-0004.html">http://xmpp.org/extensions/xep-0004.html</a>&gt;.</p>
+      <p><a name="nt-ID0EPCAC">6</a>. XEP-0122: Data Forms Validation &lt;<a href="http://xmpp.org/extensions/xep-0122.html">http://xmpp.org/extensions/xep-0122.html</a>&gt;.</p>
+      <p><a name="nt-ID0E2CAC">7</a>. XEP-0137: Publishing Stream Initiation Requests &lt;<a href="http://xmpp.org/extensions/xep-0137.html">http://xmpp.org/extensions/xep-0137.html</a>&gt;.</p>
+      <p><a name="nt-ID0EHDAC">8</a>. XEP-0141: Data Forms Layout &lt;<a href="http://xmpp.org/extensions/xep-0141.html">http://xmpp.org/extensions/xep-0141.html</a>&gt;.</p>
+      <p><a name="nt-ID0ENHAC">9</a>. XEP-0326: Internet of Things - Concentrators &lt;<a href="http://xmpp.org/extensions/xep-0326.html">http://xmpp.org/extensions/xep-0326.html</a>&gt;.</p>
+      <p><a name="nt-ID0EVDAE">10</a>. XEP-0030: Service Discovery &lt;<a href="http://xmpp.org/extensions/xep-0030.html">http://xmpp.org/extensions/xep-0030.html</a>&gt;.</p>
+      <p><a name="nt-ID0EMEAE">11</a>. XEP-0115: Entity Capabilities &lt;<a href="http://xmpp.org/extensions/xep-0115.html">http://xmpp.org/extensions/xep-0115.html</a>&gt;.</p>
+      <p><a name="nt-ID0EQNAE">12</a>. The Internet Assigned Numbers Authority (IANA) is the central coordinator for the assignment of unique parameter values for Internet protocols, such as port numbers and URI schemes. For further information, see &lt;<a href="http://www.iana.org/">http://www.iana.org/</a>&gt;.</p>
+    </div>
+    <hr><a name="appendix-revs"></a><h3>Appendix H: Revision History</h3>
+    <p>Note: Older versions of this specification might be available at <a href="http://xmpp.org/extensions/attic/">http://xmpp.org/extensions/attic/</a></p>
+    <div class="indent">
+      <h4>Version 0.0.1 (2014-08-13)</h4>
+      <div class="indent">
+                <p class="" style="">First draft.</p>
+             (pw)
+    </div>
+    </div>
+    <hr>
+    <p>END</p>
+  </body>
+</html>

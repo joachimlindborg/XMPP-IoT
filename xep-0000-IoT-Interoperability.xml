@@ -11,6 +11,10 @@
 <!-- TODO: getInterfaces-fråga med nodeId (concentrator-fallet) -->
 <!-- TODO: XMPP.IoT.Security.Alarm får inte användas av de andra alarm-interfacen. En enhet kan ha flera olika alarm. Fältnamnet måste identifiera alarmtypen. -->
 <?xml-stylesheet type='text/xsl' href='xep.xsl'?>
+<!-- 
+© Clayster 2013-2014
+Author: Peter Waher 
+-->
 <xep>
     <header>
         <title>Internet of Things - Interoperability</title>
@@ -57,7 +61,7 @@
         <p>
             Internet of Things contains many different architectures and use cases. For this reason, the IoT standards have been divided into multiple XEPs according to the following table:
         </p>
-        <table caption='Sensor Network XEPs'>
+        <table caption='Internet of Things XEPs'>
             <tr>
                 <th>XEP</th>
                 <th>Description</th>
@@ -65,10 +69,6 @@
             <tr>
                 <td>xep-0000-IoT-BatteryPoweredSensors</td>
                 <td>Defines how to handle the peculiars related to battery powered devices, and other devices intermittently available on the network.</td>
-            </tr>
-            <tr>
-                <td>xep-0000-IoT-Discovery</td>
-                <td>Defines the peculiars of Thing discovery in IoT. Apart from discovering sensors by JID, it also defines how to discover sensors based on location, etc.</td>
             </tr>
             <tr>
                 <td>xep-0000-IoT-Events</td>
@@ -123,6 +123,10 @@
 			<tr>
 				<td>XEP-0336</td>
 				<td>Defines extensions for how dynamic forms can be created, based on &xep0004;, &xep0122;, &xep0137; and &xep0141;.</td>
+			</tr>
+			<tr>
+				<td>XEP-0347</td>
+				<td>Defines the peculiars of sensor discovery in sensor networks. Apart from discovering sensors by JID, it also defines how to discover sensors based on location, etc.</td>
 			</tr>
 		</table>
     </section1>
@@ -777,11 +781,11 @@
 						</tr>
 					</table>
 				</section4>
-				<section4 topic='XMPP.IoT.Sensor.Resistence'>
+				<section4 topic='XMPP.IoT.Sensor.Resistance'>
                     <p>
-                        Resistence sensors, measuring a electrical resistence.
+                        Resistance sensors, measuring a electrical resistance.
                     </p>
-                    <table caption='XMPP.IoT.Sensor.Resistence Fields'>
+                    <table caption='XMPP.IoT.Sensor.Resistance Fields'>
                         <tr>
                             <th>Field Name</th>
                             <th>Use</th>
@@ -790,11 +794,11 @@
                             <th>Description</th>
                         </tr>
                         <tr>
-                            <td>Resistence</td>
+                            <td>Resistance</td>
                             <td>Required</td>
                             <td>momentary</td>
                             <td>numeric</td>
-                            <td>Momentary Resistence value.</td>
+                            <td>Momentary Resistance value.</td>
                         </tr>
                     </table>
                 </section4>

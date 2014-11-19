@@ -1,4 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
+<!-- 
+© Clayster, 2014
+Author: Peter Waher 
+-->
 <xs:schema
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
     targetNamespace='urn:xmpp:iot:discovery'
@@ -7,7 +11,7 @@
  
 	<xs:element name='register' type='Register'/>
 	<xs:element name='mine' type='Mine'/>
-	<xs:element name='update' type='MetaDataNodeInfo'/>
+	<xs:element name='update' type='Update'/>
  
 	<xs:element name='claimed' type='Claimed'/>
 	<xs:element name='remove' type='Jid'/>
@@ -78,7 +82,6 @@
 			<xs:element name='str' type='StrTag'/>
 			<xs:element name='num' type='NumTag'/>
 		</xs:choice>
-		<xs:attributeGroup ref='nodeInfo'/>
 	</xs:complexType>
  
 	<xs:complexType name='MetaDataNodeInfo'>
@@ -99,12 +102,20 @@
  
 	<xs:complexType name='Mine'>
 		<xs:complexContent>
-			<xs:extension base='MetaData'>
+			<xs:extension base='MetaDataNodeInfo'>
 				<xs:attribute name='public' type='xs:boolean' use='optional' default='true'/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
- 
+
+	<xs:complexType name='Update'>
+		<xs:complexContent>
+			<xs:extension base='MetaDataNodeInfo'>
+				<xs:attribute name='jid' type='xs:string' use='optional'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
 	<xs:complexType name='Claimed'>
 		<xs:complexContent>
 			<xs:extension base='Jid'>

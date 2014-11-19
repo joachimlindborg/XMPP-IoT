@@ -1,4 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
+<!-- 
+© Clayster, 2013-2014
+Author: Peter Waher 
+-->
 <xs:schema
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
     targetNamespace='urn:xmpp:iot:provisioning'
@@ -8,13 +12,18 @@
  
 	<xs:import namespace='urn:xmpp:iot:sensordata'/>
  
-	<xs:element name='getToken' type='GetToken'/>
+	<xs:element name='getToken' type='xs:base64Binary'/>
+	<xs:element name='getTokenChallenge' type='GetTokenChallengeResponse'/>
+	<xs:element name='getTokenChallengeResponse' type='GetTokenChallengeResponse'/>
 	<xs:element name='getTokenResponse' type='GetTokenResponse'/>
- 
+
+	<xs:element name='tokenChallenge' type='TokenChallenge'/>
+	<xs:element name='tokenChallengeResponse' type='xs:base64Binary'/>
+
 	<xs:element name='isFriend' type='Friend'/>
 	<xs:element name='isFriendResponse' type='FriendResponse'/>
 	<xs:element name='unfriend' type='Friend'/>
-	<xs:element name='Friend' type='Friend'/>
+	<xs:element name='friend' type='Friend'/>
  
 	<xs:element name='canRead' type='CanRead'/>
 	<xs:element name='canReadResponse' type='CanReadResponse'/>
@@ -94,16 +103,27 @@
 			</xs:choice>
 		</xs:complexType>
 	</xs:element>
- 
-	<xs:complexType name='GetToken'>
-		<xs:attribute name='deviceId' type='xs:string' use='optional'/>
-		<xs:attribute name='serviceId' type='xs:string' use='optional'/>
-	</xs:complexType>
   
 	<xs:complexType name='GetTokenResponse'>
 		<xs:attribute name='token' type='xs:string' use='required'/>
 	</xs:complexType>
-  
+ 
+	<xs:complexType name='GetTokenChallengeResponse'>
+		<xs:simpleContent>
+			<xs:extension base='xs:base64Binary'>
+				<xs:attribute name='seqnr' type='xs:int' use='required'/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name='TokenChallenge'>
+		<xs:simpleContent>
+			<xs:extension base='xs:base64Binary'>
+				<xs:attribute name='token' type='xs:string' use='required'/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
 	<xs:complexType name='Friend'>
 		<xs:attribute name='jid' type='xs:string' use='required'/>
 	</xs:complexType>
@@ -141,10 +161,16 @@
 	<xs:complexType name='CanRead'>
 		<xs:complexContent>
 			<xs:extension base='CanReadBase'>
-				<xs:attribute name='token' type='xs:string' use='optional'/>
+				<xs:attributeGroup ref='tokens'/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+
+	<xs:attributeGroup name='tokens'>
+		<xs:attribute name='serviceToken' type='xs:string' use='optional'/>
+		<xs:attribute name='userToken' type='xs:string' use='optional'/>
+		<xs:attribute name='deviceToken' type='xs:string' use='optional'/>
+	</xs:attributeGroup>
  
 	<xs:complexType name='CanReadResponse'>
 		<xs:complexContent>
@@ -175,7 +201,7 @@
 	<xs:complexType name='CanControl'>
 		<xs:complexContent>
 			<xs:extension base='CanControlBase'>
-				<xs:attribute name='token' type='xs:string' use='optional'/>
+				<xs:attributeGroup ref='tokens'/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
