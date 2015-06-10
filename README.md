@@ -55,7 +55,7 @@ Easy view links of latest work
 		important to be able to support logging of events such as user logins
 		upgrades errors. This extension is compatible with syslog but more advanced
 
-xep-0000-IoT-Events
+[xep-0000-IoT-Events](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/iot-events.html)
 		Defines how sensors send events, how event subscription, 
 		hysteresis levels, etc., are configured.
 
