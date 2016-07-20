@@ -78,7 +78,7 @@ xep-0000-IoT-PubSub
 
 
 ## Main author
-Email: peter.waher@clayster.com
+Email: peter.waher@hotmail.com
 JabberID: peter.waher@jabber.org
 URI: http://se.linkedin.com/pub/peter-waher/1a/71b/a29/
 
