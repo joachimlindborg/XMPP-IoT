@@ -1,11 +1,13 @@
 XMPP-IoT
 =======
 
-Repository for the work using XMPP in Internet of Things systems everything is published through the XSF foundation More information is also available on the [XMPP tech wiki](http://wiki.xmpp.org/web/Tech_pages/IoT_systems)
+Repository for the work using XMPP in Internet of Things systems everything is
+published through the XSF foundation More information is also available on the
+[XMPP tech wiki](http://wiki.xmpp.org/web/Tech_pages/IoT_systems)
 
 Easy view links of latest work
 
-[xep-0000-IoT-Discovery](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/xep-0000-IoT-Discovery.html)
+[xep-0347-IoT-Discovery](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/iot-discovery.html)
 		Defines the peculiars of sensor discovery in sensor networks. 
 		Apart from discovering sensors by JID, it also defines how to 
 		discover sensors based on location, etc.
@@ -29,8 +31,6 @@ Easy view links of latest work
 		access privileges, etc., can be efficiently and easily 
 		implemented.
 		
-
-
 [xep-0326-IoT-Concentrators](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/sensor-network-concentrators.html)
 		Defines how to handle architectures containing concentrators 
 		or servers handling multiple sensors.
@@ -55,11 +55,9 @@ Easy view links of latest work
 		important to be able to support logging of events such as user logins
 		upgrades errors. This extension is compatible with syslog but more advanced
 
-
-xep-0000-IoT-Events
+[xep-0000-IoT-Events](http://htmlpreview.github.com/?https://github.com/joachimlindborg/XMPP-IoT/blob/master/iot-events.html)
 		Defines how sensors send events, how event subscription, 
 		hysteresis levels, etc., are configured.
-
 
 xep-0000-IoT-BatteryPoweredSensors	
                 Defines how to handle the peculiars related to battery powered
@@ -68,14 +66,9 @@ xep-0000-IoT-BatteryPoweredSensors
 xep-0000-IoT-Multicast
 		Defines how sensor data can be multicast in efficient ways.
 
-
 xep-0000-IoT-PubSub
 		Defines how efficient publication of sensor data can be made 
 		in sensor networks.
-
-
-
-
 
 ## Main author
 Email: peterwaher@hotmail.com
